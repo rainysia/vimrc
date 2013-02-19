@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 5.02.06
+"    Version: 5.02.07
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2013-02-06 11:43:36
+" LastChange: 2013-02-19 15:02:15
 " MendDetail: 删除了.vim 用户下syntax的php.vim 
 "========================================================================
 " }}}
@@ -832,6 +832,31 @@ endif
 " zb                                       " 移动当前行到屏幕底部
 " *                                        " 读取光标处的字符串,并且移动光标到它再次出现的地方
 " #                                        " 和上面的类似,但是是往反方向寻找
+" guu                                      " 行小写
+" gUU                                      " 行大写
+" g~~                                      " 行翻转(大小写)
+" guw gUw g~w                              " 字*写
+" \'.                                      " 跳到最后修改的那一行
+" `.                                       " 跳到最后修改的那一行，定位到修改点
+" :ju(mps)                                 " 列出跳转足迹
+" !!date                                   " 读取date的输出 (但是会替换当前行的内容)
+" :bn                                      " 跳转到下一个buffer
+" :bp                                      " 跳转到上一个buffer
+" :wn                                      " 存盘当前文件并跳转到下一个
+" :wp                                      " 存盘当前文件并跳转到上一个
+" :bd                                      " 把这个文件从buffer列表中做掉
+" :b 3                                     " 跳到第3个buffer
+" :b main                                  " 跳到一个名字中包含main的buffer,例如main.c 
+" :sav php.html                            " 把当前文件存为php.html并打开php.html
+" :sav! %<.bak                             " 换一个后缀保存
+" :e!                                      " 返回到修改之前的文件(修改之后没有存盘)
+" :w /path/%                               " 把文件存到一个地儿
+" :rew                                     " 回到第一个可编辑的文件
+" :brew                                    " 回到第一个buffer
+" gvim -o file1 file2                      " 以分割窗口打开两个文件\r\n# 指出打开之后执行的命令
+" gvim -d file1 file2                      " vimdiff (比较不同)
+" dp                                       " 把光标处的不同放到另一个文件
+" do                                       " 在光标处从另一个文件取得不同
 "{{                                        " 更新日志
 " 4.8.15 
 "        4.8.15 从版本升级到4.9.1 查找了Ctrl-x在user下闪现问题,致使万能补全不能在user下使用.没有找到原因,使用长按ctrl+x ctrl+o来代替
@@ -847,5 +872,6 @@ endif
 " 4.12.1                                   " add easymotion.vim in autoload,doc.plugin 2012-12-04 10:12:22
 " 4.12.26                                  " dt< 删除<></>括号内的内容 2012-12-26 12:13:43
 " 5.02.06                                  " add gg=G 2013-02-06 11:44:24
+" 5.02.07                                  " add some usage 2013-02-19 15:26:13
 "}}
 "}}}
