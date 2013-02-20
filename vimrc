@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 5.02.07
+"    Version: 5.02.08
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2013-02-19 15:02:15
+" LastChange: 2013-02-20 13:45:01
 " MendDetail: 删除了.vim 用户下syntax的php.vim 
 "========================================================================
 " }}}
@@ -857,6 +857,8 @@ endif
 " gvim -d file1 file2                      " vimdiff (比较不同)
 " dp                                       " 把光标处的不同放到另一个文件
 " do                                       " 在光标处从另一个文件取得不同
+" diw                                      " 删除光标上的单词 (不包括空白字符)
+" daw                                      " 删除光标上的单词 (包括空白字符)
 "{{                                        " 更新日志
 " 4.8.15 
 "        4.8.15 从版本升级到4.9.1 查找了Ctrl-x在user下闪现问题,致使万能补全不能在user下使用.没有找到原因,使用长按ctrl+x ctrl+o来代替
@@ -872,6 +874,7 @@ endif
 " 4.12.1                                   " add easymotion.vim in autoload,doc.plugin 2012-12-04 10:12:22
 " 4.12.26                                  " dt< 删除<></>括号内的内容 2012-12-26 12:13:43
 " 5.02.06                                  " add gg=G 2013-02-06 11:44:24
-" 5.02.07                                  " add some usage 2013-02-19 15:26:13
+" 5.02.07                                  " add some usage 2013-02-19 15:27:10
+" 5.02.08                                  " add some usage 2013-02-20 13:45:16
 "}}
 "}}}
