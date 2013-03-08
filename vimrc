@@ -3,13 +3,13 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 5.02.08
+"    Version: 5.03.07
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2013-02-20 13:45:01
-" MendDetail: 删除了.vim 用户下syntax的php.vim 
+" LastChange: 2013-03-07 17:01:21
+" MendDetail: 删除了.vim 用户下syntax的php.vim
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -145,7 +145,7 @@ source $VIMRUNTIME/menu.vim
 set nocompatible                           " 不要使用vi的键盘模式
 "set clipboard+=unnamed                    " 与windows共享剪贴板share clipboard with windows
 set iskeyword+=_,$,@,%,#,-                 " 带有如下符号的单词不要被换行分割
-"{{                                        " 保存全局变量," 寄存器中保存几行文本 0不保存500上限 
+"{{                                        " 保存全局变量," 寄存器中保存几行文本 0不保存500上限
 set viminfo+=!
 set viminfo='1000,f1,<500
 "}}
@@ -212,7 +212,7 @@ syn match 20spa /\s\&\%20v.*\%21v/
 syn match 24spa /\s\&\%24v.*\%25v/
 syn match 80spa /.\&\%80v.*\%81v/
 set list                                   " 缩进线
-"set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$ 
+"set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$
 " 制表符显示方式定义：trail为拖尾空白显示字符，extends和precedes分别是wrap关闭时，所在行在屏幕右边和左边显示的指示字符
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
 "}}
@@ -363,7 +363,7 @@ nnoremap <silent> <F3> :Grep<CR>
 "                                          "      F4 debugger_step_out
 "                                          "      S-F5 debugger_quit
 "                                          "      F5 debugger_run
-"                                          "      F10 debugger_watch_input 
+"                                          "      F10 debugger_watch_input
 "                                          "      F11 debugger_context
 "                                          "      F12 debugger_property
 "                                          "      F11 debugger_watch_input A
@@ -421,7 +421,7 @@ let g:snips_site =  'www.btroot.org'
 "}}
 "{{                                        " indent.guides的设定
 "                                          "      自动缩进
-let g:indent_guides_auto_colors = 0 
+let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
 hi IndentGuidesOdd  guibg=red   ctermbg=3
@@ -430,9 +430,9 @@ hi IndentGuidesEven ctermbg=darkgrey
 hi IndentGuidesOdd  ctermbg=black
 "}}
 "{{                                        " colorizer.vim的设定
-"                                          "      :ColorHighlight - start/update highlighting 
-"                                          "      :ColorClear     - clear all highlights 
-"                                          "      :ColorToggle    - toggle highlights 
+"                                          "      :ColorHighlight - start/update highlighting
+"                                          "      :ColorClear     - clear all highlights
+"                                          "      :ColorToggle    - toggle highlights
 "
 "}}
 "{{                                        " css.vim的设定 影响自动补全,换了个版本
@@ -779,8 +779,8 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{{
 "{{                                        " all shortcuts
-" :%s/^\s\+//                              " 删除行末空格
-" :%s/\s\+$//                              " 删除行首空格
+" :%s/^\s\+//g                             " 删除行首空格
+" :%s/\s\+$//g                             " 删除行末空格
 " :g/^$/d                                  " 删除没有内容的空行
 " :g/^\s*$/d                               " 删除有空格组成的空格
 " :%s///g                                " 删除行末^M的符号
@@ -846,7 +846,7 @@ endif
 " :wp                                      " 存盘当前文件并跳转到上一个
 " :bd                                      " 把这个文件从buffer列表中做掉
 " :b 3                                     " 跳到第3个buffer
-" :b main                                  " 跳到一个名字中包含main的buffer,例如main.c 
+" :b main                                  " 跳到一个名字中包含main的buffer,例如main.c
 " :sav php.html                            " 把当前文件存为php.html并打开php.html
 " :sav! %<.bak                             " 换一个后缀保存
 " :e!                                      " 返回到修改之前的文件(修改之后没有存盘)
@@ -859,15 +859,167 @@ endif
 " do                                       " 在光标处从另一个文件取得不同
 " diw                                      " 删除光标上的单词 (不包括空白字符)
 " daw                                      " 删除光标上的单词 (包括空白字符)
+" :1,20s/^/#/g                             " 添加注释  :1,20s/^/\/\//g
+" 0                                        " 至本行第一个字符=<Home>
+" ^                                        " 至本行第一个非空白字符
+" N $                                      " 至本行最后一个字符
+" gm                                       " 至屏幕行中点(当前行中点)
+" N |                                      " 至第 N 列 (缺省: 1)
+" N  f{char}                               " 至右边第 N 次出现 {char} 之处 (find)
+" N  F{char}                               " 至左边第 N 次出现 {char} 之处 (Find)
+" N  t{char}                               " 至右边第 N 次出现 {char} 之前 (till)
+" N  T{char}                               " 至左边第 N 次出现 {char} 之前 (Till)
+" N  ;                                     " 重复上次 "f"、"F"、"t" 或 "T" 命令 N 次
+" N  ,                                     " 以相反方向重复上次 "f"、"F"、"t" 或 "T" 命令 N
+" N  -                                     " 上移 N 行，至第一个非空白字符
+" N  +                                     " 下移 N 行，至第一个非空白字符 (亦: CTRL-M 和 <CR>)
+" N  _                                     " 下移 N - 1 行，至第一个非空白字符
+" N  G                                     " 至第 N 行 (缺省: 末行) 第一个非空白字符
+" N  gg                                    " 至第 N 行 (缺省: 首行) 第一个非空白字符
+" N  %                                     " 至全文件行数百分之 N 处；必须给出 N，否则是 |%| 命令
+" N  gk                                    " 上移 N 屏幕行 (回绕行时不同于 "k")
+" N  gj                                    " 下移 N 屏幕行 (回绕行时不同于 "j")
+" N  w                                     " 向前 (正向，下同) N 个单词(word)
+" N  W                                     " 向前 N 个空白隔开的字串 |WORD|            (WORD)
+" N  e                                     " 向前至第 N 个单词词尾                     (end)
+" N  E                                     " 向前至第 N 个空白隔开的字串 |WORD| 的词尾 (End)
+" N  b                                     " 向后 (反向，下同) N 个单词                (backward)
+" N  B                                     " 向后至第 N 个空白隔开的字串 |WORD| 的词尾 (Backward)
+" N  ge                                    " 向后至第 N 个单词词尾
+" N  gE                                    " 向后至第 N 个空白隔开的字串 |WORD| 的词尾
+" N  )                                     " 向前 N 个句子
+" N  (                                     " 向后 N 个句子
+" N  }                                     " 向前 N 个段落
+" N  {                                     " 向后 N 个段落
+" N  ]]                                    " 向前 N 个小节，置于小节的开始
+" N  [[                                    " 向后 N 个小节，置于小节的开始
+" N  ][                                    " 向前 N 个小节，置于小节的末尾
+" N  []                                    " 向后 N 个小节，置于小节的末尾
+" N  [(                                    " 向后至第 N 个未闭合的 '('
+" N  [{                                    " 向后至第 N 个未闭合的 '{'
+" N  [m                                    " 向后至第 N 个方法 (method) 的开始 (用于 Java)
+" N  [M                                    " 向后至第 N 个方法的结束 (Method)  (用于 Java)
+" N  ])                                    " 向前至第 N 个未闭合的 ')'
+" N  ]}                                    " 向前至第 N 个未闭合的 '}'
+" N  ]m                                    " 向前至第 N 个方法 (method) 的开始 (用于 Java)
+" N  ]M                                    " 向前至第 N 个方法的结束 (Method)  (用于 Java)
+" N  [#                                    " 向后至第 N 个未闭合的 "#if" 或 "#else"
+" N  ]#                                    " 向前至第 N 个未闭合的 "#else" 或 "#endif"
+" N  [*                                    " 向后至第 N 个注释的开始 "/*"
+" N  ]*                                    " 向前至第 N 个注释的结束 "*/"
+" a
+" N  ]*                                    " 向前至第 N 个注释的结束 "*/"
+" .                                        " 匹配任意单个字符
+" ^                                        " 匹配行首
+" $                                        " 匹配<EOL>
+" \<                                       " 匹配单词开始
+" \>                                       " 匹配单词结束
+" [a-z]  \[a-z]                            " 匹配单个设定范围的字符
+" [^a-z] \[^a-z]                           " 同上..不匹配
+" \s                                       " 匹配一个空白字符
+" \S                                       " 匹配一个非空字符
+" \e                                       " 匹配<Esc>
+" \t                                       " 匹配<Tab>
+" \r                                       " 匹配<CR>
+" \b                                       " 匹配<BS> backspace
+" * \*                                     " 匹配0或者多个前面的匹配原
+" \+                                       " 匹配1或者多个前面的匹配原
+" \=                                       " 匹配0或者1个前面的匹配原
+" \{2,5}                                   " 匹配2至5个前面的匹配原
+" \|                                       " 隔开两种可替换的匹配
+" \(\)                                     " 组合模式为当匹配原
+" ;{search-command}                        " 接着执行 {search-command} 查找命令
+" m{a-zA-Z}                                " 用标记 {a-zA-Z} 记录当前位置
+" `{a-z}                                   " 至当前文件中的标记 {a-z}
+" `{A-Z}                                   " 至任何文件中的标记 {A-Z}
+" `{0-9}                                   " 至 Vim 上次退出的位置
+" ``                                       " 至上次跳转之前的位置
+" `"                                       " 至上次编辑此文件的位置
+" `[                                       " 至上次被操作或放置的文本的开始
+" `]                                       " 至上次被操作或放置的文本的结尾
+" `<                                       " 至 (前次) 可视区域的开始
+" `>                                       " 至 (前次) 可视区域的结尾
+" `.                                       " 至当前文件最后被改动的位置
+" '{a-zA-Z0-9[]'"<>.}                      " 同 `，但同时移动至该行的第一个非空白字符
+" :marks                                   " 列出活动的标记
+" N  ctrl+O                                " 跳转到跳转表中第 N 个较早的位置
+" N  ctrl+I                                " 跳转到跳转表中第 N 个较晚的位置
+" :ju[mps]                                 " 列出跳转表
+" i ctrl+E                                 " 插入光标下方的字符
+" i ctrl+Y                                 " 插入光标上方的字符
+" i ctrl+A                                 " 插入上次插入的文本
+" i ctrl+@                                 " 插入上次插入的文本并结束插入模式
+" i ctrl+R {0-9a-z%#:.-="}                 " 插入寄存器的内容
+" i ctrl+N                                 " 将下一个匹配的标识符插入光标前
+" i ctrl+P                                 " 将上一个匹配的标识符插入光标前
+" i ctrl+H                                 " 删除光标前的一个字符 = <BS>
+" i <Del>                                  " 删除光标下的一个字符
+" i ctrl+W                                 " 删除光标前的一个单词
+" i ctrl+U                                 " 删除当前行的所有字符
+" i ctrl+T                                 " 在当前行首插入一个移位宽度的缩进
+" i ctrl+D                                 " 在当前行首删除一个移位宽度的缩进
+" i 0 ctrl+D                               " 删除当前行的所有缩进
+" i ^ ctrl+D                               " 删除当前行的所有缩进,恢复下一行的缩进
+" :dig                                     " 显示当前二合字母列表
+" i ctrl+k {char1} {char2}                 " 键入二合字母
+" N D                                      " 删除至行尾
+" N J                                      " 连接N-1行
+" N gJ                                     " 同J,但不插入空格
+" N ~                                      " 翻转N个字符的大小写并前进光标
+" N ctrk+A                                 " 将光标之上或之后的数值增加 N
+" N ctrl+X                                 " 将光标之上或之后的数值减少 N
+" v o                                      " 交换高亮区域(可视)的开始处的光标位置
+" N  aw                                    " 选择 "一个单词"
+" N  iw                                    " 选择 "内含单词"
+" N  aW                                    " 选择 "一个字串"
+" N  iW                                    " 选择 "内含字串"
+" N  as                                    " 选择 "一个句子"
+" N  is                                    " 选择 "内含句子"
+" N  ap                                    " 选择 "一个段落"
+" N  ip                                    " 选择 "内含段落"
+" N  ab                                    " 选择 "一个块" (从 "[(" 至 "])")
+" N  ib                                    " 选择 "内含块" (从 "[(" 到 "])")
+" N  aB                                    " 选择 "一个大块" (从 "[{" 到 "]}")
+" N  iB                                    " 选择 "内含大块" (从 "[{" 到 "]}")
+" N  a>                                    " 选择 "一个 <> 块"
+" N  i>                                    " 选择 "内含 <> 块"
+" N  at                                    " 选择 "一个标签块" (从 <aaa> 到 </aaa>)
+" N  it                                    " 选择 "内含标签块" (从 <aaa> 到 </aaa>)
+" N  a'                                    " 选择 "一个单引号字符串"
+" N  i'                                    " 选择 "内含单引号字符串"
+" N  a"                                    " 选择 "一个双引号字符串"
+" N  i"                                    " 选择 "内含双引号字符串"
+" N  a`                                    " 选择 "一个反引号字符串"
+" N  i`                                    " 选择 "内含反引号字符串"
+" N .                                      " 重复最近一次改动
+" q{a-z}                                   " 记录键入的字符,存入寄存器{a-z}
+" q{A-Z}                                   " 记录键入的字符,添加进寄存器{a-z}
+" q                                        " 终止记录
+" N @{a-z}                                 " 执行寄存器{a-z}的内容N次
+" N @@                                     " 重复上次的@{a-z}的操作N次
+" N gs                                     " 睡N秒
+" sl[eep][sec]                             " 在[sec]秒任何事都不做
+" ga                                       " 以十进制,十六进制,八进制显示当前光标下的字符的ASCII值
+" g8                                       " 对 utf-8 编码: 显示光标所在字符的十六进制字节序列
+" g CTRL-G                                 " 显示当前光标的列、行、以及字符位置
+" :ve[rsion]                               " 显示版本信息
+" vim启动参数
+"     -v                                   " vi模式
+"     -d                                   " diff模式
+"     -b                                   " 二进制模式
+"     -l                                   " lisp模式
+"     -A                                   " 阿拉伯模式
+"     -F                                   " 波斯模式
+"     -H                                   " 希伯来模式
 "{{                                        " 更新日志
-" 4.8.15 
+" 4.8.15
 "        4.8.15 从版本升级到4.9.1 查找了Ctrl-x在user下闪现问题,致使万能补全不能在user下使用.没有找到原因,使用长按ctrl+x ctrl+o来代替
 " 4.9.2                                    " 修改了./vimfiles/after/syntax/css.vim 万能补全恢复
 " 4.9.3                                    " add reg explaination !
 " 4.9.4                                    " add reg explaination more !
 " 4.9.5                                    " change line color in #592
 " 4.9.6                                    " add NERD_commenter 的多行依次注释
-" 4.9.7                                    " add set=textwidth=100 
+" 4.9.7                                    " add set=textwidth=100
 " 4.9.8                                    " delete cterm theme ,replace the default cterm theme
 " 4.9.9                                    " 增加了matchit.vim 和multisearch.vim  2012-11-20 12:34:31
 " 4.11.1                                   " add and some ustage 2012-11-20 15:24:16
@@ -876,5 +1028,8 @@ endif
 " 5.02.06                                  " add gg=G 2013-02-06 11:44:24
 " 5.02.07                                  " add some usage 2013-02-19 15:27:10
 " 5.02.08                                  " add some usage 2013-02-20 13:45:16
+" 5.02.09                                  " fix some usage 2013-02-25 14:27:20
+" 5.03.01                                  " add some usage 2013-03-06 17:15:50
+" 5.03.07                                  " add some usage 2013-03-07 17:01:21
 "}}
 "}}}
