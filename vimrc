@@ -3,13 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 5.03.07
+"    Version: 5.10.01
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2013-03-07 17:01:21
-" MendDetail: 删除了.vim 用户下syntax的php.vim
+" LastChange: 2013-10-08 10:42:17
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -17,8 +16,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{{
 "{{                                        " work in linux
-let $VIMRUNTIME="/usr/share/vim/vim72"
-set runtimepath=/usr/share/vim/vim72,~/.vim,~/.vim/after
+let $VIMRUNTIME="/usr/share/vim/vim73"
+set runtimepath=/usr/share/vim/vim73,~/.vim,~/.vim/after
 "}}
 set nocp                                   " close compeletion with vi
 set helplang=cn                            " 帮助菜单
@@ -52,9 +51,9 @@ set bufhidden=hide                         " 当buffer丢弃时隐藏它
 set linespace=0                            " 字符间插入的像素行数目
 set wildmenu                               " 增强模式中的命令行自动完成操作
 set shortmess=atI                          " 启动的时候不显示援助索马里儿童提示
-set noerrorbells                           " 不让vim发出讨厌的滴滴声
+set noerrorbells                           " 不让vim发出讨厌的滴滴声 set noeb
 set nobomb                                 " 不使用unicode签名
-set textwidth=100                         " 每行显示多少字符
+set textwidth=100                          " 每行显示多少字符
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  2=> text pattern
@@ -86,10 +85,11 @@ set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 set tabstop=4                              " 设置tab为4个空格
 set noexpandtab                            " 不要用空格来代替制表符tab
 set backspace=2                            " 可以使用backspace键一次删2个
-set whichwrap+=<,>h,l                      " 允许backspace和光标键跨越行边界
+set whichwrap+=<,>,[,],h,l                 " 允许backspace和光标键跨越行边界
 set shiftwidth=4                           " 设置行间交错为4个空格
 set softtabstop=4                          " 统一缩进为4个空格
 set smarttab                               " 在行和段开始处使用制表符
+"set autoread                              " 设置当文件被改动时自动载入
 "{{                                        " 用空格键来开关折叠
 "                                          " 设置语法折叠
 "                                          " manual  手工定义折叠
@@ -161,8 +161,8 @@ set nu                                     " 设置行号
 syntax enable                              " 启用语法高亮
 syntax on                                  " 设置语法高亮
 "{{                                        " 高亮字符，让其不受100列限制
-:highlight OverLength ctermbg=lightred ctermfg=lightgrey guibg=#A36666 guifg=#DCDCDC
-:match OverLength '\%101v.*'
+:highlight OverLength ctermbg=darkgray ctermfg=lightblue guibg=#1C1D1E guifg=#DCDCDC
+:match OverLength '\%500v.*'
 "}}
 "{{                                        " 状态行颜色
 highlight StatusLine guifg=SlateBlue guibg=#FFFF00
@@ -174,6 +174,45 @@ set syntax=txt                             " work in linux
 au BufRead,BufNewFile *.txt setlocal ft=txt
 "                                          " 高亮显示普通txt文件（需要txt.vim脚本）
 au BufRead,BufNewFile * setfiletype txt
+"                                          " 自动.c .h .sh .java自动插入文件头
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.py exec ":call SetTitle()" 
+"                                          " 定义函数SetTitle，自动插入文件头 
+func SetTitle()
+"                                          " 如果文件类型为.sh文件 
+	if &filetype == 'sh'
+		call setline(1,"\#!/bin/bash")
+		call append(line("."), "")
+	elseif &filetype == 'python'
+		call setline(1,"#!/usr/bin/env python")
+		call append(line("."),"# coding=utf-8")
+		call append(line(".")+1, "")
+"    elseif &filetype == 'mkd'
+"        call setline(1,"<head><meta charset=\"UTF-8\"></head>")
+	else 
+		call setline(1, "/*************************************************************************")
+		call append(line("."), "	> File Name: ".expand("%"))
+		call append(line(".")+1, "	> Author: rainysia")
+		call append(line(".")+2, "	> Mail: rainysia@gmail.com ")
+		call append(line(".")+3, "	> Created Time: ".strftime("%c"))
+		call append(line(".")+4, " ************************************************************************/")
+		call append(line(".")+5, "")
+	endif
+	if &filetype == 'cpp'
+		call append(line(".")+6, "#include<iostream>")
+		call append(line(".")+7, "using namespace std;")
+		call append(line(".")+8, "")
+	endif
+	if &filetype == 'c'
+		call append(line(".")+6, "#include<stdio.h>")
+		call append(line(".")+7, "")
+	endif
+"	if &filetype == 'java'
+"		call append(line(".")+6,"public class ".expand("%"))
+"		call append(line(".")+7,"")
+"	endif
+"                                          " 新建文件后，自动定位到文件末尾
+endfunc
+autocmd BufNewFile * normal G
 "}}
 "set guioptions-=T                         " 去除vim的GUI版本中的toolbar
 "{{                                        " 状态栏
@@ -183,7 +222,7 @@ set laststatus=2                           " 总是显示状态栏,默认1无法
 set ruler                                  " 在状态行上显示光标所在位置的行号和列号
 set rulerformat=%20(%2*%<%f%=\ %m%r\ %3l\ %c\ %p%%%)
 set cmdheight=2                            " 命令行（在状态行下）的高度，默认为1，这里是2
-"set report=0                              " 通过使用: commands命令，告诉我们文件的哪一行被改变过
+"set report=0                               " 通过使用: commands命令，告诉我们文件的哪一行被改变过
 "}}
 "{{                                        " 空格的缩进颜色
 "indent color
@@ -228,7 +267,7 @@ if has("autocmd")
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \   exe "normal g`\"" |
       \ endif
-endif " has("autocmd")
+endif                                      " has("autocmd")
 "}}
 "{{                                        " 状态栏彩色
 "hi StatuslineBufNr     cterm=none    ctermfg=black  ctermbg=cyan    gui=none guibg=#840c0c guifg=#ffffff
@@ -286,16 +325,18 @@ set nowrapscan                             " 禁止搜索到文件两端时重�
 "{{                                        " CTags的设定
 "                                          "     (地址自定义,我的www在F:/php/www下)
 "                                          "     vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
-set tags=/home/www/tags
-set tags=tags;
+"                                          " ctrl_] 跳转到对应函数 ctrl_t 回跳
+set tags=/home/www/nn_cms/tags
+"set tags=tags;
 set autochdir
 "}}
-"{{                                        " Tlist的设定
+"{{                                        " Taglist的设定
 "                                          "     F9开关 按wm会启动.F9是单独开关
 "                                          "     :Tlist --呼出变量和函数列表 [TagList插件]
 map <F9> :TlistToggle<cr>
+let Tlist_Auto_Open = 0                    "     默认打开Taglist
 let Tlist_Sort_Type = "name"               "     按照名称排序
-let Tlist_Show_One_File=1
+let Tlist_Show_One_File=1                  "     不同时显示多个文件的tag，只显示当前文件的
 let Tlist_Use_Right_Window = 0             "     在右侧显示窗口
 let Tlist_Compart_Format = 1               "     压缩方式
 let Tlist_Exist_OnlyWindow = 1             "     如果只有一个buffer，kill窗口也kill掉buffer
@@ -310,7 +351,10 @@ let Tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 "                                          "     :AuthorInfoDetect呼出
 let g:vimrc_author='rainysia'
 let g:vimrc_email='rainysia@gmail.com'
-let g:vimrc_homepage='http://www.btroot.org'
+let g:vimrc_link='http://www.btroot.org'
+let g:vimrc_copyright='Copyright (c) 2006 - 2013, BTROOT, Inc.'
+let g:vimrc_license='http://www.btroot.org/user_guide/license.html'
+let g:vimrc_version='Version 1.0'
 nmap <F4> :AuthorInfoDetect<cr>
 "}}
 "{{                                        " NERD_commenter.vim的设定
@@ -340,6 +384,10 @@ map <F12> <ESC>04x$hh3x<ESC>
 "                                          "      wm 开启
 let g:winManagerWindowLayout='FileExplorer|TagList'
 nmap wm :WMToggle<cr>
+"                                          " 当打开vim且没有文件时自动打开NERDTREE
+autocmd vimenter * if !argc() | NERDTree | endif
+"                                          " 只剩NREDTree时自动关闭
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "}}
 "{{                                        " minibufexpl.vim的设定
 "                                          "     切换c+Tab前c+s+Tab后buff,ctrl+h,j,k,l上下左右
@@ -474,10 +522,34 @@ let g:mwDefaultHighlightingPalette = 'extended'
 "                                          "      ul>li*
 "                                          "      html:xt <c+y> ,
 "}}
-"{{                                        " Multisearch.vim的设定
+"{{                                        " Multisearch.vim的设定 matchit.vim
 "}}
 "{{                                        " EasyMotion.vim的设定
 "let g:EasyMotion_leader_key = '<Leader>'  " conflict with mark.vim
+"}}
+"{{                                        " phpqa.vim的设定
+let g:phpqa_codesniffer_args = "--standard=Zend"
+let g:phpqa_codesniffer_cmd  = '/usr/bin/phpcs'
+let g:phpqa_codesniffer_autorun = 0        "  default =1 on save
+let g:phpqa_messdetector_ruleset = ''
+let g:phpqa_messdetector_cmd = '/usr/bin/phpmd'
+let g:phpqa_messdetector_autorun = 0
+"                                          " :php  --check for syntax errors
+"                                          " :phpcs--run code sniffer
+"                                          " :phpmd--run mess detector(要XML rule)
+"                                          " :phpcc--show code coverage
+"}}
+"{{                                        " quickfix模式
+"                                          " :cc 显示详细错误信息 ( :help :cc )
+"                                          " :cp 跳到上一个错误 ( :help :cp )
+"                                          " :cn 跳到下一个错误 ( :help :cn )
+"                                          " :cl 列出所有错误 ( :help :cl )
+"                                          " :cw 如果有错误列表，则打开quickfix窗口 ( :help :cw )
+"                                          " :col到前一个旧的错误列表 ( :help :col )
+"                                          " :cnew 到后一个较新的错误列表 ( :help :cnew ) 
+"}}
+"{{                                        " php code sniffer ,php md模式
+"                                          " :!phpcs :!phpmd
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -595,14 +667,14 @@ au BufRead,BufNewFile *.s,*.asm,*.h,*.c,*.cpp,*.cc,*.java,*.cs,*.erl,*.hs,*.sh,*
 if has("gui_running")
 	"GUI
 	"======================================================================================================================="
-	hi        Cursor         guifg=#FBFDFC          guibg=#000201           gui=NONE        "光标所在的字符
+	hi        Cursor         guifg=#FBFDFC          guibg=#000201           gui=NONE        "光标所在的字符 #64574e
 	hi        CursorColumn                          guibg=#3E3F40           gui=NONE        "光标所在的屏幕列
 	hi        CursorLine                            guibg=#3E3E3E           gui=NONE        "光标所在的屏幕行 #666666
 	hi        Directory      guifg=#FF3F3F          guibg=#1C1D1F           gui=NONE        "目录名
-	hi        DiffAdd        guifg=#FFFFFF          guibg=#7F7F00           gui=NONE        "diff: 增加的行
-	hi        DiffChange     guifg=#FFFFFF          guibg=#7F007F           gui=NONE        "diff: 改变的行
-	hi        DiffDelete     guifg=#FFFFFF          guibg=#007F7F           gui=NONE        "diff: 删除的行
-	hi        DiffText       guifg=#007F00          guibg=#1C1D1F           gui=NONE        "diff: 改变行里的改动文本
+	hi        DiffAdd        guifg=#FFFFCD          guibg=#306D30           gui=NONE        "diff: 增加的行#FFFFFF #7F7F00
+	hi        DiffChange     guifg=#BFBFBF          guibg=#1C1D1F           gui=NONE        "diff: 改变的行#FFFFFF #7F007F #306B8F
+	hi        DiffDelete     guifg=#FFFFCD          guibg=#6D3030           gui=NONE        "diff: 删除的行#FFFFFF #007F7F
+	hi        DiffText       guifg=#FFFFCD          guibg=#4A2A4A           gui=NONE        "diff: 改变行里的改动文本#007F00 #1C1D1F
 	hi        ErrorMsg       guifg=#FF3F3F          guibg=#1C1D1F           gui=NONE        "命令行上的错误信息
 	hi        VertSplit      guifg=#FF3F3F          guibg=#3F3FFF           gui=NONE        "分离垂直分割窗口的列
 	hi        Folded         guifg=#DDEEFE          guibg=#FF3F3A           gui=NONE        "用于关闭的折叠的行
@@ -684,9 +756,150 @@ if has("gui_running")
 "	hi        cssStyle       guifg=#008B8B          guibg=#1C1D1F           gui=NONE        "cssStyle
 "	hi        phpLabel       guifg=#008B8B          guibg=#1C1D1F           gui=NONE        "phpLabel
 	"======================================================================================================================="
+"	html,css,php highlight
+"	hi        cssAttributeSelector    guifg=#800000    guibg=#00FF00    gui=NONE
+	hi        cssDefinition    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        cssFontDescriptorBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        cssLength    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        cssMediaBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+	hi        cssMediaComma  guifg=#008B8B          guibg=#1C1D1F           gui=NONE        "css逗号
+	hi        cssPseudoClass guifg=#008B8B          guibg=#1C1D1F           gui=NONE        "css伪类符号
+	hi        cssSpecialCharQ    guifg=#800000    guibg=#00FF00    gui=NONE
+	hi        cssSpecialCharQQ    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        cssString    guifg=#800000    guibg=#00FF00    gui=NONE
+	hi        cssStringQ    guifg=#F4E3DC    guibg=#808080    gui=NONE                      "css 字体单引号扩起来,src单引号
+	hi        cssStringQQ    guifg=#F4E3DC    guibg=#808080    gui=NONE                     "css 字体双引号扩起来,src双引号
+"	hi        cssStyle    guifg=#800000    guibg=#00FF00    gui=NONE
+	hi        cssURL         guifg=#BAB5C9          guibg=#1C1D1F           gui=NONE        "css url color
+"	hi        htmlBold    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlBoldItalic    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlBoldItalicUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlBoldUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlBoldUnderlineItalic    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlItalic    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlItalicBold    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlItalicBoldUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlItalicUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlItalicUnderlineBold    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlPreAttr    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+	hi        htmlString     guifg=#D7CDE4          guibg=#1C1D1F           gui=NONE        "HTML string,html的属性,""里面的
+"	hi        htmlStyleArg    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlTagN    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlUnderlineBold    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlUnderlineBoldItalic    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlUnderlineItalic    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlUnderlineItalicBold    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        htmlValue    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        javaScriptCommentSkip    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        javaScriptNumber    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        javaScriptParens    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        javaScriptRegexpString    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        javaScriptStringD    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        javaScriptStringS    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        javaScriptValue    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpArrayComma    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpArrayRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpArrayRegionSimple    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpBacktick    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpBlockRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpBracketRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpCaseRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpCatchBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpCatchRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpClassBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpClassStart    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpConstructRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpDefineClassBlockCommentOneline    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpDefineClassImplementsComma    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpDefineClassImplementsCommentOneLine    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpDefineClassImplementsName    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpDefineClassName    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpDefineFuncBlockCommentOneline    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpDefineFuncName    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpDefineFuncProto    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpDefineInterfaceName    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpDefineMethodName    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpDoBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpDoWhileConstructRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpEchoRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpErraticBracketRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpFoldCatch    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpFoldClass    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpFoldFunction    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpFoldHtmlInside    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpFoldInterface    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpFoldTry    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpForRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpForeachRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpFuncBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpHereDoc    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpIdentifierComplex    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpIdentifierInString    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpIdentifierInStringComplex    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpIdentifierInStringErratic    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpLabel    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpListComma    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpListRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpMemberHere    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpMethodHere    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpMethodsVar    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpPREGArrayComma    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpPREGArrayOpenParent    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpPREGArrayRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpPREGArrayStringDouble    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpPREGArrayStringSingle    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpPREGOpenParentMulti    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpPREGRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpPREGRegionMulti    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpPREGStringDouble    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpPREGStringSingle    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpPREGStringStarter    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpParentRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpPropertyHere    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpPropertyInString    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpProtoArray    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpQuoteDouble    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpQuoteSingle    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpRegionAsp    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpRegionSc    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpRegionSync    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpSpecialCharfold    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpStatementRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpStaticAccess    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpStaticCall    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpStaticUsage    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpStaticVariable    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpStringDouble    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpStringDoubleConstant    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpStringRegular    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpStringSingle    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpStructureHere    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpSwitchBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpSwitchConstructRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpSyncComment    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpSyncStartOfFile    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpSyncString    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpTernaryRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        phpTryBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        pregClassEscapeDouble2    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        pregClassEscapeMainQuote    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        pregConcat    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        pregEscapeMainQuote    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        pregNonSpecial    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        pregNonSpecialEscape    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        pregNonSpecial_D    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        pregNonSpecial_S    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        pregPattern    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        pregPattern_D    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        pregPattern_S    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        sqlString    guifg=#800000    guibg=#00FF00    gui=NONE
+"	hi        vbString    guifg=#800000    guibg=#00FF00    gui=NONE
 else
 	"Console
-"	"======================================================================================================================="
+"	=======================================================================================================================
 "	hi        Cursor         ctermfg=black            ctermbg=lightgreen        cterm=BOLD        "光标所在的字符
 "	hi        CursorColumn                            ctermbg=black             cterm=BOLD        "光标所在的屏幕列
 "	hi        CursorLine                              ctermbg=black             cterm=BOLD        "光标所在的屏幕行
@@ -726,21 +939,21 @@ else
 "	hi        Visual         ctermfg=yellow           ctermbg=lightblue         cterm=BOLD        "可视模式的选择区
 "	hi        WarningMsg     ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "警告消息
 "	hi        WildMenu       ctermfg=lightgreen       ctermbg=lightblue         cterm=BOLD        "wildmenu补全的当前匹配
-"	"======================================================================================================================="
+"	=======================================================================================================================
 "	"Console group-name
-"	"======================================================================================================================="
+"	=======================================================================================================================
 "	hi        Comment        ctermfg=yellow           ctermbg=black             cterm=BOLD        "任何注释
-"	"-----------------------------------------------------------------------------------------------------------------------"
+"	-----------------------------------------------------------------------------------------------------------------------
 "	hi        Constant       ctermfg=brown            ctermbg=black             cterm=BOLD        "任何常数
-"	hi        String         ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "一个字符串常数: "字符串"
+"	hi        String         ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "一个字符串常数:字符串
 "	hi        Character      ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "一个字符常数: 'c'、'\n'
 "	hi        Number         ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "一个数字常数: 234、0xff
 "	hi        Float          ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "一个浮点常数: 2.3e10
 "	hi        Boolean        ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "一个布尔型常数: TRUE、false
-"	"-----------------------------------------------------------------------------------------------------------------------"
+"	-----------------------------------------------------------------------------------------------------------------------
 "	hi        Identifier     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "任何变量名
 "	hi        Function       ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "函数名 (也包括: 类的方法名)
-"	"-----------------------------------------------------------------------------------------------------------------------"
+"	-----------------------------------------------------------------------------------------------------------------------
 "	hi        Statement      ctermfg=yellow           ctermbg=black             cterm=BOLD        "任何语句
 "	hi        Conditional    ctermfg=yellow           ctermbg=black             cterm=BOLD        "if、then、else、endif、switch
 "	hi        Repeat         ctermfg=yellow           ctermbg=black             cterm=BOLD        "for、do、while 等
@@ -748,30 +961,30 @@ else
 "	hi        Operator       ctermfg=yellow           ctermbg=black             cterm=BOLD        ""sizeof"、"+"、"*" 等
 "	hi        Keyword        ctermfg=yellow           ctermbg=black             cterm=BOLD        "任何其它关键字
 "	hi        Exception      ctermfg=lightred         ctermbg=black             cterm=BOLD        "try、catch、throw
-"	"-----------------------------------------------------------------------------------------------------------------------"
+"	-----------------------------------------------------------------------------------------------------------------------
 "	hi        PreProc        ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "通用预处理命令
 "	hi        Include        ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "预处理命令 #include
 "	hi        Define         ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "预处理命令 #define
 "	hi        Macro          ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "等同于 Define
 "	hi        PreCondit      ctermfg=lightred         ctermbg=black             cterm=BOLD        "预处理命令 #if、#else、#endif
-"	"-----------------------------------------------------------------------------------------------------------------------"
+"	-----------------------------------------------------------------------------------------------------------------------
 "	hi        Type           ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "int、long、char 等
 "	hi        StorageClass   ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "static、register、volatile 等
 "	hi        Structure      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "struct、union、enum 等
 "	hi        Typedef        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "一个 typedef
-"	"-----------------------------------------------------------------------------------------------------------------------"
+"	-----------------------------------------------------------------------------------------------------------------------
 "	hi        Special        ctermfg=brown            ctermbg=black             cterm=BOLD        "任何特殊符号
 "	hi        SpecialChar    ctermfg=brown            ctermbg=black             cterm=BOLD        "常数中的特殊字符
 "	hi        Tag            ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "这里可以使用 CTRL-]
 "	hi        Delimiter      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "需要注意的字符
 "	hi        SpecialComment ctermfg=lightred         ctermbg=black             cterm=BOLD        "注释里的特殊字符
 "	hi        Debug          ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "调试语句
-"	"-----------------------------------------------------------------------------------------------------------------------"
+"	-----------------------------------------------------------------------------------------------------------------------
 "	hi        Underlined     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "需要突出的文本，HTML 链接
 "	hi        Ignore         ctermfg=darkgrey         ctermbg=black             cterm=NONE        "留空，被隐藏
 "	hi        Error          ctermfg=yellow           ctermbg=lightred          cterm=BOLD        "任何有错的构造
 "	hi        Todo           ctermfg=lightgrey        ctermbg=lightblue         cterm=BOLD        "任何需要特殊注意的部分
-	"======================================================================================================================="
+"	=======================================================================================================================
 endif
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -859,6 +1072,20 @@ endif
 " do                                       " 在光标处从另一个文件取得不同
 " diw                                      " 删除光标上的单词 (不包括空白字符)
 " daw                                      " 删除光标上的单词 (包括空白字符)
+" dl                                       " delete character (alias: x)
+" diw                                      " delete inner word
+" daw                                      " delete a word
+" diW                                      " delete inner WORD (see |WORD|)
+" daW                                      " delete a WORD (see |WORD|)
+" dd                                       " delete one line
+" dis                                      " delete inner sentence
+" das                                      " delete a sentence
+" dib                                      " delete inner '(' ')'
+" dab                                      " delete a '(' ')'
+" dip                                      " delete inner paragraph
+" dap                                      " delete a paragraph
+" diB                                      " delete inner '{' '}'
+" daB                                      " delete a '{' '}'
 " :1,20s/^/#/g                             " 添加注释  :1,20s/^/\/\//g
 " 0                                        " 至本行第一个字符=<Home>
 " ^                                        " 至本行第一个非空白字符
@@ -869,16 +1096,16 @@ endif
 " N  F{char}                               " 至左边第 N 次出现 {char} 之处 (Find)
 " N  t{char}                               " 至右边第 N 次出现 {char} 之前 (till)
 " N  T{char}                               " 至左边第 N 次出现 {char} 之前 (Till)
-" N  ;                                     " 重复上次 "f"、"F"、"t" 或 "T" 命令 N 次
-" N  ,                                     " 以相反方向重复上次 "f"、"F"、"t" 或 "T" 命令 N
+" N  ;                                     " 重复上次 f、F、t 或 T 命令 N 次
+" N  ,                                     " 以相反方向重复上次 f、F、T 或 t 命令 N
 " N  -                                     " 上移 N 行，至第一个非空白字符
 " N  +                                     " 下移 N 行，至第一个非空白字符 (亦: CTRL-M 和 <CR>)
 " N  _                                     " 下移 N - 1 行，至第一个非空白字符
 " N  G                                     " 至第 N 行 (缺省: 末行) 第一个非空白字符
 " N  gg                                    " 至第 N 行 (缺省: 首行) 第一个非空白字符
 " N  %                                     " 至全文件行数百分之 N 处；必须给出 N，否则是 |%| 命令
-" N  gk                                    " 上移 N 屏幕行 (回绕行时不同于 "k")
-" N  gj                                    " 下移 N 屏幕行 (回绕行时不同于 "j")
+" N  gk                                    " 上移 N 屏幕行 (回绕行时不同于 k)
+" N  gj                                    " 下移 N 屏幕行 (回绕行时不同于 j)
 " N  w                                     " 向前 (正向，下同) N 个单词(word)
 " N  W                                     " 向前 N 个空白隔开的字串 |WORD|            (WORD)
 " N  e                                     " 向前至第 N 个单词词尾                     (end)
@@ -903,12 +1130,12 @@ endif
 " N  ]}                                    " 向前至第 N 个未闭合的 '}'
 " N  ]m                                    " 向前至第 N 个方法 (method) 的开始 (用于 Java)
 " N  ]M                                    " 向前至第 N 个方法的结束 (Method)  (用于 Java)
-" N  [#                                    " 向后至第 N 个未闭合的 "#if" 或 "#else"
-" N  ]#                                    " 向前至第 N 个未闭合的 "#else" 或 "#endif"
-" N  [*                                    " 向后至第 N 个注释的开始 "/*"
-" N  ]*                                    " 向前至第 N 个注释的结束 "*/"
+" N  [#                                    " 向后至第 N 个未闭合的 #if 或 #else
+" N  ]#                                    " 向前至第 N 个未闭合的 #else 或 #endif
+" N  [*                                    " 向后至第 N 个注释的开始 /*
+" N  ]*                                    " 向前至第 N 个注释的结束 */
 " a
-" N  ]*                                    " 向前至第 N 个注释的结束 "*/"
+" N  ]*                                    " 向前至第 N 个注释的结束 */
 " .                                        " 匹配任意单个字符
 " ^                                        " 匹配行首
 " $                                        " 匹配<EOL>
@@ -969,28 +1196,28 @@ endif
 " N ctrk+A                                 " 将光标之上或之后的数值增加 N
 " N ctrl+X                                 " 将光标之上或之后的数值减少 N
 " v o                                      " 交换高亮区域(可视)的开始处的光标位置
-" N  aw                                    " 选择 "一个单词"
-" N  iw                                    " 选择 "内含单词"
-" N  aW                                    " 选择 "一个字串"
-" N  iW                                    " 选择 "内含字串"
-" N  as                                    " 选择 "一个句子"
-" N  is                                    " 选择 "内含句子"
-" N  ap                                    " 选择 "一个段落"
-" N  ip                                    " 选择 "内含段落"
-" N  ab                                    " 选择 "一个块" (从 "[(" 至 "])")
-" N  ib                                    " 选择 "内含块" (从 "[(" 到 "])")
-" N  aB                                    " 选择 "一个大块" (从 "[{" 到 "]}")
-" N  iB                                    " 选择 "内含大块" (从 "[{" 到 "]}")
-" N  a>                                    " 选择 "一个 <> 块"
-" N  i>                                    " 选择 "内含 <> 块"
-" N  at                                    " 选择 "一个标签块" (从 <aaa> 到 </aaa>)
-" N  it                                    " 选择 "内含标签块" (从 <aaa> 到 </aaa>)
-" N  a'                                    " 选择 "一个单引号字符串"
-" N  i'                                    " 选择 "内含单引号字符串"
-" N  a"                                    " 选择 "一个双引号字符串"
-" N  i"                                    " 选择 "内含双引号字符串"
-" N  a`                                    " 选择 "一个反引号字符串"
-" N  i`                                    " 选择 "内含反引号字符串"
+" N  aw                                    " 选择 一个单词
+" N  iw                                    " 选择 内含单词
+" N  aW                                    " 选择 一个字串
+" N  iW                                    " 选择 内含字串
+" N  as                                    " 选择 一个句子
+" N  is                                    " 选择 内含句子
+" N  ap                                    " 选择 一个段落
+" N  ip                                    " 选择 内含段落
+" N  ab                                    " 选择 一个块 (从 [( 至 ]))
+" N  ib                                    " 选择 内含块 (从 [( 到 ]))
+" N  aB                                    " 选择 一个大块 (从 [{ 到 ]})
+" N  iB                                    " 选择 内含大块 (从 [{ 到 ]})
+" N  a>                                    " 选择 一个 <> 块
+" N  i>                                    " 选择 内含 <> 块
+" N  at                                    " 选择 一个标签块 (从 <aaa> 到 </aaa>)
+" N  it                                    " 选择 内含标签块 (从 <aaa> 到 </aaa>)
+" N  a'                                    " 选择 一个单引号字符串
+" N  i'                                    " 选择 内含单引号字符串
+" N  a"                                    " 选择 一个双引号字符串
+" N  i"                                    " 选择 内含双引号字符串
+" N  a`                                    " 选择 一个反引号字符串
+" N  i`                                    " 选择 内含反引号字符串
 " N .                                      " 重复最近一次改动
 " q{a-z}                                   " 记录键入的字符,存入寄存器{a-z}
 " q{A-Z}                                   " 记录键入的字符,添加进寄存器{a-z}
@@ -999,6 +1226,8 @@ endif
 " N @@                                     " 重复上次的@{a-z}的操作N次
 " N gs                                     " 睡N秒
 " sl[eep][sec]                             " 在[sec]秒任何事都不做
+" :%!xxd                                   " 转换成十六进制
+" :%!xxd -r                                " 转回来
 " ga                                       " 以十进制,十六进制,八进制显示当前光标下的字符的ASCII值
 " g8                                       " 对 utf-8 编码: 显示光标所在字符的十六进制字节序列
 " g CTRL-G                                 " 显示当前光标的列、行、以及字符位置
@@ -1011,9 +1240,14 @@ endif
 "     -A                                   " 阿拉伯模式
 "     -F                                   " 波斯模式
 "     -H                                   " 希伯来模式
+" /\Cxxx                                   " 大小写敏感 /\cxxx 搜索xxx不敏感
+" vsp                                      " 垂直分割窗口
+" sp                                       " 竖向分割窗口
+" ctrl w +                                 " 扩大分割窗口
+" ctrl w -                                 " 缩小分割窗口
+" res no                                   " 让分割的窗口只显示多少行
 "{{                                        " 更新日志
-" 4.8.15
-"        4.8.15 从版本升级到4.9.1 查找了Ctrl-x在user下闪现问题,致使万能补全不能在user下使用.没有找到原因,使用长按ctrl+x ctrl+o来代替
+" 4.8.15                                   " 4.8.15 从版本升级到4.9.1 查找了Ctrl-x在user下闪现问题,致使万能补全不能在user下使用.没有找到原因,使用长按ctrl+x ctrl+o来代替
 " 4.9.2                                    " 修改了./vimfiles/after/syntax/css.vim 万能补全恢复
 " 4.9.3                                    " add reg explaination !
 " 4.9.4                                    " add reg explaination more !
@@ -1031,5 +1265,17 @@ endif
 " 5.02.09                                  " fix some usage 2013-02-25 14:27:20
 " 5.03.01                                  " add some usage 2013-03-06 17:15:50
 " 5.03.07                                  " add some usage 2013-03-07 17:01:21
+" 5.03.14                                  " 修改超出背景bg#A36666->#1C1D1E fg->#DCDCDC 终端bg由lightred->darkgray fg lightgrey->lightblue 2013-03-14 15:38:09
+" 5.04.01                                  " add diW manual etc.
+" 5.04.02                                  " pear install PHP_CodeSniffer,pear channel-discover pear.phpmd.org,pear channel-discover pear.pdepend.org,pear isntall --alldeps phpmd/PHP_PMD 
+"                                          " apt-get install php5-imagick imagemagick phpqa.vim
+" 5.04.03                                  " 增加vim for php ,css ,html 变量等色彩配置 2013-04-11 15:22:09
+" 5.05.01                                  " 修改了diff 4个颜色的配置 2013-05-13 18:00:00
+" 5.06.01                                  " 修改了css font的颜色配置 2013-06-25 14:12:40
+" 5.07.01                                  " 增加了xxd 十六进制 2013-07-17 12:31:49
+" 5.09.01                                  " 增加了大小写敏感 2013-09-04 18:28:17
+" 5.09.02                                  " 增加了分割的操作 2013-09-11 10:20:58
+" 5.09.03                                  " 增加了ctags -R 操作 2013-09-11 16:50:00
+" 5.10.01                                  " 增加.c .h .sh .java 头文件自动添加,其它 2013-10-08 10:25:36 
 "}}
 "}}}
