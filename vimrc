@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 5.10.01
+"    Version: 5.10.02
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2013-10-08 10:42:17
+" LastChange: 2013-10-18 15:53:56
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -83,7 +83,7 @@ set ai!                                    " 设置自动缩进
 set cindent                                " 使用c样式的缩进
 set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 set tabstop=4                              " 设置tab为4个空格
-set noexpandtab                            " 不要用空格来代替制表符tab
+set expandtab                              " 用空格来代替制表符tab noexpandtab是不用空格代替制表符tab
 set backspace=2                            " 可以使用backspace键一次删2个
 set whichwrap+=<,>,[,],h,l                 " 允许backspace和光标键跨越行边界
 set shiftwidth=4                           " 设置行间交错为4个空格
@@ -326,7 +326,7 @@ set nowrapscan                             " 禁止搜索到文件两端时重�
 "                                          "     (地址自定义,我的www在F:/php/www下)
 "                                          "     vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
 "                                          " ctrl_] 跳转到对应函数 ctrl_t 回跳
-set tags=/home/www/nn_cms/tags
+set tags=/home/www/tags
 "set tags=tags;
 set autochdir
 "}}
@@ -464,7 +464,7 @@ set completeopt=longest,menu               " 提示菜单后输入字母实现�
 "{{                                        " snipmates的设定
 "                                          "      自定义相关文件.snippets
 let g:snips_author = 'xyl'
-let g:snips_email = 'yuliang.xia@starcorcn.com'
+let g:snips_email = 'yuliangx@jumei.com'
 let g:snips_site =  'www.btroot.org'
 "}}
 "{{                                        " indent.guides的设定
@@ -1277,5 +1277,6 @@ endif
 " 5.09.02                                  " 增加了分割的操作 2013-09-11 10:20:58
 " 5.09.03                                  " 增加了ctags -R 操作 2013-09-11 16:50:00
 " 5.10.01                                  " 增加.c .h .sh .java 头文件自动添加,其它 2013-10-08 10:25:36 
+" 5.10.02                                  " 修改set noexpandtab为expandtab用空格来代替制表符,保证代码和staff的兼容.2013-10-18 15:54:50
 "}}
 "}}}
