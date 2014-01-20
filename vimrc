@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.01.02
+"    Version: 6.01.04
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-01-14 14:51:57
+" LastChange: 2014-01-20 09:42:01
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -214,7 +214,15 @@ func SetTitle()
 endfunc
 autocmd BufNewFile * normal G
 "}}
-"set guioptions-=T                         " 去除vim的GUI版本中的toolbar
+set guioptions-=m                              " 去除vim的GUI版本中的toolbar
+set guioptions-=T
+map <silent> <F2> :if &guioptions =~# 'T' <Bar>
+        \set guioptions-=T <Bar>
+        \set guioptions-=m <bar>
+    \else <Bar>
+        \set guioptions+=T <Bar>
+        \set guioptions+=m <Bar>
+    \endif<CR>
 "{{                                        " 状态栏
 set laststatus=2                           " 总是显示状态栏,默认1无法显示
 "                                          " 我的状态行显示的内容（包括文件类型和解码）
@@ -1216,6 +1224,7 @@ endif
 " N  ctrl+O                                " 跳转到跳转表中第 N 个较早的位置
 " N  ctrl+I                                " 跳转到跳转表中第 N 个较晚的位置
 " :ju[mps]                                 " 列出跳转表
+" R                                        " 覆盖插入.
 " i ctrl+E                                 " 插入光标下方的字符
 " i ctrl+Y                                 " 插入光标上方的字符
 " i ctrl+A                                 " 插入上次插入的文本
@@ -1334,5 +1343,7 @@ endif
 " 5.12.01                                  " fix bug 2013-12-26 16:29:01
 " 6.01.01                                  " add Surround.vim 2014-01-14 14:14:26
 " 6.01.02                                  " add indentLine.vim  2014-01-14 14:51:57
+" 6.01.03                                  " add R  2014-01-16 15:01:48
+" 6.01.04                                  " add F2
 "}}
 "}}}
