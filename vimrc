@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.01.04
+"    Version: 6.04.02
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-01-20 09:42:01
+" LastChange: 2014-04-11 09:45:18
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -68,6 +68,8 @@ set textwidth=100                          " 每行显示多少字符
 "                                          " "zc 关闭 (close) 在光标下的折叠
 "                                          " "zC 循环关闭 (Close) 在光标下的所有折叠
 "                                          " "zM 关闭所有可折叠区域
+"                                          " "zj 移动到下一个折叠的开始
+"                                          " "zk 移动到上一个折叠的结束
 set formatoptions=tcrqn                    " 自动格式化
 set foldenable                             " 开始折叠
 set foldmethod=syntax                      " 设置语法折叠
@@ -261,6 +263,12 @@ syn match 80spa /.\&\%80v.*\%81v/
 set list                                   " 缩进线
 "set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$
 " 制表符显示方式定义：trail为拖尾空白显示字符，extends和precedes分别是wrap关闭时，所在行在屏幕右边和左边显示的指示字符
+" set listchars=tab:▸\ ,eol:¬ 
+" ¬	U+00AC	not sign
+" ▸	U+25B8	black right-pointing small triangle
+" ☠	U+2620	skull and crossbones
+" ❤	U+2764	heavy black heart
+" ‽	U+203d	interobang
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
 "}}
 "                                          " 只在下列文件类型被侦测时显示行号,普通文本文件不显示
@@ -384,12 +392,14 @@ map <F11> <ESC>0i<!--<ESC>$a--><ESC>
 map <F12> <ESC>04x$hh3x<ESC>
 "                                          "      :s/^/#         #用"#"注释当前行
 "                                          "      :2,50s/^ /#    #在2~50行首添加"#"注释
+"                                          "      :2,50s/$/#    #在2~50末加","
 "                                          "      :.,+3s/^/#     #用"#"注释当前行和当前行后面的三行
 "                                          "      :%s/^/#        #用"#"注释所有行
 "                                          "      :n1,n2s/^/#/g  #用"#"注释n1~n2行,下面为删除
 "                                          "      :n1,n2s/#/^/g   :n1,n2s/^/#/g   :n1,n2s/#^//g
 "                                          "      :n1,n2s/^/\/\//g 用//注释n1~n2
 "                                          "      :n1,n2s/\/\///g  删除//的注释
+"                                          "      :n1,n2s/^I/','/g 把tab替换成','
 "}}
 "{{                                        " nerdtree_plugin的设定
 "                                          "      wm 开启
@@ -597,6 +607,45 @@ nnoremap <leader>fb:FufBuffer<CR>          "
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#3E3F40'
 let g:indentLine_char = '|'
+"}}
+"{{                                        " colorv.vim 插件，颜色画板。
+" :h colorv                                "  帮助.
+" :h colorv-options                        "  帮助选项.
+" :h colorv-mapping-buffer                 "  映射.
+"                                          "    https://github.com/Rykka/colorv.vim
+"                                          "  :ColorV
+"                                          "  :ColorVView
+"                                          "  :ColorVEdit
+"                                          "  :ColorVEditTo {fmt}
+"                                          "  :ColorVEditAll
+"                                          "  :ColorVInsert {fmt}
+"                                          "  :ColorVList {gen}
+"                                          "  :ColorVTurn2 {hex1} {hex2}
+"                                          "  :ColorVPreview
+"                                          "  :ColorVPreviewLine
+"                                          "  :ColorVClear
+"                                          "  :ColorVScheme
+"                                          "  :ColorVSchemeFav
+"                                          "  :ColorVSchemeNew
+"                                          "  :ColorVPicker
+"                                          "  In ColorV window: Double Click or Press <Enter> to trigger actions.
+"                                          "    Hue Line: change hue pallete: set current color
+"                                          "    Attrbuite: change attr of current color
+"                                          "    history pallete: previous 3 colors
+"                                          "    Tips: show tips or trigger relevant actions.
+"                                          "    Stats: change relevant setting.
+"                                          "    <Tab>/<S-tab> will jump to next/prev input
+"                                          "    +=/-_/scroll up/scroll down to change RGB/HSV attributes under cursor
+"                                          "    yy/cc/p/yr/... to copy/paste colors
+"                                          "    gg/g2/... to generate a list
+"                                          "    ss/sf/... to trigger scheme actions
+"                                          "    ? to show tips
+"                                          " In Color Scheme window:
+"                                          "    n/N/p to navigate through multi schemes.
+"                                          "    f/F to fav/Unfav schemes
+"                                          "    e on a color to edit the color
+"                                          "    K/C search item under cursor with Kuler/ColourLover
+"                                          "    sn to create new scheme
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -944,93 +993,180 @@ if has("gui_running")
     "	hi        pregPattern_S    guifg=#800000    guibg=#00FF00    gui=NONE
     "	hi        sqlString    guifg=#800000    guibg=#00FF00    gui=NONE
     "	hi        vbString    guifg=#800000    guibg=#00FF00    gui=NONE
-else
-    "Console
+elseif &t_Co == 256
+    "Console xterm 256
     "	=======================================================================================================================
-    "	hi        Cursor         ctermfg=black            ctermbg=lightgreen        cterm=BOLD        "光标所在的字符
-    "	hi        CursorColumn                            ctermbg=black             cterm=BOLD        "光标所在的屏幕列
-    "	hi        CursorLine                              ctermbg=black             cterm=BOLD        "光标所在的屏幕行
-    "	hi        Directory      ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "目录名
-    "	hi        DiffAdd                                 ctermbg=lightgreen        cterm=BOLD        "diff: 增加的行
-    "	hi        DiffChange                              ctermbg=lightcyan         cterm=BOLD        "diff: 改变的行
-    "	hi        DiffDelete                              ctermbg=lightcyan         cterm=BOLD        "diff: 删除的行
-    "	hi        DiffText       ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "diff: 改变行里的改动文本
-    "	hi        ErrorMsg       ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "命令行上的错误信息
-    "	hi        VertSplit      ctermfg=lightmagenta     ctermbg=lightblue         cterm=BOLD        "分离垂直分割窗口的列
-    "	hi        Folded         ctermfg=lightgrey        ctermbg=lightgreen        cterm=BOLD        "用于关闭的折叠的行
-    "	hi        IncSearch      ctermfg=yellow           ctermbg=lightblue         cterm=BOLD        "'incsearch' 高亮
-    "	hi        LineNr         ctermfg=yellow           ctermbg=black             cterm=BOLD        "置位 number 选项时的行号
-    "	hi        MatchParen     ctermfg=lightred         ctermbg=black             cterm=BOLD        "配对的括号
-    "	hi        MatchParen     ctermfg=yellow           ctermbg=lightred          cterm=BOLD        "配对的括号
-    "	hi        ModeMsg        ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "showmode 消息(INSERT)
-    "	hi        MoreMsg        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "|more-prompt|
-    "	hi        NonText        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "窗口尾部的'~'和 '@'
-    "	hi        Normal         ctermfg=lightgrey        ctermbg=black             cterm=BOLD        "正常内容
-    hi        Pmenu          ctermfg=darkgrey       ctermbg=lightgrey               cterm=BOLD        "弹出菜单普通项目
-    hi        PmenuSel       ctermfg=lightcyan      ctermbg=lightred                cterm=BOLD        "弹出菜单选中项目
-    hi        PmenuSbar      ctermfg=lightblue      ctermbg=lightyellow             cterm=BOLD        "弹出菜单滚动条。
-    "	hi        PmenuThumb     ctermfg=black            ctermbg=lightgreen        cterm=BOLD        "弹出菜单滚动条的拇指
-    "	hi        Question       ctermfg=yellow           ctermbg=black             cterm=BOLD        "提示和 yes/no 问题
-    "	hi        Search         ctermfg=yellow           ctermbg=lightblue         cterm=BOLD        "最近搜索模式的高亮
-    "	hi        SpecialKey     ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "特殊键，字符和'listchars'
-    "	hi        SpellBad       ctermfg=lightred         ctermbg=black             cterm=BOLD        "拼写检查器不能识别的单词
-    "	hi        SpellCap       ctermfg=lightred         ctermbg=black             cterm=BOLD        "应该大写字母开头的单词
-    "	hi        SpellLocal     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "只在其它区域使用的单词
-    "	hi        SpellRare      ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "很少使用的单词
-    "	hi        StatusLine     ctermfg=yellow           ctermbg=lightblue         cterm=BOLD        "当前窗口的状态行
-    "	hi        StatusLineNC   ctermfg=yellow           ctermbg=black             cterm=BOLD        "非当前窗口的状态行
-    "	hi        TabLine        ctermfg=black            ctermbg=black             cterm=BOLD        "非活动标签页标签
-    "	hi        TabLineFill    ctermfg=black            ctermbg=lightgrey         cterm=BOLD        "没有标签的地方
-    "	hi        TabLineSel     ctermfg=yellow           ctermbg=lightblue         cterm=BOLD        "活动标签页标签
-    "	hi        Title          ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        ":set all 等输出的标题
-    "	hi        Visual         ctermfg=yellow           ctermbg=lightblue         cterm=BOLD        "可视模式的选择区
-    "	hi        WarningMsg     ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "警告消息
-    "	hi        WildMenu       ctermfg=lightgreen       ctermbg=lightblue         cterm=BOLD        "wildmenu补全的当前匹配
+    hi        Cursor         ctermfg=black            ctermbg=lightyellow       cterm=BOLD        "光标所在的字符
+    hi        CursorColumn                            ctermbg=lightgrey         cterm=BOLD        "光标所在的屏幕列
+    hi        CursorLine                              ctermbg=lightgrey         cterm=BOLD        "光标所在的屏幕行
+    hi        Directory      ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "目录名
+    hi        DiffAdd                                 ctermbg=lightgreen        cterm=BOLD        "diff: 增加的行
+    hi        DiffChange                              ctermbg=lightcyan         cterm=BOLD        "diff: 改变的行
+    hi        DiffDelete                              ctermbg=lightcyan         cterm=BOLD        "diff: 删除的行
+    hi        DiffText       ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "diff: 改变行里的改动文本
+    hi        ErrorMsg       ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "命令行上的错误信息
+    hi        VertSplit      ctermfg=lightmagenta     ctermbg=lightblue         cterm=BOLD        "分离垂直分割窗口的列
+    hi        Folded         ctermfg=lightgrey        ctermbg=lightgreen        cterm=BOLD        "用于关闭的折叠的行
+    hi        IncSearch      ctermfg=darkred          ctermbg=lightgrey         cterm=BOLD        "'incsearch' 高亮
+    hi        LineNr         ctermfg=darkgrey         ctermbg=black             cterm=BOLD        "置位 number 选项时的行号
+    hi        MatchParen     ctermfg=lightred         ctermbg=black             cterm=BOLD        "配对的括号
+    hi        MatchParen     ctermfg=yellow           ctermbg=lightred          cterm=BOLD        "配对的括号
+    hi        ModeMsg        ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "showmode 消息(INSERT)
+    hi        MoreMsg        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "|more-prompt|
+    hi        NonText        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "窗口尾部的'~'和 '@'
+    hi        Normal         ctermfg=lightgrey        ctermbg=black             cterm=BOLD        "正常内容
+    hi        Pmenu          ctermfg=darkgrey         ctermbg=lightgrey         cterm=BOLD        "弹出菜单普通项目
+    hi        PmenuSel       ctermfg=lightcyan        ctermbg=lightred          cterm=BOLD        "弹出菜单选中项目
+    hi        PmenuSbar      ctermfg=lightblue        ctermbg=lightyellow       cterm=BOLD        "弹出菜单滚动条。
+    hi        PmenuThumb     ctermfg=black            ctermbg=lightgreen        cterm=BOLD        "弹出菜单滚动条的拇指
+    hi        Question       ctermfg=yellow           ctermbg=black             cterm=BOLD        "提示和 yes/no 问题
+    hi        Search         ctermfg=red              ctermbg=white             cterm=BOLD        "最近搜索模式的高亮
+    hi        SpecialKey     ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "特殊键，字符和'listchars'
+    hi        SpellBad       ctermfg=lightred         ctermbg=black             cterm=BOLD        "拼写检查器不能识别的单词
+    hi        SpellCap       ctermfg=lightred         ctermbg=black             cterm=BOLD        "应该大写字母开头的单词
+    hi        SpellLocal     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "只在其它区域使用的单词
+    hi        SpellRare      ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "很少使用的单词
+    hi        StatusLine     ctermfg=yellow           ctermbg=lightblue         cterm=BOLD        "当前窗口的状态行
+    hi        StatusLineNC   ctermfg=yellow           ctermbg=black             cterm=BOLD        "非当前窗口的状态行
+    hi        TabLine        ctermfg=black            ctermbg=black             cterm=BOLD        "非活动标签页标签
+    hi        TabLineFill    ctermfg=black            ctermbg=lightgrey         cterm=BOLD        "没有标签的地方
+    hi        TabLineSel     ctermfg=yellow           ctermbg=lightblue         cterm=BOLD        "活动标签页标签
+    hi        Title          ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        ":set all 等输出的标题
+    hi        Visual         ctermfg=yellow           ctermbg=lightblue         cterm=BOLD        "可视模式的选择区
+    hi        WarningMsg     ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "警告消息
+    hi        WildMenu       ctermfg=lightgreen       ctermbg=lightblue         cterm=BOLD        "wildmenu补全的当前匹配
     "	=======================================================================================================================
     "	"Console group-name
     "	=======================================================================================================================
-    "	hi        Comment        ctermfg=yellow           ctermbg=black             cterm=BOLD        "任何注释
+    hi        Comment        ctermfg=darkgrey           ctermbg=black             cterm=BOLD        "任何注释
     "	-----------------------------------------------------------------------------------------------------------------------
-    "	hi        Constant       ctermfg=brown            ctermbg=black             cterm=BOLD        "任何常数
-    "	hi        String         ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "一个字符串常数:字符串
-    "	hi        Character      ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "一个字符常数: 'c'、'\n'
-    "	hi        Number         ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "一个数字常数: 234、0xff
-    "	hi        Float          ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "一个浮点常数: 2.3e10
-    "	hi        Boolean        ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "一个布尔型常数: TRUE、false
+    hi        Constant       ctermfg=brown            ctermbg=black             cterm=BOLD        "任何常数
+    hi        String         ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "一个字符串常数:字符串
+    hi        Character      ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "一个字符常数: 'c'、'\n'
+    hi        Number         ctermfg=lightblue        ctermbg=black             cterm=BOLD        "一个数字常数: 234、0xff
+    hi        Float          ctermfg=lightblue        ctermbg=black             cterm=BOLD        "一个浮点常数: 2.3e10
+    hi        Boolean        ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "一个布尔型常数: TRUE、false
     "	-----------------------------------------------------------------------------------------------------------------------
-    "	hi        Identifier     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "任何变量名
-    "	hi        Function       ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "函数名 (也包括: 类的方法名)
+    hi        Identifier     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "任何变量名
+    hi        Function       ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "函数名 (也包括: 类的方法名)
     "	-----------------------------------------------------------------------------------------------------------------------
-    "	hi        Statement      ctermfg=yellow           ctermbg=black             cterm=BOLD        "任何语句
-    "	hi        Conditional    ctermfg=yellow           ctermbg=black             cterm=BOLD        "if、then、else、endif、switch
-    "	hi        Repeat         ctermfg=yellow           ctermbg=black             cterm=BOLD        "for、do、while 等
-    "	hi        Label          ctermfg=yellow           ctermbg=black             cterm=BOLD        "case、default 等
-    "	hi        Operator       ctermfg=yellow           ctermbg=black             cterm=BOLD        ""sizeof"、"+"、"*" 等
-    "	hi        Keyword        ctermfg=yellow           ctermbg=black             cterm=BOLD        "任何其它关键字
-    "	hi        Exception      ctermfg=lightred         ctermbg=black             cterm=BOLD        "try、catch、throw
+    hi        Statement      ctermfg=yellow           ctermbg=black             cterm=BOLD        "任何语句
+    hi        Conditional    ctermfg=yellow           ctermbg=black             cterm=BOLD        "if、then、else、endif、switch
+    hi        Repeat         ctermfg=yellow           ctermbg=black             cterm=BOLD        "for、do、while 等
+    hi        Label          ctermfg=yellow           ctermbg=black             cterm=BOLD        "case、default 等
+    hi        Operator       ctermfg=yellow           ctermbg=black             cterm=BOLD        ""sizeof"、"+"、"*" 等
+    hi        Keyword        ctermfg=yellow           ctermbg=black             cterm=BOLD        "任何其它关键字
+    hi        Exception      ctermfg=lightred         ctermbg=black             cterm=BOLD        "try、catch、throw
     "	-----------------------------------------------------------------------------------------------------------------------
-    "	hi        PreProc        ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "通用预处理命令
-    "	hi        Include        ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "预处理命令 #include
-    "	hi        Define         ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "预处理命令 #define
-    "	hi        Macro          ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "等同于 Define
-    "	hi        PreCondit      ctermfg=lightred         ctermbg=black             cterm=BOLD        "预处理命令 #if、#else、#endif
+    hi        PreProc        ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "通用预处理命令
+    hi        Include        ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "预处理命令 #include
+    hi        Define         ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "预处理命令 #define
+    hi        Macro          ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "等同于 Define
+    hi        PreCondit      ctermfg=lightred         ctermbg=black             cterm=BOLD        "预处理命令 #if、#else、#endif
     "	-----------------------------------------------------------------------------------------------------------------------
-    "	hi        Type           ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "int、long、char 等
-    "	hi        StorageClass   ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "static、register、volatile 等
-    "	hi        Structure      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "struct、union、enum 等
-    "	hi        Typedef        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "一个 typedef
+    hi        Type           ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "int、long、char 等
+    hi        StorageClass   ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "static、register、volatile 等
+    hi        Structure      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "struct、union、enum 等
+    hi        Typedef        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "一个 typedef
     "	-----------------------------------------------------------------------------------------------------------------------
-    "	hi        Special        ctermfg=brown            ctermbg=black             cterm=BOLD        "任何特殊符号
-    "	hi        SpecialChar    ctermfg=brown            ctermbg=black             cterm=BOLD        "常数中的特殊字符
-    "	hi        Tag            ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "这里可以使用 CTRL-]
-    "	hi        Delimiter      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "需要注意的字符
-    "	hi        SpecialComment ctermfg=lightred         ctermbg=black             cterm=BOLD        "注释里的特殊字符
-    "	hi        Debug          ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "调试语句
+    hi        Special        ctermfg=brown            ctermbg=black             cterm=BOLD        "任何特殊符号
+    hi        SpecialChar    ctermfg=brown            ctermbg=black             cterm=BOLD        "常数中的特殊字符
+    hi        Tag            ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "这里可以使用 CTRL-]
+    hi        Delimiter      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "需要注意的字符
+    hi        SpecialComment ctermfg=lightred         ctermbg=black             cterm=BOLD        "注释里的特殊字符
+    hi        Debug          ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "调试语句
     "	-----------------------------------------------------------------------------------------------------------------------
-    "	hi        Underlined     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "需要突出的文本，HTML 链接
-    "	hi        Ignore         ctermfg=darkgrey         ctermbg=black             cterm=NONE        "留空，被隐藏
-    "	hi        Error          ctermfg=yellow           ctermbg=lightred          cterm=BOLD        "任何有错的构造
-    "	hi        Todo           ctermfg=lightgrey        ctermbg=lightblue         cterm=BOLD        "任何需要特殊注意的部分
+    hi        Underlined     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "需要突出的文本，HTML 链接
+    hi        Ignore         ctermfg=darkgrey         ctermbg=black             cterm=NONE        "留空，被隐藏
+    hi        Error          ctermfg=yellow           ctermbg=lightred          cterm=BOLD        "任何有错的构造
+    hi        Todo           ctermfg=lightgrey        ctermbg=lightblue         cterm=BOLD        "任何需要特殊注意的部分
+    "	=======================================================================================================================
+else
+    "Console xterm 8
+    hi        Cursor         ctermfg=black            ctermbg=lightyellow       cterm=BOLD        "光标所在的字符
+    hi        CursorColumn                            ctermbg=lightgrey         cterm=BOLD        "光标所在的屏幕列
+    hi        CursorLine                              ctermbg=lightgrey         cterm=BOLD        "光标所在的屏幕行
+    hi        Directory      ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "目录名
+    hi        DiffAdd                                 ctermbg=lightgreen        cterm=BOLD        "diff: 增加的行
+    hi        DiffChange                              ctermbg=lightcyan         cterm=BOLD        "diff: 改变的行
+    hi        DiffDelete                              ctermbg=lightcyan         cterm=BOLD        "diff: 删除的行
+    hi        DiffText       ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "diff: 改变行里的改动文本
+    hi        ErrorMsg       ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "命令行上的错误信息
+    hi        VertSplit      ctermfg=lightmagenta     ctermbg=lightblue         cterm=BOLD        "分离垂直分割窗口的列
+    hi        Folded         ctermfg=lightgrey        ctermbg=lightgreen        cterm=BOLD        "用于关闭的折叠的行
+    hi        IncSearch      ctermfg=darkred          ctermbg=lightgrey         cterm=BOLD        "'incsearch' 高亮
+    hi        LineNr         ctermfg=darkgrey         ctermbg=black             cterm=BOLD        "置位 number 选项时的行号
+    hi        MatchParen     ctermfg=lightred         ctermbg=black             cterm=BOLD        "配对的括号
+    hi        MatchParen     ctermfg=yellow           ctermbg=lightred          cterm=BOLD        "配对的括号
+    hi        ModeMsg        ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "showmode 消息(INSERT)
+    hi        MoreMsg        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "|more-prompt|
+    hi        NonText        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "窗口尾部的'~'和 '@'
+    hi        Normal         ctermfg=lightgrey        ctermbg=black             cterm=BOLD        "正常内容
+    hi        Pmenu          ctermfg=darkgrey         ctermbg=lightgrey         cterm=BOLD        "弹出菜单普通项目
+    hi        PmenuSel       ctermfg=lightcyan        ctermbg=lightred          cterm=BOLD        "弹出菜单选中项目
+    hi        PmenuSbar      ctermfg=lightblue        ctermbg=lightyellow       cterm=BOLD        "弹出菜单滚动条。
+    hi        PmenuThumb     ctermfg=black            ctermbg=lightgreen        cterm=BOLD        "弹出菜单滚动条的拇指
+    hi        Question       ctermfg=yellow           ctermbg=black             cterm=BOLD        "提示和 yes/no 问题
+    hi        Search         ctermfg=red              ctermbg=white             cterm=BOLD        "最近搜索模式的高亮
+    hi        SpecialKey     ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "特殊键，字符和'listchars'
+    hi        SpellBad       ctermfg=lightred         ctermbg=black             cterm=BOLD        "拼写检查器不能识别的单词
+    hi        SpellCap       ctermfg=lightred         ctermbg=black             cterm=BOLD        "应该大写字母开头的单词
+    hi        SpellLocal     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "只在其它区域使用的单词
+    hi        SpellRare      ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "很少使用的单词
+    hi        StatusLine     ctermfg=yellow           ctermbg=lightblue         cterm=BOLD        "当前窗口的状态行
+    hi        StatusLineNC   ctermfg=yellow           ctermbg=black             cterm=BOLD        "非当前窗口的状态行
+    hi        TabLine        ctermfg=black            ctermbg=black             cterm=BOLD        "非活动标签页标签
+    hi        TabLineFill    ctermfg=black            ctermbg=lightgrey         cterm=BOLD        "没有标签的地方
+    hi        TabLineSel     ctermfg=yellow           ctermbg=lightblue         cterm=BOLD        "活动标签页标签
+    hi        Title          ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        ":set all 等输出的标题
+    hi        Visual         ctermfg=yellow           ctermbg=lightblue         cterm=BOLD        "可视模式的选择区
+    hi        WarningMsg     ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "警告消息
+    hi        WildMenu       ctermfg=lightgreen       ctermbg=lightblue         cterm=BOLD        "wildmenu补全的当前匹配
+    "	=======================================================================================================================
+    "	"Console group-name
+    "	=======================================================================================================================
+    hi        Comment        ctermfg=darkgrey         ctermbg=black             cterm=BOLD        "任何注释
+    "	-----------------------------------------------------------------------------------------------------------------------
+    hi        Constant       ctermfg=brown            ctermbg=black             cterm=BOLD        "任何常数
+    hi        String         ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "一个字符串常数:字符串
+    hi        Character      ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "一个字符常数: 'c'、'\n'
+    hi        Number         ctermfg=lightblue        ctermbg=black             cterm=BOLD        "一个数字常数: 234、0xff
+    hi        Float          ctermfg=lightblue        ctermbg=black             cterm=BOLD        "一个浮点常数: 2.3e10
+    hi        Boolean        ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "一个布尔型常数: TRUE、false
+    "	-----------------------------------------------------------------------------------------------------------------------
+    hi        Identifier     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "任何变量名
+    hi        Function       ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "函数名 (也包括: 类的方法名)
+    "	-----------------------------------------------------------------------------------------------------------------------
+    hi        Statement      ctermfg=yellow           ctermbg=black             cterm=BOLD        "任何语句
+    hi        Conditional    ctermfg=yellow           ctermbg=black             cterm=BOLD        "if、then、else、endif、switch
+    hi        Repeat         ctermfg=yellow           ctermbg=black             cterm=BOLD        "for、do、while 等
+    hi        Label          ctermfg=yellow           ctermbg=black             cterm=BOLD        "case、default 等
+    hi        Operator       ctermfg=yellow           ctermbg=black             cterm=BOLD        ""sizeof"、"+"、"*" 等
+    hi        Keyword        ctermfg=yellow           ctermbg=black             cterm=BOLD        "任何其它关键字
+    hi        Exception      ctermfg=lightred         ctermbg=black             cterm=BOLD        "try、catch、throw
+    "	-----------------------------------------------------------------------------------------------------------------------
+    hi        PreProc        ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "通用预处理命令
+    hi        Include        ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "预处理命令 #include
+    hi        Define         ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "预处理命令 #define
+    hi        Macro          ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "等同于 Define
+    hi        PreCondit      ctermfg=lightred         ctermbg=black             cterm=BOLD        "预处理命令 #if、#else、#endif
+    "	-----------------------------------------------------------------------------------------------------------------------
+    hi        Type           ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "int、long、char 等
+    hi        StorageClass   ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "static、register、volatile 等
+    hi        Structure      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "struct、union、enum 等
+    hi        Typedef        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "一个 typedef
+    "	-----------------------------------------------------------------------------------------------------------------------
+    hi        Special        ctermfg=brown            ctermbg=black             cterm=BOLD        "任何特殊符号
+    hi        SpecialChar    ctermfg=brown            ctermbg=black             cterm=BOLD        "常数中的特殊字符
+    hi        Tag            ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "这里可以使用 CTRL-]
+    hi        Delimiter      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "需要注意的字符
+    hi        SpecialComment ctermfg=lightred         ctermbg=black             cterm=BOLD        "注释里的特殊字符
+    hi        Debug          ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "调试语句
+    "	-----------------------------------------------------------------------------------------------------------------------
+    hi        Underlined     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "需要突出的文本，HTML 链接
+    hi        Ignore         ctermfg=darkgrey         ctermbg=black             cterm=NONE        "留空，被隐藏
+    hi        Error          ctermfg=yellow           ctermbg=lightred          cterm=BOLD        "任何有错的构造
+    hi        Todo           ctermfg=lightgrey        ctermbg=lightblue         cterm=BOLD        "任何需要特殊注意的部分
     "	=======================================================================================================================
 endif
 "}}}
@@ -1040,11 +1176,13 @@ endif
 "{{{
 "{{                                        " all shortcuts
 " :%s/^\s\+//g                             " 删除行首空格
-" :%s/\s\+$//g                             " 删除行末空格
+" :%s/\s\+$//g                             " 删除行末空格 要转义斜杠等, 用\,而+ |转义用\\
 " :g/^$/d                                  " 删除没有内容的空行
 " :g/^\s*$/d                               " 删除有空格组成的空格
 " :%s///g                                " 删除行末^M的符号
 " :%s/^\n\+/\r/                            " 压缩多行空行为一行 2013-11-26 15:42:58
+" :                                        " 把正则用\( \) 扩起来后, 后面替换的时候可以用\1 \2来引用对应的正则
+" : 将 Doe, John 修改为 John Doe   :%s/\(\w\+\), \(\w\+\)/\2 \1/    
 " gf                                       " 在鼠标下打开当前路径的文件
 " <c-w>f                                   " open in a new window
 " <c-w>gf                                  " open in a new tab
@@ -1191,8 +1329,8 @@ endif
 " .                                        " 匹配任意单个字符
 " ^                                        " 匹配行首
 " $                                        " 匹配<EOL>
-" \<                                       " 匹配单词开始
-" \>                                       " 匹配单词结束
+" \<                                       " 匹配单词开始 /\<aaa/ 只匹配aaa开头的,
+" \>                                       " 匹配单词结束 /\<aaa\>/ 只匹配aaa开头,结尾的.
 " [a-z]  \[a-z]                            " 匹配单个设定范围的字符
 " [^a-z] \[^a-z]                           " 同上..不匹配
 " \s                                       " 匹配一个空白字符
@@ -1253,6 +1391,7 @@ endif
 " N  iw                                    " 选择 内含单词
 " N  aW                                    " 选择 一个字串
 " N  iW                                    " 选择 内含字串
+" :ciw                                     " 修改一个单词
 " N  as                                    " 选择 一个句子
 " N  is                                    " 选择 内含句子
 " N  ap                                    " 选择 一个段落
@@ -1284,6 +1423,8 @@ endif
 " ga                                       " 以十进制,十六进制,八进制显示当前光标下的字符的ASCII值
 " g8                                       " 对 utf-8 编码: 显示光标所在字符的十六进制字节序列
 " g CTRL-G                                 " 显示当前光标的列、行、以及字符位置
+" g;                                       " 在修改记录中向后选择
+" g,                                       " 在修改记录中向前选择
 " :ve[rsion]                               " 显示版本信息
 " vim启动参数
 "     -v                                   " vi模式
@@ -1299,6 +1440,17 @@ endif
 " ctrl w +                                 " 扩大分割窗口
 " ctrl w -                                 " 缩小分割窗口
 " res no                                   " 让分割的窗口只显示多少行
+" ctrl-v I ESC                             " 列插入,选列,I,输入要插入的内容,ESC
+" :%norm jkdd                              " 删除基数行 或用global命令 :g/^/d|m
+" :%norm jdd                               " 删除偶数行 或:g/^/+1 d
+" :%s/0/=eval(line(".")-1)/g               " 生成连续的数字
+" 其他                                     " :r!pwd 插入当前文本路径 :Ex 开启目录浏览 :ls 显示当前buffer :ju 列出跳转足迹 :his c 命令行历史 :his s 搜索历史 q/ 搜索历史窗口 q:命令历史窗口 :<C-F>历史命令窗口
+"                                          "  :%!sort -u 使用sort程序排序整个文件  qq录制到q,输入指令,q再次按q停止录制,@q执行q存储的指令,@@重复执行.
+"                                          " 修改register  \"ap 把register a的内容粘贴到当前位置,然后修改它, \"add 删除并且重新存入register a, @a 执行寄存器a的指令.
+"                                          " \"a5yy 复制5行到register a中, \"A5yy 再添加5行到a中.
+"                                          " [I 显示光标处的关键字匹配的行 :g/^/pu 把文中空行扩1倍 :g/^/m0 按行翻转文章 :g/关键字/t$ 拷贝行,从关键字到文件末尾
+"                                          " :let @a=@_ 清除寄存器a :let @*=@a 寄存器赋值 :scriptnames 列出所有加载的插件,_vimrcs :verbose set history 显示设置history值并指出设置文件的位置
+"                                          " i<c-r>/ 把最后一个搜索指令贴到当前位置 i<c-r>把最后一个命令贴到当前位置 :X 加密文件
 "{{                                        " 更新日志
 " 4.8.15                                   " 4.8.15 从版本升级到4.9.1 查找了Ctrl-x在user下闪现问题,致使万能补全不能在user下使用.没有找到原因,使用长按ctrl+x ctrl+o来代替
 " 4.9.2                                    " 修改了./vimfiles/after/syntax/css.vim 万能补全恢复
@@ -1345,5 +1497,15 @@ endif
 " 6.01.02                                  " add indentLine.vim  2014-01-14 14:51:57
 " 6.01.03                                  " add R  2014-01-16 15:01:48
 " 6.01.04                                  " add F2
+" 6.02.01                                  " add 列插入 2014-02-07 11:34:17
+" 6.02.02                                  " delte rainbow_parentheses.vim 2014-02-10 16:13:21
+" 6.02.03-04                               " add tips批量添加行尾符号.2014-02-27 10:55:34
+" 6.03.01                                  " 修复终端的一些颜色. 2014-03-01 02:51:11
+" 6.03.02                                  " 修复一些配置,比如tlist_php_settings生效. 2014-03-05 10:24:30
+" 6.03.03                                  " add colorv.vim 2014-03-14 11:48:37
+" 6.03.04                                  " add xterm 256 色配置 2014-03-17 16:15:51
+" 6.03.05                                  " add advanced tips 2014-03-19 12:14:49
+" 6.04.01                                  " add listchar 2014-04-02 09:40:06
+" 6.04.02                                  " add \( \) 来对正则引用 2014-04-11 09:45:18
 "}}
 "}}}
