@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.04.02
+"    Version: 6.04.05
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-04-11 09:45:18
+" LastChange: 2014-04-21 18:03:53
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -23,7 +23,7 @@ set nocp                                   " close compeletion with vi
 set helplang=cn                            " 帮助菜单
 set history=1000                           " 设置history文件记录的行数
 set confirm                                " 处理为保存或只读文件的时候弹出确定comfirm
-filetype on                                " 检测文件的类型
+filetype on                                " 检测文件的类型,vundle 关闭,其它on
 filetype plugin on                         " 载入ftplugin文件类型插件
 filetype indent on                         " 为特定文件类型载入相关缩进文件
 filetype plugin indent on
@@ -163,8 +163,8 @@ set nu                                     " 设置行号
 syntax enable                              " 启用语法高亮
 syntax on                                  " 设置语法高亮
 "{{                                        " 高亮字符，让其不受100列限制
-:highlight OverLength ctermbg=darkgray ctermfg=lightblue guibg=#1C1D1E guifg=#DCDCDC
-:match OverLength '\%500v.*'
+highlight OverLength ctermbg=darkgray ctermfg=lightblue guibg=#1C1D1E guifg=#DCDCDC
+match OverLength '\%500v.*'
 "}}
 "{{                                        " 状态行颜色
 highlight StatusLine guifg=SlateBlue guibg=#FFFF00
@@ -338,11 +338,32 @@ set nowrapscan                             " 禁止搜索到文件两端时重�
 "  6=> plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{{
+"{{
+"                                          " Ctrlp的设定 https://github.com/kien/ctrlp.vim 2013-07
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip   " Linux/MacOSX
+"set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe" Windows
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rvm)$'
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_height=15
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_mruf_max=500
+let g:ctrlp_follow_symlinks=1
+let g:ctrlp_user_command = {
+	\ 'types': {
+		\ 1: ['.git', 'cd %s && git ls-files'],
+		\ 2: ['.hg', 'hg --cwd %s locate -I .'],
+		\ },
+	\ 'fallback': 'find %s -type f'
+	\ }
+"}}
 "{{                                        " CTags的设定
 "                                          "     (地址自定义,我的www在F:/php/www下)
 "                                          "     vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
 "                                          " ctrl_] 跳转到对应函数 ctrl_t 回跳
-set tags=/home/www/tags
+set tags=/home/www/jumei/optool_yuliangx/tags
 set tags=tags;                             " 分号必须，让vim递归向上查找tags
 set autochdir
 "}}
@@ -363,16 +384,16 @@ let Tlist_Enable_Fold_Column = 0           "     不要显示折叠树
 let Tlist_Use_Right_Window=1               "     左边显示
 set tags=tags;/                            "     找不到tags文件到上层找寻"
 " php的折叠
-let Tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
+let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 "}}
 "{{                                        " authorinfo.vim的设定
 "                                          "     vim自动添加作者信息（需要和NERD_commenter联用)使用,
 "                                          "     :AuthorInfoDetect呼出
-let g:vimrc_author='rainysia'
-let g:vimrc_email='rainysia@gmail.com'
+let g:vimrc_author='yuliangx'
+let g:vimrc_email='yuliangx@jumei.com'
 let g:vimrc_link='http://www.btroot.org'
-let g:vimrc_copyright='Copyright (c) 2006 - 2013, BTROOT, Inc.'
-let g:vimrc_license='http://www.btroot.org/user_guide/license.html'
+let g:vimrc_copyright='2006-2013 Jumei.xxx.Team'
+let g:vimrc_license='http://www.jumei.com/user_guide/license.html V1'
 let g:vimrc_version='Version 1.0'
 nmap <F4> :AuthorInfoDetect<cr>
 "}}
@@ -421,6 +442,27 @@ let g:miniBufExplModSelTarget = 1
 "{{                                        " grep.vim的设定
 "                                          "     在工程中快速查找 F3
 nnoremap <silent> <F3> :Grep<CR>
+"}}
+"{{                                        " EasyGrep.vim的设定 2014-01
+"                                          " http://www.vim.org/scripts/script.php?script_id=2438
+" <Leader>vv                               "  Grep for the word under the cursor, match all occurences, like |gstar|   :Grep xxx
+" <Leader>vV                               "  Grep for the word under the cursor, match whole word, like |star|         :Grep xxx !
+" <Leader>va                               "    Like vv, but add to existing list   :GrepAdd xxx
+" <Leader>vA                               "    Like vV, but add to existing list   :GrepAdd xxx!
+" <Leader>vr                               "    Perform a global search search on the word under the cursor and prompt for a pattern with which to replace it. :Replace [target] [replacement] :ReplaceUndo
+" <Leader>vo                               "    Select the files to search in and set grep options
+"                                          " :GrepOptions [arg] 新开窗口来设置grep选项.
+"}}
+"{{                                        " mru.vim的设定 2014-03
+"                                          " http://www.vim.org/scripts/script.php?script_id=521
+" :MRU
+"let MRU_File = 'd:\myhome\_vim_mru_files' " 指定缓存地址.
+let MRU_Max_Entries = 1000
+let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*'  " For Unix  /windows '^c:\\temp\\.*'
+" let MRU_Include_Files = '\.c$\|\.h$'     " 指定类型的最近打开
+let MRU_Add_Menu = 1                       " 增加到菜单.
+let MRU_Max_Menu_Entries = 20 
+let MRU_Max_Submenu_Entries = 15 
 "}}
 "{{                                        " debugger.vim的设定  不用需要删除掉debugger.vim .py
 "let g:debuggerPort = 9001
@@ -484,11 +526,11 @@ set completeopt=longest,menu               " 提示菜单后输入字母实现�
 "}}
 "{{                                        " snipmates的设定
 "                                          "      自定义相关文件.snippets
-let g:snips_author = 'xyl'
-let g:snips_copyright = '2012-2014 BTROOT.xxx.Team'
-let g:snips_license = 'http://www.btroot.com/user_guide/license.html V1'
-let g:snips_email = 'admin@btroot.com'
-let g:snips_site =  'www.btroot.org'
+let g:snips_author = 'yuliangx <yuliangx@jumei.com>'
+let g:snips_copyright = '2012-2014 Jumei.xxx.Team'
+let g:snips_license = 'http://www.jumei.com/user_guide/license.html V1'
+let g:snips_email = 'yuliangx@jumei.com'
+let g:snips_site =  'www.jumei.com'
 "}}
 "{{                                        " indent.guides的设定
 "                                          "      自动缩进
@@ -551,10 +593,11 @@ let g:mwDefaultHighlightingPalette = 'extended'
 "let g:EasyMotion_leader_key = '<Leader>'  " conflict with mark.vim
 "}}
 "{{                                        " phpqa.vim的设定
-let g:phpqa_codesniffer_args = "--standard=Zend"
+"let g:phpqa_codesniffer_args = "--standard=Zend"
+let g:phpqa_codesniffer_args = "--standard=Jumei"
 let g:phpqa_codesniffer_args = " --encoding=utf-8"
 let g:phpqa_codesniffer_cmd  = '/usr/bin/phpcs'
-let g:phpqa_codesniffer_autorun = 1        "  default =1 on save
+let g:phpqa_codesniffer_autorun = 0        "  default =1 on save
 "                                          " :return NULL Void Boolean Float String Array Object Resource Callback
 let g:phpqa_messdetector_ruleset = ''
 let g:phpqa_messdetector_cmd = '/usr/bin/phpmd'
@@ -575,28 +618,6 @@ let g:phpqa_messdetector_autorun = 0
 "}}
 "{{                                        " php code sniffer ,php md模式
 "                                          " :!phpcs :!phpmd
-"}}
-"{{                                        " php fuzzyfinder 需要配合l9 library l9.vim
-"                                          " :FufBuffer - Buffer mode
-"                                          " :FufFIle   - File Mode
-"                                          " :FufDir    - Directory mode
-"                                          " :FufMruFIle-MRU-FIle mode
-"                                          " :FufMruCmd -MRU-Command mode
-"                                          " :FufBookmark-Bookmark mode
-"                                          " :FufTag    - Tag mode
-"                                          " :FufTaggedFIle-Tagged-File mode
-"                                          " :FufJumpList-Jump-List mode
-"                                          " :FufChangeList-Change-List mode
-"                                          " :FufQuickfix-Quickfix mode
-"                                          " :FufLine   - Line mode
-"                                          " :FufHelp   - Help mode
-"                                          " ctrl-n ctrl-p 上下选择项目
-"                                          " ctrk-j 开启该档案到水平分割视窗
-"                                          " ctrl-k 开启该档案到垂直分割视窗
-"                                          " ctrl-l 开启档案至新分页
-"                                          " ctrl-\ ctrl-\ 切换搜寻模式fuzzy matching or partial matching
-nnoremap <leader>ff:FufFile<CR>            " 
-nnoremap <leader>fb:FufBuffer<CR>          "
 "}}
 "{{                                        " php autocomplpop 插件，自动完成提示。
 "}}
@@ -746,7 +767,7 @@ au BufRead,BufNewFile *.s,*.asm,*.h,*.c,*.cpp,*.cc,*.java,*.cs,*.erl,*.hs,*.sh,*
 "if has("gui_running")
 "    au GUIEnter * simalt ~x               " 窗口启动时自动最大化
 "set guioptions-=m                     " 隐藏菜单栏
-"set guioptions-=T	                   " 隐藏工具栏
+"set guioptions-=T                     " 隐藏工具栏
 "set guioptions-=L                     " 隐藏左侧滚动条
 "set guioptions-=r                     " 隐藏右侧滚动条
 "set guioptions-=b                     " 隐藏底部滚动条
@@ -1182,7 +1203,11 @@ endif
 " :%s///g                                " 删除行末^M的符号
 " :%s/^\n\+/\r/                            " 压缩多行空行为一行 2013-11-26 15:42:58
 " :                                        " 把正则用\( \) 扩起来后, 后面替换的时候可以用\1 \2来引用对应的正则
-" : 将 Doe, John 修改为 John Doe   :%s/\(\w\+\), \(\w\+\)/\2 \1/    
+" : 将 Doe, John 修改为 John Doe   :%s/\(\w\+\), \(\w\+\)/\2 \1/
+" :s/替换字符串/\=函数式                   " 函数式可以有多个，返回值可以用字符串连接符.连接起来，如line(".") 返回匹配行号（:help line()  ），submatch(n)可以引用\1、\2的内容，其中submatch(0)引用匹配的整个内容;
+"                                          " 函数式也可以是字符串常量，用双引号引起来。函数式也可以是任意表达式，需要用小括号引起来，如(3+2*6)；
+"                                          " 函数式还可以是寄存器中的内容，通过"@寄存器名"访问，如@a（不需要加引号，但是还是需要用.来连接）
+" :%!nl -ba                                " 对包含空行的所有行进行编号.
 " gf                                       " 在鼠标下打开当前路径的文件
 " <c-w>f                                   " open in a new window
 " <c-w>gf                                  " open in a new tab
@@ -1240,7 +1265,7 @@ endif
 " \'.                                      " 跳到最后修改的那一行
 " `.                                       " 跳到最后修改的那一行，定位到修改点
 " :ju(mps)                                 " 列出跳转足迹
-" !!date                                   " 读取date的输出 (但是会替换当前行的内容)
+" !!date                                   " 读取date的输出 (但是会替换当前行的内容) :r!date 输出系统时间. :r!date \+\%F\ \%T 格式化输出
 " :bn                                      " 跳转到下一个buffer
 " :bp                                      " 跳转到上一个buffer
 " :wn                                      " 存盘当前文件并跳转到下一个
@@ -1256,6 +1281,8 @@ endif
 " :brew                                    " 回到第一个buffer
 " gvim -o file1 file2                      " 以分割窗口打开两个文件\r\n# 指出打开之后执行的命令
 " gvim -d file1 file2                      " vimdiff (比较不同)
+"                                          "    ]c 跳转下一个差异点 :diffget 把另外一个文件的差异点的内容复制过来  :diffput 把当前差异点的内容复制过去. :diffupdate 更多比较文件
+"                                          "    前面加行号表示多少行开始  :2,30diffget 把2~30行的差异取过来
 " c{ motion }                              " 删除motion命令跨过的，并且进入插入 c$删到行尾的并进入插入，ct! 删除从光标位到下一个！位置
 " dp                                       " 把光标处的不同放到另一个文件
 " do                                       " 在光标处从另一个文件取得不同
@@ -1276,6 +1303,9 @@ endif
 " diB                                      " delete inner '{' '}'
 " daB                                      " delete a '{' '}'
 " d ↓                                     " delete 完整的一个语句
+" di[ di( di{ di< di' di" di`              " 删除一对()[]{} '' "" ``的内容
+" ci[ ci( ci{ ci< ci' ci" ci`              " 删除并插入一对()[]{} '' "" ``的内容
+" vi[ vi( vi{ vi< vi' vi" vi`              " 编辑一对()[]{} '' "" ``的内容
 " :1,20s/^/#/g                             " 添加注释  :1,20s/^/\/\//g
 " 0                                        " 至本行第一个字符=<Home>
 " ^                                        " 至本行第一个非空白字符
@@ -1426,6 +1456,17 @@ endif
 " g;                                       " 在修改记录中向后选择
 " g,                                       " 在修改记录中向前选择
 " :ve[rsion]                               " 显示版本信息
+" :vimgrep /test/ *                        " 查找当前目录下所有包含test关键字  ** 代表的是递归查找大于100层目录
+" :vimgrep /test/ **                       " 递归查找当前目录下所有包含test关键字
+" :vimgrep /\<test\>/ **                   " 递归查找当前目录下所有包含只有test关键字,不包括testabc、abctest、abctestabc等等，如果一行有多个test的话，只搜索一个test结果
+" :vimgrep /\<test\>/g **                  " 递归查找当前目录下所有包含只有test关键字,不包括testabc、abctest、abctestabc等等，如果一行有多个test的话，搜索多个test结果
+" :vimgrep /\<test\>/ *.html               " 查找当前目录下所有的html文件包含只有test关键字,不包括testabc、abctest、abctestabc等等，如果一行有多个test的话，搜索多个test结果
+"                                          "  :cnext (:cn) 当前页下一个结果
+"                                          "  :cprevious (:cp) 当前页上一个结果
+"                                          "  :clist (:cl) 打开quickfix窗口，列出所有结果，不能直接用鼠标点击打开，只能看
+"                                          "  :copen (:cope) 打开quickfix窗口，列出所有结果，可以直接用鼠标点击打开
+"                                          "  :ccl[ose] 关闭 quickfix 窗口
+"                                          "   ctrl + ww 切换编辑窗口和quickfix窗口，在quickfix里面和编辑窗口一样jk表示上下移动，回车选中进入编辑窗口
 " vim启动参数
 "     -v                                   " vi模式
 "     -d                                   " diff模式
@@ -1507,5 +1548,8 @@ endif
 " 6.03.05                                  " add advanced tips 2014-03-19 12:14:49
 " 6.04.01                                  " add listchar 2014-04-02 09:40:06
 " 6.04.02                                  " add \( \) 来对正则引用 2014-04-11 09:45:18
+" 6.04.03                                  " add vimgrep 2014-04-16 13:24:19
+" 6.04.04                                  " add vim plugin ctrlp in,delete fuf.vim l9.vim # 2014-04-21 16:01:52
+" 6.04.05                                  " add EasyGrep.vim MRU.vim  2014-04-21 18:04:34
 "}}
 "}}}
