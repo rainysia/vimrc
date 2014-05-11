@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.04.05
+"    Version: 6.05.01
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-04-21 18:03:53
+" LastChange: 2014-05-07 15:48:40
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -195,7 +195,7 @@ func SetTitle()
         call append(line("."), "	> File Name: ".expand("%"))
         call append(line(".")+1, "	> Author: rainysia")
         call append(line(".")+2, "	> Mail: rainysia@gmail.com ")
-        call append(line(".")+3, "	> Created Time: ".strftime("%c"))
+        call append(line(".")+3, "	> Created Time: ".strftime("%F %T"))
         call append(line(".")+4, " ************************************************************************/")
         call append(line(".")+5, "")
     endif
@@ -1254,8 +1254,9 @@ endif
 " zz                                       " 移动当前行到屏幕中央
 " zt                                       " 移动当前行到屏幕顶部
 " zb                                       " 移动当前行到屏幕底部
-" *                                        " 读取光标处的字符串,并且移动光标到它再次出现的地方
+" *                                        " 读取光标处的字符串,并且移动光标到它再次出现的地方, n下一个匹配,N反方向
 " #                                        " 和上面的类似,但是是往反方向寻找
+" g*(g#)                                   " 此命令与上条命令相似, 只不过它不完全匹配光标所在处的单词, 而是匹配包含该单词的所有字符串
 " guu                                      " 行小写
 " gUU                                      " 行大写
 " g~~                                      " 行翻转(大小写)
@@ -1492,6 +1493,7 @@ endif
 "                                          " [I 显示光标处的关键字匹配的行 :g/^/pu 把文中空行扩1倍 :g/^/m0 按行翻转文章 :g/关键字/t$ 拷贝行,从关键字到文件末尾
 "                                          " :let @a=@_ 清除寄存器a :let @*=@a 寄存器赋值 :scriptnames 列出所有加载的插件,_vimrcs :verbose set history 显示设置history值并指出设置文件的位置
 "                                          " i<c-r>/ 把最后一个搜索指令贴到当前位置 i<c-r>把最后一个命令贴到当前位置 :X 加密文件
+"}}
 "{{                                        " 更新日志
 " 4.8.15                                   " 4.8.15 从版本升级到4.9.1 查找了Ctrl-x在user下闪现问题,致使万能补全不能在user下使用.没有找到原因,使用长按ctrl+x ctrl+o来代替
 " 4.9.2                                    " 修改了./vimfiles/after/syntax/css.vim 万能补全恢复
@@ -1551,5 +1553,6 @@ endif
 " 6.04.03                                  " add vimgrep 2014-04-16 13:24:19
 " 6.04.04                                  " add vim plugin ctrlp in,delete fuf.vim l9.vim # 2014-04-21 16:01:52
 " 6.04.05                                  " add EasyGrep.vim MRU.vim  2014-04-21 18:04:34
+" 6.05.01                                  " add some search tips 2014-05-07 15:49:48
 "}}
 "}}}
