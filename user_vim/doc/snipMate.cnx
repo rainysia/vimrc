@@ -1,0 +1,275 @@
+*snipMate.txt*  一个 Vim 里使用 TextMate 风格的片段补全插件。
+
+
+
+snipMate                                       *snippet* *snippets* *snipMate*
+最后修改：2009/07/13
+    翻译：2010/03/09
+    译者：闲耘™(hotoo.cn[AT]gmail.com)
+
+|snipMate-description|   描述
+|snipMate-syntax|        语法
+|snipMate-usage|         用法
+|snipMate-settings|      设置
+|snipMate-features|      特性
+|snipMate-disadvantages| 缺陷
+|snipMate-contact|       联系方式
+
+支持 Vim 7.0 或更高版本。
+这个插件不能设置 'compatible' ，否则无法工作。
+{Vi 不支持这些特性。}
+
+==============================================================================
+DESCRIPTION                                             *snipMate-description*
+(描述)
+
+snipMate.vim 为 Vim 实现了一些 TextMate 的片段(补全)特性，片段就是使用一个
+关键字后加 <tab> 键来插入一些常用的文本。
+
+例如，在 C 文件中使用默认安装的 snipMate.vim，如果在插入模式下输入 `for<tab>`，
+它将展开为典型的 C 循环： >
+
+ for (i = 0; i < count; i++) {
+
+ }
+
+
+要转到下一个循环项，只需要简单的按 <tab> 键；如果是重复的代码，例如示例中的
+变量 `i`，只需要在高亮处输入文本，所有指定匹配的项都将被更新。要返回到上一项，
+使用 <shift-tab> 就可以了。
+
+==============================================================================
+SYNTAX                                                        *snippet-syntax*
+(语法)
+
+有两种方式定义片段，一种是定义在 'snippets/<filetype>/<trigger>.snippet'文件
+中，另一种则定义在 'snippets/<filetype>.snippets'文件中。
+(译注：<filetype> 是文件类型，如 html，<trigger> 是关键字。)
+注意，文件类型(filetype)支持点号(.) -- 例如，可以使用 >
+
+	:set ft=html.eruby
+
+为当前文件同时激活 HTML 和 eRuby 两种片段。
+
+*.snippets 文件的片段语法如下： >
+
+ snippet 关键字
+ 	将被展开的文本
+	更多被展开的文本
+
+注意：关键字之后的片段中，最前面的硬 TAB 字符是必须的，并且不会展开到实际展开后
+的文本中。*.snippet 文件也一样，除非声明关键字时，以缩进开始。
+
+另外注意：片段必须使用硬 TAB 空白来定义，如果需要的话可以展开为空格
+（参考 |snipMate-indenting|）。
+
+井号(#) 用来作为 *.snippets 文件的单行注释，当然，它们只能用在片段定义之外，
+例如： >
+
+ # 这是一个正确的注释
+ snippet trigger
+ 	expanded text
+ snippet another_trigger
+ 	# 这不是一个注释！
+	expanded text
+<
+这从语法着色上可以明显看出来。
+
+                                                               *snipMate-${#}*
+制表符(Tab stops) ~
+
+默认情况下，光标被放置在片段的最后。可使用 "${#}"来指定下一个光标出现在哪里。
+井号(#)即制表符的数字。例如：将光标放置在 <div> 标签的 id 属性值上，并允许用户
+使用 <tab> 键跳转到 <div> 的中间：
+ >
+ snippet div
+ 	<div id="${1}">
+		${2}
+	</div>
+<
+                        *snipMate-placeholders* *snipMate-${#:}* *snipMate-$#*
+占位符 ~
+
+占位符文本可以由 "${#:text}" 提供，其中 # 是制表符的数值。而其中的 "text" 可以
+使用 "$#" 来引用前面的副本，例如 C 循环： >
+
+ snippet for
+ 	for (${2:i}; $2 < ${1:count}; $1++) {
+		${4}
+	}
+
+首先将选中 "count"，用户也可以输入来改变被选中内容。当按下 <tab> 键， ${2} 中
+的 "i" 将被定位并被选中，所有的 $2 变量默认值是 "i"，它也会受用户输入影响同步
+更新。
+注意：TextMate 的 "$#" 语法仅用于变量，不可以是制表符。
+
+变量中引用变量也是可以的，例如： >
+
+ snippet opt
+ 	<option value="${1:option}">${2:$1}</option>
+
+同样，首先 "option" 将被选中，如果用户开始输入，$1 变量会同步更新。由于其中一个
+$1 变量在 ${2} 中，它在下一个制表位(tab stop)中将被作为占位符，并允许用户修改。
+
+要复制一个没有默认值的文本，使用 "${#:}" 就可以了，例如： >
+
+ snippet foo
+ 	${1:}bar$1
+<                                                          *snipMate-commands*
+插入 Vim 脚本 ~
+
+片段定义中也可以使用 Vim 脚本命令，当片段被插入，这些命令通过 eval() 会被执行。
+命令通过反引号（`...`）来定义；对于 TextMates 的功能，使用 |system()|函数，
+例如： >
+
+ snippet date
+ 	`system("date +%Y-%m-%d")`
+
+假如在 Unix 系统上，将被插入当前时间。注意：这个实例你可以（也应该）使用
+|strftime()| 函数。
+
+Filename([{expr}] [, {defaultText}])             *snipMate-filename* *Filename()*
+
+由于当前文件名会被经常使用，所以默认定义了一个函数在 snipMate.vim 中，函数名是
+Filename()。
+
+
+如果不带参数，将返回不带后缀的文件名；第一个参数指定附加到文件名之前（或之后）
+的文本，第二个参数则指定实际文件名不存在（文件未命名）的情况下返回的值， "$1"
+在第一个参数中将被替换为文件名本身，如果希望仅仅返回文件名本身，第一个参数为
+空白即可。例如： >
+
+ snippet filename
+ 	`Filename()`
+ snippet filename_with_default
+ 	`Filename('', 'name')`
+ snippet filename_foo
+ 	`filename('$1_foo')`
+
+如果文件已被命名的话，第一个示例返回文件名本身，否则返回空字符串；
+如果文件已被命名，第二个示例返回文件名本身，否则返回 "name"；
+如果文件被命名，第三个示例返回 文件名 + "_foo"，否则返回空字符串。
+
+                                                                   *multi_snip*
+在一个 *.snippets 文件中，可以指定多项匹配的片段，语法定义如下： >
+
+ snippet trigger 片段的描述信息 #1
+ 	被展开的文本
+ snippet trigger 另一个片段的描述信息 #2
+ 	另一个被展开的文本！
+
+这个示例中，当输入 "trigger<tab>"，将出现包含所有关于 "trigger" 描述的
+编号菜单，用户输入相应的编号后，对应的片段将被展开。
+
+要在 *.snippet 文件中创建多项匹配的片段，将所有的片段放在一个子目录中，目录
+名称是触发字(trigger)即可：
+'snippets/<filetype>/<trigger>/<name>.snippet'。
+
+==============================================================================
+USAGE                                                         *snipMate-usage*
+(用法)
+                                                 *'snippets'* *g:snippets_dir*
+片段定义默认装在 'runtimepath' 下的 'snippets' 目录中，在 *nix 系统中是
+'~/.vim/snippets/'，Windows 下则是 '$HOME\vimfiles\snippets\'。要改变这个路径，
+在 .vimrc 中设置 g:snippets_dir 变量为指定目录即可，想要添加另一个路径，就使用
+|ExtractSnips()| 函数。它将调用 |globpath()| 函数，它使用统一的语法（例如：
+以逗号(,)为分隔符的路径）。
+
+ExtractSnipsFile({directory}, {filetype})     *ExtractSnipsFile()* *.snippets*
+
+ExtractSnipsFile() 为特定的文件类型提取指定的 *.snippets 文件。.snippets 文件
+包含针对特定的文件类型定义的多个片段。详细请参考 |snippet-syntax|。
+
+ExtractSnips({directory}, {filetype})             *ExtractSnips()* *.snippet*
+
+ExtractSnips() 针对特定的文件类型，从指定的目录中提取 *.snippet 文件，目录树
+看起来应该是这样：'snippets/<filetype>/<trigger>.snippet'。如果片段有多项匹配，
+'snippets/<filetype>/<trigger>/<name>.snippet' （参考 |multi_snip|）。
+
+                                                            *ResetSnippets()*
+ResetSnippets() 函数从内存中删除所有的片段，如果希望通过多次导入(|:source|)
+来将片段置于顶部，这将非常有用。
+
+
+                                             *list-snippets* *i_CTRL-R_<Tab>*
+想知道那些片段是可用的，在当前缓冲区按 <c-r><tab>，会根据|popupmenu-completion|
+来显示可用的片段列表。
+
+==============================================================================
+SETTINGS                                  *snipMate-settings* *g:snips_author*
+(设置)
+
+字符串 g:snips_author (等同于 TextMate 中的 $TM_FULLNAME) 用来设置你的姓名，
+他可以用在片段定义中，来自动补全。例如： >
+
+ let g:snips_author = '闲耘™'
+ snippet name
+ 	`g:snips_author`
+<
+                                     *snipMate-expandtab* *snipMate-indenting*
+如果想在片段展开的文本中使用空白来替代制表符(tabs)，设置 'expandtab' 和
+'softtabstop' 为合适的数值即可，如果 'softtabstop' 未设置，则使用 'shiftwidth'
+的设置。
+
+                                                              *snipMate-remap*
+snipMate 没有自定义触发键的自定义选项，但是可以在 'after' 目录下的
+'plugin/snipMate.vim' 文件中修改两行代码来重映射。例如，要改变触发键为 CTRL-J：
+把下面两行 >
+
+ ino <tab> <c-r>=TriggerSnippet()<cr>
+ snor <tab> <esc>i<right><c-r>=TriggerSnippet()<cr>
+
+改为： >
+ ino <c-j> <c-r>=TriggerSnippet()<cr>
+ snor <c-j> <esc>i<right><c-r>=TriggerSnippet()<cr>
+
+==============================================================================
+FEATURES                                                   *snipMate-features*
+(特性)
+
+snipMate.vim 还有一些其他的特性：
+  - 片段语法与 TextMate 的非常类似，可以很方便的转换。
+  - 片段保持透明（它不在缓冲区中写标记位或占位符），不需要转义不完整的片段
+    有时候这非常有用。
+  - 在输入过程中自动更新片段。
+  - 片段支持多项匹配。
+  - 片段补全可以是无序的。例如，在 do...while 循环中，条件表达式可以被添加到
+    代码之前。
+  - [新] 支持基于文件的片段定义。
+  - [新] 可以展开触发器后非单词分隔符，例如 "bar.foo" 中的 "foo"。
+  - [新] <shift-tab> 可以反序跳转到上一个制表位。
+
+==============================================================================
+DISADVANTAGES                                         *snipMate-disadvantages*
+(缺点)
+
+与 TextMate 的片段相比，snipMate 还有以下缺点：
+    - 没有 $0；制表位必须有明确的开始（必须从$1开始）。
+    - 不支持嵌套的占位符，例如： >
+
+      '<div${1: id="${2:some_id}}">${3}</div>'
+<
+      在 TextMate 中，这个片段定义将首先高亮 ' id="some_id"'，如果删掉它，
+      将自动忽略 ${2}，下一个 <tab> 将跳转到 ${3}；如果不删掉，会先高亮
+      "some_id"。在 snipMate.vim 中不可以这样。
+    - "${1/.*/\U&}" 这样的正则表达式变量不被执行。
+    - 占位符不可以跨多行。
+    - 不能激活同一文件中，不同作用域的片段。
+
+也许其中的某些功能会被添加到以后的版本中。
+
+==============================================================================
+CONTACT                                   *snipMate-contact* *snipMate-author*
+(联系方式)
+
+要联系插件作者(Michael Sanders)，请发邮件至：
+ msanders42+snipmate <at> gmail <dot> com
+
+我非常欢迎任何关于改善脚本的建议。
+
+中文文档翻译问题请联系译者（闲耘™），邮件至：
+ hotoo.cn[AT]gmail.com
+
+==============================================================================
+
+vim:tw=78:ts=8:ft=help:norl:
