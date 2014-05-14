@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.05.01
+"    Version: 6.05.02
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-05-07 15:48:40
+" LastChange: 2014-05-14 23:43:17
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -28,6 +28,7 @@ filetype plugin on                         " 载入ftplugin文件类型插件
 filetype indent on                         " 为特定文件类型载入相关缩进文件
 filetype plugin indent on
 set binary                                 " 可读二进制文件
+"set nrformats=                             " 默认<C-a> <C-x> 以十进制来计算. :h nrformats
 "{{                                        " 不同文件类型的缩进
 au FileType html,python,vim,javascript setl shiftwidth=4
 au FileType html,python,vim,javascript setl tabstop=4
@@ -1237,7 +1238,7 @@ endif
 "reg                                       " /l      lowercase alpha         [a-z]
 "reg                                       " /L      non-lowercase alpha     [^a-z]
 "reg                                       " /u      uppercase alpha         [A-Z]
-"reg                                       " /U      non-uppercase alpha     [^A-Z]"}}
+"reg                                       " /U      non-uppercase alpha     [^A-Z]
 " m a   (MARK)                             " 把这个地方标示成a    a can replace from (a~z)
 " 'a    (quote character)                  " jump to aaa
 " ''    (press ' twice)                    " 移动光标到上一个标记
@@ -1293,20 +1294,20 @@ endif
 " diw                                      " delete inner word
 " daw                                      " delete a word
 " diW                                      " delete inner WORD (see |WORD|)
-" daW                                      " delete a WORD (see |WORD|)
+" daW                                      " delete a WORD (see |WORD|会删除掉单词和其后的空格)
 " dd                                       " delete one line
 " dis                                      " delete inner sentence
 " das                                      " delete a sentence
 " dib                                      " delete inner '(' ')'
 " dab                                      " delete a '(' ')'
 " dip                                      " delete inner paragraph
-" dap                                      " delete a paragraph
+" dap                                      " delete a paragraph  p是段落
 " diB                                      " delete inner '{' '}'
 " daB                                      " delete a '{' '}'
 " d ↓                                     " delete 完整的一个语句
-" di[ di( di{ di< di' di" di`              " 删除一对()[]{} '' "" ``的内容
-" ci[ ci( ci{ ci< ci' ci" ci`              " 删除并插入一对()[]{} '' "" ``的内容
-" vi[ vi( vi{ vi< vi' vi" vi`              " 编辑一对()[]{} '' "" ``的内容
+" di[ di( di大括号 di< di' di" di`         " 删除一对()[]大括号 '' "" ``的内容
+" ci[ ci( ci大括号 ci< ci' ci" ci`         " 删除并插入一对()[]大括号 '' "" ``的内容
+" vi[ vi( vi大括号 vi< vi' vi" vi`         " 编辑一对()[]大括号 '' "" ``的内容
 " :1,20s/^/#/g                             " 添加注释  :1,20s/^/\/\//g
 " 0                                        " 至本行第一个字符=<Home>
 " ^                                        " 至本行第一个非空白字符
@@ -1493,6 +1494,13 @@ endif
 "                                          " [I 显示光标处的关键字匹配的行 :g/^/pu 把文中空行扩1倍 :g/^/m0 按行翻转文章 :g/关键字/t$ 拷贝行,从关键字到文件末尾
 "                                          " :let @a=@_ 清除寄存器a :let @*=@a 寄存器赋值 :scriptnames 列出所有加载的插件,_vimrcs :verbose set history 显示设置history值并指出设置文件的位置
 "                                          " i<c-r>/ 把最后一个搜索指令贴到当前位置 i<c-r>把最后一个命令贴到当前位置 :X 加密文件
+" advanced tips                            " vit 选中a标签里面的文本
+"                                          " A 当前行尾插入,=$a  ;   C是删除当前行尾并插入，=$c    .是重复上一次插入的所有操作
+"                                          " s 删除当前字符串并进入插入，=cl; S删除该行有内容的内容,=^c; I=^i;o=A<CR> O=ko
+"                                          " 在符号前后加空格 f+ 搜索+号，s<space>+<spance><Esc>这里完成一次添加, ;查找下一次f查找的符号， .重复, ;.重复   ,反查f的符号
+"                                          " 修改时, 重复. 回退u ;  行内查找f/t/F/T 重复;回退, ; /?<CR>文档查找 重复n 回退N;  :s/pattern/replacement 执行替换 重复& 回退u ; 执行一系列修改qx{}q
+"                                          " <C-a><C-x>对数字执行加和减操作.比如光标在5上,执行10<C-a> 会变成15.如果改行光标不在数字上,直接输入数字<C-a/x>会自动跳在第一个数字上进行对应加减操作.
+"                                          上面的加减以0开头的数字会默认以八进制来计算,如果需要以十进制,需要set nrformats=    如果要查找设置的参数值,用set xxx?来获取设置值 set xxx&为设置为默认值
 "}}
 "{{                                        " 更新日志
 " 4.8.15                                   " 4.8.15 从版本升级到4.9.1 查找了Ctrl-x在user下闪现问题,致使万能补全不能在user下使用.没有找到原因,使用长按ctrl+x ctrl+o来代替
@@ -1554,5 +1562,6 @@ endif
 " 6.04.04                                  " add vim plugin ctrlp in,delete fuf.vim l9.vim # 2014-04-21 16:01:52
 " 6.04.05                                  " add EasyGrep.vim MRU.vim  2014-04-21 18:04:34
 " 6.05.01                                  " add some search tips 2014-05-07 15:49:48
+" 6.05.02                                  " add advanced usage tips 2014-05-14 22:50:20
 "}}
 "}}}
