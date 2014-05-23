@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.05.02
+"    Version: 6.05.03
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-05-14 23:43:17
+" LastChange: 2014-05-23 10:43:25
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -133,7 +133,8 @@ set langmenu=zh_CN.UTF-8                   " Console output coding
 language message zh_CN.UTF-8               " 控制台console编码
 set ambiwidth=double                       " 把不明宽度字符设置为双倍字符宽度(中文字符宽度)
 set fileencoding=utf-8                     " 当前编辑的文件编码(新文件的编码)
-set fileencodings=utf-8,chinese,latin-1    " 当前编辑的文件自动判断依次尝试编码
+set fileencodings=usc-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin-1
+                                           " 当前编辑的文件自动判断依次尝试编码, 打开时可以指定编码
 set encoding=utf-8                         " work in linux
 "{{                                        " work in linux
 if has("win32")
@@ -1487,6 +1488,7 @@ endif
 " :%norm jkdd                              " 删除基数行 或用global命令 :g/^/d|m
 " :%norm jdd                               " 删除偶数行 或:g/^/+1 d
 " :%s/0/=eval(line(".")-1)/g               " 生成连续的数字
+" :e ++enc=utf-8 filename.txt              " 以指定编码打开文本.
 " 其他                                     " :r!pwd 插入当前文本路径 :Ex 开启目录浏览 :ls 显示当前buffer :ju 列出跳转足迹 :his c 命令行历史 :his s 搜索历史 q/ 搜索历史窗口 q:命令历史窗口 :<C-F>历史命令窗口
 "                                          "  :%!sort -u 使用sort程序排序整个文件  qq录制到q,输入指令,q再次按q停止录制,@q执行q存储的指令,@@重复执行.
 "                                          " 修改register  \"ap 把register a的内容粘贴到当前位置,然后修改它, \"add 删除并且重新存入register a, @a 执行寄存器a的指令.
@@ -1570,5 +1572,6 @@ endif
 " 6.04.05                                  " add EasyGrep.vim MRU.vim  2014-04-21 18:04:34
 " 6.05.01                                  " add some search tips 2014-05-07 15:49:48
 " 6.05.02                                  " add advanced usage tips 2014-05-14 22:50:20
+" 6.05.03                                  " add :e ++enc 2014-05-23 10:44:03
 "}}
 "}}}
