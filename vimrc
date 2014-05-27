@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.05.03
+"    Version: 6.05.04
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-05-23 10:43:25
+" LastChange: 2014-05-27 11:03:18
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1515,6 +1515,22 @@ endif
 "                                          " 插入非常用字符.插入模式下<C-v>{code} 例:<C-v>065 插入十进制,可以指定字符集<C-v>u{1234}插入十六进制,  ga显示光标处的字符的编码.(十进制,十六进制)
 "                                          "        :h i_CTRL-V-digit ,<C-v>跟非数字会插入按键本身的字符, <C-v><TAB>会插入真正的制表符而忽略expandtab是否开启.
 "                                          "        <C-k>{char1}{char2}插入二合字母表示的字符. :h digraph-table
+"                                          " :h vi-differences 查看vi 和vim差异.
+"                                          " ex命令 
+"                                          " :[range]delete [x]          删除指定范围内的行.[到寄存器x中]
+"                                          " :[range]yank [x]            复制指定范围内的行.[到寄存器x中]
+"                                          " :[range]put [x]             在指定行后粘贴寄存器x中的内容
+"                                          " :[range]copy {address}      把指定范围内的行copy到地址所指定的行之下
+"                                          " :[range]move {address}      把指定范围内的行move到地址所指定的行之下
+"                                          " :[range]join               连接指定范围的行.
+"                                          " :[range]normal {commands}   对指定范围中的每一行执行普通模式命令{commands}
+"                                          " :[range]substitute/{pattern}/{string}/[flags]  把指定范围内出现{pattern}的地方替换为{string} 
+"                                          " :[range]global/{pattern}/[cmd]     对指定范围内匹配{pattern}的所有行,在其上执行ex命令{cmd}
+"                                          " :$: 等于gg 跳到文件末尾    .代表当前行的地址  %代表当前文件的所有行.
+"                                          " :.,$p 打印当前行到文件末尾行的所有.
+"                                          " 2G VG 会选中一个选区,按: 进入ex模式,命令行上会预先填充:'<,>'  其中'<代表高亮选取的首行位置标记 '>最后一行. 这个标记会在退出可视模式后一直存在.
+"                                          " :/<html>/,/<\/html>/p  ex接受模式地址.还可以接受偏移量{address}    :/<html>/+1,/<\/html>/-1p
+"                                          " ex 的地址  1文件第一行 $文件最后一行   0虚拟行,位于文件第一行上方  .光标所在行 'm包含位置标记m的行 '<高亮选区的起始行 >'高亮选区的结束行 %整个文件(:1,$的简写形式)
 "}}
 "{{                                        " 更新日志
 " 4.8.15                                   " 4.8.15 从版本升级到4.9.1 查找了Ctrl-x在user下闪现问题,致使万能补全不能在user下使用.没有找到原因,使用长按ctrl+x ctrl+o来代替
@@ -1578,5 +1594,6 @@ endif
 " 6.05.01                                  " add some search tips 2014-05-07 15:49:48
 " 6.05.02                                  " add advanced usage tips 2014-05-14 22:50:20
 " 6.05.03                                  " add :e ++enc 2014-05-23 10:44:03
+" 6.05.04                                  " add ex tips 2014-05-27 11:05:33
 "}}
 "}}}
