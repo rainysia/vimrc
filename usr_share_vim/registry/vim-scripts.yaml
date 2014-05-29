@@ -1,0 +1,454 @@
+addon: alternate
+description: "alternate pairing files (e.g. .c/.h) with short ex-commands"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_alternateFile = 1"
+files:
+  - plugin/a.vim
+  - doc/alternate.txt
+---
+addon: whatdomain
+description: "query the meaning of a Top Level Domain"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_whatdomain = 1"
+files:
+  - plugin/whatdomain.vim
+---
+addon: bufexplorer
+description: "buffer explorer / browser"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_bufexplorer = 1"
+files:
+  - plugin/bufexplorer.vim
+  - doc/bufexplorer.txt
+---
+addon: minibufexplorer
+description: "elegant buffer explorer which takes very little screen space"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_minibufexplorer = 1"
+files:
+  - plugin/minibufexpl.vim
+---
+addon: gnupg
+description: "transparent editing of gpg encrypted files"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_gnupg = 1"
+files:
+  - plugin/gnupg.vim
+---
+addon: taglist
+description: "source code browser"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_taglist = 'no'"
+files:
+  - plugin/taglist.vim
+  - doc/taglist.txt
+---
+addon: calendar
+description: "shows calendar in a vim window"
+basedir: /usr/share/vim-scripts/
+disabledby: "let calendar_version = 1"
+files:
+  - plugin/calendar.vim
+---
+addon: winmanager
+description: "IDE-like environment with file manager and buffer list"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_winmanager = 1"
+files:
+  - plugin/winmanager.vim
+  - doc/winmanager.txt
+  - plugin/winfileexplorer.vim
+  - plugin/wintagexplorer.vim
+---
+addon: align
+description: "commands and maps for aligned text, equations, declarations, ..."
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_alignPlugin = 1"
+files:
+  - plugin/AlignPlugin.vim
+  - doc/Align.txt
+  - plugin/AlignMapsPlugin.vim
+  - plugin/cecutil.vim
+  - autoload/Align.vim
+  - autoload/AlignMaps.vim
+---
+addon: cvsmenu
+description: "CVS/CVSNT integration"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_cvsmenu = 1"
+files:
+  - plugin/cvsmenu.vim
+---
+addon: vcscommand
+description: "CVS/SVN/SVK/git/hg/bzr integration plugin"
+basedir: /usr/share/vim-scripts/
+disabledby: "let VCSCommandDisableAll = 1"
+files:
+  - plugin/vcscommand.vim
+  - doc/vcscommand.txt
+  - plugin/vcsbzr.vim
+  - plugin/vcscommand.vim
+  - plugin/vcscvs.vim
+  - plugin/vcsgit.vim
+  - plugin/vcshg.vim
+  - plugin/vcssvk.vim
+  - plugin/vcssvn.vim
+  - syntax/CVSAnnotate.vim
+  - syntax/gitAnnotate.vim
+  - syntax/HGAnnotate.vim
+  - syntax/SVKAnnotate.vim
+  - syntax/SVNAnnotate.vim
+  - syntax/vcscommit.vim
+---
+addon: utl
+description: "Universal Text Linking: URL-based hyperlinking"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_utl = 1"
+files:
+  - plugin/utl.vim
+  - doc/utl_ref.txt
+  - doc/utl_usr.txt
+  - plugin/utl_arr.vim
+  - plugin/utl_rc.vim
+  - plugin/utl_scm.vim
+  - plugin/utl_uri.vim
+---
+addon: info
+description: "GNU info documentation browser"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_info = 1"
+files:
+  - plugin/info.vim
+---
+addon: enhanced-commentify
+description: "comment lines in a program"
+basedir: /usr/share/vim-scripts/
+disabledby: "let DidEnhancedCommentify = 1"
+files:
+  - plugin/EnhancedCommentify.vim
+  - doc/EnhancedCommentify.txt
+  - ftplugin/php_enhcomm.vim
+  - ftplugin/ocaml_enhcomm.vim
+---
+addon: xmledit
+description: "plugin to help edit XML, HTML, and SGML documents"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_xmledit = 1"
+files:
+  - ftplugin/xml.vim
+  - doc/xml-plugin.txt
+---
+addon: po
+description: "easier editing of GNU gettext PO files"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_po_ftplugin = 1"
+files:
+  - ftplugin/po.vim
+---
+addon: tetris
+description: "a Tetris game"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_tetris = 1"
+files:
+  - plugin/tetris.vim
+---
+addon: sokoban
+description: "a Sokoban game"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_VimSokoban = 1"
+files:
+  - plugin/sokoban.vim
+---
+addon: colors-sampler-pack
+description: "colors sampler pack: top 100 color schemes on vim.sf.net"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_color_sample_pack = 1"
+files:
+  - plugin/color_sample_pack.vim
+  - colors/adaryn.vim
+  - colors/adrian.vim
+  - colors/aiseered.vim
+  - colors/anotherdark.vim
+  - colors/aqua.vim
+  - colors/astronaut.vim
+  - colors/asu1dark.vim
+  - colors/autumn.vim
+  - colors/autumn2.vim
+  - colors/autumnleaf.vim
+  - colors/baycomb.vim
+  - colors/bclear.vim
+  - colors/biogoo.vim
+  - colors/blacksea.vim
+  - colors/bluegreen.vim
+  - colors/borland.vim
+  - colors/breeze.vim
+  - colors/brookstream.vim
+  - colors/buttercream.vim
+  - colors/calmar256-dark.vim
+  - colors/calmar256-light.vim
+  - colors/camo.vim
+  - colors/candy.vim
+  - colors/candycode.vim
+  - colors/chela_light.vim
+  - colors/chocolateliquor.vim
+  - colors/clarity.vim
+  - colors/cleanphp.vim
+  - colors/colorer.vim
+  - colors/dante.vim
+  - colors/darkblue2.vim
+  - colors/darkbone.vim
+  - colors/darkslategray.vim
+  - colors/darkspectrum.vim
+  - colors/darkZ.vim
+  - colors/dawn.vim
+  - colors/denim.vim
+  - colors/desert256.vim
+  - colors/desertEx.vim
+  - colors/dusk.vim
+  - colors/dw_blue.vim
+  - colors/dw_cyan.vim
+  - colors/dw_green.vim
+  - colors/dw_orange.vim
+  - colors/dw_purple.vim
+  - colors/dw_red.vim
+  - colors/dw_yellow.vim
+  - colors/earendel.vim
+  - colors/eclipse.vim
+  - colors/ekvoli.vim
+  - colors/fine_blue.vim
+  - colors/fine_blue2.vim
+  - colors/fnaqevan.vim
+  - colors/fog.vim
+  - colors/freya.vim
+  - colors/fruit.vim
+  - colors/fruity.vim
+  - colors/golden.vim
+  - colors/guardian.vim
+  - colors/habilight.vim
+  - colors/herald.vim
+  - colors/impact.vim
+  - colors/inkpot.vim
+  - colors/ironman.vim
+  - colors/jammy.vim
+  - colors/jellybeans.vim
+  - colors/kellys.vim
+  - colors/leo.vim
+  - colors/lettuce.vim
+  - colors/lucius.vim
+  - colors/manxome.vim
+  - colors/marklar.vim
+  - colors/maroloccio.vim
+  - colors/martin_krischik.vim
+  - colors/matrix.vim
+  - colors/molokai.vim
+  - colors/moria.vim
+  - colors/moss.vim
+  - colors/motus.vim
+  - colors/mustang.vim
+  - colors/navajo-night.vim
+  - colors/navajo.vim
+  - colors/neon.vim
+  - colors/neverness.vim
+  - colors/night.vim
+  - colors/nightshimmer.vim
+  - colors/no_quarter.vim
+  - colors/northland.vim
+  - colors/nuvola.vim
+  - colors/oceanblack.vim
+  - colors/oceandeep.vim
+  - colors/oceanlight.vim
+  - colors/olive.vim
+  - colors/papayawhip.vim
+  - colors/peaksea.vim
+  - colors/print_bw.vim
+  - colors/pyte.vim
+  - colors/railscasts.vim
+  - colors/railscasts2.vim
+  - colors/rdark.vim
+  - colors/relaxedgreen.vim
+  - colors/robinhood.vim
+  - colors/rootwater.vim
+  - colors/satori.vim
+  - colors/sea.vim
+  - colors/settlemyer.vim
+  - colors/sienna.vim
+  - colors/silent.vim
+  - colors/simpleandfriendly.vim
+  - colors/softblue.vim
+  - colors/soso.vim
+  - colors/spring.vim
+  - colors/summerfruit256.vim
+  - colors/synic.vim
+  - colors/tabula.vim
+  - colors/tango.vim
+  - colors/tango2.vim
+  - colors/taqua.vim
+  - colors/tcsoft.vim
+  - colors/tir_black.vim
+  - colors/tolerable.vim
+  - colors/torte.vim
+  - colors/twilight.vim
+  - colors/two2tango.vim
+  - colors/vc.vim
+  - colors/vibrantink.vim
+  - colors/vividchalk.vim
+  - colors/vylight.vim
+  - colors/winter.vim
+  - colors/wombat.vim
+  - colors/wombat256.vim
+  - colors/wood.vim
+  - colors/wuye.vim
+  - colors/xemacs.vim
+  - colors/xoria256.vim
+  - colors/zenburn.vim
+  - colors/zmrok.vim
+---
+addon: closetag
+description: "functions and mappings to close open HTML/XML tags"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_closetag = 1"
+files:
+  - macros/closetag.vim
+---
+addon: nerd-commenter
+description: "easy commenting of code for many filetypes"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_nerd_comments = 1"
+files:
+  - plugin/NERD_commenter.vim
+  - doc/NERD_commenter.txt
+---
+addon: project
+description: "organize and navigate file projects (like IDE/buffer explorer)"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_project = 1"
+files:
+  - plugin/project.vim
+  - doc/project.txt
+---
+addon: vimplate
+description: "template system based on template-toolkit"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_vimplate = 1"
+files:
+  - plugin/vimplate.vim
+  - doc/vimplate.txt
+---
+addon: doxygen-toolkit
+description: "simplify writing Doxygen documentation in C/C++, Python"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_DoxygenToolkit = 1"
+files:
+  - plugin/DoxygenToolkit.vim
+---
+addon: omnicppcomplete
+description: "C++ omni completion with a ctags database"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_omnicppcomplete = 1"
+files:
+  - autoload/omni/cpp/complete.vim
+  - after/ftplugin/cpp.vim
+  - after/ftplugin/c.vim
+  - doc/omnicppcomplete.txt
+  - autoload/omni/cpp/includes.vim
+  - autoload/omni/cpp/tokenizer.vim
+  - autoload/omni/cpp/maycomplete.vim
+  - autoload/omni/cpp/namespaces.vim
+  - autoload/omni/cpp/settings.vim
+  - autoload/omni/cpp/utils.vim
+  - autoload/omni/cpp/items.vim
+  - autoload/omni/common/debug.vim
+  - autoload/omni/common/utils.vim
+---
+addon: supertab
+description: "use the tab key for all insert-mode completion"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_supertab = 1"
+files:
+  - plugin/supertab.vim
+  - doc/supertab.txt
+---
+addon: lbdbq
+description: "expand names to email addresses via lbdb queries"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_lbdbq = 1"
+files:
+  - plugin/lbdbq.vim
+---
+addon: debPlugin
+description: "browse .deb files"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_debPlugin = 1"
+files:
+  - plugin/debPlugin.vim
+  - autoload/deb.vim
+  - syntax/deb.vim
+---
+addon: python-indent
+description: "alternative python indent (a la PEP 8)"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_python_indent = 1"
+files:
+  - indent/python.vim
+---
+addon: surround
+description: "easily delete, change, and add 'surround' of text"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_surround = 1"
+files:
+  - plugin/surround.vim
+  - doc/surround.txt
+---
+addon: detectindent
+description: "detects the current indentation of files"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_detectindent = 1"
+files:
+  - plugin/detectindent.vim
+---
+addon: snippetsEmu
+description: "emulate TextMate's snippet expansion"
+basedir: /usr/share/vim-scripts/
+disabledby: "let loaded_snippet = 1"
+files:
+  - plugin/snippetsEmu.vim
+  - doc/snippets_emu.txt
+  - after/ftplugin/actionscript_snippets.vim
+  - after/ftplugin/aspvbs_snippets.vim
+  - after/ftplugin/c_snippets.vim
+  - after/ftplugin/css_snippets.vim
+  - after/ftplugin/django_model_snippets.vim
+  - after/ftplugin/django_template_snippets.vim
+  - after/ftplugin/f-script_snippets.vim
+  - after/ftplugin/haskell_snippets.vim
+  - after/ftplugin/html_snippets.vim
+  - after/ftplugin/java_snippets.vim
+  - after/ftplugin/javascript_snippets.vim
+  - after/ftplugin/latex_snippets.vim
+  - after/ftplugin/logo_snippets.vim
+  - after/ftplugin/markdown_snippets.vim
+  - after/ftplugin/movable_type_snippets.vim
+  - after/ftplugin/objc_snippets.vim
+  - after/ftplugin/ocaml_snippets.vim
+  - after/ftplugin/perl_snippets.vim
+  - after/ftplugin/php_snippets.vim
+  - after/ftplugin/phpdoc_snippets.vim
+  - after/ftplugin/propel_snippets.vim
+  - after/ftplugin/python_snippets.vim
+  - after/ftplugin/rails_snippets.vim
+  - after/ftplugin/ruby_snippets.vim
+  - after/ftplugin/sh_snippets.vim
+  - after/ftplugin/slate_snippets.vim
+  - after/ftplugin/smarty_snippets.vim
+  - after/ftplugin/symfony_snippets.vim
+  - after/ftplugin/tcl_snippets.vim
+  - after/ftplugin/template_toolkit_snippets.vim
+  - after/ftplugin/tex_snippets.vim
+  - after/ftplugin/xhtml_snippets.vim
+---
+addon: secure-modelines
+description: "secure, user-configurable modeline support"
+basedir: /usr/share/vim-scripts/
+files:
+  - plugin/securemodelines.vim
+---
