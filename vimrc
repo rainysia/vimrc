@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.05.04
+"    Version: 6.05.05
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-05-27 11:03:18
+" LastChange: 2014-05-29 23:41:33
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -55,6 +55,7 @@ set shortmess=atI                          " 启动的时候不显示援助索�
 set noerrorbells                           " 不让vim发出讨厌的滴滴声 set noeb
 set nobomb                                 " 不使用unicode签名
 set textwidth=100                          " 每行显示多少字符
+"set cc=101                                 " 红色高亮第101行.
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  2=> text pattern
@@ -535,8 +536,10 @@ let g:snips_email = 'yuliangx@jumei.com'
 let g:snips_site =  'www.jumei.com'
 "}}
 "{{                                        " indent.guides的设定
-"                                          "      自动缩进
-let g:indent_guides_auto_colors = 0
+"                                          "    http://www.vim.org/scripts/script.php?script_id=3361 2014-05-29
+"                                          "      自动缩进,<Leader>ig 唤出
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_guide_size = 1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
 hi IndentGuidesOdd  guibg=red   ctermbg=3
@@ -626,7 +629,7 @@ let g:phpqa_messdetector_autorun = 0
 "{{                                        " Surround.vim 针对包含在文字外的括号、引号、XML 标签做快速的修改
 "                                          " cs"' 修改双引号为单引号 cs'<q> 修改单引号为<q>包围的.
 "}}
-"{{                                        " indentLine.vim 另外一个对齐线.
+"{{                                        " indentLine.vim 另外一个对齐线.https://github.com/Yggdroot/indentLine 2014-05-29
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#3E3F40'
 let g:indentLine_char = '|'
@@ -715,6 +718,7 @@ au BufReadPost *.nfo call RestoreFileEncodings()
 "source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
 "behave mswin
+"{{
 set diffexpr=MyDiff()
 function! MyDiff()
     let opt = '-a --binary '
@@ -739,6 +743,20 @@ function! MyDiff()
     endif
     silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
+"}}
+"{{
+" 高亮当前光标列.
+map ,ch :call SetColorColumn()<CR>
+function! SetColorColumn()
+    let col_num = virtcol(".")
+    let cc_list = split(&cc, ',')
+    if count(cc_list, string(col_num)) <= 0
+        execute "set cc+=".col_num
+    else
+        execute "set cc-=".col_num
+    endif
+endfunction
+"}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  9=> End
@@ -789,6 +807,7 @@ if has("gui_running")
     hi        Cursor         guifg=#FBFDFC          guibg=#000201           gui=NONE        "光标所在的字符 #64574e
     hi        CursorColumn                          guibg=#3E3F40           gui=NONE        "光标所在的屏幕列
     hi        CursorLine                            guibg=#3E3E3E           gui=NONE        "光标所在的屏幕行 #666666
+    hi        ColorColumn    guifg=#5c5c5c          guibg=#f2f2f2           gui=NONE        "高亮光标所在列.
     hi        Directory      guifg=#FF3F3F          guibg=#1C1D1F           gui=NONE        "目录名
     hi        DiffAdd        guifg=#FFFFCD          guibg=#306D30           gui=NONE        "diff: 增加的行#FFFFFF #7F7F00
     hi        DiffChange     guifg=#BFBFBF          guibg=#1C1D1F           gui=NONE        "diff: 改变的行#FFFFFF #7F007F #306B8F
@@ -1022,6 +1041,7 @@ elseif &t_Co == 256
     hi        Cursor         ctermfg=black            ctermbg=lightyellow       cterm=BOLD        "光标所在的字符
     hi        CursorColumn                            ctermbg=lightgrey         cterm=BOLD        "光标所在的屏幕列
     hi        CursorLine                              ctermbg=lightgrey         cterm=BOLD        "光标所在的屏幕行
+    hi        ColorColumn    ctermfg=lightgrey        ctermbg=white             cterm=BOLD        "高亮光标所在列.
     hi        Directory      ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "目录名
     hi        DiffAdd                                 ctermbg=lightgreen        cterm=BOLD        "diff: 增加的行
     hi        DiffChange                              ctermbg=lightcyan         cterm=BOLD        "diff: 改变的行
@@ -1109,6 +1129,7 @@ else
     hi        Cursor         ctermfg=black            ctermbg=lightyellow       cterm=BOLD        "光标所在的字符
     hi        CursorColumn                            ctermbg=lightgrey         cterm=BOLD        "光标所在的屏幕列
     hi        CursorLine                              ctermbg=lightgrey         cterm=BOLD        "光标所在的屏幕行
+    hi        ColorColumn    ctermfg=lightgrey        ctermbg=white             cterm=BOLD        "高亮光标所在列.
     hi        Directory      ctermfg=lightmagenta     ctermbg=black             cterm=BOLD        "目录名
     hi        DiffAdd                                 ctermbg=lightgreen        cterm=BOLD        "diff: 增加的行
     hi        DiffChange                              ctermbg=lightcyan         cterm=BOLD        "diff: 改变的行
@@ -1595,5 +1616,6 @@ endif
 " 6.05.02                                  " add advanced usage tips 2014-05-14 22:50:20
 " 6.05.03                                  " add :e ++enc 2014-05-23 10:44:03
 " 6.05.04                                  " add ex tips 2014-05-27 11:05:33
+" 6.05.05                                  " modify indent, add set cc, highlight cursorline,hi ColorColumn 2014-05-29 23:42:21
 "}}
 "}}}
