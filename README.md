@@ -11,11 +11,16 @@ Usage && Installation.
 you can separate the files with _  and copy the files into your Debian OS filepath.
 
 ### Details.
-        1.  for user_vim,   cp it to your user home files, if your user_name is tom, cp all of it to /home/tom/.vim/ <br />
-        2.  for usr_share_vim, cp it to your /usr/share/vim/ which is your vim installed path. <br />
-        3.  for usr_share_php_PHP_CodeSniffer, cp it to your /usr/share/php/PHP/ , it will help you format php code standardly. <br />
-        4.  for usr_share_php_PHP_CodeSniffer.php, cp it to /usr/share/php/PHP/CodeSniffer.php <br />
-        5.  for vimrc, it's the basic configuration. cp it and cover your /etc/vim/vimrc before kept a backup of your vimrc. <br />
+        1.  for user_vim,
+                cp it to your user home files, if your user_name is tom, cp all of it to /home/tom/.vim/
+        2.  for usr_share_vim,
+                cp it to your /usr/share/vim/ which is your vim installed path.
+        3.  for usr_share_php_PHP_CodeSniffer, 
+                cp it to your /usr/share/php/PHP/ , it will help you format php code standardly.
+        4.  for usr_share_php_PHP_CodeSniffer.php,
+                 cp it to /usr/share/php/PHP/CodeSniffer.php
+        5.  for vimrc, it's the basic configuration. 
+                cp it and cover your /etc/vim/vimrc before kept a backup of your vimrc.
 
 Contact
 ---------------------------------
