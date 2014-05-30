@@ -9,6 +9,7 @@ we map the <Leader> as ,
 Usage && Installation.
 ---------------------------------
 you can separate the files with _  and copy the files into your Debian OS filepath.
+The vimrc file contains many usage for vim and the plugins. you can read it.
 
 ### Details.
         1.  for user_vim,
