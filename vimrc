@@ -599,7 +599,7 @@ let g:mwDefaultHighlightingPalette = 'extended'
 "}}
 "{{                                        " phpqa.vim的设定
 "let g:phpqa_codesniffer_args = "--standard=Zend"
-let g:phpqa_codesniffer_args = "--standard=Jumei"
+let g:phpqa_codesniffer_args = "--standard=Btroot"
 let g:phpqa_codesniffer_args = " --encoding=utf-8"
 let g:phpqa_codesniffer_cmd  = '/usr/bin/phpcs'
 let g:phpqa_codesniffer_autorun = 0        "  default =1 on save
