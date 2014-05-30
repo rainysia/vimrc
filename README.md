@@ -14,6 +14,7 @@ The vimrc file contains many usage for vim and the plugins. you can read it.
 ### Details.
         1.  for user_vim,
                 cp it to your user home files, if your user_name is tom, cp all of it to /home/tom/.vim/
+                and then change the owner use #chown tom:tom -R .vim , make sure the filepath is 755.
         2.  for usr_share_vim,
                 cp it to your /usr/share/vim/ which is your vim installed path.
         3.  for usr_share_php_PHP_CodeSniffer, 
