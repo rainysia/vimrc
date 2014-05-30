@@ -26,13 +26,15 @@ The vimrc file contains many usage for vim and the plugins. you can read it.
 
 ### vim needs ctags for index func,class and so on, so you need to install ctags like this:
 
-        >   For ctags windows版 直接复制ctags.exe到/vim73下
-               http://sourceforge.net/projects/ctags/files/ctags/5.8/ctags58.zip/download
-               set tags=tags;
-            "这里tags="后面可以跟上路径比如我的F:/php/www/tags; 然后在vim里面:!ctags -R 编译www下的ctags文件.建议移走不相关的代码,只保留项目源码
-               set autochdir 
-
-        >   For linux 下直接把ctags-5.8这个tar.gz文件 tar -zxvf 解压了.然后进去 ./configure make &&make install
+        >   For ctags windows:
+                cp ctags.exe into /vim73
+                    The ctags URL: http://sourceforge.net/projects/ctags/files/ctags/5.8/ctags58.zip/download
+                    Add configuration into your _vimrc: set tags=tags;
+                    The tags="$path" means your can modify the $path as your project path, then run :!ctags -R in vim.
+        >   For linux:
+                Download ctags-5.8.tar.gz and  tar -zxvf it,cd ctags-5.8,
+                and run ./configure make &&make install in shell.
+                Make sure you have permission make it.
 
 
 Contact
