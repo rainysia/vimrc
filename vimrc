@@ -366,7 +366,7 @@ let g:ctrlp_user_command = {
 "                                          "     (地址自定义,我的www在F:/php/www下)
 "                                          "     vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
 "                                          " ctrl_] 跳转到对应函数 ctrl_t 回跳
-set tags=/home/www/jumei/optool_yuliangx/tags
+set tags=/home/www/tags
 set tags=tags;                             " 分号必须，让vim递归向上查找tags
 set autochdir
 "}}
@@ -392,11 +392,11 @@ let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 "{{                                        " authorinfo.vim的设定
 "                                          "     vim自动添加作者信息（需要和NERD_commenter联用)使用,
 "                                          "     :AuthorInfoDetect呼出
-let g:vimrc_author='yuliangx'
-let g:vimrc_email='yuliangx@jumei.com'
+let g:vimrc_author='rainysia'
+let g:vimrc_email='rainysia@gmail.com'
 let g:vimrc_link='http://www.btroot.org'
-let g:vimrc_copyright='2006-2013 Jumei.xxx.Team'
-let g:vimrc_license='http://www.jumei.com/user_guide/license.html V1'
+let g:vimrc_copyright='2006-2013 BTROOT.ORG' 
+let g:vimrc_license='http://www.btroot.com/user_guide/license.html V1'
 let g:vimrc_version='Version 1.0'
 nmap <F4> :AuthorInfoDetect<cr>
 "}}
@@ -529,11 +529,11 @@ set completeopt=longest,menu               " 提示菜单后输入字母实现�
 "}}
 "{{                                        " snipmates的设定
 "                                          "      自定义相关文件.snippets
-let g:snips_author = 'yuliangx <yuliangx@jumei.com>'
-let g:snips_copyright = '2012-2014 Jumei.xxx.Team'
-let g:snips_license = 'http://www.jumei.com/user_guide/license.html V1'
-let g:snips_email = 'yuliangx@jumei.com'
-let g:snips_site =  'www.jumei.com'
+let g:snips_author = 'rainysia <rainysia@gmail.com>'
+let g:snips_copyright = '2012-2014 btroot.org'
+let g:snips_license = 'http://www.btroot.com/user_guide/license.html V1'
+let g:snips_email = 'rainysia@gmail.com'
+let g:snips_site =  'www.btroot.org'
 "}}
 "{{                                        " indent.guides的设定
 "                                          "    http://www.vim.org/scripts/script.php?script_id=3361 2014-05-29
