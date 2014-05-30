@@ -9,11 +9,15 @@ we map the <Leader> as ,
 Usage && Installation.
 ---------------------------------
 you can separate the files with _  and copy the files into your Debian OS filepath.
-
+        1.  for user_vim,   cp it to your user home files, if your user_name is tom, cp all of it to /home/tom/.vim/
+        2.  for usr_share_vim, cp it to your /usr/share/vim/ which is your vim installed path.
+        3.  for usr_share_php_PHP_CodeSniffer, cp it to your /usr/share/php/PHP/ , it will help you format php code standardly.
+        4.  for usr_share_php_PHP_CodeSniffer.php, cp it to /usr/share/php/PHP/CodeSniffer.php
+        5.  for vimrc, it's the basic configuration. cp it and cover your /etc/vim/vimrc before kept a backup of your vimrc.
 
 Contact
 ---------------------------------
-Follow me @rainy_sia in twitter, @rainysia in weibo, mail me at rainysia@gmail.com 
+Follow me @[rainy_sia](https://twitter.com/rainy_sia) in twitter, [@rainysia](http://weibo.com/rainysia) in weibo, mail me at rainysia@gmail.com 
 
 License
 ---------------------------------
