@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.05.05
+"    Version: 6.06.01
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-05-29 23:41:33
+" LastChange: 2014-06-24 14:09:32
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -672,6 +672,10 @@ let g:indentLine_char = '|'
 "                                          "    e on a color to edit the color
 "                                          "    K/C search item under cursor with Kuler/ColourLover
 "                                          "    sn to create new scheme
+"}}
+"{{                                        " vim-multiple-cursors 插件。多重选择
+"                                          "    https://github.com/terryma/vim-multiple-cursors
+
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1617,5 +1621,6 @@ endif
 " 6.05.03                                  " add :e ++enc 2014-05-23 10:44:03
 " 6.05.04                                  " add ex tips 2014-05-27 11:05:33
 " 6.05.05                                  " modify indent, add set cc, highlight cursorline,hi ColorColumn 2014-05-29 23:42:21
+" 6.06.01                                  " add vim-multiple-cursor 2014-06-24 14:09:32
 "}}
 "}}}
