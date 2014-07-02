@@ -53,7 +53,13 @@ ff02::2 ip6-allrouters
 127.0.0.1 serial.alcohol-soft.com
 127.0.0.1 www.alcohol-soft.com
 127.0.0.1 images.alcohol-soft.com
-127.0.0.1 my_p1.com
+127.0.0.1 smal.r.haizhangs.com
+127.0.0.1 5fxa.com
+127.0.0.1 799jinzi.com
+127.0.0.1 x.com.cn 
+127.0.0.1 youxi.baidu.com/dntg_8377/?pid=101110078000236_2493282
+58.217.200.14  cdn.baidupcs.com
+58.217.200.14  hot.cdn.baidupcs.com
 #优酷
 #127.0.0.1 atm.youku.com
 #127.0.0.1 Fvid.atm.youku.com
