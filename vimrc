@@ -1356,7 +1356,7 @@ endif
 " N  gj                                    " 下移 N 屏幕行 (回绕行时不同于 j)
 " N  w                                     " 向前 (正向，下同) N 个单词(word)
 " N  W                                     " 向前 N 个空白隔开的字串 |WORD|            (WORD)
-" N  e                                     " 向前至第 N 个单词词尾                     (end)
+" N  e                                     " 向后至第 N 个单词词尾/ ge是前跳词尾                     (end)
 " N  E                                     " 向前至第 N 个空白隔开的字串 |WORD| 的词尾 (End)
 " N  b                                     " 向后 (反向，下同) N 个单词                (backward)
 " N  B                                     " 向后至第 N 个空白隔开的字串 |WORD| 的词尾 (Backward)
