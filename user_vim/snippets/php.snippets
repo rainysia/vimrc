@@ -1,12 +1,12 @@
 #      Title: 
 #   FileName: php.snippets
 #Description: 
-#    Version: 14.0.3
+#    Version: 14.7.1
 #     Author: rainysia
 #      Email: rainysia@gmail.com
 #   HomePage: http://www.btroot.org
 # CreateTime: 2009-05-22 23:11:59
-# LastChange: 2014-01-27 13:52:26
+# LastChange: 2014-07-02 11:04:10
 snippet nbs
 	&nbsp;${1:}
 snippet nbs2
@@ -228,7 +228,18 @@ snippet doc_f
 	{
 		${7}
 	}
-
+snippet doc_pf
+	/**
+	 * ${1:Return}.
+	 *
+	 * @param integer $foo Comments.
+	 *
+	 * @return ${2:void}
+	 */
+	public ${2}function ${2}(${3})
+	{
+		${7}
+	}
 # Header
 snippet doc_h
 	/**
@@ -734,3 +745,4 @@ snippet xml
 #13.0.1 add echopvpex,elvp1,elvp,echopvdaex 2014-01-26 13:54:37
 #13.0.2 add vda                             2014-01-26 14:19:51
 #13.0.3 add echopprex                       2014-01-27 13:52:26
+#14.7.1 add doc_pf                          2014-07-02 11:04:10
