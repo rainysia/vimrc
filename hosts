@@ -3214,3 +3214,7 @@ ff02::2 ip6-allrouters
 204.236.220.7	dl-client999.dropbox.com
 #Dropbox END
 
+#golang#
+#173.194.70.141 golang.org
+#74.125.23.141 golang.org
+74.125.31.141 golang.org
