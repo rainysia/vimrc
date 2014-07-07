@@ -1,0 +1,34 @@
+ruby
+#apt-get install ruby irb rdoc rubybook
+
+gem list,install,uninstall,query,help
+
+
+ruby 关键词 
+    模块定义    module
+    类定义      class
+    方法定义    def, undef
+    检查类型    defined?
+    条件语句    if,then,else,elsif,case,when,unless
+    循环语句    for,in,while,until,next,break,do,redo,retry,yield
+    逻辑判断    not,and,or
+    逻辑值      true,false
+    空值        nil
+    异常处理    rescue,ensure
+    对象引用    super,self
+    块的起始结束begin/end
+    嵌入模块    BEGIN,END
+    方法相关    __FILE__,__LINE__
+    方法返回    return
+    别名        alias
+
+ruby的标示符用来指向常量,变量,方法,类和模块.  惯例是用标示符的首字符来辅助确定标识符所指向的内容的作用域. 基本规则:
+    局部变量以小写字母 or 下划线开头
+    全局变量以$开头
+    实例变量以@开头
+    类变量以@@开头
+    常量 or 类名以大写字母开头.
+
+ruby 在逻辑判断中, nil和false才表示假. 其他所有表达式都为真.
+ruby 注释以#开始到行结束为止; 在=begin 和=end两行中的代码会被解释器视为内嵌文档, 不会作任何处理.
+
