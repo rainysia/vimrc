@@ -1624,6 +1624,6 @@ endif
 " 6.05.04                                  " add ex tips 2014-05-27 11:05:33
 " 6.05.05                                  " modify indent, add set cc, highlight cursorline,hi ColorColumn 2014-05-29 23:42:21
 " 6.06.01                                  " add vim-multiple-cursor 2014-06-24 14:09:32
-" 6.07.01                                  " add Shift+F8/ F8 for !ctags -R 2014-07-14 12:28:55
+" 6.07.01                                  " add <S-F8>/F8 for !ctags -R 2014-07-14 12:28:55
 "}}
 "}}}
