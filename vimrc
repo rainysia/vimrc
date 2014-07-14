@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.06.01
+"    Version: 6.07.01
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-06-24 14:09:32
+" LastChange: 2014-07-14 12:28:55
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -366,6 +366,8 @@ let g:ctrlp_user_command = {
 "                                          "     (地址自定义,我的www在F:/php/www下)
 "                                          "     vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
 "                                          " ctrl_] 跳转到对应函数 ctrl_t 回跳
+map <F8> :!ctags -R<CR>
+nnoremap <silent> <S-F8> :!ctags -R<CR>
 set tags=/home/www/tags
 set tags=tags;                             " 分号必须，让vim递归向上查找tags
 set autochdir
@@ -1622,5 +1624,6 @@ endif
 " 6.05.04                                  " add ex tips 2014-05-27 11:05:33
 " 6.05.05                                  " modify indent, add set cc, highlight cursorline,hi ColorColumn 2014-05-29 23:42:21
 " 6.06.01                                  " add vim-multiple-cursor 2014-06-24 14:09:32
+" 6.07.01                                  " add Shift+F8/ F8 for !ctags -R 2014-07-14 12:28:55
 "}}
 "}}}
