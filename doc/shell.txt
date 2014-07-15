@@ -2031,6 +2031,11 @@ a57431^{tree} 提交所对应的树对象.
 a57431:path/to/file 某一次提交对应的文件对象
 :path/to/file 暂存区的文件对象
 
+
+git log --graph --oneline 可以图形化git的分支版本树 
+
+
+
 git help <command> # 显示command的help
 git show # 显示某次提交的内容
 git show $id #
