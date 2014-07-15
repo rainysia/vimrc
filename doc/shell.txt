@@ -2026,8 +2026,11 @@ git log -l 的HEAD 和master , refs/heads/master 是一个指向, find /git -nam
 cat .git/refs/heads/master 获得主id.
 git cat-file -t 主id 显示数据类型(commit)
 git cat-file -p 主id 显示该提交的内容
+    可以看到如果是blob的数据,可以直接看到对象的内容,这些对象存在git库的objects目录下(ID前两位为目录名,后38位为文件名)
 git cat-file commit HEAD | wc -c 查看提交信息的字符数
 git rev-parse HEAD
+git rev-parse master
+git rev-parse refs/heads/master
 
 git 用master代表分支master中最新的提交, 也可以用全称 refs/heads/master 或者heads/master
 ^ 用于代父提交 HEAD^ 代表版本库中的上一次提交, 即最近一次提交的父提交 HEAD^^ 标示HEAD^的父提交
@@ -2039,8 +2042,7 @@ a57431:path/to/file 某一次提交对应的文件对象
 
 
 git log --graph --oneline 可以图形化git的分支版本树 
-
-
+git log --pretty=raw --graph  版本号前几位id ; pretty=raw追踪显示每个提交对象的parent属性,最后一个没有parent属性, 表示追到这里结束. 就是提交的起点.
 
 git help <command> # 显示command的help
 git show # 显示某次提交的内容
