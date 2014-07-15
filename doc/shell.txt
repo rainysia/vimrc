@@ -2009,7 +2009,13 @@ git stash apply # 恢复暂存的内容
 git stash drop # 删除暂存区
 
 
-git log -l --pretty=raw
+git log -1 --pretty=raw 
+commit 16774e9035695efc459d22ca9caee656db5b5fda
+tree 553ebdb10baed40eb152701bdf105b85dab6744b
+parent 0914516a074597d74abb81f20990f0e8bb8f7aab
+author rainysia <rainysia@gmail.com> 1405443179 +0800
+committer rainysia <rainysia@gmail.com> 1405443179 +0800
+详细详细一条日志的3个对象hash ID. commit 本次提交的唯一标识ID/tree 本次提交所对应的目录树/parent本地提交的父提交 
 
 git cat-file -t xxxid 这个是保存在.git/objects 里面,以ID前2位作为目录名,后38位作为文件名
 git log --pretty=raw --graph xxxid 跟踪链
