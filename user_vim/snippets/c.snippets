@@ -75,6 +75,18 @@ snippet forr
 	for (${1:i} = ${2:0}; ${3:$1 < 10}; $1${4:++}) {
 		${5:/* code */}
 	}
+# Custom Switch
+snippet switch
+    switch (${1}) {
+        case ${2}:
+            break;
+        default:
+            
+    }
+snippet case
+    case ${1}:
+        ${2};
+        break;
 # Function
 snippet fun
 	${1:void} ${2:function_name}(${3})
