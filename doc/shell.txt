@@ -1912,11 +1912,12 @@ git config --global color.ui true
 跟踪git status的磁盘访问
 strace -e 'trace=file' git status
 
-显示版本库 .git目录所在的位置
-git rev-parse --show-toplevel
 
-显示从当前目录cd 后退 up 到工作区的根的深度
-git rev-parse --show-cdup
+git rev-parse --git-dir         显示.git目录所在的位置
+git rev-parse --show-toplevel   显示工作区根目录
+git rev-parse --show-prefix     相当于工作区根目录的相对目录
+git rev-parse --show-cdup       显示从当前目录cd 后退 up 到工作区的根的深度
+
 
 /root/.gitconfig
 git的配置
@@ -1926,6 +1927,10 @@ $git config -e --system 编辑的是/root/.gitconfig系统配置，可能在/etc
 配置文件分了<section> 段落， key 键 value 值
 git config <section>.<key> 来读取对应的属性值
 git config <section>.<key> <value> 改变某个属性的值
+
+git config --unset --global user.name
+git config --unset --global user.email 删除配置
+
 
 git config 可以操作其他ini的文件,git-svn和Gistore就是使用下面的方法来读取专有配置
 添加test.ini配置文件
@@ -1940,6 +1945,8 @@ git commit --allow-empty -m 'who does commit' 允许空白提交
 git log --pretty=fuller 查看提交log
 
 如果出现了作者和提交者的错误信息
+git config --global user.name "rainysia"
+git config --global user.email "rainysia@gmail.com"
 git commit --amend --allow-empty --reset-author
 对提交修补 允许空 将作者ID同步修改，会重置uthorDate
 
