@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.07.01
+"    Version: 6.07.02
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-07-14 12:28:55
+" LastChange: 2014-07-17 10:24:05
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -630,6 +630,13 @@ let g:phpqa_messdetector_autorun = 0
 "}}
 "{{                                        " Surround.vim 针对包含在文字外的括号、引号、XML 标签做快速的修改
 "                                          " cs"' 修改双引号为单引号 cs'<q> 修改单引号为<q>包围的.
+"                                          " ds"  删除包围的符号
+"                                          " cs"<q> 修改双引号为<q></q>包围
+"                                          " ys"  add a surrouding
+"                                          " yS"  add a surrouding and place the Surrounded text on a new line + indent it
+"                                          " yss" add a surrounding to the whole line.
+"                                          " ySs" add a surrounding to the whole line and place it on a new line + indent it.
+"                                          " ySS" same as ySs"
 "}}
 "{{                                        " indentLine.vim 另外一个对齐线.https://github.com/Yggdroot/indentLine 2014-05-29
 let g:indentLine_color_term = 239
@@ -1624,6 +1631,7 @@ endif
 " 6.05.04                                  " add ex tips 2014-05-27 11:05:33
 " 6.05.05                                  " modify indent, add set cc, highlight cursorline,hi ColorColumn 2014-05-29 23:42:21
 " 6.06.01                                  " add vim-multiple-cursor 2014-06-24 14:09:32
-" 6.07.01                                  " add <S-F8>/F8 for !ctags -R 2014-07-14 12:28:55
+" 6.07.01                                  " add Shift+F8/ F8 for !ctags -R 2014-07-14 12:28:55
+" 6.07.02                                  " add Surround.vim manual. 2014-07-17 10:24:05
 "}}
 "}}}
