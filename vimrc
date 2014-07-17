@@ -637,6 +637,8 @@ let g:phpqa_messdetector_autorun = 0
 "                                          " yss" add a surrounding to the whole line.
 "                                          " ySs" add a surrounding to the whole line and place it on a new line + indent it.
 "                                          " ySS" same as ySs", try ysw,yswb",yas')
+"                                          " ysiw' 为光标下的单词包围
+"                                          " 可视模式下，选中，S"  可插入包裹的
 "}}
 "{{                                        " indentLine.vim 另外一个对齐线.https://github.com/Yggdroot/indentLine 2014-05-29
 let g:indentLine_color_term = 239
