@@ -1,0 +1,29 @@
+[giggle]
+    main-window-maximized = true
+    main-window-geometry = 1600x835+0+20
+    history-view-vpane-position = 478
+    main-window-view = HistoryView
+    file-view-vpane-position = 756
+[user]
+    name = rainysia
+    email = rainysia@gmail.com
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    last = log -1 HEAD
+    cf = config
+    md = commit --amend
+    dt = difftool
+    mt = mergetool
+    line = log --oneline
+    latest = for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short) [%(committername)]'
+    ls = log --pretty=format:\"%C(yellow)%h %C(blue)%ad %C(red)%d %C(reset)%s %C(green)[%cn]\" --decorate --date=short
+    hist = log --pretty=format:\"%C(yellow)%h %C(red)%d %C(reset)%s %C(green)[%an] %C(blue)%ad\" --topo-order --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+[color]
+    diff = auto
+    status = auto
+    branch = auto
