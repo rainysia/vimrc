@@ -686,7 +686,10 @@ let g:indentLine_char = '|'
 "}}
 "{{                                        " vim-multiple-cursors 插件。多重选择
 "                                          "    https://github.com/terryma/vim-multiple-cursors
-
+"                                          "    ctrl-n  select, c modify the content, <esc> exit;
+"let g:multi_cursor_next_key='<C-n>'       "    next 
+"let g:multi_cursor_prev_key='<C-d>'       "    prev
+"let g:multi_cursor_skip_key='<C-x>'       "    skip the next.
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
