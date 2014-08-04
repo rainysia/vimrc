@@ -85,6 +85,8 @@ export HISTIMEFORMAT="%Y-%m-%d %H:%M:%S "
 export PYTHONPATH=~/lib/python
 export PATH=~/bin:$PATH
 export HGRCPATH=~/.hgrc
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
 #export PATH="/usr/local/lib/cw:$PATH"
 ssh() {
     if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux" ]; then

@@ -125,6 +125,9 @@ alias cdgo='cd /home/go/'
 alias cdn='cd /home/node/'
 alias shl='sh /home/sh/log.sh'
 
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+
 ssh() {
     if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux" ]; then
             tmux rename-window "$*"
