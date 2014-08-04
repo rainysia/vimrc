@@ -9,3 +9,8 @@ export GOROOT=$HOME/go
 export PATH=$PATH:$GOROOT/bin
 
 go run hello.go
+:dif
+
+在终端运行godoc -http=:8000 就可以开启http://localhost:port 的go官方文档.
+安装gccgo
+#apt-get install gccgo-4.7 gccgo-4.7-multilib gccgo gccgo-multilib gccgo-4.7-doc
