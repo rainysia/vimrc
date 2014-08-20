@@ -4,10 +4,10 @@
  * @package    
  * @subpackage 
  * @author     yuliangx <yuliangx@jumei.com>
- * @copyright  2006-2013 Jumei.xxx.Team
+ * @copyright  2006-2014 Btroot.xxx.Team
  * @license    http://www.jumei.com/user_guide/license.html V1
  * @createTime 2009-11-14 11:14:23
- * @lastChange 2014-07-23 14:57:33
+ * @lastChange 2014-08-20 10:30:35
 */
 Shell好玩的
 
@@ -2188,7 +2188,8 @@ git push origin 本地分支名:服务器分支名 这样就会在服务器上�
 git pull origin 远程分支名:本地分支名  这样会把服务器上的分支拉到本地的一个分支, pull的操作还会进行合并.
 git fetch origin 远程分支名:本地分支名 会只拉取.
 
-
+git blame file_name  查看文件每一行的修改。
+git cherry-pick commit_hash 从不同的分支中捡出一个单独的commit，并把它和你当前的分支合并
 
 108. 统计最常用的
 
@@ -3408,3 +3409,4 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
 6.10更新git                                         2014-05-17 02:07:49
 7.1 更新git                                         2014-07-01 23:52:04
 7.2 更新git diff                                    2014-07-23 14:57:33
+8.1 更新git cherry-pick                             2014-08-20 10:31:28
