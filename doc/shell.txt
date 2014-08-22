@@ -7,7 +7,7 @@
  * @copyright  2006-2014 Btroot.xxx.Team
  * @license    http://www.jumei.com/user_guide/license.html V1
  * @createTime 2009-11-14 11:14:23
- * @lastChange 2014-08-20 10:30:35
+ * @lastChange 2014-08-22 15:06:29
 */
 Shell好玩的
 
@@ -2047,6 +2047,8 @@ a57431:path/to/file 某一次提交对应的文件对象
 
 git log --graph --oneline 可以图形化git的分支版本树 
 git log --pretty=raw --graph  版本号前几位id ; pretty=raw追踪显示每个提交对象的parent属性,最后一个没有parent属性, 表示追到这里结束. 就是提交的起点.
+git log --pretty=format:'%Cgreen%ai [%h] %Cblue<%an> %Cred%s' --date-order  一行显示git log, 本地日期, commit no, committer, comments.
+git log --pretty=format:'%ai [%h] <%an> %s' --date-order  一行显示git log, 本地日期, commit no, committer, comments.
 
 git help <command> # 显示command的help
 git show # 显示某次提交的内容
@@ -3410,3 +3412,4 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
 7.1 更新git                                         2014-07-01 23:52:04
 7.2 更新git diff                                    2014-07-23 14:57:33
 8.1 更新git cherry-pick                             2014-08-20 10:31:28
+8.2 更新git log                                     2014-08-22 15:06:29
