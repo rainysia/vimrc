@@ -2049,6 +2049,8 @@ git log --graph --oneline 可以图形化git的分支版本树
 git log --pretty=raw --graph  版本号前几位id ; pretty=raw追踪显示每个提交对象的parent属性,最后一个没有parent属性, 表示追到这里结束. 就是提交的起点.
 git log --pretty=format:'%Cgreen%ai [%h] %Cblue<%an> %Cred%s' --date-order  一行显示git log, 本地日期, commit no, committer, comments.
 git log --pretty=format:'%ai [%h] <%an> %s' --date-order  一行显示git log, 本地日期, commit no, committer, comments.
+git log --pretty=format:'%ai [%h] <%an> %s' --date-order --graph
+git log --pretty=format:'%ai [%h] <%an> %s' --date-order --graph --decorate --since="yesterday"
 
 git help <command> # 显示command的help
 git show # 显示某次提交的内容
@@ -3393,6 +3395,9 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
 
 
 142. vim 查看启动.会生成time.txt                   vi README.md --startuptime 'time.txt'
+
+143. smb://192.168.84.2/public/ITO/Training
+    username,domainname,mail-pwd.
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
