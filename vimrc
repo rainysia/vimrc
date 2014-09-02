@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.08.01
+"    Version: 6.09.01
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-08-06 14:46:24
+" LastChange: 2014-09-02 15:40:56
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1531,6 +1531,7 @@ endif
 " :%s/0/=eval(line(".")-1)/g               " 生成连续的数字
 " :e ++enc=utf-8 filename.txt              " 以指定编码打开文本.
 " 其他                                     " :r!pwd 插入当前文本路径 :Ex 开启目录浏览 :ls 显示当前buffer :ju 列出跳转足迹 :his c 命令行历史 :his s 搜索历史 q/ 搜索历史窗口 q:命令历史窗口 :<C-F>历史命令窗口
+" ,m                                       " mark
 "                                          "  :%!sort -u 使用sort程序排序整个文件  qq录制到q,输入指令,q再次按q停止录制,@q执行q存储的指令,@@重复执行.
 "                                          " 修改register  \"ap 把register a的内容粘贴到当前位置,然后修改它, \"add 删除并且重新存入register a, @a 执行寄存器a的指令.
 "                                          " \"a5yy 复制5行到register a中, \"A5yy 再添加5行到a中.
@@ -1640,5 +1641,6 @@ endif
 " 6.07.01                                  " add Shift+F8/ F8 for !ctags -R 2014-07-14 12:28:55
 " 6.07.02                                  " add Surround.vim manual. 2014-07-17 10:24:05
 " 6.08.01                                  " add引用替换
+" 6.09.01                                  " add ,m mark
 "}}
 "}}}
