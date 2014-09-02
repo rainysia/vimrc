@@ -570,7 +570,11 @@ hi IndentGuidesOdd  ctermbg=black
 "                                          "      :Calendar  :CalendarH
 let g:calendar_diary="$VIMRUNTIME/diary/"
 "}}
-"{{                                        " mark.vba.gz的设定(mark.vim)
+"{{                                        " mark.vba.gz的设定(mark.vim) http://www.vim.org/scripts/script.php?script_id=1238
+"                                          " :Mark regexp   to mark a regular expression 
+"                                          " :Mark regexp   with exactly the same regexp to unmark it 
+"                                          " :Mark          to clear all marks 
+"                                          " ,m mark关键词，,n 取消关键词， ,r输入想要高亮的   / 已经替换成了，
 "                                          "      解压后,用vim打开  :so %
 "                                          "      颜色值 'extended'18色 'maximum' 77色
 "                                          "      /m  mark or unmark the word under (or before) the cursor
