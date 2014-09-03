@@ -746,8 +746,9 @@ traceroute 域名 跟踪跳hop
 查看网络流量watch -n 1 "/sbin/ifconfig eth0 | grep bytes"
 
 lsof -i 列出系统中的开放端口以及运行在端口上的服务的详细信息
+lsof -Pnl -i:80 查看80端口。
 netstat 查看开放端口和服务
-
+netstat -nlp |grep LISTEN 查看LISTEN的
 25.磁盘
 du filename 查找某个文件占用的磁盘空间 df = disk free du=disk usage
 du -a directory 递归输出指定目录或者多个目录所有文件的统计结果
