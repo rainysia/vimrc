@@ -1285,6 +1285,16 @@ tar -zxvf XXX.tar.gz -C ../dir
 
 打包排除所有的.svn 文件
 tar -zcvf xxx.tar.gz xxx --exclude .svn
+
+格式  解压                      打包
+.tar  tar xvf xxx.tar           tar cvf xxx.tar Dirname
+.gz   tar zxvf xxx.tar.gz       tar zcvf xxx.tar.gz Dirname
+.bz2  tar jxvf xxx.tar.bz2      tar jcvf xxx.tar.bz2 Dirname
+.bz   tar jxvf xxx.tar.gz
+.zip  unzip xxx.zip             zip xxx.zip Dirname
+
+
+
 101. 把当前一个文件copy到远程另外一台主机上，可以如下命令。(注意都是本地操作)
 
 scp 文件名 用户名@计算机IP或者计算机名称:远程路径 
