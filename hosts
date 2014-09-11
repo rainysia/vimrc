@@ -47,6 +47,9 @@ ff02::2 ip6-allrouters
 127.0.0.1 youxi.baidu.com/dntg_8377/?pid=101110078000236_2493282
 58.217.200.14  cdn.baidupcs.com
 58.217.200.14  hot.cdn.baidupcs.com
+128.199.185.120 btroot.org
+50.97.254.162 word2.cloudsolv.com
+127.0.0.1 a.baidu.com
 127.0.0.1 baidutv.baidu.com
 127.0.0.1 bar.baidu.com
 127.0.0.1 c.baidu.com
@@ -897,7 +900,7 @@ ff02::2 ip6-allrouters
 74.125.207.95	play.googleapis.com
 74.125.207.95	ajax.googleapis.com
 74.125.207.95	chart.googleapis.com
-74.125.207.95	fonts.googleapis.com
+74.125.205.106 fonts.googleapis.com
 74.125.207.95	redirector-bigcache.googleapis.com
 74.125.207.95	translate.googleapis.com
 74.125.207.95	maps.googleapis.com
