@@ -1102,6 +1102,12 @@ history | awk '{a[$2]++}END{for(i in a){print a[i] "" i}}' | sort -rn | head
 #crontab -e 
 */20 * * * * /usr/sbin/ntpdate 210.72.145.44
 30 5 * * * /usr/sbin/ntpdate 210.72.145.44
+ntpdate ns1.bluehost.com
+ntpdate pool.ntp.org
+dig pool.ntp.org
+ntpdate 67.213.74.13
+ntpdate 0.ubuntu.pool.ntp.org
+ntpdate timeserver2.synnex.org
 
 57.
 vmstat 2 每两秒显示虚拟内存状态 
