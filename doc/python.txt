@@ -199,3 +199,87 @@
             >>> s = 'supercalifragilisticexpialidocious'
             >>> len(s)
             34
+
+    3.1.3. 关于 Unicode
+        Python 中创建 Unicode 字符串和创建普通的字符串一样简单:
+            >>> u'Hello World !'
+            u'Hello World !'
+        引号前的 'u' 表示这会创建一个 Unicode 字符串。如果想要在字符串中包含特殊字符，可以使用 Python 的 Unicode-Escape 。请看下面的例子:
+            >>> u'Hello\u0020World !'
+            u'Hello World !'
+        和普通字符串一样， Unicode 字符串也有原始模式。可以在引号前加 “ur”，Python 会采用 Raw-Unicode-Escape 编码。如果有前缀为 ‘u’ 的数值，它也只会显示为 uXXXX 。
+            >>> ur'Hello\u0020World !'
+            u'Hello World !'
+            >>> ur'Hello\\u0020World !'
+            u'Hello\\\\u0020World !'
+        内置函数 unicode() 可以使用所有注册的 Unicode 编码（ COders 和 DECoders ）
+    3.1.4. 列表
+        Python 有几个 复合 数据类型，用于表示其它的值。最通用的是 list (列表) ，它可以写作中括号之间的一列逗号分隔的值。列表的元素不必是同一类型。
+            >>> a = ['spam', 'eggs', 100, 1234]
+            >>> a
+            ['spam', 'eggs', 100, 1234]
+        字符串索引，列表从 0 开始检索。列表可以被切片和连接:
+            >>> a[0]
+            'spam'
+            >>> a[3]
+            1234
+            >>> a[-2]
+            100
+            >>> a[1:-1]
+            ['eggs', 100]
+            >>> a[:2] + ['bacon', 2*2]
+            ['spam', 'eggs', 'bacon', 4]
+            >>> 3*a[:3] + ['Boo!']
+            ['spam', 'eggs', 100, 'spam', 'eggs', 100, 'spam', 'eggs', 100, 'Boo!']
+        所有的切片操作都会返回新的列表，包含求得的元素。这意味着以下的切片操作返回列表 a 的一个浅拷贝的副本:
+            >>> a[:]
+            ['spam', 'eggs', 100, 1234]
+        不像 不可变的 字符串，列表允许修改元素
+            >>> a
+            ['spam', 'eggs', 100, 1234]
+            >>> a[2] = a[2] + 23
+            >>> a
+            ['spam', 'eggs', 123, 1234]
+        也可以对切片赋值，此操作可以改变列表的尺寸，或清空它:
+            >>> # Replace some items:
+            ... a[0:2] = [1, 12]
+            >>> a
+            [1, 12, 123, 1234]
+            >>> # Remove some:
+            ... a[0:2] = []
+            >>> a
+            [123, 1234]
+            >>> # Insert some:
+            ... a[1:1] = ['bletch', 'xyzzy']
+            >>> a
+            [123, 'bletch', 'xyzzy', 1234]
+            >>> # Insert (a copy of) itself at the beginning
+            >>> a[:0] = a
+            >>> a
+            [123, 'bletch', 'xyzzy', 1234, 123, 'bletch', 'xyzzy', 1234]
+            >>> # Clear the list: replace all items with an empty list
+            >>> a[:] = []
+            >>> a
+            []
+        内置函数 len() 同样适用于列表:
+            >>> a = ['a', 'b', 'c', 'd']
+            >>> len(a)
+            4
+        允许嵌套列表（创建一个包含其它列表的列表），例如:
+            >>> q = [2, 3]
+            >>> p = [1, q, 4]
+            >>> len(p)
+            3
+            >>> p[1]
+            [2, 3]
+            >>> p[1][0]
+            2
+        你可以在列表末尾添加内容:
+            >>> p[1].append('xtra')
+            >>> p
+            [1, [2, 3, 'xtra'], 4]
+            >>> q
+            [2, 3, 'xtra']
+    3.2. 编程的第一步
+        交互式录入复合语句时，必须在最后输入一个空行来标识结束（因为解释器没办法猜测你输入的哪一行是最后一行），需要注意的是同一个语句块中的每一行必须缩进同样数量的空白。
+        一个逗号结尾就可以禁止输出换行:
