@@ -19,3 +19,29 @@
             ...     print "Be careful!"
             ... 
             Be careful!
+    2.2.1 错误处理
+        异常可以由 try 语句中的 except 子句来控制，这样就不会出现上文中的错误信息
+        在主提示符或从属提示符中输入中断符（通常是 Control-C 或者 DEL）就会取消当前输入，回到主命令行。 [1] 执行命令时输入一个中断符会抛出一个 KeyboardInterrupt 异常，它可以被 try 语句截获。
+
+    2.2.2 执行python脚本
+        加类似shell的,并且可以指定执行模式和权限,chmod +x script.py
+        #! /usr/bin/env python
+        如果需要指定其他的字符编码。指定编码必须在文件的第一行或者第二行定义。
+            # -*- coding: encoding -*-
+        例如
+            # -*- coding: cp-1252 -*-
+    2.2.4 交互执行文件。
+        在每次解释器启动时执行一些命令,你可以在一个文件中包含你想要执行的命令，设定一个名为 PYTHONSTARTUP 的环境变量来指定这个文件。这类似于 Unix shell 的 .profile 文件。
+        想要在当前目录中执行附加的启动文件，可以在全局启动文件中加入类似以下的代码： if os.path.isfile('.pythonrc.py'): execfile('.pythonrc.py') 。如果你想要在某个脚本中使用启动文件，必须要在脚本中写入这样的语句:
+            import os
+            filename = os.environ.get('PYTHONSTARTUP')
+            if filename and os.path.isfile(filename):
+                exec(open(filename).read())
+    2.2.5. 本地化模块
+        Python 提供了两个钩子（方法）来本地化: sitecustomize 和 usercustomize
+            >>> import site
+            >>> site.getusersitepackages()
+            '/home/user/.local/lib/python2.7/site-packages'
+        现在你可以在 site-packages 的目录下创建 usercustomize.py 文件，内容就悉听尊便了。 这个文件将会影响 python 的每次调用，除非启动的时候加入 -s 选项禁止自动导入。
+
+3. Python 简介
