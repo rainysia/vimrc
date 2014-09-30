@@ -45,3 +45,157 @@
         现在你可以在 site-packages 的目录下创建 usercustomize.py 文件，内容就悉听尊便了。 这个文件将会影响 python 的每次调用，除非启动的时候加入 -s 选项禁止自动导入。
 
 3. Python 简介
+    3.1
+        一个值可以同时赋给几个变量:
+        变量在使用前必须“定义”（赋值），否则会出错:
+        浮点数有完整的支持；与整型混合计算时会自动转为浮点数:
+            >>> 3 * 3.75 / 1.5
+            7.5
+            >>> 7.0 / 2
+            3.5
+        复数也得到支持；带有后缀 j 或 J 就被视为虚数。带有非零实部的复数写为 (real+imagj) ，或者可以用 complex(real, imag) 函数创建
+            >>> 1j * 1J
+            (-1+0j)
+            >>> 1j * complex(0, 1)
+            (-1+0j)
+            >>> 3+1j*3
+            (3+3j)
+            >>> (3+1j)*3
+            (9+3j)
+            >>> (1+2j)/(1+1j)
+            (1.5+0.5j)
+        复数的实部和虚部总是记为两个浮点数。要从复数 z 中提取实部和虚部，使用 z.real 和 z.imag
+        复数a+bi中，a称为复数的实部，b称为复数的虚部，i称为虚数单位。当虚部等于零时，这个复数就是实数；当虚部不等于零时，这个复数称为虚数，复数的实部如果等于零，则称为纯虚数
+            >>> a=1.5+0.5j
+            >>> a.real
+            1.5
+            >>> a.imag
+            0.5
+        浮点数和整数之间的转换函数（ float() 和 int() 以及 long() ） 不能用于复数。没有什么正确方法可以把一个复数转成一个实数。函数 abs(z) 用于获取其模（浮点数）或 z.real 获取其实部:
+            >>> a=3.0+4.0j
+            >>> float(a)
+            Traceback (most recent call last):
+              File "<stdin>", line 1, in ?
+            TypeError: can't convert complex to float; use abs(z)
+            >>> a.real
+            3.0
+            >>> a.imag
+            4.0
+            >>> abs(a)  # sqrt(a.real**2 + a.imag**2)
+            5.0
+        交互模式中，最近一个表达式的值赋给变量 _ 。这样我们就可以把它当作一个桌面计算器，很方便的用于连续计算
+            >>> tax = 12.5 / 100
+            >>> price = 100.50
+            >>> price * tax
+            12.5625
+            >>> price + _
+            113.0625
+            >>> round(_, 2)
+            113.06
+    3.1.2. 字符串
+        Python 也提供了可以通过几种不同方式传递的字符串。它们可以用单引号或双引号标识:
+            >>> 'spam eggs'
+            'spam eggs'
+            >>> 'doesn\'t'
+            "doesn't"
+            >>> "doesn't"
+            "doesn't"
+            >>> '"Yes," he said.'
+            '"Yes," he said.'
+            >>> "\"Yes,\" he said."
+            '"Yes," he said.'
+            >>> '"Isn\'t," she said.'
+            '"Isn\'t," she said.'
+        Python 解释器按照字符串被输入的方式打印字符串结果：为了显示准确的值，字符串包含在成对的引号中，引号和其他特殊字符要用反斜线（ \ ）转译。 如果字符串只包含单引号（ ‘ ）而没有双引号（ ” ）就可以用双引号（ ” ）包围，反之用单引号（ ‘ ）包围。 再强调一下， print 语句可以生成可读性更好的输出。可以使用反斜杠为行结尾的连续字符串，它表示下一行在逻辑上是本行的后续内容
+        需要注意的是，还是需要在字符串中写入 \n ——结尾的反斜杠会被忽略
+        字符串可以标识在一对三引号中： """ 或 ''' 。三引号中，不需要行属转义
+            print """\
+            Usage: thingy [OPTIONS]
+                 -h                        Display this usage message
+                 -H hostname               Hostname to connect to
+            """
+            得到如下输出:
+            Usage: thingy [OPTIONS]
+                 -h                        Display this usage message
+                 -H hostname               Hostname to connect to
+        字符串可以由 + 操作符连接（粘到一起），可以由 * 重复:
+
+            >>> word = 'Help' + 'A'
+            >>> word
+            'HelpA'
+            >>> '<' + word*5 + '>'
+            '<HelpAHelpAHelpAHelpAHelpA>'
+        相邻的两个字符串文本自动连接在一起，前面那行代码也可以写为 word ='Help' 'A';它只用于两个字符串文本，不能用于字符串表达式:
+            >>> 'str' 'ing'                   #  <-  This is ok
+            'string'
+            >>> 'str'.strip() + 'ing'   #  <-  This is ok
+            'string'
+            >>> 'str'.strip() 'ing'     #  <-  This is invalid
+              File "<stdin>", line 1, in ?
+                'str'.strip() 'ing'
+                                  ^
+            SyntaxError: invalid syntax
+        字符串也可以被截取（检索）。类似于 C ，字符串的第一个字符索引为 0 。没有独立的字符类型，字符就是长度为 1 的字符串。类似 Icon ，可以用 切片标注 法截取字符串：由两个索引分割的复本。
+            >>> word[4]
+            'A'
+            >>> word[0:2]
+            'He'
+            >>> word[2:4]
+            'lp'
+        索引切片可以有默认值，切片时，忽略第一个索引的话，默认为 0，忽略第二个索引，默认为字符串的长度:
+            >>> word[:2]    # The first two characters
+            'He'
+            >>> word[2:]    # Everything except the first two characters
+            'lpA'
+        不同于 C 字符串，Python 字符串不可变。向字符串文本的某一个索引赋值会引发错误:
+            >>> word[0] = 'x'
+            Traceback (most recent call last):
+              File "<stdin>", line 1, in ?
+            TypeError: 'str' object does not support item assignment
+            >>> word[:1] = 'Splat'
+            Traceback (most recent call last):
+              File "<stdin>", line 1, in ?
+            TypeError: 'str' object does not support slice assignment
+        切片操作有个有用的不变性： s[:i] + s[i:] 等于 s。
+            >>> word[:2] + word[2:]
+            'HelpA'
+            >>> word[:3] + word[3:]
+            'HelpA'
+        Python 能够优雅地处理那些没有意义的切片索引：一个过大的索引值（即下标值大于字符串实际长度）将被字符串实际长度所代替，当上边界比下边界大时（即切片左值大于右值）就返回空字符串。
+            >>> word[1:100]
+            'elpA'
+            >>> word[10:]
+            ''
+            >>> word[2:1]
+            ''
+        索引也可以是负数，这将导致从右边开始计算。 例如:
+            >>> word[-1]     # The last character
+            'A'
+            >>> word[-2]     # The last-but-one character
+            'p'
+            >>> word[-2:]    # The last two characters
+            'pA'
+            >>> word[:-2]    # Everything except the last two characters
+            'Hel'
+        请注意 -0 实际上就是 0 ，所以它不会导致从右边开始计算！
+            >>> word[-0]     # (since -0 equals 0)
+            'H'
+        负索引切片越界会被截断，不要尝试将它用于单元素（非切片）检索:
+            >>> word[-100:]
+            'HelpA'
+            >>> word[-10]    # error
+            Traceback (most recent call last):
+              File "<stdin>", line 1, in ?
+            IndexError: string index out of range
+        有个办法可以很容易地记住切片的工作方式：切片时的索引是在两个字符 之间 。左边第一个字符的索引为0，，而长度为 n 的字符串其最后一个字符的右界索引为 n 。例如:
+             +---+---+---+---+---+
+             | H | e | l | p | A |
+             +---+---+---+---+---+
+             0   1   2   3   4   5
+            -5  -4  -3  -2  -1
+        文本中的第一行数字给出字符串中的索引点 0...5 。第二行给出相应的负索引。切片是从 i 到 j 两个数值标示的边界之间的所有字符。
+        对于非负索引，如果上下都在边界内，切片长度就是两个索引之差。例如， word[1:3] 是 2 。
+        内置函数 len() 返回字符串长度:
+            >>> s = 'supercalifragilisticexpialidocious'
+            >>> len(s)
+            34
