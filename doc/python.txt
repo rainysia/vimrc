@@ -1,0 +1,3 @@
+1. python /usr/bin/python in debian
+    Ctrl-D让python解释器以0状态码退出, 或者用quit()来退出解释器
+    Ctrl-P 检查是否支持命令行编辑。
