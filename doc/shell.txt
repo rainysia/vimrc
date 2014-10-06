@@ -2189,6 +2189,7 @@ cat ~/.ssh/id_rsa.pub  | ssh username@yourhost `cat >> .ssh/authorized_keys`    
 
     如果需要修改url
     git remote set-url origin git@github.com:rainysia/simple_upload
+    或者修改.git/config里 [remote "origin"] 的url为 url = git@github.com:rainysia/simple_upload
 
 	本地：
 		gut init
