@@ -505,6 +505,7 @@
     最后，一个最不常用的选择是可以让函数调用可变个数的参数。这些参数被包装进一个元组（参见 元组和序列 ）。在这些可变个数的参数之前，可以有零到多个普通的参数。
         def write_multiple_items(file, separator, *args):
             file.write(separator.join(args))
+    以下内容python 3支持。
     通常，这些 可变 参数是参数列表中的最后一个， 因为它们将把所有的剩余输入参数传递给函数。任何出现在 *args 后的参数是关键字参数，这意味着，他们只能被用作关键字，而不是位置参数。
         >>> def concat(*args, sep="/"):
         ...    return sep.join(args)
@@ -521,3 +522,20 @@
         'earth/mars/venus'
         >>> concat("earth", "mars", "venus", sep=".")
         'earth.mars.venus'
+
+    4.7.4. 参数列表的分拆
+    当你要传递的参数已经是一个列表，但要调用的函数却接受分开一个个的参数值。这时候你要把已有的列表拆开来。例如内建函数 range() 需要独立的 start , stop 参数。 你可以在调用函数时加一个 * 操作符来自动把参数列表拆开:
+        >>> list(range(3, 6))            # normal call with separate arguments
+        [3, 4, 5]
+        >>> args = [3, 6]
+        >>> list(range(*args))            # call with arguments unpacked from a list
+        [3, 4, 5]
+    同样的方式，可以使用 ** 操作符分拆关键字参数为字典:
+        >>> def parrot(voltage, state='a stiff', action='voom'):
+        ...     print "-- This parrot wouldn't", action,
+        ...     print "if you put", voltage, "volts through it.",
+        ...     print "E's", state, "!"
+        ...
+        >>> d = {"voltage": "four million", "state": "bleedin' demised", "action": "VOOM"}
+        >>> parrot(**d)
+        -- This parrot wouldn't VOOM if you put four million volts through it. E's bleedin' demised !
