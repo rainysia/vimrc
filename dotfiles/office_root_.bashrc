@@ -53,8 +53,10 @@ alias cdgo='cd /home/go/'
 alias cdn='cd /home/node/'
 alias cdm='cd /home/manual/'
 alias cds='cd /home/work/'
-alias ssh128='sh /home/sh/ssh.sh'
+alias cdp='cd /home/python/'
 alias shl='sh /home/sh/log.sh'
+alias ssh128='sh /home/sh/ssh.sh'
+alias gvimlog='gvim /var/log/php_errors.log'
 vman () {
     export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
                     vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
