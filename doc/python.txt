@@ -373,3 +373,151 @@
                   d: 转变为字符串后处理。
                     sys.stdout.softspace=0
                     print (str(n)+","),  #这里是转换为字符串后，连接逗号，第二个逗号是不换行。
+    4.5. pass 语句
+    pass 语句什么也不做。它用于那些语法上必须要有什么语句，但程序什么也不做的场合，例如:
+        >>> while True:
+        ...     pass  # Busy-wait for keyboard interrupt (Ctrl+C)
+        ...
+    这通常用于创建最小结构的类:
+        >>> class MyEmptyClass:
+        ...     pass
+        ...
+    另一方面， pass 可以在创建新代码时用来做函数或控制体的占位符。可以让你在更抽象的级别上思考。 pass 可以默默地被忽视:
+        >>> def initlog(*args):
+        ...     pass   # Remember to implement this!
+        ...
+    4.6. 定义函数
+    我们可以定义一个函数用来生成任意上界的菲波那契数列:
+        >>> def fib(n):    # write Fibonacci series up to n
+        ...     """Print a Fibonacci series up to n."""
+        ...     a, b = 0, 1
+        ...     while a < n:
+        ...         print a,
+        ...         a, b = b, a+b
+        ...
+        >>> # Now call the function we just defined:
+        ... fib(2000)
+        0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597
+    函数体是缩进的，第一行可选字符串文本为docstring注释，全局变量需要global申明（命名）
+    函数调用，实参是传值调用，可以直接重命名函数。
+    函数如果没有return会返回一个None，这个值会被解释器忽略（不输入任何内容），如果想要输出，使用print
+        >>> fib(0)
+        >>> print fib(0)
+        None
+
+        >>> def fib2(n): # return Fibonacci series up to n
+        ...     """Return a list containing the Fibonacci series up to n."""
+        ...     result = []
+        ...     a, b = 0, 1
+        ...     while a < n:
+        ...         result.append(a)    # see below
+        ...         a, b = b, a+b
+        ...     return result
+        ...
+        >>> f100 = fib2(100)    # call it
+        >>> f100                # write the result
+        [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+    示例中演示的 append() 方法由链表对象定义，它向链表中加入一个新元素。在示例中它等同于 result = result + [b] ，不过效率更高。
+
+    4.7.1. 默认参数值
+    in 关键字。它测定序列中是否包含某个确定的值。
+        def ask_ok(prompt, retries=4, complaint='Yes or no, please!'):
+            while True:
+                ok = raw_input(prompt)
+                if ok in ('y', 'ye', 'yes'):
+                    return True
+                if ok in ('n', 'no', 'nop', 'nope'):
+                    return False
+                retries = retries - 1
+                if retries < 0:
+                    raise IOError('refusenik user')
+                print complaint
+
+        默认值在函数 定义 作用域被解析，如下所示:
+            i = 5
+
+            def f(arg=i):
+                print arg
+
+            i = 6
+            f()
+        将会输出 5。
+        默认值只被赋值一次。这使得当默认值是可变对象时会有所不同，比如列表、字典或者大多数类的实例。例如，下面的函数在后续调用过程中会累积（前面）传给它的参数:
+            def f(a, L=[]):
+                L.append(a)
+                return L
+
+            print f(1)
+            print f(2)
+            print f(3)
+        这将会打印:
+            [1]
+            [1, 2]
+            [1, 2, 3]
+        如果你不想在随后的调用中共享默认值，可以像这样写函数:
+        def f(a, L=None):
+            if L is None:
+                L = []
+            L.append(a)
+            return L
+
+    4.7.2. 关键字参数
+    函数可以通过 关键字参数 的形式来调用，形如 keyword = value 。例如，以下的函数:
+        def parrot(voltage, state='a stiff', action='voom', type='Norwegian Blue'):
+            print "-- This parrot wouldn't", action,
+            print "if you put", voltage, "volts through it."
+            print "-- Lovely plumage, the", type
+            print "-- It's", state, "!"
+        接受一个必选参数 ( voltage ) 以及三个可选参数 ( state , action , 和 type )。 可以用以下的任一方法调用:
+            parrot(1000)                                          # 1 positional argument
+            parrot(voltage=1000)                                  # 1 keyword argument
+            parrot(voltage=1000000, action='VOOOOOM')             # 2 keyword arguments
+            parrot(action='VOOOOOM', voltage=1000000)             # 2 keyword arguments
+            parrot('a million', 'bereft of life', 'jump')         # 3 positional arguments
+            parrot('a thousand', state='pushing up the daisies')  # 1 positional, 1 keyword
+        引入一个形如 **name 的参数时，它接收一个字典（参见 typesmapping ） ，该字典包含了所有未出现在形式参数列表中的关键字参数。这里可能还会组合使用一个形如 *name （下一小节详细介绍） 的形式参数，它接收一个元组（下一节中会详细介绍），包含了所有没有出现在形式参数列表中的参数值。（ *name 必须在 **name 之前出现） 例如，我们这样定义一个函数:
+            def cheeseshop(kind, *arguments, **keywords):
+                print "-- Do you have any", kind, "?"
+                print "-- I'm sorry, we're all out of", kind
+                for arg in arguments:
+                    print arg
+                print "-" * 40
+                keys = sorted(keywords.keys())
+                for kw in keys:
+                    print kw, ":", keywords[kw]
+        它可以像这样调用:
+            cheeseshop("Limburger", "It's very runny, sir.",
+                       "It's really very, VERY runny, sir.",
+                       shopkeeper='Michael Palin',
+                       client="John Cleese",
+                       sketch="Cheese Shop Sketch")
+        当然它会按如下内容打印:
+                -- Do you have any Limburger ?
+                -- I'm sorry, we're all out of Limburger
+                It's very runny, sir.
+                It's really very, VERY runny, sir.
+                ----------------------------------------
+                client : John Cleese
+                shopkeeper : Michael Palin
+                sketch : Cheese Shop Sketch
+
+    4.7.3. 可变参数列表
+    最后，一个最不常用的选择是可以让函数调用可变个数的参数。这些参数被包装进一个元组（参见 元组和序列 ）。在这些可变个数的参数之前，可以有零到多个普通的参数。
+        def write_multiple_items(file, separator, *args):
+            file.write(separator.join(args))
+    通常，这些 可变 参数是参数列表中的最后一个， 因为它们将把所有的剩余输入参数传递给函数。任何出现在 *args 后的参数是关键字参数，这意味着，他们只能被用作关键字，而不是位置参数。
+        >>> def concat(*args, sep="/"):
+        ...    return sep.join(args)
+        ...
+        >>> concat("earth", "mars", "venus")
+        'earth/mars/venus'
+        >>> concat("earth", "mars", "venus", sep=".")
+        'earth.mars.venus'
+    通常，这些 可变 参数是参数列表中的最后一个， 因为它们将把所有的剩余输入参数传递给函数。任何出现在 *args 后的参数是关键字参数，这意味着，他们只能被用作关键字，而不是位置参数。
+        >>> def concat(*args, sep="/"):
+        ...    return sep.join(args)
+        ...
+        >>> concat("earth", "mars", "venus")
+        'earth/mars/venus'
+        >>> concat("earth", "mars", "venus", sep=".")
+        'earth.mars.venus'
