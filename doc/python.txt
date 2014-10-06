@@ -284,3 +284,35 @@
     3.2. 编程的第一步
         交互式录入复合语句时，必须在最后输入一个空行来标识结束（因为解释器没办法猜测你输入的哪一行是最后一行），需要注意的是同一个语句块中的每一行必须缩进同样数量的空白。
         一个逗号结尾就可以禁止输出换行:
+
+4. 深入 Python 流程控制
+    4.1 if
+        >>> x = int(raw_input("Please enter an integer: "))
+        Please enter an integer: 42
+        >>> if x < 0:
+        ...      x = 0
+        ...      print 'Negative changed to zero'
+        ... elif x == 0:
+        ...      print 'Zero'
+        ... elif x == 1:
+        ...      print 'Single'
+        ... else:
+        ...      print 'More'
+        ...
+        More
+    4.2 for
+        Python 中的 for 语句和 C 或 Pascal 中的略有不同。通常的循环可能会依据一个等差数值步进过程（如 Pascal），或由用户来定义迭代步骤和中止条件（如 C ），Python 的 for 语句依据任意序列（链表或字符串）中的子项，按它们在序列中的顺序来进行迭代
+        >>> # Measure some strings:
+        ... a = ['cat', 'window', 'defenestrate']
+        >>> for x in a:
+        ...     print x, len(x)
+        ...
+        cat 3
+        window 6
+        defenestrate 12
+    在迭代过程中修改迭代序列不安全（只有在使用链表这样的可变序列时才会有这样的情况）。如果你想要修改你迭代的序列（例如，复制选择项），你可以迭代 它的复本。使用切割标识就可以很方便地做到这一点:
+        >>> for x in a[:]: # make a slice copy of the entire list
+        ...    if len(x) > 6: a.insert(0, x)
+        ...
+        >>> a
+        ['defenestrate', 'cat', 'window', 'defenestrate']
