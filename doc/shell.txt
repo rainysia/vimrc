@@ -2185,7 +2185,7 @@ cat ~/.ssh/id_rsa.pub  | ssh username@yourhost `cat >> .ssh/authorized_keys`    
 	把你本地生成的密钥复制到里面（key文本框中）， 点击 add key 就ok了
 	接着打开git ，测试连接是否成功
 	ssh -T git@github.com
-	如果提示：Hi defnngj You've successfully authenticated, but GitHub does not provide shell access. 说明你连接成功了
+	如果提示：Hi rainysia! You've successfully authenticated, but GitHub does not provide shell access. 说明你连接成功了
 	本地：
 		gut init
 		git add somelocalfile
