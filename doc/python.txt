@@ -301,7 +301,7 @@
         ...
         More
     4.2 for
-        Python 中的 for 语句和 C 或 Pascal 中的略有不同。通常的循环可能会依据一个等差数值步进过程（如 Pascal），或由用户来定义迭代步骤和中止条件（如 C ），Python 的 for 语句依据任意序列（链表或字符串）中的子项，按它们在序列中的顺序来进行迭代
+    Python 中的 for 语句和 C 或 Pascal 中的略有不同。通常的循环可能会依据一个等差数值步进过程（如 Pascal），或由用户来定义迭代步骤和中止条件（如 C ），Python 的 for 语句依据任意序列（链表或字符串）中的子项，按它们在序列中的顺序来进行迭代
         >>> # Measure some strings:
         ... a = ['cat', 'window', 'defenestrate']
         >>> for x in a:
@@ -316,3 +316,60 @@
         ...
         >>> a
         ['defenestrate', 'cat', 'window', 'defenestrate']
+    4.3. range() 函数
+    如果你需要一个数值序列，内置函数 range() 会很方便，它生成一个等差级数链表:
+        >>> range(10)
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    第二个参数是范围。
+        >>> range(5, 10)
+        [5, 6, 7, 8, 9]
+    第三个参数是步长
+        >>> range(0, 10, 3)
+        [0, 3, 6, 9]
+        >>> range(-10, -100, -30)
+        [-10, -40, -70]
+    可以把数组(链表) 迭代索引。
+        >>> a = ['Mary', 'had', 'a', 'little', 'lamb']
+        >>> for i in range(len(a)):
+        ...     print i, a[i]
+        ...
+        0 Mary
+        1 had
+        2 a
+        3 little
+        4 lamb
+    4.4 break/continue/else in 循环。
+        循环可以有一个 else 子句；它在循环迭代完整个列表（对于 for ）后或执行条件为 false （对于 while ）时执行，但循环被 break 中止的情况下不会执行。以下搜索素数的示例程序演示了这个子句:
+            计算素数。
+        >>> for n in range(2, 10):
+        ...     for x in range(2, n):
+        ...         if n % x == 0:
+        ...             print n, 'equals', x, '*', n/x
+        ...             break
+        ...     else:
+        ...         # loop fell through without finding a factor
+        ...         print n, 'is a prime number'
+        ...
+        2 is a prime number
+        3 is a prime number
+        4 equals 2 * 2
+        5 is a prime number
+        6 equals 2 * 3
+        7 is a prime number
+        8 equals 2 * 4
+        9 equals 3 * 3
+    上面结果会输出默认的空格。
+        解决办法，a:    import sys 然后 sys.stdout.softspace=0 #这里是设置空格为0
+                  b:    用.strip()函数去除开头和末尾的空格。
+                  c:
+                    >>> sentence = 'hello apple'
+                    >>> sentence.strip()  #去除开头和末尾的空格#
+                    'hello apple'
+                    >>> sentence = ''.join(sentence.split())#去除所有的空格#
+                    >>> sentence
+                    'helloapple'
+                    或者用replace
+                    string.replace(" ", "")
+                  d: 转变为字符串后处理。
+                    sys.stdout.softspace=0
+                    print (str(n)+","),  #这里是转换为字符串后，连接逗号，第二个逗号是不换行。
