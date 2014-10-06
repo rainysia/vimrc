@@ -539,3 +539,36 @@
         >>> d = {"voltage": "four million", "state": "bleedin' demised", "action": "VOOM"}
         >>> parrot(**d)
         -- This parrot wouldn't VOOM if you put four million volts through it. E's bleedin' demised !
+    4.7.5. Lambda 形式
+    通过 lambda 关键字，可以创建短小的匿名函数
+        >>> def make_incrementor(n):
+        ...     return lambda x: x + n
+        ...
+        >>> f = make_incrementor(42)
+        >>> f(0)
+        42
+        >>> f(1)
+        43
+    4.7.6. 文档字符串
+        >>> def my_function():
+        ...     """Do nothing, but document it.
+        ...
+        ...     No, really, it doesn't do anything.
+        ...     """
+        ...     pass
+        ...
+        >>> print my_function.__doc__
+            Do nothing, but document it.
+
+            No, really, it doesn't do anything.
+
+    4.8. 插曲：编码风格
+        使用 4 空格缩进，而非 TAB。 在小缩进（可以嵌套更深）和大缩进（更易读）之间，4空格是一个很好的折中。TAB 引发了一些混乱，最好弃用。
+        折行以确保其不会超过 79 个字符。 这有助于小显示器用户阅读，也可以让大显示器能并排显示几个代码文件。
+        使用空行分隔函数和类，以及函数中的大块代码。
+        可能的话，注释独占一行 使用文档字符串
+        把空格放到操作符两边，以及逗号后面，但是括号里侧不加空格： a = f(1, 2) + g(3, 4) 。
+        统一函数和类命名。
+        推荐类名用 驼峰命名， 函数和方法名用 小写_和_下划线。总是用 self 作为方法的第一个参数（关于类和方法的知识详见 初识类 ）。
+        不要使用花哨的编码，如果你的代码的目的是要在国际化 环境。 Python 的默认情况下，UTF-8，甚至普通的 ASCII 总是工作的最好。
+        同样，也不要使用非 ASCII 字符的标识符，除非是不同语种的会阅读或者维护代码。
