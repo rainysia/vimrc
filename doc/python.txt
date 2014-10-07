@@ -1,0 +1,147 @@
+x = input("x:") 获取用户输入
+2**3 = pow(2,3) 幂运算符**,乘方
+round           四舍五入最接近的整数。
+abs             绝对值
+1//2            整除
+1.0/2           浮点运算
+19000000000L    L就是长整数
+0xAF            十六进制
+010             八进制
+import 来导入模块
+    import math
+    math.floor(32.9) 会取整 =32.0
+    要输出为整数
+    int(math.floor(32.9)) 输出32,自动向下取整,所以可以直接int(32.9)
+    要输出向上的整数，ceil
+    math.ceil(32.9) 输出33, 32.0 =32 32.1=33
+
+from模块import函数来指定。就不要在每次调用函数的时候都写模块名字
+    sqrt是math里面计算一个数的平方根
+    from math import sqrt
+    sqrt(9)   输出3.0
+    也可以用变量来引用函数foo=math.sqrt
+        foo(4) = 2.0
+
+sqrt(-1) 会输出nan/NAN 意思就是not a number 非数值
+要处理负数的平方根（负数的平方根是虚数),需要用cmath(complex math,复数)模块
+    import cmath
+    cmath.sqrt(-1) 输出1j  j/J就是虚数,不使用from cmath import sqrt是怕命名冲突污染
+        虚数相乘为-1
+        >>>(1+3j)* (8+4j)
+        8+4j+24j-12 = -4+28j
+
+python IDE /idle
+#apt-get install idle-python2.7
+
+raw_input("Press <enter>") 来提供交互,
+    与input不同，input会假设用户输入的都是合法的python表达式，而raw_input会把所有的输入当作原始数据(raw data)
+
+str函数， 把值转换为合理形式的字符串, str实际是一种类型,类似int/long，repr是函数。
+repr函数，创建一个字符串以合法的python表达式的形式来表示值
+    >>>print repr("Hello, world!")
+    'Hello, world!'
+    >>>print repr(10000L)
+    10000L
+    >>>print str("Hello, world!")
+    Hello, world!
+    >>>print str(10000L)
+    10000
+    repr也可以作为`x` 反引号的实现。
+    >>>temp = 42
+    >>>print "The temperature is " + `temp` 就不会报错,python3不再使用反引号，所以应该用repr
+
+
+长字符串用'''string'''来包围,或者"""string""" 里面可以随意用单双引号。
+如果一行的最后一个字符是反斜杠\ 换行符本身就转义而被忽略掉
+
+原始字符串
+    为了解决>>>path = "C:\nowhere"
+            >>>path
+            'C:\nowhere'
+            >>>print path
+            C:
+            owhere
+    对于短的，可以再转义一次
+            >>print "c:\\nowhere"
+            c:\nowhere
+    对于长的，加上r表示原始字符串,原始字符串的最后一个字符不能是反斜线，除非转义,因为不知道是否应该结束字符串,如果非要原始字符串以一个反斜杠结尾，把这个反斜线作为一个字符串处理
+        >>>print r'Let\'s go!'
+        Let\'s go!
+        >>>print r'C:\Program Files\foo\bar' '\\'
+        C:\Program Files\foo\bar\
+
+Unicode字符串,在python3.0，所有字符串都是unicode字符串
+    u"hello, world1"
+
+数据结构
+
+    sequence 序列,python右6种序列,包括列表，元组，字符串，Unicode字符串，buffer对象，xrange对象
+        列表可以修改，元组不能修改
+    python中还有一种名叫容器container的数据结构。 容器就是包含其他对象的任意对象。
+    序列（例如和元组）和映射（例如字典） 是两类主要的容器。 序列中的每个元素都有自己的编号，而映射中的每个元素则右一个名字（键）。集合set是既不是序列也不是映射的容器类型。
+
+    所有序列都可以进行某些特定操作,索引indexing,分片slicing,加adding，乘multiplying
+    以及检查某个元素是否属于序列的成员（成员资格）。除此之外，python还有计算序列长度，找出最大元素，最小元素的内建函数
+    迭代iteration，对序列进行迭代的意思，就是依次对序列中的每个元素重复执行某些操作。
+    字符串就是一个由字符组成的序列。索引0指向第一个元素
+
+    分片slicing.可以指定步长step length,步长不能为0
+        >>>numbers = [1,2,3,4,5,6,7,8,9,10]
+        >>>numbers[0:10:2]  #[1,3,5,7,9]
+        >>>numbers[::3]     #[1,4,7,10]
+        >>>numbers[8:3:-1]  #[9,8,7,6,5]
+
+    空列表，[]
+    None python内建值，表示没有在里面放置任何元素
+    初始化一个长度10的列表
+        >>>sequence = [None] * 10
+        >>>sequence
+        [None,None,None,None,None,None,None,None,None,None]
+
+    成员资格用in运算符,返回True/False
+    内建函数len 返回序列包含元素的数量
+    内建函数min/max返回序列中最大/最小的元素
+
+    list函数，实现字符串可以像列表一样被修改,list也适用于所有类型的序列。
+        >>>list('Hello')
+        ['H','e','l','l','o']
+        可以用''.join(somelist)来把列表转换为字符串
+
+    分片赋值,可以赋值不等长的序列
+        >>>name=list('perl')
+        >>>name[2:]=list('ar')
+        >>>name
+        ['p','e','a','r']
+    列表方法
+        append/count/extend/index/insert/pop/remove/reverse/sort
+        pop是唯一一个既能修改列表又返回元素值(除了None)的列表方法
+
+    元组，不可变的序列
+    用逗号分割值，就自动创建了元组,元组大部分是通过圆括号括起来的。可以用没有那个的两个圆括号表示空元组
+        >>>42  #42
+        >>>42, #(42,)
+        >>>(42,) #(42,)
+        >>>3*(40+2)  #126
+        >>>3*(40+2,)  #(42,42,42)
+    tuple函数,以一个序列作为参数并把它转换为元组。 如果参数是元组就原样返回
+        >>>tuple([1,2,3]) #(1,2,3)
+        >>>tuple('abc') #('a','b','c')
+        >>>typle(1,2,3) #(1,2,3)
+    元组操作
+        >>>x=1,2,3 #x = (1,2,3)
+        >>>x[1] #2
+        >>>x[0:2] (1,2)
+    cmp函数cmp(x,y) 比较两个值。1,0,-1
+
+
+    格式化字符串，字符串格式化操作符%, %s是转换说明符conversion specifier, 标记了需要插入转换值的位置，s表示值会被格式化成字符串，如果不是字符串，会用str将其转换为字符串
+        如果格式化字符串有百分号。就用%%，这样python就不会将百分号误认为是转换说明符了。
+        >>>format = "Hello, %s. %s enough for ya?"
+        >>>values = ('world','Hot')
+        >>>print format %s vlaues
+        Hello, world. Hot enough for ya?
+    格式化浮点数,f和精度 如%.3f是小数点后保留3位。 因为格式化转换说明符总是以表示类型的字符结束，所以精度在类型字符的前面
+        >>>format = "Pi with three 10 decimals: %.10f"
+        >>>from math import pi
+        >>>print format % pi
+        Pi with 10 decimals:3.1415926536
