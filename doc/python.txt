@@ -145,3 +145,39 @@ Unicode字符串,在python3.0，所有字符串都是unicode字符串
         >>>from math import pi
         >>>print format % pi
         Pi with 10 decimals:3.1415926536
+
+    string模块提供另外一种格式化方法,模板字符串,substitute模板方法会用传递进来的关键字参数foo替换掉字符串中的$foo
+        >>>from string import Template
+        >>>s = Template('$x,glorious $x!')
+        >>>s.substitute(x='slurm')
+        'slurm. glorious slurm!'
+    如果替换字段是单词的一部分，参数名需要用括号括起来 ${x}
+    可以使用$$插入美元符号,除了关键字参数以外，还可以使用字典变量提供值/名称对
+        >>>s=Template('A $thing must never $action.')
+        >>>d={}
+        >>>d['thing'] = 'gentleman'
+        >>>d['action'] = 'show his socks'
+        >>>s.substitute(d)
+        'A gentleman must never show his socks.'
+    如果格式化的右边(右操作数)是元组的话,则其中的每一个元素都会被单独格式化.每个值都需要一个对应的转换说明符
+    如果需要转换的元组作为转换表达式的一部分存在,那么必须将它用圆括号括起来.
+        >>>'%s plus $s equals $s' % (1,1,2)
+        '1 plus 1 equals 2'
+    字符串转换类型
+        %标记转换说明符的开始
+        转换标志(可选)-表示左对齐,+表示在转换值之前要加上正负号,""空白字符表示正数之前保留空格,0表示转换值若位数不够则用0填充
+        最小字段宽度(可选),转换后的字符串至少应该具有该值指定的宽度.如果是*,则宽度会从元组中读书 
+        点. 后跟精度值(可选),如果转换的是实数,精度值会表示在小数点后的位数.  如果转换的是字符串,那么该数字就表示最大字段宽度,如果是*,精度会从元组中读书
+            d,i     带符号的十进制整数
+            o       不带符号的八进制
+            u       不带符号的十进制
+            x       不带符号的十六进制 小写
+            X       不带符号的十六进制 大写
+            e       科学计数法表示的浮点数 小写
+            E       科学计数法表示的浮点数 大写
+            f,F     浮点数
+            g       如果指数大于-4或者小于精度值则和e相同.其他情况和f相同
+            G       如果指数大于-4或者小于精度值则和E相同.其他情况和F相同
+            C       单字符 接受整数或者单字符字符串
+            r       字符串  使用repr转换任意python对象
+            s       字符串 使用str转换任意python对象
