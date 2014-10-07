@@ -30,10 +30,8 @@ filetype plugin indent on
 set binary                                 " 可读二进制文件
 "set nrformats=                             " 默认<C-a> <C-x> 以十进制来计算. :h nrformats
 "{{                                        " 不同文件类型的缩进
-au FileType html,python,vim,javascript setl shiftwidth=4
-au FileType html,python,vim,javascript setl tabstop=4
-au FileType java,php setl shiftwidth=4
-au FileType java,php setl tabstop=4
+au FileType html,python,vim,javascript,php,java setl shiftwidth=4
+au FileType html,python,vim,javascript,php,java setl tabstop=4
 "}}
 "{{                                        " 修改一个文件后自动备份,备份文件名为原文件名加~后缀
 "if has("vms")                             " linux取消
@@ -178,7 +176,6 @@ au BufRead,BufNewFile * setfiletype txt    " work in linux
 set syntax=txt                             " work in linux
 au BufRead,BufNewFile *.txt setlocal ft=txt
 "                                          " 高亮显示普通txt文件（需要txt.vim脚本）
-au BufRead,BufNewFile * setfiletype txt
 "                                          " 自动.c .h .sh .java自动插入文件头
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.py exec ":call SetTitle()" 
 "                                          " 定义函数SetTitle，自动插入文件头 
