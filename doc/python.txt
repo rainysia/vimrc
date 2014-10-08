@@ -311,20 +311,82 @@ Unicode字符串,在python3.0，所有字符串都是unicode字符串
     字典方法
         aDict.clear()   移除aDict所有的项
         aDict.copy()    返回aDict的副本
-        aDict.fromkeys(seq[,val])   返回从seq中获得的键和被设置为val的值的字典.
-        aDict.get(key[,default])    如果aDict[key]存在,将其返回;否则返回给定的默认值(默认为none)
-        aDict.has_key(key)          检查aDict是否右给定键key
+            copy是浅复制shallow copy,内存中实际是一份,可以使用深复制deep copy,
+                >>> from copy import deepcopy
+                >>> d = {}
+                >>> d['name'] = ['tommyxia','rainysia']
+                >>> c = d.copy()
+                >>> dc = deepcopy(d)
+                >>> d['name'].append('yuliang.xia')
+                >>> c
+                {'name': ['tommyxia', 'rainysia', 'yuliang.xia']}
+                >>> dc
+                {'name': ['tommyxia', 'rainysia']}
+                >>> d.clear()
+                >>> c
+                {'name': ['tommyxia', 'rainysia', 'yuliang.xia']}
+                >>> dc
+                {'name': ['tommyxia', 'rainysia']}
+                >>> d
+                {}
+        aDict.fromkeys(seq[,val])   返回从seq中获得的键和被设置为val的值的字典,使用给定的键建立新的字典.每个键都对应一个默认值None
+            >>> {}.fromkeys(['name','age'])
+            {'age': None, 'name': None}
+            >>> dict.fromkeys(['name','age','degree'])
+            {'age': None, 'name': None, 'degree': None}
+            >>> {}.fromkeys(['name','age'], '(hahah)')
+            {'age': '(hahah)', 'name': '(hahah)'}
+            dict是所有字典的类型.所以可以直接在dict上调用fromkeys函数
+        aDict.get(key[,default])    如果aDict[key]存在,将其返回;否则返回给定的默认值(默认为None)
+            >>> d = {}
+            >>> d['a']
+            Traceback (most recent call last):
+              File "<pyshell#169>", line 1, in <module>
+                d['a']
+            KeyError: 'a'
+            >>> d.get('name')
+            >>> print d.get('name')
+            None
+            >>> print d.get('name','N/A')
+            N/A
+        aDict.has_key(key)          检查aDict是否右给定键key,python3.x不存在
         aDict.items()               返回表示aDict项的(键,值)对列表
         aDict.iteritems()           返回表示aDict项的(键,值)对相同的(键,值)对中返回一个可迭代对象
+            >>> d = {'title':'123','name':'tommy','spam':0}
+            >>> d
+            {'spam': 0, 'name': 'tommy', 'title': '123'}
+            >>> d.items()
+            [('spam', 0), ('name', 'tommy'), ('title', '123')]
+            >>> it = d.iteritems()
+            >>> it
+            <dictionary-itemiterator object at 0x1333470>
+            >>> list(it)
+            [('spam', 0), ('name', 'tommy'), ('title', '123')]
         aDict.iteerkeys()           从aDict的键中返回一个可迭代对象
         aDict.itervalues()          从aDict的值中返回一个可迭代对象
         aDict.keys()                返回aDict的键列表
         aDict.pop(key[,d])          移除并且返回给定键key或给定的默认值d的值
-        aDict.popitem()             从aDict中移除任意一项,并将其作为(键,值)对返回
-        aDict.setdefault(key[,default]) 如果aDict[key]存在则将其返回;否则返回给定的默认值(默认为none),并将aDict[key]的值绑定给该默认值
+        aDict.popitem()             从aDict中移除随机项,并将其作为(键,值)对返回
+        aDict.setdefault(key[,default]) 如果aDict[key]存在则将其返回;否则返回给定的默认值(默认为none),并将aDict[key]的值绑定给该默认值(字典中不含有给定键的情况下设定相应的键值)
+            >>> d={}
+            >>> d.setdefault('name','N.A')
+            'N.A'
+            >>> d
+            {'name': 'N.A'}
+            >>> d['name']='tommy'
+            >>> d
+            {'name': 'tommy'}
+            >>> d.setdefault('name','N/A')
+            'tommy'
+            >>> d
+            {'name': 'tommy'}
         aDict.update(other)         将other中的每一项都加入到aDict中,可能会重写已存在的项
         aDict.values()              返回aDict中值的列表(可能包括相同的)
-
+            >>> d = {'1':1,'2':1,'3':3,'4':'ab','5':'21'}
+            >>> d
+            {'1': 1, '3': 3, '2': 1, '5': '21', '4': 'ab'}
+            >>> d.values()
+            [1, 3, 1, '21', 'ab']
 
 
 
