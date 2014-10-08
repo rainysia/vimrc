@@ -271,3 +271,67 @@ Unicode字符串,在python3.0，所有字符串都是unicode字符串
 
 
     字典,mapping,键可以是数字,字符串,元组., 字典是python中唯一内建的映射类型.
+        字典的key是唯一的,如果重复,会以最后一个key的value为value
+        创建字典 a = {'alice':'234','bb':'23','cc':'32'}
+            >>> a = {'a':'23','b':'23','c':'321321','a':'32'}
+            >>> a
+            {'a': '32', 'c': '321321', 'b': '23'}
+            >>> a['a']
+            '32'
+            >>> a['a']='hello'
+            >>> a
+            {'a': 'hello', 'c': '321321', 'b': '23'}
+            >>> 'c' in a
+            True
+            >>> del a['a']
+            >>> a
+            {'c': '321321', 'b': '23'}
+        key键类型是任意的不可变类型,比如浮点,实型,字符串,元组等.
+        键如果不存在,当赋值的时候会自动创建
+        成员资格, k in d(d为字典)查找的是键,不是值,表达式v in l(l为列表l)则是用来查找值的,而不是索引
+        在字典中检查键的成员资格比在列表中检查值的成员资格更高效,数据结构规模越大,两者效率差距越明显.
+            >>> x=[]            #空列表
+            >>> x[42]='foobar'
+            Traceback (most recent call last):
+              File "<pyshell#109>", line 1, in <module>
+                x[42]='foobar'
+            IndexError: list assignment index out of range
+                #可以用 [NONE]*43来初始化列表x
+                    >>> x=[None]*43
+                    >>> x
+                    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+                    >>> x[42]='foobar'
+                    >>> x
+                    [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, 'foobar']
+            >>> x={}            #空字典
+            >>> x[42]='foobar'
+            >>> x
+            {42: 'foobar'}
+
+    字典方法
+        aDict.clear()   移除aDict所有的项
+        aDict.copy()    返回aDict的副本
+        aDict.fromkeys(seq[,val])   返回从seq中获得的键和被设置为val的值的字典.
+        aDict.get(key[,default])    如果aDict[key]存在,将其返回;否则返回给定的默认值(默认为none)
+        aDict.has_key(key)          检查aDict是否右给定键key
+        aDict.items()               返回表示aDict项的(键,值)对列表
+        aDict.iteritems()           返回表示aDict项的(键,值)对相同的(键,值)对中返回一个可迭代对象
+        aDict.iteerkeys()           从aDict的键中返回一个可迭代对象
+        aDict.itervalues()          从aDict的值中返回一个可迭代对象
+        aDict.keys()                返回aDict的键列表
+        aDict.pop(key[,d])          移除并且返回给定键key或给定的默认值d的值
+        aDict.popitem()             从aDict中移除任意一项,并将其作为(键,值)对返回
+        aDict.setdefault(key[,default]) 如果aDict[key]存在则将其返回;否则返回给定的默认值(默认为none),并将aDict[key]的值绑定给该默认值
+        aDict.update(other)         将other中的每一项都加入到aDict中,可能会重写已存在的项
+        aDict.values()              返回aDict中值的列表(可能包括相同的)
+
+
+
+
+
+
+
+
+
+
+
