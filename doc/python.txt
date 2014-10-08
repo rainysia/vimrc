@@ -76,7 +76,7 @@ Unicode字符串,在python3.0，所有字符串都是unicode字符串
 
 数据结构
 
-    sequence 序列,python右6种序列,包括列表，元组，字符串，Unicode字符串，buffer对象，xrange对象
+    sequence 序列,python有6种序列,包括列表，元组，字符串，Unicode字符串，buffer对象，xrange对象
         列表可以修改，元组不能修改
     python中还有一种名叫容器container的数据结构。 容器就是包含其他对象的任意对象。
     序列（例如和元组）和映射（例如字典） 是两类主要的容器。 序列中的每个元素都有自己的编号，而映射中的每个元素则右一个名字（键）。集合set是既不是序列也不是映射的容器类型。
@@ -389,11 +389,151 @@ Unicode字符串,在python3.0，所有字符串都是unicode字符串
             [1, 3, 1, '21', 'ab']
 
 
+    语句
+        导入的时候,同命名的函数,可以用别名
+            from module1 import open as open1
+            from module2 import open as open2
+            或者
+            import module1
+            import module2
+            module1.open(...)
+            module2.open(...)
+        序列解包, 将多个值的序列解开,然后放到变量的序列中.
+            >>> values = 1,2,3
+            >>> values
+            (1, 2, 3)
+            >>> x,y,z=values
+            >>> y
+            2
+            如果获取/删除字典中任意的键值对,可以用popitem方法.将键值对作为元组返回.然后会复制给两个变量
+                >>> scoudrel = {'name':'tommyx','title':'se'}
+                >>> key,value=scoudrel.popitem()    #popitem是随机的
+                >>> key
+                'name'
+                >>> value
+                'tommyx'
+        链式赋值chained assignment
+            x = y = somefunction() 等于
+            x=somefunction()
+            x=y
+            可能不等于
+            x=somefunction()
+            y=somefunction()
 
+        布尔值false 包括
+            Flase None 0 "" ()  []              {}
+                                空列表/空元组  空字典
+        bool函数可以转换其他值为布尔值
+            bool([])==bool("")==Flase 但是[]!="" 因为类型不一样
 
+        同一性运算符is, 判断同一性而不是相等性,x,y绑定在同一个列表中,z绑定在另一个具有相同数值和顺序 列表中.它们值那个相等,但是却不是同一个对象
+            >>> x=y=[1,2,3]
+            >>> z=[1,2,3]
+            >>> x==y
+            True
+            >>> x==z
+            True
+            >>> x is y
+            True
+            >>> x is z
+            False
+        使用==运算符来判定两个对象是否相等, 使用is来判断两者是否等同(同一个对象)
+        字符串可以按照字母顺序进行比较
+            >>>'alpha' < 'beta'
+            True
+        三元
+            >>> 1 if True else Flase
+            1
+        断言, assert 条件,后可跟解释性字符串
+            >>> age = -1
+            >>> assert 0<age<130, "The age must be realistic"
+            Traceback (most recent call last):
+              File "<pyshell#229>", line 1, in <module>
+                assert 0<age<130, "The age must be realistic"
+            AssertionError: The age must be realistic
+        For循环遍历字典(序列解包)
+            >>> d={'x':1,'y':2,'z':'we'}
+            >>> for key,value in d.items():
+                print key, '==', value
 
+            y == 2
+            x == 1
+            z == we
+            >>> d.items()
+            [('y', 2), ('x', 1), ('z', 'we')]
+        并行迭代.
+            >>> names = ['tom','kevin','susan']
+            >>> ages =[28,33,44]
+            >>> for i in range(len(names)):
+                print names[i], 'is', ages[i], 'years old'
 
+                
+            tom is 28 years old
+            kevin is 33 years old
+            susan is 44 years old
 
+        zip函数压缩后返回一个元组的列表.
+            >>> zip(names,ages)
+            [('tom', 28), ('kevin', 33), ('susan', 44)]
+            >>> for name,age in zip(names,ages):
+                print name, 'is', age, 'years old'
 
+                
+            tom is 28 years old
+            kevin is 33 years old
+            susan is 44 years old
+        zip函数也可以作用任意多的序列,来处理不等长的序列.当最短的序列"用完"的时候会停止循环.
+        这里xrange是一次创建一个数,而range会一次创建整个序列.所以序列越大,xrange越高效,下面代码里xrange只计算了5次,每次1个数.
+            >>> zip(range(5), xrange(100000))
+            [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4)]
 
+        按索引迭代,也可以用enumerate函数
+            >>> index = 0
+            >>> for string in strings:
+                if 'xxx' in string:
+                    strings[index] = '[censored]'
+                index +=1
 
+            for index,string in enumerate(strings):
+                ...
+        翻转/排序迭代 reversed/sorted
+
+        wile True/break
+            while True:
+                word = raw_input('pls enter a word: ')
+                if not word: break
+                print 'The word was ' + word
+
+        for else子句, 仅在没有调用break时执行.
+        列表推导式list comprehension
+            >>>[x*x for x in  range(10)]
+            [0,1,4,9,16,25,36,49,64,81]
+            >>>[x*x for x in  range(10) if x % 3 == 0]
+            [0,9,36,81]
+            >>>[(x,y) for x in range(3) for y in range(3)]
+            [(0,0), (0,1), (0,2), (1,0), (1,1), (1,2), (2,0), (2,1), (2,2)]
+            等同于
+            result = []
+            for x in range(3):
+                for y in range(3):
+                    result.append((x,y))
+        pass是为了解决python中空代码块非法.什么都不做
+        del语句删除的是名称,而不是删除的值,值是由Python解释器的内存回收的.
+        exec/eval可以用in scope来实现作用域,exec是执行一个语句,eval是用于求值的类似exec的内置函数.
+            >>> from math import sqrt
+            >>> scope = {}
+            >>> exec 'sqrt=1' in scope
+            >>> sqrt(4)
+            2.0
+            >>> scope['sqrt']
+            1
+        eval语句可以提供两个命名空间,一个全局的,必须是字典.局部的可是是任意形式的映射.
+        chr(n)函数, 传入序号n时,返回n所代表的包含一个字符的字符串,0<=n<=256
+            >>> chr(0)
+            '\x00'
+            >>> chr(98)
+            'b'
+        ord(c) 返回单字符字符串的int值
+            >>> ord('a')
+            97
+            >>> 
