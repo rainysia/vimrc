@@ -786,7 +786,8 @@ autocmd! bufwritepost _vimrc source %
 "{{                                        " 自动补齐符号
 :inoremap ( ()<ESC>i
 :inoremap ) <c-r>=ClosePair(')')<CR>
-:inoremap { {<CR>}<ESC>O
+":inoremap { {<CR>}<ESC>O
+:inoremap { {}<ESC>i
 :inoremap } <c-r>=ClosePair('}')<CR>
 :inoremap [ []<ESC>i
 :inoremap ] <c-r>=ClosePair(']')<CR>
