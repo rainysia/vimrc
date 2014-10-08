@@ -250,10 +250,22 @@ Unicode字符串,在python3.0，所有字符串都是unicode字符串
             >>> a.splitlines()
             ['123132asdfew']
         string.startswidth(prefix[,start[,end]]) 检查string是否以prefix开头, 可以用开始,结束来指定匹配范围
-        string.strip([chars])   默认为空格的chars都从开头和结尾去除.默认为所有空白字符,包括空格.tab.换行符
+        string.strip([chars])   默认为空格的chars都从开头和结尾去除(不包括内部).默认为所有空白字符,包括空格.tab.换行符
         string.swapcase()   交换大小写
-        string.title()  返回字符串的副本,单词以大写字母开头, 包括i'm => I'M
-        string.translate(table[, deletechars])  返回字符串的副本,其中所有字符都使用table, 可选择删除出现在deletechars中的所有字符
+        string.title()  返回字符串的副本,单词以大写字母开头, 包括i'm => I'M, 可以用capwords函数来处理i'm => I'm
+        string.translate(table[, deletechars])  返回字符串的副本,其中所有字符都使用table替换, 可选择删除出现在deletechars中的所有字符
+            替换换行符,等,优势在于可以同时进行多个替换.有时候比replace效率高.
+            转换前需要一个转换表table, 可以用maketrans函数来, maketrans接受两个参数, 两个等长的字符串,来表示第一个字符串中的每个字符都要用第二个字符串中相同位置的字符替换.
+                >>>from string import maketrans
+                >>>table = maketrans('cs', 'kz')
+            转换表是包含替换ASCII字符集中256个字符的替换字母的字符串
+                >>>table = maketrans('cs', 'kz')
+                >>>len(table)
+                256
+                >>>table[97:123]
+                'abkdefghijklmnopqrztuvwxyz'
+                >>>maketrans('', '')[97,123]
+                'abcdefghijklmnopqrstuvwxyz'
         string.upper()  返回字符串的副本,其中所有基于实例的字符都是大写的
         string.zfill(width) 在string的左侧以0填充width个字符
 
