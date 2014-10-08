@@ -195,3 +195,65 @@ Unicode字符串,在python3.0，所有字符串都是unicode字符串
             ' +3.141593'
             >>> '%10f' % pi
             '  3.141593'
+
+    字符串方法. 来源于string模块.
+        >>>import string
+        >>>string.字符串方法
+
+        find方法在一个较长的字符串中查找子串.返回子串所在位置的最左端索引. 没找到返回-1
+        find('子串',[起始点],[结束点]) []是可选的参数 
+        join是split方法的逆方法,用来连接序列中的元素(元素必须是字符串)
+            >>> a = ['1','2','3']
+            >>> b = '+'
+            >>> b.join(a)
+            '1+2+3'
+        lower返回字符串的小写版, 相反的是title方法,会把所有单词的首字母大写. 但是可能不自然, 用string模块的capwords函数.
+        string.capitalize 返回首字母大写的字符串的副本.
+        string.center(width[, fillchar])  返回一个长度为max(len(string), width)且string的副本居中的字符串,两侧使用fillchar填充
+        string.count(sub[, start[, end]]) 计算子字符串出现的次数,可以限定搜索范围
+        string.decode([encoding[, errors]])
+        string.encode([encoding[, errors]])
+        string.endswith(suffix[, start[,end]]) 检查string是否以suffix结尾
+        string.expandtabs([tabsize]) 返回字符串副本,其中tab字符会以默认8个空格扩展,可以选tab以几个空格
+        string.find(sub[, start[,end]]) 返回子字符串的第一个索引,不存在返回-1
+        string.index(sub[, start[,end]])返回子字符串的第一个索引,找不到索引的时候引发valueError异常
+        string.isalnum()    检查字符串是否由字母/数字字符组成
+        string.isalpha()    检查是否由字母字符组成
+        string.isdigit()    检查是否由数字组成
+        string.islower()    检查是否都为小写
+        string.istitle()    检查是否不基于实例的字母后面的基于实例的字符都是答谢,且其他的基于实例的字符都是小写
+        string.isspace()    检查字符串是否由空格组成
+        string.isupper()    检查基于实例的字符都是答谢
+        string.join(sequence)   返回其中sequence的字符串元素已用string连接的字符串
+        string.ljust(width[, fillchar]) 返回一个长度为max且其中string的副本左对齐的字符串,右侧使用fillchar默认空字符填充
+        string.lower()  返回一个字符串的副本,所有基于实例的字符都是小写
+        string.lstrip([chars])  返回去除开始处所有char的字符串副本,默认char为空白字符,比如空格,tab,换行符
+        string.partition(sep)   在字符串中搜索sep并返回(head,sep,tail)
+        string.replace(old, new[, max]) 替换
+        string.rfind(sub[, start[, end]]) 返回找到的最后一个索引,不存在返回-1
+        string.rindex(sub[,start[,end]])  返回被找到的最后一个索引,不存在返回valueerror
+        string.rjust(width[,fillchar])  返回右对齐,左侧用fillchar填充的字符串
+        string.rpartition(sep)  同partition,但是从右侧开始查找
+        string.rstrip([chars])  同strip,不过是从字符串结束处去除.
+        string.rsplit([sep[, maxsplit]]) 同split,但是在使用maxsplit的时候是从右向左计数
+        string.split([sep[, maxsplit]]) 返回字符串中所有单词的列表,使用sep作为分隔符(如没指定则以空格切分,可使用maxsplit来指定最大切分数)
+            a = 'a hello wolrd a, you\'are so beautiful'
+            >>> a.split()
+            ['a', 'hello', 'wolrd', 'a,', "you'are", 'so', 'beautiful']
+            >>> a.split(',')
+            ['a hello wolrd a', " you'are so beautiful"]
+        string.splitlines([keepends]) 返回所有string中所有行的列表,可选择是否包括换行符,如提供keepends则包括
+            >>> import string
+            >>> a = '123132asdfew'
+            >>> print a
+            123132asdfew
+            >>> a.splitlines()
+            ['123132asdfew']
+        string.startswidth(prefix[,start[,end]]) 检查string是否以prefix开头, 可以用开始,结束来指定匹配范围
+        string.strip([chars])   默认为空格的chars都从开头和结尾去除.默认为所有空白字符,包括空格.tab.换行符
+        string.swapcase()   交换大小写
+        string.title()  返回字符串的副本,单词以大写字母开头, 包括i'm => I'M
+        string.translate(table[, deletechars])  返回字符串的副本,其中所有字符都使用table, 可选择删除出现在deletechars中的所有字符
+        string.upper()  返回字符串的副本,其中所有基于实例的字符都是大写的
+        string.zfill(width) 在string的左侧以0填充width个字符
+
