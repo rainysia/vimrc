@@ -269,3 +269,5 @@ Unicode字符串,在python3.0，所有字符串都是unicode字符串
         string.upper()  返回字符串的副本,其中所有基于实例的字符都是大写的
         string.zfill(width) 在string的左侧以0填充width个字符
 
+
+    字典,mapping,键可以是数字,字符串,元组., 字典是python中唯一内建的映射类型.
