@@ -537,3 +537,103 @@ Unicode字符串,在python3.0，所有字符串都是unicode字符串
             >>> ord('a')
             97
             >>> 
+
+    Abstract抽象
+        2.x callable函数,判断函数是否可以调用
+        3.x 弃用callable, 使用hasattr(func, __call__)替代
+            >>> import math
+            >>> x = 1
+            >>> y = math.sqrt
+            >>> callable(x)
+            False
+            >>> callable(y)
+            True
+    
+    def 定义函数, 函数如果没有返回值,默认会返回None
+    在函数内部开头写下字符串,这个字符串会作为函数的一部分进行存储,称为文档字符串
+    文档字符串可以使用 函数名.__doc__来进行访问. 注意不是注释, 也不需要传参
+    内建的help(函数名) 可以得到函数,包括文档字符串的信息.
+
+    函数可以使用关键字参数来传入指定的实参
+        >>>def store(patient='test1', name='test2'):
+                return patient,name
+        如果既有位置参数又有关键字参数, 应该把位置参数放到前面. 避免未定义.
+
+    收集参数. 指定一个参数在前面加上星号,
+    就可以传入多个位置参数,并且存在一个元组里面,如果不提供任何供收集的元素,就会是空元组
+        def print_params(*params):
+            print params
+
+        print_params(1,2,3)     #(1,2,3)
+        print_params('Testing') #('Testing',)
+
+        def print_params_2(title, *params):
+            print title
+            print params
+
+        print_params_2('CEO','Tom','Nico','Deb')    #CEO \n ('Tom', 'Nico', 'Deb')
+
+        print_params_2('CEO')       #CEO \n ()
+    注意不能使用关键字参数
+        >>>print_params_2(test='CEO', 'Tom')
+        File "collect.py", line 17                                                                      
+        print_params_2(test='CEO', 'Tom')                                                             
+        SyntaxError: non-keyword arg after keyword arg  
+    可以使用两个星号**params来收集,这样返回的就是字典而不是元组
+        def print_p(x,y,z=3, *pops, **keypars):
+            print x,y,z
+            print pops
+            print keypars
+        >>>print_p(1,2,3,4,5,67,a='12',b='hel',c=3)
+        1 2 3
+        (4, 5, 67)
+        {'a': '12', 'c': 3, 'b': 'hel'}
+        >>>print_p(1,2)
+        1 2 3
+        ()
+        {}
+    可以使用星号,两个星号在调用的时候传递更多的数据(元组/字典)
+        >>> def add(x,y):
+            return x+y
+
+        >>> params=(1,2)
+        >>> add(*params)
+        3
+        >>> def with_stars(**kwds):
+            print kwds['name'],'is',kwds['age'],'years old'
+
+        >>> def without_stars(kwds):
+            print kwds['name'],'is',kwds['age'],'years old'
+
+        >>> args = {'name':'tommy','age':'28'}
+        >>> with_stars(**args)
+        tommy is 28 years old
+        >>> without_stars(args)
+        tommy is 28 years old
+
+        >> def story(**kwds):
+            return 'Once upon a time , there was a  %(job)s called %(name)s.' % kwds
+
+        >>> print story(job='king', name='tommy')
+        Once upon a time , there was a  king called tommy.
+        >>> print story(name='Tommy X', job='light knight')
+        Once upon a time , there was a  light knight called Tommy X.
+        >>> params={'job':'lanuage','name':'php'}
+        >>> print story(**params)
+        Once upon a time , there was a  lanuage called php.
+        >>> del params['job']
+        >>> params
+        {'name': 'php'}
+        >>> print story(job='amazing fast language', **params)
+        Once upon a time , there was a  amazing fast language called php.
+        >>> 
+
+    globals函数获取全局变量值,vars返回全局变量的字典,locals返回局部变量的字典
+        >>> x = 1
+        >>> def change_global():
+            global x
+            x = x+2
+            
+        >>> change_global()
+        >>> x
+        3

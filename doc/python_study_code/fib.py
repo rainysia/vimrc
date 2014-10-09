@@ -10,4 +10,12 @@ def fib2(n):
     return str(result).strip()
 
 fib = fib2(200)
-print fib
+#print fib
+
+fibs = [0, 1]
+
+num = int(raw_input('How many Fibonacci numbers do you want?'))
+for i in range(num-2):
+    fibs.append(fibs[-2]+fibs[-1])
+
+print fibs
