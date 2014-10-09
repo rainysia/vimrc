@@ -637,3 +637,30 @@ Unicode字符串,在python3.0，所有字符串都是unicode字符串
         >>> change_global()
         >>> x
         3
+
+    map(func, seq[, seq, ...])  对序列中的每个元素应用函数
+    filter(func, seq)           返回其函数为真的元素的列表
+        >>> def func(x):
+            return x.isalnum()
+        >>> seq=['tommy','x10','?3','**']
+        >>> filter(func, seq)
+        ['tommy', 'x10']
+    reduce(func, seq [,initial])等同于func(func(seq[0], seq[1], seq[2],...))
+    sum(seq)                    返回seq中所有元素的和
+    apply(func[,args[, kwargs]])调用函数, 可以提供参数
+
+Object 对象
+    多态,polymorphism 意味着可以对不同类的对象使用同样的操作.
+    封装,encapsulation,对外部世界隐藏对象的工作细节
+    继承,inheritance,以通用的类为基础建立专门的类对象
+
+    标准库random中包含choice函数,可以从序列中随机选出元素,然后给变量赋值
+        >>> from random import choice
+        >>> x = choice(['hello,wordl',[1,2,'e','e',4]])
+        >>> x
+        'hello,wordl'
+        >>> x.count('e')
+        1
+        >>> x.count('l')
+        3
+
