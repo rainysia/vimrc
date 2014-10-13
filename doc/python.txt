@@ -663,4 +663,109 @@ Object 对象
         1
         >>> x.count('l')
         3
+        >>> x= choice(range(1000))
+        >>> any numbers in the range of 1000.
 
+    类, 默认新式类需要加载下面的内容.
+        __metaclass__ = type #确定使用新式类
+
+        class Person:
+            def setName(self, name):
+                self.name = name
+
+            def geName(self):
+                return self.name
+
+            def greet(self):
+                print "Hello, World! I'm %s ." % self.name
+
+        >>> foo = Person()
+        >>> bar = Person()
+        >>> foo.setName('haha1')
+        >>> bar.setName('haha2')
+        >>> foo.greet()
+        Hello,world! I'm haha1. 
+        >>> bar.greet()
+        Hello,world! I'm haha2. 
+        >>> foo.name
+        'haha1'
+        >>> bar.name
+        'haha2'
+
+    python并不直接支持私有方式. 不过可以在方法/变量前加上__ 双下划线. 实际上也可以通过 "_类名__方法名"来直接从外部访问
+        >>> class secretive:
+            def __inaccessible(self):
+                print "Bet you can't see..."
+            def accessible(self):
+                print "You can see:"
+                self.__inaccessible()
+
+        >>> foo = secretive()
+        >>> foo.accessible()
+        You can see:
+        Bet you can't see...
+        >>> foo.__inaccessible()
+
+        Traceback (most recent call last):
+          File "<pyshell#31>", line 1, in <module>
+            foo.__inaccessible()
+        AttributeError: secretive instance has no attribute '__inaccessible'
+        >>> foo._secretive__inaccessible
+        <bound method secretive.__inaccessible of <__main__.secretive instance at 0x17baf38>>
+    单下划线,都不会被带星号的import语言导入(from module import *)
+
+    类的命名空间 
+        下面两个语句几乎等价
+        def foo(x): return x*x
+        foo = lambda x:x*x
+        在类里面, 可以直接定义一个可供所有成员(实例)访问的变量.用init来初始化所有实例.
+            >>> class MC:
+                members = 0
+                def init(self):
+                    MC.members+=1
+
+                
+            >>> m1=MC()
+            >>> m1.init()
+            >>> MC.members
+            1
+            >>> m2=MC()
+            >>> m2.init()
+            >>> MC.members
+            2
+
+    对类进行修改,就叫子类对超类的扩展
+        >>> class F:
+            def init(self):
+                self.blocked=[]
+            def filter(self, sequence):
+                return [x for x in sequence if x not in self.blocked]
+            
+        >>> class sf(F):
+            def init(self):
+                self.blocked=['SPAM']
+                
+        >>> f=F()
+        >>> f.init()
+        >>> f.filter([1,2,3])
+        [1, 2, 3]
+        >>> s=sf()
+        >>> s.init()
+        >>> s.filter(['spam','spam','eee','haha','spam','SPAM'])
+        ['spam', 'spam', 'eee', 'haha', 'spam']
+    查看一个类是否是另外一个类的子类, 可以用内建的issubclass函数,issubclass(子类,超类)
+        >>> issubclass(sf,F)
+        True
+    如果想要知道已知类的基类(们),可以用__bases__:
+        >>> sf.__bases__
+        (<class __main__.F at 0x17cdce8>,)
+        >>> F.__bases__
+        ()
+    也可以用isinstance方法来检查一个对象是否是一个类的实例
+        >>> s=sf()
+        >>> isinstance(s, sf)
+        True
+        >>> isinstance(s,F)
+        True
+        >>> isinstance(s,str)
+        False

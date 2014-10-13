@@ -1,0 +1,11 @@
+docs.seleniumhq.com/download
+
+seleniumIDE
+
+ajax测试的时候, 
+http://jqueryui.com/autocomplete/
+国内需要把几个域名给停掉防止超时,加下列host到你的hosts文件
+0.0.0.0 ajax.googleapis.com
+0.0.0.0 www.googleapis.com
+0.0.0.0 google-analytics.com
+
