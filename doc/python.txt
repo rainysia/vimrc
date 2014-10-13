@@ -769,3 +769,45 @@ Object 对象
         True
         >>> isinstance(s,str)
         False
+    如果只想支持一个对象属于哪个类,可以使用__class__特性
+        >>> s.__class__
+        <class __main__.sf at 0x17cdd50>
+
+    多重继承multiple
+    inheritance,如果一个方法从多个超类继承(也就是多个相同名字的不同方法),就需要注意超类的顺序.先继承的类中的方法会重写后继承的类中的方法.(注意是前面的重写后面的)
+        下例中子类TC不做任何事,它从自己的超类继承所有
+        class Calculator:
+            def calculate(self, expression):
+                self.value = eval(expression)
+
+        class Talker:
+            def talk(self):
+                print 'Hi, my value is', self.value
+
+        class TalkingCalculator(Calculator, Talker):
+            pass
+
+        tc = TalkingCalculator()
+        tc.calculate('1+20*20')
+        tc.talk()
+
+    使用hasattr(x,'__call__')来代替在python3.0弃用的callable,检测所需方法是否存在,
+    getattr函数,允许提供默认值以便在特性(函数)不存在时调用, 对应的是setattr函数,可以用来设置对象的特性.
+        >>> setattr(tc, 'name', 'Mr.Tom')
+        >>> tc.name
+        'Mr.Tom'
+        >>>callable(getattr(tc,'talk', 'NNN'))
+        True
+        >>> hasattr(tc,'echo')
+        False
+    如果要查看对象内所有存储的值,可以用__dict__特性.
+        >>> tc.__dict__
+        {'name': 'Mr.Tom', 'value': 401}
+    Type(object) 返回对象的类型.
+    callable(object)
+    getattr(object,name[,default])
+    hasattr(object, name)
+    isinstance(object, class)
+    issubclass(A,B)
+    random.choice(sequence)
+    setattr(object, name, value)
