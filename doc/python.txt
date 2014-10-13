@@ -811,3 +811,95 @@ Object 对象
     issubclass(A,B)
     random.choice(sequence)
     setattr(object, name, value)
+
+异常
+    python用异常对象(exception object)来表示异常情况,如果异常未被处理或捕捉,程序就用回溯(traceback,一种错误信息)终止执行
+    为了引发异常,可以用一个exception的子类或者实例参数调用raise语句. 使用时,程序会自动创建类的实例
+        >>> raise Exception
+        Traceback (most recent call last):
+          File "<stdin>", line 1, in <module>
+        Exception
+        >>> raise Exception('Hello wrong!')
+        Traceback (most recent call last):
+          File "<stdin>", line 1, in <module>
+        Exception: Hello wrong!
+    可以查看exceptions模块用dir函数来列出所有的模块内容
+        >>>import exceptions
+        >>>dir(Exceptions)
+        ['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException', '...']
+    所有异常都可以用在raise语句中
+        >>>raise BaseException
+          ...
+    一些内建常用的异常
+        Exception 所有异常的基类
+        AttributeError 特性引用/赋值失败时引发
+        IOError     试图打开不存在文件(包括其他情况)引发
+        IndexError  在使用序列中不存在的索引时引发
+        KeyError    在使用映射中不存在的键时引发
+        NameError   在找不到名字(变量)时引发
+        SyntaxError 在代码为错误形式时引发
+        TypeError   在内建操作或者函数应用于错误类型的对象时引发
+        ValueError  在内建操作或者函数应用于正确类型的对象,但是该对象使用不合适的值时引发
+        ZeroDivisionError   在除法或者模除操作的第二个参数为0时引发
+    可以自己自定义异常类,使用继承Exception
+        class someCustomeException(Exception): pass
+    捕捉异常
+            try:
+                x = input('Enter the first number: ')
+                y = input('Enter the second number: ')
+                print x/y
+            except ZeroDivisionError:
+                print "The second name can't be zero"
+    如果没有捕捉到异常,就会被传播到调用的函数中,如果那里也没有捕获,这些异常最终会浮到程序的最顶层.也就是说可以捕捉到其他人的函数中所引发的异常.
+    如果捕捉到了异常,但是又想重新引发它.(传递异常,不进行处理),可以用不带参数的raise
+        class MuffledCalc:
+            muffled = False
+            def calc(self, expr):
+                try:
+                    return eval(expr)
+                except ZeroDivisionError:
+                    if  self.muffled:
+                        print 'Division by zero is illegal!'
+                    else:
+                        raise
+
+        ca = MuffledCalc()
+        ca.calc('10/2')
+#ca.calc('10/0')
+        ca.muffled = True
+        ca.calc('10/0')
+    多个异常,可以多个调用,在上面的代码中继续加入excep TypeError: ......
+    或者是用一个块来捕捉多个类型异常, 可以将它们作为元组列出
+        try:
+            ...
+        except(ZeroDivisionError, TypeError, NameError):
+            print 'xxx...'
+    如果想要打印异常的内容.在except子句中访问异常对象本身,用e 
+        python 2.x  except(ZeroDivisionError, TypeError), e:
+                        print e
+        python 3.x  except(ZeroDivisionError, TypeError) as e:
+                        print e
+    当没有异常引发的时候, 可以用else子句的break来退出, 也就是说,如果程序中有错误,就不断要求重新输入,直到没有错误
+        while True:
+            try:
+                x = input('Enter the first number: ')
+                y = input('Enter the second number: ')
+                value = x/y
+                print 'x/y is', value
+            except Exception,e:
+                print 'Invalid input: ',e
+                print 'pls try agin!'
+            else:
+                break
+    finally子句,用来在可能的异常后进行清理.和try子句联合
+        x = None
+        try:
+            x = 1/0
+        except NameError:
+            print 'UNknown variable'
+        else:
+             print "That went well!"
+        finally:
+            print 'Cleaning UP'
+            #可以在finally这里执行一些关闭文件/网络套接字, 非常有用
+
