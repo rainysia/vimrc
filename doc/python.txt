@@ -940,4 +940,22 @@ Object 对象
 
         sb = SongBird()
         sb.sing()
+    在调用一个实例的方法时,该方法的self参数会自动绑定到实例上(这称为绑定方法);但如果直接调用类的方法(比如Bird.__init__),那么就没有实例会被绑定.这样就可以自由地提供需要的self参数.这样的方法称为未绑定(unbound)方法.
+    super函数,(python3.x中不带任何参数就可以调用),只支持在新式类中调用
+    __metaclass__ = type 
+    class Bird:
+        def __init__(self):
+            self.hungry = True
+        def eat(self):
+            if  self.hungry:
+                print 'Aaaah....'
+                self.hungry = False
+            else:
+                print 'No, thanks!'
+    class SongBird(Bird):
+        def __init__(self):
+            super(SongBird, self).__init__()
+            self.sound = 'Squawk'
+        def sing(self):
+            pritn self.sound
 
