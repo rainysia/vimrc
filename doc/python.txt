@@ -942,6 +942,7 @@ Object 对象
         sb.sing()
     在调用一个实例的方法时,该方法的self参数会自动绑定到实例上(这称为绑定方法);但如果直接调用类的方法(比如Bird.__init__),那么就没有实例会被绑定.这样就可以自由地提供需要的self参数.这样的方法称为未绑定(unbound)方法.
     super函数,(python3.x中不带任何参数就可以调用),只支持在新式类中调用
+    当前的类和对象可以作为super函数的参数使用,调用函数返回的对象的任何方法都是调用超类的方法,而不是当前类的方法.
     __metaclass__ = type 
     class Bird:
         def __init__(self):
@@ -958,4 +959,13 @@ Object 对象
             self.sound = 'Squawk'
         def sing(self):
             pritn self.sound
+
+    其他的魔术方法
+    __len__(self)   返回集合中所含项目的数量/序列的元素个数/隐射的键值对的数量
+    __getitem__(self, key) 返回所给键对应的值./序列是0~n-1的整数(负数),/映射则是任何种类的键
+    __setitem__(self, key, value)   设置
+    __delitem__(self, key)  对一部分对象del语句时调用.同时必须删除和元素相关的键
+    对上面的方法, 如果是一个序列,键是负整数,就要从末尾开始计数,x[-n] = x[len(x)-n],如果键不是一个合适的类型,如对序列用字母做key,会引发typeError异常.
+        如果序列的索引是正常的类型,但是超出了范围,会引发一个IndexError异常
+
 
