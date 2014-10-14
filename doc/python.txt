@@ -903,3 +903,41 @@ Object 对象
             print 'Cleaning UP'
             #可以在finally这里执行一些关闭文件/网络套接字, 非常有用
 
+
+魔术方法/属性/迭代器
+    魔术方法,在名称前后加两个下划线的.如果对象实现了这些方法中的某一个,那么这个方法将会在特殊的情况下(根据名字)被python调用
+        __init__
+    属性,以前的版本的python使用魔术方法来处理,现在通过property函数
+    迭代器,使用魔术方法的__iter__来允许迭代器在for循环中使用
+
+    构造方法
+        class Foobar:
+            def __init__(self):
+                self.somevar = 42
+
+    调用未绑定的超类构造方法(为了解决子类继承超类的方法,其中该方法中有超类的初始化的情况)
+        class Bird:
+            """docstring for Bird"""
+            def __init__(self):
+                self.hungry = True
+            def eat(self):
+                if  self.hungry:
+                    print 'Aaaah...'
+                    self.hungry = False
+                else:
+                    print 'No, Thanks!'
+
+        b = Bird()
+        b.eat()
+        b.eat()
+
+        class SongBird(Bird):
+            def __init__(self):
+                Bird.__init__(self)
+                self.sound = 'Squawk!'
+            def sing(self):
+                print self.sound
+
+        sb = SongBird()
+        sb.sing()
+
