@@ -9,3 +9,5 @@ http://jqueryui.com/autocomplete/
 0.0.0.0 www.googleapis.com
 0.0.0.0 google-analytics.com
 
+对于弹窗,需要打开firefox等的pop-up添加例外
+
