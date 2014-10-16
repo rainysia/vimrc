@@ -895,7 +895,7 @@ xargs 看例：find . -name *.conf -print0 | xargs -0 grep -l -Z mem_limit | xar
 上面的命令中，“grep init”不仅搜索“ps aux”的标准输出，而且搜索 sterr 输出。
 
 28
-编辑命令
+编辑命令, 注意有时间顺序,按压ctrl后,再按.不是组合
 Ctrl + a ：移到命令行首
 Ctrl + e ：移到命令行尾
 Ctrl + f ：按字符前移（右向）

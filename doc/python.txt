@@ -691,6 +691,10 @@ Object 对象
         'haha1'
         >>> bar.name
         'haha2'
+Python的类的方法和普通的函数有一个很明显的区别，在类的方法必须有个额外的第一个参数 (self )，但在调用这个方法的时候不必为这个参数赋值 （显胜于隐 的引发）。Python的类的方法的这个特别的参数指代的是对象本身，而按照Python的惯例，它用self来表示。（当然我们也可以用其他任何名称来代替，只是规范和标准在那建议我们一致使用self）
+为何Python给self赋值而你不必给self赋值？
+例子说明：创建了一个类MyClass，实例化MyClass得到了MyObject这个对象，然后调用这个对象的方法MyObject.method(arg1,arg2) ，这个过程中，Python会自动转为Myclass.mehod(MyObject,arg1,arg2)
+这就是Python的self的原理了。即使你的类的方法不需要任何参数，但还是得给这个方法定义一个self参数，虽然我们在实例化调用的时候不用理会这个参数不用给它赋值。
 
     python并不直接支持私有方式. 不过可以在方法/变量前加上__ 双下划线. 实际上也可以通过 "_类名__方法名"来直接从外部访问
         >>> class secretive:
@@ -968,4 +972,200 @@ Object 对象
     对上面的方法, 如果是一个序列,键是负整数,就要从末尾开始计数,x[-n] = x[len(x)-n],如果键不是一个合适的类型,如对序列用字母做key,会引发typeError异常.
         如果序列的索引是正常的类型,但是超出了范围,会引发一个IndexError异常
 
+    访问器方法,是一个简单的方法,能够使用getHeight,setHeight来得到或者重绑定一些特性(可能是类的私有属性)
+        class Rectangle:
+            """docstring for Rectangle"""
+            def __init__(self):
+                self.width = 0
+                self.height = 0
+            def setSize(self, size):
+                """docstring for setSize"""
+                self.width, self.height = size
+            def getSize(self):
+                """docstring for getSize"""
+                return self.width, self.height
 
+        r = Rectangle()
+        r.width = 10
+        r.height = 15
+        print r.getSize()
+        r.setSize((150,100))
+        print r.width
+    这里把size由width和height组成了元组
+
+    property函数, 这里创建了一个属性,其中访问器函数就被用作参数(先取值,再赋值), 这个属性被命名为size. 必须要是新式类.
+    propery(fget, fset, fdel[,], doc[,]) 第三个参数(可选)是用于删除特性的方法,不需要参数, 第四个参数(可选)是一个文档字符串
+        __metaclass__ = type
+        class Rectangle:
+            """docstring for Rectangle"""
+            def __init__(self):
+                self.width = 0
+                self.height = 0
+            def setSize(self, size):
+                """docstring for setSize"""
+                self.width, self.height = size
+            def getSize(self):
+                """docstring for getSize"""
+                return self.width, self.height
+            size = propery(getSize, setSize)
+
+        r = Rectangle()
+        r.width = 10
+        r.height = 15
+        print r.size()
+        r.size((150,100))
+        print r.width
+            
+    property函数实际是拥有很多特殊方法的类,有__get__,__set__,__delete__来定义描述符规则,实现了任何一个方法的对象就叫描述符(descriptor).描述符的特殊之处在于它们是如何被访问的.比如,程序读取一个特性时(尤其是在实例中访问该特性, 但该特性在类中定义时),如果该特性被绑定到实现了__get__方法的对象上,那么就会调用__get__方法(结果值也会返回),这就是属性的绑定方法
+
+    静态方法
+        静态方法和类成员方法分辨在创建时分别被加载进Staticmethod类型和Classmethod类型的对象中.  静态方法的定义没有self参数, 且能够被类本身直接调用.  类方法在定义时需要名为cls的类似于self的参数
+        ,类成员方法可以直接用类的具体对象调用.但是cls参数是自动被绑定到类的.
+            __metaclass__ = type
+
+            class MyClass(object):
+                """docstring for ClassName"""
+                def smeth():
+                    """docstring for smeth"""
+                    print 'this is a static method'
+                smeth = staticmethod(smeth)
+
+                def cmeth(cls):
+                    """docstring for cmeth"""
+                    print 'This is a class method of:', cls
+                cmeth = classmethod(cmeth)
+        在Python2.4中,为手动包装和替换方法引入了装饰器(decorator)的新语法(它能对任何可调用的对象进行包装,既能够用于方法也可能够用于函数),
+        使用@操作符,在方法(或函数)的上发将装饰器列出,从而指定一个或者更多的装饰器(多个装饰器在应用时的顺序和指定顺序相反)
+            __metaclass__ = type
+
+            class MyClass2:
+                """docstring for MyClass2"""
+                @staticmethod
+                def meth():
+                    print 'This is s static method'
+
+                @classmethod
+                def cmeth(cls):
+                    """docstring for cm"""
+                    print 'This is a class method of', cls
+
+            a = MyClass()
+            a.smeth()
+            a.cmeth()
+    其他的魔法方法
+        __getattribute__(self,name) 当特性name被访问时会自动调用(只能在新式类中使用)
+        __getattr__(self,name) 当特性name被访问且对象没有对应的特性时被自动调用
+        __setattr__(self,name,value) 当试图给特性name赋值时会被自动调用
+        __delattr__(self,name) 当试图删除特性name时会被自动调用
+
+            class Rectangle:
+                """docstring for Rectangle"""
+                def __init__(self):
+                    self.width = 0
+                    self.height = 0
+                def __setattr__(self, name, value):
+                    if name == 'size':
+                        self.width, self.height = value
+                    else:
+                        self.__dict__[name] = value
+
+                def _getattr__(self, name):
+                    if name == 'size':
+                        return self.width, self.height
+                    else:
+                        raise AttributeError
+
+    迭代器iterator,迭代就是重复做一件事很多次.迭代器就是具有next方法(这个方法在调用时不需要任何参数)的对象.
+    在调用next方法时,迭代器会返回它的下一个值,如果next方法被调用,但迭代器没有值可以返回,就会引发一个StopIterator异常
+    在python3.x,迭代器对象会实现__next__方法而不是next, 而新的内建函数next可以访问这个方法,next(it)等价于2.x版本的it.next()
+    __iter__,这个方法是迭代器规则(iterator protocol)的基础
+        class Fibs:
+            """docstring for Fibc"""
+            def __init__(self):
+                self.a = 0
+                self.b = 1
+            def next(self):
+                self.a, self.b = self.b, self.a+self.b
+                return self.a
+            def __iter__(self):
+                return self
+
+        fibs = Fibs()
+        for f in fibs:
+            if f > 1000:
+                print 'End Numbers is:',f
+                break
+            else:
+                print f
+
+    内建函数iter可以从可迭代的对象中直接获取迭代器
+        >>>it = iter([1,2,3])
+        >>>it.next()
+        1
+        >>>it.next()
+        2
+    还可以把迭代转成序列,(用list)
+        class TestIterator:
+            """docstring for Test"""
+            value = 0
+            def next(self):
+                self.value += 1
+                if self.value > 10: raise StopIteration
+                return self.value
+            def __iter__(self):
+                return self
+
+        ti = TestIterator()
+        a = list(ti)
+        print a 
+    生成器(简单生成器),是一种用普通的函数语法定义的迭代器.任何包含yield语句的函数就成为生成器
+    生成器不会像return那样返回值,而且每次产生多个值. 在yield语句每次产生一个值,函数就会冻结:
+    即函数听在那点等待被重新唤醒,函数被重新唤醒后就从停止的那点开始执行
+        nested = [[1,2],[3,4],[5,6],[7]]
+
+        def flattern(nested):
+            """docstring for flattern"""
+            for sublist in nested:
+                # code...
+                for element in sublist:
+                    yield element
+
+        for num in flattern(nested):
+            print num
+
+        b = list(flattern(nested))
+        print b
+    生成器推导式:(生成器表达式)和列表推导式的工作方式类似.可以在当前的圆括号内直接使用.比如在函数调用中.不用增加了另外一对圆括号.
+        sum(i**2 for i in range(10))
+    递归recursion生成器,注意不要对字符串的对象进行迭代
+        def flattern(nested):
+            try:
+                try: nested + ''
+                except: raise TypeError #这里就会忽略掉nest +'' 引发的TypeError.
+                for sublist in nested:
+                    for element in flattern(sublist):
+                        yield element
+            except TypeError:
+                yield nested
+        
+        >>>list(flattern([[1,2],3,4,[5,[6,7],[8]]]))
+        [1,2,3,4,5,6,7,8]
+
+    生成器是一个包含yield关键字的函数,当它被调用时,在函数体的代码不会被执行.而会返回一个迭代器,每次请求一个值,都会执行生成器中的代码,直到遇到一个yield/return语句,yield语句意味着应该生成一个值.return语句意味着生成器要停止执行(不再生成任何东西,return语句只有在一个生成器中使用时才能进行无参数调用)
+        生成器是由两部分组成, 生成器的函数 和生成器的迭代器. 函数用def语句定义,包含yield部分.  迭代器是这个函数的返回部分
+
+    生成器的方法:
+        外部作用域访问生成器的send方法.就和next类似.不过需要一个参数(要发送的信息--任意对象)
+        内部则刮起生成器,当生成器重新运行的时候,yield方法会返回一个值,也就是外部send方法发送的值,如果next()方法被使用,那么yield方法返回None
+            def repeater(value):
+                while True:
+                new = (yield value)
+                if new is not None: value = new
+            r = repeater(42)
+            r.next() #42
+            r.send("Hello, world") #"Hello, world"
+    生成器的throw方法:使用异常类型调用, 还有可选的值以及回溯对象, 用于在生成器中引发一个异常
+    生成器的close方法:调用时不用参数, 用于停止生成器
+    树和图:
+        图:是用来直接描述现实问题的数据结构,方便使用算法来计算问题,比如公交线路查询
+        树:则是具体的,有b-tree,b+tree,red black tree, 树可以提供查询效率
