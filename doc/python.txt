@@ -1176,4 +1176,10 @@ Python的类的方法和普通的函数有一个很明显的区别，在类的�
     下列代码会告诉python解释器,除了从默认的Python目录寻找模块之外,还需要从目录/home/python 来查找.
     import sys
     sys.path.append('/home/python/')
-    
+    import hello    #一个文件存在/home/python中.就可以在import sys并且指定了目录来直接import.  但是注意,一般导入主要用于定义变量,函数,类等, 只需要定义这些东西一次,导入模块多次和导入一次的效果是一样
+    如果想要重新载入模块,可以用内建函数reload(要重新载入的模块).python3.x废弃了reload
+        >>>hello = reload(hello)
+        Hello, World!
+    通过reload函数的返回值会赋给hello,这里就用了重新载入的版本替换了原先的hello版本.
+    如果是通过实例化一个模块中的类来创建了一个对象,那么就算重新载入这个模块,不过通过什么方式都无法重新创建该模块的对象的实例.
+    该实例依然是旧版本类的实例.如果需要重新载入模块的新类, 就需要重新创建它.
