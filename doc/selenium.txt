@@ -11,3 +11,286 @@ http://jqueryui.com/autocomplete/
 
 对于弹窗,需要打开firefox等的pop-up添加例外
 
+
+
+selenium ide的学习
+1.selenium IDE的安装步骤
+  （1）下载火狐浏览器并安装
+  （2）http://seleniumhq.org，下载selenium ide
+  （3）火狐安全提示框中提示：是否安装这个软件在计算机上
+  （4）选择"允许"，之后点击安装就行了
+  （5）重启火狐之后，你可以在"工具"下面看到selenium IDE
+
+/**录制
+
+2.selenium录制时需要注意的问题？
+  （1）对于链接的点击，录制时一般会认为是click,而实际上应该改为clickAndWait。如果是click点击之后，页面没有加载完成，会导致测试失败。
+
+3.增加确认（verification）和断言(assert)的方法
+  转到你要测试的系统，在需要增加确认和断言的元素的旁边，鼠标右击，选择相关的确认或者断言的命令。
+
+4.增加断点和其它一些特殊功能的方法？
+  在需要添加断点或者特殊功能的命令行上，鼠标右击，选择toggle breakpoint,或者一些其它的特殊功能
+
+5.保存test case 和test suite的方法
+  (1)如果是test case ,就直接点击"file"->"save test case"
+  (2)如果是test suite,选择多个test case,然后点击"file"->"save test suite"
+
+6.selenium commands-selenese来自于以下三个部分
+ （1）行为（actions）:操纵应用程序的状态，例如，点击一个链接，或者选择一个选项
+ （2）存取（accessors）：检查应用程序的状态，并且把结果存储在变量中，例如，存诸主题
+ （3）断言（assertions）：像一个检查者一样，检查应用程序的状态是否和预期的一样。例如，检查复选框是否被选择了。
+ 
+
+7.selenium中，元素的定位器存在哪几种？（解释可以慢慢再补充）
+  （1）id ：选择的元素具有指定的id属性
+  （2）name ：选择的元素具有指定的name属性
+  （3）xpath：学习网址：http://www.zvon.org/xxl/XPathTutorial/General_chi/examples.html
+  （4）dom
+  （5）css
+  （6）identifier
+  （7）link
+  （8）ui
+
+
+8.如何在selenium中加入user_extension.js?
+
+ 
+
+9.selenium ide的测试规则：
+  (1)测试都应该存在一个开始点，在selenium中，开始点为open
+  (2)一个测试不必依赖于其它的测试，以避免一个测试错误，而引起多个测试出现错误
+  (3)测试每次应该只测试一件事情
+  (4)测试完之后，应该清除测试数据
+
+
+10.selenium中模式匹配的情况？
+   selenium的模式匹配有以下几种规则：（1）glob匹配模式
+        ---格式为： glob:*中国         *：代表任意多个字符 
+           glob:?中国     ？：代表一个任意的字符
+           glob:[bmpc]中国     第一个字符必须为b,m,p,c中的任意一个
+ 
+          （2）regular expression匹配模式 （目前来说不会用）
+
+          （3）精确匹配模式   
+        ---例如：如果要验证"确定"文本，则输入"确定"文本就可以了。 
+
+
+11.什么时候用javascript,以及怎么用？(这部分我还没有看完)
+   以下的情况下会需要javascript.:(1)需要输入日期或者其它内容到text文本中。格式如下：type locator javascript{Date()}
+         (2)需要存储javascript片断的值。格式如下：storeEval javascript{10*10} result
+
+ 
+
+12.如何在selenium IDE中，添加user_extensions？
+
+ 
+
+
+注：在许多命令中，元素定位器就等于"target"属性值
+
+ 
+
+selenium rc 的学习
+
+1.selenium rc 的组成部分？
+  （1）selenium server:接收测试脚本，运行它们，并且报告测试的结果。
+  （2）client libraries：提供编程语言和selenium serer之间的接口。
+
+
+2.安装selenium rc 的方法？
+ （1）安装selenium server：下载selenium rc的压缩包到本地计算上。然后直接解压到你的电脑目录下就可以了。
+     运行selenim server的两种方法：第一种：可以直接在DOS环境下，在打开selenium-server.jar的解压目录的情况下，可以输入以下命令java -jar selenium-        server.jar
+        注：你需要安装java和path环境变量的配制，第一种方法才能运行成功。
+        第二种：以在Selenium-server.jar的同级目录下建立一个server.txt的文本文件。打开server.txt的文件。输入java -         jarselenium-server.jar 然后保存。将server.txt的后缀名修改为server.bat.最后将server.bat的        快捷方式剪切到桌面上，双击它就可以启动Selenium的服务器程序
+    看selenium server是否运行成功的方法：java -version
+
+ （2）运用java 客户端驱动
+     * 下载selenium rc,安
+     * 提取selenium-java-client-driver.jar
+     * 在myeclipse
+     * 创建一个新的工程
+     * 增加selenium-java-driver.jar到你的工程中，作为一个references
+     * 从selenium IDE中，用java语言导出一个脚本，并且把它放在你的java项目中，或者自己用java语言写脚本
+     * 运行selenium server
+     * 用java IDE执行你的脚本ufy
+
+3.运用java写selenium脚本，电脑上面需要哪些安装和配置
+  （1）安装jdk，jdk的安装和配置需参考"jdk的安装"
+  （2）安装myeclipse
+  （3）在myeclipse中新建一个java项目，导入selenium-java-client-driver.jar,selenium-java-client-driver-tests.jar,junit-4.8.1.jar这三个jar包到项目中
+  （4）在项目中新建selenium脚本，这个脚本可以通过以下的方式得到：selenium IDE中保存录制的脚本用junit4的格式。当然脚本也可以自己写
+  （5）运行脚本
+
+
+4.selenium rc可以处理以下的内容：
+  （1）条件判断
+  （2）循环
+  （3）日志和错误结果的报道
+  （4）异常的处理
+  （5）数据库的测试
+  （6）测试用例组
+  （7）重复执行失败的测试
+  （8）测试用例的独立
+
+
+5.testsuite是怎样运行的？
+  在java中，testsuite运行，就相当于testcase的运行。每个testcase都会单独启动一个浏览器。
+
+
+6.selenium支持哪两种开发脚本？
+  selenium支持的开发脚本：（1）testRunner（html文件）
+                         （2）driver（脚本语言编写）
+
+
+7.运用selenium remote control运行testRunnner的方法？
+  不必要安装selenium ide,只需要安装selenium server.然后在selenium server中测试套件。存在两种方法：
+ 第一种：可以直接在DOS环境下，在打开selenium-server.jar的解压目录的情况下，可以输入以下命令java -jar selenium-server.jar -singlewindow
+     -htmlsuite  *firefoxhttp://www.baidu.com"C:\Documents and Settings\zhuhui\桌面\testcase1" "C:\Documents and Settings\zhuhui      \桌面\result.html"
+        注：你需要安装java和path环境变量的配制，第一种方法才能运行成功。
+ 第二种：以在Selenium-server.jar的同级目录下建立一个server.txt的文本文件。打开server.txt的文件。输入java -jar selenium-server.jar
+    -singlewindow -htmlsuite *firefoxhttp://www.baidu.com"C:\Documents and Settings\zhuhui\桌面\testcase1" "C:\Documents
+    and Settings\zhuhui\桌面\result.html" 然后保存。将server.txt的后缀名修改为server.bat.最后将server.bat的快捷方式剪切到桌面上，双击     它就可以启动Selenium的服务器程序
+
+ 注：java -jar selenium-server.jar -singlewindow -htmlsuite *firefoxhttp://www.baidu.com"C:\Documents and Settings\zhuhui\桌面       \testcase1" "C:\Documents and Settings\zhuhui\桌面\result.html"
+   相当于java -jar selenium-server.jar -singlewindow -htmlsuite 所用的浏览器类型 测试用例所要用的网址 测试套件存在的地址 测试结果存放的位置
+
+
+8.浏览器的几中类型？
+   *iexplore: IE浏览器
+   *firefox: 火狐浏览器
+
+
+
+
+
+
+
+
+2.确认（verifation）和断言(assert)有什么区别？
+  确认：当测试中的一个用例存在错误时，系统将会继续运行这些测试
+  断言：当测试中的一个用例存在错误时，系统将会退出当前用例
+  总而言之，确认和断言的不同在于，当出现错误情况之后，系统将会如何处理。
+
+ 
+3.test case 和 test suite的区别？
+  test case是一个用例
+  test suite是一组用例
+
+4.有的时候在运行测试脚本的时候，selenium会报错，但是，当你放慢运行的速度的时候，系统又会是正确的。
+
+
+
+7.selenium IDE, selenium core, selenium core hta, selenium rc四者的概念以及它们之间的区别？
+  selenium IDE（集成开发环境)。它是一个firefox的插件，可以录制、回放并编辑测试脚本
+  selenium Core(核心)。这是符合断言机制，由测试套件执行的平台。它是整个测试机制的核心部分，由纯javaScript代码组成
+  selenium Core Hta.这是针对IE设计的执行平台，运行于IE的最高字全级别之上。
+  selenium Remote Control(远程控制)：它是一个代理与控制端，可代替selenium core/selenium DIE的客户端，并支持多语言
+
+ 
+
+8.能不能在IE中录制脚本吗？
+  不能，只能在firefox中安装selenium IDE,而只有selenium IDE才存在录制的功能。
+  如果想测试一些，不能在firefox中正常显示的程序，则只有安装selenium RC,然后自己编写测试脚本，只有这样，脚本才能在ie中运行。
+
+
+9.界面中存在控件的时候，不能成功的录制，不知道存在什么解决方法？
+
+
+12.怎样安装多窗口模型？
+   （1）启动selenium-server时，输入以下的命令：java -jar selenium-server.jar -multiwindow。则会在两个窗口中显示运行结果
+   （2）启动selenium-server时，输入以下的命令：java -jar selenium-server.jar -singlewindow。则会在一个窗口中显示运行结果
+
+
+15.怎样访问变量？
+  ${变量名}
+
+
+
+17.录制到邮件的时候，不能正常录制，要如何处理呢？
+  录制的时候，首先要指定要框架，然后再输入文本。
+  例如：邮件通过firebug定位为：
+   
+
+    在selenium ide中则需要手动的输入以下的内容：
+  
+  再输入一条以下的命令：selectFrame  relative=top
+  则，此时的脚本就能正常的运行了。
+
+
+18.录制到组件的时候，不能正常录制，要怎样处理？
+   例如：上传附件(以及其它一些要上传的东西)，刚发现附件并不是不能录制，而是你在界面中的定位不是很清楚，selenium不能识别。
+
+
+19.录制时，会跳出多个窗口，此时要怎样处理？
+   存在四种解决方法，可以参考http://www.boobooke.com/bbs/viewthread.php?tid=41824&highlight=selenium中的第七集
+   具体方法如下：（1）java中可用如下的代码：String[] titles = selenium.getAllWindowTitles();               //得到所有窗口的标题
+        selenium.selectWindow("title="+titles[titles.length-1]);   //选择最后打开的一个窗口
+        selenium.close();                                               //关闭最后打开的一个窗口  
+        selenium.selectWindow("null");                            //重新聚集在最开始的一个窗口（只有两个窗口的时候） 
+   （2）java中可用如下的代码：selenium.click("link=ÂÛÌ³"); 换成如下的两行代码
+            String url = selenium.getAttribute("link=ÂÛÌ³@href");
+             selenium.open(url);
+                         注：此方法也存在一定的缺陷，就是不能验证click点击事件是否正确。   
+   （3）利用javascript去掉原代码中的target="_blank"的属性（目前为止还不清楚）
+   （4）这种方法不清楚，看的不是很懂 
+
+20.什么是window id?
+   window id可以通过java中。selenium.getAllWindowId()方法得到，不过一般情况下都是undefined
+
+ 
+
+
+22.selectFrame中的relative=up,relative=top,relative=parent等等，是什么意思？它们之间存在怎样的关系？
+
+ 
+
+23.select,selectFrame,selectWindow,selectPopUp，这几个功能的用法，以及在什么时候用？
+   select用来操作下拉框。语法：select(selectLocator,optionLocator) ,例：select id=person_person_type,lable=非户籍人口
+   selectFrame用来操作iframe框架。语法：selectFrame(location) ,例: select xpath =//iframe[@name='abc']
+   selectWindow用来操作多个窗口问题，至于如何操作可参考上面的19条的描述。
+   selectPopUp:这种情况还没有遇到。
+
+ 
+
+24.selectWindow 中的windowID怎样定位呢？(关于mulwindow操作，我差不多完全不会)
+   （1）title:就是一个window标题栏中的文本。
+   （2）name:例:<a target="selenium_blank60273" href="http://bbs.51testing.com/">软件测试论坛</a>，则selectWindow name='selenium_blank60273'
+   （3）var
+ 
+
+25.录制完成之后，经常会出现回放不成功的情况，在这种情况之下要如何处理呢？
+   （1）看是否要加上wait，很多的时候，只要你加上wait之后，回放就能正常运行了，例如：原本为click，会报错，修改为clickAndWait之后，系统就能正常回放
+   （2）判断出错的地方，此地方是不是因为框架没有选对呢。例如：原本的框架为frame1,现在执行的操作在frame2时，此时要怎样处理？
+               加上以下两条语句：selectFrame. relative=up, selectFrame. frame2Locator;
+
+26.selenium ide不能录制的东西？
+   （1）html5中部分元素不能录制
+   （2）上传文件控件不能录制
+   （3）用于绘图、图像编辑、文档设计、演示和web图形设计的集成应用软件不能录制
+   （4）silverlight flex and flash不能录制
+
+
+27.[warn] Link has target '_blank', which is not supported in Selenium!这个问题的原因？（可参考上文中的19）
+ Link has target '_blank'这个好像是这样的：当Link有这个属性时，会打开新浏览器窗口，如果target是"_blank"的话，Selenium不能找到打开的新窗  口，如果target有一个明确的名字的话，selenium就能够找到这个打开的新窗口并在其上进行操作了。
+ "_blank"的话，selenium不能保证一定找到找准这个窗口，所以给出警告，如果只有这样的一个窗口和主窗口，selenium通过一些变通的方法也能找到该窗  口，但是不保证。
+ 这是selenium本身限制的问题，暂时不晓得怎么解决，只要不影响测试就不用管这个警告。
+    "selenium_blank4795 "这个应该是OpenQA里提给selenium的bug号吧？
+
+
+28.可以直接在DOS环境下，在打开selenium-server.jar的解压目录的情况下，可以输入以下命令java -jar selenium-server.jar -singlewindow
+   -htmlsuite  *iexpolrehttp://www.baidu.com"C:\Documents and Settings\zhuhui\桌面\testcase1" "C:\Documents and Settings\zhuhui\桌面   \result.html"时，系统会报错？
+   对于这 个问题的解决方法，可参考http://bbs.51testing.com/thread-302909-1-1.html。由于要修改原码，所以我暂时还没有看。
+
+
+29.com.thoughtworks.selenium.SeleniumException: XHR ERROR: URL =http://192.168.1.15:3000/loginResponse_Code = 500 Error_Message = Internal Server Error的原因是什么？
+ 
+
+ 
+
+注：
+ 1.pop-up blocker的意思是：弹出窗口屏蔽（阻止未经许可弹出的窗口出现）
+
+ 2.选择一个框架之后，以后的命令都会在这个框架中，要想操作其它的框架，则必须要选择相应的框架才能进行相关的操作。
+
+ 3.目前在测试中，还没有遇到多个window之间转换的情况。现在只遇到多个frame转换的情况。
