@@ -5,3 +5,7 @@ import sys
 sys.path.append('/home/vc/git/vimrc/doc/python_study_code/')
 import hello
 
+hello.hello2()
+
+hello.test()
+

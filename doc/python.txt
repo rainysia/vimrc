@@ -1183,3 +1183,77 @@ Python的类的方法和普通的函数有一个很明显的区别，在类的�
     通过reload函数的返回值会赋给hello,这里就用了重新载入的版本替换了原先的hello版本.
     如果是通过实例化一个模块中的类来创建了一个对象,那么就算重新载入这个模块,不过通过什么方式都无法重新创建该模块的对象的实例.
     该实例依然是旧版本类的实例.如果需要重新载入模块的新类, 就需要重新创建它.
+        可以import了模块后,直接调用.
+        #hello2.py
+        def hello():
+            print 'hlow, world!'
+        >>>import hello2
+        >>>hello2.hello()
+        hlow, world!
+    为了区分模块是作为程序运行还是导入到其他程序,使用__name__变量
+        #hello.py
+        def hello2():
+            """docstring for he"""
+            print 'Hello, World!'
+        def test():
+            hello2()
+
+        if __name__ == '__main__':test()
+        #call
+        import sys
+        sys.path.append('/home/vc/git/vimrc/doc/python_study_code/')
+        import hello
+
+        hello.hello2()
+
+        hello.test()
+    模块的正确位置
+        这里使用pprint模块中的pprint函数来代替普通的print,可以提供更加智能的打印输出.
+        比较好的模块放置位置是系统的dist-packages(win中是site-packages),这个目录就是用来储存模块
+            >>> import sys, pprint
+            >>> pprint.pprint(sys.path)
+            ['',
+            '/home/vc/git/vimrc/doc/python_study_code',
+             '/usr/bin',
+             '/root/lib/python',
+             '/usr/lib/python2.7',
+             '/usr/lib/python2.7/plat-linux2',
+             '/usr/lib/python2.7/lib-tk',
+             '/usr/lib/python2.7/lib-old',
+             '/usr/lib/python2.7/lib-dynload',
+             '/usr/local/lib/python2.7/dist-packages',
+             '/usr/lib/python2.7/dist-packages',
+             '/usr/lib/python2.7/dist-packages/gst-0.10',
+             '/usr/lib/python2.7/dist-packages/gtk-2.0',
+             '/usr/lib/pymodules/python2.7']
+    PYTHONPATH环境变量
+         在.bashrc里面, 加入 export PYTHONPATH=$PYTHONPATH:~/python 这样就会把~/python的路径加到系统的环境变量中, 多个路径以冒号分开.
+         win 的,set PYTHONPATH=%PYTHONPATH%;c:\python
+    路径配置文件, 用.pth为扩展名的文件,里面有添加到sys.path的目录信息,空行和以#开头的都会被忽略.以import开头的文件会被执行
+        需要把该文件放置在可以找到的地方.windows中用sys.prefix定义目录,unix/osx用site-packages目录,
+        在windows中,可以用.pyw扩展名.
+    包package,为了让Python将其作为包对象,需要包含一个命名为__init__.py的文件(模块),如果将它作为普通模块导入,文件的内容就是包的内容.
+        比如一个名为constants的包,文件constants/__init__.py包含语句PI=3.14
+            import constants
+            print constants.Pi
+        drawing包,包含shapes和colors的模块.
+            drawing/
+            ├── colors.py
+            ├── __init__.py
+            └── shapes.py
+        如果drawing已经在PYTHONPAH. 则可以通过
+            import drawing              #imports the drawing package
+            import drawing.colors       #imports the colors module
+            from drawing import  shapes #imports the sharpes module
+
+    模块中有什么
+        import 模块名
+        dir(模块名)
+        可以看见模块的所有特性(所有函数,类,变量等).一些名字以下划线开始暗示属于内部,可以用列表推导式来过滤掉
+            >>>[n for n in dir(模块名) if not n.startswith('_')]
+
+        __all__变量,定义了模块的公有接口(public interface),所以就可以使用from copy import * #*是表示从模块导入的名字代表了什么含义
+            >>> copy.__all__
+            ['Error', 'copy', 'deepcopy']
+        使用__all__可以过滤其他程序不需要或者不想要的变量.如果没有设置__all__,用importo *会默认导入模块中所有不以下划线开头的全局名称
+
