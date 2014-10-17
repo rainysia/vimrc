@@ -1169,3 +1169,11 @@ Python的类的方法和普通的函数有一个很明显的区别，在类的�
     树和图:
         图:是用来直接描述现实问题的数据结构,方便使用算法来计算问题,比如公交线路查询
         树:则是具体的,有b-tree,b+tree,red black tree, 树可以提供查询效率
+
+    
+
+模块
+    下列代码会告诉python解释器,除了从默认的Python目录寻找模块之外,还需要从目录/home/python 来查找.
+    import sys
+    sys.path.append('/home/python/')
+    
