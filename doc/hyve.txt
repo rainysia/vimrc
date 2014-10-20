@@ -1,0 +1,19 @@
+安装pip
+安装virtualen
+安装virtualenwrapper
+mkdir ~/.virtualenv
+export WORKON_HOME=$HOME/.virtualenv
+source /usr/local/bin/virtualenvwrapper.sh
+mkvirtualenv bom
+workon
+
+http://192.168.85.123:6543/
+
+
+cd bom_maintenance/
+python setup.py develop
+pip install virtualenv
+gvim .bashrc
+export WORKON_HOME=$HOME/.virtualenv
+echo $WORKON_HOME
+source /usr/local/bin/virtualenvwrapper.sh

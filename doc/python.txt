@@ -1339,4 +1339,4 @@ python标准库
                     print time.strptime(time.asctime())
     datetime模块
     timeit代码段执行时间计时
-
+    random 模块
