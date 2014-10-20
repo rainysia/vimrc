@@ -1280,12 +1280,16 @@ python标准库
         linesep         行分隔符('\n', '\r', '\r\n')
         urandom(n)      返回n字节的加密强随机数据
     fileinput
-        input([files[, inplace[, backup]]])
-        filename()
-        lineno()
-        filelineno()
-        isfirstline()
-        isstdin()
-        nextfile()
-        close()
+        input([files[, inplace[, backup]]])  遍历多个输入流中的行
+        filename()                           返回当前文件的名称
+        lineno()                             返回当前(累计的)行数
+        filelineno()                         返回当前文件的行数
+        isfirstline()                        检查当前行是否是文件的第一行
+        isstdin()                            检查最后一行是否来自sys.stdin
+        nextfile()                           关闭当前文件, 移动到下一个文件
+        close()                              关闭序列
+注意import的时候如果文件名和库名一样,会导致冲突.
+    集合set,set类位于sets模块中.
+        >>>set(range(10))
+        set([0,1,2,3,4,5,6,7,8,9])
 
