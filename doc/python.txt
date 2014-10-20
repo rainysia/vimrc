@@ -1289,7 +1289,26 @@ python标准库
         nextfile()                           关闭当前文件, 移动到下一个文件
         close()                              关闭序列
 注意import的时候如果文件名和库名一样,会导致冲突.
-    集合set,set类位于sets模块中.
+    集合set,set类位于sets模块中.集合是由序列(或者其它可迭代的对象)构建的,主要用于检查成员资格,和字典一样,集合元素的顺序是随意的.
+    可以通过对集合union方法,or等方法来计算几个集合的并集,
         >>>set(range(10))
         set([0,1,2,3,4,5,6,7,8,9])
+
+        a = set([1,2,3])                #
+        b = set([2,3,4])                #
+        print a.union(b)                #set([1, 2, 3, 4])
+        print a | b                     #set([1, 2, 3, 4])
+        print a & b                     #set([2,3])
+        c = a & b                       #set([2,3])
+        print c.issubset(a)             #True
+        print c<=a                      #True
+        print c.issuperset(a)           #False
+        print c>=a                      #False
+        print a.intersection(b)         #set([2, 3])
+        print a.difference(b)           #set([1])
+        print a - b                     #set([1])
+        print a.symmetric_difference(b) #set([1,4])
+        print a ^ b                     #set([1,4])
+        print a.copy()                  #set([1,2,3])
+        print a.copy() is a             #False
 
