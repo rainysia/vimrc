@@ -5,15 +5,19 @@ mkdir ~/.virtualenv
 export WORKON_HOME=$HOME/.virtualenv
 source /usr/local/bin/virtualenvwrapper.sh
 mkvirtualenv bom
-workon
+workon bom
 
 http://192.168.85.123:6543/
 
 
 cd bom_maintenance/
-python setup.py develop
 pip install virtualenv
+pip install MySQL-python
 gvim .bashrc
 export WORKON_HOME=$HOME/.virtualenv
 echo $WORKON_HOME
 source /usr/local/bin/virtualenvwrapper.sh
+
+python setup.py develop
+pserve development.ini 
+
