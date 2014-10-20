@@ -1311,4 +1311,32 @@ python标准库
         print a ^ b                     #set([1,4])
         print a.copy()                  #set([1,2,3])
         print a.copy() is a             #False
+    frozenset()构造函数创建给定集合的副本.用于代表不可边(可散列)的集合
+    堆heap, 是优先队列的一种.使用优先队列能够以任意顺序增加对象,并且能在任意时间找到(移除)最小的元素
+        heapq(q是queue的缩写,即队列)
+            heappush(heap, x)       把x入堆
+            heappop(heap)           将堆中最小的元素弹出
+            heapify(heap)           将heap属性强制用到任意列表
+            heapreplace(heap, x)    将堆中最小的元素弹出,同时将x入堆
+            nlargest(n, iter)       返回iter中第n大的元素
+            nsmallest(n, iter)      返回iter中第n小的元素
+    双端队列(double-ended queqe/deque)
+
+    time模块,获取当前时间,操作时间和日期,从字符串读取时间,格式化时间为字符串.
+        日期可以用实数(秒) 或者是一个9个整数的元组(2014,1,21,12,2,57,2,21,0)表示2014年1月21日12点2分57秒 星期3(以星期一为0),并且是当年的第21天(无夏令时)
+                                                    年  月1~12 日1~31 时0~23 分0~59 秒0~61 周一为0,范围0~6 儒历时1~366 夏令时0,1或者-1
+            如果夏令时那里是-1, mktime转换为时间戳的时候,就会工作正常.
+            time.asctime()          #将当前时间(元组)格式化成字符串
+                localtime([secs])   #将秒数转换成日期元组,以本地时间为准. 全球化的用gmtime
+                mktime(tuple)       #将时间元组转换成本地时间
+                sleep(secs)         #休眠secs秒
+                strptime(string[, format]) #将字符串解析为时间元组
+                time()              #当前时间(新纪元开始后的秒数,以UTC为准)
+                    import time
+                    print time.asctime()
+                    print time.mktime((2014,10,20,16,50,23,0,320,0))
+                    print time.localtime(1413795023.0)
+                    print time.strptime(time.asctime())
+    datetime模块
+    timeit代码段执行时间计时
 
