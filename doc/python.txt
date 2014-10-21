@@ -1340,3 +1340,43 @@ python标准库
     datetime模块
     timeit代码段执行时间计时
     random 模块
+        random()            返回0<n<=1之间的随机实数n
+        getrandbits(n)      以长整型形式返回n个随机位
+        uniform(a, b)       返回随机实数n,其中a<=n<=b
+        randrange([start], stop, [step])    返回range(start,stop,step)中的随机数
+        choice(seq)         从序列seq中返回随意元素
+        shuffle(seq[, random])  原地指定序列seq
+        sample(seq, n)      从序列seq中选择n个随机且独立的元素
+            from random import *
+            from time import *
+            date1 = (2008, 1, 1, 0, 0, 0, -1, -1, -1)
+            time1 = mktime(date1)
+            date2 = (2009, 1, 1, 0, 0, 0, -1, -1, -1)
+            time2 = mktime(date2)
+            random_time = uniform(time1, time2)
+            print asctime(localtime(random_time))
+    range([start,] stop[, step]) 返回一个整数的list(序列),range(i,j)会返回[i,i+1,...,j-1],
+            range(n) 会返回[0,1,2,3,...n-1]
+            range(0,j) 会返回[0,1,j-1]
+    shelve 模块.对文件的存储数据
+        import shelve
+        s = shelve.open('test.data')
+        s['x'] = ['a', 'b', 'c']
+        s['x'].append('d')
+        print s['x']  #{'x': ['a', 'b', 'c']}
+        为了解决这个,需要在用shelve模块修改存储的对象时,用临时变量绑定到获得的副本上,并且在修改后重新存储这个副本.
+        >>> s
+        {'x': ['a', 'b', 'c']}
+        >>> temp = s['x']
+        >>> temp.append('d')
+        >>> s['x'] = temp
+        >>> s
+        {'x': ['a', 'b', 'c', 'd']}
+    re模块,包含了对正则的支持
+        compile(pattern[, flags])           根据包含正则表达式的字符串创建模式对象
+        search(pattern, string[, flags])    在字符串中寻找模式
+        match(pattern, string[, flags])     在字符串的开始处匹配模式
+        split(pattern, string[, maxsplit=0])根据模式的匹配项来分割字符串
+        findall(pattern, string)            列出字符串中模式的所有匹配项
+        sub(pat, repl, string[, count=0])   将字符串中所有pat的匹配项用repl替换
+        escape(string)                      将字符串中所有特殊正则表达式字符转义
