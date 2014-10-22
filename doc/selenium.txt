@@ -185,7 +185,7 @@ selenium rc 的学习
   selenium IDE（集成开发环境)。它是一个firefox的插件，可以录制、回放并编辑测试脚本
   selenium Core(核心)。这是符合断言机制，由测试套件执行的平台。它是整个测试机制的核心部分，由纯javaScript代码组成
   selenium Core Hta.这是针对IE设计的执行平台，运行于IE的最高字全级别之上。
-  selenium Remote Control(远程控制)：它是一个代理与控制端，可代替selenium core/selenium DIE的客户端，并支持多语言
+  selenium Remote Control(远程控制)：它是一个代理与控制端，可代替selenium core/selenium IDE的客户端，并支持多语言
 
  
 
@@ -294,3 +294,9 @@ selenium rc 的学习
  2.选择一个框架之后，以后的命令都会在这个框架中，要想操作其它的框架，则必须要选择相应的框架才能进行相关的操作。
 
  3.目前在测试中，还没有遇到多个window之间转换的情况。现在只遇到多个frame转换的情况。
+
+
+常用selenium-IDE错误
+    seleniumIDE对空格敏感,命令前后不能有空格
+    扩展文件正确读取(options=>options=>General selenium Core extension域)
+
