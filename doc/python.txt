@@ -1270,7 +1270,7 @@ python标准库
         path        是一个字符串列表.包含了要导入的目录名
         pathform    平台,sunos5,win32,linux2
         stdin       标准输入,python利用sys.stdin来获得输入(用于函数的input和raw_input输入),利用sys.stdout来输出
-        stdout      标准输出
+        stdout      标准输出(input,raw_input的提示文字也是写入到这里.)
         stderr      标准错误
     os 
         environ         对环境变量进行映射
@@ -1468,3 +1468,90 @@ python标准库
         getopt      在sys.argv
         optparse    
         cmd         编写命令行解释器.
+文件和流
+    open(name[, mode[, buffering]])
+    只带一个name参数,就是读取, 带了可选的mode,就可以写入等显示声明.
+        >>> f = open(r'/home/www/demo.txt')
+        'r' 读 'w' 写 'a'追加 'b'二进制模式(可追加到其他模式)'+'读/写模式(可追加到其他模式)
+        通过在模式参数中使用U参数可以在Python打开文件时使用通用的换行符支持模式,这样所有的换行符/字符串(\r\n,\r or \n) 都会转换成\n.而不用考虑其平台(win/unix/Macox)
+        第三个参数控制文件的缓冲.
+            0/False ,I/O输入/输出 就是无缓冲的(所有的读写都直接针对硬盘).
+            1/True  I/O就有先内存->硬盘的缓冲,这样程序更快.只有在使用flush/close时才会更新硬盘上的数据.
+            大于1就代表缓冲区的大小(字节), -1(或任何负数)代表使用默认的缓冲区大小
+        对于一个文件(流),如果有一个f的类文件对象,就可以使用f.write写入(追加)f.read读取数据
+            f1 = open('test.txt', 'w')
+            print f1.write("Hello!")
+            print f1.write(", World!")
+            f1.close()
+            f2 = open('test.txt', 'r')  #r是默认的 
+            print f2.read(4)
+            print f2.read()
+
+        seek(offset[, whence]) offset是一个字节(字符)数,偏移量;
+            whence默认0,表示偏移量是从文件开头开始计算(偏移量必须是非负的)
+                1,相当于当前位置的移动,此时偏移量可以是负的
+                2,相对于文件结尾的移动.
+        tell方法返回当前文件位置.
+                f = open('test2.txt', 'w')
+                f.write('012345678901234567')
+                print f.seek(5)
+                print f.write('Hello, World!')
+                f.close()
+                f = open('test2.txt', 'r')
+                print f.read()              #01234Hello, World!
+                print f.tell()              #18
+                print f.seek(2)
+                print f.tell()              #2
+        file.readline读取单独的一行,直到出现换行符(也读取这个换行符);
+        或者使用一个非负整数作为readline读取的字符(字节)的最大值.  
+        readlines 可以读取一个文件中的所有行将其作为一个列表返回
+        writelines 可以传给它一个字符串的列表,会把所有的字符串写入,程序不会增加新行.需要自己添加.注意写入读都需要重新open
+            可以在try/finally 语句的finally里面强制close
+            有类似的模块with_statement,在python2.5后可以直接调用
+                >>>from __future__ import with_statement
+                    with open("somefile.txt") as somefile:
+                        do_something(somefile)
+            with语句带有__enter__方法,不带参数,在进入with语句的时候调用,返回值绑定在as关键字之后的变量
+                        __exit__方法带有3个参数,(异常类型,异常对象,异常回溯),在离开方法时这个函数被调用.如果__exit__返回false,那么所有的异常都不会处理
+                        文件可以作为上下文管理器(context manager) __enter__方法返回文件对象本身,__exit__方法关闭文件
+                    f = open('test2.txt', 'w')
+                    f.write('012345678901234567')
+                    print f.seek(5)
+                    print f.write('Hello, World!')
+                    f.close()
+                    print '--'*20
+                    f = open('test2.txt', 'r')
+                    print f.read()              #01234Hello, World!
+                    print f.tell()              #18
+                    print f.seek(2)
+                    print f.tell()              #2
+                    f.seek(0)
+                    print '--'*20
+                    print f.readline()
+                    print f.readlines()
+                    f = open('test2.txt', 'w')
+                    f.writelines(['hahaha', 'Are u', 'sure'])
+                    f.close()
+                    print '--'*20
+                    f = open('test2.txt', 'r')
+                    print f.tell()
+                    print f.readlines()
+                    print f.tell()
+                    print '--'*20
+                    f = open('test3.txt', 'w')
+                    f.write('this\n')
+                    f.write('is no\n')
+                    f.write('haiku.\n')
+                    f.close()
+                    f = open('test3.txt', 'r')
+                    lines = f.readlines()
+                    f.close()
+                    print lines
+                    lines[1] = "isn't a\n"
+                    f = open('test3.txt', 'w')
+                    f.writelines(lines)
+                    f.close()
+                    f = open('test3.txt', 'r')
+                    print f.read()
+        flush方法不允许其他程序在使用该文件的同时访问文件.
+            
