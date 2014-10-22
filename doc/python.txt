@@ -1373,6 +1373,7 @@ python标准库
         >>> s
         {'x': ['a', 'b', 'c', 'd']}
     re模块,包含了对正则的支持
+        为了让特殊字符和普通字符一样,需要进行转义(escape)(反斜线),也可以直接用原始字符串,如r'string',主要是为了转义点号,因为点号的通配符代表了匹配除换行符外的任何字符
         compile(pattern[, flags])           根据包含正则表达式的字符串创建模式对象
             >>> pattern = re.compile("o")       #以O开头
             >>> pattern.match("ejkwfog")
@@ -1414,4 +1415,56 @@ python标准库
             >>> re.escape('www.python.org hello')
             'www\\.python\\.org\\ hello'
 
+    re模块匹配到的MatchObject包含了匹配模式的子字符串,还包含了哪个模式匹配字符串哪部分的信息(组(group))
+        组的序号取决于它左侧的括号数,组0就是整个字符串.
+            r'(http://)?(www\.)?python\.org'
+            会匹配'http://www.python.org'   'www.python.org'    'python.org'    'http://python.org'
 
+        re.group([group1, ...])     获取给定子模式(组)的匹配项,没有组号,默认为组0,一共只能用99个组
+        re.start([group])           返回给定组的匹配项的开始位置,默认为0即整个模式
+        re.end([group])             返回给定组的匹配项的结束位置(和分片一样.不包括组的结束位置)
+        re.span([group])            返回一个组的开始和结束位置
+            >>> m = re.match(r'www\.(.*)\..{2,3}', 'www.python.org')
+            >>> print m
+            <_sre.SRE_Match object at 0x11e4a08>
+            >>> print m.group(1)
+            python
+            >>> print m.group(0)
+            www.python.org
+            >>> m.start(1)
+            4
+            >>> m.end(1)
+            10
+            >>> m.start(0)
+            0
+            >>> m.span()
+            (0, 14)
+            >>> a = 'www.python.org'
+            >>> len(a)
+            14
+        使用re.sub和组号来替换掉
+            me_pat = r'\*([^\*]+)\*'
+            me_pat = re.compile(r'''
+                \*      #开始,一个星号
+                (       #开始组
+                 [^\*]+ #匹配所有的,除了星号
+                 )      #结束组
+                \*      #结束匹配
+            ''', re.VERBOSE         #
+            >>> me_pat = r'\*([^\*]+)\*'
+            >>> 
+            >>> re.sub(me_pat, r'<em>\1</em>', 'Hello, *world*!')
+            'Hello, <em>world</em>!'
+
+其它标准模块
+        functools   
+        difflib     计算两个序列的相似程度
+        hashlib     计算小签名(数字)
+        csv         comma-separated values
+        timeit,profile,trace    衡量代码片段运行时间/代码片段效率的分析/trace提供总的分析
+        datetime    支持特殊的日期和时间对象
+        itertools   创建和联合迭代器等
+        logging     日志文件
+        getopt      在sys.argv
+        optparse    
+        cmd         编写命令行解释器.
