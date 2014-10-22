@@ -127,9 +127,11 @@ alias shl='sh /home/sh/log.sh'
 
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
-
 export GOPATH=$HOME/go:$PATH:$GOROOT/bin
-
+export JAVAROOT=/usr/java/java7
+export PATH=$PATH:$JAVAROOT/bin
+export CLASSPATH=.:$JAVAROOT/lib:$JAVAROOT/jre/lib
+export WORKON_HOME=$HOME/.virtualenv
 ssh() {
     if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux" ]; then
             tmux rename-window "$*"
