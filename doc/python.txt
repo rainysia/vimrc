@@ -1374,9 +1374,44 @@ python标准库
         {'x': ['a', 'b', 'c', 'd']}
     re模块,包含了对正则的支持
         compile(pattern[, flags])           根据包含正则表达式的字符串创建模式对象
-        search(pattern, string[, flags])    在字符串中寻找模式
+            >>> pattern = re.compile("o")       #以O开头
+            >>> pattern.match("ejkwfog")
+            >>> print pattern.match("few0lpo")
+            None
+            >>> print pattern.match("ofew0lpo")
+            <_sre.SRE_Match object at 0x11e5b28>
+            >>> print pattern.match("dog", 1)   #一个偏移
+            <_sre.SRE_Match object at 0x11e5b28>
+        search(pattern, string[, flags]) 在字符串中寻找模式,找到返回MatchObject(True),找不到None(False)
+            >>> pattern = re.compile("d")
+            >>> pattern.search("dog")
+            <_sre.SRE_Match object at 0x11e5b90>
+            >>> pattern.search("dog",2)
+            >>> print pattern.search("dog",2)
+            None
         match(pattern, string[, flags])     在字符串的开始处匹配模式
         split(pattern, string[, maxsplit=0])根据模式的匹配项来分割字符串
+            >>> re.split('[, ]+', "word2, word2,,,, word3,word5")
+            ['word2', 'word2', 'word3', 'word5']
+            >>> re.split('[, ]+', "word2, word2,,,, word3,word5", 1)
+            ['word2', 'word2,,,, word3,word5']
+            >>> re.split('[, ]+', "word2, word2,,,, word3,word5", 2)
+            ['word2', 'word2', 'word3,word5']
+            >>> re.split('[a-f]+', '0a3B9', flags=re.IGNORECASE)
+            ['0', '3', '9']
         findall(pattern, string)            列出字符串中模式的所有匹配项
+            >>> pattern = '[a-zA-Z]+'
+            >>> text = '"Hm...Err.. - -Are you sure?" he said, sounding insecure'
+            >>> re.findall(pattern, text)
+            ['Hm', 'Err', 'Are', 'you', 'sure', 'he', 'said', 'sounding', 'insecure']
         sub(pat, repl, string[, count=0])   将字符串中所有pat的匹配项用repl替换
+            >>> pattern = '{name}'
+            >>> text = 'Dear {name}, Hi {name}, Do you want some break?'
+            >>> re.sub(pattern, "Tommy", text)
+            'Dear Tommy, Hi Tommy, Do you want some break?'
         escape(string)                      将字符串中所有特殊正则表达式字符转义
+            >>> import re
+            >>> re.escape('www.python.org hello')
+            'www\\.python\\.org\\ hello'
+
+
