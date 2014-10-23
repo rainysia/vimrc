@@ -21,6 +21,10 @@ selenium ide的学习
   （4）选择"允许"，之后点击安装就行了
   （5）重启火狐之后，你可以在"工具"下面看到selenium IDE
 
+
+
+#pip install -u selenium
+
 /**录制
 
 2.selenium录制时需要注意的问题？
@@ -299,4 +303,3 @@ selenium rc 的学习
 常用selenium-IDE错误
     seleniumIDE对空格敏感,命令前后不能有空格
     扩展文件正确读取(options=>options=>General selenium Core extension域)
-
