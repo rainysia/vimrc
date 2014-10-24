@@ -3363,10 +3363,16 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
                     ifconfig | grep ‘inet addr:’| grep -v ’127.0.0.1′ |cut -d: -f2 | awk ‘{ print $1}’
     内存的大小
                     free -m |grep “Mem” | awk ‘{print $2}’
+    统计httpd进程数,结果表明服务器可以处理多少个并发请求.一般是几千
+                ps -ef | grep httpd | wc -l
+    返回当前所有80端口的请求总数
+                netstat -nat | grep -i "80" | wc -l
+    打印系统所有80端口已建立的连接总数
+                netstat -na | grep ESTABLISHED | wc -l
     查看80端口的连接，并排序
-                    netstat -an -t | grep “:80″ | grep ESTABLISHED | awk ‘{printf “%s %s\n”,$5,$6}’ | sort
+                    netstat -an -t | grep ":80" | grep ESTABLISHED | awk '{printf "%s %s\n",$5,$6}' | sort
     查看Apache的并发请求数及其TCP连接状态
-                    netstat -n | awk ‘/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}’
+                    netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
     统计一下服务器下面所有的jpg的文件的大小 
                     find / -name *.jpg -exec wc -c {} \;|awk ‘{print $1}’|awk ‘{a+=$1}END{print a}’
     CPU的数量   
