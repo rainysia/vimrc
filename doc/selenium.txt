@@ -29,6 +29,7 @@ download chromedriver https://code.google.com/p/selenium/wiki/ChromeDriver
 #unzip ChromeDriver.zip
 确保google-chrome在/usr/bin/google-chrome
 
+本地
     import os
     from selenium import webdriver
 
@@ -38,6 +39,17 @@ download chromedriver https://code.google.com/p/selenium/wiki/ChromeDriver
             driver.get("http://baidu.com")
     driver.quit()
 
+
+    import os
+    from selenium import webdriver
+    browser = webdriver.Firefox()
+    browser.get('http://www.baidu.com')
+    browser.save_screenshot('screen.png')
+    browser.quit()
+
+
+selenium sever command line
+    $java -jar selenium-server-standalone-2.43.0.jar -h     #帮助
 
 
 
