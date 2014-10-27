@@ -29,6 +29,14 @@ download chromedriver https://code.google.com/p/selenium/wiki/ChromeDriver
 #unzip ChromeDriver.zip
 确保google-chrome在/usr/bin/google-chrome
 
+    import os
+    from selenium import webdriver
+
+    chromedriver = "/home/tommy/Downloads/chromedriver"
+    os.environ["webdriver.chrome.driver"] = chromedriver
+    driver = webdriver.Chrome(chromedriver)
+            driver.get("http://baidu.com")
+    driver.quit()
 
 
 
