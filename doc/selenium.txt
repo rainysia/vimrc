@@ -25,6 +25,14 @@ selenium ide的学习
 
 #pip install -u selenium
 
+download chromedriver https://code.google.com/p/selenium/wiki/ChromeDriver
+#unzip ChromeDriver.zip
+确保google-chrome在/usr/bin/google-chrome
+
+
+
+
+
 /**录制
 
 2.selenium录制时需要注意的问题？
