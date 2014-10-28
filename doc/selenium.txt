@@ -331,3 +331,84 @@ selenium rc 的学习
 常用selenium-IDE错误
     seleniumIDE对空格敏感,命令前后不能有空格
     扩展文件正确读取(options=>options=>General selenium Core extension域)
+
+
+
+以下是我总结的Slenium Server 的启动参数列表，并把自认为比较重要的命令放在了开头部分，那些前面加*的命令表示目前还没有详细了解其
+功能。
+java -jar selenium-server.jar [-interactive] [options]
+
+-interactive         进入交互模式，可以在命令行中输入命令控制测试的执行。交互模式下的命令的基本形式是
+ 
+cmd=<command>[&1=<parameter1>[&2=<parameter2>]...]
+[&sessionId=<sessionId>]，例如
+                        cmd=setNewBrowserSession&1=*firefox&2=http://
+www.google.com
+
+-port <nnnn>        设置selenium server使用的端口号（默认4444）
+
+-singleWindow        在这种模式下，被测试的网站会在一个html frame中执行，该frame的上半部分是
+                        selenium控制台。该模式只适合那些不使用html frames的网站
+
+-multiWindow        默认模式。在这种模式下，被测试网站在单独的浏览器窗口中执行，并且支持frame
+
+-firefoxProfileTemplate <profile>
+                       在启动firefox时使用指定的profile文件夹。默认情况下，selenium启动firefox时
+                       会创建一个新的自定义的custom配置文件夹
+
+-forcedBrowserMode <browser>
+                      强制所有的Selenium会话都使用指定的浏览器
+
+-forcedBrowserModeRestOfLine <browser>
+                      与上面的命令类似，但是会将启动行中所有剩余内容全部读入作为browser的值
+
+-browserSessionReuse
+                      停止在测试期间重新初始化和替换浏览器。即getNewBrowserSession只能成功执行
+                      一次，所有测试用例都使用其创建的selenium session（可能引起的问题是：在使用
+                      close和stop命令后，selenium无法再次打开浏览器，导致测试失败；在并行环境下，
+                      也无法在同一个selenium server上同时创建多个session）
+
+-debug             进入debug模式，在命令行中将显示更多的跟踪和诊断信息
+
+-htmlSuite <browser> <startURL> <suiteFile> <resultFile>
+                    使用指定的浏览器在指定的URL上，运行一个单独的HTML Selenese Test Suite后立即
+                    退出。resultFile是结果文件的路径。附注：HTML格式的Selenese Test Suite可以使用
+                    Selenium IDE进行录制或编辑。
+
+*-profilesLocation <dir>
+                   指定Firefox profiles的存放目录。
+
+*-timeout <nnnn>
+                   设置等待秒数
+
+*-userExtensions <file>
+                   指定一个JavaScript文件。当Selenium Server启动时，可以将其作为扩展载入
+
+*-alwaysProxy        强制所有的浏览器通讯都通过代理服务器进行
+
+*-avoidProxy        默认情况下，selenium server将代理所有的浏览器请求；使用-avoidProxy参数后，
+                Selenium Server将只代理那些带有'/selenium-server'的链接
+
+*-log <logFile>        启动日志功能，将debug信息记录到logFile中
+
+*-browserSideLog
+                   在浏览器端启动日志功能；日志信息将传送给server；该功能将影响性能。
+
+*-ensureCleanSession
+                   如果浏览器没有用户配置文件（user profiles），该选项将确保每个selenium session
+                   在启动时都不受先前session的影响。比如，浏览器为IE时，将在启动session前备份
+                   所有用户的cookies，在关闭浏览器后再将其恢复。
+
+*-trustAllSSLCetificates
+                   强制Selenium代理信任所有的SSL证书。该选项在不使用Selenium代理的浏览器上无效
+
+*-proxyInjectionMode
+                   进入代理注入模式。在该模式下，Selenium Server将作为一个代理服务器，处理所有
+                   浏览器和被测网站间交互的内容；可以绕过浏览器的同源策略，在同一个会话中访问
+                   多个域的页面。该模式支持以下附加选项：
+        -dontInjectRegex <regex>
+                   绕过所有匹配正则表达式regex的页面（这些页面将不使用代理注入模式）
+        -userJsInjection <file>
+                   指定一个JavaScript文件，该script将注入到所有待测页面中
+        -userContentTransformation <regex> <replacement>
+                   将页面中所有匹配regex的字符串替换为replacement的内容

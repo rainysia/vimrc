@@ -72,5 +72,3 @@ finally:
     #driver.implicitly_wait(10)
     #driver.set_script_timeout(10)
     driver.quit()
-
-
