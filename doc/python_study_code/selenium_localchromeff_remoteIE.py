@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
-#chrome
+#chrome localhost
 '''
 import os
 from selenium import webdriver
@@ -11,7 +11,7 @@ driver.get("http://baidu.com")
 driver.quit()
 '''
 
-#firefox(iceweasel)
+#firefox(iceweasel) localhost
 '''
 import os
 from selenium import webdriver
