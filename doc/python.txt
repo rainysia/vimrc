@@ -32,6 +32,8 @@ sqrt(-1) 会输出nan/NAN 意思就是not a number 非数值
 
 python IDE /idle
 #apt-get install idle-python2.7
+    idle :alt+p调用历史记录
+    在Debug窗口的Debugger
 
 raw_input("Press <enter>") 来提供交互,
     与input不同，input会假设用户输入的都是合法的python表达式，而raw_input会把所有的输入当作原始数据(raw data)
@@ -1555,3 +1557,57 @@ python标准库
                     print f.read()
         flush方法不允许其他程序在使用该文件的同时访问文件.
             
+
+
+
+
+
+
+测试
+    doctest 检查文档的测试
+        在模块代码的底部, 加入
+            if  __name__=='__main__':
+                import doctest, 模块名
+                doctest.testmod(模块名)
+        doctest.testmod函数从一个模块中读书所有的文档字符串,找出所有看起来像是在交互式解释器中输入的例子的文本,之后检查例子是否符合实际需要
+
+        在交互式脚本运行的时候, 加上-v(verbose)参数,详述选项. 可以输出详细的脚本运行.
+        注释里面的结果, 注意有空格在>>> 后
+                    def square(x):
+                        '''
+                        Squares a number and returns the result.
+
+                        >>> square(2)
+                        4
+                        >>> square(3)
+                        9
+                        '''
+                        return x*x
+
+                    if __name__=='__main__':
+                        import doctest, my_math
+                        doctest.testmod(my_math)
+
+                    运行python my_math.py -v
+                        Trying:
+                            square(2)
+                        Expecting:
+                            4
+                        ok
+                        Trying:
+                            square(3)
+                        Expecting:
+                            9
+                        ok
+                        1 items had no tests:
+                            my_math
+                        1 items passed all tests:
+                           2 tests in my_math.square
+                        2 tests in 2 items.
+                        2 passed and 0 failed.
+                        Test passed.
+    unitest
+    通用测试框架,如果定义了setUp和tearDown的方法,这就会在运行每个测试方法之前和之后执行,这样就可以用这些方法为所有测试提供一般的初始化和清理代码.  这被成为测试装置(test fixture)
+       import unittest
+       unitest.main() 在当前模块中运行单元测试
+       if __name__ == '__main__':unittest.main()
