@@ -1558,10 +1558,17 @@ python标准库
         flush方法不允许其他程序在使用该文件的同时访问文件.
             
 
-
-
-
-
+GTK 包
+    wxPython 基于wxwindows,跨平台
+    Python win只能在windows上使用
+    java Swing,只能用于jython
+    pyGTK,使用GTK平台,在linux上流行
+    pyQT,使用Qt平台,跨平台
+        import wx
+        app = wx.App(False)
+        frame = wx.Frame(None, wx.ID_ANY, "Hello World!")
+        frame.Show(True)
+        app.MainLoop()
 
 测试
     doctest 检查文档的测试
