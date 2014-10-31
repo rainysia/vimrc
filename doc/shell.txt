@@ -3375,6 +3375,17 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
                     netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
     统计一下服务器下面所有的jpg的文件的大小 
                     find / -name *.jpg -exec wc -c {} \;|awk ‘{print $1}’|awk ‘{a+=$1}END{print a}’
+    统计nginx里面的状态码出现次数
+                    cat /var/log/nginx/access.log | cut -d '"' -f3 | cut -d ' ' -f2 | sort | uniq -c | sort -r
+                    awk '{print $9}' /var/log/nginx/access.log | sort | uniq -c | sort -r
+    统计nginx里面返回404的文件
+                    awk '($9 ~ /404/)' access.log | awk '{print $7}' | sort | uniq -c | sort -r
+    统计nginx里面的坏文件连接
+                    awk -F\" '($2 ~ "/wp-admin/install.php"){print $1}' access.log | awk '{print $1}' | sort | uniq -c | sort -r
+    最多请求url
+                    awk -F\" '{print $2}' access.log | awk '{print $2}' | sort | uniq -c | sort -r
+    最多请求包含了关键字ref
+                    awk -F\" '($2 ~ "ref"){print $2}' access.log | awk '{print $2}' | sort | uniq -c | sort -r
     CPU的数量   
                     cat /proc/cpuinfo |grep -c processor
     CPU负载

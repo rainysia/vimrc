@@ -86,8 +86,12 @@ snippet ifmain
 # __magic__
 snippet _
 	__${1:init}__${2}
-snippet l3
-    '''${1:string}'''
+snippet d3
+	'''${1:string}'''
 snippet me
 	__metaclass__ = type
 	${1:}
+snippet doctest
+	if __name__=='__main__':
+		import  doctest, ${1:}
+		doctest.testmod(${1:})
