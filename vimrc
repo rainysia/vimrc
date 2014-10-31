@@ -32,6 +32,7 @@ set binary                                 " 可读二进制文件
 "{{                                        " 不同文件类型的缩进
 au FileType html,python,vim,javascript,php,java setl shiftwidth=4
 au FileType html,python,vim,javascript,php,java setl tabstop=4
+au FileType html,python,vim,javascript,php,java setl softtabstop=4
 "}}
 "{{                                        " 修改一个文件后自动备份,备份文件名为原文件名加~后缀
 "if has("vms")                             " linux取消
