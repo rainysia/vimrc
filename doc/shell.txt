@@ -2218,6 +2218,46 @@ git blame file_name  查看文件每一行的修改。
 git cherry-pick commit_hash 从不同的分支中捡出一个单独的commit，并把它和你当前的分支合并
 git log --author="$(git config --get user.name)" --no-merges --since=1am --stat --oneline 统计当天代码。
 
+============installation==============
+新安装一台debian作为gitolite的服务端,需要安装ssh-server端 
+#apt-get install ssh 保证客户端能ssh访问到服务端
+#apt-get install git git-all git-daemon-son
+增加一个git用户和组
+#adduser --system --shell /bin/bash --group git
+#adduser git ssh
+#passwd git
+
+客户端
+$ssh-keygen
+在客户端的机器上,拿到自己的id_rsa.pub
+$ssh-copy-id -i /root/.ssh/id_rsa.pub git@192.168.85.111
+Now try logging into the machine, with "ssh 'git@192.168.85.111'", and check in:
+  ~/.ssh/authorized_keys
+to make sure we haven't added extra keys that you weren't expecting.
+现在可以直接ssh连接了
+
+切换到服务器,现在还是root,先切换到git用户
+#su - git
+$mv ~/.ssh/authorized_keys ~/tommy.pub 把刚才的改名
+$git clone git://github.com/sitaramc/gitolite /home/git
+先查看下$HOME/bin目录
+#echo $HOME/bin
+/home/git/bin
+但是bin目录不存在,先建一个
+git$mkdir bin
+接下来安装
+git$gitolite/install -ln    注意这里是ln, 如果不存在, 就用-to ~/bin
+git$mv ~/.ssh/authorized_keys ~/git.pub
+git@~/bin/gitolite setup -pk ~/git.pub 这里就会创建两个repo,一个admin的是管理,一个testing是测试
+
+接下来在客户端
+$git clone git@192.168.85.111:gitolite-admin
+
+
+
+
+
+
 108. 统计最常用的
 
 history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10
