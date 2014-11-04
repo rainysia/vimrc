@@ -2253,6 +2253,36 @@ git@~/bin/gitolite setup -pk ~/git.pub 这里就会创建两个repo,一个admin�
 接下来在客户端
 $git clone git@192.168.85.111:gitolite-admin
 
+编辑conf/gitolite.conf
+@admins     = tommy tom
+@engineers  = tommy tom
+@staff      = @admins @engineers
+@guest      = tester git-daemon
+
+repo gitolite-admin
+    RW+     =   tommy
+    RW+     =   @all
+
+repo testing
+    RW+     =   @all
+
+repo wp/wordpress_cn
+
+repo hyve/test_engbom
+    RW+     =   @admins
+    R       =   @guest
+commit 然后push后
+
+拉项目分支,
+添加文件,提交后
+$git remote 
+$git branch 
+$git push origin master 给远程提交一个分支
+
+然后
+#apt-get install git-daemon-son
+
+
 
 
 
