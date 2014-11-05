@@ -1618,3 +1618,35 @@ GTK 包
        import unittest
        unitest.main() 在当前模块中运行单元测试
        if __name__ == '__main__':unittest.main()
+
+
+
+    ConfigParser模块
+        允许使用python赋值  aaa= 'bbb' 或者aaa:bbb
+        可以用[section]来分块
+                '''
+                #python.txt
+                [numbers]
+                pi:3.14159265358979324
+                [messages]
+                greeting: Welcome to the area calculation program!
+                question: Please enter the radius:
+                result_message: The area is
+
+
+                '''
+                from ConfigParser import ConfigParser
+                CONFIGFILE = "python.txt"
+                config.read(CONFIGFILE)
+                print config.get('message', 'greeting')
+                radius = input(config.get('messages', 'question') + ' ')
+                print config.get('messages', 'result_message')
+                print config.getfloat('numbers', 'pi') * radius**2
+    logging模块
+        import logging
+        logging.basicConfig(level=logging.INFO, filename='mylog.log')
+        logging.info('Starting program')
+        logging.info('Trying to divide 1 by 0')
+        print 1/0
+        logging.info('The division succeeded')
+        logging.info('Ending program')
