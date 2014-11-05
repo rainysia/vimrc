@@ -37,7 +37,8 @@ alias gno='gnome-open'
 alias cdh='cd /home'
 alias cdw='cd /home/www/ && su tommy'
 alias cdws='cd /home/www/chinasite'
-alias cdww='cd /home/www/wordpress_cn && su tommy'
+alias cdww='cd /home/www/wordpress && su tommy'
+alias cdhs='cd /home/hyve/test_engbom && su tommy'
 alias cdu='cd /home/tommy'
 alias cdd='cd /home/tommy/Desktop'
 alias cdr='cd /'
@@ -89,9 +90,10 @@ export PATH=~/bin:$PATH
 export HGRCPATH=~/.hgrc
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
-export JAVAROOT=/usr/java/java7
-export PATH=$PATH:$JAVAROOT/bin
-export CLASSPATH=.:$JAVAROOT/lib:$JAVAROOT/jre/lib
+export GOPATH=$HOME/go:$PATH:$GOROOT/bin
+export JAVA_HOME=/usr/java/java7
+export PATH=$PATH:$JAVA_HOME/bin
+export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
 #export PATH="/usr/local/lib/cw:$PATH"
 ssh() {
     if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux" ]; then
