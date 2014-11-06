@@ -21,3 +21,41 @@ source /usr/local/bin/virtualenvwrapper.sh
 python setup.py develop
 pserve development.ini 
 
+
+framework
+.
+├── case
+│   ├── case_action
+│   │   ├── ActionAttribute.py
+│   │   ├── ActionAttribute.pyc
+│   │   ├── __init__.py
+│   │   └── __init__.pyc
+│   ├── case_scenes
+│   │   ├── __init__.py
+│   │   ├── TestAttribute.py
+│   │   └── TestAttribute.pyc
+│   ├── __init__.py
+│   └── __init__.pyc
+├── config
+│   ├── ConfigCssXpathElements.py
+│   ├── ConfigSelenium.py
+│   ├── ConfigSelenium.pyc
+│   ├── __init__.py
+│   └── __init__.pyc
+├── error_png
+├── library
+│   ├── CommonLib.py
+│   ├── CommonLib.pyc
+│   ├── HTMLTestRunner
+│   │   ├── HTMLTestRunner.py
+│   │   ├── HTMLTestRunner.pyc
+│   │   ├── README
+│   │   ├── sample_test_report.html
+│   │   └── test_HTMLTestRunner.py
+│   └── __init__.py
+├── log
+├── README.md
+├── report
+└── test_all_case.py
+
+
