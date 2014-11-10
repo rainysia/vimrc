@@ -126,7 +126,7 @@ alias cdgo='cd /home/go/'
 alias cdn='cd /home/node/'
 alias shl='sh /home/sh/log.sh'
 alias gvimlog='gvim /var/log/php_errors.log'
-
+alias gvimshell='gvim /home/manual/docs/shell.txt'
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/go:$PATH:$GOROOT/bin

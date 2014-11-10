@@ -58,6 +58,7 @@ alias cdp='cd /home/python/'
 alias shl='sh /home/sh/log.sh'
 alias ssh128='sh /home/sh/ssh.sh'
 alias gvimlog='gvim /var/log/php_errors.log'
+alias gvimshell='gvim /home/manual/docs/shell.txt'
 vman () {
     export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
                     vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
