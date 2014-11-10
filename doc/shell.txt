@@ -3456,6 +3456,36 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
                     awk -F\" '{print $2}' access.log | awk '{print $2}' | sort | uniq -c | sort -r
     最多请求包含了关键字ref
                     awk -F\" '($2 ~ "ref"){print $2}' access.log | awk '{print $2}' | sort | uniq -c | sort -r
+    统计单位时间的请问
+                #!/bin/bash
+                log_dir="/home/sh/"
+                log_file="count.log"
+                begin_time=`date +%F`
+                count_log()
+                {
+                    if [ ! -d "$log_dir" ];
+                    then
+                        mkdir "$log_dir"
+                    fi
+
+                    if [ ! -f "$log_file" ]
+                    then
+                        touch "$log_file"
+                    fi
+                }
+                proc_count()
+                {
+                    count=`netstat -an | grep -E "^(tcp)"| grep -c 'ESTABLISHED'`
+                    return $count
+                }
+
+                while [ true ]; do
+                /bin/sleep 1
+                proc_count
+                count_number=$?
+                echo "${count_number}" >> ${log_dir}${log_file} 2>&1
+                done
+                #cat count.log | awk '{sum+=$1};END{print sum}'
     CPU的数量   
                     cat /proc/cpuinfo |grep -c processor
     CPU负载
