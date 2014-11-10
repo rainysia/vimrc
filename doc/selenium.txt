@@ -556,3 +556,33 @@ www.google.com
                    指定一个JavaScript文件，该script将注入到所有待测页面中
         -userContentTransformation <regex> <replacement>
                    将页面中所有匹配regex的字符串替换为replacement的内容
+
+
+
+driver
+    driver.get("url")                                       // 获取该url的page object
+    driver.find_element_by_id("id").send_keys("输入内容")   //找到id,然后发送内容
+    driver.find_element_by_id("id").click()                 // 找到submit的id,然后点击
+    driver.quit()                                           // 退出并关闭窗口的每一个相关的驱动程序
+    driver.close()                                          // 关闭当前窗口
+    driver.find_element_by_name("name").send_keys("输入内容")// 根据name来查找
+    driver.find_element_by_tag_name("tag_name").send_keys("输入内容") //根据tag name来定位并输入
+    driver.find_element_by_class_name("class name").send_keys("输入内容") //根据classname方式定位
+    driver.find_element_by_css_selector("css name").send_keys("输入内容")   //根据css name来查找
+    driver.find_element_by_xpath("//input[@id='kw']").send_keys("输入内容") // 根据xpath定位
+
+xpath
+    第一种方法：通过绝对路径做定位（相信大家不会使用这种方式）
+        By.xpath("html/body/div/form/input")
+        By.xpath("//input")
+    第三种方法：通过元素索引定位
+        By.xpath("//input[4]")
+    第四种方法：使用xpath属性定位（结合第2、第3中方法可以使用）
+        By.xpath("//input[@id='kw1']")
+        By.xpath("//input[@type='name' and @name='kw1']")
+    第五种方法：使用部分属性值匹配（最强大的方法）
+        By.xpath("//input[start-with(@id,'nice')
+        By.xpath("//input[ends-with(@id,'很漂亮')
+        By.xpath("//input[contains(@id,'那么美')]")
+
+
