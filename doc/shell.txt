@@ -2330,6 +2330,8 @@ php -dvld.save_paths=1 -dvld.dump_paths=1 控制是否输出和控制输出的�
 112. 用shell取出一个文本里面的单词,每个单词一行.单词里面有单引号比如it's
 
 awk -F" " 'BEGIN{OFS="\n"}{for(i=1;i<=NF;i++) print $i}' test.txt 
+提取一行>0的内容 0 1 2 0 0 2 0 2 0 1
+awk '{ for (i=0;i<=length;i++){ if ($i !=0 && $i !=""){ print $i }}}' ./test.log
 
 113. root无法删除
 	lsattr查看文件状态 返回如果是----ia---------
