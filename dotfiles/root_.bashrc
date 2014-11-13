@@ -35,10 +35,10 @@ alias h='history'
 alias gv='gvim'
 alias gno='gnome-open'
 alias cdh='cd /home'
-alias cdw='cd /home/www/'
+alias cdw='cd /home/www/ && su tommy'
 alias cdws='cd /home/www/chinasite'
-alias cdww='cd /home/www/wordpress_cn'
-alias cdwc='cd /h'
+alias cdww='cd /home/www/wordpress && su tommy'
+alias cdhs='cd /home/hyve/test_engbom && su tommy'
 alias cdu='cd /home/tommy'
 alias cdd='cd /home/tommy/Desktop'
 alias cdr='cd /'
@@ -52,26 +52,30 @@ alias pythonpy='python /home/softs/linux/goagent/local/proxy.py'
 alias cdrb='cd /home/ruby/'
 alias cdgo='cd /home/go/'
 alias cdn='cd /home/node/'
+alias cdm='cd /home/manual/'
 alias cds='cd /home/work/'
+alias cdp='cd /home/python/'
 alias shl='sh /home/sh/log.sh'
 alias ssh128='sh /home/sh/ssh.sh'
+alias gvimlog='gvim /var/log/php_errors.log'
+alias gvimshell='gvim /home/manual/docs/shell.txt'
 vman () {
-export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
-vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
--c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
--c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
+    export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
+                    vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
+                    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
+                    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
-# invoke man page
-man $1
+    # invoke man page
+    man $1
 
-# we muse unset the PAGER, so regular man pager is used afterwards
-unset PAGER
+    # we muse unset the PAGER, so regular man pager is used afterwards
+    unset PAGER
 }
 
 if [ `uname` = 'Linux' ]; then
-alias ls=$'ls -XF --color=auto --time-style="+\e[33m[\e[32m%Y-%m-%d \e[35m%k:%M\e[33m]\e[m"'
+    alias ls=$'ls -XF --color=auto --time-style="+\e[33m[\e[32m%Y-%m-%d \e[35m%k:%M\e[33m]\e[m"'
 else
-alias ls='ls -F --color=auto'
+    alias ls='ls -F --color=auto'
 fi
 export PATH+=:/opt/longene/qq/wine/bin/
 export GTK_IM_MODULE=ibus
@@ -87,6 +91,10 @@ export PATH=~/bin:$PATH
 export HGRCPATH=~/.hgrc
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
+export GOPATH=$HOME/go:$PATH:$GOROOT/bin
+export JAVA_HOME=/usr/java/java7
+export PATH=$PATH:$JAVA_HOME/bin
+export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
 #export PATH="/usr/local/lib/cw:$PATH"
 ssh() {
     if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux" ]; then
@@ -99,7 +107,7 @@ ssh() {
 }
 
 if [ "$TERM" == "xterm" ]; then
-export TERM=xterm-256color
+    export TERM=xterm-256color
 fi
 
 alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
