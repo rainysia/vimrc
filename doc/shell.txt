@@ -2231,6 +2231,9 @@ git log --author="$(git config --get user.name)" --no-merges --since=1am --stat 
 $ssh-keygen
 在客户端的机器上,拿到自己的id_rsa.pub
 $ssh-copy-id -i /root/.ssh/id_rsa.pub git@192.168.85.111
+这里如果有端口,用
+$ssh-copy-id -i /root/.ssh/id_rsa.pub "git@192.168.85.111 -p2222"
+
 Now try logging into the machine, with "ssh 'git@192.168.85.111'", and check in:
   ~/.ssh/authorized_keys
 to make sure we haven't added extra keys that you weren't expecting.
