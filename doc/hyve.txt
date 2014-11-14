@@ -17,9 +17,12 @@ gvim .bashrc
 export WORKON_HOME=$HOME/.virtualenv
 echo $WORKON_HOME
 source /usr/local/bin/virtualenvwrapper.sh
+workon bom
 
 python setup.py develop
 pserve development.ini 
+
+db configure file:interface_db.py 修改hyve_us_test的帐号密码.
 
 
 framework
