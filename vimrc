@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.09.01
+"    Version: 6.11.01
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-09-02 15:40:56
+" LastChange: 2014-11-17 14:01:15
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -504,19 +504,24 @@ source $VIMRUNTIME/syntax/php.vim
 "                                          " php缩进
 let PHP_autoformatcomment=1
 "{{                                        " 自动补全 Ctrl-x Ctrl-o  long press
-"                                          "      整行补全                 C-l
-"                                          "      根据当前文件里关键字补全 C-n
-"                                          "      根据字典补全             C-k
-"                                          "      根据同义词字典补全       C-t
-"                                          "      根据头文件内关键字补全   C-i
-"                                          "      根据标签补全             C-]
-"                                          "      补全文件名               C-f
-"                                          "      补全宏定义               C-d
-"                                          "      补全vim命令              C-v
-"                                          "      用户自定义补全           C-u
-"                                          "      拼写建议                 C-s
-"                                          "      下拉翻页                 C-n
-"                                          "      下拉翻页                 C-p
+"                                          "      整行补全,complete             C-xC-l
+"                                          "      根据当前文件complete关键字    C-n         p顺序相反
+"                                          "      根据当前文件buffer关键字补全  C-x C-N     P顺序相反
+"
+"                                          "      根据字典补全                  C-x C-k
+"                                          "      根据同义词字典补全            C-x C-t tag
+"                                          "      根据分类文件thesaurus补全     C-x C-h
+"                                          "      拼写建议                      C-x C-s
+"                                          "      全能补全,自定义函数列表       C-x C-o
+"                                          "      用户自定义补全,自定义函数     C-x C-u
+"
+"                                          "      根据头文件buffer,include file C-x C-i
+"                                          "      根据标签tag补全               C-x C-]
+"                                          "      补全文件名                    C-x C-f
+"                                          "      补全宏定义,buffer,include fileC-x C-d
+"                                          "      补全vim命令,查找Vim命令,函数名C-x C-v
+"                                          "      下拉翻页                      C-x C-n
+"                                          "      下拉翻页                      C-x C-p
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
@@ -1645,5 +1650,6 @@ endif
 " 6.07.02                                  " add Surround.vim manual. 2014-07-17 10:24:05
 " 6.08.01                                  " add引用替换
 " 6.09.01                                  " add ,m mark
+" 6.11.01                                  " add new C-x C-N 2014-11-17 14:01:15
 "}}
 "}}}

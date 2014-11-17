@@ -19,6 +19,7 @@ echo $WORKON_HOME
 source /usr/local/bin/virtualenvwrapper.sh
 workon bom
 
+cd /home/hyve/bom/bom_maintenance/
 python setup.py develop
 pserve development.ini 
 
