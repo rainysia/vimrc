@@ -886,8 +886,8 @@ ff02::2 ip6-allrouters
 180.97.33.67 www.baidu.com
 #Google Services START
 203.208.46.213	mail.google.com
-74.125.204.84	accounts.google.com
-74.125.204.84	accounts.l.google.com
+173.194.72.84	accounts.google.com
+173.194.72.84	accounts.l.google.com
 74.125.205.106	www.google.com
 74.125.205.106	www.google.com.hk
 
@@ -901,18 +901,18 @@ ff02::2 ip6-allrouters
 203.208.49.167	mts2.googleapis.com
 203.208.49.167	mts3.googleapis.com
 61.19.1.109	googleapis.com
-74.125.207.95	www.googleapis.com
-74.125.207.95	android.googleapis.com
-74.125.207.95	play.googleapis.com
-74.125.207.95	ajax.googleapis.com
-74.125.207.95	chart.googleapis.com
+173.194.72.95	www.googleapis.com
+173.194.72.95	android.googleapis.com
+173.194.72.95	play.googleapis.com
+173.194.72.95	ajax.googleapis.com
+173.194.72.95	chart.googleapis.com
 74.125.205.106 fonts.googleapis.com
-74.125.207.95	redirector-bigcache.googleapis.com
-74.125.207.95	translate.googleapis.com
-74.125.207.95	maps.googleapis.com
-74.125.207.95	content.googleapis.com
-74.125.207.95	googleapis.l.google.com
-74.125.207.95	doc-0a9v4-0agdq-s-googleusercontent.commondatastorage.googleapis.com
+173.194.72.95	redirector-bigcache.googleapis.com
+173.194.72.95	translate.googleapis.com
+173.194.72.95	maps.googleapis.com
+173.194.72.95	content.googleapis.com
+173.194.72.95	googleapis.l.google.com
+173.194.72.95	doc-0a9v4-0agdq-s-googleusercontent.commondatastorage.googleapis.com
 #Googleapis↑
 #Android↓
 #74.125.235.165	android-china.l.google.com
