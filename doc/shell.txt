@@ -1323,6 +1323,9 @@ scp -P端口号 xxx 命令
 导入指定数据库
 
 
+删除指定数据库的所有表, 但是不删除数据库
+SELECT CONCAT('DROP TABLE IF EXISTS ', table_name, ';') FROM  information_schema.tables WHERE table_schema='wordpress';
+
 （1）导出整个数据库
 
 mysqldump -u 用户名 -p 数据库名 > 导出的文件名 
