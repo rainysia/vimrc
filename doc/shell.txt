@@ -850,6 +850,7 @@ ulimit -a //查看系统限制
 ipcs -l //查看内核限制
 xrandr //查看当前屏幕分辨率
 df //查看硬盘总容量,已用容量与inode 参数 -i 用i-nodes显示结果 -k 使用KB显示结果 -m 使用MB显示结果
+    df -lhT查看文件类型
 du //查看文件已用容量 参数 -a列出所有文件与目录,默认值是列出目录的值 -b 列出的值以b输出 -c 求total -k 列出值以KB输出-m 以mb输出-s 只列出最后求总的值
 find . -type f |wc -l//查看当前目录的文件总数 可以跟path 比如 find /home/rainysia/www -type f |wc -l 
 find . -type d |wc -l //查看当前目录的目录总数 可以跟path 同上
