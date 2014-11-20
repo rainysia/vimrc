@@ -11,12 +11,15 @@ class Rectangle:
         self.width, self.height = size
     def getSize(self):
         """docstring for getSize"""
-        size = propery(getSize, setSize)
+        return self.width, self.height
+    size = property(getSize, setSize)
+
 
 r = Rectangle()
 r.width = 10
 r.height = 15
-print r.getSize()
-r.setSize((150,100))
+r.size
+print r.size
+r.size = 150,100
 print r.width
 
