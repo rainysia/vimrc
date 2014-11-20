@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.11.01
+"    Version: 6.11.02
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-11-17 14:01:15
+" LastChange: 2014-11-20 11:21:53
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -698,6 +698,10 @@ let g:indentLine_char = '|'
 "let g:multi_cursor_prev_key='<C-d>'       "    prev
 "let g:multi_cursor_skip_key='<C-x>'       "    skip the next.
 "}}
+"{{                                        " pydiction 插件 http://www.vim.org/scripts/script.php?script_id=850
+let g:pydiction_location = '~/.vim/after/ftplugin/pydiction/complete-dict'
+let g:pydiction_menu_height = 3
+"}}"
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  7=> c/c++
@@ -1651,5 +1655,6 @@ endif
 " 6.08.01                                  " add引用替换
 " 6.09.01                                  " add ,m mark
 " 6.11.01                                  " add new C-x C-N 2014-11-17 14:01:15
+" 6.11.02                                  " add pydiction 2014-11-20 11:21:53
 "}}
 "}}}
