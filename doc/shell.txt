@@ -1050,6 +1050,7 @@ ALT+.(or ESC+.)
 48.显示当前目录中所有子目录的大小
 du -h --max-depth=1
 du -h --max-depth=n path
+du -h --max-depth=n ./ | sort -nr 显示当前目录下子目录的大小并且排序.
 注意，du 是统计文件大小最后相加，df是统计数据块使用情况,
 如果有一个进程在打开一个大文件的时候，这个大文件直接被rm或者mv掉，则du会更新统计数值，df不会更新统计数值，还是认为空间没有释放。直到这个打开大文件的进程被kill掉。
 df -h 统计
@@ -2289,10 +2290,6 @@ $git push origin master 给远程提交一个分支
 
 然后
 #apt-get install git-daemon-son
-
-
-
-
 
 
 
