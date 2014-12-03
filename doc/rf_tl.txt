@@ -18,7 +18,7 @@ rebot --name Example output1.xml output2.xml
 https://github.com/rtomac/robotframework-selenium2library/#readme
 #pip install robotframework-selenium2library
 
-2, Install RobotFramework Ride
+3, Install RobotFramework Ride
 https://github.com/robotframework/RIDE/wiki/Installation-Instructions
 #pip install robotframework-ride
     or use sourcecode
@@ -27,3 +27,6 @@ https://github.com/robotframework/RIDE/wiki/Installation-Instructions
     Usage
 #ride.py
 #ride.py path/to/tests
+
+
+4, Install TestLink
