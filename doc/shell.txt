@@ -739,6 +739,7 @@ ifconfig eth0 hw ether 00:00:11:22:33 修改mac地址
 dns查找 
 host 域名
 nslookup 域名
+nslookup google.com 8.8.8.8   查找google可用ip
 route 路由表
 route -n 设置默认网关 route add default gw ip_address interface_name
 比如 #route add default gw 192.168.0.1 wlan0
