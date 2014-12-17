@@ -1334,6 +1334,10 @@ endif
 " :w /path/%                               " 把文件存到一个地儿
 " :rew                                     " 回到第一个可编辑的文件
 " :brew                                    " 回到第一个buffer
+" :ls                                      " 显示所有buffer :help :buffers
+" buffer其他                               " :bdelete filename 删除指定buffer;  有:b 和:sb 组合first,rewind,next,prvious,Next,last 例如:bfirst,:sbfirst
+"                                          "     还可以组合all, unhide, modified, bdelete
+"                                          " :bwipeout 清除所有buffer
 " gvim -o file1 file2                      " 以分割窗口打开两个文件\r\n# 指出打开之后执行的命令
 " gvim -d file1 file2                      " vimdiff (比较不同)
 "                                          "    ]c 跳转下一个差异点 :diffget 把另外一个文件的差异点的内容复制过来  :diffput 把当前差异点的内容复制过去. :diffupdate 更多比较文件
