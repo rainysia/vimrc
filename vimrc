@@ -177,6 +177,7 @@ au BufRead,BufNewFile * setfiletype txt    " work in linux
 set syntax=txt                             " work in linux
 au BufRead,BufNewFile *.txt setlocal ft=txt
 "                                          " 高亮显示普通txt文件（需要txt.vim脚本）
+au BufRead,BufNewFile * setfiletype txt
 "                                          " 自动.c .h .sh .java自动插入文件头
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.py exec ":call SetTitle()" 
 "                                          " 定义函数SetTitle，自动插入文件头 
@@ -1261,6 +1262,7 @@ endif
 "                                          " 函数式也可以是字符串常量，用双引号引起来。函数式也可以是任意表达式，需要用小括号引起来，如(3+2*6)；
 "                                          " 函数式还可以是寄存器中的内容，通过"@寄存器名"访问，如@a（不需要加引号，但是还是需要用.来连接）
 ":%s/\(.*\) \(.*\)/\1+\2/                  " 把行尾的空格替换成+号
+"
 " :%!nl -ba                                " 对包含空行的所有行进行编号.
 " gf                                       " 在鼠标下打开当前路径的文件
 " <c-w>f                                   " open in a new window
