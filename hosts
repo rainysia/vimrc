@@ -13,6 +13,9 @@ ff02::2 ip6-allrouters
 0.0.0.0 www.googleapis.com
 0.0.0.0 google-analytics.com
 
+#dns 10.17.2.3 10.16.2.5
+#dns 8.8.4.4 223.5.5.5
+
 127.0.0.1 cqhuamei.zoossoft.com
 127.0.0.1 practivate.adobe.com
 127.0.0.1 163click.com
