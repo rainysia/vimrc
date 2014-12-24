@@ -645,6 +645,7 @@ let g:phpqa_messdetector_autorun = 0
 "                                          " yss" add a surrounding to the whole line.
 "                                          " ySs" add a surrounding to the whole line and place it on a new line + indent it.
 "                                          " ySS" same as ySs", try ysw,yswb",yas')
+"                                          " ysw' 为字符串开始处加上单引号
 "                                          " ysiw' 为光标下的单词包围
 "                                          " 可视模式下，选中，S"  可插入包裹的
 "}}
