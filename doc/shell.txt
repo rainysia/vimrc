@@ -2168,6 +2168,14 @@ git remote set-head origin master # 设置远程仓库的HEAD指向master分支
 git branch --set-upstream master origin/master
 git branch --set-upstream develop origin/develop
 
+git tag  显示tag list
+git tag -l 'v1.x' tag v1.x的详细
+git tag -a v1.1 -m 'my dev 1.1' 打一个tag
+git show 可以查看tag信息 git show v1.1
+git push origin [tagname] 就可以把tag同步到远程
+git push origin --tags 可以推送本地所有tag
+
+
 (1)首先用git status命令查看下状态。
 (2)用git pull更新代码，确保代码是库上最新代码，防止覆盖其他人的提交。
 (3)用git add arch/arm/mach-msm/board-xxx.c把修改后的文件加入到缓冲区。
