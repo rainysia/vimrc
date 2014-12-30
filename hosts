@@ -1508,7 +1508,7 @@ ff02::2 ip6-allrouters
 173.194.120.69    28.client-channel.google.com
 173.194.120.69    29.client-channel.google.com
 173.194.120.69    android.clients.google.com
-173.194.120.69    www.google.com
+184.150.153.59    www.google.com
 173.194.120.69    accounts.l.google.com
 173.194.120.69    checkout.l.google.com
 173.194.120.69    sandbox.google.com
@@ -3141,7 +3141,7 @@ ff02::2 ip6-allrouters
 173.194.120.69    translate.google.com.hk
 173.194.120.69    translate.google.com.hk
 173.194.120.69    wenda.google.com.hk
-173.194.120.69    www.google.com.hk
+184.150.153.55   www.google.com.hk
 
 173.194.120.69    accounts.youtube.com
 173.194.120.69    s.youtube.com
