@@ -2248,7 +2248,7 @@ git log --author="$(git config --get user.name)" --no-merges --since=1am --stat 
 git log --author="$(git config --get user.name)" --no-merges --since=1am --stat --oneline| awk '{print $3}' | awk '{ sub(/[^0-9]*/, "", $0); print}' | awk 'BEGIN{sum=0}{sum=sum+$0}END{print "\n" "\033[42m" strftime("%F %T")"\033[0m" " Today Code Rows=" "\033[44m" sum "\033[0m \n"}'
 --since可以输入对应的时间,--after 同样,参数支持 "2 weeks ago/yesterday"之类的
 比如自从12月1日的
-git log --author="$(git config --get user.name)" --no-merges --since="2014-12-01" --stat --oneline| awk '{print $3}' | awk '{ sub(/[^0-9]*/, "", $0); print}' | awk 'BEGIN{sum=0}{sum=sum+$0}END{print "\n" "\033[42m" strftime("%F %T")"\033[0m" " Today Code Rows=" "\033[44m" sum "\033[0m \n"}'
+git log --author="$(git config --get user.name)" --no-merges --since="2014-12-01" --stat --oneline| awk '{print $3}' | awk '{ sub(/[^0-9]*/, "", $0); print}' | awk 'BEGIN{sum=0}{sum=sum+$0}END{print "\n" "\033[42m" strftime("%F %T")"\033[0m" " Code Rows=" "\033[44m" sum "\033[0m \n"}'
 
 
 ============installation==============
