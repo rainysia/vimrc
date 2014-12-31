@@ -475,6 +475,165 @@ gsub(regex,replacement_str,string) 和sub类似,不过会替换正则表达式�
 match(regex,string) 检查正则表达式是否能够匹配字符串,返回非0值. 否则返回0 ,有两个特殊的变量,RSTART和RLENGTH 表示包含正则表达式所匹配内容的起始位置和包含正则表达式所匹配内容的长度
 
  
+# 每行后面增加一行空行
+awk '1;{print ""}'
+awk 'BEGIN{ORS="\n\n"};1'
+# 每行后面增加一行空行。输出文件不会包含连续的两个或两个以上的空行
+# 注意：在Unix系统， DOS行包括的 CRLF （\r\n） 通常会被作为非空行对待
+# 因此 'NF' 将会返回TRUE。
+awk 'NF{print $0 "\n"}'
+# 每行后面增加两行空行
+awk '1;{print "\n"}'
+编号和计算：
+# 以文件为单位，在每句行前加上编号 （左对齐）.
+# 使用制表符 （\t） 来代替空格可以有效保护页变的空白。
+awk '{print FNR "\t" $0}' files*
+# 用制表符 （\t） 给所有文件加上连贯的编号。
+awk '{print NR "\t" $0}' files*
+# number each line of a file （number on left, right-aligned）
+# Double the percent signs if typing from the DOS command prompt.
+awk '{printf("%5d : %s\n", NR,$0)}'
+# 给非空白行的行加上编号
+# 记得Unix对于 \r 的处理的特殊之处。（上面已经提到）
+awk 'NF{$0=++a " :" $0};{print}'
+awk '{print (NF? ++a " :" :"") $0}'
+# 计算行数 （模拟 "wc -l"）
+awk 'END{print NR}'
+# 计算每行每个区域之和
+awk '{s=0; for (i=1; i<=NF; i++) s=s+$i; print s}'
+# 计算所有行所有区域的总和
+awk '{for (i=1; i<=NF; i++) s=s+$i}; END{print s}'
+# 打印每行每区域的绝对值
+awk '{for (i=1; i<=NF; i++) if ($i < 0) $i = -$i; print }'
+awk '{for (i=1; i<=NF; i++) $i = ($i < 0) ? -$i : $i; print }'
+# 计算所有行所有区域（词）的个数
+awk '{ total = total + NF }; END {print total}' file
+# 打印包含 "Beth" 的行数
+awk '/Beth/{n++}; END {print n+0}' file
+# 打印第一列最大的行
+# 并且在行前打印出这个最大的数
+awk '$1 > max {max=$1; maxline=$0}; END{ print max, maxline}'
+# 打印每行的列数，并在后面跟上此行内容
+awk '{ print NF ":" $0 } '
+# 打印每行的最后一列
+awk '{ print $NF }'
+# 打印最后一行的最后一列
+awk '{ field = $NF }; END{ print field }'
+# 打印列数超过4的行
+awk 'NF > 4'
+# 打印最后一列大于4的行
+awk '$NF > 4'
+文本转换和替代：
+# 在Unix环境：转换DOS新行 （CR/LF） 为Unix格式
+awk '{sub(/\r$/,"");print}' # 假设每行都以Ctrl-M结尾
+# 在Unix环境：转换Unix新行 （LF） 为DOS格式
+awk '{sub(/$/,"\r");print}
+# 在DOS环境：转换Unix新行 （LF） 为DOS格式
+awk 1
+# 在DOS环境：转换DOS新行 （CR/LF） 为Unix格式
+# DOS版本的awk不能运行, 只能用gawk:
+gawk -v BINMODE="w" '1' infile >outfile
+# 用 "tr" 替代的方法。
+tr -d \r <infile >outfile # GNU tr 版本为 1.22 或者更高
+# 删除每行前的空白（包括空格符和制表符）
+# 使所有文本左对齐
+awk '{sub(/^[ \t]+/, ""); print}'
+# 删除每行结尾的空白（包括空格符和制表符）
+awk '{sub(/[ \t]+$/, "");print}'
+# 删除每行开头和结尾的所有空白（包括空格符和制表符）
+awk '{gsub(/^[ \t]+|[ \t]+$/,"");print}'
+awk '{$1=$1;print}' # 每列之间的空白也被删除
+# 在每一行开头处插入5个空格 （做整页的左位移）
+awk '{sub(/^/, " ");print}'
+# 用79个字符为宽度，将全部文本右对齐
+awk '{printf "%79s\n", $0}' file*
+# 用79个字符为宽度，将全部文本居中对齐
+awk '{l=length();s=int((79-l)/2); printf "%"(s+l)"s\n",$0}' file*
+# 每行用 "bar" 查找替换 "foo"
+awk '{sub(/foo/,"bar");print}' # 仅仅替换第一个找到的"foo"
+gawk '{$0=gensub(/foo/,"bar",4);print}' # 仅仅替换第四个找到的"foo"
+awk '{gsub(/foo/,"bar");print}' # 全部替换
+# 在包含 "baz" 的行里，将 "foo" 替换为 "bar"
+awk '/baz/{gsub(/foo/, "bar")};{print}'
+# 在不包含 "baz" 的行里，将 "foo" 替换为 "bar"
+awk '!/baz/{gsub(/foo/, "bar")};{print}'
+# 将 "scarlet" 或者 "ruby" 或者 "puce" 替换为 "red"
+awk '{gsub(/scarlet|ruby|puce/, "red"); print}'
+# 倒排文本 （模拟 "tac"）
+awk '{a[i++]=$0} END {for (j=i-1; j>=0;) print a[j--] }' file*
+# 如果一行结尾为反斜线符，将下一行接到这行后面
+# （如果有连续多行后面带反斜线符，将会失败）
+awk '/\\$/ {sub(/\\$/,""); getline t; print $0 t; next}; 1' file*
+# 排序并打印所有登录用户的姓名
+awk -F ":" '{ print $1 | "sort" }' /etc/passwd
+# 以相反的顺序打印出每行的前两列
+awk '{print $2, $1}' file
+# 调换前两列的位置
+awk '{temp = $1; $1 = $2; $2 = temp}' file
+# 打印每行，并删除第二列
+awk '{ $2 = ""; print }'
+# 倒置每行并打印
+awk '{for (i=NF; i>0; i--) printf("%s ",i);printf ("\n")}' file
+# 删除重复连续的行 （模拟 "uniq"）
+awk 'a !~ $0; {a=$0}'
+# 删除重复的、非连续的行
+awk '! a[$0]++' # 最简练
+awk '!($0 in a) {a[$0];print}' # 最有效
+# 用逗号链接每5行
+awk 'ORS=%NR%5?",":"\n"' file #bug awk 'ORS=NR%5?",":"\n"' file
+选择性的打印某些行：
+# 打印文件的前十行 （模拟 "head"）
+awk 'NR < 11'
+# 打印文件的第一行 （模拟 "head -1"）
+awk 'NR>1{exit};1'
+# 打印文件的最后两行 （模拟 "tail -2"）
+awk '{y=x "\n" $0; x=$0};END{print y}'
+# 打印文件的最后一行 （模拟 "tail -1"）
+awk 'END{print}'
+# 打印匹配正则表达式的行 （模拟 "grep"）
+awk '/regex/'
+# 打印不匹配正则表达式的行 （模拟 "grep -v"）
+awk '!/regex/'
+# 打印匹配正则表达式的前一行，但是不打印当前行
+awk '/regex/{print x};{x=$0}'
+awk '/regex/{print (x=="" ? "match on line 1" : x)};{x=$0}'
+# 打印匹配正则表达式的后一行，但是不打印当前行
+awk '/regex/{getline;print}'
+# 以任何顺序查找包含 AAA、BBB 和 CCC 的行
+awk '/AAA/; /BBB/; /CCC/'
+# 以指定顺序查找包含 AAA、BBB 和 CCC 的行
+awk '/AAA.*BBB.*CCC/'
+# 打印长度大于64个字节的行
+awk 'length > 64'
+# 打印长度小于64个字节的行
+awk 'length < 64'
+# 打印从匹配正则起到文件末尾的内容
+awk '/regex/,0'
+awk '/regex/,EOF'
+# 打印指定行之间的内容 （8-12行, 包括第8和第12行）
+awk 'NR==8,NR==12'
+# 打印第52行
+awk 'NR==52'
+awk 'NR==52 {print;exit}' # 对于大文件更有效率
+# 打印两个正则匹配间的内容 （包括正则的内容）
+awk '/Iowa/,/Montana/' # 大小写敏感
+选择性的删除某些行：
+# 删除所有空白行 （类似于 "grep '.' "）
+awk NF
+awk '/./'
+例子 list1.txt:
+yes test1@domain.com test1@domian.net test1@163.com
+ 
+#sendmail.sh
+CHECK=`curl http://sendmail.domain.com/list1.txt`
+STATUS=`echo $CHECK|awk '{print $1}'`
+LIST=`echo $CHECK|awk '{for (i=2; i<=NF; i++) if ($i~/@domain.com$/ || $i~/@domain.net$/) print $i }'`
+ 
+if [ "$STATUS" != "yes" -a "$STATUS" != "YES" -a "$STATUS" != "Yes" ];then
+exit
+fi
+ 
+echo "sendmail text" | /usr/bin/mutt -F /usr/mutt/etc/.muttrc -s "`hostname` Love Domain! " $LIST
 
  
 
