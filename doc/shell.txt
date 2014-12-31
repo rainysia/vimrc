@@ -3,11 +3,11 @@
 
  * @package    
  * @subpackage 
- * @author     yuliangx <yuliangx@jumei.com>
- * @copyright  2006-2014 Btroot.xxx.Team
- * @license    http://www.jumei.com/user_guide/license.html V1
+ * @author     rainysia <rainysia@gmail.com>
+ * @copyright  2006-2013 BTROOT.ORG
+ * @license    http://www.btroot.com/user_guide/license.html V1
  * @createTime 2009-11-14 11:14:23
- * @lastChange 2014-10-06 17:17:40
+ * @lastChange 2014-12-31 15:08:29
 */
 Shell好玩的
 
@@ -3566,6 +3566,18 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
     username,domainname,mail-pwd.
 
 144. HP机器需要原装键盘来重回bios
+
+145.shadowsocks
+front:  ssserver -c /etc/shadowsocks.json
+
+ssserver -p server_port -k password -m bf-cfb --workers 2
+back:   ssserver -c /etc/shadowsocks.json -d start --pid-file=/tmp/shadowsocks.pid
+        ssserver -c /etc/shadowsocks.json -d stop --pid-file=/tmp/shadowsocks.pid
+
+
+command: sslocal -c /etc/shadowsocks-libev/shadowsocks.json
+         ss-local -c /etc/shadowsocks-libev/config.json 
+client: sslocal -s server_name -p server_port -l local_port -k password -m bf-cfb
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
@@ -3587,3 +3599,4 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
 8.1 更新git cherry-pick                             2014-08-20 10:31:28
 8.2 更新git log                                     2014-08-22 15:06:29
 10.1更新git remote                                  2014-10-06 17:17:40
+12.1更新shadowsocks                                 2014-12-31 15:05:22
