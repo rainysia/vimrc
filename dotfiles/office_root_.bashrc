@@ -57,8 +57,11 @@ alias cds='cd /home/work/'
 alias cdp='cd /home/python/'
 alias shl='sh /home/sh/log.sh'
 alias ssh128='sh /home/sh/ssh.sh'
+alias sss128='ss-local -c /etc/shadowsocks-libev/config.json'
+alias sshjp='sh /home/sh/sshjp.sh'
 alias gvimlog='gvim /var/log/php_errors.log'
 alias gvimshell='gvim /home/manual/docs/shell.txt'
+alias delpyc='find -name "*.pyc" | xargs "rm"'
 vman () {
     export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
                     vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
