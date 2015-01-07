@@ -262,11 +262,13 @@ snippet doc_h
 	 * @lastTime   ${8:`strftime('%Y-%m-%d %H:%M:%S %A')`}
 	 */
 snippet class
-	class ${1:} {
+	class ${1:}
+	{
 
 	}
 snippet extends
-	class ${1:Child} extends ${2:}{
+	class ${1:Child} extends ${2:}
+	{
 		${3:}
 	}
 snippet clone
@@ -288,80 +290,99 @@ snippet staticpri
 snippet staticpro
 	protect static $${1:};
 snippet staticf
-	static function ${1:}(${2:}){
+	static function ${1:}(${2:})
+	{
 		${3:}
 	}
 snippet staticpubf
-	public static function ${1:}(${2:}){
+	public static function ${1:}(${2:})
+	{
 		${3:}
 	}
 snippet staticprif
-	private static function ${1:}(${2:}){
+	private static function ${1:}(${2:})
+	{
 		${3:}
 	}
 snippet staticprof
-	protected static function ${1:}(${2:}){
+	protected static function ${1:}(${2:})
+	{
 		${3:}
 	}
 snippet publicf
-	public function ${1:}(${2:}){
+	public function ${1:}(${2:})
+	{
 		${3:}
 	}
 snippet privatef
-	private function ${1:}(${2:}){
+	private function ${1:}(${2:})
+	{
 		${3:}
 	}
 snippet protectedf
-	protected function ${1:}(${2:}){
+	protected function ${1:}(${2:})
+	{
 		${3:}
 	}
 snippet constructf
-	function __construct(${1:}){
+	function __construct(${1:})
+	{
 		${2:}
 	}
 snippet destructf
-	function __destruct(${1:}){
+	function __destruct(${1:})
+	{
 		${2:}
 	}
 snippet clonef
-	function __clone(${1:}){
+	function __clone(${1:})
+	{
 		${2:}
 	}
 snippet getf
-	function __get($${1:}){
+	function __get($${1:})
+	{
 		${2:}
 	}
 snippet issetf
-	function __isset(${1:}){
+	function __isset(${1:})
+	{
 		${2:}
 	}
 snippet setf
-	function __set($${1:name},$${2:value}){
+	function __set($${1:name},$${2:value})
+	{
 		${3:}
 	}
 snippet unsetf
-	function __unset($${1:name}){
+	function __unset($${1:name})
+	{
 		${2:}
 	}
 snippet callf
-	function __call($${1:method_name},$${2:parameters}){
+	function __call($${1:method_name},$${2:parameters})
+	{
 		${3:}
 	}
 snippet sleepf
-	function __sleep(){
+	function __sleep()
+	{
 		${1:}
 		return ${2:}
 	}
 snippet wakeupf
-	function __wakeup(){
+	function __wakeup()
+	{
 		${1:}
 	}
 snippet tostringf
-	function __toString(){
+	function __toString()
+	{
 		${1:}
 	}
 snippet autoloadf
-	function __autoload(${1:class_name}){
+	function __autoload(${1:class_name})
+	{
 		${1:}
 	}
 snippet parent
@@ -375,19 +396,23 @@ snippet abstract
 		}
 	}
 snippet interface
-	interface ${1:}{
+	interface ${1:}
+	{
 		${2:}
 	}
 snippet finalf
-	final function ${1:}{
+	final function ${1:}
+	{
 		${2:}
 	}
 snippet finalc
-	final class ${1:}{
+	final class ${1:}
+	{
 		${2:}
 	}
 snippet implements
-	class ${1:} implements ${2:}{
+	class ${1:} implements ${2:}
+	{
 		${2:}
 	}
 snippet new

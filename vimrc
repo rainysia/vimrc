@@ -536,7 +536,7 @@ set completeopt=longest,menu               " 提示菜单后输入字母实现�
 "{{                                        " snipmates的设定
 "                                          "      自定义相关文件.snippets
 let g:snips_author = 'rainysia <rainysia@gmail.com>'
-let g:snips_copyright = '2012-2014 btroot.org'
+let g:snips_copyright = '2012-2015 btroot.org'
 let g:snips_license = 'http://www.btroot.com/user_guide/license.html V1'
 let g:snips_email = 'rainysia@gmail.com'
 let g:snips_site =  'www.btroot.org'
