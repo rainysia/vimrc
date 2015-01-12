@@ -2171,6 +2171,16 @@ git diff --staged 提交任务 和版本库中文件的差异(stage 暂存区)
 git diff HEAD 将工作区和HEAD (和当前工作区) 对比
 git diff 分支1 分支2 -- 文件名, 可以对比不同分支的文件的差异.
 
+
+git补丁管理
+git diff > ../synv.patch #生成补丁
+git apply ../sync.patch #打补丁
+git apply --check ../sync.patch #测试补丁能否成功
+
+git diff 分支1号 分支2号 --name-only 输出两个分支的差异文件地址
+git diff 分支1号 分支2号 --name-only | xargs tar -zcvf xxx_update.tar.gz 打包自某个版本到某个版本的更新内容
+
+
 ls --full-time xxx 显示完整的时间
 当对工作区修改(新增)的文件执行git add 命令时, 暂存区的目录树将更新,同时工作区修改(新增)的文件内容会被写入到对象库中的一个新的对象中,而该对象的ID被记录在暂存区的文件索引中
 当执行提交操作 git commit 时，暂存区的目录树会写到版本库(对象库)中,master分支会作相应的更新,即master最新指向的目录树就是提交时原暂存区的目录树.
@@ -2296,10 +2306,7 @@ git merge origin/master --no-ff # 不要Fast-Foward 合并,这样可以生成mer
 git rebase master <branch> # 将master rebase到branch.相当于
 git co <branch> && git rebase master && git co master && git merge <branch>
 
-git补丁管理
-git diff > ../synv.patch #生成补丁
-git apply ../sync.patch #打补丁
-git apply --check ../sync.patch #测试补丁能否成功
+
 
 git远程分支管理
 git pull #抓取远程仓库所有分支更新并合并到本地
@@ -3155,7 +3162,7 @@ commit(提交前删除库中指定文件)
     date -d "2013-11-13 17:05:59" +%s 输出时间戳@1384335779
     date -d @1384335779 "+%Y-%m-%d %H:%M:%S" 输出时间格式2013-11-13 17:05:59
     date +%F\ %T 输出当前格式化的时间.
-tar -zcvf 1_`date +%Y%m%d%H%M%S`.tar.gz ./1.php
+    tar -zcvf 1_`date +%Y%m%d%H%M%S`.tar.gz ./1.php
 
 130. ANSI控制码
     man console_codes
