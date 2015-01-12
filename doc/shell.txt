@@ -3155,6 +3155,7 @@ commit(提交前删除库中指定文件)
     date -d "2013-11-13 17:05:59" +%s 输出时间戳@1384335779
     date -d @1384335779 "+%Y-%m-%d %H:%M:%S" 输出时间格式2013-11-13 17:05:59
     date +%F\ %T 输出当前格式化的时间.
+tar -zcvf 1_`date +%Y%m%d%H%M%S`.tar.gz ./1.php
 
 130. ANSI控制码
     man console_codes
