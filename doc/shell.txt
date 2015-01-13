@@ -4,10 +4,10 @@
  * @package    
  * @subpackage 
  * @author     rainysia <rainysia@gmail.com>
- * @copyright  2006-2013 BTROOT.ORG
+ * @copyright  2006-2015 BTROOT.ORG
  * @license    http://www.btroot.com/user_guide/license.html V1
  * @createTime 2009-11-14 11:14:23
- * @lastChange 2014-12-31 15:08:29
+ * @lastChange 2015-01-13 14:15:36
 */
 Shell好玩的
 
@@ -2193,7 +2193,9 @@ git ls-tree -l HEAD 查看HEAD(版本库中当前提交)指向的目录树.
 100644 blob 7d5e76b5454fe03d46a73705859dbec22ed0d40c 34 welcome.txt
 文件树形 blob对象(文件) 40位的SHA1 ID 文件大小 文件名
 
-git clean -fd清除当前工作区中没有加入版本库的文件和目录(非跟踪文件和目录).然后执行git checkout . 用暂存区内容刷新工作区
+git clean -nd 测试删除, -n=--dry-run 不真实删除,只是显示会如何做 -d remove  -x 不使用忽略规则,会删除所有的未在版本中的文件, -X remove仅仅是git忽略的文件
+git clean -fd 清除当前工作区中没有加入版本库的文件和目录(非跟踪文件和目录). -f=--force
+                    然后执行git checkout . 用暂存区内容刷新工作区
 
 git ls-files -s 显示暂存区的目录树
 
@@ -3781,3 +3783,4 @@ client: sslocal -s server_name -p server_port -l local_port -k password -m bf-cf
 8.2 更新git log                                     2014-08-22 15:06:29
 10.1更新git remote                                  2014-10-06 17:17:40
 12.1更新shadowsocks                                 2014-12-31 15:05:22
+13.1更新git clean                                   2015-01-13 14:15:36
