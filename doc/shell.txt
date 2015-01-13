@@ -2180,6 +2180,8 @@ git apply --check ../sync.patch #测试补丁能否成功
 git diff 分支1号 分支2号 --name-only 输出两个分支的差异文件地址
 git diff 分支1号 分支2号 --name-only | xargs tar -zcvf xxx_update.tar.gz 打包自某个版本到某个版本的更新内容
 
+git diff tag号 tag2号 --name-only 可以用tag来标记对比
+
 
 ls --full-time xxx 显示完整的时间
 当对工作区修改(新增)的文件执行git add 命令时, 暂存区的目录树将更新,同时工作区修改(新增)的文件内容会被写入到对象库中的一个新的对象中,而该对象的ID被记录在暂存区的文件索引中
