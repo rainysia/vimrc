@@ -297,20 +297,20 @@ endif                                      " has("autocmd")
 "hi StatuslineTermEnc   cterm=none    ctermbg=white  ctermfg=yellow  gui=none guibg=#77cf77 guifg=black
 "hi StatuslineChar      cterm=none    ctermbg=white  ctermfg=yellow  gui=none guibg=#66b06f guifg=black
 
-hi StatuslineBufNr     cterm=none    ctermfg=red  ctermbg=darkgrey    gui=none guibg=#696969 guifg=#D8BFD8
+hi StatuslineBufNr     cterm=none    ctermfg=red        ctermbg=darkgrey    gui=none guibg=#696969 guifg=#D8BFD8
 hi StatuslineFlag      cterm=none    ctermfg=grey       ctermbg=darkgrey    gui=none guibg=#330223 guifg=#cdcde1
-hi StatuslinePath      cterm=none    ctermfg=white      ctermbg=green   gui=none guibg=#210222 guifg=#cdcde2
-hi StatuslineFileName  cterm=none    ctermfg=white      ctermbg=blue    gui=none guibg=#410041 guifg=#cdcde3
+hi StatuslinePath      cterm=none    ctermfg=white      ctermbg=green       gui=none guibg=#210222 guifg=#cdcde2
+hi StatuslineFileName  cterm=none    ctermfg=white      ctermbg=blue        gui=none guibg=#410041 guifg=#cdcde3
 hi StatuslineFileEnc   cterm=bold    ctermfg=white      ctermbg=darkblue    gui=none guibg=#400342 guifg=#cdcde4
 hi StatuslineFileType  cterm=bold    ctermfg=grey       ctermbg=darkgrey    gui=none guibg=#52096C guifg=#cdcde5
-hi StatuslineTermEnc   cterm=none    ctermfg=lightblue       ctermbg=darkgrey    gui=none guibg=#79318B guifg=#cdcde6
-hi StatuslineChar      cterm=none    ctermfg=lightgreen       ctermbg=darkgrey    gui=none guibg=#8C63A4 guifg=#cdcde7
-hi StatuslineSyn       cterm=none    ctermfg=lightblue       ctermbg=black    gui=none guibg=#AA87B8 guifg=#cdcde8
-hi StatuslineRealSyn   cterm=none    ctermfg=lightgreen       ctermbg=darkgrey    gui=none guibg=#C9B5D4 guifg=#7F8794
-hi StatusLine          cterm=none    ctermfg=white        ctermbg=darkgrey    gui=none guibg=#8C7E95 guifg=#cdcdea
-hi StatuslineTime      cterm=none    ctermfg=lightblue   ctermbg=darkgrey    gui=none guibg=#504855 guifg=#cdcdeb
-hi StatuslineSomething cterm=reverse ctermfg=white      ctermbg=darkred gui=none guibg=#400342 guifg=#cdcdec
-hi StatusLineNC        cterm=bold    ctermfg=white      ctermbg=red     gui=none guibg=#250342 guifg=#cdcded
+hi StatuslineTermEnc   cterm=none    ctermfg=lightblue  ctermbg=darkgrey    gui=none guibg=#79318B guifg=#cdcde6
+hi StatuslineChar      cterm=none    ctermfg=lightgreen ctermbg=darkgrey    gui=none guibg=#8C63A4 guifg=#cdcde7
+hi StatuslineSyn       cterm=none    ctermfg=lightblue  ctermbg=black       gui=none guibg=#AA87B8 guifg=#cdcde8
+hi StatuslineRealSyn   cterm=none    ctermfg=lightgreen ctermbg=darkgrey    gui=none guibg=#C9B5D4 guifg=#7F8794
+hi StatusLine          cterm=none    ctermfg=white      ctermbg=darkgrey    gui=none guibg=#8C7E95 guifg=#cdcdea
+hi StatuslineTime      cterm=none    ctermfg=lightblue  ctermbg=darkgrey    gui=none guibg=#504855 guifg=#cdcdeb
+hi StatuslineSomething cterm=reverse ctermfg=white      ctermbg=darkred     gui=none guibg=#400342 guifg=#cdcdec
+hi StatusLineNC        cterm=bold    ctermfg=white      ctermbg=red         gui=none guibg=#250342 guifg=#cdcded
 
 "}}
 "{{
@@ -703,7 +703,7 @@ let g:indentLine_char = '|'
 "{{                                        " pydiction 插件 http://www.vim.org/scripts/script.php?script_id=850
 let g:pydiction_location = '~/.vim/after/ftplugin/pydiction/complete-dict'
 let g:pydiction_menu_height = 3
-"}}"
+"}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  7=> c/c++
