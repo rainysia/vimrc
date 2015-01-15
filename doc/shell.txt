@@ -2442,6 +2442,7 @@ $ssh-keygen
 $ssh-copy-id -i /root/.ssh/id_rsa.pub git@192.168.85.111
 这里如果有端口,用
 $ssh-copy-id -i /root/.ssh/id_rsa.pub "git@192.168.85.111 -p2222"
+如果不在对应的账户, 可以使用git clone git@xxxxx:repositories/项目 来要求每次输入密码拉取更新
 
 Now try logging into the machine, with "ssh 'git@192.168.85.111'", and check in:
   ~/.ssh/authorized_keys
