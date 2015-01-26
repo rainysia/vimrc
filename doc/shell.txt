@@ -687,6 +687,8 @@ pstree 进程树
 #$kill -s SIGNAL Pid 向指定的进程发送指定信号 (或者直接kill -9 PID)常用的是singal 
 sighup 1 对控制进程或者终端进行挂起检测
 sigint 2 当按下ctrl+c时发送该信号
+sigusr1 用户自定义,表示重新加载内核模块的符号信息 kill -USR1 PID
+sigusr2 表示同时重新加载模块和静态内核的符号信息, kill -USR2 PID
 sigkill 9 用于强行杀死进程
 sigterm 15 默认用于终止进程
 sigtstp 20 当按下ctrl+z时发送该信号
