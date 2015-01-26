@@ -13,6 +13,7 @@ http://192.168.85.123:6543/
 cd bom_maintenance/
 pip install virtualenv
 pip install MySQL-python
+pip install -r requirements
 gvim .bashrc
 export WORKON_HOME=$HOME/.virtualenv
 echo $WORKON_HOME
@@ -22,8 +23,9 @@ workon bom
 cd /home/hyve/bom/bom_maintenance/
 python setup.py develop
 pserve development.ini 
-
 db configure file:interface_db.py 修改hyve_us_test的帐号密码.
+
+
 
 
 framework
