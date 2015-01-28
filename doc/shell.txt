@@ -3766,6 +3766,18 @@ back:   ssserver -c /etc/shadowsocks.json -d start --pid-file=/tmp/shadowsocks.p
 command: sslocal -c /etc/shadowsocks-libev/shadowsocks.json
          ss-local -c /etc/shadowsocks-libev/config.json 
 client: sslocal -s server_name -p server_port -l local_port -k password -m bf-cfb
+
+146. ldd 用于打印程序或者库文件所依赖的共享库列表。
+    ldd(选项)(参数) 
+    选项
+    ldd --version 
+    ldd -v 详细信息模式
+    ldd -u 打印未使用的直接依赖
+    ldd -d 执行重定位和报告任何丢失的对象
+    ldd -r 执行数据对象和函数的重定位，并且报告任何丢失的对象和函数
+    ldd --help  显示帮助信息
+    参数 文件,指定可执行程序或者文库。
+
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
