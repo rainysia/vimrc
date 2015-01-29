@@ -540,6 +540,8 @@ let g:snips_copyright = '2012-2015 btroot.org'
 let g:snips_license = 'http://www.btroot.com/user_guide/license.html V1'
 let g:snips_email = 'rainysia@gmail.com'
 let g:snips_site =  'www.btroot.org'
+let g:snips_link = 'http://www.btroot.org'
+let g:snips_php_version='PHP version 5'
 "}}
 "{{                                        " indent.guides的设定
 "                                          "    http://www.vim.org/scripts/script.php?script_id=3361 2014-05-29

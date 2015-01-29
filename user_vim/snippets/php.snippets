@@ -1,12 +1,12 @@
 #      Title: 
 #   FileName: php.snippets
 #Description: 
-#    Version: 15.1.1
+#    Version: 15.1.2
 #     Author: rainysia
 #      Email: rainysia@gmail.com
 #   HomePage: http://www.btroot.org
 # CreateTime: 2009-05-22 23:11:59
-# LastChange: 2015-01-09 09:55:26
+# LastChange: 2015-01-29 13:39:30
 snippet nbs
 	&nbsp;${1:}
 snippet nbs2
@@ -209,9 +209,14 @@ snippet doc_c
 	/**
 	 * ${1:Default.Class.Description.}
 	 *
-	 * ${2:Detail.Description}
-	 */${4}
-	class ${5:ClassName}
+	 * @category ${2:}
+	 * @package  ${3:}
+	 * @author   ${4:`g:snips_author`}
+	 * @license  ${5:`g:snips_license`}
+	 * @link     ${6:`g:snips_link`}
+	 *
+	 */
+	class ${7:ClassName}
 	{
 
 	}
@@ -253,6 +258,9 @@ snippet doc_h
 	/**
 	 * ${1:ClassName}
 	 *
+	 * ${2:`g:snips_php_version`}
+	 * 
+	 * @category   ${2:ClassName}
 	 * @package    ${2:Main}
 	 * @subpackage ${3:Child}
 	 * @author     ${4:`g:snips_author`}
@@ -260,6 +268,8 @@ snippet doc_h
 	 * @license    ${6:`g:snips_license`}
 	 * @createTime ${7:`strftime('%Y-%m-%d %H:%M:%S %A')`}
 	 * @lastTime   ${8:`strftime('%Y-%m-%d %H:%M:%S %A')`}
+	 *
+	 * @link       ${9:`g:snips_link`}
 	 */
 snippet class
 	class ${1:}
@@ -785,4 +795,4 @@ snippet xml
 #14.7.1 add doc_pf                          2014-07-02 11:04:10
 #14.8.1 add doc_                            2014-08-12 13:38:56
 #15.1.1 add foreachv                        2015-01-09 09:55:26
-
+#15.1.2 add new class/doc_h                 2015-01-29 13:39:27

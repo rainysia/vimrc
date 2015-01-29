@@ -121,6 +121,11 @@ function s:AddTitle()
     "call setline('.',preChar.noTypeChar.preChar.' ')
     "normal o
     "normal o
+    call setline('.',preChar.noTypeChar.preChar.g:snips_php_version)
+    normal o
+    normal o
+    call setline('.',preChar.noTypeChar.preChar.'@category   ')
+    normal o
     call setline('.',preChar.noTypeChar.preChar.'@package    ')
     normal o
     call setline('.',preChar.noTypeChar.preChar.'@subpackage ')
@@ -140,6 +145,10 @@ function s:AddTitle()
     call setline('.',preChar.noTypeChar.preChar.'@createTime '.strftime("%Y-%m-%d %H:%M:%S"))
     normal o
     call setline('.',preChar.noTypeChar.preChar.'@lastChange '.strftime("%Y-%m-%d %H:%M:%S"))
+    normal o
+    normal o
+    call setline('.',preChar.noTypeChar.preChar.'@link       '.g:vimrc_link)
+    normal o
     normal o
     call setline('.',noTypeChar.startTag)
     let lastLine = line('.')
