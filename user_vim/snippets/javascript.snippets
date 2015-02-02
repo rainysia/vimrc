@@ -98,6 +98,9 @@ snippet elvp
 	error_log(var_export(array('${1:}' => ${2}), 1)."\n", 3, "/var/log/php_errors.log");
 snippet elvp1
 	error_log("#${1:}#"."\n", 3, "/var/log/php_errors.log");
+snippet elvpt
+	error_log("#${1:`strftime('%Y-%m-%d %H:%M:%S %A')`}#"."\n", 3, "/var/log/php_errors.log");
+	error_log(var_export(array('${1:}' => ${2}), 1)."\n", 3, "/var/log/php_errors.log");
 snippet echoh
 	echo ${1:string}.'<hr />';
 snippet echob
