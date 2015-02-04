@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 6.11.02
+"    Version: 7.01.01
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2014-11-20 11:21:53
+" LastChange: 2015-02-04 11:22:49
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1077,10 +1077,10 @@ elseif &t_Co == 256
     hi        CursorLineNr   ctermfg=white                                      cterm=BOLD        "光标所在的行号
     hi        ColorColumn    ctermfg=lightgrey        ctermbg=white             cterm=BOLD        "高亮光标所在列.
     hi        Directory      ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "目录名
-    hi        DiffAdd                                 ctermbg=lightgreen        cterm=BOLD        "diff: 增加的行
-    hi        DiffChange                              ctermbg=lightcyan         cterm=BOLD        "diff: 改变的行
-    hi        DiffDelete                              ctermbg=lightcyan         cterm=BOLD        "diff: 删除的行
-    hi        DiffText       ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "diff: 改变行里的改动文本
+    hi        DiffAdd        ctermfg=grey             ctermbg=lightblue         cterm=BOLD        "diff: 增加的行
+    hi        DiffChange     ctermfg=darkgrey         ctermbg=lightcyan         cterm=BOLD        "diff: 改变的行
+    hi        DiffDelete     ctermfg=grey             ctermbg=lightred          cterm=BOLD        "diff: 删除的行
+    hi        DiffText       ctermfg=red              ctermbg=black             cterm=BOLD        "diff: 改变行里的改动文本
     hi        ErrorMsg       ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "命令行上的错误信息
     hi        VertSplit      ctermfg=darkcyan         ctermbg=lightblue         cterm=BOLD        "分离垂直分割窗口的列
     hi        Folded         ctermfg=lightgrey        ctermbg=lightgreen        cterm=BOLD        "用于关闭的折叠的行
@@ -1166,10 +1166,10 @@ else
     hi        CursorLineNr   ctermfg=white                                      cterm=BOLD        "光标所在的行号
     hi        ColorColumn    ctermfg=lightgrey        ctermbg=white             cterm=BOLD        "高亮光标所在列.
     hi        Directory      ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "目录名
-    hi        DiffAdd                                 ctermbg=lightgreen        cterm=BOLD        "diff: 增加的行
-    hi        DiffChange                              ctermbg=lightcyan         cterm=BOLD        "diff: 改变的行
-    hi        DiffDelete                              ctermbg=lightcyan         cterm=BOLD        "diff: 删除的行
-    hi        DiffText       ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "diff: 改变行里的改动文本
+    hi        DiffAdd        ctermfg=grey             ctermbg=lightblue         cterm=BOLD        "diff: 增加的行
+    hi        DiffChange     ctermfg=darkgrey         ctermbg=lightcyan         cterm=BOLD        "diff: 改变的行
+    hi        DiffDelete     ctermfg=grey             ctermbg=lightred          cterm=BOLD        "diff: 删除的行
+    hi        DiffText       ctermfg=red              ctermbg=black             cterm=BOLD        "diff: 改变行里的改动文本
     hi        ErrorMsg       ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "命令行上的错误信息
     hi        VertSplit      ctermfg=darkcyan         ctermbg=lightblue         cterm=BOLD        "分离垂直分割窗口的列
     hi        Folded         ctermfg=lightgrey        ctermbg=lightgreen        cterm=BOLD        "用于关闭的折叠的行
@@ -1667,5 +1667,6 @@ endif
 " 6.09.01                                  " add ,m mark
 " 6.11.01                                  " add new C-x C-N 2014-11-17 14:01:15
 " 6.11.02                                  " add pydiction 2014-11-20 11:21:53
+" 7.01.01                                  " add new vimdiff color 2015-02-04 11:22:49
 "}}
 "}}}
