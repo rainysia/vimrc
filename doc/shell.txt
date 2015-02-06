@@ -7,7 +7,7 @@
  * @copyright  2006-2015 BTROOT.ORG
  * @license    http://www.btroot.com/user_guide/license.html V1
  * @createTime 2009-11-14 11:14:23
- * @lastChange 2015-01-13 14:15:36
+ * @lastChange 2015-02-06 10:53:32
 */
 Shell好玩的
 
@@ -3778,6 +3778,10 @@ client: sslocal -s server_name -p server_port -l local_port -k password -m bf-cf
     ldd --help  显示帮助信息
     参数 文件,指定可执行程序或者文库。
 
+147. zsh
+    apt-get install zsh
+    /usr/bin/zsh
+    /etc/passwd 修改修改用户的bash /bin/zsh
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
@@ -3801,3 +3805,4 @@ client: sslocal -s server_name -p server_port -l local_port -k password -m bf-cf
 10.1更新git remote                                  2014-10-06 17:17:40
 12.1更新shadowsocks                                 2014-12-31 15:05:22
 13.1更新git clean                                   2015-01-13 14:15:36
+13.2更新zsh                                         2015-02-06 10:53:32
