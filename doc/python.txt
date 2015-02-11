@@ -1653,3 +1653,5 @@ GTK 包
 
  python debug 模式.
     在当前目录运行python, 执行代码里面的import语句,可以调试.
+
+    如果import文件后,修改了里面的功能,需要重新import或者删除掉pyc再import
