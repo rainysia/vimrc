@@ -1,3 +1,41 @@
+ 列表	可以包含不同类型的对象，可以增减元素，可以跟其他的列表结合或者把一个列表拆分，用[]来定义的
+eg:aList=[123,'abc',4.56,['inner','list'],7-9j]
+1.list(str):将str转换成list类型，str可以使字符串也可以是元组类型
+2.aList.append('test'):追加元素到列表中去
+3.del aList[1]:删除列表中下标为1的元素
+del aList:删除整个列表
+4.cmp(list1,list2):比较两个列表的大小
+5.len(list):返回列表元素个数
+6.sorted(list):使用字典序对列表中元素进行排序
+7.reversed(list):倒置列表中的元素位置
+8.list.count(obj):返回对象obj在list中出现的次数
+9.list.extend(seq):把序列seq的内容添加到list中10.list.insert(index,obj):在索引量为index的地方插入obj对象
+11.list.pop(index=-1):删除并返回指定位置的对象，默认是最后一个对象
+12.list.remove(obj):从list中删除obj对象
+
+ 元组	可以包含不同类型的对象，但是是不可变的，不可以在增减元素，用()来定义
+eg:aTuple=(123,'abc',4.56,['inner','list'],7-9j)
+1.tuple(obj):将对象obj转换成tuple对象，obj可以是任意字符串或者列表
+2.适用于列表的del,cmp,len,max,min方法也适用于tuple，但是由于元祖是不可变的，替换、添加、排序等不可实现
+
+ 字典	 键值对，用{}来定义
+eg:aDict={'name':'cynthia','age':18}
+1.dict1=dict((['x',1],['y',2])):dict()创建字典
+2.dict1={}.fromkeys(('x','y'),-1):fromkeys()创建一个默认字典，字典中元素具有相同的值
+3.dict1.keys():获取字典的键值列表
+4.dict1.has_key('x'):判断字典中是否有‘x'键值，返回bool型
+5.dict.get(key,default):返回键值key的值，若是key不存在，返回default的值
+6.dict.items():返回键值对列表值
+7.dict.values():返回字典中所有值的列表
+8.dict.update(dict2):将dict2的键值对列表添加到字典dict中去
+9.dict.pop(key)：返回键值key的value
+10.setdefault():类似get方法，能够获得给定key的value，此外setdefault还能在自动重不含有给定key的情况下设定相应的key-value
+11.clear():清除字典中所有的项。原地操作，无返回(或说返回值为None）
+12.copy():返回具有相同key-value的新字典，为浅复制(shallow copy)
+
+
+
+
 x = input("x:") 获取用户输入
 2**3 = pow(2,3) 幂运算符**,乘方
 round           四舍五入最接近的整数。
