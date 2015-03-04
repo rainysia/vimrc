@@ -2424,8 +2424,7 @@ git log --author="$(git config --get user.name)" --no-merges --since="2014-12-01
 
 或者换一种统计, 计算insert和delete的差
 git log --author="$(git config --get user.name)" --no-merges --since="2014-12-01" --stat --oneline | grep "insertions(+)" | awk 'BEGIN{sum=0}{sum=sum+$4-$6}END{print "\n" "\033[42m" strftime("%F %T")"\033[0m" " Code Rows=" "\033[44m" sum "\033[0m \n"}'
-|
-git log --author="$(git config --get user.name)" --no-merges --since="yesterday" --stat --oneline | grep "insertions(+)" | awk 'BEGIN{sum=0}{sum=sum+$4-$6}END{print "\n" "\033[42m" strftime("%F %T")"\033[0m" " Code Rows=" "\033[44m" sum "\033[0m \n"}'
+|ibu        git log --author="$(git config --get user.name)" --no-merges --since="yesterday" --stat --oneline | grep "insertions(+)" | awk 'BEGIN{sum=0}{sum=sum+$4-$6}END{print "\n" "\033[42m" strftime("%F %T")"\033[0m" " Code Rows=" "\033[44m" sum "\033[0m \n"}'
 
 
 
@@ -2467,6 +2466,8 @@ git@~/bin/gitolite setup -pk ~/git.pub 这里就会创建两个repo,一个admin�
 
 接下来在客户端
 $git clone git@192.168.85.111:gitolite-admin
+or 如果有端口
+$git clone ssh://git@xxx.com:5647/gitolite-admin
 
 编辑conf/gitolite.conf
 @admins     = tommy tom
@@ -2496,6 +2497,36 @@ $git push origin master 给远程提交一个分支
 
 然后
 #apt-get install git-daemon-son
+
+=======centos 6=======
+yum install git git-core openssh -y
+adduser --system --shell /bin/sh  --create-home --home-dir /home/git git
+passwd git  #synnex
+ssh-keygen
+sudo usermod -a -G git `eval whoami`
+cp ~/.ssh/id_rsa.pub /home/git/admin.pub
+chown git:git /home/git/admin.pub
+4 安装 gitolite 服务器
+sudo -u git -H git clone git://github.com/gitlabhq/gitolite /home/git/gitolite
+sudo -u git -H /home/git/gitolite/src/gitolite setup -pk /home/git/admin.pub
+(报错,需要安装perl-Time_HiRes:
+ yum install perl-Time-HiRes)
+
+完成安装后 接下来在客户端
+如果有端口
+$git clone ssh://git@xxx.com:5647/gitolite-admin
+
+编辑conf/gitolite.conf
+@admins     = tommy tom
+@engineers  = tommy tom
+@staff      = @admins @engineers
+@guest      = tester git-daemon
+配置下user.name和user.email
+
+git config --global user.name
+然后提交commit and push这个
+
+
 
 
 
