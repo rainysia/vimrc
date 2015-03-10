@@ -11,5 +11,5 @@
 #
 # By default this script does nothing.
 modprobe -r pcspkr
-/usr/bin/teamviewer --daemon start
+/opt/teamviewer/tv_bin/teamviewerd --daemon start
 exit 0
