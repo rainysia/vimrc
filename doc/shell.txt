@@ -2537,8 +2537,21 @@ git config --global user.name
 把其他用户的.pub文件放进gitolite-admin/keydir
 然后推送就有权限了
 
+====github更新fork仓库===================
+1, 先git clone fork的到自己用户的仓库
+2, 增加源分支地址到你项目远程分支列表中，先得将原来的仓库指定为upstream，命令为：
+   git remote add upstream https://github.com/被fork的仓库.git
+可使用git remote -v查看远程分支列表
+3, fetch源分支的新版本到本地
+   [master]> git fetch upstream
+4, 合并两个版本的代码
+   [master]> git merge upstream/master
+5, 将合并后的代码push到github上去
+   [master]> git push origin master
 
-
+如果要发送自己修改的
+登录github后,点pull request, new pull request 输入描述
+send pull request 就会发送commit
 
 
 
