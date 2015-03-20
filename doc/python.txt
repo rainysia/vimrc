@@ -1750,3 +1750,19 @@ python 可以识别的运算符有
     +   -   *   **  /   //  %   <<  >>  &   |
     ^   ~   <   >   <=  >=  ==  !=  <>  +=
     -=  *=  /=  //= %=  **= &=  |=  ^=  >>= <<=
+
+python的数据内置类型
+    None        Type(None)      null对象None
+    数字        int             整数
+                Long            任意精度的整数(只在python2中使用)
+                float           浮点数
+                complex         复数
+                bool            布尔值(True/False)
+    序列        str             字符串
+                unicode         Unicode字符串(仅在python2中使用)
+                list            列表
+                tuple           元组
+                xrange          xrange()函数创建的整数范围(在python3中称为range)
+    映射        dict            字典
+    集合        set             可变集合
+                frozenset       不可变集合
