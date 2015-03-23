@@ -3827,6 +3827,7 @@ command: sslocal -c /etc/shadowsocks-libev/shadowsocks.json
 client: sslocal -s server_name -p server_port -l local_port -k password -m bf-cfb
 
 146. ldd 用于打印程序或者库文件所依赖的共享库列表。
+    ladd xxx.so
     ldd(选项)(参数) 
     选项
     ldd --version 
