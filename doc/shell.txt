@@ -3849,6 +3849,11 @@ rename 's/\.jpeg$/\.jpg/' *.jpeg 重名令jpg为jpeg
 rename 'y/A-Z/a-z/' *             大写改成小写
 rename -v 's/img_\d{3}(\d{4})\.jpeg$/dan_$1\.jpg/' *jpeg    将img_000NNNN.jpeg变成dan_NNNN.jpg
 
+149.ample
+/usr/bin/ample -p30303-c5 -f /etc/ample/ample.conf -d
+http://192.168.85.123:30303
+http://192.168.85.123:30303/index.html
+
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
