@@ -1766,3 +1766,7 @@ python的数据内置类型
     映射        dict            字典
     集合        set             可变集合
                 frozenset       不可变集合
+
+python id(a) 可以获取python的计数器
+    python只会缓存整型范围(-1, 100)的. 所以a=1 和b=1 是相等的 id(a)==id(b)
+        但是a=1.0 和b=1.0 是不相等的, id(a) != id(b)
