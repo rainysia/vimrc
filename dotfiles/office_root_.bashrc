@@ -65,6 +65,7 @@ alias vimlog='vim /var/log/php_errors.log'
 alias taillog='tail -f /var/log/php_errors.log'
 alias gvimshell='gvim /home/manual/docs/shell.txt'
 alias delpyc='find -name "*.pyc" | xargs "rm"'
+alias systart='sh /home/sh/start_debian.sh'
 vman () {
     export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
                     vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
