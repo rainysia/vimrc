@@ -1782,3 +1782,20 @@ hex(number) 获取十六进制
 二进制转十进制 int(str, 2)
 八进制转十进制 int(str, 8)
 十六进制转十进制 int(str, 16)
+
+python传统除法会舍去小数部分.返回整型.如果操作数是浮点型才会执行真正的除法
+1/2     0
+1.0/2/0     0.5
+可以引入from __future__import division 来解决这个
+// float除法    1//2    0
+                1.0//2.0    0.0
+                -1//2   -1
+ord('a') 返回对应的ASCII整型值
+chr(97) 返回对应的字符串
+unichr('unicode码值') 返回对应的unicode字符,码值范围取决python构建于UCS-2还是UCS-4
+
+十进制浮点数,用来解决金融,科学计算
+from decimal import Decimal
+dec = Decimal('.1')   0.1
+
+对于017+32 = 47 和017+032=41.因为0开头是八进制的
