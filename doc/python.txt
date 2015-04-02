@@ -1770,3 +1770,15 @@ python的数据内置类型
 python id(a) 可以获取python的计数器
     python只会缓存整型范围(-1, 100)的. 所以a=1 和b=1 是相等的 id(a)==id(b)
         但是a=1.0 和b=1.0 是不相等的, id(a) != id(b)
+
+from random import choice
+choice([x for x in range(10)])
+
+十进制转换 number十进制
+bin(number) 获取二进制
+oct(number) 获取八进制
+hex(number) 获取十六进制
+
+二进制转十进制 int(str, 2)
+八进制转十进制 int(str, 8)
+十六进制转十进制 int(str, 16)
