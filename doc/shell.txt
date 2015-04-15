@@ -1247,6 +1247,7 @@ man 7 charsets
 man 7 bootparam
 man 5 filesystems 各种linux文件系统
 man 5 proc /proc的文件系统
+man 内容后, 用/来搜索 enter(或者n)来进入,shift+n来返回.
 
 51.简易计时器 time command
 
