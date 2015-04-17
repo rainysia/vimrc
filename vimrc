@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 7.01.01
+"    Version: 7.04.01
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2015-02-04 11:22:49
+" LastChange: 2015-04-17 17:59:15
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -61,6 +61,10 @@ set textwidth=100                          " 每行显示多少字符
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{{
 "                                          " "折叠相关的快捷键
+"                                          " "zf 创建折叠
+"                                               zf\`a   折叠当前光标处到标记a的文本
+"                                               zf3j    向下折叠3行
+"                                               zf%     在括号光标处折叠括号内文本
 "                                          " "zR 打开所有的折叠
 "                                          " "za Open/Close (toggle) a folded group of lines.
 "                                          " "zA Open a Closed fold or close and open fold recursively.
@@ -1668,5 +1672,6 @@ endif
 " 6.11.01                                  " add new C-x C-N 2014-11-17 14:01:15
 " 6.11.02                                  " add pydiction 2014-11-20 11:21:53
 " 7.01.01                                  " add new vimdiff color 2015-02-04 11:22:49
+" 7.04.01                                  " add foldenable zf 2015-04-17 17:59:15
 "}}
 "}}}
