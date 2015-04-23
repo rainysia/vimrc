@@ -3855,6 +3855,10 @@ rename -v 's/img_\d{3}(\d{4})\.jpeg$/dan_$1\.jpg/' *jpeg    将img_000NNNN.jpeg�
 http://192.168.85.123:30303
 http://192.168.85.123:30303/index.html
 
+150. GPG KEY error, No PUBKEY xxxxx
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com xxxxxx
+
+
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
