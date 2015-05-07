@@ -16,8 +16,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{{
 "{{                                        " work in linux
-let $VIMRUNTIME="/usr/share/vim/vim73"
-set runtimepath=/usr/share/vim/vim73,~/.vim,~/.vim/after
+let $VIMRUNTIME="/usr/share/vim/vim74"
+set runtimepath=/usr/share/vim/vim74,~/.vim,~/.vim/after
 "}}
 set nocp                                   " close compeletion with vi
 set helplang=cn                            " 帮助菜单

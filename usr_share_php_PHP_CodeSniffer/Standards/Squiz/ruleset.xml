@@ -25,7 +25,7 @@
  <!-- Lines can be 85 chars long, but never show errors -->
  <rule ref="Generic.Files.LineLength">
   <properties>
-   <property name="lineLimit" value="85"/>
+   <property name="lineLimit" value="400"/>
    <property name="absoluteLineLimit" value="0"/>
   </properties>
  </rule>
