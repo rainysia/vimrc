@@ -3860,6 +3860,7 @@ http://192.168.85.123:30303/index.html
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com xxxxxx
 
 
+151. ctags -R ./xxx ./xxx ./xxx 指定对哪些文件作索引
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
