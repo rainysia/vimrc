@@ -38,6 +38,7 @@ alias cdh='cd /home'
 alias cdw='cd /home/www/ && su tommy'
 alias cdws='cd /home/www/chinasite'
 alias cdww='cd /home/www/wordpress && su tommy'
+alias cdwn='cd /home/www/'
 alias cdhs='cd /home/hyve/test_engbom && su tommy'
 alias cdu='cd /home/tommy'
 alias cdd='cd /home/tommy/Desktop'
@@ -65,6 +66,7 @@ alias vimlog='vim /var/log/php_errors.log'
 alias taillog='tail -f /var/log/php_errors.log'
 alias gvimshell='gvim /home/manual/docs/shell.txt'
 alias delpyc='find -name "*.pyc" | xargs "rm"'
+alias systart='sh /home/sh/start_debian.sh'
 vman () {
     export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
                     vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
