@@ -911,7 +911,7 @@ if has("gui_running")
     hi        PreCondit      guifg=#FF007F          guibg=#1C1D1F           gui=NONE        "预处理命令 #if、#else、#endif
     "-----------------------------------------------------------------------------------------------------------------------"
     hi        Type           guifg=#96CBFE          guibg=#1C1D1F           gui=NONE        "int、long、char 等 #96CBFE #00C000
-    hi        StorageClass   guifg=#7FFF00          guibg=#1C1D1F           gui=NONE        "static、register、volatile 等
+    hi        StorageClass   guifg=#B6B7EB          guibg=#1C1D1F           gui=NONE        "static、register、volatile 等 #7FFF00 #B6B7EB
     hi        Structure      guifg=#00FF7F          guibg=#1C1D1F           gui=NONE        "struct、union、enum 等
     hi        Typedef        guifg=#3FFF3F          guibg=#1C1D1F           gui=NONE        "一个typedef
     "-----------------------------------------------------------------------------------------------------------------------"
@@ -1546,6 +1546,7 @@ endif
 "     -F                                   " 波斯模式
 "     -H                                   " 希伯来模式
 "     --noplugin                           " 不加载,无插件模式
+"     --startuptime {fname}                " 启动时把计时信息写入文件 {fname}。可用于分析载入 .vimrc、插件和打开首个文件的过程中时哪一步最耗时
 " /\Cxxx                                   " 大小写敏感 /\cxxx 搜索xxx不敏感
 " vsp                                      " 垂直分割窗口
 " sp                                       " 竖向分割窗口
