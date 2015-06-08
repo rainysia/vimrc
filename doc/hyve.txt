@@ -15,9 +15,11 @@ pip install virtualenv
 pip install MySQL-python
 pip install -r requirements
     pip install --upgrade -r requirements   
-gvim .bashrc
-export WORKON_HOME=$HOME/.virtualenv
-echo $WORKON_HOME
+
+#gvim .bashrc
+#export WORKON_HOME=$HOME/.virtualenv
+#echo $WORKON_HOME
+
 source /usr/local/bin/virtualenvwrapper.sh
 workon bom
 
@@ -25,6 +27,7 @@ cd /home/hyve/bom/bom_maintenance/
 python setup.py develop
 pserve development.ini 
 db configure file:interface_db.py 修改hyve_us_test的帐号密码.
+
 
 
 
