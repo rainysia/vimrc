@@ -1915,6 +1915,10 @@ mysql>UPDATE tb_name SET column=value WHERE column=value;
 mysql>UPDATE students SET Course='mysql' WHERE Name='lujunyi';
 替换数据：
 和UPDATE使用方式一样,只要将UPDATE换成REPLACE即可
+
+update table_name set  filed_name= REPLACE(filed_name, 'will replace_string', 'replaced_value')
+
+
 删除数据
 mysql>DELETE FROM tb_name WHERE conditions;
 mysql>DELETE FROM students WHERE Course='mysql';
