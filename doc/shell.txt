@@ -1503,6 +1503,8 @@ mysqldump --single-transaction -u wcnc -p smgp_apps_wcnc > xxx.sql
 
 mysqldump -u 用户名 -p 数据库名 表名> 导出的文件名
 mysqldump -u wcnc -p smgp_apps_wcnc users> wcnc_users.sql
+
+mysqldump -u user -p database_name table_1 table_2 table_3 > filename.sql
 （3）导出一个数据库结构
 
 mysqldump -u wcnc -p -d --add-drop-table smgp_apps_wcnc >d:\wcnc_db.sql
