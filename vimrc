@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 7.04.01
+"    Version: 7.06.01
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2015-04-17 17:59:15
+" LastChange: 2015-06-16 15:30:59
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -302,7 +302,7 @@ endif                                      " has("autocmd")
 "hi StatuslineChar      cterm=none    ctermbg=white  ctermfg=yellow  gui=none guibg=#66b06f guifg=black
 
 hi StatuslineBufNr     cterm=none    ctermfg=red        ctermbg=darkgrey    gui=none guibg=#696969 guifg=#D8BFD8
-hi StatuslineFlag      cterm=none    ctermfg=grey       ctermbg=darkgrey    gui=none guibg=#330223 guifg=#cdcde1
+hi StatuslineFlag      cterm=none    ctermfg=black   ctermbg=grey    gui=none guibg=#330223 guifg=#cdcde1
 hi StatuslinePath      cterm=none    ctermfg=white      ctermbg=green       gui=none guibg=#210222 guifg=#cdcde2
 hi StatuslineFileName  cterm=none    ctermfg=white      ctermbg=blue        gui=none guibg=#410041 guifg=#cdcde3
 hi StatuslineFileEnc   cterm=bold    ctermfg=white      ctermbg=darkblue    gui=none guibg=#400342 guifg=#cdcde4
@@ -1076,8 +1076,8 @@ elseif &t_Co == 256
     "Console xterm 256
     "	=======================================================================================================================
     hi        Cursor         ctermfg=black            ctermbg=lightyellow       cterm=BOLD        "光标所在的字符
-    hi        CursorColumn                                                      cterm=BOLD        "光标所在的屏幕列
-    hi        CursorLine                                                        cterm=NONE        "光标所在的屏幕行
+    hi        CursorColumn   ctermfg=black            ctermbg=darkgrey          cterm=BOLD        "光标所在的屏幕列
+    hi        CursorLine     ctermfg=black            ctermbg=darkgrey          cterm=NONE        "光标所在的屏幕行
     hi        CursorLineNr   ctermfg=white            ctermfg=red               cterm=BOLD        "光标所在的行号
     hi        ColorColumn    ctermfg=lightgrey        ctermbg=white             cterm=BOLD        "高亮光标所在列.
     hi        Directory      ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "目录名
@@ -1091,7 +1091,7 @@ elseif &t_Co == 256
     hi        IncSearch      ctermfg=darkred          ctermbg=lightgrey         cterm=BOLD        "'incsearch' 高亮
     hi        LineNr         ctermfg=darkgrey         ctermbg=black             cterm=BOLD        "置位 number 选项时的行号
     hi        MatchParen     ctermfg=lightred         ctermbg=black             cterm=BOLD        "配对的括号
-    hi        MatchParen     ctermfg=yellow           ctermbg=lightred          cterm=BOLD        "配对的括号
+    hi        MatchParen     ctermfg=black            ctermbg=lightgreen        cterm=BOLD        "配对的括号
     hi        ModeMsg        ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "showmode 消息(INSERT)
     hi        MoreMsg        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "|more-prompt|
     hi        NonText        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "窗口尾部的'~'和 '@'
@@ -1165,9 +1165,9 @@ elseif &t_Co == 256
 else
     "Console xterm 8
     hi        Cursor         ctermfg=black            ctermbg=lightyellow       cterm=BOLD        "光标所在的字符
-    hi        CursorColumn                                                      cterm=BOLD        "光标所在的屏幕列
-    hi        CursorLine                                                        cterm=NONE        "光标所在的屏幕行
-    hi        CursorLineNr   ctermfg=white                                      cterm=BOLD        "光标所在的行号
+    hi        CursorColumn   ctermfg=black            ctermbg=darkgrey          cterm=BOLD        "光标所在的屏幕列
+    hi        CursorLine     ctermfg=black            ctermbg=darkgrey          cterm=NONE        "光标所在的屏幕行
+    hi        CursorLineNr   ctermfg=white            ctermfg=red               cterm=BOLD        "光标所在的行号
     hi        ColorColumn    ctermfg=lightgrey        ctermbg=white             cterm=BOLD        "高亮光标所在列.
     hi        Directory      ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "目录名
     hi        DiffAdd        ctermfg=grey             ctermbg=lightblue         cterm=BOLD        "diff: 增加的行
@@ -1180,7 +1180,7 @@ else
     hi        IncSearch      ctermfg=darkred          ctermbg=lightgrey         cterm=BOLD        "'incsearch' 高亮
     hi        LineNr         ctermfg=darkgrey         ctermbg=black             cterm=BOLD        "置位 number 选项时的行号
     hi        MatchParen     ctermfg=lightred         ctermbg=black             cterm=BOLD        "配对的括号
-    hi        MatchParen     ctermfg=yellow           ctermbg=lightred          cterm=BOLD        "配对的括号
+    hi        MatchParen     ctermfg=black            ctermbg=lightgreen        cterm=BOLD        "配对的括号
     hi        ModeMsg        ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "showmode 消息(INSERT)
     hi        MoreMsg        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "|more-prompt|
     hi        NonText        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "窗口尾部的'~'和 '@'
@@ -1674,5 +1674,6 @@ endif
 " 6.11.02                                  " add pydiction 2014-11-20 11:21:53
 " 7.01.01                                  " add new vimdiff color 2015-02-04 11:22:49
 " 7.04.01                                  " add foldenable zf 2015-04-17 17:59:15
+" 7.06.01                                  " change terminal fg/bg color 2015-06-16 15:30:59
 "}}
 "}}}
