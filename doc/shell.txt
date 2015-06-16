@@ -2562,6 +2562,11 @@ git config --global user.name
 send pull request 就会发送commit
 
 
+=========
+把push命令的全局默认模式设置成：simple/matching
+git config --global push.default simple
+git branch -a       display all branch
+
 
 
 
