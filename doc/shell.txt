@@ -2554,6 +2554,7 @@ git config --global user.name
    [master]> git fetch upstream
 4, 合并两个版本的代码
    [master]> git merge upstream/master
+   如果发生冲突,git mergetool 来启动gui的merge 工具进行合并
 5, 将合并后的代码push到github上去
    [master]> git push origin master
 
