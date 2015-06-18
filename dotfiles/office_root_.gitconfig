@@ -28,3 +28,9 @@
     status = auto
     branch = auto
     ui = true
+[http]
+	sslverify = true
+[https]
+	sslverify = true
+[push]
+	default = matching
