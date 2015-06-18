@@ -2546,9 +2546,10 @@ git config --global user.name
 然后推送就有权限了
 
 ====github更新fork仓库===================
-1, 先git clone fork的到自己用户的仓库
+1, 先git clone fork的到自己用户的仓库, 注意要用git@git的地址
 2, 增加源分支地址到你项目远程分支列表中，先得将原来的仓库指定为upstream，命令为：
    git remote add upstream https://github.com/被fork的仓库.git
+   git remote add upstream git@gitxxxx.git
 可使用git remote -v查看远程分支列表
 3, fetch源分支的新版本到本地
    [master]> git fetch upstream
