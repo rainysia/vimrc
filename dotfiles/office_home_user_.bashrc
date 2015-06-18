@@ -109,6 +109,7 @@ alias gno='gnome-open'
 alias cdw='cd /home/www'
 alias cdws='cd /home/www/chinasite'
 alias cdww='cd /home/www/wordpress/'
+alias cdbb='cd /home/www/bom/bom'
 alias cds='cd /home/work/'
 alias cdh='cd /home'
 alias cdhs='cd /home/hyve/test_engbom'
@@ -133,10 +134,11 @@ alias gvimlog='gvim /var/log/php_errors.log'
 alias vimlog='vim /var/log/php_errors.log'
 alias taillog='tail -f /var/log/php_errors.log'
 alias gvimshell='gvim /home/manual/docs/shell.txt'
+alias gvimhyve='gvim /home/manual/docs/hyve.txt'
+alias gvimvimrc='gvim /etc/vim/vimrc'
 alias delpyc='find -name "*.pyc" | xargs "rm"'
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
-
 export GOPATH=$HOME/go:$PATH:$GOROOT/bin
 export JAVAROOT=/usr/java/java7
 export PATH=$PATH:$JAVAROOT/bin
@@ -174,3 +176,7 @@ fi
 if [ "$TERM"=="xterm" ]; then
     export TERM=xterm-256color
 fi
+
+alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
+source /usr/local/bin/virtualenvwrapper.sh
+#export PATH="/usr/local/lib/cw:$PATH"
