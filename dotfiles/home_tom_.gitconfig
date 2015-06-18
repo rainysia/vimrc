@@ -21,6 +21,7 @@
     line = log --oneline
     latest = for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short) [%(committername)]'
     ls = log --pretty=format:\"%C(yellow)%h %C(blue)%ad %C(red)%d %C(reset)%s %C(green)[%cn]\" --decorate --date=short
+    log2=log --pretty=format:\"%Cgreen%ai [%h] %Cblue<%an> %Cred%s\" --date-order
     hist = log --pretty=format:\"%C(yellow)%h %C(red)%d %C(reset)%s %C(green)[%an] %C(blue)%ad\" --topo-order --graph --date=short
     type = cat-file -t
     dump = cat-file -p
@@ -28,5 +29,10 @@
     diff = auto
     status = auto
     branch = auto
+    ui = true
+[http]
+    sslverify = true
+[https]
+    sslverify = true
 [push]
     default = matching
