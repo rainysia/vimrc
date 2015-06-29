@@ -623,6 +623,11 @@ awk NF
 awk '/./'
 例子 list1.txt:
 yes test1@domain.com test1@domian.net test1@163.com
+
+cat 1.txt | awk -F":" '{gsub(/\//, "-", $1);"date +%Y-%m-%d -d" $1|getline d;print d" "$2":"$3":"$4$5}'
+18/Apr/2015:09:34:12 +0800  => 转成 2015-04-18 09:34:12 +0800
+
+
  
 #sendmail.sh
 CHECK=`curl http://sendmail.domain.com/list1.txt`
@@ -1258,8 +1263,7 @@ net rpc shutdown -l ip_address -U username%password
 ping -a IP
 
 54.列出最常用的10个命令
-history | awk '{a[$2]++}END{for(i in a){print a[i] "" i}}' | sort -rn | head
-
+history | awk '{a[$2]++}END{for(i in a){print a[i] "" i}}' | sort -rn | head 
 55.lastlog 显示每个用户最后登录的时间
 
 56.tzselect 时区选择 5,9,1,1 亚洲 中国 北京时间 确认 
