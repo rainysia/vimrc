@@ -1799,3 +1799,8 @@ from decimal import Decimal
 dec = Decimal('.1')   0.1
 
 对于017+32 = 47 和017+032=41.因为0开头是八进制的
+
+#pip install -U pep8
+是python的代码风格检测工具 
+pep8 --first xxx.py
+pep8  --show-source  --show-pep8 xxx.py  显示详细的错误和警告
