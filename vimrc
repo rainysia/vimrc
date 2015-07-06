@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 7.06.01
+"    Version: 7.07.01
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2015-06-16 15:30:59
+" LastChange: 2015-07-06 14:39:19
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -368,7 +368,7 @@ let g:ctrlp_user_command = {
 "{{                                        " CTags的设定
 "                                          "     (地址自定义,我的www在F:/php/www下)
 "                                          "     vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
-"                                          " ctrl_] 跳转到对应函数 ctrl_t 回跳
+"                                          " ctrl_] 跳转到对应函数 ctrl_t 回跳 ctrl_o 回跳
 map <F8> :!ctags -R<CR>
 nnoremap <silent> <S-F8> :!ctags -R<CR>
 set tags=/home/www/tags
@@ -709,6 +709,15 @@ let g:indentLine_char = '|'
 "{{                                        " pydiction 插件 http://www.vim.org/scripts/script.php?script_id=850
 let g:pydiction_location = '~/.vim/after/ftplugin/pydiction/complete-dict'
 let g:pydiction_menu_height = 3
+"}}
+"{{                                        " pyflakes 插件 http://www.vim.org/scripts/script.php?script_id=2441
+if has("gui_running") 
+    highlight SpellBad term=underline gui=undercurl guisp=Orange
+endif
+let g:pyflakes_use_quickfix = 1            " 开关 
+"}}
+"{{                                        " pep8插件 http://www.vim.org/scripts/script.php?script_id=2914  F5唤出
+"let g:pep8_map='whatever key'
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1675,5 +1684,6 @@ endif
 " 7.01.01                                  " add new vimdiff color 2015-02-04 11:22:49
 " 7.04.01                                  " add foldenable zf 2015-04-17 17:59:15
 " 7.06.01                                  " change terminal fg/bg color 2015-06-16 15:30:59
+" 7.07.01                                  " add pyflakes and pep8 2015-07-06 14:39:19
 "}}
 "}}}
