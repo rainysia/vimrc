@@ -52,6 +52,7 @@ eg:aDict={'name':'cynthia','age':18}
     字典通过del prices["MSFT"]来删除字典的元素
 
 
+
 集合,用set()函数设置,用于包含一组无序的对象
 s = set([5,3,9,10]) 创建一个数值集合
 t = set("hello")
@@ -1804,3 +1805,32 @@ dec = Decimal('.1')   0.1
 是python的代码风格检测工具 
 pep8 --first xxx.py
 pep8  --show-source  --show-pep8 xxx.py  显示详细的错误和警告
+
+python每行建议80个字符,超出用圆括号,方括号和花括号连接
+a=('fewf ewf ew'
+   'fewf ewf bbbb www')
+
+测试程序消耗时间
+from timeit import Timer
+Timer('call function').timeit()
+使用dis模块来分析堆栈(dis Dat Input Supervisor)
+import dis
+def a():
+    Timer('call function').timeit()
+>>> def a():
+	Timer('x,y=y,x', 'x=2;y=3').timeit()
+	
+>>> a
+<function a at 0x7f29e2e82410>
+>>> dis.dis(a)
+  2           0 LOAD_GLOBAL              0 (Timer)
+              3 LOAD_CONST               1 ('x,y=y,x')
+              6 LOAD_CONST               2 ('x=2;y=3')
+              9 CALL_FUNCTION            2
+             12 LOAD_ATTR                1 (timeit)
+             15 CALL_FUNCTION            0
+             18 POP_TOP             
+             19 LOAD_CONST               0 (None)
+             22 RETURN_VALUE    
+
+ROW_TWO是交换两个栈的最顶层元素,比LOAD_FAST + STORE_FAST更快

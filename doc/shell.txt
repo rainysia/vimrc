@@ -3878,6 +3878,9 @@ apt-key adv --recv-keys --keyserver keyserver.ubuntu.com xxxxxx
 
 
 151. ctags -R ./xxx ./xxx ./xxx 指定对哪些文件作索引
+
+152. window + space 来控制root下的ibus输入法切换
+windows键可以在stardict双击选中单词的时候,按住windows键可以弹出屏幕取词
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
