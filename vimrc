@@ -710,14 +710,19 @@ let g:indentLine_char = '|'
 let g:pydiction_location = '~/.vim/after/ftplugin/pydiction/complete-dict'
 let g:pydiction_menu_height = 3
 "}}
-"{{                                        " pyflakes 插件 http://www.vim.org/scripts/script.php?script_id=2441
-if has("gui_running") 
-    highlight SpellBad term=underline gui=undercurl guisp=Orange
-endif
-let g:pyflakes_use_quickfix = 1            " 开关 
-"}}
-"{{                                        " pep8插件 http://www.vim.org/scripts/script.php?script_id=2914  F5唤出
-"let g:pep8_map='whatever key'
+"{{                                        " flake8插件 http://www.vim.org/scripts/script.php?script_id=4440
+"                                          " command
+"                                               :PyFlakeToggle  "Disable/enable automatic checking of current file
+"                                               :PyFlake        "Run checks for current file
+"                                               :PyFlakeAuto    "Auto-fix pep8 errors for current file
+let g:PyFlakeOnWrite = 1                   "Auto-check file for errors on write:
+let g:PyFlakeCheckers = 'pep8,mccabe,pyflakes' "List of checkers used:
+let g:PyFlakeDefaultComplexity=10          "Default maximum complexity for mccabe:
+let g:PyFlakeDisabledMessages = 'E501'     "List of disabled pep8 warnings and errors:
+let g:PyFlakeCWindow = 6                   "Default height of quickfix window:
+let g:PyFlakeSigns = 1                     "Whether to place signs or not:
+let g:PyFlakeMaxLineLength = 100           "Maximum line length for PyFlakeAuto command
+let g:PyFlakeRangeCommand = 'Q'            "Visual-mode key command for PyFlakeAuto
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1684,6 +1689,6 @@ endif
 " 7.01.01                                  " add new vimdiff color 2015-02-04 11:22:49
 " 7.04.01                                  " add foldenable zf 2015-04-17 17:59:15
 " 7.06.01                                  " change terminal fg/bg color 2015-06-16 15:30:59
-" 7.07.01                                  " add pyflakes and pep8 2015-07-06 14:39:19
+" 7.07.01                                  " add flake8=pyflake+pep8 2015-07-06 14:39:19
 "}}
 "}}}
