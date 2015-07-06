@@ -560,6 +560,10 @@ Unicode字符串,在python3.0，所有字符串都是unicode字符串
 
             for index,string in enumerate(strings):
                 ...
+
+        对于字典的序列迭代,用iteritems
+            for k,v in xxx.iteritems():
+                print k,":",v
         翻转/排序迭代 reversed/sorted
 
         wile True/break
