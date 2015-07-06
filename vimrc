@@ -715,7 +715,10 @@ let g:pydiction_menu_height = 3
 "                                               :PyFlakeToggle  "Disable/enable automatic checking of current file
 "                                               :PyFlake        "Run checks for current file
 "                                               :PyFlakeAuto    "Auto-fix pep8 errors for current file
-let g:PyFlakeOnWrite = 1                   "Auto-check file for errors on write:
+"                                          " Bind F6 to auto fix,F5 to check
+map <F6> :PyFlakeAuto<CR>
+map <F5> :PyFlake<CR>
+let g:PyFlakeOnWrite = 0                   "Auto-check file for errors on write:
 let g:PyFlakeCheckers = 'pep8,mccabe,pyflakes' "List of checkers used:
 let g:PyFlakeDefaultComplexity=10          "Default maximum complexity for mccabe:
 let g:PyFlakeDisabledMessages = 'E501'     "List of disabled pep8 warnings and errors:
