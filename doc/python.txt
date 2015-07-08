@@ -170,7 +170,9 @@ Unicode字符串,在python3.0，所有字符串都是unicode字符串
     list函数，实现字符串可以像列表一样被修改,list也适用于所有类型的序列。
         >>>list('Hello')
         ['H','e','l','l','o']
+        >>> hello = ['H','e','l','l','o']
         可以用''.join(somelist)来把列表转换为字符串
+        ''.join(value for value in hello)
 
     分片赋值,可以赋值不等长的序列
         >>>name=list('perl')
@@ -974,6 +976,22 @@ Python的类的方法和普通的函数有一个很明显的区别，在类的�
         finally:
             print 'Cleaning UP'
             #可以在finally这里执行一些关闭文件/网络套接字, 非常有用
+
+    try:
+        <statements>            # runt this main action first
+    except <name1>:
+        <statements>            # 当try中发生name1的异常时处理
+    except (name2, name3):
+        <statements>            # 当try中发生name2或name3中的某一个异常时处理
+    except <name4> as <data>:
+        <statements>            # 当try中发生name4的异常处理时,并获取对应实例
+    except:
+        <statement>             #其他异常发生时处理
+    else:
+        <statements>            #没有异常发生时执行
+    finally:
+        <statements>            #不管有没有异常发生都会执行
+
 
 
 魔术方法/属性/迭代器

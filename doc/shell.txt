@@ -3829,6 +3829,7 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
 142. vim 查看启动.会生成time.txt                   vi README.md --startuptime 'time.txt'
 
 143. smb://192.168.84.2/public/ITO/Training
+    smb://10.17.2.12
     username,domainname,mail-pwd.
 
 144. HP机器需要原装键盘来重回bios
@@ -3881,6 +3882,16 @@ apt-key adv --recv-keys --keyserver keyserver.ubuntu.com xxxxxx
 
 152. window + space 来控制root下的ibus输入法切换
 windows键可以在stardict双击选中单词的时候,按住windows键可以弹出屏幕取词
+
+153, REALVNC
+#dpkg -i VNC-Server-5.2.3-Linux-x64.deb
+key:8KNFU-MZZHE-WA449-2SLLH-48Q7A
+#mkdir /usr/lib/systemd/system
+#systemctl start vncserver-x11-serviced.service
+#vnclicensewiz
+然后就可以直接用了,添加用户,配置密码
+#dpkg -i VNC-Viewer-5.2.3-Linux-x64.deb
+option里选Security->VNC password->Alwas On
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
