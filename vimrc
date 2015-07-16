@@ -1358,6 +1358,7 @@ endif
 " :sav php.html                            " 把当前文件存为php.html并打开php.html
 " :sav! %<.bak                             " 换一个后缀保存
 " :e!                                      " 返回到修改之前的文件(修改之后没有存盘)
+" :w !sudo tee > /dev/null %               " save as root
 " :w /path/%                               " 把文件存到一个地儿
 " :rew                                     " 回到第一个可编辑的文件
 " :brew                                    " 回到第一个buffer
