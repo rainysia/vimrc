@@ -70,5 +70,12 @@ framework
 
 
 
-
+testview
+==========
+mkvirtualenv testview
+pip install -r requiredpypkgs.txt
+pip install mysql-python
+pip install --upgrade  mysql-python
+apt-get install libmysqlclient-dev
+python manage.py runserver 192.168.85.123:8765
 
