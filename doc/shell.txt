@@ -1398,7 +1398,7 @@ usermod -a -G 组名 用户 ，把已有的用户名添加到已有的组里面
 54，top 后 在shift + P 所占进程的排序显示
 55，top 后 在shift + M 所占内存的排序显示
 56，iptraf -g //查看各个接口的流量
-57，ostat -d -x /dev/sda2 2 //用iostat查看磁盘/dev/sda2的磁盘i/o情况，每两秒刷新一次
+57，iostat -d -x /dev/sda2 2 //用iostat查看磁盘/dev/sda2的磁盘i/o情况，每两秒刷新一次
 58, paste -sd '|||\n' test //文件的每4行转换成1行，并用|隔开。
 59，lsof -i :22 //知道22端口现在运行什么程序
 60，lsof -c abc //显示abc进程现在打开的文件
@@ -2288,7 +2288,8 @@ git rm <file> --cached #从版本库中删除文件,但不删除文件
 
 git reset <file> # 从暂存区恢复到工作文件
 git reset -- . # 从暂存区恢复到工作文件
-git reset --hard # 恢复最近一次提交的状态,即放弃上次提交后的所有本次修改
+git reset --hard # 恢复最近一次提交的状态,即放弃上次提交后的所有本次修改, merge前的分支
+
 
 git ci <file> #
 git ci . #
@@ -2298,6 +2299,7 @@ git ci --amend # 修改最后一次提交记录
 
 git revert <$id> # 恢复某次提交的状态,恢复动作本身也创建了一次提交对象
 git revert HEAD # 恢复最后一次提交的状态
+
 
 git本地分支管理
 查看.切换.创建和删除分支
@@ -2457,6 +2459,7 @@ $ssh-keygen
 $ssh-copy-id -i /root/.ssh/id_rsa.pub git@192.168.85.111
 这里如果有端口,用
 $ssh-copy-id -i /root/.ssh/id_rsa.pub "git@192.168.85.111 -p2222"
+ssh-copy-id -i /root/.ssh/id_rsa.pub -p2222 "git@192.168.86.111" 
 如果不在对应的账户, 可以使用git clone git@xxxxx:repositories/项目 来要求每次输入密码拉取更新
 
 Now try logging into the machine, with "ssh 'git@192.168.85.111'", and check in:
