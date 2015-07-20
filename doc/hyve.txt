@@ -104,3 +104,7 @@ for i in a: print i
 还有一点需要说明，就是执行普通的 shell 命令中如果有 $的话需要用两个 $。比如原来的echo $PATH现在得写成!echo$$PATH。
 在较新的ipython版本中，添加了ipython notebook的功能，弥补了ipython shell下代码不易保存等缺点，并且在使用 --pylab inline选项后，可以在代码执行后立即显示运行结果（包括图片，数据表格等），因此在数据分析中运用十分广泛。
 
+
+
+
+#/usr/lib/python2.7/dist-packages/
