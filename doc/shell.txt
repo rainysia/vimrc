@@ -3897,6 +3897,15 @@ key:8KNFU-MZZHE-WA449-2SLLH-48Q7A
 然后就可以直接用了,添加用户,配置密码
 #dpkg -i VNC-Viewer-5.2.3-Linux-x64.deb
 option里选Security->VNC password->Alwas On
+
+
+154,
+aptitude install cups cups-client
+/etc/init.d/cups start
+http://localhost:631
+system-config-printer
+可以配置
+
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
