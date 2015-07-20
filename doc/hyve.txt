@@ -78,4 +78,29 @@ pip install mysql-python
 pip install --upgrade  mysql-python
 apt-get install libmysqlclient-dev
 python manage.py runserver 192.168.85.123:8765
+o
+
+=========
+pip install ipython
+%bg function把 function 放到后台执行，例如: %bg myfunc(x, y,z=1)，之后可以用jobs将其结果取回。myvar = jobs.result(5) 或 myvar =jobs[5].result。另外，jobs.status() 可以查看现有任务的状态。
+%ed 或 %edit编辑一个文件并执行，如果只编辑不执行，用 ed -x filename 即可。
+%env显示环境变量
+%hist 或 %history显示历史记录
+%macro name n1-n2 n3-n4 ... n5 .. n6 ...创建一个名称为 name 的宏，执行 name 就是执行 n1-n2 n3-n4 ... n5 .. n6 ...这些代码。
+%pwd显示当前目录
+%pycat filename用语法高亮显示一个 python 文件(不用加.py后缀名)
+%save filename n1-n2 n3-n4 ... n5 .. n6 ...将执行过多代码保存为文件
+%time statement计算一段代码的执行时间
+%timeit statement自动选择重复和循环次数计算一段代码的执行时间，太方便了。
+另外，ipython 中用 ! 表示执行 shell 命令，用 $ 将 python 的变量转化成shell 变量。通过这种两个符号，我们就可以做到和 shell命令之间的交互，可以非常方便地做许多复杂的工作。比如你可以很方便地创建一组目录:
+for i in range(10):
+s = "dir%s" % i
+!mkdir $s
+不过写法上还是有一些限制，$ 后面只能跟变量名，不能直接写复杂表达式，$"dir%s"%i 就是错误的写法了，所以要先完全产生python 的变量以后再用。像
+for i in !ls: print i
+这样的写法也是错的，可以这样:
+a = !ls
+for i in a: print i
+还有一点需要说明，就是执行普通的 shell 命令中如果有 $的话需要用两个 $。比如原来的echo $PATH现在得写成!echo$$PATH。
+在较新的ipython版本中，添加了ipython notebook的功能，弥补了ipython shell下代码不易保存等缺点，并且在使用 --pylab inline选项后，可以在代码执行后立即显示运行结果（包括图片，数据表格等），因此在数据分析中运用十分广泛。
 
