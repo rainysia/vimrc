@@ -1,6 +1,7 @@
 安装pip
 安装virtualen
 安装virtualenwrapper
+pip install virtualenwrapper
 mkdir ~/.virtualenv
 export WORKON_HOME=$HOME/.virtualenv
 source /usr/local/bin/virtualenvwrapper.sh
