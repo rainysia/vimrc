@@ -96,10 +96,15 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias u2g='iconv -f UTF-8 -t GBK'
-alias gtu='iconv -f GBK -t UTF-8'
+alias g2u='iconv -f GBK -t UTF-8'
 alias la='ls -AF --color=auto'
 alias ll='ls -lF --color=auto'
 alias lm='ls -F --color=auto |more'
+alias lsrh='ls -lrt'
+alias lsrha='ls -lrta'
+alias lsrth='ls -lrth'
+alias lsrtah='ls -lrtah'
+alias lsrtahi='ls -lrtah --ignore="*.pyc"'
 alias ..='cd ..'
 alias ....='cd ../..'
 alias dh='df -hT'
@@ -137,13 +142,20 @@ alias gvimshell='gvim /home/manual/docs/shell.txt'
 alias gvimhyve='gvim /home/manual/docs/hyve.txt'
 alias gvimvimrc='gvim /etc/vim/vimrc'
 alias delpyc='find -name "*.pyc" | xargs "rm"'
+
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export XIM=ibus
+export QT_IM_MODULE=ibus
+export XIM_ARGS="ibus-daemon -d -x"
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/go:$PATH:$GOROOT/bin
-export JAVAROOT=/usr/java/java7
-export PATH=$PATH:$JAVAROOT/bin
-export CLASSPATH=.:$JAVAROOT/lib:$JAVAROOT/jre/lib
+export JAVA_HOME=/usr/java/java7
+export PATH=$PATH:$JAVA_HOME/bin
+export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
 export WORKON_HOME=$HOME/.virtualenv
+source /usr/local/bin/virtualenvwrapper.sh
 ssh() {
     if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux" ]; then
             tmux rename-window "$*"
@@ -178,5 +190,4 @@ if [ "$TERM"=="xterm" ]; then
 fi
 
 alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
-source /usr/local/bin/virtualenvwrapper.sh
 #export PATH="/usr/local/lib/cw:$PATH"
