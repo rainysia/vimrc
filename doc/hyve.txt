@@ -107,6 +107,11 @@ for i in a: print i
 
 
 
+=============
+CIS-API
+pip install requests>=2.6
+=============
+
 
 #/usr/lib/python2.7/dist-packages/
 
