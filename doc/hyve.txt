@@ -112,6 +112,11 @@ CIS-API
 pip install requests>=2.6
 =============
 
+flask-api
+============
+pip install flask
+pip install flask-restful
+============
 
 #/usr/lib/python2.7/dist-packages/
 
