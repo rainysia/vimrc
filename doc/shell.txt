@@ -7,7 +7,7 @@
  * @copyright  2006-2015 BTROOT.ORG
  * @license    http://www.btroot.com/user_guide/license.html V1
  * @createTime 2009-11-14 11:14:23
- * @lastChange 2015-02-25 11:03:43
+ * @lastChange 2015-07-29 14:06:43
 */
 Shell好玩的
 
@@ -3911,6 +3911,21 @@ system-config-printer
 155.zeal
 apt-get install qt5-default qt5-qmake libarchive-dev libarchive13 libxcb-keysyms1-dev libxcb-keysyms1 libqt5webkit5-dev libqt5x11extras5 libqt5x11extras5-dev
 
+156.ipython
+[TAB]列出所有可用的子物件和方法.如输入"os."按tab可以显示所有os的
+%pdoc 模组 或 模组? 会出现该模组或方法的文件. 
+%psource 模组 或%pfile 模组 或 模组?? 会显示该模组的代码. 如os??
+输入edit可以直接编辑代码.编辑器用的系统默认的editor.
+这些都是ipython的神奇指令magic command.可以通过automagic 关闭, %automagic开启
+常用的magic command:
+%magic 查看所有指令
+%edit 编辑并执行文件
+%edit -x filename 编辑但不执行文件
+%edit 5:20 filename 编辑文件第5行,第20个字符
+%pwd 显示当前目录
+%time statement 计算程序执行时间
+要调用linux系统命令,可以直接加!符号.
+
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
@@ -3936,3 +3951,5 @@ apt-get install qt5-default qt5-qmake libarchive-dev libarchive13 libxcb-keysyms
 13.1更新git clean                                   2015-01-13 14:15:36
 13.2更新zsh                                         2015-02-06 10:53:32
 13.3更新rename                                      2015-02-25 11:03:43
+13.4更新ipython                                     2015-07-29 14:06:39
+
