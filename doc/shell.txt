@@ -7,7 +7,7 @@
  * @copyright  2006-2015 BTROOT.ORG
  * @license    http://www.btroot.com/user_guide/license.html V1
  * @createTime 2009-11-14 11:14:23
- * @lastChange 2015-07-29 14:06:43
+ * @lastChange 2015-07-31 16:19:25
 */
 Shell好玩的
 
@@ -3926,6 +3926,15 @@ apt-get install qt5-default qt5-qmake libarchive-dev libarchive13 libxcb-keysyms
 %time statement 计算程序执行时间
 要调用linux系统命令,可以直接加!符号.
 
+157. mysql procedure
+创建create procedure sp_name(参数列表)
+        BEGIN
+        ...
+        END
+调用call sp_name()
+删除drop procedure sp_name
+显示show procedure status
+show create procedure sp_name
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
@@ -3952,4 +3961,4 @@ apt-get install qt5-default qt5-qmake libarchive-dev libarchive13 libxcb-keysyms
 13.2更新zsh                                         2015-02-06 10:53:32
 13.3更新rename                                      2015-02-25 11:03:43
 13.4更新ipython                                     2015-07-29 14:06:39
-
+13.5更新Procedure                                   2015-07-31 16:19:25
