@@ -3935,6 +3935,24 @@ apt-get install qt5-default qt5-qmake libarchive-dev libarchive13 libxcb-keysyms
 删除drop procedure sp_name
 显示show procedure status
 show create procedure sp_name
+
+存储过程参数有三种类型:
+IN: 输入参数,在调用存储过程时指定, 默认未指定类型时则是此类型
+OUT:输出参数,在存储过程里可以被改变,并且可返回
+INOUT:输入输出参数,IN和OUT结合.
+DECLARE var_name,[var_name...] data_type DEFAULT default_value 声明局部变量
+    e.g: DECLARE a,b,c INT DEFAULT 5;
+SET 对已声明的变量复制或者重新赋值
+SELECT 显示变量, SELECT var into out_var 将变量值写入OUT参数
+事件Event 可以定义一些任务调度,首先需要开启事件调度的支持 SET GLOBAL event_scheduler = 1;
+创建语法:
+    CREATE EVENT [IF NOT EXISTS] <event_name>
+    ON SCHEDULE <schedule>
+    DO
+    <event_body>;
+SHOW EVENTS列出所有事件 show events\G;
+SHOW CREATE EVENT <event_name>查看一个已存在的事件的信息
+
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
