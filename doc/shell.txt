@@ -3942,8 +3942,12 @@ OUT:输出参数,在存储过程里可以被改变,并且可返回
 INOUT:输入输出参数,IN和OUT结合.
 DECLARE var_name,[var_name...] data_type DEFAULT default_value 声明局部变量
     e.g: DECLARE a,b,c INT DEFAULT 5;
-SET 对已声明的变量复制或者重新赋值
+SET 对已声明的变量复制或者重新赋值. SET var_name=表达式值[.variable_name=expression...]
 SELECT 显示变量, SELECT var into out_var 将变量值写入OUT参数
+    e.g: SELECT 'hello world' into @x;
+        SELECT @x;
+        SET @y='Good bye !';
+        SELECT @y;
 事件Event 可以定义一些任务调度,首先需要开启事件调度的支持 SET GLOBAL event_scheduler = 1;
 创建语法:
     CREATE EVENT [IF NOT EXISTS] <event_name>
@@ -3952,6 +3956,29 @@ SELECT 显示变量, SELECT var into out_var 将变量值写入OUT参数
     <event_body>;
 SHOW EVENTS列出所有事件 show events\G;
 SHOW CREATE EVENT <event_name>查看一个已存在的事件的信息
+
+注释: -- , # 用于单行注释, /* ...*/ 多行注释
+存储过程名字后面的()是必须的.
+不能在存储过程参数名称前+@,只能 b int
+存储过程的参数不能指定默认值,不能省略参数, 可以用null代替, 不需要在procedure body前加as,
+比如mysql存储过程包含多条mysql语句, 需要begin end 关键字
+create procedure pr_add(
+            a int,
+            b int.
+            )
+            BEGIN
+            mysql statement1 ...;
+            mysql statement2 ...;
+            end;
+每条语句的末尾,都要分号;
+declare c int;
+if a is null then
+set a = 0;
+end if;
+...
+end;
+
+
 
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
