@@ -3937,9 +3937,42 @@ apt-get install qt5-default qt5-qmake libarchive-dev libarchive13 libxcb-keysyms
 show create procedure sp_name
 
 存储过程参数有三种类型:
-IN: 输入参数,在调用存储过程时指定, 默认未指定类型时则是此类型
-OUT:输出参数,在存储过程里可以被改变,并且可返回
-INOUT:输入输出参数,IN和OUT结合.
+IN: 输入参数,必须在调用存储过程时指定, 默认未指定类型时则是此类型
+    在存储过程中修改该参数的值不能被返回. 为默认值
+    CREATE PROCEDURE SP_IN_PARA(IN p_in INT)
+        BEGIN
+        select p_in;
+        set p_in=2;
+        select p_in;
+        END;
+
+        执行:
+        set @p_in=1;
+        call SP_IN_PARA(@p_in);
+        select @p_in;   输出1
+OUT:输出参数,在存储过程内部可以被改变,并且可返回
+    CREATE PROCEDURE sp_out_param(OUT p_out INT)
+        begin
+        select p_out;
+        set p_out=2;
+        select p_out;
+        END;
+
+        执行:
+        set @p_out=1;
+        call sp_out_param(@p_out); 输出3
+        select @p_out;  输出2
+INOUT:输入输出参数,IN和OUT结合,调用时指定,并且可被改变和返回
+    CREATE PROCEDURE sp_inout_param(INOUT p_inout INT)
+        BEGIN
+        select p_inout;
+        SET p_inout=5;
+        select p_inout;
+        END;
+
+        set @p_input=3;
+        call sp_inout_param(@p_inout); 输出3
+        select @p_inout;    输出3
 DECLARE var_name,[var_name...] data_type DEFAULT default_value 声明局部变量
     e.g: DECLARE a,b,c INT DEFAULT 5;
 SET 对已声明的变量复制或者重新赋值. SET var_name=表达式值[.variable_name=expression...]
@@ -3978,7 +4011,186 @@ end if;
 ...
 end;
 
+DROP procedure if exists selectnum;
+DELIMITER //
+CREATE PROCEDURE  selectnum(IN num INT)
+BEGIN
+	select num;
+    set num=100;
+    select num * 100;
+END //
+DELIMITER ;
 
+set @a=555;
+CALL selectnum(@a);
+
+算术运算符: +,-,*,/,DIV,%
+    SET var5=10 DIV 3; 3
+    SET var6=10%3;   1
+比较运算符, 下面的返回True/False
+>,<,<=,>=,BETWEEN,NOT BETWEEN, IN, NOT IN, =, <> !=  , <=>, LIKE, REGEXP, IS NULL, IS NOT NULL
+    5 BETWEEN 1 AND 10    True 5 IN (1,2,3,4) False
+    2 <> 3 False
+    NUll <=> NULL  True 严格比较两个值是否相等
+    "Guy Harrison" LIKE "Guy%" True
+    "Guy Harrison" REGEXP "[Gg]reg" False 
+    0 IS NULL  False
+逻辑运算符
+位运算符
+|或, &与, <<左移位, >>右, ~非(取反)
+流程控制:
+    分支
+        if
+        case
+    循环
+        for循环
+        while循环
+        loop循环
+        repeat until循环
+    区块定义
+        BEGIN
+        ...
+        END;
+        或者取别名:
+        lable1:BEGIN
+        ...
+        END lable1;
+        可以用levae label1; 来跳出区块,执行区块后的代码
+
+函数库,字符串类型，数值类型，日期类型
+一、字符串类
+CHARSET(str) //返回字串字符集
+CONCAT (string2 [,… ]) //连接字串
+INSTR (string ,substring ) //返回substring首次在string中出现的位置,不存在返回0
+LCASE (string2 ) //转换成小写
+LEFT (string2 ,length ) //从string2中的左边起取length个字符
+LENGTH (string ) //string长度
+LOAD_FILE (file_name ) //从文件读取内容
+LOCATE (substring , string [,start_position ] ) 同INSTR,但可指定开始位置
+LPAD (string2 ,length ,pad ) //重复用pad加在string开头,直到字串长度为length
+LTRIM (string2 ) //去除前端空格
+REPEAT (string2 ,count ) //重复count次
+REPLACE (str ,search_str ,replace_str ) //在str中用replace_str替换search_str
+RPAD (string2 ,length ,pad) //在str后用pad补充,直到长度为length
+RTRIM (string2 ) //去除后端空格
+STRCMP (string1 ,string2 ) //逐字符比较两字串大小,
+SUBSTRING (str , position [,length ]) //从str的position开始,取length个字符,
+注：mysql中处理字符串时，默认第一个字符下标为1，即参数position必须大于等于1
+mysql> select substring(’abcd’,0,2);
++———————–+
+| substring(’abcd’,0,2) |
++———————–+
+|                       |
++———————–+
+1 row in set (0.00 sec)
+
+mysql> select substring(’abcd’,1,2);
++———————–+
+| substring(’abcd’,1,2) |
++———————–+
+| ab                    |
++———————–+
+1 row in set (0.02 sec)
+
+TRIM([[BOTH|LEADING|TRAILING] [padding] FROM]string2) //去除指定位置的指定字符
+UCASE (string2 ) //转换成大写
+RIGHT(string2,length) //取string2最后length个字符
+SPACE(count) //生成count个空格
+
+二、数值类型
+
+ABS (number2 ) //绝对值
+BIN (decimal_number ) //十进制转二进制
+CEILING (number2 ) //向上取整
+CONV(number2,from_base,to_base) //进制转换
+FLOOR (number2 ) //向下取整
+FORMAT (number,decimal_places ) //保留小数位数
+HEX (DecimalNumber ) //转十六进制
+注：HEX()中可传入字符串，则返回其ASC-11码，如HEX(’DEF’)返回4142143
+也可以传入十进制整数，返回其十六进制编码，如HEX(25)返回19
+LEAST (number , number2 [,..]) //求最小值
+MOD (numerator ,denominator ) //求余
+POWER (number ,power ) //求指数
+RAND([seed]) //随机数
+ROUND (number [,decimals ]) //四舍五入,decimals为小数位数]
+
+注：返回类型并非均为整数，如：
+
+(1)默认变为整形值
+mysql> select round(1.23);
++————-+
+| round(1.23) |
++————-+
+|           1 |
++————-+
+1 row in set (0.00 sec)
+
+mysql> select round(1.56);
++————-+
+| round(1.56) |
++————-+
+|           2 |
++————-+
+1 row in set (0.00 sec)
+
+(2)可以设定小数位数，返回浮点型数据
+
+mysql> select round(1.567,2);
++—————-+
+| round(1.567,2) |
++—————-+
+|           1.57 |
++—————-+
+1 row in set (0.00 sec)
+
+SIGN (number2 ) //返回符号,正负或0
+SQRT(number2) //开平方
+
+三、日期类型
+
+ADDTIME (date2 ,time_interval ) //将time_interval加到date2
+CONVERT_TZ (datetime2 ,fromTZ ,toTZ ) //转换时区
+CURRENT_DATE ( ) //当前日期
+CURRENT_TIME ( ) //当前时间
+CURRENT_TIMESTAMP ( ) //当前时间戳
+DATE (datetime ) //返回datetime的日期部分
+DATE_ADD (date2 , INTERVAL d_value d_type ) //在date2中加上日期或时间
+DATE_FORMAT (datetime ,FormatCodes ) //使用formatcodes格式显示datetime
+DATE_SUB (date2 , INTERVAL d_value d_type ) //在date2上减去一个时间
+DATEDIFF (date1 ,date2 ) //两个日期差
+DAY (date ) //返回日期的天
+DAYNAME (date ) //英文星期
+DAYOFWEEK (date ) //星期(1-7) ,1为星期天
+DAYOFYEAR (date ) //一年中的第几天
+EXTRACT (interval_name FROM date ) //从date中提取日期的指定部分
+MAKEDATE (year ,day ) //给出年及年中的第几天,生成日期串
+MAKETIME (hour ,minute ,second ) //生成时间串
+MONTHNAME (date ) //英文月份名
+NOW ( ) //当前时间
+SEC_TO_TIME (seconds ) //秒数转成时间
+STR_TO_DATE (string ,format ) //字串转成时间,以format格式显示
+TIMEDIFF (datetime1 ,datetime2 ) //两个时间差
+TIME_TO_SEC (time ) //时间转秒数]
+WEEK (date_time [,start_of_week ]) //第几周
+YEAR (datetime ) //年份
+DAYOFMONTH(datetime) //月的第几天
+HOUR(datetime) //小时
+LAST_DAY(date) //date的月的最后日期
+MICROSECOND(datetime) //微秒
+MONTH(datetime) //月
+MINUTE(datetime) //分
+
+注：可用在INTERVAL中的类型：DAY ,DAY_HOUR ,DAY_MINUTE ,DAY_SECOND ,HOUR ,HOUR_MINUTE ,HOUR_SECOND ,MINUTE ,MINUTE_SECOND,MONTH ,SECOND ,YEAR
+DECLARE variable_name [,variable_name...] datatype [DEFAULT value]; 
+其中，datatype为mysql的数据类型，如:INT, FLOAT, DATE, VARCHAR(length)
+
+例：
+
+DECLARE l_int INT unsigned default 4000000; 
+DECLARE l_numeric NUMERIC(8,2) DEFAULT 9.95; 
+DECLARE l_date DATE DEFAULT '1999-12-31'; 
+DECLARE l_datetime DATETIME DEFAULT '1999-12-31 23:59:59';
+DECLARE l_varchar VARCHAR(255) DEFAULT 'This will not be padded';
 
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
