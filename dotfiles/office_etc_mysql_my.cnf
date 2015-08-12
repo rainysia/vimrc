@@ -36,14 +36,14 @@ query_cache_type    = 1
 query_cache_limit   = 1M
 query_cache_size    = 64M
 general_log_file    = /var/log/mysql/mysql.log
-general_log         = 1
+#general_log         = 1
 slow-query-log      = 1
 log-error           = /var/log/mysql/mysql_error.log
 long_query_time     = 1
 #log-queries-not-using-indexes
 #server-id = 1
 #log_bin = /var/log/mysql/mysql-bin.log
-log_bin             = /var/log/mysql/mysql-bin.log
+#log_bin             = /var/log/mysql/mysql-bin.log
 expire_logs_days    = 30
 max_binlog_size     = 100M
 #binlog_do_db       = include_database_name
