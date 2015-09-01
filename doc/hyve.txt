@@ -75,6 +75,7 @@ testview
 ==========
 mkvirtualenv testview
 pip install -r requiredpypkgs.txt
+pip install --upgrade -r requiredpypkgs.txt
 pip install mysql-python
 pip install --upgrade  mysql-python
 apt-get install libmysqlclient-dev
