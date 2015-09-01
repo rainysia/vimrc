@@ -30,7 +30,7 @@ pserve development.ini
 db configure file:interface_db.py 修改hyve_us_test的帐号密码.
 
 
-
+deactivate退出workon虚拟环境
 
 
 framework
