@@ -4192,6 +4192,16 @@ DECLARE l_date DATE DEFAULT '1999-12-31';
 DECLARE l_datetime DATETIME DEFAULT '1999-12-31 23:59:59';
 DECLARE l_varchar VARCHAR(255) DEFAULT 'This will not be padded';
 
+
+158. strace命令
+显示streams跟踪消息, 
+没有参数的 strace 命令将所有的驱动程序和模块中的所有 STREAMS 事件跟踪消息写入它的标准输出。这些消息是从 STREAMS 日志驱动程序中获取的。如果提供参数，它们必须是在三元组中。每个三元组表明跟踪消息要从给定的模块或驱动程序、子标识（通常表明次要设备）以及优先级别等于或小于给定级别的模块或驱动程序中接收。all 标记可由任何成员使用，以表明对该属性没有限制。
+
+语法 strace [ mid sid level ] mid 指定STREAMS模块的标识号.  sid指定子标识号. level指定跟踪优先级别
+输出格式 每个跟踪消息输出的格式是： <seq> <time> <ticks> <level> <flags> <mid> <sid> <text>
+<seq>跟踪序列号. <time>消息时间(hh:mm:ss) <ticks>系统启动后以机器滴答信号表示消息的时间.<level>跟踪优先级别.<flag> E消息也在错误日志那个/F表示致命错误/N邮件已发送给SA
+<mid>源的模块标识号.<sid>源的子标识号.<text>跟踪消息的格式化文本.(在多处理器系统上,由两部分组成,消息发送者发送处的处理器号码,格式化文本本身)
+
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
