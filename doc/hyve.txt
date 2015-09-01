@@ -79,7 +79,9 @@ pip install mysql-python
 pip install --upgrade  mysql-python
 apt-get install libmysqlclient-dev
 python manage.py runserver 192.168.85.123:8765
-o
+
+-------
+python manage.py shell
 
 =========
 pip install ipython
