@@ -2232,6 +2232,8 @@ git stash # 保存当前工作进度
 git stash list # 列所有stash
 git stash apply # 恢复暂存的内容
 git stash drop # 删除暂存区
+git stash save #暂存内容到暂存区
+git stash pop #弹出暂存的内容
 
 
 git log -1 --pretty=raw 
@@ -3366,6 +3368,7 @@ tcpdump host sundown 监视指定主机的数据包 也可以是IP
           使tcpdump 放弃自己的超级权限(如果以root用户启动tcpdump, tcpdump将会有超级用户权限), 并把当前tcpdump的用户ID设置为user, 组ID设置为user首要所属组的ID(nt: tcpdump 此处可理解为tcpdump 运行之后对应的进程)
           此选项也可在编译的时候被设置为默认打开.(nt: 此时user 的取值未知, 需补充)
 
+
 133.系统启动控制服务
     第一个是invoke-rc.d
         这个命令可以停止或启动服务，比如：
@@ -3429,6 +3432,9 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
     ** 冥计算 
 
     文件重定向
+    标准输入standard input的文件描述符是0
+    标准输出standard output是1
+    标准错误standard error是2
     command > filename      把标准输出重定向到一个文件中
     command >> filename     把标准输出以追加的方式重定向到一个文件中
     command 1 > filename    把标准输出重定向到一个文件中
@@ -3439,6 +3445,9 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
     command < filename > filename2 把command命令以filename文件作为标准输入,以filename2文件作为标准输出
     command < filename      把command命令以filename文件作为标准输入.
     read A < a.txt 会把a.txt的内容读取一个字符串赋值给A
+    grep "standard"* > grep.out 2>&1 就是将标准输出与错误输出一并送入grep.out文件中，写文件方式为覆盖写（>）。
+    cat >>filetest 2>&1 <<MAYDAY 就是从MAYDAY中读取文件内容，将标准输出与错误输出一并送入filetest文件中，写文件方式为附加写（>>）。
+
     tr "[a-z]" "[A-Z]" < a.txt > b.txt 这会从把a.txt的小写全部转换成大写保存到b.txt
 
     test 文件状态测试
@@ -4201,6 +4210,22 @@ DECLARE l_varchar VARCHAR(255) DEFAULT 'This will not be padded';
 输出格式 每个跟踪消息输出的格式是： <seq> <time> <ticks> <level> <flags> <mid> <sid> <text>
 <seq>跟踪序列号. <time>消息时间(hh:mm:ss) <ticks>系统启动后以机器滴答信号表示消息的时间.<level>跟踪优先级别.<flag> E消息也在错误日志那个/F表示致命错误/N邮件已发送给SA
 <mid>源的模块标识号.<sid>源的子标识号.<text>跟踪消息的格式化文本.(在多处理器系统上,由两部分组成,消息发送者发送处的处理器号码,格式化文本本身)
+一旦strace启动将继续执行直到用户终止.
+由于性能的考虑，所以一次只允许一个 strace 命令来打开 STREAMS 日志驱动程序。日志驱动程序有一个三元组的列表（该列表在命令调用中指定），并且程序会根据该列表比较每个潜在的跟踪消息，以决定是否要格式化和发送这个信息到 strace 进程中。因此，长的三元组列表会对 STREAMS 的总体性能的影响更大。运行 strace 命令对于某些模块和驱动程序（生成要发送给 strace 进程的跟踪消息的模块和驱动程序）的定时的影响最大。如果跟踪消息生成过快，以至 strace 进程无法处理，那么就会丢失一些消息。最后的情况可以通过检查跟踪消息输出上的序列号来确定。
+
+strace用法, 
+    1.可以找到被一个程序读取的配置文件.e.g: strace php 2>&1 | grep php.ini
+    2.跟踪指定的系统调用, -e选项仅仅被用来展示特定的系统调用.比如open,write
+        e.g: strace -e open cat dead.letter
+    3. 通过使用-p选项能用在运行的进程上。
+        e.g: strace -p 6543
+    4. 统计概要. -c选项以一种整洁的方式展示.
+        e.g: strace -c ls
+    5. 保存输出结果 -o 
+        e.g: strace -o filename -p 7777
+    6. 显示时间戳 -t, -tt选项可以展示微秒级别的时间戳, -ttt则是从epoch(1970/1/1 00:00:00 UTC)展示秒数, -r展示系统调用之间的相对时间戳
+        e.g: strace -t ls
+    7        
 
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
