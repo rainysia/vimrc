@@ -75,11 +75,15 @@ testview
 ==========
 mkvirtualenv testview
 pip install -r requiredpypkgs.txt
+pip install --upgrade -r requiredpypkgs.txt
 pip install mysql-python
 pip install --upgrade  mysql-python
 apt-get install libmysqlclient-dev
 python manage.py runserver 192.168.85.123:8765
 
+
+python manage.py makemigrations #
+python manage.py migrate        #
 -------
 python manage.py shell
 
@@ -124,3 +128,66 @@ pip install flask-restful
 
 
 pip freeze | grep xxxx
+
+
+
+
+=========unittest for testview==============
+
+Writing tests
+Django的单元测试使用python的unittest模块，这个模块使用基于类的方法来定义测试。类名为django.test.TestCase,继承于python的unittest.TestCase。
+from django.test import TestCase
+from myapp.models import Animal
+  
+class AnimalTestCase(TestCase):
+    def setUp(self):
+        Animal.objects.create(name="lion", sound="roar")
+        Animal.objects.create(name="cat", sound="meow")
+  
+    def test_animals_can_speak(self):
+        """Animals that can speak are correctly identified"""
+        lion = Animal.objects.get(name="lion")
+        cat = Animal.objects.get(name="cat")
+        self.assertEqual(lion.speak(), 'The lion says "roar"')
+        self.assertEqual(cat.speak(), 'The cat says "meow"')
+运行测试的时候，测试程序会在所有以test开头的文件中查找所有的test cases(inittest.TestCase的子类),自动建立测试集然后运行测试。
+注意：如果测试是基于数据库访问的(读取、查询Model)，一定要用django.test.TestCase建立测试类，而不要用unittest.TestCase。
+Runing tests
+执行目录下所有的测试(所有的test*.py文件)：
+    $ python manage.py test
+执行animals项目下tests包里的测试：
+    $ python manage.py test animals.tests
+执行animals项目里的test测试：
+    $ python manage.py test animals
+单独执行某个test case：
+    $ python manage.py test animals.tests.AnimalTestCase
+单独执行某个测试方法：
+    $ python manage.py test animals.tests.AnimalTestCase.test_animals_can_speak
+为测试文件提供路径：
+    $ python manage.py test animals/
+通配测试文件名：
+    $ python manage.py test --pattern="tests_*.py"
+启用warnings提醒：
+    $ python -Wall manage.py test
+数据库
+测试是需要数据库的，django会为测试单独生成数据库。不管你的测试是否通过,当你所有的测试都执行过后,这个测试数据库就会被销毁。
+默认情况下,测试数据库的名字是test_DATABASE_NAME,DATABASE_NAME是你在settings.py里配置的数据库名.如果 你需要给测试数据库一个其他的名字,在settings.py中指定TEST_DATABASE_NAME的值。使用sqlite3时，数据库是在内存中创建的。
+除了数据库是单独创建的以外,测试工具会使用相同的数据库配置--DATABASE_ENGINE, DATABASE_USER, DATABASE_HOST等等.创建测试数据库的用户DATABASE_USER(settings中)指定,所以你需要确认 DATABASE_USER有足够的权限去创建数据库。
+测试执行顺序
+为了保证所有的测试都从干净的数据库开始，执行顺序如下：
+1.所有的TestCase子类首先运行。
+2.所有其他的单元测试(unittest.TestCase,SimpleTestCase,TransactionTestCase)。
+3.其它的测试(例如doctests等)
+加速测试
+可以将PASSWORD_HASHERS设置为更快的算法：
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.MD5PasswordHasher',
+)
+
+
+=========process testview=====================
+python manage.py makemigrations
+python manage.py migrate
+python manage.py test --pattern="test_servergi.py"
+
+
