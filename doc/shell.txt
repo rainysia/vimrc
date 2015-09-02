@@ -1196,6 +1196,7 @@ netstat -s 查看网络统计信息
 mount | column =t  查看挂载的分区状态
 mount -o remount,rw,auto / 重新挂载
 mount -n -o remount,rw / 重新挂载根目录,设置为可读写
+mount -t vfat /dev/sdb1 /mnt/usb 
 fdisk -l 查看所有分区
 swapon -s 查看所有交换分区
 
