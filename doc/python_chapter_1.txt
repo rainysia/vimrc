@@ -549,6 +549,14 @@
         42
         >>> f(1)
         43
+
+        对字典排序按照key来排序为list
+        def sortDict(tdict):
+            # key sort
+            return dict(sorted(tdict.items(), key=lambda d:d[0]))
+            # value sort
+            return dict(sorted(tdict.items(), key=lambda d:d[1]))
+
     4.7.6. 文档字符串
         >>> def my_function():
         ...     """Do nothing, but document it.
