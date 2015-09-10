@@ -2218,6 +2218,7 @@ git ls-tree -l HEAD 查看HEAD(版本库中当前提交)指向的目录树.
 git clean -nd 测试删除, -n=--dry-run 不真实删除,只是显示会如何做 -d remove  -x 不使用忽略规则,会删除所有的未在版本中的文件, -X remove仅仅是git忽略的文件
 git clean -fd 清除当前工作区中没有加入版本库的文件和目录(非跟踪文件和目录). -f=--force
                     然后执行git checkout . 用暂存区内容刷新工作区
+git gc 版本库存储优化
 
 git ls-files -s 显示暂存区的目录树
 
