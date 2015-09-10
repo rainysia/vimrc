@@ -2167,6 +2167,8 @@ git config --global alisa.ci "commit -s" 别名可以带参数
 -s 参数，会在提交说明中自动添加上包含提交者姓名和邮件地址的签名标识
 like: Signed-off-by: UserName <email@address>
 
+git config --list  列出config
+
 git 备份
 git clone demo demo-step-1
 
@@ -2331,7 +2333,8 @@ git merge origin/master --no-ff # 不要Fast-Foward 合并,这样可以生成mer
 
 git rebase master <branch> # 将master rebase到branch.相当于
 git co <branch> && git rebase master && git co master && git merge <branch>
-
+git checkout --track origin/dev 切换到远程dev分支
+git checkout -b dev 本地建立一个dev分支 = git branch dev
 
 
 git远程分支管理
@@ -2357,6 +2360,7 @@ git remote add origin git@ github:robbin/robbin_site.git # 添加远程仓库地
 git remote set-url origin git@ github.com:robbin/robbin_site.git # 设置远程仓库地址(用于修改远程仓库地址)
 git remote rm <repository> # 删除远程仓库
 git branch -d -r origin/branch_name 删除远程仓库分支 git push origin --delete branch_name 
+git branch -D master develop 删除掉本地develop分支
 
 创建远程仓库
 
