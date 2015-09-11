@@ -140,6 +140,7 @@ set fileencoding=utf-8                     " 当前编辑的文件编码(新文�
 set fileencodings=usc-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin-1
                                            " 当前编辑的文件自动判断依次尝试编码, 打开时可以指定编码
 set encoding=utf-8                         " work in linux
+set imcmdline
 "{{                                        " work in linux
 if has("win32")
     set fileencoding=chinese
@@ -325,9 +326,9 @@ hi StatusLineNC        cterm=bold    ctermfg=white      ctermbg=red         gui=
 "}}
 "{{
 set virtualedit=block                      " block 允许可视列块模式的虚拟编辑
-" insert 允许插入模式的虚拟编辑
-" all 允许所有模式的虚拟编辑
-" onemore 允许光标移动到刚刚超过行尾的位置
+                                           " insert 允许插入模式的虚拟编辑
+                                           " all 允许所有模式的虚拟编辑
+                                           " onemore 允许光标移动到刚刚超过行尾的位置
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -338,6 +339,7 @@ set virtualedit=block                      " block 允许可视列块模式的�
 map  irainysia@gmail.com
 "}}
 set showmatch                              " 高亮显示匹配的括号
+set showcmd
 set cursorline                             " 高亮显示当前行
 set cursorcolumn                           " 高亮光标列
 set matchtime=5                            " 匹配括号高亮的时间（单位是十分之一秒）
@@ -847,12 +849,12 @@ au BufRead,BufNewFile *.s,*.asm,*.h,*.c,*.cpp,*.cc,*.java,*.cs,*.erl,*.hs,*.sh,*
 "{{                                        " work in windows ,not work in linux
 "if has("gui_running")
 "    au GUIEnter * simalt ~x               " 窗口启动时自动最大化
-"set guioptions-=m                     " 隐藏菜单栏
-"set guioptions-=T                     " 隐藏工具栏
-"set guioptions-=L                     " 隐藏左侧滚动条
-"set guioptions-=r                     " 隐藏右侧滚动条
-"set guioptions-=b                     " 隐藏底部滚动条
-"set showtabline=0                     " 隐藏Tab栏
+    "set guioptions-=m                     " 隐藏菜单栏
+    "set guioptions-=T                     " 隐藏工具栏
+    "set guioptions-=L                     " 隐藏左侧滚动条
+    "set guioptions-=r                     " 隐藏右侧滚动条
+    "set guioptions-=b                     " 隐藏底部滚动条
+    "set showtabline=0                     " 隐藏Tab栏
 "endif
 "}}
 "}}}
