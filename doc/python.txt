@@ -1443,6 +1443,14 @@ python标准库
             time2 = mktime(date2)
             random_time = uniform(time1, time2)
             print asctime(localtime(random_time))
+    当前时间
+        import time 
+        time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())       #GMT 0
+        time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())    # local time
+        from datetime import datetime
+        datetime.now().strftime("%Y-%m-%d %H:%M:%S")            # local time
+
+
     range([start,] stop[, step]) 返回一个整数的list(序列),range(i,j)会返回[i,i+1,...,j-1],
             range(n) 会返回[0,1,2,3,...n-1]
             range(0,j) 会返回[0,1,j-1]
