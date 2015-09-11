@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 7.07.01
+"    Version: 7.09.01
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2015-07-06 14:39:19
+" LastChange: 2015-09-11 17:03:59
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -152,7 +152,13 @@ source $VIMRUNTIME/delmenu.vim             " 解决菜单乱码
 source $VIMRUNTIME/menu.vim
 set nocompatible                           " 不要使用vi的键盘模式
 "set clipboard+=unnamed                    " 与windows共享剪贴板share clipboard with windows
+"set iskeyword+=_,$,@,%,#,-                 " 带有如下符号的单词不要被换行分割
 set iskeyword+=_,$,@,%,#,-                 " 带有如下符号的单词不要被换行分割
+nmap <f7> :set iskeyword-=_,$,@,%,#,-,<CR>
+                                           " 设置以上面符号为分割, 可以set iskeyword查看当前换行的,
+                                           " -是删除掉, +是添加.
+nmap <s-f7> :set iskeyword+=_,$,@,%,#,-,<CR>
+                                           " 设置不以上面符号为分割
 "{{                                        " 保存全局变量," 寄存器中保存几行文本 0不保存500上限
 set viminfo+=!
 set viminfo='1000,f1,<500
@@ -1695,5 +1701,6 @@ endif
 " 7.04.01                                  " add foldenable zf 2015-04-17 17:59:15
 " 7.06.01                                  " change terminal fg/bg color 2015-06-16 15:30:59
 " 7.07.01                                  " add flake8=pyflake+pep8 2015-07-06 14:39:19
+" 7.09.01                                  " add set iskeyword 2015-09-11 17:03:59
 "}}
 "}}}
