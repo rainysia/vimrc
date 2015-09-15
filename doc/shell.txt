@@ -7,7 +7,7 @@
  * @copyright  2006-2015 BTROOT.ORG
  * @license    http://www.btroot.com/user_guide/license.html V1
  * @createTime 2009-11-14 11:14:23
- * @lastChange 2015-07-31 16:19:25
+ * @lastChange 2015-09-15 10:48:26
 */
 Shell好玩的
 
@@ -4238,6 +4238,84 @@ strace用法,
 159. systemctl
 systemctl is-enabled nginx  #check nginx will start when system initial
 systemctl enable mysql      #make mysql will start when system initial
+
+160. mysql perfermance
+    需要10s,30s,60s这样来计算每个选项的差异值, 然后再计算
+    (1)QPS(每秒Query量) 
+    QPS = Questions(or Queries) / seconds 
+    mysql> show global status like 'Question%';
+
+    (2)TPS(每秒事务量)
+    TPS = (Com_commit + Com_rollback) / seconds
+    mysql> show global status like 'Com_commit';
+    mysql> show global status like 'Com_rollback';
+
+    (3)key Buffer 命中率
+    mysql> show global status like 'key%';
+    key_buffer_read_hits = (1-key_reads / key_read_requests) * 100%
+    key_buffer_write_hits = (1-key_writes / key_write_requests) * 100%
+
+    (4)InnoDB Buffer命中率 
+    mysql> show status like 'innodb_buffer_pool_read%';
+    innodb_buffer_read_hits = (1 - innodb_buffer_pool_reads / innodb_buffer_pool_read_requests) * 100%
+
+    (5)Query Cache命中率
+    mysql> show status like 'Qcache%';
+    Query_cache_hits = (Qcahce_hits / (Qcache_hits + Qcache_inserts )) * 100%;
+
+    (6)Table Cache状态量 
+    mysql> show global  status like 'open%';
+    比较 open_tables  与 opend_tables 值
+
+    (7)Thread Cache 命中率 
+    mysql> show global status like 'Thread%'; =
+    mysql> show global status like 'Connections';
+    Thread_cache_hits = (1 - Threads_created / connections ) * 100%
+
+    (8)锁定状态
+    mysql> show global  status like '%lock%';
+    Table_locks_waited/Table_locks_immediate=0.3%  如果这个比值比较大的话，说明表锁造成的阻塞比较严重
+    Innodb_row_lock_waits innodb行锁，太大可能是间隙锁造成的 
+
+    (9)复制延时量
+    mysql > show slave status 
+    查看延时时间 
+
+    (10) Tmp Table 状况(临时表状况) 
+    mysql > show status like 'Create_tmp%'; 
+    Created_tmp_disk_tables/Created_tmp_tables比值最好不要超过10%，如果Created_tmp_tables值比较大， 
+    可能是排序句子过多或者是连接句子不够优化 
+
+    (11) Binlog Cache 使用状况 
+    mysql > show status like 'Binlog_cache%'; 
+    如果Binlog_cache_disk_use值不为0 ，可能需要调大 binlog_cache_size大小 
+
+    (12) Innodb_log_waits 量 
+    mysql > show status like 'innodb_log_waits'; 
+    Innodb_log_waits值不等于0的话，表明 innodb log  buffer 因为空间不足而等待 
+
+    比如命令： 
+    >#show global status; 
+    虽然可以使用： 
+    >#show global status like %...%; 
+
+    TPS - Transactions Per Second（每秒传输的事物处理个数），即服务器每秒处理的事务数，如果是InnoDB会显示，没有InnoDB就不会显示。
+    TPS = (COM_COMMIT + COM_ROLLBACK)/UPTIME
+
+    use information_schema;
+    select VARIABLE_VALUE into @num_com from GLOBAL_STATUS where VARIABLE_NAME ='COM_COMMIT';
+    select VARIABLE_VALUE into @num_roll from GLOBAL_STATUS where VARIABLE_NAME ='COM_ROLLBACK';
+    select VARIABLE_VALUE into @uptime from GLOBAL_STATUS where VARIABLE_NAME ='UPTIME';
+    select (@num_com+@num_roll)/@uptime;
+
+
+    QPS - Queries Per Second（每秒查询处理量）MyISAM 引擎
+    QUESTIONS/UPTIME
+
+    use information_schema;
+    select VARIABLE_VALUE into @num_queries from GLOBAL_STATUS where VARIABLE_NAME ='QUESTIONS';
+    select VARIABLE_VALUE into @uptime from GLOBAL_STATUS where VARIABLE_NAME ='UPTIME';
+    select @num_queries/@uptime;
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
@@ -4265,3 +4343,4 @@ systemctl enable mysql      #make mysql will start when system initial
 13.3更新rename                                      2015-02-25 11:03:43
 13.4更新ipython                                     2015-07-29 14:06:39
 13.5更新Procedure                                   2015-07-31 16:19:25
+13.6更新mysql perfermance                           2015-09-15 10:48:26
