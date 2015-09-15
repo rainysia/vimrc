@@ -4238,6 +4238,8 @@ strace用法,
 159. systemctl
 systemctl is-enabled nginx  #check nginx will start when system initial
 systemctl enable mysql      #make mysql will start when system initial
+systemctl --failed          #list all failed
+systemctl status mysql      #show the mysql status
 
 160. mysql perfermance
     需要10s,30s,60s这样来计算每个选项的差异值, 然后再计算
