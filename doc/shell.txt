@@ -2364,6 +2364,10 @@ git remote set-url origin git@ github.com:robbin/robbin_site.git # 设置远程�
 git remote rm <repository> # 删除远程仓库
 git branch -d -r origin/branch_name 删除远程仓库分支 git push origin --delete branch_name 
 git branch -D master develop 删除掉本地develop分支
+删除掉错误的分支后, 需要重新fetch upstream branch_name:branch_name
+如果push 到origin报错, error: src refspec 1.4.0 matches more than one.,说明有tag
+需要删除掉对应branch的tag, git tag -d tag-name
+
 
 创建远程仓库
 
