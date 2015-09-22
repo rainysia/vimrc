@@ -1,0 +1,43 @@
+
+
+; supervisord -c ./supervisor_tornado.conf
+; configuration for project;
+
+
+[unix_http_server]
+file=/tmp/supervisor.sock                   ; (the path to the socket file)
+chmod=0700                                      ; sockef file mode (default 0700)
+ 
+[supervisord]
+logfile=/var/log/supervisor/supervisord.log    ; supervisord log file
+logfile_maxbytes=50MB                           ; maximum size of logfile before rotation
+logfile_backups=10                              ; number of backed up logfiles
+loglevel=warn                                   ; info, debug, warn, trace
+pidfile=/tmp/supervisord.pid                ; (supervisord pidfile;default supervisord.pid)
+nodaemon=false                                  ; run supervisord as a daemon
+minfds=1024                                     ; number of startup file descriptors
+minprocs=200                                    ; number of process descriptors
+user=root                                       ; default user
+childlogdir=/var/log/supervisor
+ 
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+ 
+[supervisorctl]
+serverurl=unix:///var/run/supervisor.sock       ; use a unix:// URL  for a unix socket
+ 
+[program:tor8888]
+command=python /home/www/python/tornado/demos/chat/chatdemo.py
+autostart=true
+autorestart=true
+startsecs=3
+redirect_stderr=true
+stderr_logfile = /var/log/tornado-8888-stderr.log
+stdout_logfile = /var/log/tornado-8888-stdout.log
+ 
+[program:tor8889]
+user=tommy
+command=python /home/www/python/tornado/demos/chat/chatdemo.py --port=8889
+autostart=true
+stderr_logfile = /var/log/tornado-8889-stderr.log
+stdout_logfile = /var/log/tornado-8889-stdout.log

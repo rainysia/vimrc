@@ -1864,3 +1864,9 @@ def a():
              22 RETURN_VALUE    
 
 ROW_TWO是交换两个栈的最顶层元素,比LOAD_FAST + STORE_FAST更快
+
+
+fab fabfile.py
+    fab func_name:param1=value1
+    fab func_name:value1
+    fab func_name:value1,value2,param3=value3
