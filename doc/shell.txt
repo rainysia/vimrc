@@ -4331,6 +4331,11 @@ systemctl status mysql      #show the mysql status
 
 161. info -f linux-command -n 'keyword'
     在info中详细查找指定的文件(linux-command)的某个keyword节点
+
+162. 4kdownload
+    perferences: proxy enabled
+    server:socks5://127.0.0.1
+    port:7070
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
