@@ -2,18 +2,23 @@
 
 ; supervisord -c ./supervisor_tornado.conf
 ; configuration for project;
-
+; this conf will start 2 workers, port:8888,8889
+===================================
+[inet_http_server]
+port=0.0.0.0:9000
+username=test
+password=test
 
 [unix_http_server]
-file=/tmp/supervisor.sock                   ; (the path to the socket file)
+file=/tmp/supervisor.sock                       ; (the path to the socket file)
 chmod=0700                                      ; sockef file mode (default 0700)
  
 [supervisord]
-logfile=/var/log/supervisor/supervisord.log    ; supervisord log file
+logfile=/var/log/supervisor/supervisord.log     ; supervisord log file
 logfile_maxbytes=50MB                           ; maximum size of logfile before rotation
 logfile_backups=10                              ; number of backed up logfiles
 loglevel=warn                                   ; info, debug, warn, trace
-pidfile=/tmp/supervisord.pid                ; (supervisord pidfile;default supervisord.pid)
+pidfile=/tmp/supervisord.pid                    ; (supervisord pidfile;default supervisord.pid)
 nodaemon=false                                  ; run supervisord as a daemon
 minfds=1024                                     ; number of startup file descriptors
 minprocs=200                                    ; number of process descriptors
@@ -24,20 +29,41 @@ childlogdir=/var/log/supervisor
 supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
  
 [supervisorctl]
-serverurl=unix:///var/run/supervisor.sock       ; use a unix:// URL  for a unix socket
+;serverurl=unix:///var/run/supervisor.sock       ; use a unix:// URL  for a unix socket
+serverurl=http://192.168.85.123:9000             ; use a unix:// URL  for a unix socket
+username=test
+password=test
  
 [program:tor8888]
 command=python /home/www/python/tornado/demos/chat/chatdemo.py
-autostart=true
-autorestart=true
-startsecs=3
-redirect_stderr=true
+autostart=true                          ; will start when supervisord started
+autorestart=true                        ; will restart when project exception
+startsecs=3                             ;
+;startretries=10                        ; try times when failed, default=3
+redirect_stderr=true                    ; redirect stderr to stdout, default=false
+stdout_logfile_maxbytes=100MB
+stderr_logfile_maxbytes=100MB
 stderr_logfile = /var/log/tornado-8888-stderr.log
 stdout_logfile = /var/log/tornado-8888-stdout.log
  
 [program:tor8889]
 user=tommy
 command=python /home/www/python/tornado/demos/chat/chatdemo.py --port=8889
-autostart=true
+autostart=true                          ; will start when supervisord started
+autorestart=true                        ; will restart when project exception
+startsecs=3                             ;
+;startretries=10                        ; try times when failed, default=3
+redirect_stderr=true                    ; redirect stderr to stdout, default=false
+stdout_logfile_maxbytes=100MB
+stderr_logfile_maxbytes=100MB
 stderr_logfile = /var/log/tornado-8889-stderr.log
 stdout_logfile = /var/log/tornado-8889-stdout.log
+
+
+====================================
+
+supervisrod
+
+supervisorctl -c tornado_chat.conf status               ; check status
+supervisorctl -c tornado_chat.conf stop program_name    ; stop single program
+supervisorctl -c tornado_chat.conf start all            ; start all program
