@@ -1474,6 +1474,7 @@ tar -zcvf xxx.tar.gz xxx --exclude .svn
 .bz2  tar jxvf xxx.tar.bz2      tar jcvf xxx.tar.bz2 Dirname
 .bz   tar jxvf xxx.tar.gz
 .zip  unzip xxx.zip             zip xxx.zip Dirname
+.xz   tar --xz -xvf filename.tar.gz 
 
 
 
