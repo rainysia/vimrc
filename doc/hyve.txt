@@ -1,5 +1,5 @@
 安装pip
-安装virtualen
+安装virtualenv
 安装virtualenwrapper
 pip install virtualenwrapper
 mkdir ~/.virtualenv
