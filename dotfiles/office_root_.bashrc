@@ -52,7 +52,7 @@ alias cdwk='cd /home/work/'
 alias cdu='cd /home/tommy'
 alias cdd='cd /home/tommy/Desktop'
 alias cdr='cd /'
-alias st='su - tommy'
+alias st='su tommy'
 alias sr='su - root'
 alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
 alias pythonpy='python /home/softs/linux/goagent/local/proxy.py'
