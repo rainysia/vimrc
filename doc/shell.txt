@@ -1441,6 +1441,7 @@ usermod -a -G 组名 用户 ，把已有的用户名添加到已有的组里面
 93,modprobe pcspkr //开启tab提示音  readlink
 的读读取读取读取了里俩脸链接练级链接链接位万恶问文件文集问价文件文件你呢内内容内容哦内容内容内容户添加到wheel这个组
 95,dd if=/dev/zero of=/virtual/ubuntu.virt.img bs=1M count=4096 //创建一个4G的IMG镜像
+dd if=xxx.iso of=/dev/sdb bs=1M //把镜像烧进U盘
 96，lspic //显示pci设备
 97，lsusb //显示usb设备
 98，history | less //less根more有点像，感觉less用着更舒服点
