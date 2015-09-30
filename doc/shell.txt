@@ -168,6 +168,8 @@ echo $(1+2+3+4+5+6+0)
 md5sum sha1summ
 md5sum filename > filename.md5 把产生的md5码重定向到.md5
 获取文本的md5值: echo -n "text" | md5sum
+echo -n "text" | md5sum| cut -d ' ' -f1
+
 #uniq 从文本stdin中提取单一的行,并且去掉重复的行
 #cat sorted_file.txt | uniq>uniq_lines.txt 找出已排序文件中不重复的行
 
