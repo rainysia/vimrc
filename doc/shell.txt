@@ -168,6 +168,8 @@ echo $(1+2+3+4+5+6+0)
 md5sum sha1summ
 md5sum filename > filename.md5 把产生的md5码重定向到.md5
 获取文本的md5值: echo -n "text" | md5sum
+echo -n "text" | md5sum| cut -d ' ' -f1
+
 #uniq 从文本stdin中提取单一的行,并且去掉重复的行
 #cat sorted_file.txt | uniq>uniq_lines.txt 找出已排序文件中不重复的行
 
@@ -1441,6 +1443,7 @@ usermod -a -G 组名 用户 ，把已有的用户名添加到已有的组里面
 93,modprobe pcspkr //开启tab提示音  readlink
 的读读取读取读取了里俩脸链接练级链接链接位万恶问文件文集问价文件文件你呢内内容内容哦内容内容内容户添加到wheel这个组
 95,dd if=/dev/zero of=/virtual/ubuntu.virt.img bs=1M count=4096 //创建一个4G的IMG镜像
+dd if=xxx.iso of=/dev/sdb bs=1M //把镜像烧进U盘
 96，lspic //显示pci设备
 97，lsusb //显示usb设备
 98，history | less //less根more有点像，感觉less用着更舒服点
@@ -1474,6 +1477,7 @@ tar -zcvf xxx.tar.gz xxx --exclude .svn
 .bz2  tar jxvf xxx.tar.bz2      tar jcvf xxx.tar.bz2 Dirname
 .bz   tar jxvf xxx.tar.gz
 .zip  unzip xxx.zip             zip xxx.zip Dirname
+.xz   tar --xz -xvf filename.tar.gz 
 
 
 
@@ -2478,6 +2482,9 @@ $ssh-copy-id -i /root/.ssh/id_rsa.pub git@192.168.85.111
 $ssh-copy-id -i /root/.ssh/id_rsa.pub "git@192.168.85.111 -p2222"
 ssh-copy-id -i /root/.ssh/id_rsa.pub -p2222 "git@192.168.86.111" 
 如果不在对应的账户, 可以使用git clone git@xxxxx:repositories/项目 来要求每次输入密码拉取更新
+
+如果要删除掉某个已经过期的host key
+ssh-keygen -f "/root/.ssh/known_hosts" -R 192.168.85.123
 
 Now try logging into the machine, with "ssh 'git@192.168.85.111'", and check in:
   ~/.ssh/authorized_keys
@@ -4241,6 +4248,28 @@ strace用法,
         e.g: strace -t ls
     7        
 
+
+====trigger====
+show triggers;
+################ TRIGGER START #################
+DELIMITER //
+DROP TRIGGER IF EXISTS t_after_update_on_model_param//
+CREATE TRIGGER t_after_update_on_model_param
+AFTER UPDATE ON HYVE_PLM.hyve_planning_bom_model_param 
+FOR EACH ROW
+BEGIN
+IF  new.prod_cycle_time != old.prod_cycle_time then
+    INSERT INTO dbname.hyve_planning_bom_change_log(`table_name`, `primary_key_id`, `change_action`, `col_name`, `new_value`, `change_source`, `change_user_id`, `change_timestamp`) 
+        values ('hyve_planning_bom_model_param', old.id, 'update', 'prod_cycle_time', new.prod_cycle_time, 'excel', 0, CURRENT_TIMESTAMP);
+ELSEIF new.default_bom != old.default_bom then
+    INSERT INTO dbname.hyve_planning_bom_change_log(`table_name`, `primary_key_id`, `change_action`, `col_name`, `new_value`, `change_source`, `change_user_id`, `change_timestamp`) 
+        values ('hyve_planning_bom_model_param', old.id, 'update', 'default_bom', new.default_bom, 'excel', 0, CURRENT_TIMESTAMP);
+END IF;
+END//
+DELIMITER ;
+################ TRIGGER END #################
+
+
 159. systemctl
 systemctl is-enabled nginx  #check nginx will start when system initial
 systemctl enable mysql      #make mysql will start when system initial
@@ -4336,6 +4365,8 @@ systemctl status mysql      #show the mysql status
     perferences: proxy enabled
     server:socks5://127.0.0.1
     port:7070
+
+
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
