@@ -2481,6 +2481,9 @@ $ssh-copy-id -i /root/.ssh/id_rsa.pub "git@192.168.85.111 -p2222"
 ssh-copy-id -i /root/.ssh/id_rsa.pub -p2222 "git@192.168.86.111" 
 如果不在对应的账户, 可以使用git clone git@xxxxx:repositories/项目 来要求每次输入密码拉取更新
 
+如果要删除掉某个已经过期的host key
+ssh-keygen -f "/root/.ssh/known_hosts" -R 192.168.85.123
+
 Now try logging into the machine, with "ssh 'git@192.168.85.111'", and check in:
   ~/.ssh/authorized_keys
 to make sure we haven't added extra keys that you weren't expecting.
@@ -4338,6 +4341,8 @@ systemctl status mysql      #show the mysql status
     perferences: proxy enabled
     server:socks5://127.0.0.1
     port:7070
+
+
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
