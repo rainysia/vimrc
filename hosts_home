@@ -9,16 +9,18 @@ ff02::2 ip6-allrouters
 
 # link: https://github.com/txthinking/google-hosts
 
-#{{{    #00.    Self-Define START
+#{{{    #00.    Self-Define 
 127.0.0.1 *.cnwp.com cnwp.com www.cnwp.com
 127.0.0.1 dbm.com www.dbm.com
 0.0.0.0 ajax.googleapis.com
 0.0.0.0 www.googleapis.com
 0.0.0.0 google-analytics.com
 180.97.33.67 www.baidu.com
-# SELF-Define END}}}
+#dns 10.17.2.3 10.16.2.5
+#dns 8.8.4.4 223.5.5.5
+# SELF-Define END }}}
 
-#{{{    #01.    ADBlock START 
+#{{{    #01.    ADBlock  
 127.0.0.1 cqhuamei.zoossoft.com
 127.0.0.1 practivate.adobe.com
 127.0.0.1 163click.com
@@ -892,7 +894,7 @@ ff02::2 ip6-allrouters
 #127.0.0.1	z.alimama.com
 #AdBlock END #}}}
 
-#{{{    #02.    Flickr START
+#{{{    #02.    Flickr 
 98.136.43.76	geo.yahoo.com
 68.142.250.161	l.yimg.com
 96.6.93.227	s.yimg.com
@@ -945,7 +947,7 @@ ff02::2 ip6-allrouters
 98.136.171.208	gq1.farm6.staticflickr.com
 #Flickr END }}}
 
-#{{{    #03.    Twitter START
+#{{{    #03.    Twitter 
 199.16.158.8	twitter.com
 199.16.158.8	www.twitter.com
 199.16.158.13	mobile.twitter.com
@@ -1026,7 +1028,7 @@ ff02::2 ip6-allrouters
 96.127.160.130	web10.twitpic.com
 #Twitter END }}}
 
-#{{{    #04.    Facebook START
+#{{{    #04.    Facebook 
 127.0.0.1	ads.ak.facebook.com
 127.0.0.1	creative.ak.facebook.com
 127.0.0.1	creative.ak.fbcdn.net
@@ -1085,7 +1087,7 @@ ff02::2 ip6-allrouters
 42.99.128.137	fbcdn-profile-a.akamaihd.net
 #Facebook END }}}
 
-#{{{    #05.    Adobe Activation START
+#{{{    #05.    Adobe Activation 
 0.0.0.0	3dns-2.adobe.com
 0.0.0.0	3dns-3.adobe.com
 0.0.0.0	activate.adobe.com
@@ -1103,7 +1105,7 @@ ff02::2 ip6-allrouters
 0.0.0.0	wwis-dubc1-vip60.adobe.com
 #Adobe Activation END }}}
 
-#{{{    #06.    GitHub START
+#{{{    #06.    GitHub 
 #204.232.175.78	documentcloud.github.com
 #207.97.227.239	github.com
 #204.232.175.94	gist.github.com
@@ -1115,17 +1117,13 @@ ff02::2 ip6-allrouters
 #207.97.227.243	www.github.com
 #GitHub END }}}
 
-#{{{    #07.    Feedly START
-#173.194.72.141 feedly-beta.appspot.com
-#74.125.29.141 feedly-beta.appspot.com
-#74.125.200.141 feedly-beta.appspot.com
-#74.125.31.141 feedly-beta.appspot.com
-74.125.128.141 feedly-beta.appspot.com
+#{{{    #07.    Feedly 
+74.125.128.141  feedly-beta.appspot.com
 #74.125.200.121 s3.feedly.com
-#74.125.23.121 s3.feedly.com
+#74.125.23.121  s3.feedly.com
 #74.125.128.121 s3.feedly.com
-198.41.247.160 feedly-beta.appspot.com
-198.41.247.160 s3.feedly.com
+198.41.247.160  feedly-beta.appspot.com
+198.41.247.160  s3.feedly.com
 #Feedly END }}}
 
 #{{{    #08.    Godaddy
@@ -1139,7 +1137,7 @@ ff02::2 ip6-allrouters
 174.129.209.0 ifttt.com
 #IFTTT END }}}
 
-#{{{    #10.    WordPress START
+#{{{    #10.    WordPress 
 66.155.11.243	wordpress.com
 68.232.44.111	s0.wp.com
 68.232.44.111	s1.wp.com
@@ -1165,23 +1163,171 @@ ff02::2 ip6-allrouters
 72.233.2.58	r-login.wordpress.com
 #WordPress END }}}
 
-#{{{    #11.    Microsoft Live START
-134.170.108.26	onedrive.live.com
-134.170.109.48	skyapi.onedrive.live.com
-#134.170.30.15	people.live.com
+#{{{    #11.    Microsoft Live 
+65.54.187.24	account.live.com
+23.44.152.70	auth.gfx.ms
+131.253.61.66	login.live.com
+134.170.108.154 onedrive.live.com
+23.212.129.202	p.sfx.ms
+134.170.30.15	people.live.com
+134.170.30.15	profile.live.com
+134.170.111.96	skyapi.onedrive.live.com
+134.170.104.168	storage.live.com
+204.79.197.213	nhuhga.dm2301.livefilestore.com
 #Microsoft Live END }}}
 
-#{{{    #12.    Golang START
+#{{{    #12.    Golang 
 #173.194.70.141 golang.org
 #74.125.23.141 golang.org
 74.125.31.141 golang.org
 # golang END }}}
 
-#{{{    #13.    Others START
+#{{{    #13.    Others 
 38.229.72.14	www.torproject.org
 #Others END }}}
 
-#{{{    #14.    Google START
+#{{{    #14.    Imgur START
+103.245.222.193	imgur.com
+103.245.222.193	www.imgur.com
+103.245.222.193	i.imgur.com
+103.245.222.193	s.imgur.com
+# imgur End }}}
+
+#{{{    #15.    Instagram Start
+107.23.173.176	instagram.com
+184.25.56.204	instagramstatic-a.akamaihd.net
+# Instagram End }}}
+
+#{{{    #16.    Mozilla Start
+117.18.232.191	activations.cdn.mozilla.net
+117.18.232.191	addons.cdn.mozilla.net
+117.18.232.191	air.cdn.mozilla.net
+117.18.232.191	cdn.mozilla.net
+117.18.232.191	code.cdn.mozilla.net
+117.18.232.191	developer.cdn.mozilla.net
+117.18.232.191	download-installer.cdn.mozilla.net
+117.18.232.191	fhr.cdn.mozilla.net
+117.18.232.191	glow.cdn.mozilla.net
+117.18.232.191	marketplace.cdn.mozilla.net
+117.18.232.191	mozorg.cdn.mozilla.net
+117.18.232.191	snippets.cdn.mozilla.net
+117.18.232.191	support.cdn.mozilla.net
+117.18.232.191	telemetry-experiment.cdn.mozilla.net
+117.18.232.191	videos.cdn.mozilla.net
+117.18.237.191	getpersonas-cdn.mozilla.net
+117.18.237.29	ocsp.digicert.com	
+63.245.215.56	ftp.mozilla.org
+63.245.216.132	addons.mozilla.org
+72.21.81.109	df6a.https.cdn.softlayer.net
+# Mozilla End }}}
+
+#{{{    #17.    OpenShift Start
+118.214.71.214	www.redhat.com
+23.23.202.32	openshift.com
+118.214.78.23	www.openshift.com
+118.214.78.23	assets.openshift.net
+23.21.84.238	openshift.redhat.com
+54.237.40.208	developers.openshift.com
+192.161.151.215	help.openshift.com
+23.20.242.119	hub.openshift.com
+23.22.105.178	hosts-smounives.rhcloud.com
+# OpenShift End }}}
+
+#{{{    #18.    Amazon AWS Start
+27.0.1.125	ap-northeast-1.console.aws.amazon.com
+54.240.226.19	ap-southeast-1.console.aws.amazon.com
+54.240.195.197	ap-southeast-2.console.aws.amazon.com
+176.32.100.36	aws.amazon.com
+72.21.194.168	console.aws.amazon.com
+54.239.54.107	eu-central-1.console.aws.amazon.com
+178.236.4.251	eu-west-1.console.aws.amazon.com
+54.231.66.16	s3.amazonaws.com
+54.231.229.10	s3-ap-northeast-1.amazonaws.com
+54.231.242.150	s3-ap-southeast-1.amazonaws.com
+54.231.252.130	s3-ap-southeast-2.amazonaws.com
+72.21.203.5	s3-console-us-standard.console.aws.amazon.com
+54.231.192.41	s3-eu-central-1.amazonaws.com
+54.231.132.112	s3-eu-west-1.amazonaws.com
+54.231.253.78	s3-sa-east-1.amazonaws.com
+54.231.237.85	s3-us-west-1.amazonaws.com
+54.231.160.48	s3-us-west-2.amazonaws.com
+177.72.244.68	sa-east-1.console.aws.amazon.com
+204.246.162.198	us-west-1.console.aws.amazon.com
+54.240.250.61	us-west-2.console.aws.amazon.com
+# Amazon AWS End }}}
+
+#{{{    #19.    Yahoo Start
+76.13.18.77	ac4.farm4.staticflickr.com
+209.191.105.102	adjax.flickr.yahoo.com
+121.101.144.112	api.flickr.com
+98.137.205.236	bf1.farm3.staticflickr.com
+98.139.21.45	bf1.farm6.staticflickr.com
+98.139.235.135	bf1.farm7.staticflickr.com
+119.161.9.151	c5.ah.yahoo.com
+68.142.196.57	c5.ah.yahoo.com
+204.0.5.35	content.yieldmanager.edgesuite.net
+119.160.254.215	d.yimg.com
+98.137.88.88	d.yimg.com
+106.10.136.195	de.yahoo.com
+119.160.254.215	e.yimg.com
+106.10.193.20	edit.yahoo.com
+209.191.92.115	edit.yahoo.com
+68.142.214.43	farm1.staticflickr.com
+69.147.90.159	farm2.staticflickr.com
+77.238.160.184	farm3.staticflickr.com
+76.13.18.77	farm4.staticflickr.com
+76.13.18.79	farm5.staticflickr.com
+98.136.171.208	farm6.staticflickr.com
+98.138.250.88	farm7.staticflickr.com
+69.147.76.173	flickr.com
+106.10.137.175	geo.query.yahoo.com
+98.136.43.76	geo.yahoo.com
+216.39.54.34	gq1.farm3.staticflickr.com
+67.195.19.62	gq1.farm4.staticflickr.com
+67.195.19.65	gq1.farm5.staticflickr.com
+98.136.171.208	gq1.farm6.staticflickr.com
+119.160.254.215	h.yimg.com
+106.10.199.10	hk.news.yahoo.com
+106.10.138.240	hk.yahoo.com
+119.161.24.8	hk-mg61.mail.yahoo.com
+206.190.39.139	hsrd.yahoo.com
+119.160.254.215	l.yimg.com
+68.142.250.161	l.yimg.com
+106.10.193.20	login.yahoo.com
+124.108.97.193	login.yahoo.com
+208.71.44.31	m.flickr.com
+119.161.10.71	mail.yahoo.com
+68.142.214.43	mud.farm1.staticflickr.com
+106.10.193.20	na.edit.yahoo.com
+98.138.250.88	ne1.farm7.staticflickr.com
+106.10.193.20	open.login.yahoo.com
+66.163.168.247	open.login.yahoo.com
+98.136.166.37	overview.mail.yahoo.com
+119.160.254.215	p.yimg.com
+119.160.254.215	s.yimg.com
+96.6.93.227	s.yimg.com
+119.160.254.215	s1.yimg.com
+106.10.193.20	sa.edit.yahoo.com
+124.108.120.124	sa.edit.yahoo.com
+208.71.44.31	secure.flickr.com
+106.10.193.30	sp.analytics.yahoo.com
+69.147.90.159	sp1.farm2.staticflickr.com
+69.147.90.215	sp1.farm3.staticflickr.com
+106.10.137.23	static.flickr.com
+106.10.199.11	tw.news.yahoo.com
+106.10.138.240	tw.yahoo.com
+121.101.144.116	up.flickr.com
+204.0.5.34	us.js2.yimg.com
+23.62.109.75	us.js2.yimg.com
+106.10.138.240	us.yahoo.com
+183.177.81.75	www.flickr.com
+106.10.138.240	www.yahoo.com
+98.138.47.63	y.analytics.yahoo.com
+98.138.253.109	yahoo.com
+77.238.184.150	ying.com
+# Yahoo End }}}
+
+#{{{    #20.    Google 
 203.208.52.129    0.docs.google.com
 203.208.52.129    0.drive.google.com
 203.208.52.129    1.docs.google.com
@@ -3205,7 +3351,7 @@ ff02::2 ip6-allrouters
 203.208.52.129    www.webmproject.org
 # Google END }}}
 
-#{{{    #99.    Delay START
+#{{{    #99.    Delay 
 0.0.0.0 ajax.googleapis.com
 0.0.0.0 www.googleapis.com
 0.0.0.0 google-analytics.com

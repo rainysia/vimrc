@@ -6,16 +6,21 @@ fe00::0 ip6-localnet
 ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
+
+# link: https://github.com/txthinking/google-hosts
+
+#{{{    #00.    Self-Define 
 127.0.0.1 *.cnwp.com cnwp.com www.cnwp.com
 127.0.0.1 dbm.com www.dbm.com
-
 0.0.0.0 ajax.googleapis.com
 0.0.0.0 www.googleapis.com
 0.0.0.0 google-analytics.com
-
+180.97.33.67 www.baidu.com
 #dns 10.17.2.3 10.16.2.5
 #dns 8.8.4.4 223.5.5.5
+# SELF-Define END }}}
 
+#{{{    #01.    ADBlock  
 127.0.0.1 cqhuamei.zoossoft.com
 127.0.0.1 practivate.adobe.com
 127.0.0.1 163click.com
@@ -55,7 +60,7 @@ ff02::2 ip6-allrouters
 127.0.0.1 youxi.baidu.com/dntg_8377/?pid=101110078000236_2493282
 58.217.200.14  cdn.baidupcs.com
 58.217.200.14  hot.cdn.baidupcs.com
-#128.199.185.120 btroot.org
+128.199.185.120 btroot.org
 50.97.254.162 word2.cloudsolv.com
 127.0.0.1 a.baidu.com
 127.0.0.1 baidutv.baidu.com
@@ -887,11 +892,9 @@ ff02::2 ip6-allrouters
 127.0.0.1	y.admob.com
 127.0.0.1	z.admob.com
 #127.0.0.1	z.alimama.com
-#AdBlock END
+#AdBlock END #}}}
 
-180.97.33.67 www.baidu.com
-
-#Flickr START
+#{{{    #02.    Flickr 
 98.136.43.76	geo.yahoo.com
 68.142.250.161	l.yimg.com
 96.6.93.227	s.yimg.com
@@ -942,9 +945,9 @@ ff02::2 ip6-allrouters
 67.195.19.62	gq1.farm4.staticflickr.com
 67.195.19.65	gq1.farm5.staticflickr.com
 98.136.171.208	gq1.farm6.staticflickr.com
-#Flickr END
+#Flickr END }}}
 
-#Twitter START
+#{{{    #03.    Twitter 
 199.16.158.8	twitter.com
 199.16.158.8	www.twitter.com
 199.16.158.13	mobile.twitter.com
@@ -1023,144 +1026,68 @@ ff02::2 ip6-allrouters
 96.127.160.130	web8.twitpic.com
 96.127.160.130	web9.twitpic.com
 96.127.160.130	web10.twitpic.com
-#Twitter END
+#Twitter END }}}
 
-#Facebook start
-31.13.95.8	mqtt.facebook.com
-77.67.4.11	fbcdn-sphotos-a-a.akamaihd.net
-77.67.4.64	fbcdn-sphotos-b-a.akamaihd.net
-77.67.4.74	fbcdn-sphotos-c-a.akamaihd.net
-77.67.4.73	fbcdn-sphotos-d-a.akamaihd.net
-77.67.4.74	fbcdn-sphotos-e-a.akamaihd.net
-77.67.4.10	fbcdn-sphotos-f-a.akamaihd.net
-23.63.99.56	fbcdn-sphotos-g-a.akamaihd.net
-23.63.99.88	fbcdn-sphotos-h-a.akamaihd.net
-2.16.162.11	fbcdn-profile-a.akamaihd.net
-31.13.84.4	scontent.xx.fbcdn.net
-31.13.84.4	scontent-a.xx.fbcdn.net
-31.13.84.4	scontent-b.xx.fbcdn.net
-23.213.58.87	s-static.ak.facebook.com
-23.213.58.87	profile.ak.facebook.com
-184.28.188.154	static.ak.facebook.com
-184.28.188.154	b.static.ak.facebook.com
-31.13.95.8	graph.facebook.com
-31.13.95.8	ssl.facebook.com
-31.13.95.8	api.facebook.com
-31.13.95.8	secure-profile.facebook.com
-31.13.95.8	secure.facebook.com
-31.13.95.8	zh-cn.facebook.com
-31.13.95.8	login.facebook.com
-31.13.95.8	m.facebook.com
-108.166.120.82	messages-facebook.com
-31.13.95.8	attachments.facebook.com
-31.13.95.8	touch.facebook.com
-31.13.95.8	facebook.com
-31.13.95.8	www.facebook.com
-31.13.95.8	apps.facebook.com
-165.254.42.232	profile.ak.fbcdn.net
-31.13.95.8	vpn.tfbnw.net
-184.28.188.240	vthumb.ak.fbcdn.net
-184.28.188.152	photos-a.ak.fbcdn.net
-184.28.188.154	photos-b.ak.fbcdn.net
-184.28.188.171	photos-c.ak.fbcdn.net
-184.28.188.171	photos-d.ak.fbcdn.net
-184.28.188.153	photos-e.ak.fbcdn.net
-184.28.188.153	photos-f.ak.fbcdn.net
-184.28.188.171	photos-g.ak.fbcdn.net
-184.28.188.146	photos-h.ak.fbcdn.net
-184.28.188.171	creative.ak.fbcdn.net
-31.13.95.8	fbcdn.net
-184.28.188.153	external.ak.fbcdn.net
-184.28.188.153	b.static.ak.fbcdn.net
-184.28.188.153	static.ak.fbcdn.net
-31.13.95.8	upload.facebook.com
-31.13.95.8	developers.facebook.com
-184.28.188.153	act.channel.facebook.com
-184.28.188.153	0-act.channel.facebook.com
-184.28.188.153	1-act.channel.facebook.com
-184.28.188.153	2-act.channel.facebook.com
-184.28.188.153	3-act.channel.facebook.com
-184.28.188.153	4-act.channel.facebook.com
-184.28.188.153	5-act.channel.facebook.com
-184.28.188.153	6-act.channel.facebook.com
-69.171.246.7	beta-chat-01-05-ash3.facebook.com
-184.28.188.153	origincache-ai-01-05-ash3.fbcdn.net
-69.171.235.9	static.thefacebook.com
-184.28.188.153	inyour-slb-01-05-ash3.facebook.com
-184.28.188.153	origincache-starfacebook-ai-01-05-ash3.facebook.com
-69.171.246.16	channel-ecmp-05-ash3.facebook.com
-69.171.246.17	channel-staging-ecmp-05-ash3.facebook.com
-69.171.246.18	channel-testing-ecmp-05-ash3.facebook.com
-31.13.95.8	0-edge-chat.facebook.com
-31.13.95.8	1-edge-chat.facebook.com
-31.13.95.8	2-edge-chat.facebook.com
-31.13.95.8	3-edge-chat.facebook.com
-31.13.95.8	4-edge-chat.facebook.com
-31.13.95.8	5-edge-chat.facebook.com
-31.13.95.8	6-edge-chat.facebook.com
-31.13.95.8	api-read.facebook.com
-31.13.95.8	attachment.fbsbx.com
-31.13.95.8	bigzipfiles.facebook.com
-31.13.95.8	check4.facebook.com
-31.13.95.8	check6.facebook.com
-31.13.95.8	code.facebook.com
-31.13.95.8	connect.facebook.com
-31.13.95.8	edge-chat.facebook.com
-31.13.95.8	pixel.facebook.com
-31.13.95.8	star.c10r.facebook.com
-31.13.95.8	star.facebook.com
-31.13.95.8	zh-tw.facebook.com
-31.13.95.8	b-api.facebook.com
-31.13.95.8	b-graph.facebook.com
-104.78.23.174	connect.facebook.net
-23.32.248.41	creative.ak.fbcdn.net
-31.13.95.8	d.facebook.com
-31.13.95.12	ent-a.xx.fbcdn.net
-31.13.95.12	ent-b.xx.fbcdn.net
-31.13.95.12	ent-c.xx.fbcdn.net
-31.13.95.12	ent-d.xx.fbcdn.net
-31.13.95.12	ent-e.xx.fbcdn.net
-23.32.248.66	fbcdn-creative-a.akamaihd.net
-72.246.188.82	fbcdn-photos-a.akamaihd.net
-72.246.188.19	fbcdn-photos-e-a.akamaihd.net
-23.205.168.10	fbcdn-sphotos-a.akamaihd.net
-23.32.248.49	fbcdn-video-a-a.akamaihd.net
-23.32.248.34	fbcdn-video-b-a.akamaihd.net
-23.32.248.59	fbcdn-video-c-a.akamaihd.net
-124.40.41.16	fbcdn-video-d-a.akamaihd.net
-23.32.248.8	fbcdn-video-e-a.akamaihd.net
-23.32.248.51	fbcdn-video-f-a.akamaihd.net
-23.32.248.9	fbcdn-video-g-a.akamaihd.net
-23.32.248.11	fbcdn-video-h-a.akamaihd.net
-23.32.248.42	fbcdn-video-i-a.akamaihd.net
-124.40.41.17	fbcdn-video-j-a.akamaihd.net
-23.32.248.50	fbcdn-video-k-a.akamaihd.net
-23.32.248.43	fbcdn-video-l-a.akamaihd.net
-23.32.248.26	fbcdn-video-m-a.akamaihd.net
-23.32.248.73	fbcdn-video-n-a.akamaihd.net
-23.32.248.19	fbcdn-video-o-a.akamaihd.net
-23.32.248.35	fbcdn-video-p-a.akamaihd.net
-23.32.248.33	fbcdn-vthumb-a.akamaihd.net
-23.32.248.27	fbexternal-a.akamaihd.net
-23.61.194.178	fbstatic-a.akamaihd.net
-192.168.52.23	ldap.thefacebook.com
-31.13.95.8	orcart.facebook.com
-31.13.70.7	scontent-a-lax.xx.fbcdn.net
-31.13.79.251	scontent-a-sin.xx.fbcdn.net
-31.13.70.7	scontent-b-lax.xx.fbcdn.net
-183.111.23.18	scontent-b-sin.xx.fbcdn.net
-31.13.82.7	scontent-c.xx.fbcdn.net
-31.13.95.7	scontent-d.xx.fbcdn.net
-31.13.79.224	scontent-e.xx.fbcdn.net
-31.13.86.4	scontent-mxp.xx.fbcdn.net
-23.207.122.24	s-external.ak.fbcdn.net
-23.34.45.177	s-static.ak.fbcdn.net
-118.214.29.177	s-static.facebook.com
-69.171.235.49	vupload.facebook.com
-69.171.235.49	vupload2.vvv.facebook.com
-#Facebook end
+#{{{    #04.    Facebook 
+127.0.0.1	ads.ak.facebook.com
+127.0.0.1	creative.ak.facebook.com
+127.0.0.1	creative.ak.fbcdn.net
+69.171.237.25	facebook.com
+69.171.237.25	www.facebook.com
+69.171.237.23	m.facebook.com
+69.171.237.25	d.facebook.com
+69.171.237.25	touch.facebook.com
+69.171.237.25	zh-CN.facebook.com
+69.171.237.25	ldap.thefacebook.com
+69.171.237.25	graph.facebook.com
+69.171.237.25	vupload.facebook.com
+69.171.237.25	developers.facebook.com
+69.171.237.25	connect.facebook.net
+69.171.237.25	creativeupload.facebook.com
+69.171.237.25	upload.facebook.com
+69.171.237.25	bigzipfiles.facebook.com
+69.171.237.25	star.facebook.com
+69.171.235.13	bigzipfiles.facebook.com
+31.13.82.32	api.facebook.com
+31.13.69.86	b-api.facebook.com
+31.13.82.32	api-read.facebook.com
+31.13.82.32	apps.facebook.com
+31.13.82.32	pixel.facebook.com
+31.13.82.32	ssl.facebook.com
+31.13.82.32	secure.facebook.com
+31.13.82.32	orcart.facebook.com
+31.13.82.32	attachments.facebook.com
+69.171.237.25	vpn.tfbnw.net
+61.213.189.113	fbcdn.net
+61.213.189.113	s-hprofile-sf2p.fbcdn.net
+61.213.189.114	profile.ak.fbcdn.net
+61.213.189.120	b.static.ak.fbcdn.net
+61.213.189.98	b.static.ak.facebook.com
+23.5.157.177	s-static.ak.fbcdn.net
+184.26.194.110	s-static.ak.facebook.com
+69.171.247.22	s-static.facebook.com
+61.213.189.98	static.ak.facebook.com
+61.213.189.113	creative.ak.fbcdn.net
+23.3.68.113	external.ak.fbcdn.net
+31.13.77.89	ent-a.xx.fbcdn.net
+31.13.77.89	ent-b.xx.fbcdn.net
+31.13.77.89	ent-c.xx.fbcdn.net
+31.13.77.89	ent-d.xx.fbcdn.net
+31.13.77.89	ent-e.xx.fbcdn.net
+31.13.77.89	ent-a.xy.fbcdn.net
+31.13.77.89	ent-b.xy.fbcdn.net
+31.13.77.89	ent-c.xy.fbcdn.net
+31.13.77.89	ent-d.xy.fbcdn.net
+31.13.77.89	ent-e.xy.fbcdn.net
+31.13.70.56	scontent-a.xx.fbcdn.net
+31.13.70.56	scontent-b.xx.fbcdn.net
+31.13.70.56	scontent-c.xx.fbcdn.net
+31.13.70.56	scontent-d.xx.fbcdn.net
+31.13.70.56	scontent-e.xx.fbcdn.net
+42.99.128.137	fbcdn-profile-a.akamaihd.net
+#Facebook END }}}
 
-#Adobe Activation START
+#{{{    #05.    Adobe Activation 
 0.0.0.0	3dns-2.adobe.com
 0.0.0.0	3dns-3.adobe.com
 0.0.0.0	activate.adobe.com
@@ -1176,500 +1103,231 @@ ff02::2 ip6-allrouters
 0.0.0.0	activate.wip3.adobe.com
 0.0.0.0	ereg.wip3.adobe.com
 0.0.0.0	wwis-dubc1-vip60.adobe.com
-#Adobe Activation END
+#Adobe Activation END }}}
 
-#YouTube START
-203.208.46.206	accounts.youtube.com
-203.208.46.206	apiblog.youtube.com
-203.208.46.206	help.youtube.com
-203.208.46.206	i.ytimg.com
-203.208.46.206	i1.ytimg.com
-203.208.46.206	i2.ytimg.com
-203.208.46.206	i3.ytimg.com
-203.208.46.206	i4.ytimg.com
-203.208.46.206	insight.youtube.com
-203.208.46.206	m.youtube.com
-203.208.46.206	s.ytimg.com
-203.208.46.206	www.youtube.com
-203.208.46.206	ytimg.l.google.com
-#YouTube END
+#{{{    #06.    GitHub 
+#204.232.175.78	documentcloud.github.com
+#207.97.227.239	github.com
+#204.232.175.94	gist.github.com
+#107.20.136.254	help.github.com
+#207.97.227.252	nodeload.github.com
+#199.27.76.130	raw.github.com
+#107.22.3.110	status.github.com
+#204.232.175.78	training.github.com
+#207.97.227.243	www.github.com
+#GitHub END }}}
 
-#GitHub START
-103.245.222.133 documentcloud.github.com
-192.30.252.130  github.com
-159.106.121.75  gist.github.com
-107.20.136.254  help.github.com
-192.30.252.147  nodeload.github.com
-103.245.222.133 raw.github.com
-23.20.32.221    status.github.com
-103.245.222.133 training.github.com
-192.30.252.130  www.github.com
-#GitHub END
-
-#Feedly START
-#173.194.72.141 feedly-beta.appspot.com
-#74.125.29.141 feedly-beta.appspot.com
-#74.125.200.141 feedly-beta.appspot.com
-#74.125.31.141 feedly-beta.appspot.com
-74.125.128.141 feedly-beta.appspot.com
+#{{{    #07.    Feedly 
+74.125.128.141  feedly-beta.appspot.com
 #74.125.200.121 s3.feedly.com
-#74.125.23.121 s3.feedly.com
+#74.125.23.121  s3.feedly.com
 #74.125.128.121 s3.feedly.com
-198.41.247.160 feedly-beta.appspot.com
-198.41.247.160 s3.feedly.com
-#Feedly END
+198.41.247.160  feedly-beta.appspot.com
+198.41.247.160  s3.feedly.com
+#Feedly END }}}
 
-#Others START
-38.229.72.14	www.torproject.org
-#Others END
-
-#SmartHosts END
-
-#Godaddy
+#{{{    #08.    Godaddy
 97.74.104.201 www.godaddy.com
 216.69.149.90 idp.godaddy.com
 216.69.149.53 dns.godaddy.com
-#IFTTT
+# Godaddy END }}}
+
+#{{{    #09.    IFTTT
 66.6.44.4 blog.ifttt.com
 174.129.209.0 ifttt.com
-#Apple Services STAR
-#
+#IFTTT END }}}
 
-# Wikipedia Start
-198.35.26.96	www.wikipedia.org
-198.35.26.112	upload.wikimedia.org
-198.35.26.106	bits.wikimedia.org
-198.35.26.96	ab.wikipedia.org
-198.35.26.96	ace.wikipedia.org
-198.35.26.96	af.wikipedia.org
-198.35.26.96	ak.wikipedia.org
-198.35.26.96	als.wikipedia.org
-198.35.26.96	am.wikipedia.org
-198.35.26.96	an.wikipedia.org
-198.35.26.96	ang.wikipedia.org
-198.35.26.96	ar.wikipedia.org
-198.35.26.96	arc.wikipedia.org
-198.35.26.96	arz.wikipedia.org
-198.35.26.96	as.wikipedia.org
-198.35.26.96	ast.wikipedia.org
-198.35.26.96	av.wikipedia.org
-198.35.26.96	ay.wikipedia.org
-198.35.26.96	az.wikipedia.org
-198.35.26.96	ba.wikipedia.org
-198.35.26.96	bar.wikipedia.org
-198.35.26.96	bat-smg.wikipedia.org
-198.35.26.96	bcl.wikipedia.org
-198.35.26.96	bg.wikipedia.org
-198.35.26.96	bh.wikipedia.org
-198.35.26.96	bi.wikipedia.org
-198.35.26.96	bjn.wikipedia.org
-198.35.26.96	bm.wikipedia.org
-198.35.26.96	bn.wikipedia.org
-198.35.26.96	bo.wikipedia.org
-198.35.26.96	bpy.wikipedia.org
-198.35.26.96	br.wikipedia.org
-198.35.26.96	bs.wikipedia.org
-198.35.26.96	bug.wikipedia.org
-198.35.26.96	bxr.wikipedia.org
-198.35.26.96	ca.wikipedia.org
-198.35.26.96	cbk-zam.wikipedia.org
-198.35.26.96	cdo.wikipedia.org
-198.35.26.96	ce.wikipedia.org
-198.35.26.96	ceb.wikipedia.org
-198.35.26.96	ch.wikipedia.org
-198.35.26.96	chr.wikipedia.org
-198.35.26.96	chy.wikipedia.org
-198.35.26.96	ckb.wikipedia.org
-198.35.26.96	co.wikipedia.org
-198.35.26.96	cr.wikipedia.org
-198.35.26.96	crh.wikipedia.org
-198.35.26.96	cs.wikipedia.org
-198.35.26.96	csb.wikipedia.org
-198.35.26.96	cu.wikipedia.org
-198.35.26.96	cv.wikipedia.org
-198.35.26.96	cy.wikipedia.org
-198.35.26.96	da.wikipedia.org
-198.35.26.96	de.wikipedia.org
-198.35.26.96	diq.wikipedia.org
-198.35.26.96	dsb.wikipedia.org
-198.35.26.96	dv.wikipedia.org
-198.35.26.96	dz.wikipedia.org
-198.35.26.96	ee.wikipedia.org
-198.35.26.96	el.wikipedia.org
-198.35.26.96	eml.wikipedia.org
-198.35.26.96	en.wikipedia.org
-198.35.26.96	eo.wikipedia.org
-198.35.26.96	es.wikipedia.org
-198.35.26.96	et.wikipedia.org
-198.35.26.96	eu.wikipedia.org
-198.35.26.96	ext.wikipedia.org
-198.35.26.96	fa.wikipedia.org
-198.35.26.96	ff.wikipedia.org
-198.35.26.96	fi.wikipedia.org
-198.35.26.96	fiu-vro.wikipedia.org
-198.35.26.96	fj.wikipedia.org
-198.35.26.96	fo.wikipedia.org
-198.35.26.96	fr.wikipedia.org
-198.35.26.96	frp.wikipedia.org
-198.35.26.96	frr.wikipedia.org
-198.35.26.96	fur.wikipedia.org
-198.35.26.96	fy.wikipedia.org
-198.35.26.96	ga.wikipedia.org
-198.35.26.96	gag.wikipedia.org
-198.35.26.96	gan.wikipedia.org
-198.35.26.96	gd.wikipedia.org
-198.35.26.96	gl.wikipedia.org
-198.35.26.96	glk.wikipedia.org
-198.35.26.96	gn.wikipedia.org
-198.35.26.96	got.wikipedia.org
-198.35.26.96	gu.wikipedia.org
-198.35.26.96	gv.wikipedia.org
-198.35.26.96	ha.wikipedia.org
-198.35.26.96	hak.wikipedia.org
-198.35.26.96	haw.wikipedia.org
-198.35.26.96	he.wikipedia.org
-198.35.26.96	hi.wikipedia.org
-198.35.26.96	hif.wikipedia.org
-198.35.26.96	hr.wikipedia.org
-198.35.26.96	hsb.wikipedia.org
-198.35.26.96	ht.wikipedia.org
-198.35.26.96	hu.wikipedia.org
-198.35.26.96	hy.wikipedia.org
-198.35.26.96	ia.wikipedia.org
-198.35.26.96	id.wikipedia.org
-198.35.26.96	ie.wikipedia.org
-198.35.26.96	ig.wikipedia.org
-198.35.26.96	ik.wikipedia.org
-198.35.26.96	ilo.wikipedia.org
-198.35.26.96	io.wikipedia.org
-198.35.26.96	is.wikipedia.org
-198.35.26.96	it.wikipedia.org
-198.35.26.96	iu.wikipedia.org
-198.35.26.96	ja.wikipedia.org
-198.35.26.96	ja.wikipedia.org
-198.35.26.96	jbo.wikipedia.org
-198.35.26.96	jv.wikipedia.org
-198.35.26.96	ka.wikipedia.org
-198.35.26.96	kaa.wikipedia.org
-198.35.26.96	kab.wikipedia.org
-198.35.26.96	kbd.wikipedia.org
-198.35.26.96	kg.wikipedia.org
-198.35.26.96	ki.wikipedia.org
-198.35.26.96	kk.wikipedia.org
-198.35.26.96	kl.wikipedia.org
-198.35.26.96	km.wikipedia.org
-198.35.26.96	kn.wikipedia.org
-198.35.26.96	ko.wikipedia.org
-198.35.26.96	koi.wikipedia.org
-198.35.26.96	krc.wikipedia.org
-198.35.26.96	ks.wikipedia.org
-198.35.26.96	ksh.wikipedia.org
-198.35.26.96	ku.wikipedia.org
-198.35.26.96	kv.wikipedia.org
-198.35.26.96	kw.wikipedia.org
-198.35.26.96	ky.wikipedia.org
-198.35.26.96	la.wikipedia.org
-198.35.26.96	lad.wikipedia.org
-198.35.26.96	lb.wikipedia.org
-198.35.26.96	lbe.wikipedia.org
-198.35.26.96	lez.wikipedia.org
-198.35.26.96	lg.wikipedia.org
-198.35.26.96	li.wikipedia.org
-198.35.26.96	lij.wikipedia.org
-198.35.26.96	lmo.wikipedia.org
-198.35.26.96	ln.wikipedia.org
-198.35.26.96	lo.wikipedia.org
-198.35.26.96	lt.wikipedia.org
-198.35.26.96	ltg.wikipedia.org
-198.35.26.96	lv.wikipedia.org
-198.35.26.96	map-bms.wikipedia.org
-198.35.26.96	mdf.wikipedia.org
-198.35.26.96	mg.wikipedia.org
-198.35.26.96	mhr.wikipedia.org
-198.35.26.96	mi.wikipedia.org
-198.35.26.96	mk.wikipedia.org
-198.35.26.96	ml.wikipedia.org
-198.35.26.96	mn.wikipedia.org
-198.35.26.96	mo.wikipedia.org
-198.35.26.96	mr.wikipedia.org
-198.35.26.96	mrj.wikipedia.org
-198.35.26.96	ms.wikipedia.org
-198.35.26.96	mt.wikipedia.org
-198.35.26.96	mwl.wikipedia.org
-198.35.26.96	my.wikipedia.org
-198.35.26.96	myv.wikipedia.org
-198.35.26.96	mzn.wikipedia.org
-198.35.26.96	na.wikipedia.org
-198.35.26.96	nah.wikipedia.org
-198.35.26.96	nap.wikipedia.org
-198.35.26.96	nds-nl.wikipedia.org
-198.35.26.96	nds.wikipedia.org
-198.35.26.96	ne.wikipedia.org
-198.35.26.96	new.wikipedia.org
-198.35.26.96	nov.wikipedia.org
-198.35.26.96	nrm.wikipedia.org
-198.35.26.96	nso.wikipedia.org
-198.35.26.96	nv.wikipedia.org
-198.35.26.96	ny.wikipedia.org
-198.35.26.96	oc.wikipedia.org
-198.35.26.96	om.wikipedia.org
-198.35.26.96	or.wikipedia.org
-198.35.26.96	os.wikipedia.org
-198.35.26.96	pa.wikipedia.org
-198.35.26.96	pag.wikipedia.org
-198.35.26.96	pam.wikipedia.org
-198.35.26.96	pap.wikipedia.org
-198.35.26.96	pcd.wikipedia.org
-198.35.26.96	pdc.wikipedia.org
-198.35.26.96	pfl.wikipedia.org
-198.35.26.96	pi.wikipedia.org
-198.35.26.96	pih.wikipedia.org
-198.35.26.96	pl.wikipedia.org
-198.35.26.96	pl.wikipedia.org
-198.35.26.96	pms.wikipedia.org
-198.35.26.96	pnb.wikipedia.org
-198.35.26.96	pnt.wikipedia.org
-198.35.26.96	ps.wikipedia.org
-198.35.26.96	pt.wikipedia.org
-198.35.26.96	pt.wikipedia.org
-198.35.26.96	qu.wikipedia.org
-198.35.26.96	rm.wikipedia.org
-198.35.26.96	rmy.wikipedia.org
-198.35.26.96	rn.wikipedia.org
-198.35.26.96	ro.wikipedia.org
-198.35.26.96	roa-rup.wikipedia.org
-198.35.26.96	roa-tara.wikipedia.org
-198.35.26.96	ru.wikipedia.org
-198.35.26.96	rue.wikipedia.org
-198.35.26.96	rw.wikipedia.org
-198.35.26.96	sa.wikipedia.org
-198.35.26.96	sah.wikipedia.org
-198.35.26.96	sc.wikipedia.org
-198.35.26.96	scn.wikipedia.org
-198.35.26.96	sco.wikipedia.org
-198.35.26.96	sd.wikipedia.org
-198.35.26.96	se.wikipedia.org
-198.35.26.96	sg.wikipedia.org
-198.35.26.96	sh.wikipedia.org
-198.35.26.96	si.wikipedia.org
-198.35.26.96	simple.wikipedia.org
-198.35.26.96	sk.wikipedia.org
-198.35.26.96	sl.wikipedia.org
-198.35.26.96	sm.wikipedia.org
-198.35.26.96	sn.wikipedia.org
-198.35.26.96	so.wikipedia.org
-198.35.26.96	sq.wikipedia.org
-198.35.26.96	sr.wikipedia.org
-198.35.26.96	srn.wikipedia.org
-198.35.26.96	ss.wikipedia.org
-198.35.26.96	st.wikipedia.org
-198.35.26.96	stq.wikipedia.org
-198.35.26.96	su.wikipedia.org
-198.35.26.96	sv.wikipedia.org
-198.35.26.96	sw.wikipedia.org
-198.35.26.96	szl.wikipedia.org
-198.35.26.96	ta.wikipedia.org
-198.35.26.96	te.wikipedia.org
-198.35.26.96	tet.wikipedia.org
-198.35.26.96	tg.wikipedia.org
-198.35.26.96	th.wikipedia.org
-198.35.26.96	ti.wikipedia.org
-198.35.26.96	tk.wikipedia.org
-198.35.26.96	tl.wikipedia.org
-198.35.26.96	tn.wikipedia.org
-198.35.26.96	to.wikipedia.org
-198.35.26.96	tpi.wikipedia.org
-198.35.26.96	tr.wikipedia.org
-198.35.26.96	ts.wikipedia.org
-198.35.26.96	tt.wikipedia.org
-198.35.26.96	tum.wikipedia.org
-198.35.26.96	tw.wikipedia.org
-198.35.26.96	ty.wikipedia.org
-198.35.26.96	udm.wikipedia.org
-198.35.26.96	ug.wikipedia.org
-198.35.26.96	uk.wikipedia.org
-198.35.26.96	ur.wikipedia.org
-198.35.26.96	uz.wikipedia.org
-198.35.26.96	ve.wikipedia.org
-198.35.26.96	vec.wikipedia.org
-198.35.26.96	vep.wikipedia.org
-198.35.26.96	vi.wikipedia.org
-198.35.26.96	vls.wikipedia.org
-198.35.26.96	vo.wikipedia.org
-198.35.26.96	wa.wikipedia.org
-198.35.26.96	war.wikipedia.org
-198.35.26.96	wo.wikipedia.org
-198.35.26.96	wuu.wikipedia.org
-198.35.26.96	xal.wikipedia.org
-198.35.26.96	xh.wikipedia.org
-198.35.26.96	xmf.wikipedia.org
-198.35.26.96	yi.wikipedia.org
-198.35.26.96	yo.wikipedia.org
-198.35.26.96	za.wikipedia.org
-198.35.26.96	zea.wikipedia.org
-198.35.26.96	zh-classical.wikipedia.org
-198.35.26.96	zh-min-nan.wikipedia.org
-198.35.26.96	zh-yue.wikipedia.org
-198.35.26.96	zh.wikipedia.org
-198.35.26.96	zu.wikipedia.org
-198.35.26.96	www.mediawiki.org
-198.35.26.96	www.wikibooks.org
-198.35.26.96	www.wikidata.org
-198.35.26.96	www.wikimedia.org
-198.35.26.96	www.wikimediafoundation.org
-198.35.26.96	www.wikinews.org
-198.35.26.96	www.wikipedia.org
-198.35.26.96	www.wikiquote.org
-198.35.26.96	www.wikisource.org
-198.35.26.96	www.wikiversity.org
-198.35.26.96	www.wikivoyage.org
-198.35.26.96	www.wiktionary.org
-198.35.26.96	m.mediawiki.org
-198.35.26.96	m.wikibooks.org
-198.35.26.96	m.wikidata.org
-198.35.26.96	m.wikimedia.org
-198.35.26.96	m.wikimediafoundation.org
-198.35.26.96	m.wikinews.org
-198.35.26.96	m.wikipedia.org
-198.35.26.96	m.wikiquote.org
-198.35.26.96	m.wikisource.org
-198.35.26.96	m.wikiversity.org
-198.35.26.96	m.wikivoyage.org
-198.35.26.96	m.wiktionary.org
-198.35.26.96	mediawiki.org
-198.35.26.96	wikibooks.org
-198.35.26.96	wikidata.org
-198.35.26.96	wikimedia.org
-198.35.26.96	wikimediafoundation.org
-198.35.26.96	wikinews.org
-198.35.26.96	wikipedia.org
-198.35.26.96	wikiquote.org
-198.35.26.96	wikisource.org
-198.35.26.96	wikiversity.org
-198.35.26.96	wikivoyage.org
-198.35.26.96	wiktionary.org
-91.198.174.192	wikibooks.org
-91.198.174.192	www.wikibooks.org
-91.198.174.192	en.wikibooks.org
-91.198.174.192	es.wikibooks.org
-91.198.174.192	zh.wikibooks.org
-91.198.174.192	fr.wikibooks.org
-91.198.174.192	de.wikibooks.org
-91.198.174.192	it.wikibooks.org
-91.198.174.192	ja.wikibooks.org
-91.198.174.192	wikinews.org
-91.198.174.192	www.wikinews.org
-91.198.174.192	en.wikinews.org
-91.198.174.192	zh.wikinews.org
-91.198.174.192	fr.wikinews.org
-91.198.174.192	de.wikinews.org
-91.198.174.192	es.wikinews.org
-91.198.174.192	it.wikinews.org
-91.198.174.192	ja.wikinews.org
-91.198.174.192	wikiquote.org
-91.198.174.192	www.wikiquote.org
-91.198.174.192	en.wikiquote.org
-91.198.174.192	zh.wikiquote.org
-91.198.174.192	fr.wikiquote.org
-91.198.174.192	de.wikiquote.org
-91.198.174.192	es.wikiquote.org
-91.198.174.192	it.wikiquote.org
-91.198.174.192	ja.wikiquote.org
-91.198.174.192	zh.wikisource.org
-91.198.174.192	fr.wikisource.org
-91.198.174.192	de.wikisource.org
-91.198.174.192	en.wikisource.org
-91.198.174.192	it.wikisource.org
-91.198.174.192	ja.wikisource.org
-91.198.174.192	es.wikisource.org
-91.198.174.192	wiktionary.org
-91.198.174.192	www.wiktionary.org
-91.198.174.192	en.wiktionary.org
-91.198.174.192	zh.wiktionary.org
-91.198.174.192	fr.wiktionary.org
-91.198.174.192	de.wiktionary.org
-91.198.174.192	it.wiktionary.org
-91.198.174.192	es.wiktionary.org
-91.198.174.192	ja.wiktionary.org
-91.198.174.192	wikimedia.org
-91.198.174.192	www.wikimedia.org
-91.198.174.192	commons.wikimedia.org
-91.198.174.192	mail.wikimedia.org
-91.198.174.192	meta.wikimedia.org
-91.198.174.192	wikimediafoundation.org
-91.198.174.192	www.wikimediafoundation.org
-91.198.174.192	mediawiki.org
-91.198.174.192	www.mediawiki.org
-208.80.154.241	bugs.wikimedia.org
-208.80.154.241	bugzilla.wikimedia.org
-208.80.154.241	noc.wikimedia.org
-208.80.154.241	stats.wikimedia.org
-208.80.154.11	dumps.wikimedia.org
-208.80.154.11	download.wikimedia.org
-208.80.154.146	ticket.wikimedia.org
-91.198.174.208	upload.wikimedia.org
-208.80.154.160	irc.wikimedia.org
-208.80.154.53	ganglia.wikimedia.org
-# Wikipedia End
-
-# WordPress Start
-68.232.44.121	0.gravatar.com
-68.232.44.121	1.gravatar.com
-68.232.44.121	2.gravatar.com
-192.0.81.250 	botd2.wordpress.com
-66.155.9.238	dashboard.wordpress.com
-66.155.9.238	en.blog.wordpress.com
-66.155.9.238	en.forums.wordpress.com
-66.155.9.238	forums.wordpress.com
-192.0.77.2	i0.wp.com
-192.0.77.2	i1.wp.com
-192.0.77.2	i2.wp.com
-192.0.80.242	lb.gravatar.com
-66.155.9.238	lb.wordpress.com
-66.155.9.238	lucifr.wordpress.com
-192.0.81.250 	r-login.wordpress.com
-68.232.44.121	s.gravatar.com
-68.232.44.119	s.stats.wordpress.com
-192.229.144.127	s.w.org
-68.232.44.111	s.wordpress.com
-68.232.44.111	s.wordpress.org
-68.232.44.111	s0.wp.com
-68.232.44.111	s1.wordpress.com
-68.232.44.111	s1.wp.com
-68.232.44.111	s2.wordpress.com
-68.232.44.111	s2.wp.com
-68.232.44.111	s3.wordpress.com
-192.0.80.242	secure.gravatar.com
-66.155.9.238	stats.wordpress.com
+#{{{    #10.    WordPress 
 66.155.11.243	wordpress.com
-66.155.9.238	wpcom.wordpress.com
-68.232.44.121	www.gravatar.com
+68.232.44.111	s0.wp.com
+68.232.44.111	s1.wp.com
+68.232.44.111	s2.wp.com
+68.232.44.111	s.wordpress.org
+68.232.44.111	s.wordpress.com
+68.232.44.111	s1.wordpress.com
+68.232.44.111	s2.wordpress.com
+68.232.44.111	s3.wordpress.com
+68.232.44.119	s.stats.wordpress.com
+66.155.9.238	lb.wordpress.com
 66.155.9.238	zh.wordpress.com
-66.155.9.238	zh-cn.wordpress.com
 66.155.9.238	zh-sg.wordpress.com
-# WordPress End
-#
-#Box.com START
-74.112.184.73	box.com
-74.112.184.70	app.box.com
-#Box.com END
+66.155.9.238	zh-cn.wordpress.com
+66.155.9.238	dashboard.wordpress.com
+66.155.9.238	forums.wordpress.com
+66.155.9.238	en.forums.wordpress.com
+66.155.9.238	en.blog.wordpress.com
+66.155.9.238	stats.wordpress.com
+66.155.9.238	wpcom.wordpress.com
+66.155.9.238	lucifr.wordpress.com
+72.233.2.58	botd2.wordpress.com
+72.233.2.58	r-login.wordpress.com
+#WordPress END }}}
 
-#Microsoft Live START
-134.170.108.26	onedrive.live.com
-134.170.109.48	skyapi.onedrive.live.com
-#134.170.30.15	people.live.com
-#Microsoft Live END
+#{{{    #11.    Microsoft Live 
+65.54.187.24	account.live.com
+23.44.152.70	auth.gfx.ms
+131.253.61.66	login.live.com
+134.170.108.154 onedrive.live.com
+23.212.129.202	p.sfx.ms
+134.170.30.15	people.live.com
+134.170.30.15	profile.live.com
+134.170.111.96	skyapi.onedrive.live.com
+134.170.104.168	storage.live.com
+204.79.197.213	nhuhga.dm2301.livefilestore.com
+#Microsoft Live END }}}
 
-#golang#
+#{{{    #12.    Golang 
 #173.194.70.141 golang.org
 #74.125.23.141 golang.org
 74.125.31.141 golang.org
-#TX-HOSTS
-#
-# link: https://github.com/txthinking/google-hosts
-#
-# UPDATE: Tue Dec 16 03:16:08 UTC 2014
-# Gmail Start
+# golang END }}}
+
+#{{{    #13.    Others 
+38.229.72.14	www.torproject.org
+#Others END }}}
+
+#{{{    #14.    Imgur START
+103.245.222.193	imgur.com
+103.245.222.193	www.imgur.com
+103.245.222.193	i.imgur.com
+103.245.222.193	s.imgur.com
+# imgur End }}}
+
+#{{{    #15.    Instagram Start
+107.23.173.176	instagram.com
+184.25.56.204	instagramstatic-a.akamaihd.net
+# Instagram End }}}
+
+#{{{    #16.    Mozilla Start
+117.18.232.191	activations.cdn.mozilla.net
+117.18.232.191	addons.cdn.mozilla.net
+117.18.232.191	air.cdn.mozilla.net
+117.18.232.191	cdn.mozilla.net
+117.18.232.191	code.cdn.mozilla.net
+117.18.232.191	developer.cdn.mozilla.net
+117.18.232.191	download-installer.cdn.mozilla.net
+117.18.232.191	fhr.cdn.mozilla.net
+117.18.232.191	glow.cdn.mozilla.net
+117.18.232.191	marketplace.cdn.mozilla.net
+117.18.232.191	mozorg.cdn.mozilla.net
+117.18.232.191	snippets.cdn.mozilla.net
+117.18.232.191	support.cdn.mozilla.net
+117.18.232.191	telemetry-experiment.cdn.mozilla.net
+117.18.232.191	videos.cdn.mozilla.net
+117.18.237.191	getpersonas-cdn.mozilla.net
+117.18.237.29	ocsp.digicert.com	
+63.245.215.56	ftp.mozilla.org
+63.245.216.132	addons.mozilla.org
+72.21.81.109	df6a.https.cdn.softlayer.net
+# Mozilla End }}}
+
+#{{{    #17.    OpenShift Start
+118.214.71.214	www.redhat.com
+23.23.202.32	openshift.com
+118.214.78.23	www.openshift.com
+118.214.78.23	assets.openshift.net
+23.21.84.238	openshift.redhat.com
+54.237.40.208	developers.openshift.com
+192.161.151.215	help.openshift.com
+23.20.242.119	hub.openshift.com
+23.22.105.178	hosts-smounives.rhcloud.com
+# OpenShift End }}}
+
+#{{{    #18.    Amazon AWS Start
+27.0.1.125	ap-northeast-1.console.aws.amazon.com
+54.240.226.19	ap-southeast-1.console.aws.amazon.com
+54.240.195.197	ap-southeast-2.console.aws.amazon.com
+176.32.100.36	aws.amazon.com
+72.21.194.168	console.aws.amazon.com
+54.239.54.107	eu-central-1.console.aws.amazon.com
+178.236.4.251	eu-west-1.console.aws.amazon.com
+54.231.66.16	s3.amazonaws.com
+54.231.229.10	s3-ap-northeast-1.amazonaws.com
+54.231.242.150	s3-ap-southeast-1.amazonaws.com
+54.231.252.130	s3-ap-southeast-2.amazonaws.com
+72.21.203.5	s3-console-us-standard.console.aws.amazon.com
+54.231.192.41	s3-eu-central-1.amazonaws.com
+54.231.132.112	s3-eu-west-1.amazonaws.com
+54.231.253.78	s3-sa-east-1.amazonaws.com
+54.231.237.85	s3-us-west-1.amazonaws.com
+54.231.160.48	s3-us-west-2.amazonaws.com
+177.72.244.68	sa-east-1.console.aws.amazon.com
+204.246.162.198	us-west-1.console.aws.amazon.com
+54.240.250.61	us-west-2.console.aws.amazon.com
+# Amazon AWS End }}}
+
+#{{{    #19.    Yahoo Start
+76.13.18.77	ac4.farm4.staticflickr.com
+209.191.105.102	adjax.flickr.yahoo.com
+121.101.144.112	api.flickr.com
+98.137.205.236	bf1.farm3.staticflickr.com
+98.139.21.45	bf1.farm6.staticflickr.com
+98.139.235.135	bf1.farm7.staticflickr.com
+119.161.9.151	c5.ah.yahoo.com
+68.142.196.57	c5.ah.yahoo.com
+204.0.5.35	content.yieldmanager.edgesuite.net
+119.160.254.215	d.yimg.com
+98.137.88.88	d.yimg.com
+106.10.136.195	de.yahoo.com
+119.160.254.215	e.yimg.com
+106.10.193.20	edit.yahoo.com
+209.191.92.115	edit.yahoo.com
+68.142.214.43	farm1.staticflickr.com
+69.147.90.159	farm2.staticflickr.com
+77.238.160.184	farm3.staticflickr.com
+76.13.18.77	farm4.staticflickr.com
+76.13.18.79	farm5.staticflickr.com
+98.136.171.208	farm6.staticflickr.com
+98.138.250.88	farm7.staticflickr.com
+69.147.76.173	flickr.com
+106.10.137.175	geo.query.yahoo.com
+98.136.43.76	geo.yahoo.com
+216.39.54.34	gq1.farm3.staticflickr.com
+67.195.19.62	gq1.farm4.staticflickr.com
+67.195.19.65	gq1.farm5.staticflickr.com
+98.136.171.208	gq1.farm6.staticflickr.com
+119.160.254.215	h.yimg.com
+106.10.199.10	hk.news.yahoo.com
+106.10.138.240	hk.yahoo.com
+119.161.24.8	hk-mg61.mail.yahoo.com
+206.190.39.139	hsrd.yahoo.com
+119.160.254.215	l.yimg.com
+68.142.250.161	l.yimg.com
+106.10.193.20	login.yahoo.com
+124.108.97.193	login.yahoo.com
+208.71.44.31	m.flickr.com
+119.161.10.71	mail.yahoo.com
+68.142.214.43	mud.farm1.staticflickr.com
+106.10.193.20	na.edit.yahoo.com
+98.138.250.88	ne1.farm7.staticflickr.com
+106.10.193.20	open.login.yahoo.com
+66.163.168.247	open.login.yahoo.com
+98.136.166.37	overview.mail.yahoo.com
+119.160.254.215	p.yimg.com
+119.160.254.215	s.yimg.com
+96.6.93.227	s.yimg.com
+119.160.254.215	s1.yimg.com
+106.10.193.20	sa.edit.yahoo.com
+124.108.120.124	sa.edit.yahoo.com
+208.71.44.31	secure.flickr.com
+106.10.193.30	sp.analytics.yahoo.com
+69.147.90.159	sp1.farm2.staticflickr.com
+69.147.90.215	sp1.farm3.staticflickr.com
+106.10.137.23	static.flickr.com
+106.10.199.11	tw.news.yahoo.com
+106.10.138.240	tw.yahoo.com
+121.101.144.116	up.flickr.com
+204.0.5.34	us.js2.yimg.com
+23.62.109.75	us.js2.yimg.com
+106.10.138.240	us.yahoo.com
+183.177.81.75	www.flickr.com
+106.10.138.240	www.yahoo.com
+98.138.47.63	y.analytics.yahoo.com
+98.138.253.109	yahoo.com
+77.238.184.150	ying.com
+# Yahoo End }}}
+
+#{{{    #20.    Google 
 64.233.162.83	b.googlemail.l.google.com 
 64.233.162.83	chatenabled.mail.google.com 
 64.233.162.83	filetransferenabled.mail.google.com 
@@ -3631,468 +3289,10 @@ ff02::2 ip6-allrouters
 103.7.200.79	www-google-analytics.l.google.com 
 103.7.200.79	youtu.be 
 103.7.200.79	ytstatic.l.google.com
+# Google END }}}
 
-# Google end
-
-
-# Huhamhire Start
-192.184.89.121	hosts.huhamhire.com
-103.7.200.79	huhamhire-hosts.googlecode.com 
-199.27.79.133	huhamhire.github.com
-# Huhamhire End
-
-# HumbleBundle Start
-5.153.35.171	humble.pubnub.com
-198.41.186.33	humblebundle.com
-103.31.45.8	humblebundle-a.akamaihd.net
-216.146.46.11	pubnub.com
-74.125.34.32	www.humblebundle.com
-# HumbleBundle End
-
-# imgur Start
-103.245.222.193	imgur.com
-103.245.222.193	www.imgur.com
-103.245.222.193	i.imgur.com
-103.245.222.193	s.imgur.com
-# imgur End
-
-# Indiegala Start
-199.83.129.61	www.indiegala.com
-74.125.29.121	www.galagiveaways.com
-# Indiegala End
-
-# inoreader Start
-92.247.181.40	inoreader.com
-92.247.181.40	www.inoreader.com
-# inoreader End
-
-# Instagram Start
-107.23.173.176	instagram.com
-184.25.56.204	instagramstatic-a.akamaihd.net
-# Instagram End
-
-# Ixquick Start
-69.90.210.184	www.ixquick.com
-69.90.210.184	ixquick.com
-69.90.210.184	support.ixquick.com
-69.90.210.184	s19.ixquick.com
-69.90.210.184	s1-eu5.ixquick.com
-69.90.210.184	s2-eu5.ixquick.com
-69.90.210.184	s3-eu5.ixquick.com
-69.90.210.184	s4-eu5.ixquick.com
-69.90.210.184	s5-eu5.ixquick.com
-69.90.210.184	s6-eu5.ixquick.com
-69.90.210.184	s7-eu5.ixquick.com
-69.90.210.184	s8-eu5.ixquick.com
-69.90.210.184	s9-eu5.ixquick.com
-69.90.210.184	s10-eu5.ixquick.com
-69.90.210.184	s11-eu5.ixquick.com
-69.90.210.184	s12-eu5.ixquick.com
-69.90.210.184	s13-eu2.ixquick.com
-69.90.210.184	s14-eu2.ixquick.com
-69.90.210.184	s15-eu2.ixquick.com
-69.90.210.184	s16-eu2.ixquick.com
-69.90.210.184	s17-eu2.ixquick.com
-69.90.210.184	s18-eu2.ixquick.com
-69.90.210.184	s19-eu2.ixquick.com
-69.90.210.184	s20-eu2.ixquick.com
-69.90.210.184	s1-us5.ixquick.com
-69.90.210.184	s2-us5.ixquick.com
-69.90.210.184	s3-us5.ixquick.com
-69.90.210.184	s4-us5.ixquick.com
-69.90.210.184	s5-us5.ixquick.com
-69.90.210.184	s6-us5.ixquick.com
-69.90.210.184	s7-us5.ixquick.com
-69.90.210.184	s8-us5.ixquick.com
-69.90.210.184	s9-us5.ixquick.com
-69.90.210.184	s10-us5.ixquick.com
-69.90.210.184	s11-us5.ixquick.com
-69.90.210.184	s12-us5.ixquick.com
-69.90.210.184	s13-us2.ixquick.com
-69.90.210.184	s14-us2.ixquick.com
-69.90.210.184	s15-us2.ixquick.com
-69.90.210.184	s16-us2.ixquick.com
-69.90.210.184	s17-us2.ixquick.com
-69.90.210.184	s18-us2.ixquick.com
-69.90.210.184	s19-us2.ixquick.com
-69.90.210.184	s20-us2.ixquick.com
-# Ixquick End
-
-# Logmein Start
-77.242.192.193	secure.logmein.com
-# Logmein End
-
-# MEGA Start
-31.216.147.135	eu.api.mega.co.nz
-154.53.224.130	eu.static.mega.co.nz
-117.18.237.188	g.cdn1.mega.co.nz
-154.53.224.150	mega.co.nz
-154.53.224.166	mega.nz
-31.216.147.130	w.api.mega.co.nz
-# MEGA End
-
-# Mozilla Start
-117.18.232.191	activations.cdn.mozilla.net
-117.18.232.191	addons.cdn.mozilla.net
-117.18.232.191	air.cdn.mozilla.net
-117.18.232.191	cdn.mozilla.net
-117.18.232.191	code.cdn.mozilla.net
-117.18.232.191	developer.cdn.mozilla.net
-117.18.232.191	download-installer.cdn.mozilla.net
-117.18.232.191	fhr.cdn.mozilla.net
-117.18.232.191	glow.cdn.mozilla.net
-117.18.232.191	marketplace.cdn.mozilla.net
-117.18.232.191	mozorg.cdn.mozilla.net
-117.18.232.191	snippets.cdn.mozilla.net
-117.18.232.191	support.cdn.mozilla.net
-117.18.232.191	telemetry-experiment.cdn.mozilla.net
-117.18.232.191	videos.cdn.mozilla.net
-117.18.237.191	getpersonas-cdn.mozilla.net
-117.18.237.29	ocsp.digicert.com	
-63.245.215.56	ftp.mozilla.org
-63.245.216.132	addons.mozilla.org
-72.21.81.109	df6a.https.cdn.softlayer.net
-# Mozilla End
-
-# OneDrive Start
-65.54.187.24	account.live.com
-23.44.152.70	auth.gfx.ms
-131.253.61.66	login.live.com
-134.170.108.154	onedrive.live.com
-23.212.129.202	p.sfx.ms
-134.170.30.15	people.live.com
-134.170.30.15	profile.live.com
-134.170.111.96	skyapi.onedrive.live.com
-134.170.104.168	storage.live.com
-204.79.197.213	nhuhga.dm2301.livefilestore.com
-# OneDrive End
-
-# OpenShift Start
-118.214.71.214	www.redhat.com
-23.23.202.32	openshift.com
-118.214.78.23	www.openshift.com
-118.214.78.23	assets.openshift.net
-23.21.84.238	openshift.redhat.com
-54.237.40.208	developers.openshift.com
-192.161.151.215	help.openshift.com
-23.20.242.119	hub.openshift.com
-23.22.105.178	hosts-smounives.rhcloud.com
-# OpenShift End
-
-
-# Amazon AWS Start
-27.0.1.125	ap-northeast-1.console.aws.amazon.com
-54.240.226.19	ap-southeast-1.console.aws.amazon.com
-54.240.195.197	ap-southeast-2.console.aws.amazon.com
-176.32.100.36	aws.amazon.com
-72.21.194.168	console.aws.amazon.com
-54.239.54.107	eu-central-1.console.aws.amazon.com
-178.236.4.251	eu-west-1.console.aws.amazon.com
-54.231.66.16	s3.amazonaws.com
-54.231.229.10	s3-ap-northeast-1.amazonaws.com
-54.231.242.150	s3-ap-southeast-1.amazonaws.com
-54.231.252.130	s3-ap-southeast-2.amazonaws.com
-72.21.203.5	s3-console-us-standard.console.aws.amazon.com
-54.231.192.41	s3-eu-central-1.amazonaws.com
-54.231.132.112	s3-eu-west-1.amazonaws.com
-54.231.253.78	s3-sa-east-1.amazonaws.com
-54.231.237.85	s3-us-west-1.amazonaws.com
-54.231.160.48	s3-us-west-2.amazonaws.com
-177.72.244.68	sa-east-1.console.aws.amazon.com
-204.246.162.198	us-west-1.console.aws.amazon.com
-54.240.250.61	us-west-2.console.aws.amazon.com
-# Amazon AWS End
-
-# Archive Start
-207.241.224.2	archive.org
-207.241.226.190	web.archive.org
-# Archive End
-
-# Battle.NET Start
-12.129.206.133	enUS.patch.battle.net
-208.111.148.7	llnw.blizzard.com
-121.254.200.133	zhTW.patch.battle.net
-# Battle.NET End
-
-# Box.com Start
-74.112.184.70	app.box.com
-74.112.184.90	box.com
-74.112.184.85	m.box.com
-104.218.203.34	support.box.com
-74.112.184.85	www.box.com
-74.112.184.80	www.box.net
-# Box.com End
-
-# BundleStars Start
-23.253.146.21	bundlestars.com
-54.192.232.60	cdn-images.bundlestars.com
-185.12.83.2	support.bundlestars.com
-# BundleStars End
-
-# DeviantART Start
-68.232.44.148	a.deviantart.net
-110.232.178.146	about.deviantart.com
-110.232.178.146	b.deviantart.net
-110.232.178.146	boneyardbrew.deviantart.com
-110.232.178.146	boneyardbrew.deviantart.com
-110.232.178.146	c.deviantart.net
-110.232.178.146	chat.deviantart.com
-110.232.178.146	critiques.deviantart.com
-110.232.178.146	cs123.adn.edgecastcdn.net
-110.232.178.146	d.deviantart.net
-199.15.160.100	deviantart.com
-199.15.160.100	deviantart.net
-68.232.44.148	e.deviantart.net
-68.232.45.40	fc00.deviantart.net
-68.232.45.40	fc01.deviantart.net
-68.232.45.40	fc02.deviantart.net
-68.232.45.40	fc03.deviantart.net
-68.232.45.40	fc04.deviantart.net
-68.232.45.40	fc05.deviantart.net
-68.232.45.40	fc06.deviantart.net
-68.232.45.40	fc07.deviantart.net
-68.232.45.40	fc08.deviantart.net
-68.232.45.40	fc09.deviantart.net
-110.232.178.146	fc10.deviantart.net
-110.232.178.146	fc11.deviantart.net
-110.232.178.146	fc12.deviantart.net
-110.232.178.146	fc13.deviantart.net
-110.232.178.146	fc14.deviantart.net
-110.232.178.146	fc15.deviantart.net
-110.232.178.146	fc16.deviantart.net
-110.232.178.146	fc17.deviantart.net
-110.232.178.146	fc18.deviantart.net
-110.232.178.146	fc19.deviantart.net
-110.232.178.146	fc20.deviantart.net
-110.232.178.146	forum.deviantart.com
-110.232.178.146	groups.deviantart.com
-110.232.178.146	help.deviantart.com
-110.232.178.146	hq.deviantart.com
-68.232.45.40	img00.deviantart.net
-68.232.45.40	img01.deviantart.net
-68.232.45.40	img02.deviantart.net
-68.232.45.40	img03.deviantart.net
-68.232.45.40	img04.deviantart.net
-68.232.45.40	img05.deviantart.net
-68.232.45.40	img06.deviantart.net
-68.232.45.40	img07.deviantart.net
-68.232.45.40	img08.deviantart.net
-68.232.45.40	img09.deviantart.net
-68.232.45.40	img10.deviantart.net
-68.232.45.40	img11.deviantart.net
-68.232.45.40	img12.deviantart.net
-68.232.45.40	img13.deviantart.net
-68.232.45.40	img14.deviantart.net
-68.232.45.40	img15.deviantart.net
-110.232.178.146	img16.deviantart.net
-110.232.178.146	img17.deviantart.net
-110.232.178.146	img18.deviantart.net
-110.232.178.146	img19.deviantart.net
-110.232.178.146	img20.deviantart.net
-110.232.178.146	img21.deviantart.net
-110.232.178.146	img22.deviantart.net
-110.232.178.146	img23.deviantart.net
-110.232.178.146	img24.deviantart.net
-110.232.178.146	img25.deviantart.net
-110.232.178.146	img26.deviantart.net
-110.232.178.146	img27.deviantart.net
-110.232.178.146	img28.deviantart.net
-110.232.178.146	img29.deviantart.net
-110.232.178.146	img30.deviantart.net
-110.232.178.146	l.deviantart.com
-68.232.45.40	orig00.deviantart.net
-68.232.45.40	orig01.deviantart.net
-68.232.45.40	orig02.deviantart.net
-68.232.45.40	orig03.deviantart.net
-68.232.45.40	orig04.deviantart.net
-68.232.45.40	orig05.deviantart.net
-68.232.45.40	orig06.deviantart.net
-68.232.45.40	orig07.deviantart.net
-68.232.45.40	orig08.deviantart.net
-68.232.45.40	orig09.deviantart.net
-68.232.45.40	orig10.deviantart.net
-68.232.45.40	orig11.deviantart.net
-68.232.45.40	orig12.deviantart.net
-68.232.45.40	orig13.deviantart.net
-68.232.45.40	orig14.deviantart.net
-68.232.45.40	orig15.deviantart.net
-110.232.178.146	orig16.deviantart.net
-110.232.178.146	orig17.deviantart.net
-110.232.178.146	orig18.deviantart.net
-110.232.178.146	orig19.deviantart.net
-110.232.178.146	orig20.deviantart.net
-110.232.178.146	orig21.deviantart.net
-110.232.178.146	orig22.deviantart.net
-110.232.178.146	orig23.deviantart.net
-110.232.178.146	orig24.deviantart.net
-110.232.178.146	orig25.deviantart.net
-110.232.178.146	orig26.deviantart.net
-110.232.178.146	orig27.deviantart.net
-110.232.178.146	orig28.deviantart.net
-110.232.178.146	orig29.deviantart.net
-110.232.178.146	orig30.deviantart.net
-110.232.178.146	portfolio.deviantart.com
-68.232.44.148	pre00.deviantart.net
-68.232.44.148	pre01.deviantart.net
-68.232.44.148	pre02.deviantart.net
-68.232.44.148	pre03.deviantart.net
-68.232.44.148	pre04.deviantart.net
-68.232.44.148	pre05.deviantart.net
-68.232.44.148	pre06.deviantart.net
-68.232.44.148	pre07.deviantart.net
-68.232.44.148	pre08.deviantart.net
-68.232.44.148	pre09.deviantart.net
-68.232.44.148	pre10.deviantart.net
-68.232.44.148	pre11.deviantart.net
-68.232.44.148	pre12.deviantart.net
-68.232.44.148	pre13.deviantart.net
-68.232.44.148	pre14.deviantart.net
-68.232.44.148	pre15.deviantart.net
-110.232.178.146	pre16.deviantart.net
-110.232.178.146	pre17.deviantart.net
-110.232.178.146	pre18.deviantart.net
-110.232.178.146	pre19.deviantart.net
-110.232.178.146	pre20.deviantart.net
-110.232.178.146	pre21.deviantart.net
-110.232.178.146	pre22.deviantart.net
-110.232.178.146	pre23.deviantart.net
-110.232.178.146	pre24.deviantart.net
-110.232.178.146	pre25.deviantart.net
-110.232.178.146	pre26.deviantart.net
-110.232.178.146	pre27.deviantart.net
-110.232.178.146	pre28.deviantart.net
-110.232.178.146	pre29.deviantart.net
-110.232.178.146	pre30.deviantart.net
-110.232.178.146	shop.deviantart.com
-68.232.44.148	st.deviantart.net
-68.232.44.148	t00.deviantart.net
-68.232.44.148	t01.deviantart.net
-68.232.44.148	t02.deviantart.net
-68.232.44.148	t03.deviantart.net
-68.232.44.148	t04.deviantart.net
-68.232.44.148	t05.deviantart.net
-68.232.44.148	t06.deviantart.net
-68.232.44.148	t07.deviantart.net
-68.232.44.148	t08.deviantart.net
-68.232.44.148	t09.deviantart.net
-68.232.44.148	t10.deviantart.net
-68.232.44.148	t11.deviantart.net
-68.232.44.148	t12.deviantart.net
-68.232.44.148	t13.deviantart.net
-68.232.44.148	t14.deviantart.net
-68.232.44.148	t15.deviantart.net
-110.232.178.146	t16.deviantart.net
-110.232.178.146	t17.deviantart.net
-110.232.178.146	t18.deviantart.net
-110.232.178.146	t19.deviantart.net
-110.232.178.146	t20.deviantart.net
-110.232.178.146	t21.deviantart.net
-110.232.178.146	t22.deviantart.net
-110.232.178.146	t23.deviantart.net
-110.232.178.146	t24.deviantart.net
-110.232.178.146	t25.deviantart.net
-110.232.178.146	t26.deviantart.net
-110.232.178.146	t27.deviantart.net
-110.232.178.146	t28.deviantart.net
-110.232.178.146	t29.deviantart.net
-110.232.178.146	t30.deviantart.net
-68.232.44.148	th00.deviantart.net
-68.232.44.148	th01.deviantart.net
-68.232.44.148	th02.deviantart.net
-68.232.44.148	th03.deviantart.net
-68.232.44.148	th04.deviantart.net
-68.232.44.148	th05.deviantart.net
-68.232.44.148	th06.deviantart.net
-68.232.44.148	th07.deviantart.net
-68.232.44.148	th08.deviantart.net
-68.232.44.148	th09.deviantart.net
-110.232.178.146	th11.deviantart.net
-110.232.178.146	th12.deviantart.net
-110.232.178.146	th13.deviantart.net
-110.232.178.146	th14.deviantart.net
-110.232.178.146	th15.deviantart.net
-110.232.178.146	th16.deviantart.net
-110.232.178.146	th17.deviantart.net
-110.232.178.146	th18.deviantart.net
-110.232.178.146	th19.deviantart.net
-110.232.178.146	th20.deviantart.net
-110.232.178.146	wallpaper.deviantart.com
-110.232.178.146	welcome.deviantart.com
-68.232.44.253	www.da-files.com
-110.232.178.146	www.deviantart.com
-# DeviantART End
-
-# Yahoo Start
-76.13.18.77	ac4.farm4.staticflickr.com
-209.191.105.102	adjax.flickr.yahoo.com
-121.101.144.112	api.flickr.com
-98.137.205.236	bf1.farm3.staticflickr.com
-98.139.21.45	bf1.farm6.staticflickr.com
-98.139.235.135	bf1.farm7.staticflickr.com
-119.161.9.151	c5.ah.yahoo.com
-68.142.196.57	c5.ah.yahoo.com
-204.0.5.35	content.yieldmanager.edgesuite.net
-119.160.254.215	d.yimg.com
-98.137.88.88	d.yimg.com
-106.10.136.195	de.yahoo.com
-119.160.254.215	e.yimg.com
-106.10.193.20	edit.yahoo.com
-209.191.92.115	edit.yahoo.com
-68.142.214.43	farm1.staticflickr.com
-69.147.90.159	farm2.staticflickr.com
-77.238.160.184	farm3.staticflickr.com
-76.13.18.77	farm4.staticflickr.com
-76.13.18.79	farm5.staticflickr.com
-98.136.171.208	farm6.staticflickr.com
-98.138.250.88	farm7.staticflickr.com
-69.147.76.173	flickr.com
-106.10.137.175	geo.query.yahoo.com
-98.136.43.76	geo.yahoo.com
-216.39.54.34	gq1.farm3.staticflickr.com
-67.195.19.62	gq1.farm4.staticflickr.com
-67.195.19.65	gq1.farm5.staticflickr.com
-98.136.171.208	gq1.farm6.staticflickr.com
-119.160.254.215	h.yimg.com
-106.10.199.10	hk.news.yahoo.com
-106.10.138.240	hk.yahoo.com
-119.161.24.8	hk-mg61.mail.yahoo.com
-206.190.39.139	hsrd.yahoo.com
-119.160.254.215	l.yimg.com
-68.142.250.161	l.yimg.com
-106.10.193.20	login.yahoo.com
-124.108.97.193	login.yahoo.com
-208.71.44.31	m.flickr.com
-119.161.10.71	mail.yahoo.com
-68.142.214.43	mud.farm1.staticflickr.com
-106.10.193.20	na.edit.yahoo.com
-98.138.250.88	ne1.farm7.staticflickr.com
-106.10.193.20	open.login.yahoo.com
-66.163.168.247	open.login.yahoo.com
-98.136.166.37	overview.mail.yahoo.com
-119.160.254.215	p.yimg.com
-119.160.254.215	s.yimg.com
-96.6.93.227	s.yimg.com
-119.160.254.215	s1.yimg.com
-106.10.193.20	sa.edit.yahoo.com
-124.108.120.124	sa.edit.yahoo.com
-208.71.44.31	secure.flickr.com
-106.10.193.30	sp.analytics.yahoo.com
-69.147.90.159	sp1.farm2.staticflickr.com
-69.147.90.215	sp1.farm3.staticflickr.com
-106.10.137.23	static.flickr.com
-106.10.199.11	tw.news.yahoo.com
-106.10.138.240	tw.yahoo.com
-121.101.144.116	up.flickr.com
-204.0.5.34	us.js2.yimg.com
-23.62.109.75	us.js2.yimg.com
-106.10.138.240	us.yahoo.com
-183.177.81.75	www.flickr.com
-106.10.138.240	www.yahoo.com
-98.138.47.63	y.analytics.yahoo.com
-98.138.253.109	yahoo.com
-77.238.184.150	ying.com
-# Yahoo End
-
+#{{{    #99.    Delay START
 0.0.0.0 ajax.googleapis.com
 0.0.0.0 www.googleapis.com
 0.0.0.0 google-analytics.com
+#delay END }}}
