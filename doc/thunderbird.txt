@@ -54,6 +54,10 @@ https://cdc-exch1.domain.org/EWS/Exchange.asmx
 fremont exchange ews url:
 https://fcamail.domain.com/EWS/Exchange.asmx
 
+didn't need domain area like domainorg
+account:tommyx@domain.com
+pwd
+
 日历添加
 选网络,输入帐号就好.注意ssl例外
 
