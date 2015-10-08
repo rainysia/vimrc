@@ -1403,6 +1403,13 @@ usermod -a -G 组名 用户 ，把已有的用户名添加到已有的组里面
 53，vmstat 5 //每5显示一下次系统信息，cpu,memory,i/o等
 54，top 后 在shift + P 所占进程的排序显示
 55，top 后 在shift + M 所占内存的排序显示
+    top 后 在shift + A 按照不同类别排序显示
+    top 后 在shift + H Thread 和Task切换
+    top 后 在shift + L 搜索 
+    top 后 在shift + H Thread 和Task切换
+    top 后 在shift + H Thread 和Task切换
+
+
 56，iptraf -g //查看各个接口的流量
 57，iostat -d -x /dev/sda2 2 //用iostat查看磁盘/dev/sda2的磁盘i/o情况，每两秒刷新一次
 58, paste -sd '|||\n' test //文件的每4行转换成1行，并用|隔开。
