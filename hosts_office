@@ -1032,22 +1032,6 @@ ff02::2 ip6-allrouters
 127.0.0.1	ads.ak.facebook.com
 127.0.0.1	creative.ak.facebook.com
 127.0.0.1	creative.ak.fbcdn.net
-69.171.237.25	facebook.com
-69.171.237.25	www.facebook.com
-69.171.237.23	m.facebook.com
-69.171.237.25	d.facebook.com
-69.171.237.25	touch.facebook.com
-69.171.237.25	zh-CN.facebook.com
-69.171.237.25	ldap.thefacebook.com
-69.171.237.25	graph.facebook.com
-69.171.237.25	vupload.facebook.com
-69.171.237.25	developers.facebook.com
-69.171.237.25	connect.facebook.net
-69.171.237.25	creativeupload.facebook.com
-69.171.237.25	upload.facebook.com
-69.171.237.25	bigzipfiles.facebook.com
-69.171.237.25	star.facebook.com
-69.171.235.13	bigzipfiles.facebook.com
 31.13.82.32	api.facebook.com
 31.13.69.86	b-api.facebook.com
 31.13.82.32	api-read.facebook.com
@@ -1057,7 +1041,6 @@ ff02::2 ip6-allrouters
 31.13.82.32	secure.facebook.com
 31.13.82.32	orcart.facebook.com
 31.13.82.32	attachments.facebook.com
-69.171.237.25	vpn.tfbnw.net
 61.213.189.113	fbcdn.net
 61.213.189.113	s-hprofile-sf2p.fbcdn.net
 61.213.189.114	profile.ak.fbcdn.net
@@ -1065,7 +1048,6 @@ ff02::2 ip6-allrouters
 61.213.189.98	b.static.ak.facebook.com
 23.5.157.177	s-static.ak.fbcdn.net
 184.26.194.110	s-static.ak.facebook.com
-69.171.247.22	s-static.facebook.com
 61.213.189.98	static.ak.facebook.com
 61.213.189.113	creative.ak.fbcdn.net
 23.3.68.113	external.ak.fbcdn.net
@@ -1328,6 +1310,7 @@ ff02::2 ip6-allrouters
 # Yahoo End }}}
 
 #{{{    #20.    Google 
+# Gmail Start
 64.233.162.83	b.googlemail.l.google.com 
 64.233.162.83	chatenabled.mail.google.com 
 64.233.162.83	filetransferenabled.mail.google.com 
@@ -2279,8 +2262,6 @@ ff02::2 ip6-allrouters
 103.7.200.79	r18---sn-npo7enes.c.android.clients.google.com 
 103.7.200.79	r19---sn-npo7enes.c.android.clients.google.com 
 103.7.200.79	r20---sn-npo7enes.c.android.clients.google.com 
-# 本文件来自 老D博客 www.laod.cn  转载请说明出处！
-# 更新于：2015-09-01 15:53
 # 更新地址：http://laod.cn/hosts/2015-google-hosts.html
 # Ingress start
 103.7.200.79	betaspike.appspot.com 
@@ -3291,7 +3272,7 @@ ff02::2 ip6-allrouters
 103.7.200.79	ytstatic.l.google.com
 # Google END }}}
 
-#{{{    #99.    Delay START
+#{{{    #99.    Delay 
 0.0.0.0 ajax.googleapis.com
 0.0.0.0 www.googleapis.com
 0.0.0.0 google-analytics.com
