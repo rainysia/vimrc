@@ -79,6 +79,9 @@ pip install --upgrade -r requiredpypkgs.txt
 pip install mysql-python
 pip install --upgrade  mysql-python
 apt-get install libmysqlclient-dev
+apt-get install libffi-dev
+apt-get install python-dev  [,python2.7-dev]
+
 python manage.py runserver 192.168.85.123:8765
 
 
