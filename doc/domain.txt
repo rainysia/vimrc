@@ -81,7 +81,7 @@ pip install --upgrade  mysql-python
 apt-get install libmysqlclient-dev
 apt-get install libffi-dev
 apt-get install python-dev  [,python2.7-dev]
-
+apt-get install libxml2-dev, libxslt1-dev
 python manage.py runserver 192.168.85.123:8765
 
 
