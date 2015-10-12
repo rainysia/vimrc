@@ -1282,7 +1282,7 @@ ntpdate pool.ntp.org
 dig pool.ntp.org
 ntpdate 67.213.74.13
 ntpdate 0.ubuntu.pool.ntp.org
-ntpdate timeserver2.synnex.org
+ntpdate timeserver2.domain.org
 
 57.
 vmstat 2 每两秒显示虚拟内存状态 
@@ -2549,7 +2549,7 @@ $git push origin master 给远程提交一个分支
 =======centos 7=======
 yum install git git-core openssh -y
 adduser --system --shell /bin/bash  --create-home --home-dir /home/apche apache
-passwd git  #synnex
+passwd git  #domain
 ssh-keygen
 sudo usermod -a -G git `eval whoami`
 

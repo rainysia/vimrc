@@ -527,11 +527,11 @@ set completeopt=longest,menu               " 提示菜单后输入字母实现�
 "{{                                        " snipmates的设定
 "                                          "      自定义相关文件.snippets
 let g:snips_author='Tommy Xia'
-let g:snips_copyright='2006-2015 SYNNEX.ORG' 
-let g:snips_license='http://www.synnex.org/user_guide/license.html V1'
-let g:snips_email='tommyx@synnex.com'
-let g:snips_site =  'http://www.synnex.org'
-let g:snips_link='http://www.synnex.org'
+let g:snips_copyright='2006-2015 domain.ORG' 
+let g:snips_license='http://www.domain.org/user_guide/license.html V1'
+let g:snips_email='tommyx@domain.com'
+let g:snips_site =  'http://www.domain.org'
+let g:snips_link='http://www.domain.org'
 let g:snips_php_version='PHP version 5'
 "}}
 "{{                                        " indent.guides的设定
