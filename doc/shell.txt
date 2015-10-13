@@ -4257,6 +4257,9 @@ strace用法,
     6. 显示时间戳 -t, -tt选项可以展示微秒级别的时间戳, -ttt则是从epoch(1970/1/1 00:00:00 UTC)展示秒数, -r展示系统调用之间的相对时间戳
         e.g: strace -t ls
     7        
+strace -f -e execve git ls
+
+
 
 
 ====trigger====

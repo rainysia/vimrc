@@ -1,0 +1,395 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  1=> system configure
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"{{{
+set nocp
+set helplang=cn
+set history=1000
+set confirm
+filetype on
+filetype plugin on
+filetype indent on
+filetype plugin indent on
+set binary
+"set nrformats=
+"{{
+au FileType html,python,vim,javascript,php,java setl shiftwidth=4
+au FileType html,python,vim,javascript,php,java setl tabstop=4
+au FileType html,python,vim,javascript,php,java setl softtabstop=4
+"}}
+"{{
+"if has("vms")
+set nobackup
+"else
+"set nobackup
+"endif
+"}}
+set backupcopy=yes
+set mouse=a
+set selection=exclusive
+set selectmode=mouse,key
+set scrolloff=3
+setlocal noswapfile
+set bufhidden=hide
+set linespace=0
+set wildmenu
+set shortmess=atI
+set noerrorbells
+set nobomb
+set textwidth=100
+"set cc=101
+"}}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  2=> text pattern
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"{{{
+set formatoptions=tcrqn
+set foldenable
+set foldmethod=syntax
+set foldcolumn=0
+setlocal foldlevel=1
+" set foldclose=all
+set wrap
+set linebreak
+set autoindent
+set smartindent
+set sm
+set ai!
+set cindent
+set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
+set tabstop=4
+set expandtab
+set backspace=2
+set whichwrap+=<,>,[,],h,l
+set shiftwidth=4
+set softtabstop=4
+set smarttab
+"set autoread
+set foldmethod=marker
+nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+"}}
+set fillchars=vert:\ ,stl:\ ,stlnc:\
+"}}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  3=> encoding configure
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"{{{
+set enc=utf-8
+set termencoding=utf-8
+set fenc=utf-8
+set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+set langmenu=zh_CN.UTF-8
+language message zh_CN.UTF-8
+set ambiwidth=double
+set fileencoding=utf-8
+set fileencodings=usc-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin-1
+
+set encoding=utf-8
+"{{
+if has("win32")
+    set fileencoding=chinese
+else
+    set fileencoding=utf-8
+endif
+"}}
+set fileformat=unix
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+set nocompatible
+"set clipboard+=unnamed
+set iskeyword+=_,$,@,%,#,-
+"{{
+set viminfo+=!
+set viminfo='1000,f1,<500
+"}}
+"}}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  4=> display
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"{{{
+colorscheme desert
+set background=dark
+set novisualbell
+set nu
+syntax enable
+syntax on
+"{{
+highlight OverLength ctermbg=darkgray ctermfg=lightblue guibg=#1C1D1E guifg=#DCDCDC
+match OverLength '\%500v.*'
+"}}
+"{{
+highlight StatusLine guifg=SlateBlue guibg=#FFFF00
+highlight StatusLineNC guifg=Gray guibg=White
+"}}
+"{{
+au BufRead,BufNewFile * setfiletype txt
+set syntax=txt
+au BufRead,BufNewFile *.txt setlocal ft=txt
+au BufRead,BufNewFile * setfiletype txt
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.py exec ":call SetTitle()"
+
+func SetTitle()
+    if &filetype == 'sh'
+        call setline(1,"\#!/bin/bash")
+        call append(line("."), "")
+    elseif &filetype == 'python'
+        call setline(1,"#!/usr/bin/env python")
+        call append(line("."),"# -*- coding: UTF-8 -*-")
+        call append(line(".")+1, "")
+        "    elseif &filetype == 'mkd'
+        "        call setline(1,"<head><meta charset=\"UTF-8\"></head>")
+    else
+        call setline(1, "/*************************************************************************")
+        call append(line("."), "	> File Name: ".expand("%"))
+        call append(line(".")+1, "	> Author: tommyx")
+        call append(line(".")+2, "	> Mail: tommyx@synnex.com ")
+        call append(line(".")+3, "	> Created Time: ".strftime("%F %T"))
+        call append(line(".")+4, " ************************************************************************/")
+        call append(line(".")+5, "")
+    endif
+    if &filetype == 'cpp'
+        call append(line(".")+6, "#include<iostream>")
+        call append(line(".")+7, "using namespace std;")
+        call append(line(".")+8, "")
+    endif
+    if &filetype == 'c'
+        call append(line(".")+6, "#include <stdio.h>")
+        call append(line(".")+7, "")
+    endif
+endfunc
+
+hi StatuslineBufNr     cterm=none    ctermfg=red        ctermbg=darkgrey    gui=none guibg=#696969 guifg=#D8BFD8
+hi StatuslineFlag      cterm=none    ctermfg=black   ctermbg=grey    gui=none guibg=#330223 guifg=#cdcde1
+hi StatuslinePath      cterm=none    ctermfg=white      ctermbg=green       gui=none guibg=#210222 guifg=#cdcde2
+hi StatuslineFileName  cterm=none    ctermfg=white      ctermbg=blue        gui=none guibg=#410041 guifg=#cdcde3
+hi StatuslineFileEnc   cterm=bold    ctermfg=white      ctermbg=darkblue    gui=none guibg=#400342 guifg=#cdcde4
+hi StatuslineFileType  cterm=bold    ctermfg=grey       ctermbg=darkgrey    gui=none guibg=#52096C guifg=#cdcde5
+hi StatuslineTermEnc   cterm=none    ctermfg=lightblue  ctermbg=darkgrey    gui=none guibg=#79318B guifg=#cdcde6
+hi StatuslineChar      cterm=none    ctermfg=lightgreen ctermbg=darkgrey    gui=none guibg=#8C63A4 guifg=#cdcde7
+hi StatuslineSyn       cterm=none    ctermfg=lightblue  ctermbg=black       gui=none guibg=#AA87B8 guifg=#cdcde8
+hi StatuslineRealSyn   cterm=none    ctermfg=lightgreen ctermbg=darkgrey    gui=none guibg=#C9B5D4 guifg=#7F8794
+hi StatusLine          cterm=none    ctermfg=white      ctermbg=darkgrey    gui=none guibg=#8C7E95 guifg=#cdcdea
+hi StatuslineTime      cterm=none    ctermfg=lightblue  ctermbg=darkgrey    gui=none guibg=#504855 guifg=#cdcdeb
+hi StatuslineSomething cterm=reverse ctermfg=white      ctermbg=darkred     gui=none guibg=#400342 guifg=#cdcdec
+hi StatusLineNC        cterm=bold    ctermfg=white      ctermbg=red         gui=none guibg=#250342 guifg=#cdcded
+set virtualedit=block
+set showmatch
+set cursorline
+set cursorcolumn
+set matchtime=5
+set ignorecase
+set hlsearch
+set incsearch
+set nowrapscan
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType mysql set omnifunc=mysqlcomplete#CompleteMYSQL
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType c set omnifunc=ccomplete#Complete
+set completeopt=longest,menu
+set diffexpr=MyDiff()
+function! MyDiff()
+    let opt = '-a --binary '
+    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+    let arg1 = v:fname_in
+    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+    let arg2 = v:fname_new
+    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+    let arg3 = v:fname_out
+    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+    let eq = ''
+    if $VIMRUNTIME =~ ' '
+        if &sh =~ '\<cmd'
+            let cmd = '""' . $VIMRUNTIME . '\diff"'
+            let eq = '"'
+        else
+            let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+        endif
+    else
+        let cmd = $VIMRUNTIME . '\diff'
+    endif
+    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+endfunction
+if &t_Co == 256
+    hi        Cursor         ctermfg=black            ctermbg=lightyellow       cterm=BOLD
+    hi        CursorColumn   ctermfg=black            ctermbg=darkgrey          cterm=BOLD
+    hi        CursorLine     ctermfg=black            ctermbg=darkgrey          cterm=NONE
+    hi        CursorLineNr   ctermfg=white            ctermfg=red               cterm=BOLD
+    hi        ColorColumn    ctermfg=lightgrey        ctermbg=white             cterm=BOLD
+    hi        Directory      ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        DiffAdd        ctermfg=grey             ctermbg=lightblue         cterm=BOLD
+    hi        DiffChange     ctermfg=darkgrey         ctermbg=lightcyan         cterm=BOLD
+    hi        DiffDelete     ctermfg=grey             ctermbg=lightred          cterm=BOLD
+    hi        DiffText       ctermfg=red              ctermbg=black             cterm=BOLD
+    hi        ErrorMsg       ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        VertSplit      ctermfg=darkcyan         ctermbg=lightblue         cterm=BOLD
+    hi        Folded         ctermfg=lightgrey        ctermbg=lightgreen        cterm=BOLD
+    hi        IncSearch      ctermfg=darkred          ctermbg=lightgrey         cterm=BOLD
+    hi        LineNr         ctermfg=darkgrey         ctermbg=black             cterm=BOLD
+    hi        MatchParen     ctermfg=lightred         ctermbg=black             cterm=BOLD
+    hi        MatchParen     ctermfg=black            ctermbg=lightgreen        cterm=BOLD
+    hi        ModeMsg        ctermfg=lightgreen       ctermbg=black             cterm=BOLD
+    hi        MoreMsg        ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    hi        NonText        ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    hi        Normal         ctermfg=lightgrey        ctermbg=black             cterm=none
+    hi        Pmenu          ctermfg=darkgrey         ctermbg=lightgrey         cterm=BOLD
+    hi        PmenuSel       ctermfg=lightcyan        ctermbg=lightred          cterm=BOLD
+    hi        PmenuSbar      ctermfg=lightblue        ctermbg=lightyellow       cterm=BOLD
+    hi        PmenuThumb     ctermfg=black            ctermbg=lightgreen        cterm=BOLD
+    hi        Question       ctermfg=yellow           ctermbg=black             cterm=BOLD
+    hi        Search         ctermfg=red              ctermbg=white             cterm=BOLD
+    hi        SpecialKey     ctermfg=lightgreen       ctermbg=black             cterm=BOLD
+    hi        SpellBad       ctermfg=lightred         ctermbg=black             cterm=BOLD
+    hi        SpellCap       ctermfg=lightred         ctermbg=black             cterm=BOLD
+    hi        SpellLocal     ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    hi        SpellRare      ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    "hi        StatusLine     ctermfg=yellow           ctermbg=lightblue         cterm=BOLD
+    "hi        StatusLineNC   ctermfg=yellow           ctermbg=black             cterm=BOLD
+    hi        TabLine        ctermfg=black            ctermbg=black             cterm=BOLD
+    hi        TabLineFill    ctermfg=black            ctermbg=lightgrey         cterm=BOLD
+    hi        TabLineSel     ctermfg=yellow           ctermbg=lightblue         cterm=BOLD
+    hi        Title          ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        Visual         ctermfg=yellow           ctermbg=lightblue         cterm=BOLD
+    hi        WarningMsg     ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        WildMenu       ctermfg=lightgreen       ctermbg=lightblue         cterm=BOLD
+    "	==========================================================================================
+    "	"Console group-name
+    "	==========================================================================================
+    hi        Comment        ctermfg=darkgrey         ctermbg=black             cterm=BOLD
+    "	------------------------------------------------------------------------------------------
+    hi        Constant       ctermfg=brown            ctermbg=black             cterm=NONE
+    hi        String         ctermfg=grey             ctermbg=black             cterm=NONE
+    hi        Character      ctermfg=grey             ctermbg=black             cterm=NONE
+    hi        Number         ctermfg=lightblue        ctermbg=black             cterm=NONE
+    hi        Float          ctermfg=lightblue        ctermbg=black             cterm=NONE
+    hi        Boolean        ctermfg=grey             ctermbg=black             cterm=NONE
+    "	------------------------------------------------------------------------------------------
+    hi        Identifier     ctermfg=lightgreen       ctermbg=black             cterm=NONE
+    hi        Function       ctermfg=lightcyan        ctermbg=black             cterm=NONE
+    "	------------------------------------------------------------------------------------------
+    hi        Statement      ctermfg=yellow           ctermbg=black             cterm=NONE
+    hi        Conditional    ctermfg=yellow           ctermbg=black             cterm=NONE
+    hi        Repeat         ctermfg=yellow           ctermbg=black             cterm=NONE
+    hi        Label          ctermfg=yellow           ctermbg=black             cterm=NONE
+    hi        Operator       ctermfg=yellow           ctermbg=black             cterm=NONE
+    hi        Keyword        ctermfg=yellow           ctermbg=black             cterm=NONE
+    hi        Exception      ctermfg=lightred         ctermbg=black             cterm=NONE
+    "	------------------------------------------------------------------------------------------
+    hi        PreProc        ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    hi        Include        ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        Define         ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        Macro          ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        PreCondit      ctermfg=lightred         ctermbg=black             cterm=BOLD
+    "	------------------------------------------------------------------------------------------
+    hi        Type           ctermfg=lightgreen       ctermbg=black             cterm=BOLD
+    hi        StorageClass   ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        Structure      ctermfg=lightgreen       ctermbg=black             cterm=BOLD
+    hi        Typedef        ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    "	------------------------------------------------------------------------------------------
+    hi        Special        ctermfg=brown            ctermbg=black             cterm=BOLD
+    hi        SpecialChar    ctermfg=brown            ctermbg=black             cterm=BOLD
+    hi        Tag            ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    hi        Delimiter      ctermfg=lightgreen       ctermbg=black             cterm=BOLD
+    hi        SpecialComment ctermfg=lightred         ctermbg=black             cterm=BOLD
+    hi        Debug          ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    "	------------------------------------------------------------------------------------------
+    hi        Underlined     ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    hi        Ignore         ctermfg=darkgrey         ctermbg=black             cterm=NONE
+    hi        Error          ctermfg=yellow           ctermbg=lightred          cterm=BOLD
+    hi        Todo           ctermfg=lightgrey        ctermbg=lightblue         cterm=BOLD
+    "	==========================================================================================
+else
+    "Console xterm 8
+    hi        Cursor         ctermfg=black            ctermbg=lightyellow       cterm=BOLD
+    hi        CursorColumn   ctermfg=black            ctermbg=darkgrey          cterm=BOLD
+    hi        CursorLine     ctermfg=black            ctermbg=darkgrey          cterm=NONE
+    hi        CursorLineNr   ctermfg=white            ctermfg=red               cterm=BOLD
+    hi        ColorColumn    ctermfg=lightgrey        ctermbg=white             cterm=BOLD
+    hi        Directory      ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        DiffAdd        ctermfg=grey             ctermbg=lightblue         cterm=BOLD
+    hi        DiffChange     ctermfg=darkgrey         ctermbg=lightcyan         cterm=BOLD
+    hi        DiffDelete     ctermfg=grey             ctermbg=lightred          cterm=BOLD
+    hi        DiffText       ctermfg=red              ctermbg=black             cterm=BOLD
+    hi        ErrorMsg       ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        VertSplit      ctermfg=darkcyan         ctermbg=lightblue         cterm=BOLD
+    hi        Folded         ctermfg=lightgrey        ctermbg=lightgreen        cterm=BOLD
+    hi        IncSearch      ctermfg=darkred          ctermbg=lightgrey         cterm=BOLD
+    hi        LineNr         ctermfg=darkgrey         ctermbg=black             cterm=BOLD
+    hi        MatchParen     ctermfg=lightred         ctermbg=black             cterm=BOLD
+    hi        MatchParen     ctermfg=black            ctermbg=lightgreen        cterm=BOLD
+    hi        ModeMsg        ctermfg=lightgreen       ctermbg=black             cterm=BOLD
+    hi        MoreMsg        ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    hi        NonText        ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    hi        Normal         ctermfg=lightgrey        ctermbg=black             cterm=NONE
+    hi        Pmenu          ctermfg=darkgrey         ctermbg=lightgrey         cterm=BOLD
+    hi        PmenuSel       ctermfg=lightcyan        ctermbg=lightred          cterm=BOLD
+    hi        PmenuSbar      ctermfg=lightblue        ctermbg=lightyellow       cterm=BOLD
+    hi        PmenuThumb     ctermfg=black            ctermbg=lightgreen        cterm=BOLD
+    hi        Question       ctermfg=yellow           ctermbg=black             cterm=BOLD
+    hi        Search         ctermfg=red              ctermbg=white             cterm=BOLD
+    hi        SpecialKey     ctermfg=lightgreen       ctermbg=black             cterm=BOLD
+    hi        SpellBad       ctermfg=lightred         ctermbg=black             cterm=BOLD
+    hi        SpellCap       ctermfg=lightred         ctermbg=black             cterm=BOLD
+    hi        SpellLocal     ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    hi        SpellRare      ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    "hi        StatusLine     ctermfg=yellow           ctermbg=lightblue         cterm=BOLD
+    "hi        StatusLineNC   ctermfg=yellow           ctermbg=black             cterm=BOLD
+    hi        TabLine        ctermfg=black            ctermbg=black             cterm=BOLD
+    hi        TabLineFill    ctermfg=black            ctermbg=lightgrey         cterm=BOLD
+    hi        TabLineSel     ctermfg=yellow           ctermbg=lightblue         cterm=BOLD
+    hi        Title          ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        Visual         ctermfg=yellow           ctermbg=lightblue         cterm=BOLD
+    hi        WarningMsg     ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        WildMenu       ctermfg=lightgreen       ctermbg=lightblue         cterm=BOLD
+    "	==========================================================================================
+    "	"Console group-name
+    "	==========================================================================================
+    hi        Comment        ctermfg=darkgrey         ctermbg=black             cterm=BOLD
+    "	------------------------------------------------------------------------------------------
+    hi        Constant       ctermfg=brown            ctermbg=black             cterm=NONE
+    hi        String         ctermfg=grey             ctermbg=black             cterm=NONE
+    hi        Character      ctermfg=grey             ctermbg=black             cterm=NONE
+    hi        Number         ctermfg=lightblue        ctermbg=black             cterm=NONE
+    hi        Float          ctermfg=lightblue        ctermbg=black             cterm=NONE
+    hi        Boolean        ctermfg=grey             ctermbg=black             cterm=NONE
+    "	------------------------------------------------------------------------------------------
+    hi        Identifier     ctermfg=lightgreen       ctermbg=black             cterm=NONE
+    hi        Function       ctermfg=lightcyan        ctermbg=black             cterm=NONE
+    "	------------------------------------------------------------------------------------------
+    hi        Statement      ctermfg=yellow           ctermbg=black             cterm=NONE
+    hi        Conditional    ctermfg=yellow           ctermbg=black             cterm=NONE
+    hi        Repeat         ctermfg=yellow           ctermbg=black             cterm=NONE
+    hi        Label          ctermfg=yellow           ctermbg=black             cterm=NONE
+    hi        Operator       ctermfg=yellow           ctermbg=black             cterm=NONE
+    hi        Keyword        ctermfg=yellow           ctermbg=black             cterm=NONE
+    hi        Exception      ctermfg=lightred         ctermbg=black             cterm=NONE
+    "	------------------------------------------------------------------------------------------
+    hi        PreProc        ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        Include        ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        Define         ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        Macro          ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        PreCondit      ctermfg=lightred         ctermbg=black             cterm=BOLD
+    "	------------------------------------------------------------------------------------------
+    hi        Type           ctermfg=lightgreen       ctermbg=black             cterm=BOLD
+    hi        StorageClass   ctermfg=darkcyan         ctermbg=black             cterm=BOLD
+    hi        Structure      ctermfg=lightgreen       ctermbg=black             cterm=BOLD
+    hi        Typedef        ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    "	------------------------------------------------------------------------------------------
+    hi        Special        ctermfg=brown            ctermbg=black             cterm=BOLD
+    hi        SpecialChar    ctermfg=brown            ctermbg=black             cterm=BOLD
+    hi        Tag            ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    hi        Delimiter      ctermfg=lightgreen       ctermbg=black             cterm=BOLD
+    hi        SpecialComment ctermfg=lightred         ctermbg=black             cterm=BOLD
+    hi        Debug          ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    "	------------------------------------------------------------------------------------------
+    hi        Underlined     ctermfg=lightcyan        ctermbg=black             cterm=BOLD
+    hi        Ignore         ctermfg=darkgrey         ctermbg=black             cterm=NONE
+    hi        Error          ctermfg=yellow           ctermbg=lightred          cterm=BOLD
+    hi        Todo           ctermfg=lightgrey        ctermbg=lightblue         cterm=BOLD
+    "	==========================================================================================
+endif
+"}}}
