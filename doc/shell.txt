@@ -902,6 +902,9 @@ ifconfig eth0 hw ether 00:00:11:22:33 修改mac地址
 	ifconfig 192.168.1.12 netmask 255.255.255.0 broadcase 192.168.1.255
 	无线网卡使用iwconfig
 
+one command get server ip:
+ifconfig eth0|grep inet|head -1|sed 's/\:/ /'|awk '{print $3}'
+
 添加域名服务器 
 #echo nameserver ip_address >> /etc/resolv.conf
 dns查找 
