@@ -864,7 +864,7 @@ screen -p number or name:预先选择一个窗口。
 Screen实现后台运行程序的简单步骤:
 
 1> 要进行某项操作时，先使用命令创建一个Screen:
-[linux@user~]$ screen -S test1
+[linux@user~]$ screen -S testname1
 
 2>接着就可以在里面进行操作了，如果你的任务还没完成就要走开的话，使用命令保留Screen：
 [linux@user~]$ Ctrl+a+d                    #按Ctrl+a，然后再按d即可保留Screen
