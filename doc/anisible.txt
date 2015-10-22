@@ -1,0 +1,93 @@
+Install
+#apt-get install python-yaml
+#pip install ansible  
+#git clone git://github.com/ansible/ansible.git
+#cd ansible && make install
+ 
+Configuration
+Configuration file has prority sequence.
+ANSIBLE_CONFIG (enviroment path)
+ansible.cfg (current path)
+.ansible.cfg (home path)
+/etc/ansible/ansible.cfg
+add hosts file for ansible
+group
+[group_name1]
+192.168.2.100
+192.168.2.101
+...
+[group_name2]
+192.168.85.2
+port
+[group_name3]
+10.88.85.90:2222
+10.88.85.123:3333
+...
+Usage
+pattern
+command 
+ansible <pattern_goes_here> -m <module_name> -a <arguments>
+e.g.
+ansible all -m ping          # it's will ping all server in hosts
+ansible 192.168.85.123 -m ping -u tester      # use tester to ping 192.168.85.123
+ansible group_name3 -m ping -u tester  –sudo -K      # use tester to ping group_name3, -K will need root passwd.
+<pattern_goes_here>
+pattern can be one server IP, domain, or hosts groupname, if you want to use multiple group or ip, use colon ":" to split it.
+ip
+ip1:ip2
+domain1:domain2
+group1
+group1:group2:group3
+all
+*            # * = all
+192.168.1.*
+ group1:!grop2           # hosts in group1 but not in group2.    !
+group1:&group2        # hosts exists both  gruop1  and group2.   &
+group1[0]                     # group1 first, like python slice, group1[0:100], the exceed result can't be matched
+~(web|db).*\.example\.com    # regexp
+www
+Ad-Hoc command.  (point-to-point command)
+-a  command, -f concurrency, default value is 5, -m choose module.
+run shell
+ansible all -a "/bin/echo hello"         # print hello
+ansible all -a "/sbin/reboot"  -f   10    --sudo  -K     #reboot
+ansible all -m shell -a 'ls -la ~'
+  file 
+ansible all -m copy -a "src=~/project/tests/t.py dest=~"                                  # send file
+ansible all -m file -a "dest=~/.t.py mode=777 owner=tester group=tester"                            # modify file 
+ansible all -m file -a "dest=~/tests mode=755 owner=tester group=tester state=diretory"    # create directory
+install
+ansible v1 -m apt -a "name=python-pip state=present" --sudo -K       # install 
+ansible v1 -m apt -a "name=git state=latest"                #install the latest
+ansible v1 -m apt -a "name=git state=absent" --sudo -K        # uninstall if installed.
+user
+ansible all -m user -a "name=foo password=foo" --sudo -K    #adduser
+ansible all -m user -a "name=foo state=absent" --sudo -K     #deluser
+git
+ ansible v1 -m git -a "repo=https://github.com/xxxx/xxx.git dest=~/project-dir version=HEAD" #use https checkout. dest shouldnot be exist at first.
+service
+ansible v1 -m service -a "name=mysql state=started" --sudo -K
+ansible v1 -m service -a "name=mysql state=restarted" --sudo -K
+ansible v1 -m service -a "name=mysql state=stopped" --sudo -K 
+playbook YAML syntax
+---
+- hosts: {{ servers }}
+tasks:
+- name: Get latest project1 version in PXE server
+command: yum list project1 | grep project1 | awk '{print $2}'
+- name: Get latest project2 version in PXE server
+command: yum list project2 | grep project2 | awk '{print $2}'
+- name: Get latest project3 version in PXE server
+command: yum list project3 | grep project3 | awk '{print $2}'
+- name: Get latest project4 version in PXE server
+command: yum list project4 | grep project4 | awk '{print $2}'
+start — as document
+list start , key: value, the space right near the colon(:) is must.  if colon(:) exists in colon, it should be quoted.
+ansible-playbook test.yaml
+variable use jinja grammar
+var    k->v
+var_files  list
+--extra-vars 
+global variable will be in group_vars/all
+local variable will be in group_vars/x
+use ansiable-playbok xxx.yml -vv to print variables.
