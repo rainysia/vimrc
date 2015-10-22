@@ -2499,28 +2499,29 @@ git push origin(远程库) ngemini(本地分支):ngemini(远程分支)
 
 github
     先fork获取到自己的repo主页https://github.com/rainysia/simple_upload
-	cd ~/.ssh 然后产生一个密钥 id_rsa
-		ssh-keygen -t rsa -C "rainysia@gmail.com" 一直回车ok
-cat ~/.ssh/id_rsa.pub  | ssh username@yourhost `cat >> .ssh/authorized_keys`     ssh username@yourhost.com
-	登陆github系统。点击右上角的 Account Settings--->SSH Public keys ---> add another public keys
-	把你本地生成的密钥复制到里面（key文本框中）， 点击 add key 就ok了
-	接着打开git ，测试连接是否成功
-	ssh -T git@github.com
-	如果提示：Hi rainysia! You've successfully authenticated, but GitHub does not provide shell access. 说明你连接成功了
+    cd ~/.ssh 然后产生一个密钥 id_rsa
+        ssh-keygen -t rsa -C "rainysia@gmail.com" 一直回车ok
+        # -t 指定协议, rsa是加密方式, -P
+    cat ~/.ssh/id_rsa.pub  | ssh username@yourhost `cat >> .ssh/authorized_keys`     ssh username@yourhost.com
+    登陆github系统。点击右上角的 Account Settings--->SSH Public keys ---> add another public keys
+    把你本地生成的密钥复制到里面（key文本框中）， 点击 add key 就ok了
+    接着打开git ，测试连接是否成功
+        ssh -T git@github.com
+    如果提示：Hi rainysia! You've successfully authenticated, but GitHub does not provide shell access. 说明你连接成功了
 
     如果需要修改url
     git remote set-url origin git@github.com:rainysia/simple_upload
     或者修改.git/config里 [remote "origin"] 的url为 url = git@github.com:rainysia/simple_upload
 
-	本地：
-		gut init
-		git add somelocalfile
-		git commit -a -m '注释'
-		git remote add origin git@github.com:rainysia/simple_upload
-		git push -u origin master
-	如果push失败，先要git pull origin master一次
-	如果fatal:remote origin already exists: git remote rm origin 然后重新
-		git remote add origin git@github.com:rainysia/simple_upload.git
+    本地：
+        gut init
+        git add somelocalfile
+        git commit -a -m '注释'
+        git remote add origin git@github.com:rainysia/simple_upload
+        git push -u origin master
+    如果push失败，先要git pull origin master一次
+    如果fatal:remote origin already exists: git remote rm origin 然后重新
+        git remote add origin git@github.com:rainysia/simple_upload.git
          termail里边 输入  git remote -v 可以看到形如一下的返回结果
             origin https://github.com/yuquan0821/demo.git (fetch)
             origin https://github.com/yuquan0821/demo.git (push)
