@@ -91,3 +91,21 @@ var_files  list
 global variable will be in group_vars/all
 local variable will be in group_vars/x
 use ansiable-playbok xxx.yml -vv to print variables.
+
+
+
+============yaml=====================
+[webserver1]
+site01 ansible_ssh_user=root
+site02 ansible_ssh_user=tester
+site03 ansible_ssh_port=7777
+site04
+site05 ansible_ssh_private_key_file=/key/.ssh/id_ras.pub
+site06 ansible_ssh_user=www
+
+ping can test network between client and servers.
+-k  means use passwd
+-sudo  tell ansible use sudo to run task, if sudo need password, use -k; or add ask_sudo_pass in ansible.cfg
+
+
+
