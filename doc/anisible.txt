@@ -46,7 +46,7 @@ group1:&group2        # hosts exists both  gruop1  and group2.   &
 group1[0]                     # group1 first, like python slice, group1[0:100], the exceed result can't be matched
 ~(web|db).*\.example\.com    # regexp
 www
-Ad-Hoc command.  (point-to-point command)
+Ad-Hoc command.  (temporary command, use -a)
 -a  command, -f concurrency, default value is 5, -m choose module.
 run shell
 ansible all -a "/bin/echo hello"         # print hello
