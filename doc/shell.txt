@@ -4461,6 +4461,12 @@ systemctl status mysql      #show the mysql status
 split -d -b2G xp-disk1.vmdk
 会分割成x00, x01, x02...这样
 使用cat x* > xp-disk1.vmdk来合并
+
+164. hash sum mismatch
+apt-get clean 
+rm -rf /var/lib/apt/lists/*
+apt-get update
+apt-get upgrade
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
