@@ -143,34 +143,21 @@ YAML grammar
     help
         ansible-doc -l
         ansible-doc file  # get file module help
-
-
-
-===================================================================
-ansible -i hosts all -m ping -u www
-    -i 指定inventory文件, 这里使用当前目录下的hosts
-    all 所有主机
-    -m 指定模块
-    -u 指定远端机器的用户
-
-======create user on remote server create_user.yml=================
+--------------------------------------------------
+# xxx.yml
 ---
-- name: create user
-hosts: vps
-user: root
-gather\_facts: false
+- hosts: local   #hosts中指定
+  remote_user: root #如果和当前用户一样, 无须指定
+    tasks
+     -name: whoami
+      copy: src=~/hosts dest=~/hosts.dest #本地拷贝到远端
+      notify:   #如果copy执行完后~/hosts.dest文件发生了变化,则字号行
+        - clear copy # 调用下面handler
+    handlers
+        在处理执行tasks后服务器发生变化后可供调用的handler
 
-vars:
-- user: "tester"
-
-tasks:
-- name: create {{ user }} on vps
-user: name="{{ user }}"
-
-# gather\_facts 是收集远端机器的信息
-# vars 是自定义变量
-# task 是要执行的任务
-
-# ansible-playbook create_user.yml
-
-====================== END ===============================
+    handlers:
+      - name: clear copy
+       shell: 'mv ~/xxxx.test{,.bak}'
+--------------------------------------------------
+===================================================================
