@@ -1,111 +1,296 @@
 Install
-#apt-get install python-yaml
-#pip install ansible  
-#git clone git://github.com/ansible/ansible.git
-#cd ansible && make install
- 
+    #apt-get install python-yaml
+    #pip install ansible  
+    #git clone git://github.com/ansible/ansible.git
+    #cd ansible && make install
 Configuration
-Configuration file has prority sequence.
-ANSIBLE_CONFIG (enviroment path)
-ansible.cfg (current path)
-.ansible.cfg (home path)
-/etc/ansible/ansible.cfg
-add hosts file for ansible
-group
-[group_name1]
-192.168.2.100
-192.168.2.101
-...
-[group_name2]
-192.168.85.2
-port
-[group_name3]
-10.88.85.90:2222
-10.88.85.123:3333
-...
+    inventory 文件用来定义你想控制管理的服务器, 默认配置在/etc/ansible/hosts
+    Configuration file has prority sequence.
+        ANSIBLE_CONFIG (enviroment path)
+        ansible.cfg (current path)
+        .ansible.cfg (home path)
+        /etc/ansible/ansible.cfg
+    add hosts file for ansible
+        group
+            [group_name1]
+            192.168.2.100
+            192.168.2.101
+            ...
+            [group_name2]
+            192.168.85.2
+        port
+            [group_name3]
+            10.88.85.90:2222
+            10.88.85.123:3333
+            ...
+        child
+            [child1]
+            10.0.0.1:2222
+            10.0.0.2:3333
+            [child2]
+            10.0.2.1:3333
+            10.0.3.1
+
+            [vps:children]
+            child1
+            child2
+        reg
+            [1:3].xxx.org   #= 1.xxx.org, 2.xxx.org, 3.xxx.org
+            [a:c].xxx.org   #= a.xxx.org, b.xxx.org, c.xxx.org
+
 Usage
-pattern
-command 
-ansible <pattern_goes_here> -m <module_name> -a <arguments>
-e.g.
-ansible all -m ping          # it's will ping all server in hosts
-ansible 192.168.85.123 -m ping -u tester      # use tester to ping 192.168.85.123
-ansible group_name3 -m ping -u tester  –sudo -K      # use tester to ping group_name3, -K will need root passwd.
-<pattern_goes_here>
-pattern can be one server IP, domain, or hosts groupname, if you want to use multiple group or ip, use colon ":" to split it.
-ip
-ip1:ip2
-domain1:domain2
-group1
-group1:group2:group3
-all
-*            # * = all
-192.168.1.*
- group1:!grop2           # hosts in group1 but not in group2.    !
-group1:&group2        # hosts exists both  gruop1  and group2.   &
-group1[0]                     # group1 first, like python slice, group1[0:100], the exceed result can't be matched
-~(web|db).*\.example\.com    # regexp
-www
-Ad-Hoc command.  (temporary command, use -a)
--a  command, -f concurrency, default value is 5, -m choose module.
-run shell
-ansible all -a "/bin/echo hello"         # print hello
-ansible all -a "/sbin/reboot"  -f   10    --sudo  -K     #reboot
-ansible all -m shell -a 'ls -la ~'
-  file 
-ansible all -m copy -a "src=~/project/tests/t.py dest=~"                                  # send file
-ansible all -m file -a "dest=~/.t.py mode=777 owner=tester group=tester"                            # modify file 
-ansible all -m file -a "dest=~/tests mode=755 owner=tester group=tester state=diretory"    # create directory
-install
-ansible v1 -m apt -a "name=python-pip state=present" --sudo -K       # install 
-ansible v1 -m apt -a "name=git state=latest"                #install the latest
-ansible v1 -m apt -a "name=git state=absent" --sudo -K        # uninstall if installed.
-user
-ansible all -m user -a "name=foo password=foo" --sudo -K    #adduser
-ansible all -m user -a "name=foo state=absent" --sudo -K     #deluser
-git
- ansible v1 -m git -a "repo=https://github.com/xxxx/xxx.git dest=~/project-dir version=HEAD" #use https checkout. dest shouldnot be exist at first.
-service
-ansible v1 -m service -a "name=mysql state=started" --sudo -K
-ansible v1 -m service -a "name=mysql state=restarted" --sudo -K
-ansible v1 -m service -a "name=mysql state=stopped" --sudo -K 
+    pattern
+    command 
+        ansible <pattern_goes_here> -m <module_name> -a <arguments>
+        e.g.
+        ansible all -m ping          # it's will ping all server in hosts
+        ansible 192.168.85.123 -m ping -u tester      # use tester to ping 192.168.85.123
+        ansible group_name3 -m ping -u tester  –sudo -K      # use tester to ping group_name3, -K will need root passwd.
+    <pattern_goes_here>
+        pattern can be one server IP, domain, or hosts groupname, if you want to use multiple group or ip, use colon ":" to split it.
+            ip
+            ip1:ip2
+            domain1:domain2
+            group1
+            group1:group2:group3
+            all
+            *            # * = all
+            192.168.1.*
+             group1:!grop2           # hosts in group1 but not in group2.    !
+            group1:&group2        # hosts exists both  gruop1  and group2.   &
+            group1[0]                     # group1 first, like python slice, group1[0:100], the exceed result can't be matched
+            ~(web|db).*\.example\.com    # regexp
+    Ad-Hoc command.  (temporary command, use -a)
+        -a  command, -f concurrency, default value is 5, -m choose module.
+        run shell
+            ansible all -a "/bin/echo hello"         # print hello
+            ansible all -a "/sbin/reboot"  -f   10    --sudo  -K     #reboot
+            ansible all -m shell -a 'ls -la ~'
+        file 
+            ansible all -m copy -a "src=~/project/tests/t.py dest=~"                                  # send file
+            ansible all -m file -a "dest=~/.t.py mode=777 owner=tester group=tester"                            # modify file 
+            ansible all -m file -a "dest=~/tests mode=755 owner=tester group=tester state=diretory"    # create directory
+        install
+            ansible v1 -m apt -a "name=python-pip state=present" --sudo -K       # install 
+            ansible v1 -m apt -a "name=git state=latest"                #install the latest
+            ansible v1 -m apt -a "name=git state=absent" --sudo -K        # uninstall if installed.
+        user
+            ansible all -m user -a "name=foo password=foo" --sudo -K    #adduser
+            ansible all -m user -a "name=foo state=absent" --sudo -K     #deluser
+        git
+             ansible v1 -m git -a "repo=https://github.com/xxxx/xxx.git dest=~/project-dir version=HEAD" #use https checkout. dest shouldnot be exist at first.
+        service
+            ansible v1 -m service -a "name=mysql state=started" --sudo -K
+            ansible v1 -m service -a "name=mysql state=restarted" --sudo -K
+            ansible v1 -m service -a "name=mysql state=stopped" --sudo -K 
 playbook YAML syntax
----
-- hosts: {{ servers }}
-tasks:
-- name: Get latest project1 version in PXE server
-command: yum list project1 | grep project1 | awk '{print $2}'
-- name: Get latest project2 version in PXE server
-command: yum list project2 | grep project2 | awk '{print $2}'
-- name: Get latest project3 version in PXE server
-command: yum list project3 | grep project3 | awk '{print $2}'
-- name: Get latest project4 version in PXE server
-command: yum list project4 | grep project4 | awk '{print $2}'
-start — as document
-list start , key: value, the space right near the colon(:) is must.  if colon(:) exists in colon, it should be quoted.
-ansible-playbook test.yaml
-variable use jinja grammar
-var    k->v
-var_files  list
---extra-vars 
-global variable will be in group_vars/all
-local variable will be in group_vars/x
-use ansiable-playbok xxx.yml -vv to print variables.
+        start — as document
+        list start , key: value, the space right near the colon(:) is must.  if colon(:) exists in colon, it should be quoted.
+        ansible-playbook test.yaml
+            ---
+            - hosts: {{ servers }}
+            tasks:
+            - name: Get latest hyve-stress version in PXE server
+            command: yum list hyve-stress | grep hyve-stress | awk '{print $2}'
+            - name: Get latest hyve-lnxflash version in PXE server
+            command: yum list hyve-lnxflash | grep hyve-lnxflash | awk '{print $2}'
+            - name: Get latest hyve-testview version in PXE server
+            command: yum list hyve-testview | grep hyve-testview | awk '{print $2}'
+            - name: Get latest hyve-pxeboot version in PXE server
+            command: yum list hyve-pxeboot | grep hyve-pxeboot | awk '{print $2}'
+    variable use jinja grammar
+        var    k->v
+        var_files  list
+        --extra-vars 
+        global variable will be in group_vars/all
+        local variable will be in group_vars/x
+        use ansiable-playbok xxx.yml -vv to print variables.
+====================================================================
+YAML grammar
+    ping module 测试远程主机的运行状态
+    hosts
+        [webserver1]
+        site01 ansible_ssh_user=root
+        site02 ansible_ssh_user=tester
+        site03 ansible_ssh_port=7777
+        site04
+        site05 ansible_ssh_private_key_file=/key/.ssh/id_ras.pub
+        site06 ansible_ssh_user=www
+        ping module can test network between client and servers.
+        -k means use password
+        -sudo tell ansible use sudo to run task, if sudo need password, use -k; or add ask_sudo_pass in ansible.cfg
+        -a means use parameters, and parameters is always be Key=value
+    setup module收集远程主机的一些基本信息
+        ansible -i /etc/ansible/hosts test -m setup
+        ansible machineName -u root -k -m setup  #Ansible use root to execute setup module on machineName, it can gather server basic information.
+        setup module can use facter/ohai module to gather information, and the result will have prefix "facter_" or "ohai_"
+
+    file module/copy module
+        force：需要在两种情况下强制创建软链接，一种是源文件不存在但之后会建立的情况下；另一种是目标软链接已存在,需要先取消之前的软链，然后创建新的软链，有两个选项：yes|no
+        group：定义文件/目录的属组
+        mode：定义文件/目录的权限
+        owner：定义文件/目录的属主
+        path：必选项，定义文件/目录的路径
+        recurse：递归的设置文件的属性，只对目录有效
+        src：要被链接的源文件的路径，只应用于state=link的情况
+        dest：被链接到的路径，只应用于state=link的情况
+        state：
+        directory：如果目录不存在，创建目录
+        file：即使文件不存在，也不会被创建
+        link：创建软链接
+        hard：创建硬链接
+        touch：如果文件不存在，则会创建一个新的文件，如果文件或目录已存在，则更新其最后修改时间
+        absent：删除目录、文件或者取消链接文件
+
+        ansible MachineName -u root -k -m file -a 'path=/etc/fstab'     # Ansible use file module to get/modify/query file information.
+            changed	false/true	if file didn't exist or attribute didn't same as expect, it will be ture
+
+        ansible MachineName -u root -k -m copy -a "src=/etc/fstab dest=/tmp/fstab mode=644 owner=root"    # Ansible use copy module to copy file.
+            basic information, msg will return the handle
+
+        ansible test -m file -a "src=/etc/fstab dest=/tmp/fstab state=link"
+        ansible test -m file -a "path=/tmp/fstab state=absent"
+        ansible test -m file -a "path=/tmp/test state=touch"
+        ansible test -m file -a "path=/tmp/test state=directory"
+        ansible test -m file -a "path=/tmp/testd state=directory owner=root group=root mode=777"
+
+
+    copy module
+        ansible test -m copy -a "src=/srv/myfiles/foo.conf dest=/etc/foo.conf owner=foo group=foo mode=0644"
+        ansible test -m copy -a "src=/mine/ntp.conf dest=/etc/ntp.conf owner=root group=root mode=644 backup=yes"
+        ansible test -m copy -a "src=/mine/sudoers dest=/etc/sudoers validate='visudo -cf %s'"
+
+    command module/creates/removes attribute.为ansible默认模块,不指定-m参数时,默认就是调用command模块,但是不支持<,>,|,and,&等,也不支持管道
+        command module didn't have return value. but can use creates/removes to detect command success or not.
+        command module can "execute remote command in server, and can use setup module parameters"
+        ansible MachineName -m command -a "rm rfv /tmp/fstab removes=/tmp/fstab" # if not exists, will output "MachineName | skipped" or will return "ansibletest | success | rc=0 >>"
+        ansible MachineName -m file -a 'path=/tmp/fstab state=absent'  # use ansbile file module to delete file. 
+    shell module 在远程命令通过/bin/sh来执行.
+        shell module can deal rewrite/pipeline output/background jobs
+        ansible machineName -m shell -a '/opt/bin/test.sh > /data/log/test.log creates=/data/log/test.log'
+    scripts module 本地写一个脚本在远程服务器上执行
+        ansible myservers -m script -a "/opt/app/target.sh"
+    raw module, 类似command, 但是可以传递管道
+
+    service module 管理服务
+        arguments 给命令行提供一些选项
+        enabled:是否开机启动 yes|no
+        name: 服务名称
+        pattern：定义一个模式，如果通过status指令来查看服务的状态时，没有响应，就会通过ps指令在进程中根据该模式进行查找，如果匹配到，则认为该服务依然在运行
+        runlevel：运行级别
+        sleep：如果执行了restarted，在则stop和start之间沉睡几秒钟
+        state：对当前服务执行启动，停止、重启、重新加载等操作（started,stopped,restarted,reloaded）
+        示例：
+             ansible test -m service -a "name=httpd state=started enabled=yes"
+             ansible test -m service -a "name=foo pattern=/usr/bin/foo state=started"
+             ansible test -m service -a "name=network state=restarted args=eth0"
+    cron module 用于管理计划任务,包含如下选项：
+        backup：对远程主机上的原任务计划内容修改之前做备份
+        cron_file：如果指定该选项，则用该文件替换远程主机上的cron.d目录下的用户的任务计划
+        day：日（1-31，*，*/2,……）
+        hour：小时（0-23，*，*/2，……）
+        minute：分钟（0-59，*，*/2，……）
+        month：月（1-12，*，*/2，……）
+        weekday：周（0-7，*，……）
+        job：要执行的任务，依赖于state=present
+        name：该任务的描述
+        special_time：指定什么时候执行，参数：reboot,yearly,annually,monthly,weekly,daily,hourly
+        state：确认该任务计划是创建还是删除
+        user：以哪个用户的身份执行
+         例：
+            ansible test -m cron -a 'name="check dirs" hour="5,2" job="ls -alh > /dev/null"'
+            ansible test -m cron -a 'name="a job for reboot" special_time=reboot job="/some/job.sh"'
+            ansible test -m cron -a 'name="yum autoupdate" weekday="2" minute=0 hour=12 user="root" job="YUMINTERACTIVE=0 /usr/sbin/yum-autoupdate" cron_file=ansible_yum-autoupdate'
+            ansilbe test -m cron -a 'cron_file=ansible_yum-autoupdate state=absent'
+    yum module 使用yum包管理器来管理软件包, 选项：
+        config_file：yum的配置文件
+        disable_gpg_check：关闭gpg_check
+        disablerepo：不启用某个源
+        enablerepo：启用某个源
+        list
+        name：要进行操作的软件包的名字，也可以传递一个url或者一个本地的rpm包的路径
+        state：状态（present，absent，latest）
+        示例：
+            ansible test -m yum -a 'name=httpd state=latest'
+            ansible test -m yum -a 'name="@Development tools" state=present'
+            ansible test -m yum -a 'name=http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm state=present'
+    user module 管理用户
+        home:
+        groups:
+        uid
+        password:
+        name:
+        createhome:
+        system:
+        remove:
+        state:
+        shell:
+        需要特别说明的是，password后面指定的密码不能是明文，后面这一串密码会被直接传送到被管理主机的/etc/shadow文件中，而登陆的时候输入的密码会被hash加密以后再去与/etc/shadow中存放的密码去做对比，会出现不一致的现象。所以需要先将密码字符串进行加密处理：openssl passwd -salt -1 "123456"，然后将得到的字符串放到password中即可。
+    group module
+
+    synchronize module 使用rsync同步文件
+        archive
+        checksum
+        delete
+        dest
+        src
+        dest_port
+        existing_only: skip createing new files on receiver
+        links
+        owner
+        mode:(push, pull)
+        recursive
+        rsync_path
+        times:Preserve modification times
+        示例：
+            src=some/relative/path dest=/some/absolute/path rsync_path="sudo rsync"
+            src=some/relative/path dest=/some/absolute/path archive=no links=yes
+            src=some/relative/path dest=/some/absolute/path checksum=yes times=no
+            src=/tmp/helloworld dest=/var/www/helloword rsync_opts=--no-motd,--exclude=.git mode=pull
+
+    mount module 配置挂载点
+        dump
+        fstype：必选项，挂载文件的类型
+        name：必选项，挂载点
+        opts：传递给mount命令的参数
+        passno
+        src：必选项，要挂载的文件
+        state：必选项
+        present：只处理fstab中的配置
+        absent：删除挂载点
+        mounted：自动创建挂载点并挂载之
+        umounted：卸载
+        示例：
+            name=/mnt/dvd src=/dev/sr0 fstype=iso9660 opts=ro state=present
+            name=/srv/disk src='LABEL=SOME_LABEL' state=present
+            name=/home src='UUID=b3e48f45-f933-4c8e-a700-22a159ec9077' opts=noatime state=present
+
+            ansible test -a 'dd if=/dev/zero of=/disk.img bs=4k count=1024'
+            ansible test -a 'losetup /dev/loop0 /disk.img'
+            ansible test -m filesystem 'fstype=ext4 force=yes opts=-F dev=/dev/loop0'
+            ansible test -m mount 'name=/mnt src=/dev/loop0 fstype=ext4 state=mounted opts=rw'
+
+    help
+         ansible-doc -l
+         ansible-doc file  # get file module help
+ --------------------------------------------------
+ # xxx.yml
+ ---
+ - hosts: local   #hosts中指定
+   remote_user: root #如果和当前用户一样, 无须指定
+     tasks
+      -name: whoami
+       copy: src=~/hosts dest=~/hosts.dest #本地拷贝到远端
+       notify:   #如果copy执行完后~/hosts.dest文件发生了变化,则字号行
+         - clear copy # 调用下面handler
+     handlers
+         在处理执行tasks后服务器发生变化后可供调用的handler
+ 
+    handlers:
+      - name: clear copy
+       shell: 'mv ~/xxxx.test{,.bak}'
+--------------------------------------------------
 
 
 
-============yaml=====================
-[webserver1]
-site01 ansible_ssh_user=root
-site02 ansible_ssh_user=tester
-site03 ansible_ssh_port=7777
-site04
-site05 ansible_ssh_private_key_file=/key/.ssh/id_ras.pub
-site06 ansible_ssh_user=www
-
-ping can test network between client and servers.
--k  means use passwd
--sudo  tell ansible use sudo to run task, if sudo need password, use -k; or add ask_sudo_pass in ansible.cfg
-
-
-
+===================================================================
