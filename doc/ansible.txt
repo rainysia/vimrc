@@ -391,7 +391,7 @@ ansible-playbook example1.yml -e "uservar=xxx" --tags init 运行指定tag的tas
     - name: Create logrotate entry for ansible-pull.log
       template: src=templates/etc_logrotate.d_ansible-pull.j2 dest=/etc/logrotate.d/ansible-pull owner=root group=root mode=0644
 
-    - name: transfer apache2 configure file to remote template: src=./apache2.j2 dest=/etc/apache2/apache2.conf         # 使用模板, 传送jinja2文件, 也可以用copy模块传递普通文件
+    - name: transfer apache2 configure file to remote template src=./apache2.j2 dest=/etc/apache2/apache2.conf         # 使用模板, 传送jinja2文件, 也可以用copy模块传递普通文件
       notify:                                                           # 类似触发器, 会等前面的执行完了后, 去执行handlers里面的同一个名字的handler, 并执行匹配到的task
         - restart apache2                       # handlers里面的任务名字
       when: result.stdout == 'testserver'
