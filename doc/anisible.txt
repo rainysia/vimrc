@@ -170,7 +170,10 @@ YAML grammar
         ansible machineName -m shell -a '/opt/bin/test.sh > /data/log/test.log creates=/data/log/test.log'
     scripts module 本地写一个脚本在远程服务器上执行
         ansible myservers -m script -a "/opt/app/target.sh"
-    raw module, 类似command, 但是可以传递管道
+    raw module, 类似command, 但是可以传递管道, 就是有些机器没装python,或者是python2.4以下.木有装python-simplejson, 就可以用它装python, 装simplejson
+        ansible 10.2.2.2 -a "ls /tmp/" -u root -k
+        ansible 10.2.2.2 -m shell -a 'ls /tmp/*' -u root -k
+        ansible 10.2.2.2 -m raw -a 'ls /tmp/*' -u root -k
 
     service module 管理服务
         arguments 给命令行提供一些选项
@@ -290,7 +293,110 @@ YAML grammar
       - name: clear copy
        shell: 'mv ~/xxxx.test{,.bak}'
 --------------------------------------------------
+ansible的变量, 主要是给playbook用的. 分为主机变量和组变量.
+# hosts
+[alltest:children]
+salt
+xxx
 
+[salt]
+slat-master salt-port=4505 mysql-port=3306      # 主机变量
+10.1.2.3 salt-path=/usr/bin/salt-call           # 主机变量
 
+[xxx]
+lixc ansible ssh_host=192.168.2.3 ansible_ssh_port=33333
+10.22.33.4[1:9]:22
+[alltest:vars]
+ls-path=/bin/ls                     # 组变量
+eee=fortest                         # 组变量
 
+--------------------------------------------------
+ansible的patterns.可以用--limit关键字 xxx-hhostname 来排除某一主机
+要ansible免密码用私钥登录, ssh-keys 必须要700权限, 同时需要指定ansible.cfg里面
+    [defaults]
+    transport= paramiko
+    [ssh_connection]
+    control_path=./ssh_keys
+    scp_if_ssh  = True
+--------------------------------------------------
+ansible AOH在执行命令的时候, 可以用-B 30来设置后台执行时间为30s, -P2 是每两秒报告一次状态.
+    ansible test_server -m apt -a "name=apache2 state=installed" -s -B 30 -P2 >> /dev/null #安装apache
+
+    ansible test_server -m user -a "name=mysql state=absent" -s     #删除mysql用户
+    ansible test_server -m 
 ===================================================================
+playbook example1.yml
+
+playbook里面的运行的内容, 命令行和ansible的模块是通用的,而且都需要遵循key=value形式
+ansible-playbook example1.yml -e "uservar=xxx"  要传递自定义参数,需要用-e
+ansible-playbook example1.yml -e "uservar=xxx" --tags init 运行指定tag的task
+--------------------------------------------------
+---
+
+- hosts: pull_mode_hosts                    #定义作用的主机,多个主机或者组用:分开.也可以用正则
+  remote_user: root                         #定义远端哪个用户来执行, 如果用 '{{ uservar}}' 就可以通过命令行来输入此变量
+
+  vars:                                     # 定义变量. 局部的, 只能在此play里面用
+
+    # schedule is fed directly to cron
+    schedule: '*/15 * * * *'
+
+    # User to run ansible-pull as from cron
+    cron_user: root
+
+    # File that ansible will use for logs
+    logfile: /var/log/ansible-pull.log
+
+    # Directory to where repository will be cloned
+    workdir: /var/lib/ansible/local
+
+    # Repository to check out -- YOU MUST CHANGE THIS
+    # repo must contain a local.yml file at top level
+    #repo_url: git://github.com/sfromm/ansible-playbooks.git
+    repo_url: SUPPLY_YOUR_OWN_GIT_URL_HERE
+
+    software:
+      - python-setuptools
+      - apache2
+      - ntpdate
+
+  tasks:                                    # task起始标识,可以定义一个或者多个task
+
+    - name: run this command and ignore the result
+      shell: hostname
+      ignore_errors: True                   # 模块执行的结果,如果不为0, 不加ingore_erros的话,出现错误,playbook就不继续执行了. 加上后会忽略错误继续
+      register: result                      # 把上一个模块执行的结果, 保留在result(名字任意)这个变量里, 常用的有result.stdout, result.err, result.rc等属性.
+    - debug: msg='{{result.stdout}}'        # debug打印,把result的stdout打印出来, debug后要遵循msg="这种结构"
+
+    - name: install mysql and apache2
+      apt: name={{item}} state=installed    # item是循环的一部分
+      sudo: yes                             # 表明sudo只针对当前task有效,要全局有效要放进hosts, remote_user里面
+      with_items:                           # ansible的内置循环, 循环变量用{{item}}表似乎, 循环列表在with_items里, 这里用的前面定义的vars里面的变量
+       - '{{software}}'
+      tags: init                            # 设置标签,当playbook执行的似乎后, 将只执行tags所对应的task
+
+    - name: Install ansible                 # 定义一个名字,这样会在终端打印,不定义会默认打印的提示
+      yum: pkg=ansible state=installed
+
+    - name: Create local directory to work from
+      file: path={{workdir}} state=directory owner=root group=root mode=0751
+
+    - name: Copy ansible inventory file to client
+      copy: src=/etc/ansible/hosts dest=/etc/ansible/hosts
+              owner=root group=root mode=0644
+
+    - name: Create crontab entry to clone/pull git repository
+      template: src=templates/etc_cron.d_ansible-pull.j2 dest=/etc/cron.d/ansible-pull owner=root group=root mode=0644
+
+    - name: Create logrotate entry for ansible-pull.log
+      template: src=templates/etc_logrotate.d_ansible-pull.j2 dest=/etc/logrotate.d/ansible-pull owner=root group=root mode=0644
+
+    - name: transfer apache2 configure file to remote template: src=./apache2.j2 dest=/etc/apache2/apache2.conf         # 使用模板, 传送jinja2文件, 也可以用copy模块传递普通文件
+      notify:                                                           # 类似触发器, 会等前面的执行完了后, 去执行handlers里面的同一个名字的handler, 并执行匹配到的task
+        - restart apache2                       # handlers里面的任务名字
+      when: result.stdout == 'testserver'
+
+  handlers:
+    - name: restart apache2
+      service: name=apache2 state=restarted
+--------------------------------------------------
