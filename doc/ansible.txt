@@ -330,6 +330,32 @@ playbook example1.yml
 playbook里面的运行的内容, 命令行和ansible的模块是通用的,而且都需要遵循key=value形式
 ansible-playbook example1.yml -e "uservar=xxx"  要传递自定义参数,需要用-e
 ansible-playbook example1.yml -e "uservar=xxx" --tags init 运行指定tag的task
+
+ansible 命令行参数
+-v       --verbose 更多成功输出
+-i PATH  --inventory=PATH 指定inventory hosts file
+-f NUM   --fokrs=NUM  指定并发数, 默认5个.
+--private-key=PRIVATE_KEY_FILE 执行私钥文件
+-m NAME  --model-name=NAME 执行module
+-M DIRECTORY --model-path=DIRECTORY 指定module load的目录
+-a 'ARGUMENTS' --args='ARGUMENTS'   传给module的参数
+-k --ask-pass   ssh 登录要密码
+-K --ask-sudo-pass  要sudo密码如果需要的话
+-o --one-line      输出所有东西在一行上
+-s --sudo          run the command as the user given by -u and sudo to root
+-t DIRECTORY, --tree=DIRECTORY 把输出保存到这个目录,以每个host命名
+-T SECONDS, --timeout=SECONDS  连接超时时间
+-B NUM  --background=UM       背景连接超出时间后被杀掉
+-P NUM --poll=NUM      拉背景任务每多少秒,需要有-B
+-u USERNAME --username=USERNAME  远端用户如果和本地不一样
+-U SUDO_USERNAME  --sudo-user=SUDO_USERNAME  远端sudo用户
+-c CONNECTION --connection=CONNECTION 连接类型, paramiko(ssh), SSH, and local, local主要对crontab or kickstarts
+-l SUBSET --limit=SUBSET   限定主机.排除掉
+-l ~REGEX --limit=~REGEX   正则限定
+    
+
+
+
 --------------------------------------------------
 ---
 
@@ -400,3 +426,129 @@ ansible-playbook example1.yml -e "uservar=xxx" --tags init 运行指定tag的tas
     - name: restart apache2
       service: name=apache2 state=restarted
 --------------------------------------------------
+group_vars 文件夹, 存放组变量(组名)和全局变量all
+组名需要和主机名字对应起来, all里面变量是全局的
+
+=====ansible 项目规划=========
+|-- group_vars
+|    `-- 组名
+|    `-- all
+|-- hosts
+|-- roles
+|    |
+|    -- mysql           # 其中一个role
+|        |--handlers
+|        |   `-- main.yml
+|        |--tasks
+|        |   `-- cnfigure.yml
+|        |   `-- main.yml
+|        |--templates
+|        |   `-- my.cnf
+|        |--vars            # 这里对应的变量, 只对当前role有作用
+|        |   `-- main.yml
+|    |--webserver       # 另外一个role
+|        |--files           # 存文件的,ansible会默认去这个目录找文件, 对应task里面的copy模块
+|        |   `-- index.html
+|        |--handlers        # 存放handlers
+|        |   `-- main.yml
+|        |--meta            # 定义role和role直接的依赖关系 
+|        |   `-- main.yml
+|        |--tasks           # 存放tasks
+|        |   `-- main.yml
+|        |--templates       # 存放模板, 对应task里面的模块template
+|        |   `-- apache2.conf
+|
+|-- site.yml
+
+-----------------------
+webserver/tasks/main.yml
+
+---
+- name: transfer index file
+  copy: src=index.html dest=/var/www/index.html    #这里index.html会去file里面查找
+  tags: install
+- name: wait for aapche2 to restart
+  wait_for: port={{http_port}}                  # http_port是来自gruop_vars中的全局变量
+  tags: install
+- name: transfer apache2 configure file
+  template: src=apache2.conf dest=/etc/apache2/apache2.conf     # apache2.conf会到templates里面查找
+  tags: conf
+  notify:
+    - restart apache2
+-----------------------
+webserver/handlers/main.yml
+
+---
+- name: restart apache2
+  service: name=apache2 state=restarted         # 定义task完成后要作的处理
+-----------------------
+webserver/meta/main.yml
+
+---
+dependencies:
+  - {role: mysql,echo_vars: hello mysql}        # 定义依赖关系, webserver运行前, 必须先运行 这个role,并且传递变量echo_vars给mysql
+-----------------------
+mysql/tasks/configure.yml
+---
+- name: transfer mysql configure file
+  template: src=my.cnf dest=/etc/mysql/my.cnf
+  notify:
+    - restart mysql
+  tags: configure
+-----------------------
+mysql/tasks/main.yml
+---
+- name: install mysql-server
+  apt: name={{item}} state=installed
+  with_items:
+    - '{{software}}'
+  tags: install
+
+- name: keep mysql is running
+  sevice: name=mysql state=running
+  tags: install
+
+- name: echo_vars
+  shell: echo '{{echo_vars}}'               # webservers的meta传过来的变量
+  register: result
+- debug: msg='{{result.stdout}}'
+  tags: install
+
+- include: configure.yml                # include进来其它
+-----------------------
+mysql/handlers/main.yml
+---
+- name: restart mysql
+  service: name=mysql state=restarted
+-----------------------
+mysql/vars/main.yml
+---
+software:           # role内置变量
+  - mysql-server
+  - mysql-client
+
+-----------------------
+site.yml  文件就是我们要调用的文件了
+---
+- hosts: 组名
+  remote_user: '{{uservar}}'
+
+  roles:
+    - webserver
+======================
+ansible-playbook -i hosts site.yml -e 'uservar=xxxx' -s
+======================
+ansible variables 定义
+    Inventory(host vars,group vars) playbook里面
+    命令行
+    playbook执行task过程中产生结果，可以register起来，作为变量给下面的task使用
+    roles里面
+    来自于nodes上面的facts
+
+
+
+
+--------------------------------------------------
+
+
+

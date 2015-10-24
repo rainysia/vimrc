@@ -4468,6 +4468,10 @@ apt-get clean
 rm -rf /var/lib/apt/lists/*
 apt-get update
 apt-get upgrade
+
+165.shell for loop
+for file n {'xxx1', 'xx2', 'xxx3'}; do echo -e "\033[32m${file}\033[0m"; cat $file; done
+循环一组数据到file然后输出
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
