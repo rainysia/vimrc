@@ -133,3 +133,15 @@ if [ "$TERM" == "xterm" ]; then
 fi
 
 alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
+
+echo "Welcome!, Today is `date`."
+echo 
+echo "Last three logins:";last `logname`|head -3
+echo 
+echo "Current users:`users`"
+echo "System uptime:";uptime
+echo
+echo "There are `who|wc -l` userids logged in right now."
+export EDITOR=vim
+export PAGER=less
+export LESS='CFMS'

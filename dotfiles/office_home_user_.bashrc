@@ -196,3 +196,16 @@ fi
 
 alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
 #export PATH="/usr/local/lib/cw:$PATH"
+
+#export PS1="\t \u@\h (\w) [\!]$"
+echo "Welcome!, Today is `date`."
+echo 
+echo "Last three logins:";last `logname`|head -3
+echo 
+echo "Current users:`users`"
+echo "System uptime:";uptime
+echo
+echo "There are `who|wc -l` userids logged in right now."
+export EDITOR=vim
+export PAGER=less
+export LESS='CFMS'
