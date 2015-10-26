@@ -4474,7 +4474,8 @@ apt-get update
 apt-get upgrade
 
 165.shell for loop
-for file n {'xxx1', 'xx2', 'xxx3'}; do echo -e "\033[32m${file}\033[0m"; cat $file; done
+for file in {'xxx1', 'xx2', 'xxx3'}; do echo -e "\033[32m${file}\033[0m"; cat $file; done
+for file in `ls`;do echo -e "\033[32m${file}\033[0m";cat $file; done
 循环一组数据到file然后输出
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
@@ -4504,3 +4505,4 @@ for file n {'xxx1', 'xx2', 'xxx3'}; do echo -e "\033[32m${file}\033[0m"; cat $fi
 13.4更新ipython                                     2015-07-29 14:06:39
 13.5更新Procedure                                   2015-07-31 16:19:25
 13.6更新mysql perfermance                           2015-09-15 10:48:26
+15.1更新shell file loop                             2015-10-25 12:11:11
