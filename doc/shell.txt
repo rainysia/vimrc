@@ -2263,6 +2263,8 @@ git config --global alisa.ci "commit -s" 别名可以带参数
 like: Signed-off-by: UserName <email@address>
 
 git config --list  列出config
+git config --global diff.external meld 设置合并工具
+git config --global --unset meld.external 取消合并工具
 
 git 备份
 git clone demo demo-step-1
