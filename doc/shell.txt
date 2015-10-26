@@ -2485,6 +2485,9 @@ git show 可以查看tag信息 git show v1.1
 git push origin [tagname] 就可以把tag同步到远程
 git push origin --tags 可以推送本地所有tag
 
+git fetch --tags upstream 获取远端所有tags
+git merge tag_name 
+
 
 (1)首先用git status命令查看下状态。
 (2)用git pull更新代码，确保代码是库上最新代码，防止覆盖其他人的提交。
