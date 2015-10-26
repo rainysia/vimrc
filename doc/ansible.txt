@@ -440,7 +440,7 @@ group_vars 文件夹, 存放组变量(组名)和全局变量all
 |        |--handlers
 |        |   `-- main.yml
 |        |--tasks
-|        |   `-- cnfigure.yml
+|        |   `-- configure.yml
 |        |   `-- main.yml
 |        |--templates
 |        |   `-- my.cnf
@@ -544,7 +544,44 @@ ansible variables 定义
     playbook执行task过程中产生结果，可以register起来，作为变量给下面的task使用
     roles里面
     来自于nodes上面的facts
+-----------------------
+inventory hosts 里面的
+[组名]
+test-server http_port=80        # 主变量
+10.0.2.3 ansible_connection=paramiko
 
+[组名:vars]     #组变量
+mysql_port=3306
+path/ansible/host_vars/组名1     #定义在文件里的主机变量, 文件名要和主机名一致
+test1: test2
+path/ansible/group_vars/组名    # 定义在文件里的组变量, 文件名要和组名一直
+test3:
+  - test4
+  - ansible
+
+-----------------------
+playbook 的变量
+---------------
+---
+ - hosts: all
+   user: test2
+   vars:
+     time: 120              变量
+     port: 80
+     keeplive: 100
+   vars_files:
+    - /vars/test.yml        也可以导入外部文件的变量
+--------------
+yml里面的 '{{变量名}}' 这种变量通过命令行 -e "变量名=xxx 变量名2=xxx2" 来传入
+格式也支持json  -e '{"变量名":"xxx", "变量名2":"xxx2"}'
+也可以传入参数文件 -e '@test.json' 用@来引入json文件
+第四种register task, 作为变量给下面的task使用
+第五钟,在roles里面定义vars
+
+-----------------------
+-----------------------
+-----------------------
+-----------------------
 
 
 

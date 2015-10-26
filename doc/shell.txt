@@ -900,7 +900,11 @@ exit ：关闭当前窗口，并且切换到下一个窗口（当退出最后一
 
 Ctrl+a d ：退出当前终端，返回加载screen前的shell命令状态
 
- 
+#### 关闭其中一个screen
+screen -ls
+screen -r sessionID #确认下内容
+screen -S sessionID -X quit
+
 
 
 21.cron 调度
