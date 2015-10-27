@@ -577,7 +577,155 @@ yml里面的 '{{变量名}}' 这种变量通过命令行 -e "变量名=xxx 变�
 也可以传入参数文件 -e '@test.json' 用@来引入json文件
 第四种register task, 作为变量给下面的task使用
 第五钟,在roles里面定义vars
+-----------------------
+task
+---
+ - hosts: test
+   remote_user: test2
+   vars:
+     list1:
+      - 1
+      - 2
+      - 3
+     list2:
+      - 2
+      - 3
+     dic:
+      dict1: test11
+      dict2: test12
+      dict3: 10
 
+   tasks:
+    - name: exec some tasks
+      shell: abcd                   # 故意错误
+      register result
+      ignore_errors: True
+
+    - name: exec the module module_test_tommy
+      action: module_test_tommy
+      when: result|failed           # 这是jinja2的filter,类似过滤,用|后的方法对变量处理,得到一个新结果, 当failed的时候返回True
+
+    - debug: msg='{{item}}'
+      with_items:
+        - '{{list1|union(list2)}}'  # 取两个list的合集
+      when: dic.dic1|match("li*")   # 判断dic[dic1]的value是否匹配"li*", 匹配返回True, 否则False
+
+    - name: Send file to remote
+      template: src=/home/xxx/variables.j2 dest=/tmp/variables
+      when: dic.dic3|version_compare(10,'==')       # 比较大小, 判断dic['dic3']是否等于10, 等于返回True
+
+-----------------------
+templates
+=========
+{% if ansible_distribution == 'Debian' %}
+{% fo ip in ansible_all_ipv4_addresses %}
+{% ip %}
+{% endfor %}
+{% for value in lists1|difference(list2) %}
+{% value %}
+{% endfor %}
+{% if 'xxx2' in groups['test'] %}               # 用了groups里面的变量
+{% module_test_tommy|default(0) %}              # 用到了自定义模块返回的facts, default(0)是设定值
+{% hostvars['test2']['ansible_distribution'] %} # 用到hostvars变量
+{% endif %}
+{% endif %}
+=========
+playbook常用模块
+
+templates 模块让人设计一个框架式的配置文件.如何把ansible需要的值插入到合适的位置.
+    set_fact模块可以让你在远程受管机器上执行脚本的过程中来计算我们需要的值，这些值可以被用在模板或者变量中。这些值有点类似setup模块中的参数，只不过setup模块是以单台主机为单位的。
+
+    - hosts: all
+      remote_user: root
+      tasks:
+       - name: setfact var
+         set_fact: var='good'
+       - name: template a file with vars
+         template: src=../test/config dest=/home/test backup=yes
+
+    ==config start=====
+    {{ansible_date_time.time}}
+    {{var}}
+    ==config end  =====
+
+pause 模块让我们在playbook中暂停一段时间，可以指定一个时间段，或者提示用户继续。在命令行模式中，这没什么用，但是在playbook中，这很有用处。
+暂停模块通常被用在当我们需要用户来提供一个确认来继续的时候，或者在一个特殊的时间点手动确认。比如你更新一个web应用程序之后，你需要用户在接受用户的连接之前，手工确认一切Ok。这也可以用来提示用户一些可能出现的问题，并提供选项继续。Ansible会打印出服务器的名字，要求用户确认之后继续。如果在目标选项中设置了串行参数，Ansible会询问组里面的每一个主机。这种方式可以让用户在部署的时候，灵活的控制整个节奏，并监控整个交互过程
+     tasks:
+      -name: wait for a second
+       pause: prompt='please wait'
+
+debug、fail模块
+调试模块，在需要调试的地方调用；fail一般配合条件判断使用，当满足某一条件是中止执行。
+    tasks:
+     - shell: /usr/bin/uptime
+       register: result
+
+     - debug: var=result
+
+     - fail: msg="game over"
+       when: result|failed
+assemble模块
+把多个受管主机的文件合并成一个文件，当配置文件不允许包含的时候，这非常有用，特别是在设置root用户的authorized_keys文件的时候。目标文件路径必须存在
+    tasks:
+     - name: build a new file
+       aseemble: src=/home/test dest=/home/test1/c
+
+条件判断
+    - hosts: all
+      remote_user: root
+      tasks:
+       - name: register
+         command: /usr/bin/uptime
+         register: result
+
+       - debug: msg="result|success"
+         when: result|success
+
+       - command: echo "hello, '{{var}'}"
+         when: var is defined
+
+       - command: echo {{item}}
+         with_items: [1,2,3,4,5,6,7]
+         when: item:5
+
+register:motd_contents      –将上一步的执行结果赋值给变量motd_contents；
+motd_contents.stdout       –将结果输出
+motd_contents.stderr         –将错误输出
+下面在列举集中条件判断的语法： 
+– name: test play
+hosts: all
+tasks:
+– shell: cat /etc/motd           –查看motd文件内容
+register: motd_contents       –将内容复制给变量motd_contents
+– shell: echo “motd contains the word hi” > /tmp/test2
+when: motd_contents.stdout.find(‘hi’) != -1   如果内容中包含字符“hi”执行上面的任务
+– name: this command prints FAILED when it fails
+command: /usr/bin/example-command -x -y -z
+register: command_result
+failed_when: “‘FAILED’ in command_result.stderr”  –当上面任务执行结果为failed是中止次脚本。
+
+
+vars_prompt参数：在执行此任务的时候提示输入参数值，然后继续运行，private选项为yes时，用户输入的值不会显示在屏幕上。
+    - hosts: servers
+      remote_user: root
+      vars:
+       - var: 'ok'
+      vars_prompt:
+       - name: 'var1'
+         prompt: 'key'
+         private: no
+
+      tasks:
+       - name: wait for a second
+         pause: prompt='please wait'
+       - name: create a file
+         copy: dest=/home/c1 content="{{var1}}" backup=yes
+如果没有在脚本里给变量赋值，可以直接在执行playbook时在命令行后面直接指定：
+ansible-playbook  command_vars.yml -e ‘uservar=”root” echovar=”hello world”‘
+ansible-playbook  command_vars.yml -e ‘{“uservar”:”root”, “echovar”:”hello world”}’
+{{ some_variable | default(5) }}这个语法的意思是如果变量some_variable没有被赋值默认为5
+-----------------------
+-----------------------
 -----------------------
 -----------------------
 -----------------------

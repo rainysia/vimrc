@@ -4481,6 +4481,9 @@ apt-get upgrade
 165.shell for loop
 for file in {'xxx1', 'xx2', 'xxx3'}; do echo -e "\033[32m${file}\033[0m"; cat $file; done
 for file in `ls`;do echo -e "\033[32m${file}\033[0m";cat $file; done
+for i in $(seq 1 $END); do echo $i; done
+for i in {1..5}; do echo $i; done
+for n in {1..1000}; do echo -e "\033[32m $n\033[0m" \; `rpm -qa | grep hyve`; done;
 循环一组数据到file然后输出
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
