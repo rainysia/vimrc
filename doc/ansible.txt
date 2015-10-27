@@ -725,6 +725,9 @@ ansible-playbook  command_vars.yml -e ‘uservar=”root” echovar=”hello wor
 ansible-playbook  command_vars.yml -e ‘{“uservar”:”root”, “echovar”:”hello world”}’
 {{ some_variable | default(5) }}这个语法的意思是如果变量some_variable没有被赋值默认为5
 -----------------------
+
+
+
 -----------------------
 -----------------------
 -----------------------

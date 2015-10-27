@@ -134,7 +134,7 @@ fi
 
 alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
 
-echo "Welcome!, Today is `date`."
+echo "Welcome!, Today is `date +%Y-%m-%d\ %H:%M:%S`."
 echo 
 echo "Last three logins:";last `logname`|head -3
 echo 
