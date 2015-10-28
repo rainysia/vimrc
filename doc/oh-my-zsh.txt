@@ -1,0 +1,27 @@
+1, 
+    apt-get install zsh
+
+2, need run this in root/user enviroment
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+3, change the default shell
+    chsh -s /bin/zsh
+    切换回去
+    chsh -s /bin/bash
+
+4, .zshrc
+不让oh-my-zsh对关键词rake deploy作纠正
+alias rake deploy='nocorrect rake deploy'
+连按两次Tab会列出所有的补全列表并直接开始选择,可以用方向键来选择
+zsh支持使用<ctrl-n/p/f/b>来选择
+
+
+5, 更智能的历史命令。在用<ctrl-p>或者方向上键查找历史命令时，zsh支持限制查找。
+    比如，输入ls,然后再按方向上键，则只会查找用过的ls命令。而此时使用<ctrl-p>则会仍然按之前的方式查找，忽略ls。
+
+    多个终端会话共享历史记录。经常有多个窗口，tab,tmux的的多个session，panel。这些命令历史不能共享实在是很糟糕的回忆。但是有了zsh之后，这些确实成了回忆，所有的命令历史可以共享。
+更智能的cd。首先你甚至不需要再输入cd了，直接输入路径即可。第二，在你知道路径的情况下，比如/usr/local/bin你可以输入cd /u/l/b然后按<tab>进行补全快速输入。这显然不够，zsh还支持路径替换，如果你其实想进入的是/usr/local/bin（作者注：疑为/usr/local/share），不再需要../了，直接在当前输入cd bin share即可，则bin会替换为share。在之后，我会介绍z和autojumper,目录跳转会更方便。
+更强大的alias。zsh不仅支持普通的alias，例如：alisa ls = 'ls --color=auto'。zsh还支持后缀alias，即以什么命令打开特定的后缀名文件。例如alias -s js=mvim，输入hello.js，会以vim打开该文件，而不在需要vim hello.js。
+通配符搜索。这也是我最爱的功能之一。之前讲过由于命令补全少用了很多man命令，而这个功能让我少用了很多find命令。一般的通配符搜索无非是ls -l *.log,
+在zsh中可以做到递归的通配符搜索。使用**/来递归搜索
