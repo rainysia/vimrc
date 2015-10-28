@@ -45,3 +45,4 @@ deb-src http://mirrors.ustc.edu.cn/debian jessie-proposed-updates main non-free 
 deb http://mirrors.ustc.edu.cn/bjlx jessie main
 deb-src http://mirrors.ustc.edu.cn/bjlx/ jessie main
 deb http://http.debian.net/debian jessie-backports main
+deb http://http.debian.net/debian jessie main contrib non-free
