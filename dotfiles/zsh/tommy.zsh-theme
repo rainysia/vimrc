@@ -52,4 +52,4 @@ PROMPT='%{$fg[$NCOLOR]%}%B%n%b%{$reset_color%}@$hostname_output:$current_dir_out
 GIT_PROMPT='$(out=$(git_prompt_info)$(git_prompt_status)$(git_remote_status);if [[ -n $out ]]; then printf %s " $white($green$out$white)$reset";fi)'
 PROMPT+="$GIT_PROMPT"
 PROMPT+=" $last_command_output%#$reset "
-RPROMPT='%{$fg[blue]%}[%*]%{$reset_color%}'
+RPROMPT='%{$bg[white]%}%{$fg_bold[blue]%}[%*]%{$reset_color%}'
