@@ -483,7 +483,6 @@ webserver/handlers/main.yml
   service: name=apache2 state=restarted         # 定义task完成后要作的处理
 -----------------------
 webserver/meta/main.yml
-
 ---
 dependencies:
   - {role: mysql,echo_vars: hello mysql}        # 定义依赖关系, webserver运行前, 必须先运行 这个role,并且传递变量echo_vars给mysql
@@ -725,10 +724,21 @@ ansible-playbook  command_vars.yml -e ‘uservar=”root” echovar=”hello wor
 ansible-playbook  command_vars.yml -e ‘{“uservar”:”root”, “echovar”:”hello world”}’
 {{ some_variable | default(5) }}这个语法的意思是如果变量some_variable没有被赋值默认为5
 -----------------------
-
-
-
+playbook 里面有
+    pre_tasks可以来指定先执行task
+    post_task 最后执行这个task
+---
+- hosts: webservers
+  pre_tasks:
+    - shell: echo 'hello'      #最先执行
+  roles:
+    - { role: some_role }      #第二个执行
+  tasks:
+    - shell: echo 'still busy'
+  post_tasks:
+    - shell: echo 'goodbye'     #最后执行
 -----------------------
+
 -----------------------
 -----------------------
 -----------------------
