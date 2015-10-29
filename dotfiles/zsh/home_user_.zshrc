@@ -1,11 +1,11 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/tommy/.oh-my-zsh
+export ZSH=/home/tommy/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="tommy"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -183,3 +183,5 @@ echo "System uptime:";uptime
 echo
 echo "There are `who|wc -l` userids logged in right now."
 export EDITOR=vim
+
+alias git commit='nocorrect git commit'
