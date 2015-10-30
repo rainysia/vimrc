@@ -4485,6 +4485,10 @@ for i in $(seq 1 $END); do echo $i; done
 for i in {1..5}; do echo $i; done
 for n in {1..1000}; do echo -e "\033[32m $n\033[0m" \; `rpm -qa | grep hyve`; done;
 循环一组数据到file然后输出
+
+166.查看硬件相关信息
+dmidecode -t1
+ipmitool fru print
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
