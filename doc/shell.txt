@@ -7,7 +7,7 @@
  * @copyright  2006-2015 BTROOT.ORG
  * @license    http://www.btroot.com/user_guide/license.html V1
  * @createTime 2009-11-14 11:14:23
- * @lastChange 2015-09-15 10:48:26
+ * @lastChange 2015-11-10 11:15:08
 */
 Shell好玩的
 
@@ -4489,6 +4489,10 @@ for n in {1..1000}; do echo -e "\033[32m $n\033[0m" \; `rpm -qa | grep hyve`; do
 166.查看硬件相关信息
 dmidecode -t1
 ipmitool fru print
+
+167. Xfce4 notes file folder
+~/.local/share/notes
+
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
@@ -4518,3 +4522,4 @@ ipmitool fru print
 13.5更新Procedure                                   2015-07-31 16:19:25
 13.6更新mysql perfermance                           2015-09-15 10:48:26
 15.1更新shell file loop                             2015-10-25 12:11:11
+15.2更新xfce4-notes                                 2015-11-10 11:15:08

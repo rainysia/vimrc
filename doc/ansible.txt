@@ -597,7 +597,7 @@ task
    tasks:
     - name: exec some tasks
       shell: abcd                   # 故意错误
-      register result
+      register: result
       ignore_errors: True
 
     - name: exec the module module_test_tommy
@@ -738,6 +738,8 @@ playbook 里面有
   post_tasks:
     - shell: echo 'goodbye'     #最后执行
 -----------------------
+
+ansible-playbook playbook.yml --list-hosts 列出影响的hosts
 
 -----------------------
 -----------------------
