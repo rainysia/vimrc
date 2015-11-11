@@ -4649,7 +4649,7 @@ ipmitool -I open command 意思是用Openipmi接口, command选项如下
         #ipmitool -I lanplus -H x.x.x.x -U root -P password chassis power reset (off on)
     列出日志  
         #ipmitool sel list
-    快捷键 shift + ~ +.  是退出ipmi
+    快捷键 ~.  是退出ipmi
 
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
