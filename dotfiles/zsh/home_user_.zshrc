@@ -41,6 +41,11 @@ ZSH_THEME="tommy"
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILESIZE=10000
+HISTFILE=~/.zsh_history
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -82,8 +87,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-HISTSIZE=10000
-HISTFILESIZE=10000
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
