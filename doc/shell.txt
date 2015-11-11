@@ -4490,6 +4490,24 @@ for n in {1..1000}; do echo -e "\033[32m $n\033[0m" \; `rpm -qa | grep hyve`; do
 dmidecode -t1
 ipmitool fru print
 
+dmidecode -t   -t是类型, 后面跟要输出的类型,比如processor
+    -d, --dev-mem FILE Read memory from device FILE (default: /dev/mem) #从设备文件读信息，输出内容与不加参数标准输出相同
+    -h, --help Display this help text and exit #显示帮助信息
+    -q, --quiet Less verbose output #显示更少的简化信息
+    -s, --string KEYWORD Only display the value of the given DMI string #只显示指定DMI字符串的信息
+    -t, --type TYPE Only display the entries of given type #只显示指定条目的信息
+    -u, --dump Do not decode the entries #显示未解码的原始条目内容
+    --dump-bin FILE Dump the DMI data to a binary file
+    --from-dump FILE Read the DMI data from a binary file
+    -V, --version Display the version and exit #显示版本信息
+
+    1、查看服务器型号：dmidecode | grep 'Product Name'
+    2、查看主板的序列号：dmidecode |grep 'Serial Number'
+    3、查看系统序列号：dmidecode -s system-serial-number
+    4、查看内存信息：dmidecode -t memory
+    5、查看OEM信息：dmidecode -t 1
+
+
 167. Xfce4 notes file folder
 ~/.local/share/notes
 
