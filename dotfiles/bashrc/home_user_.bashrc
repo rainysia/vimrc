@@ -116,11 +116,14 @@ alias cdw='cd /home/www'
 alias cdws='cd /home/www/chinasite'
 alias cdww='cd /home/www/wordpress'
 alias cdwh='cd /home/www/domain'
-alias cdwhb='cd /home/www/domain/bom'
-alias cdwht='cd /home/www/domain/testview'
-alias cdwhs='cd /home/www/domain/stress'
 alias cdwha='cd /home/www/domain/ansible'
+alias cdwhb='cd /home/www/domain/bom'
+alias cdwhc='cd /home/www/domain/curator'
 alias cdwhd='cd /home/www/domain/DBAPI'
+alias cdwhp='cd /home/www/domain/pxeboot'
+alias cdwhs='cd /home/www/domain/stress'
+alias cdwht='cd /home/www/domain/testview'
+
 alias cdwk='cd /home/work/'
 alias cdu='cd /home/tommy'
 alias cdd='cd /home/tommy/Desktop'
@@ -207,5 +210,3 @@ echo "System uptime:";uptime
 echo
 echo "There are `who|wc -l` userids logged in right now."
 export EDITOR=vim
-export PAGER=less
-export LESS='CFMS'
