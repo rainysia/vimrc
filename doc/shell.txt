@@ -4560,6 +4560,9 @@ dmidecode -t   -t是类型, 后面跟要输出的类型,比如processor
 ~/.local/share/notes
 
 168. ipmitool
+168A. 通过OS监控本地服务,实现对本地服务器的管理
+
+ipmitool -I open command 意思是用Openipmi接口, command选项如下
     raw #发送一个原始的IPMI请求，并且打印回复信息。
     Lan #配置网络（lan）信道(channel)
     chassis #查看底盘的状态和设置电源
@@ -4620,6 +4623,33 @@ dmidecode -t   -t是类型, 后面跟要输出的类型,比如processor
         ipmitool chassis identify off
         ipmitool sdr type Temperature
         ipmitool sol payload enable 1
+
+168B 通过网络监控远程服务器
+被监控服务器需要硬件和操作系统接口驱动的支持，可以无需安装应用软件。监控客户端需要应用软件如ipmitool工具，可以无需硬件和操作系统接口驱动的支持。 ipmi的远程监控是通过向与BMC相连的网络接口发送udp数据包实现的，udp数据包的定位是通过把ip地址写BMC芯片来实现，而这需要本地的Ipmi系统接口来完成连接。Ipmitool可以通过LAN远程监控系统，同时BMC中保存有一序列用户名和密码，通过LAN进行远端访问需要用户名和密码。
+
+    被监控服务器使用ipmitool更改ip,查看ip
+        ipmitool lan set 1 ipaddr  172.16.6.222
+        ipmitool lan print 1
+    监控客户端Ipmi ip地址也必须和被监控服务端在同一网段
+        ipmitool lan print 1
+    能够Ping通被监控服务器地址 则可以远程管理该主机
+
+    ipmitool -I lanplus -H 172.16.6.222 -U root -P password sol activate
+
+    查看ipmi信息    #ipmitool mc info
+    人员            #ipmitool user list 1
+    查看绑定IP      #ipmitool  lan print 1
+    更改IP          #ipmitool lan set 1 ipaddr  x.x.x.x
+    更改密码        #ipmitool user list 1
+                    #ipmitool user set password 2 "123456"
+
+    ipmitool的SOL远程控制服务器
+        #ipmitool -I lanplus -H x.x.x.x  -U  root -P  password sol (de)activate
+    强制重启(关闭或开启)被监控服务器
+        #ipmitool -I lanplus -H x.x.x.x -U root -P password chassis power reset (off on)
+    列出日志  
+        #ipmitool sel list
+    快捷键 shift + ~ +.  是退出ipmi
 
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
