@@ -333,6 +333,12 @@ perl的元字符
 #$grep -A 3匹配某个结果之后的3行 -B 3 匹配结果之前的3行 -C 3匹配结果之前和之后的3行
 #echo -e “a\nb\nc\na\nb\nc” | grep a -A 1 多个匹配,以一行 – 作为各匹配之前的定界符
 
+egrep=grep -E   利用此命令可以使用扩展的正则表达式对文本进行搜索，并把符合用户需求的字符串打印出来。
+fgrep=grep -F   它利用固定的字符串来对文本进行搜索，但不支持正则表达式的引用，所以此命令的执行速度也最快。
+
+ls | egrep -E "*\.[0-9]" | xargs rm 删除/var/log下面的数字备份文件
+
+
 12. cut切分文件
 #cut 切分文件
 #$cut -f field_list filename 提取第一个字段或者列,field_list用逗号分割
