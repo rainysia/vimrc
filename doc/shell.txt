@@ -743,6 +743,7 @@ cat /proc/loadavg    查看系统负载
 /proc/pid/statm 进程所占用的内存
 获取系统的详细信息 lshw
 lshw -short 简化输出
+    lshw -short -quiet -C disk 获取硬盘路径
 hwinfo -short 输出硬件信息
 lspci - List PCI 输出PCI
 lsscsi - List scsi devices 输出scsi
