@@ -742,6 +742,19 @@ cat /proc/loadavg    查看系统负载
 #$cat /proc/partitions 打印系统分区信息 或者 #$fdisk -l
 /proc/pid/statm 进程所占用的内存
 获取系统的详细信息 lshw
+lshw -short 简化输出
+hwinfo -short 输出硬件信息
+lspci - List PCI 输出PCI
+lsscsi - List scsi devices 输出scsi
+lsusb - List usb buses and device details 
+lsblk - List block devices
+df - disk space of file systems
+mount
+fdisk
+dmidecode
+/proc files
+hdparm The hdparm command gets information about sata devices like hard disks.
+
 
 /proc 收集信息
 bash的进程id 加入是4295 (pgrep bash) 系统每个运行的进程都在/proc中都有一个对应的目录,进程的目录名和进程ID相同,这个目录包含了大量的相关进程的信息
@@ -2205,6 +2218,7 @@ dpkg -L 查询系统中已安装的软件包所安装的位置. (类似于rpm -q
 dpkg -S 查询系统中某个文件属于哪个软件包. (类似于rpm -qf)
 dpkg -I 查询deb包的详细信息,在一个软件包下载到本地之后看看用不用安装(看一下呗).
 dpkg -i 手动安装软件包(这个命令并不能解决软件包之前的依赖性问题),如果在安装某一个软件包的时候遇到了软件依赖的问题,可以用apt-get -f install在解决信赖性这个问题.
+        (rpm -Uvh)
 dpkg -r 卸载软件包.不是完全的卸载,它的配置文件还存在.
 dpkg -P 全部卸载(但是还是不能解决软件包的依赖性的问题)
 dpkg -reconfigure 重新配置
