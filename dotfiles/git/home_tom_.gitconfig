@@ -36,3 +36,5 @@
     sslverify = true
 [push]
     default = matching
+[merge]
+	tool = meld

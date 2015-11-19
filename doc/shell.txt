@@ -1267,6 +1267,9 @@ $cp filename{,.bak}
 35.免密码ssh登录主机,把公钥串写入远程主机~/.ssh/authorized_keys,前提是当前用户有公钥,默认没有,需要ssh-keygen,如果需要删除,需要打开远程主机上authorized_keys,你的用户名,删除掉该行
 $ssh-copy_id remote-machine
 
+指定ssh 的private key 来登录
+ssh -i private_key_file root@ip_address -p port_num
+
 36.抓取桌面的视频,-f x11grab 指定输入类型,-s wxga 1366x768的区域,-r 25帧率,-i:0.0
 设置输入源,本地X默认在0.0 -sameq 保持跟输入量一样的图像质量
 $ffmpeg -f x11grab -s wxga -r 25 -i:0.0 -sameq /tmp/out.mpg
@@ -1392,7 +1395,7 @@ ntpdate timeserver2.domain.org
 
 57.
 vmstat 2 每两秒显示虚拟内存状态 
-vmstat virtual meomory statistics 虚拟内存统计  vmstat 3 5 表示每3秒更新一次输出信息，循环输出，统计5次后停止输出
+vmstat virtual memory statistics 虚拟内存统计  vmstat 3 5 表示每3秒更新一次输出信息，循环输出，统计5次后停止输出
 	procs
 	r 列 结果分析 procs 表示运行和等待cpu时间片的进程数 
 	b 列 表示在等待资源的进程数。比如正在等待I/O或者内存交换等
@@ -1507,8 +1510,8 @@ usermod -a -G 组名 用户 ，把已有的用户名添加到已有的组里面
 51，fc-list //查看系统中安装的字体
 52，find ./ -type f -exec grep -q "root" {} \; -exec echo {} \; //查找目录下文件所包涵的字符串
 53，vmstat 5 //每5显示一下次系统信息，cpu,memory,i/o等
-54，top 后 在shift + P 所占进程的排序显示
-55，top 后 在shift + M 所占内存的排序显示
+54，top 后 在shift + P 所占进程的排序显示 process
+55，top 后 在shift + M 所占内存的排序显示 memory
     top 后 在shift + A 按照不同类别排序显示
     top 后 在shift + H Thread 和Task切换
     top 后 在shift + L 搜索 
@@ -2238,6 +2241,8 @@ git config --system alias.br branch
 开启颜色显示
 git config --global color.ui true
 
+git config --global merge.tool meld
+
 跟踪git status的磁盘访问
 strace -e 'trace=file' git status
 
@@ -2835,6 +2840,9 @@ sar [option] [-o filename] [interval [count]]
 			%MEM 进程占用的物理内存百分比
 			TIME+ 进程使用的CPU时间总计，单位1/100秒
 			COMMAND 正在运行进程的命令名或路径
+
+按照指定应用输出内存占用
+#ps -e -o 'pid,comm,args,pcpu,rsz,vsz,stime,user,uid' | grep oracle |  sort -nrk5
 
 119. nginx
 	启动/nginx_env/nginx -c nginx.conf 指定配置文件启动
