@@ -4685,6 +4685,13 @@ ipmitool -I open command 意思是用Openipmi接口, command选项如下
         #ipmitool sel list
     快捷键 ~.  是退出ipmi
 
+
+169,UWSGI
+
+pip install uwsgi
+uwsgi --ini uwsgi.ini --http:33333
+
+
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
