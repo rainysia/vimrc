@@ -4691,6 +4691,12 @@ ipmitool -I open command 意思是用Openipmi接口, command选项如下
 pip install uwsgi
 uwsgi --ini uwsgi.ini --http:33333
 
+170,runlevel
+0 - Runlevel 0 means system shutdown
+1 - Runlevel 1 means single-user, rescue mode
+5 - Runlevel 5 means multi-user, network enabled, graphical mode
+6 - Runlevel 6 is for system reboot
+In general, runlevels 2, 3 and 4 mean states where Linux has booted in multi-user, network enabled, text mode.
 
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
