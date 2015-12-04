@@ -2740,6 +2740,8 @@ git branch -a       display all branch
 
 history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10
 history | awk '{CMD[$3]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c4 -s " " -t | sort -nr | nl | head -n10
+zshrc
+history | awk '{CMD[$4]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c4 -s " " -t | sort -nr | nl | head -n10
 109. cat来读取文本赋值
 touch 1.txt
 echo -ne 'aaa\nbbbbbbb\ncccc=3a\n' >> 1.txt 分行输入
