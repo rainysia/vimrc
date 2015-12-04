@@ -4698,6 +4698,8 @@ uwsgi --ini uwsgi.ini --http:33333
 6 - Runlevel 6 is for system reboot
 In general, runlevels 2, 3 and 4 mean states where Linux has booted in multi-user, network enabled, text mode.
 
+171, smartctl to check drive
+smartctl -a -s on /dev/sda
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
