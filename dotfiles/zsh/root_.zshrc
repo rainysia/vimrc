@@ -154,6 +154,7 @@ alias gvimdomain='gvim /home/manual/docs/domain.txt'
 alias gvimvimrc='gvim /etc/vim/vimrc'
 alias delpyc='find -name "*.pyc" | xargs "rm"'
 alias systart='sh /home/sh/start_debian.sh'
+alias ks='sh /home/sh/kill.sh'
 
 alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
 export EDITOR=vim

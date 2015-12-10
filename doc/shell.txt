@@ -332,11 +332,13 @@ perl的元字符
 排除目录—exclude-dir 从文件中读取所许排除的文件列表 –exclude-from file
 #$grep -A 3匹配某个结果之后的3行 -B 3 匹配结果之前的3行 -C 3匹配结果之前和之后的3行
 #echo -e “a\nb\nc\na\nb\nc” | grep a -A 1 多个匹配,以一行 – 作为各匹配之前的定界符
+grep "keyword1\|keyword2" 用 | 来分割来, 需要转义, 来多个匹配
 
 egrep=grep -E   利用此命令可以使用扩展的正则表达式对文本进行搜索，并把符合用户需求的字符串打印出来。
 fgrep=grep -F   它利用固定的字符串来对文本进行搜索，但不支持正则表达式的引用，所以此命令的执行速度也最快。
 
-ls | egrep -E "*\.[0-9]" | xargs rm 删除/var/log下面的数字备份文件
+ls | egrep -E "*\.[0-9]" | xargs rm 删除/var/log下面的数字备份文件, 支持1级
+find ./ -type f | grep -E "[a-z]+\.[0-9]+" | xargs rm, 支持多级
 
 
 12. cut切分文件
@@ -2219,7 +2221,7 @@ aptitude autoclean 仅删除过期的包文件
 dpkg --info "软件包名" --列出软件包解包后的包名称.
 dpkg -l --列出当前系统中所有的包.可以和参数less一起使用在分屏查看. (类似于rpm -qa)
 dpkg -l |grep -i "软件包名" --查看系统中与"软件包名"相关联的包.
-dpkg -s 查询已安装的包的详细信息.
+dpkg -s 查询已安装的包的详细信息.(rpm -qi)
 dpkg -L 查询系统中已安装的软件包所安装的位置. (类似于rpm -ql)
 dpkg -S 查询系统中某个文件属于哪个软件包. (类似于rpm -qf)
 dpkg -I 查询deb包的详细信息,在一个软件包下载到本地之后看看用不用安装(看一下呗).
@@ -2518,6 +2520,8 @@ git push origin --tags 可以推送本地所有tag
 git fetch --tags upstream 获取远端所有tags
 git merge tag_name 
 
+git checkout tags/<tag_name>
+
 
 (1)首先用git status命令查看下状态。
 (2)用git pull更新代码，确保代码是库上最新代码，防止覆盖其他人的提交。
@@ -2738,6 +2742,8 @@ git branch -a       display all branch
 
 history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10
 history | awk '{CMD[$3]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c4 -s " " -t | sort -nr | nl | head -n10
+zshrc
+history | awk '{CMD[$4]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c4 -s " " -t | sort -nr | nl | head -n10
 109. cat来读取文本赋值
 touch 1.txt
 echo -ne 'aaa\nbbbbbbb\ncccc=3a\n' >> 1.txt 分行输入
@@ -4698,6 +4704,8 @@ uwsgi --ini uwsgi.ini --http:33333
 6 - Runlevel 6 is for system reboot
 In general, runlevels 2, 3 and 4 mean states where Linux has booted in multi-user, network enabled, text mode.
 
+171, smartctl to check drive
+smartctl -a -s on /dev/sda
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
