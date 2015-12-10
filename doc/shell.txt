@@ -337,7 +337,8 @@ grep "keyword1\|keyword2" 用 | 来分割来, 需要转义, 来多个匹配
 egrep=grep -E   利用此命令可以使用扩展的正则表达式对文本进行搜索，并把符合用户需求的字符串打印出来。
 fgrep=grep -F   它利用固定的字符串来对文本进行搜索，但不支持正则表达式的引用，所以此命令的执行速度也最快。
 
-ls | egrep -E "*\.[0-9]" | xargs rm 删除/var/log下面的数字备份文件
+ls | egrep -E "*\.[0-9]" | xargs rm 删除/var/log下面的数字备份文件, 支持1级
+find ./ -type f | grep -E "[a-z]+\.[0-9]+" | xargs rm, 支持多级
 
 
 12. cut切分文件
