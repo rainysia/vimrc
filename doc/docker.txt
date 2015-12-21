@@ -3,8 +3,17 @@ add docker hosts
 54.234.135.251  cdn-registry-1.docker.io
 
 Debian8, need kernel > 3.8
+sources.list
+deb http://http.debian.net/debian jessie-backports main
 
 #apt-get install docker.io
+
+remove docker
+apt-get purge docker-io
+or 
+apt-get autoremove --purge docker-io
+rm -rf /var/lib/docker
+
 
 验证安装
 #docker version
@@ -23,5 +32,49 @@ OS/Arch (server): linux/amd64
 #docker info
 
 #docker search xxxx 搜索相关的官方docker镜像(index.docker.io)
-#docker pull xxxx 下载相关的镜像,    用户名/镜像名, (/var/lib/docker/graph/)
+#docker pull xxxx 下载相关的镜像,    用户名/镜像名, 
+                (根据 /var/lib/docker/repositories-aufs 存储在/var/lib/docker/graph/
+                 /var/lib/docker/aufs/diff 里面存在的镜像)
+e.g. docker run user/project_image command 
 #docker run xxxx echo "hello world"  运行xxxx镜像, 并且在镜像中运行echo 命令
+
+docker 无法实现交互模式, 也就是比如apt-get install xxx 需要增加-y 参数默认
+
+当你对某一个容器做了修改之后（通过在容器中运行某一个命令），可以把对容器的修改保存下来，
+这样下次可以从保存后的最新状态运行该容器。
+docker中保存状态的过程称之为committing，它保存的新旧状态之间的区别，从而产生一个新的版本。
+
+首先使用docker ps -l命令获得安装完ping命令之后容器的id。然后把这个镜像保存为learn/ping。
+$sudo docker ps -l                                                                                                                                                                            [15:49:09]
+CONTAINER ID        IMAGE                   COMMAND                CREATED             STATUS                     PORTS               NAMES
+66a36c7e1bfc        learn/tutorial:latest   "apt-get install -y    8 minutes ago       Exited (0) 8 minutes ago                       nostalgic_euclid 
+
+运行docker commit，可以查看该命令的参数列表。
+2. 你需要指定要提交保存容器的ID。(译者按：通过docker ps -l 命令获得)
+3. 无需拷贝完整的id，通常来讲最开始的三至四个字母即可区分。（译者按：非常类似git里面的版本号)
+
+$sudo docker commit 66a learn/ping
+执行完docker commit命令之后，会返回新版本镜像的id号。
+
+一定要使用新的镜像名learn/ping来运行ping命令。(译者按：最开始下载的learn/tutorial镜像中是没有ping命令的)
+
+% sudo docker run learn/tutorial ping www.baidu.com                                                                                                                                            [15:51:36]
+exec: "ping": executable file not found in $PATH
+FATA[0000] Error response from daemon: Cannot start container 23af03a7c2e1692b0474437d16165390735cc29ba49734261902de8ba7d6d030: [8] System error: exec: "ping": executable file not found in $PATH 
+
+% sudo docker run learn/ping ping www.baidu.com                                                                                                                                                [15:52:26]
+PING www.a.shifen.com (220.181.112.244) 56(84) bytes of data.
+64 bytes from 220.181.112.244: icmp_req=1 ttl=53 time=38.1 ms
+64 bytes from 220.181.112.244: icmp_req=2 ttl=53 time=37.5 ms
+64 bytes from 220.181.112.244: icmp_req=3 ttl=53 time=38.0 ms
+
+
+使用docker ps命令可以查看所有正在运行中的容器列表，
+$sudo docker ps -l
+
+使用docker inspect命令我们可以查看更详细的关于某一个容器的信息。
+$sudo docker inspect 20f66
+
+1. docker images命令可以列出所有安装过的镜像。
+2. docker push命令可以将某一个镜像发布到官方网站。
+3. 你只能将镜像发布到自己的空间下面。这个模拟器登录的是learn帐号。
