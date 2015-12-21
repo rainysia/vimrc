@@ -20,3 +20,8 @@ Go version (server): go1.3.3
 Git commit (server): 7c8fca2
 OS/Arch (server): linux/amd64
 
+#docker info
+
+#docker search xxxx 搜索相关的官方docker镜像(index.docker.io)
+#docker pull xxxx 下载相关的镜像,    用户名/镜像名
+#docker run xxxx echo "hello world"  运行xxxx镜像, 并且在镜像中运行echo 命令
