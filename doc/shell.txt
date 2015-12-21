@@ -7,7 +7,7 @@
  * @copyright  2006-2015 BTROOT.ORG
  * @license    http://www.btroot.com/user_guide/license.html V1
  * @createTime 2009-11-14 11:14:23
- * @lastChange 2015-11-11 11:38:15
+ * @lastChange 2015-12-21 15:05:10
 */
 Shell好玩的
 
@@ -4707,6 +4707,8 @@ In general, runlevels 2, 3 and 4 mean states where Linux has booted in multi-use
 
 171, smartctl to check drive
 smartctl -a -s on /dev/sda
+
+172. cat json.txt | python -mjson.tool 用python来格式化输出json字符串
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
@@ -4738,3 +4740,4 @@ smartctl -a -s on /dev/sda
 15.1更新shell file loop                             2015-10-25 12:11:11
 15.2更新xfce4-notes                                 2015-11-10 11:15:08
 15.3更新dmidecode,ipmitool                          2015-11-11 11:38:15
+15.4更新mjson                                       2015-12-21 15:05:05
