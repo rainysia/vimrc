@@ -1,0 +1,22 @@
+add docker hosts
+54.234.135.251  get.docker.io
+54.234.135.251  cdn-registry-1.docker.io
+
+Debian8, need kernel > 3.8
+
+#apt-get install docker.io
+
+验证安装
+#docker version
+
+Client version: 1.6.2
+Client API version: 1.18
+Go version (client): go1.3.3
+Git commit (client): 7c8fca2
+OS/Arch (client): linux/amd64
+Server version: 1.6.2
+Server API version: 1.18
+Go version (server): go1.3.3
+Git commit (server): 7c8fca2
+OS/Arch (server): linux/amd64
+
