@@ -3020,6 +3020,7 @@ sar [option] [-o filename] [interval [count]]
         }
 120. rsync (remoter synchronize)远程数据同步工具,可以通过ssh华人rsh使用，也可以用daemon模式运行，daemon的时rsync server会打开873端口，然后进行增量备份,windows上有cwRsync和sync2NAS
 	rsync [option] src [DEST]
+rsync --info=progress2 source dest 显示复制的进度和百分比
 	
 121. dpkg --get-selections > /home/bak/packagelist.txt
     备份包列表
