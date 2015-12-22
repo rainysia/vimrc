@@ -48,7 +48,7 @@ docker 无法实现交互模式, 也就是比如apt-get install xxx 需要增加
 docker中保存状态的过程称之为committing，它保存的新旧状态之间的区别，从而产生一个新的版本。
 
 首先使用docker ps -l命令获得安装完ping命令之后容器的id。然后把这个镜像保存为learn/ping。
-$sudo docker ps -l                                                                                                                                                                            [15:49:09]
+$sudo docker ps -l
 CONTAINER ID        IMAGE                   COMMAND                CREATED             STATUS                     PORTS               NAMES
 66a36c7e1bfc        learn/tutorial:latest   "apt-get install -y    8 minutes ago       Exited (0) 8 minutes ago                       nostalgic_euclid 
 
@@ -61,11 +61,11 @@ $sudo docker commit 66a learn/ping
 
 一定要使用新的镜像名learn/ping来运行ping命令。(译者按：最开始下载的learn/tutorial镜像中是没有ping命令的)
 
-% sudo docker run learn/tutorial ping www.baidu.com                                                                                                                                            [15:51:36]
+% sudo docker run learn/tutorial ping www.baidu.com
 exec: "ping": executable file not found in $PATH
 FATA[0000] Error response from daemon: Cannot start container 23af03a7c2e1692b0474437d16165390735cc29ba49734261902de8ba7d6d030: [8] System error: exec: "ping": executable file not found in $PATH 
 
-% sudo docker run learn/ping ping www.baidu.com                                                                                                                                                [15:52:26]
+% sudo docker run learn/ping ping www.baidu.com
 PING www.a.shifen.com (220.181.112.244) 56(84) bytes of data.
 64 bytes from 220.181.112.244: icmp_req=1 ttl=53 time=38.1 ms
 64 bytes from 220.181.112.244: icmp_req=2 ttl=53 time=37.5 ms
@@ -93,12 +93,12 @@ $sudo docker rm alias_name 来删除同名容器
 
 $sudo docker start alias_name 来启动指定的docker容器, restart来重启
 也可以使用attach来重连该docker容器 
-tommy@debian:/ % sudo docker start 23af03a                                                                                                                                                                                        [14:54:00]
+$sudo docker start 23af03a
 Error response from daemon: Cannot start container 23af03a: [8] System error: exec: "ping": executable file not found in $PATH
 FATA[0000] Error: failed to start one or more containers 
-tommy@debian:/ % sudo docker start 10ae45                                                                                                                                                                                         [14:54:07]
+$sudo docker start 10ae45
 10ae45
-tommy@debian:/ % sudo docker attach 10ae45                                                                                                                                                                                        [14:54:29]
+$sudo docker attach 10ae45
 64 bytes from 220.181.112.244: icmp_req=9 ttl=53 time=38.4 ms
 64 bytes from 220.181.112.244: icmp_req=10 ttl=53 time=37.5 ms
 64 bytes from 220.181.112.244: icmp_req=11 ttl=53 time=38.1 ms
@@ -143,3 +143,82 @@ $sudo docker run --restart=always --name daemon_dave -d ubuntu /bin/sh -c "while
     --restart=on-failure:2
 
 $sudo docker rm `docker ps -a -q` 一次性删除所有容器
+
+
+列出镜像
+$sudo docker images
+
+$sudo docker run -t -i --name new_container ubuntu:12.04 /bin/bash 通过指定版本号来拉取指定的镜像
+
+搜索镜像
+$sudo docker search debian
+
+创建docker hub帐号
+https://hub.docker.com/account/signup
+测试帐号
+$sudo docker login
+Username:xxxxx
+Password: 
+Email: xxxx@gmail.com
+WARNING: login credentials saved in /root/.dockercfg.
+Login Succeede
+
+
+对镜像作了修改后, 可以commit, 比如安装软件
+$sudo docker commit 3aab3ce  user_name/project
+
+$sudo docker commit dffb66497 rainysia/learn
+b7f12b9b4b29a0d18ccb8e2490aa0fb4eece919ddfe59a712171a90ac963938c
+
+$sudo docker commit -m="A new custom image for test base on ubuntu12.04" --author="rainysia" dffb66497 rainysia/learn:test
+    最后一个是test是tag,类似alias_name别名
+查看该镜像的详细
+$sudo docker inspect rainysia/learn:test    
+
+
+运用dockerfile来构建镜像
+dockerfile
+----------------------------
+# Version: 0.0.1
+FROM debian                      # FROM来指定一个已经存在的镜像, 后续指令都是基于这个镜像
+MAINTAINER rainysia "rainysia@gmail.com"
+RUN apt-get update                          # run指定会默认shell用/bin/sh -c来执行.如果不希望或者不支持shell平台.可以用exec方式   RUN ["apt-get", " install", "-y", "nginx"]
+RUN apt-get install -y nginx
+RUN echo 'Hi, i am in your container' \
+        > /usr/share/nginx/html/index.html
+EXPOSE 80                                   #指定打开80端口
+----------------------------
+执行docker build来build一个镜像
+$sudo docker build -t="rainysia/static_web" .
+
+------------------------------------------------
+sudo docker build -t="rainysia/static_web" .
+Sending build context to Docker daemon 2.048 kB
+Sending build context to Docker daemon 
+Step 0 : FROM learn/ping:latest
+ ---> 9e8823ddedf9
+Step 1 : MAINTAINER rainysia "rainysia@gmail.com"
+ ---> Running in 5e6fc8254653
+ ---> 3077170bae60
+Removing intermediate container 5e6fc8254653
+Step 2 : RUN apt-get update
+ ---> Running in 2026e6c913cf
+Ign http://archive.ubuntu.com precise InRelease
+Hit http://archive.ubuntu.com precise Release.gpg
+Hit http://archive.ubuntu.com precise Release
+Hit http://archive.ubuntu.com precise/main amd64 Packages
+Get:1 http://archive.ubuntu.com precise/main i386 Packages [1641 kB]
+Get:2 http://archive.ubuntu.com precise/main TranslationIndex [3706 B]
+Get:3 http://archive.ubuntu.com precise/main Translation-en [893 kB]
+....
+------------------------------------------------
+
+也可以为镜像设置tag
+$sudo docker build -t="rainysia/static_web:tag_v1" .
+也可以指定dockerfile
+$sudo docker build -t="rainysia/static_web:tag_v1" \
+                       git@github.com:rainysia/docker-static_web 
+
+docker 构建文件支持.dockerignore文件来忽视对应的文件, 类似.gitignore
+
+
