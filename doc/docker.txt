@@ -393,3 +393,11 @@ $sudo docker run -t -i docker.example.com:5000/rainysia/static_web /bin/bash
 ==============================
 修改dockerfile
 
+$sudo docker iamges
+$sudo docker build -t rainysia/new_project_name .
+$sudo docker rm `docker ps -q -a`
+$sudo docker history rainysia/nginx
+$sudo docker run -d -p 127.0.0.1:44444:80 --name website \
+        -v $PWD/website:/var/www/html/website \
+        rainysia/nginx nginx
+
