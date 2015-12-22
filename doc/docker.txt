@@ -389,3 +389,6 @@ $sudo docker tag xxxxxxid docker.example.com:5000/rainysia/static_web
 $sudo docker run -t -i docker.example.com:5000/rainysia/static_web /bin/bash
 
 
+==============================
+修改dockerfile
+
