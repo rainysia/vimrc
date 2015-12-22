@@ -317,6 +317,7 @@ $sudo docker run -d -p 80:80 --name static_web rainysia/static_web \
     -p 127.0.0.1:80:80 把80端口绑定到宿主机的127.0.0.1:80
     -P 来公开在dockerfile里面定义的expose的所有端口.
 $sudo docker run -d -P --name static_web rainysia/static_web nginx -g "daemon off;"
+$sudo docker run -d -p 192.168.85.123:33333:80 --name static_web rainysia/static_web nginx -g "daemon off;"
 
 更新docker images里面的内容后. 
 需要stop掉当前的docker, 然后rm 掉, 启新的
