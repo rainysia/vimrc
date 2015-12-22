@@ -77,7 +77,69 @@ $sudo docker ps -l
 
 使用docker inspect命令我们可以查看更详细的关于某一个容器的信息。
 $sudo docker inspect 20f66
+$sudo docker inspect 20f66 -f
+$sudo docker inspect --format='{{.State.Running }}' 20f66 来限定输出
 
 1. docker images命令可以列出所有安装过的镜像。
 2. docker push命令可以将某一个镜像发布到官方网站。
 3. 你只能将镜像发布到自己的空间下面。这个模拟器登录的是learn帐号。
+
+
+$sudo docker run -i -t user/project /bin/bash 进入docker的交互式shell
+    -i 标志保证容器中STDIN是开启的. -t表示告诉docker要为创建的容器分配一个伪tty终端
+    --name alias_name 可以为这个docker指定一个别名
+$sudo docker rm alias_name 来删除同名容器
+#exit 退出该docker
+
+$sudo docker start alias_name 来启动指定的docker容器, restart来重启
+也可以使用attach来重连该docker容器 
+tommy@debian:/ % sudo docker start 23af03a                                                                                                                                                                                        [14:54:00]
+Error response from daemon: Cannot start container 23af03a: [8] System error: exec: "ping": executable file not found in $PATH
+FATA[0000] Error: failed to start one or more containers 
+tommy@debian:/ % sudo docker start 10ae45                                                                                                                                                                                         [14:54:07]
+10ae45
+tommy@debian:/ % sudo docker attach 10ae45                                                                                                                                                                                        [14:54:29]
+64 bytes from 220.181.112.244: icmp_req=9 ttl=53 time=38.4 ms
+64 bytes from 220.181.112.244: icmp_req=10 ttl=53 time=37.5 ms
+64 bytes from 220.181.112.244: icmp_req=11 ttl=53 time=38.1 ms
+64 bytes from 220.181.112.244: icmp_req=12 ttl=53 time=37.6 ms
+^C
+--- www.a.shifen.com ping statistics ---
+12 packets transmitted, 12 received, 0% packet loss, time 11013ms
+rtt min/avg/max/mdev = 37.561/38.483/44.528/1.886 ms
+
+
+进入docker伪tty后, 可以像正常操作linux一样操作docker
+
+docker ps -a 列出所有docker容器.
+
+
+
+创建守护式容器(deamonized container) 而不是(交互式运行容器)interactive container
+$sudo docker run --name daemon_dave -d ubuntu /bin/sh -c "while true;do echo hello world; sleep 1; done"
+    -d  参数会把容器放到后台运行
+
+$sudo docker logs daemon_dave 来查看日志
+$sudo docker logs -f daemon_dave 类似tail -f
+$sudo docker logs --tail 10 daemon_dave 获取日志的最后10行
+$sudo docker logs --tail 0 -f daemon_dave 来跟踪某个容器的最新日志.
+$sudo docker top daemon_dave  查看容器内部运行的进程
+
+
+在容器内部运行进程
+$sudo docker exec -d daemon_dave touch /etc/new_config_file 
+$sudo docker exec -t -i daemon_dave /bin/bash
+
+停止守护式容器
+$sudo docker stop daemon_dave
+
+查看最后x个容器
+docker ps -n x
+
+自动重启容器, always/on-failure:5 可选的重启次数,on-failure只有当容器的退出代码为非0值的时候才会自动重启, 可以接数字来限定重启次数
+$sudo docker run --restart=always --name daemon_dave -d ubuntu /bin/sh -c "while true;do echo hello world; sleep 1; done"
+    --restart=always
+    --restart=on-failure
+    --restart=on-failure:2
+
+$sudo docker rm `docker ps -a -q` 一次性删除所有容器
