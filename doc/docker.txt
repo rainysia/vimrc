@@ -403,7 +403,11 @@ $sudo docker run -d -p 127.0.0.1:44444:80 --name website \
         -v $PWD/website:/var/www/html/website \
         rainysia/nginx nginx
 
-sudo docker run -d -p 127.0.0.1:44444:80 --name website rainysia/nginx nginx
+sudo docker run -d -p 127.0.0.1:44444:80 --name test_web rainysia/nginx nginx
+
+sudo docker logs -f test_web 查看docker运行的日志
+sudo docker port test_web 80 查看docker容器的端口映射
+sudo docker top test_web  查看docker容器的正在运行的程序
 
 =======================================
 卷可以在容器间共享, 即使容器停止. 卷里的内容依旧存在. 适合对代码作开发和测试
@@ -414,7 +418,7 @@ $sudo docker run -d -p 80 --name website \
         rainysia/new_project_name nginx
     通过卷将$PWD/website 挂载到了容器的/var/www/html/webiste 目录.
 
-$sudo docker run -d -p 127.0.0.1:44444:80 --name test_web2 \
+$sudo docker run -d -p 127.0.0.1:44444:80 --name test_web \
 -v $PWD/website:/var/www/html:ro \
 rainysia/nginx nginx
 

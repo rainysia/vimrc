@@ -1463,6 +1463,7 @@ head -n 1 /etc/issue 查看操作系统版本
     ls -h 是显示大小以k , 也可以用 --block-size=g/m/k 来指定 
     ls -lrth
     ls --ingore="*.pyc" 
+    ls -lah 显示文件大小, 以对应单位k.显示
 11,rsync -P //同步时显示进度
 12.history -c //清楚历史命令
 13，cd - //返回上次目录
