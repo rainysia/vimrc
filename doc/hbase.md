@@ -41,3 +41,6 @@ export JAVA_HOME=/usr/java/java7/
 do it both in user mode
 
 
+Usage
+------
+Edit conf/hbase-site.xml

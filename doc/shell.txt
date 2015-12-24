@@ -4714,6 +4714,33 @@ smartctl -a -s on /dev/sda
 
 173. shell 追加path环境变量
     export PATH="$PATH:追加的path"
+
+174. Markdown
+
+==== 最高阶标题
+---- 次阶标题
+> 区块引用
+## 等同于header2, ### h3
+*强调的内容*
+**强调的内容**
+__强调的内容__
+* 无序列表1     +, -
+* 无序列表2     +, -
+* 无序列表3     +, - 效果一样
+1. 有序列表
+2. 有序列表
+3. 有序列表
+一段和另外一段插入空行, 会把第一段用<p>包起来
+链接 
+This is an [example link](http://example.com/).
+This is an [example link](http://example.com/ "With a Title").
+图片
+![alt text](/path/to/img.jpg "Title")
+代码 ``` ```包裹
+
+
+
+
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
