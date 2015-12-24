@@ -4737,6 +4737,10 @@ This is an [example link](http://example.com/ "With a Title").
 图片
 ![alt text](/path/to/img.jpg "Title")
 代码 ``` ```包裹
+分隔线用三个以上的星号,减号,底线来建立一个分割线
+***
+---
+
 
 
 
