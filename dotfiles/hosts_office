@@ -3720,53 +3720,53 @@ ff02::2 ip6-allrouters
 # Google:A-GPS End
 
 # Google CN Start
-# 203.208.41.144	0.gvt0.cn
-# 203.208.41.144	1.gvt0.cn
-# 203.208.41.144	2.gvt0.cn
-# 203.208.41.144	265.com
-# 203.208.41.144	3.gvt0.cn
-# 203.208.41.144	blogsearch.google.cn
-# 203.208.41.144	books.google.cn
-# 203.208.41.144	ditu.google.cn
-# 203.208.41.144	dl.google.com
-# 203.208.41.144	fonts.googleapis.com
-# 203.208.41.144	g.cn
-# 203.208.41.144	gg.google.cn
-# 203.208.41.144	google.cn
-# 203.208.41.144	groups.google.cn
-# 203.208.41.144	id.google.cn
-# 203.208.41.144	labs.google.cn
-# 203.208.41.144	m.google.cn
-# 203.208.41.144	maps.gstatic.cn
-# 203.208.41.144	mt.google.cn
-# 203.208.41.144	mt0.google.cn
-# 203.208.41.144	mt1.google.cn
-# 203.208.41.144	mt2.google.cn
-# 203.208.41.144	mt3.google.cn
-# 203.208.41.144	news.google.cn
-# 203.208.41.144	pack.google.cn
-# 203.208.41.144	scholar.google.cn
-# 203.208.41.144	static.googleadsserving.cn
-# 203.208.41.144	translate.google.cn
-# 203.208.41.144	video.google.cn
-# 203.208.41.144	www.265.com
-# 203.208.41.144	www.google.cn
-# 203.208.41.144	www.gstatic.cn
-# 203.208.41.144	www.gvt0.cn
-# 203.208.41.139	tpc.googlesyndication.com
-# 203.208.40.153	domains.googlesyndication.com
-# 203.208.41.153	pagead2.googlesyndication.com
-# 216.239.38.125	www.googletagservices.com
-# 216.239.38.125	www.google-analytics.com
-# 216.239.38.125	googleads.g.doubleclick.net
-# 216.239.38.125	ssl.google-analytics.com
-# 216.239.38.125	googletagmanager.com
-# 216.239.38.125	www.googletagmanager.com
-# 216.239.38.125	fonts.gstatic.com
-# 216.239.38.125	fls.uk.doubleclick.net
-# 216.239.38.125	csi.gstatic.com
-# 216.239.38.125	www-google-analytics.l.google.com
-# 216.239.38.125	www-googletagmanager.l.google.com
+203.208.41.144	0.gvt0.cn
+203.208.41.144	1.gvt0.cn
+203.208.41.144	2.gvt0.cn
+203.208.41.144	265.com
+203.208.41.144	3.gvt0.cn
+203.208.41.144	blogsearch.google.cn
+203.208.41.144	books.google.cn
+203.208.41.144	ditu.google.cn
+203.208.41.144	dl.google.com
+203.208.41.144	fonts.googleapis.com
+203.208.41.144	g.cn
+203.208.41.144	gg.google.cn
+203.208.41.144	google.cn
+203.208.41.144	groups.google.cn
+203.208.41.144	id.google.cn
+203.208.41.144	labs.google.cn
+203.208.41.144	m.google.cn
+203.208.41.144	maps.gstatic.cn
+203.208.41.144	mt.google.cn
+203.208.41.144	mt0.google.cn
+203.208.41.144	mt1.google.cn
+203.208.41.144	mt2.google.cn
+203.208.41.144	mt3.google.cn
+203.208.41.144	news.google.cn
+203.208.41.144	pack.google.cn
+203.208.41.144	scholar.google.cn
+203.208.41.144	static.googleadsserving.cn
+203.208.41.144	translate.google.cn
+203.208.41.144	video.google.cn
+203.208.41.144	www.265.com
+203.208.41.144	www.google.cn
+203.208.41.144	www.gstatic.cn
+203.208.41.144	www.gvt0.cn
+203.208.41.139	tpc.googlesyndication.com
+203.208.40.153	domains.googlesyndication.com
+203.208.41.153	pagead2.googlesyndication.com
+216.239.38.125	www.googletagservices.com
+216.239.38.125	www.google-analytics.com
+216.239.38.125	googleads.g.doubleclick.net
+216.239.38.125	ssl.google-analytics.com
+216.239.38.125	googletagmanager.com
+216.239.38.125	www.googletagmanager.com
+216.239.38.125	fonts.gstatic.com
+216.239.38.125	fls.uk.doubleclick.net
+216.239.38.125	csi.gstatic.com
+216.239.38.125	www-google-analytics.l.google.com
+216.239.38.125	www-googletagmanager.l.google.com
 # Google CN End
 
 # Google End
