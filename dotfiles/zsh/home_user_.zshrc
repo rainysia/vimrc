@@ -87,69 +87,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
-alias as='aptitude search'
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias u2g='iconv -f UTF-8 -t GBK'
-alias g2u='iconv -f GBK -t UTF-8'
-alias la='ls -AF --color=auto'
-alias ll='ls -lF --color=auto'
-alias lm='ls -F --color=auto |more'
-alias lslrt='ls -lrt'
-alias lslrha='ls -lrta'
-alias lslrth='ls -lrth'
-alias lslrtha='ls -lrtha'
-alias lslrthai='ls -lrtha --ignore="*.pyc"'
-alias ..='cd ..'
-alias ....='cd ../..'
-alias dh='df -hT'
-alias h='history'
-alias gv='gvim'
-alias gno='xdg-open'
-alias cdh='cd /home'
-alias cdw='cd /home/www'
-alias cdws='cd /home/www/chinasite'
-alias cdww='cd /home/www/wordpress'
-alias cdwh='cd /home/www/domain'
-alias cdwha='cd /home/www/domain/ansible'
-alias cdwhb='cd /home/www/domain/bom'
-alias cdwhc='cd /home/www/domain/curator'
-alias cdwhd='cd /home/www/domain/DBAPI'
-alias cdwhp='cd /home/www/domain/pxeboot'
-alias cdwhs='cd /home/www/domain/stress'
-alias cdwht='cd /home/www/domain/testview'
-
-alias cdwk='cd /home/work/'
-alias cdu='cd /home/tommy'
-alias cdd='cd /home/tommy/Desktop'
-alias cdr='cd /'
-alias st='su tommy'
-alias sr='su -'
-alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
-alias pythonpy='python /home/softs/linux/goagent/local/proxy.py'
-alias cdwc='cd /home/www/c/'
-alias cdwr='cd /home/www/ruby/'
-alias cdwg='cd /home/www/go/'
-alias cdwn='cd /home/www/node/'
-alias cdwpy='cd /home/www/python/'
-alias cdwph='cd /home/www/php/'
-alias cdm='cd /home/manual/'
-alias cdg='cd /home/vc/git/'
-
-alias shl='sh /home/sh/log.sh'
-alias gvimlog='gvim /var/log/php_errors.log'
-alias vimlog='vim /var/log/php_errors.log'
-alias taillog='tail -f /var/log/php_errors.log'
-alias echolog="echo '' > /var/log/php_errors.log"
-alias gvimshell='gvim /home/manual/docs/shell.txt'
-alias gvimdomain='gvim /home/manual/docs/domain.txt'
-alias gvimvimrc='gvim /etc/vim/vimrc'
-alias delpyc='find -name "*.pyc" | xargs "rm"'
-
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export XIM=ibus
@@ -188,6 +125,5 @@ echo "Current users:`users`"
 echo "System uptime:";uptime
 echo
 echo "There are `who|wc -l` userids logged in right now."
-export EDITOR=vim
-
 alias git commit='nocorrect git commit'
+source ~/.ssh_tommy
