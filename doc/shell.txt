@@ -4711,6 +4711,9 @@ In general, runlevels 2, 3 and 4 mean states where Linux has booted in multi-use
 smartctl -a -s on /dev/sda
 
 172. cat json.txt | python -mjson.tool 用python来格式化输出json字符串
+
+173. shell 追加path环境变量
+    export PATH="$PATH:追加的path"
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
 5.3 更新hg merge                                    2013-11-20 11:02:31
