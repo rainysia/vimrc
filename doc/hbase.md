@@ -119,19 +119,19 @@ t2
 
 2.Write Data
 ```
-e.g.: put 'table_name','first', 'row family:field_name', 'field_value'
+e.g.: put 'table_name','rowkey', 'row family:field_name', 'field_value'
 put 'mytable','first','cf:message','hello HBase'
 put 'mytable','second','cf:foo', 0x0
 put 'mytable','third','cf:bar', 3.14159
 ```
 3.Read Data by get/scan
 ```
-e.g.: get 'table_name', 'first'
+e.g.: get 'table_name', 'rowkey'     #et table_name rowkey data
 hbase(main):021:0> get 'mytable', 'first'
 COLUMN                                                       CELL
  cf:message                                                  timestamp=1451036405579, value=hello HBase
 
-e.g.: can 'table_name'
+e.g.: scan 'table_name'     #get all table_name data
 hbase(main):022:0> scan 'mytable'
 ROW                                                          COLUMN+CELL
  first                                                       column=cf:message, timestamp=1451036405579, value=hello HBase
