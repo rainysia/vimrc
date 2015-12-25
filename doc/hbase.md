@@ -93,4 +93,49 @@ http://{host}:60010/table.jsp?name=wordcount Check wordcount table
 http://{host}:60030/rs-status         Region server page
 ```
 
+###Create Table need assign zookeeper data
+    Edit conf/hbase-site.xml
+    add the blow content into <configuration>
+```
+    <property>
+        <name>hbase.zookeeper.property.dataDir</name>
+        <value>/home/tommy/hbase/zookeeper</value>
+    </property>
+```
 
+### Command
+1.Create Table 
+```
+e.g.:create 'table_name','row family'
+create 'mytable','cf'
+
+e.g.:list    #list table
+list
+TABLE
+mytable
+t2
+2 row(s) in 0.0060 seconds
+```
+
+2.Write Data
+```
+e.g.: put 'table_name','first', 'row family:field_name', 'field_value'
+put 'mytable','first','cf:message','hello HBase'
+put 'mytable','second','cf:foo', 0x0
+put 'mytable','third','cf:bar', 3.14159
+```
+3.Read Data by get/scan
+```
+e.g.: get 'table_name', 'first'
+hbase(main):021:0> get 'mytable', 'first'
+COLUMN                                                       CELL
+ cf:message                                                  timestamp=1451036405579, value=hello HBase
+
+e.g.: can 'table_name'
+hbase(main):022:0> scan 'mytable'
+ROW                                                          COLUMN+CELL
+ first                                                       column=cf:message, timestamp=1451036405579, value=hello HBase
+ second                                                      column=cf:foo, timestamp=1451036428844, value=0
+ third                                                       column=cf:bar, timestamp=1451036464702, value=3.14159
+3 row(s) in 0.0210 seconds
+```
