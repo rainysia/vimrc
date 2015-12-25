@@ -84,6 +84,13 @@ stop-hbase.sh
         <value>60010</value>
     </property>
 ```
-
+###Address
+```
+http://{host}:50070/dfshealth.jsp     HBase build /hbase folder on HDFS for store data
+http://{host}:60010/mster-status      HBase master page
+http://{host}:60010/zk.jsp            ZooKeeper page
+http://{host}:60010/table.jsp?name=wordcount Check wordcount table
+http://{host}:60030/rs-status         Region server page
+```
 
 
