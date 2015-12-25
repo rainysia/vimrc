@@ -40,6 +40,9 @@ export JAVA_HOME=/usr/java/java7/
 #$HBASE_HOME/bin/start-hbase.sh
 do it both in user mode
 
+verify install successful or not
+#hbase version
+
 
 Usage
 ------
@@ -51,3 +54,9 @@ add the below content into <configuration>
         <value>file:///home/tommy/hbase/</value>
     </property>
 ```
+
+manual
+------
+go to hbase shell 
+#hbase shell 
+
