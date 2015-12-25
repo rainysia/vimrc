@@ -44,3 +44,10 @@ do it both in user mode
 Usage
 ------
 Edit conf/hbase-site.xml
+add the below content into <configuration>
+```
+    <property>
+        <name>hbase.rootdir</name>
+        <value>file:///home/tommy/hbase/</value>
+    </property>
+```
