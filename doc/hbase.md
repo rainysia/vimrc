@@ -77,6 +77,7 @@ stop-hbase.sh
 ###open 60010 hbase web 
     Edit conf/hbase-site.xml
     add the below content into <configuration>
+    http://127.0.0.1:60010
 ```
     <property>
         <name>hbase.master.info.port</name>
