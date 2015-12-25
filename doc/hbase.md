@@ -46,8 +46,10 @@ verify install successful or not
 
 Usage
 ------
-Edit conf/hbase-site.xml
-add the below content into <configuration>
+###modify default hbase tmp folder
+    Edit conf/hbase-site.xml
+    add the below content into <configuration>
+
 ```
     <property>
         <name>hbase.rootdir</name>
@@ -55,8 +57,19 @@ add the below content into <configuration>
     </property>
 ```
 
-manual
-------
-go to hbase shell 
+###go to hbase shell 
+```
 #hbase shell 
+```
+###open 60010 hbase web 
+    Edit conf/hbase-site.xml
+    add the below content into <configuration>
+```
+    <property>
+        <name>hbase.master.info.port</name>
+        <value>60010</value>
+    </property>
+```
+
+
 
