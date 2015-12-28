@@ -73,6 +73,8 @@ stop-hbase.sh
 ###go to hbase shell 
 ```
 #hbase shell 
+hbase(main):017:0> status
+1 servers, 0 dead, 5.0000 average load
 ```
 ###open 60010 hbase web 
     Edit conf/hbase-site.xml
@@ -107,7 +109,7 @@ http://{host}:60030/rs-status         Region server page
 1.Create Table 
 ```
 e.g.:create 'table_name','row family'
-create 'mytable','cf'
+create 'mytable','row_1'
 
 e.g.:list    #list table
 list
@@ -115,6 +117,12 @@ TABLE
 mytable
 t2
 2 row(s) in 0.0060 seconds
+
+hbase(main):018:0> list 'user'
+TABLE
+user
+1 row(s) in 0.0060 seconds
+=> ["user"]
 ```
 
 2.Write Data
@@ -123,6 +131,11 @@ e.g.: put 'table_name','rowkey', 'row family:field_name', 'field_value'
 put 'mytable','first','cf:message','hello HBase'
 put 'mytable','second','cf:foo', 0x0
 put 'mytable','third','cf:bar', 3.14159
+
+e.g.: create 'user','info'
+put 'user', 'row_1', 'info:name', 'tommy'
+put 'user', 'row_2', 'info:name', 'susan'
+put 'user', 'row_2', 'info:email', 'susanl@gmail.com'
 ```
 3.Read Data by get/scan
 ```
@@ -131,6 +144,8 @@ hbase(main):021:0> get 'mytable', 'first'
 COLUMN                                                       CELL
  cf:message                                                  timestamp=1451036405579, value=hello HBase
 
+e.g.: get 'user','row_2','info:email'
+
 e.g.: scan 'table_name'     #get all table_name data
 hbase(main):022:0> scan 'mytable'
 ROW                                                          COLUMN+CELL
@@ -138,4 +153,53 @@ ROW                                                          COLUMN+CELL
  second                                                      column=cf:foo, timestamp=1451036428844, value=0
  third                                                       column=cf:bar, timestamp=1451036464702, value=3.14159
 3 row(s) in 0.0210 seconds
+```
+
+4. Describe table
+```
+e.g.: describe 'table_name'
+hbase(main):011:0> describe 'user'
+Table user is ENABLED
+user
+COLUMN FAMILIES DESCRIPTION
+{NAME => 'info', DATA_BLOCK_ENCODING => 'NONE', BLOOMFILTER => 'ROW', REPLICATION_SCOPE => '0', VERSIONS => '1', COMPRESSION => 'NONE', MIN_VERSIONS => '0', TTL => 'FOREVER', KEEP_DELETED_CELLS => 'FALSE', BLOCKSIZE => '65536', IN_MEMORY
+ => 'false', BLOCKCACHE => 'true'}
+1 row(s) in 0.0170 seconds
+```
+
+5. Disable and Drop table
+```
+e.g.: disable 'table_name'
+e.g.: drop 'table_name'
+```
+
+6. Delete one cell
+```
+e.g.: delete 'table_name', 'rowkey', 'col:qual'
+>delete 'testtable','myrow-2','colfam1:q2'
+```
+
+### Instruction
+1.Hbase 
+```
+Hbase use coordinate.
+[rowkey, column family,column qualifer(qual)]
+[TheRealMT, info,       name]
+
+Put p = new Put(Bytes.toBytes("TheRealMT"));
+p.add(Bytes.toBytes("info")),
+    Bytes.toBytes("name"),
+    Bytes.toBytes("Mark Twain");
+p.add(Bytes.toBytes("info")),
+    Bytes.toBytes("email"),
+    Bytes.toBytes("samuel@clemens.org");
+p.add(Bytes.toBytes("info")),
+    Bytes.toBytes("password"),
+    Bytes.toBytes("Langhorne");
+
+hbase(main):019:0> put 'user','TheRealMT','info:name','Chouting'
+0 row(s) in 0.0420 seconds
+hbase(main):020:0> put 'user','TheRealMT','info:name','Tommy'
+0 row(s) in 0.0040 seconds
+
 ```
