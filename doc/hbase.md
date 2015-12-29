@@ -202,3 +202,4 @@ hbase(main):019:0> put 'user','TheRealMT','info:name','Chouting'
 hbase(main):020:0> put 'user','TheRealMT','info:name','Tommy'
 0 row(s) in 0.0040 seconds
 ```
+

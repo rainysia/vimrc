@@ -2809,6 +2809,11 @@ awk '{ for (i=0;i<=length;i++){ if ($i !=0 && $i !=""){ print $i }}}' ./test.log
 116.chkconfig --list 列出系统所有服务
 chkconfig --list | grep on 列出所有启动的系统服务
 
+add script_name into system initial boot
+chkconfig --add script_name
+chkconfig --level 345 script_name on
+chkconfig --list script_name
+
 
 117.sar 命令
 sar [option] [-o filename] [interval [count]]
