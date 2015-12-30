@@ -2735,7 +2735,9 @@ send pull request 就会发送commit
 git config --global push.default simple
 git branch -a       display all branch
 
-
+git submodule 把另外一个库加入到项目中.既要保持自己的变更, 也要保持上游库的更新
+-------
+git submodule add git_repo_add.git alias_name
 
 
 
