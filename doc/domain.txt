@@ -188,6 +188,10 @@ PASSWORD_HASHERS = (
 )
 
 
+## Celery
+--------------
+pip install celery
+
 =========process testview=====================
 python manage.py makemigrations
 python manage.py migrate
