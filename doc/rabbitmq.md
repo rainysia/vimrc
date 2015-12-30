@@ -63,7 +63,7 @@ sudo rabbitmq-plugins enable rabbitmq_management
 sudo rabbitmq-server --version
 sudo rabbitmqctl -V | more
 cd /etc/rabbitmq
-wget https://raw.githubusercontent.com/rabbitmq/rabbitmq-management/rabbitmq_v3_6_0/bin/rabbitmqad
+wget https://raw.githubusercontent.com/rabbitmq/rabbitmq-management/rabbitmq_v3_6_0/bin/rabbitmqadmin
 sudo chown root:root rabbitmqadmin
 sudo cp rabbitmqadmin /usr/local/bin/
 sudo ln -s /usr/local/bin/rabbitmqadmin /usr/bin/rabbitmqadmin
