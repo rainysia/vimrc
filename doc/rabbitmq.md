@@ -7,6 +7,11 @@ RabbitMQ
 #yum install rabbitmq-server
 #yum install librabbitmq librabbitmq-tools
 ```
+##Debian8
+--------
+```
+#apt-get install erlang* rabbitmq-server
+```
 
 --------
 ##Configuration
@@ -75,4 +80,6 @@ rabbitmqctl add_user username password
 rabbitmq set_user_tags username administrator
 rabbitmqctl list_uers
 rabbitmqctl delete_user username
+rabbitmqctl status
+rabbitmq-plugins list
 ```
