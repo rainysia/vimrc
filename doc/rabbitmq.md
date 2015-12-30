@@ -1,7 +1,6 @@
 RabbitMQ
 ==========
-
-#Centos7
+##Centos7
 --------
 ```
 #yum install erlang*
@@ -9,7 +8,8 @@ RabbitMQ
 #yum install librabbitmq librabbitmq-tools
 ```
 
-#Configuration
+--------
+##Configuration
 
 ### /etc/rabbitmq/rabbitmq-env.conf
 --------
@@ -49,6 +49,7 @@ Touch if not exists, edit the below snippets in rabbitmq.config
 
 ### command
 --------
+Install management flow
 ```
 sudo systemctl enable rabbitmq-server
 sudo systemctl restart rabbitmq-server.service
@@ -64,4 +65,14 @@ sudo ln -s /usr/local/bin/rabbitmqadmin /usr/bin/rabbitmqadmin
 sudo ln -s /usr/bin/rabbitmqadmin /bin/rabbitmqadmin
 sudo rabbitmq-plugins enable rabbitmq_management
 http://192.168.85.116:15672/#/
+```
+
+### Others command
+--------
+http://www.rabbitmq.com/configure.html#define-environment-variables
+```
+rabbitmqctl add_user username password
+rabbitmq set_user_tags username administrator
+rabbitmqctl list_uers
+rabbitmqctl delete_user username
 ```
