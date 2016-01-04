@@ -179,6 +179,60 @@ e.g.: delete 'table_name', 'rowkey', 'col:qual'
 >delete 'testtable','myrow-2','colfam1:q2'
 ```
 
+7. All command
+```
+normal command
+
+status
+Version
+
+DDL
+
+alter
+create
+describe
+disable
+drop
+enable
+exists
+is_disabled
+is_enabled
+List
+
+DML
+
+count
+delete
+delteall
+get
+get_counter
+incr
+put
+scan
+truncate
+
+Tool
+
+assign
+balance_switch
+balancer
+compact
+Flush
+major_compact
+Move
+split
+unassign
+zk_dump
+
+Replication
+
+add_peer
+disable_peer
+enable_peer
+remove_peer
+start_replication
+stop_replication
+```
 ### Instruction
 1.Hbase 
 ```
