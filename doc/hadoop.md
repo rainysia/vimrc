@@ -35,8 +35,13 @@ java -version
 #cd /usr && mv hadoop-2.7.1 hadoop
 
 #export HADOOP_HOME=/usr/hadoop
-#export PATHa=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH
 #export YARN_LOG_DIR=$HADOOP_LOG_DIR
 
+#export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+```
 
+###Verify Install
+------
+```
+#hadoop version
 ```

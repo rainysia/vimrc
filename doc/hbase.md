@@ -33,7 +33,7 @@ java -version
 #cd /usr && mv hbase-0.98.16.1 hbase
 
 #export HBASE_HOME=/usr/hbase
-#export PATH="$PATH:$HBASE_HOME/bin"
+#export PATH=$PATH:$HBASE_HOME/bin
 
 gvim /usr/hbase/conf/hbase-env.sh 
 uncomment and edit
@@ -64,9 +64,20 @@ stop-hbase.sh
     Edit conf/hbase-site.xml
     add the below content into <configuration>
 ```
+    individual mode
     <property>
         <name>hbase.rootdir</name>
         <value>file:///home/tommy/hbase/</value>
+    </property>
+
+    cluster
+    <property>
+        <name>hbase.rootdir</name>
+        <value>hdfs://localhost:9000/hbase</value>
+    </property>
+    <property>
+        <name>hbase.cluster.distributed</name>
+        <value>true</value>
     </property>
 ```
 
