@@ -30,14 +30,45 @@ java -version
 ###Install Hadoop
 ------
 ```
+1. 
 #cd /tmp && wget http://apache.fayea.com/hadoop/common/current/hadoop-2.7.1.tar.gz
 #tar -zxvf hadoop-2.7.1.tar.gz -C /usr/
 #cd /usr && mv hadoop-2.7.1 hadoop
 
+2.
 #export HADOOP_HOME=/usr/hadoop
 #export YARN_LOG_DIR=$HADOOP_LOG_DIR
 
 #export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+
+3.
+###debian###
+adduser --system --shell /bin/bash --home /home/hadoop hadoop
+###centos###
+adduser --system --shell /bin/bash --create-home --home-dir /home/hadoop hadoop
+
+passwd hadoop  123456
+
+4.
+need three server, one master, two cluster
+vi three server hosts file && add 
+192.168.85.123 hadoop_master
+192.168.85.116 hadoop_node1
+192.168.85.40 hadoop_node2
+
+5.
+ssh-keygen -t rsa in hadoop_master use hadoop user
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+chmod 700 ~/.ssh
+
+do it in two node server
+
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop_master
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop_node1
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop_node2
+
+6.
 ```
 
 ###Verify Install
