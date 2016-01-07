@@ -83,7 +83,6 @@ export JAVA_HOME=/usr/java/java7
 
 mkdir /home/hadoop/hadoop-2.7.1/tmp
 vim /home/hadoop/hadoop-2.7.1/etc/hadoop/core-site.xml  
-
 add the below content into configuration
 
     <property>
@@ -97,6 +96,13 @@ add the below content into configuration
     <property>
         <name>hadoop.tmp.dir</name>
         <value>/home/hadoop/hadoop-2.7.1/tmp</value> 
+    </property>
+
+cp /home/hadoop/hadoop-2.7.1/etc/hadoop/mapred-site.xml.template /home/hadoop/hadoop-2.7.1/etc/hadoop/mapred-site.xml
+add the below content into configuration
+    <property>
+        <name>mapred.job.tracker</name>  
+        <value>localhost:9001</value>   
     </property>
 
 
