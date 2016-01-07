@@ -74,7 +74,31 @@ vim /etc/profile
 export HADOOP_HOME=/home/hadoop/hadoop-2.7.1
 export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
 
-6.
+source /etc/profile
+
+7.
+vim /home/hadoop/hadoop-2.7.1/etc/hadoop/hadoop-env.sh    
+add
+export JAVA_HOME=/usr/java/java7
+
+mkdir /home/hadoop/hadoop-2.7.1/tmp
+vim /home/hadoop/hadoop-2.7.1/etc/hadoop/core-site.xml  
+
+add the below content into configuration
+
+    <property>
+        <name>fs.default.name</name>
+        <value>hdfs://localhost:9000</value> 
+    </property>
+    <property>
+        <name>dfs.replication</name> 
+        <value>1</value> 
+    </property>
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/home/hadoop/hadoop-2.7.1/tmp</value> 
+    </property>
+
 
 
 
