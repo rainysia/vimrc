@@ -5,34 +5,28 @@ Dodcker manual
 
 ###Install on different system
 -----------
-```
-add docker hosts
+docker hosts
 54.234.135.251  get.docker.io
 54.234.135.251  cdn-registry-1.docker.io
-
-####Debian8
-----------
-need kernel > 3.8, add the below content into sources.list
 ```
-deb http://http.debian.net/debian jessie-backports main
+#Debian8
+need kernel > 3.8, add the below content into sources.list
+#deb http://http.debian.net/debian jessie-backports main
 #apt-get install docker.io
 有docker 的用户组, 为了避免使用sudo, 需要把当前用户加入到docker组,
-sudo usermod -aG docker your_username
+#sudo usermod -aG docker your_username
 
 remove docker
-apt-get purge docker-io
+#apt-get purge docker-io
 or
-apt-get autoremove --purge docker-io
-rm -rf /var/lib/docker
-```
+#apt-get autoremove --purge docker-io
+#rm -rf /var/lib/docker
 
-####Centos7
-----------
-```
+#Centos7
 sudo yum install docker
 ```
 
-####验证安装
+###Verify Installation
 -----------
 ```
 docker version
