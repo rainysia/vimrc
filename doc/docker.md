@@ -24,6 +24,8 @@ or
 
 #Centos7
 sudo yum install docker
+sudo systemctl start docker
+sudo systemctl enable docker
 ```
 
 ###Verify Installation
@@ -40,8 +42,12 @@ Server API version: 1.18
 Go version (server): go1.3.3
 Git commit (server): 7c8fca2
 OS/Arch (server): linux/amd64
-#docker info
+```
 
+###Docs
+-----------
+```
+#docker info
 #docker search xxxx 搜索相关的官方docker镜像(index.docker.io)
 #docker pull xxxx 下载相关的镜像,    用户名/镜像名, 
                 (根据 /var/lib/docker/repositories-aufs 存储在/var/lib/docker/graph/
