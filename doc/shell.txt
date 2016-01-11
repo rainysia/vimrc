@@ -4762,9 +4762,9 @@ This is an [example link](http://example.com/ "With a Title").
 ***
 ---
 
-
-
-
+175. arp 扫描内网ip冲突
+apt-get install arp-scan
+arp-scan -I eth0 -l 重复出现的IP就是IP冲突
 
 ##########################################################################
 5.2 更新hg                                          2013-11-14 11:14:11
