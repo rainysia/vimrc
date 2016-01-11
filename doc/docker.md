@@ -3,15 +3,16 @@ Dodcker manual
 
 #Basic Config
 
-###
+###Install on different system
 -----------
 ```
 add docker hosts
 54.234.135.251  get.docker.io
 54.234.135.251  cdn-registry-1.docker.io
-```
 
-Debian8, need kernel > 3.8, add the below content into sources.list
+####Debian8
+----------
+need kernel > 3.8, add the below content into sources.list
 ```
 deb http://http.debian.net/debian jessie-backports main
 #apt-get install docker.io
@@ -25,15 +26,16 @@ apt-get autoremove --purge docker-io
 rm -rf /var/lib/docker
 ```
 
-Centos7
+####Centos7
+----------
 ```
 sudo yum install docker
 ```
 
-
-验证安装
-#docker version
-
+####验证安装
+-----------
+```
+docker version
 Client version: 1.6.2
 Client API version: 1.18
 Go version (client): go1.3.3
@@ -44,7 +46,6 @@ Server API version: 1.18
 Go version (server): go1.3.3
 Git commit (server): 7c8fca2
 OS/Arch (server): linux/amd64
-
 #docker info
 
 #docker search xxxx 搜索相关的官方docker镜像(index.docker.io)
@@ -435,4 +436,4 @@ $sudo docker run -d -p 127.0.0.1:44444:80 --name test_web \
 -v $PWD/website:/var/www/html:ro \
 rainysia/nginx nginx
 
-
+```

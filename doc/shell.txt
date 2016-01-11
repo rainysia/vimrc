@@ -96,6 +96,17 @@ $getconf ARG_MAX
 
 统计某个文件夹下所有文件的行数
 find ./nn_cms/ -name '*.*' | xargs wc -l
+
+find . -name "*.py" | xargs cat | wc -l 统计所有行数,包含空格
+find . -name "*.py" | xargs cat|grep -v ^$|wc -l  去除空行
+find . -name "*.py" | xargs cat | grep -v -e  ^$ -e ^\s*\/\/.*$|wc -l 去除空行和注释
+find . -name "*.py" | sed '/^$/d; /\/\//d' | wc -l
+
+apt-get install cloc
+cloc ./ --3 来代码统计, 可以按照语言排序
+
+
+
 4.echp 输出
 #$echo “efwkfjwfjewklfjweklfjeklwjfwe4tjrklegnmer12312j3kljklfwe” | xargs -d X 
 -d用来指定采定界符 这里用的X分开
@@ -1586,6 +1597,7 @@ tar cvf - /home/www/ | gzip -qc > xxx.tar.gz
 一个命令完成解压
 gunzip -c xxx.tar.gz | tra xvf -
 gunzip xxx.tgz
+tar -xz
 tar zxvf xxx.tar.Z
 打包排除 文件和 文件夹
 tar zcvf xxx.tar.gz /home/www --exclude /home/www/db --exclude=/home/www/config.inc.php
@@ -1604,6 +1616,7 @@ tar -zcvf xxx.tar.gz xxx --exclude .svn
 .bz   tar jxvf xxx.tar.gz
 .zip  unzip xxx.zip             zip xxx.zip Dirname
 .xz   tar --xz -xvf filename.tar.gz 
+.tgz  tar -xzf xxx.tgz
 
 
 
