@@ -46,21 +46,23 @@ passwd hadoop  123456
 3.
 need three server, one master, two cluster
 vi three server hosts file && add 
-192.168.85.123 hadoop_master
-192.168.85.116 hadoop_node1
-192.168.85.40 hadoop_node2
+192.168.85.123 hadoop_node1
+192.168.85.116 hadoop_node2
+192.168.85.40 hadoop_node3
 
 4.
-ssh-keygen -t rsa in hadoop_master use hadoop user
+ssh-keygen -t rsa in hadoop_node1 use hadoop user
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 chmod 700 ~/.ssh
 
 do it in two node server under hadoop user
 
-ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop_master
 ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop_node1
 ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop_node2
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@hadoop_node3
+
+login each server and ssh hadoop_node1,hadoop_node2,hadoop_node3
 
 5.
 go to three server and add sudo user for hadoop
@@ -68,7 +70,7 @@ sudo vim /etc/sudoers
 
 
 6.
-cd hadoop_master home
+cd hadoop_node1 home
 vim /etc/profile
 
 export HADOOP_HOME=/home/hadoop/hadoop-2.7.1
