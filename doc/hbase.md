@@ -19,7 +19,7 @@ Oracle Java Download [Java 7](http://www.oracle.com/technetwork/java/javase/down
 #update-alternatives --config jar
 
 #export JAVA_HOME=/usr/java/java7
-#export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
+#export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar
 #export PATH=$PATH:$JAVA_HOME/bin
 do it both in user mode
 java -version
