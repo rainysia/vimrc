@@ -88,7 +88,7 @@ vim /home/hadoop/hadoop-2.7.1/etc/hadoop/core-site.xml
 add the below content into configuration
 
     <property>
-        <name>fs.default.name</name>
+        <name>fs.defaultFS</name>
         <value>hdfs://localhost:9000</value> 
     </property>
     <property>
@@ -107,6 +107,15 @@ add the below content into configuration
         <value>localhost:9001</value>   
     </property>
 
+8.
+modify ulimit -n
+vim /etc/security/limits.conf, for centos7
+add the below content at the end of file then restart server
+```
+* soft nofile 102400
+* hard nofile 102400
+```
+cat /proc/sys/fs/file-max  will affect the limits
 
 
 
