@@ -1870,3 +1870,17 @@ fab fabfile.py
     fab func_name:param1=value1
     fab func_name:value1
     fab func_name:value1,value2,param3=value3
+
+
+xml print 
+
+from lxml import etree
+
+node = etree.Element('xmltag', type='misc')
+node.attrib['pci_vendor_id'] = '111'
+node.attrib['aa'] = '222'
+node.attrib['bb'] = '333'
+node.attrib['cc'] = 'a1'
+node.attrib['end'] = 'eee'
+
+print etree.tostring(node, pretty_print = True)
