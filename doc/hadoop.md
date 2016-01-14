@@ -46,9 +46,9 @@ passwd hadoop  123456
 3.
 need three server, one master, two cluster
 vi three server hosts file && add 
-192.168.85.109 halo-cnode1
-192.168.85.115 halo-cnode2
-192.168.85.119 halo-cnode3
+192.168.85.109 halo-cnode1 NameNode
+192.168.85.115 halo-cnode2 node1
+192.168.85.119 halo-cnode3 node2
 
 4.
 ssh-keygen -t rsa in halo-cnode1 use hadoop user
@@ -61,6 +61,9 @@ do it in two node server under hadoop user
 ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@halo-cnode1
 ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@halo-cnode2
 ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@halo-cnode3
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@NameNode
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@node1
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop@node2
 
 login each server and ssh halo-cnode1,halo-cnode2,halo-cnode3
 
@@ -95,7 +98,7 @@ add the below content into configuration
 
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://halo-cnode1:9000</value> 
+        <value>hdfs://NameNode:9000</value> 
     </property>
     <property>
         <name>dfs.replication</name> 
@@ -120,19 +123,19 @@ add the below content into configuration
     </property>
     <property>
         <name>mapred.job.tracker</name>
-        <value>halo-cnode1:9001</value>
+        <value>NameNode:9001</value>
     </property>
     <property>
         <name>mapreduce.jobhistory.address</name>
-        <value>halo-cnode1:10020</value>
+        <value>NameNode:10020</value>
     </property>
     <property>
         <name>mapreduce.jobhistory.webapp.address</name>
-        <value>halo-cnode1:19888</value>
+        <value>NameNode:19888</value>
     </property>
     <property>
         <name>mapreduce.jobtracker.http.address</name>
-        <value>halo-cnode1:50030</value>
+        <value>NameNode:50030</value>
     </property>
 
 11.
@@ -140,11 +143,11 @@ vim /home/hadoop/hadoop-2.7.1/etc/hadoop/hdfs-site.xml
 add the below content into configuration
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>file:/home/hadoop/hadoop-2.7.1/hdfs/name</value>
+        <value>file:///home/hadoop/hadoop-2.7.1/hdfs/name</value>
     </property>
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>file:/home/hadoop/hadoop-2.7.1/hdfs/data</value>
+        <value>file:///home/hadoop/hadoop-2.7.1/hdfs/data</value>
     </property>
     <property>
         <name>dfs.replication</name>
@@ -152,7 +155,7 @@ add the below content into configuration
     </property>
     <property>
         <name>dfs.namenode.secondary.http-address</name>
-        <value>192.168.85.109:9001</value>
+        <value>NameNode:50090</value>
     </property>
     <property>
         <name>dfs.webhdfs.enabled</name>
@@ -164,7 +167,7 @@ vim /home/hadoop/hadoop-2.7.1/etc/hadoop/yarn-site.xml
 add the below content into configuration
     <property>
         <name>yarn.resourcemanager.hostname</name>
-        <value>halo-cnode1</value>
+        <value>NameNode</value>
     </property>
     <property>
         <name>yarn.nodemanager.aux-services</name>
@@ -176,23 +179,23 @@ add the below content into configuration
     </property>
     <property>
         <name>yarn.resourcemanager.address</name>
-        <value>halo-cnode1:8032</value>
+        <value>NameNode:8032</value>
     </property>
     <property>
         <name>yarn.resourcemanager.scheduler.address</name>
-        <value>halo-cnode1:8030</value>
+        <value>NameNode:8030</value>
     </property>
     <property>
         <name>yarn.resourcemanager.resource-tracker.address</name>
-        <value>halo-cnode1:8031</value>
+        <value>NameNode:8031</value>
     </property>
     <property>
         <name>yarn.resourcemanager.admin.address</name>
-        <value>halo-cnode1:8033</value>
+        <value>NameNode:8033</value>
     </property>
     <property>
         <name>yarn.resourcemanager.webapp.address</name>
-        <value>halo-cnode1:8088</value>
+        <value>NameNode:8088</value>
     </property>
     <property>
         <name>yarn.nodemanager.resource.memory-mb</name>
@@ -235,6 +238,7 @@ sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux; setenfor
 17.
 start
 su - hadoop on halo-cnode1
+hdfs namenode -format
 start-all.sh
 stop-all.sh
 
@@ -246,4 +250,6 @@ stop-all.sh
 ------
 ```
 #hadoop version
+jps
+hadoop dfsadmin -report
 ```
