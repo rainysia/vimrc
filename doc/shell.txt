@@ -2699,6 +2699,10 @@ sudo usermod -a -G git `eval whoami`
 如果想要加用户进sudoer组
 sudo adduser <username> sudo
 
+userdel username
+userdel -r username (including files)
+visudo (delete用户的sudo)
+
 本地电脑个人pc,比如tommy的
 su - tommy
 注意用户名要和里面的id_rsa.pub的账户对应
