@@ -4050,6 +4050,8 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
 144. HP机器需要原装键盘来重回bios
 
 145.shadowsocks
+pip install shadowsocks
+
 front:  ssserver -c /etc/shadowsocks.json
 
 ssserver -p server_port -k password -m bf-cfb --workers 2
