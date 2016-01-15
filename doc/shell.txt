@@ -2692,6 +2692,8 @@ $git push origin master 给远程提交一个分支
 =======centos 7=======
 yum install git git-core openssh -y
 adduser --system --shell /bin/bash  --create-home --home-dir /home/apche apache
+
+debian  adduser --system --shell /bin/bash  --home /home/apache apache
 passwd git  #domain
 ssh-keygen
 sudo usermod -a -G git `eval whoami`
