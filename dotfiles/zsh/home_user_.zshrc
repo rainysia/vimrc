@@ -126,4 +126,4 @@ echo "System uptime:";uptime
 echo
 echo "There are `who|wc -l` userids logged in right now."
 alias git commit='nocorrect git commit'
-source ~/.ssh_tommy
+source ~/.tommy_ssh

@@ -91,4 +91,4 @@ echo "System uptime:";uptime
 echo
 echo "There are `who|wc -l` userids logged in right now."
 
-source ~/.ssh_tommy
+source ~/.tommy_ssh
