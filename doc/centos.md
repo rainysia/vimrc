@@ -19,3 +19,28 @@ cat /etc/sysconfig/network-scripts/ifcfg-enp2s0
 ```
 ONBOOT="yes"
 ```
+
+###Close selinux
+----------
+```
+setenforce 0
+vim /etc/selinux/config
+```
+
+###Close iptables
+----------
+```
+systemctl disable firewalld
+service firewalld stop
+```
+
+###Createrepo
+----------
+```
+yum install yum-utils createrepo yum-plugin-priorities
+wge repo_file
+reposync -r repo_soft_name
+createrepo filepath
+vim /etc/yum.repos.d/repo.file 
+make gpgcheck=0
+```
