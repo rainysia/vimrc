@@ -1005,6 +1005,23 @@ du -b 用字节单位 -k 以KB为单位 -m 以MB为单位 -B 以块为单位 如
 #$du -ak source_dir | sort -nrk 1 | head
 du -sh 列出当前目录大小
 
+du -h --max-depth=1
+du -h --max-depth=n path
+du -h --max-depth=n ./ | sort -nr 显示当前目录下子目录的大小并且排序.
+注意,du 是统计文件大小最后相加,df是统计数据块使用情况,
+如果有一个进程在打开一个大文件的时候,这个大文件直接被rm或者mv掉,则du会更新统计数值,df不会更新统计数值,还是认为空间没有释放.直到这个打开大文件的进程被kill掉.
+df -h 统计
+du -sh path 统计总数大小
+du -sm * | sort -n 统计当前目录大小,并按照大小排序
+du -sk * | sort -n
+du -sk * | grep username 查看用户的大小
+du -s * | sort -n | tail 列出当前目录最大的10个文件
+du -m | cut -d "/" -f 2 看第二个/ 字符前的文字
+查看该文件夹下有多少个文件
+du path/
+du path/*/*/* | wc -l
+wc 的-l 是多少行,-m是多少字符,-w是多少字
+
 #chmod u+s 给user增加suid 如果user有x的权限,那么x位就变成s,如果没有x的权限,那么就变成S
 #chmod g+s 给group增加sgid 如果group有x的权限,那么x位就变成s,如果没有x的权限,那么变成S
 u-s g-s 类似
@@ -1147,7 +1164,7 @@ find ./ -type l | wc -l //
      alt + p 输入字符查找与字符相接近的历史命令
      alt + t 交换两个光标当前所处位置单词和光标前一个单词, 交换光标处和之前的单词
      alt + u 把光标当前位置单词变为大,从光标处更改为全部大写的单词
-     alt + . 使用上一条命令的最后一个参数
+     alt + . 使用上一条命令的最后一个参数 (or ESC+.) 复制最后使用的命令中的参数
      alt + backspace 与 ctrl + w 相同类似,分隔符有些差别
     Bang (!) 命令
         !! 执行上一条命令
@@ -1236,6 +1253,7 @@ ffmpeg -f x11grab -s wxga -r 25 -i:0.0 -sameq /tmp/out.mpg
 36.清空或创建一个文件
 ```
 >file.txt 有些是:>file.txt
+echo "aa" > test.txt 和 echo "bb" >> test.txt //>将原文件清空,并且内容写入到文件中,>>将内容放到文件的尾部
 ```
 
 37.在午夜的时候执行某命令,at用于定时一次性任务,cron是定时周期性任务,参数很灵活
@@ -1258,68 +1276,60 @@ arecord | ssh username@host aplay
 ssh user@host cat /path/to/remotefile | diff /path/to/localfile -
 ```
 
-41.netstat -tulnp 查看占用端口的进程
--a all 网络端口 -at tcp的端口 -s 所有连接的统计 -c 动态持续输出
--t 显示TCP链接信息
--u 显示UDP链接信息
--l 显示监听状态的端口
--n 直接显示ip,不做名称转换
--p 显示相应的进程PID以及名称
+40.netstat -tulnp 查看占用端口的进程
+```
+    -a all 网络端口 -at tcp的端口 -s 所有连接的统计 -c 动态持续输出
+    -t 显示TCP链接信息
+    -u 显示UDP链接信息
+    -l 显示监听状态的端口
+    -n 直接显示ip,不做名称转换
+    -p 显示相应的进程PID以及名称
 sockets 的要用lsof工具
 netstat -lntp 查看所有监听端口
 netstat -antp 查看所有已经建立的连接
 netstat -s 查看网络统计信息
+```
 
-42.更友好的显示当前挂载的文件系统
+41.更友好的显示当前挂载的文件系统
+```
 mount | column =t  查看挂载的分区状态
 mount -o remount,rw,auto / 重新挂载
 mount -n -o remount,rw / 重新挂载根目录,设置为可读写
 mount -t vfat /dev/sdb1 /mnt/usb 
 fdisk -l 查看所有分区
 swapon -s 查看所有交换分区
+```
 
-43.实时查看某个目录下最新改动过的文件 -d 高亮变化,-n 1刷新间隔1秒
+42.实时查看某个目录下最新改动过的文件 -d 高亮变化,-n 1刷新间隔1秒
+```
 watch -d -n 1 'df;ls -F|At /path'
+```
 
-44.ssh挂在远程主机上的文件夹,需要安装FUSE和sshfs
+43.ssh挂在远程主机上的文件夹,需要安装FUSE和sshfs
+```
 sshfs name@server:/path/to/folder /path/to/mount/point
 卸载用fusermount -u /path/to/mount/point
+```
 
-45.wget递归下载整站,random-wait 等待0.5s到1.5s进行下一次请求,-r递归检索
+44.wget递归下载整站,random-wait 等待0.5s到1.5s进行下一次请求,-r递归检索
+```
 -erobots=ff忽略robots.txt -U Mozilla设置User-Agent
 --limit-rate=20K限制下载速度 --wait=1h每下载一个文件后等待1小时
 wget --random-wait -r -p -e robots=off -U Mozilla www.example.com
+```
 
-46.复制最后使用的命令中的参数
-ALT+.(or ESC+.)
-
-47.运行一个命令但不保存到history中
+45.运行一个命令但不保存到history中
+```
 <space>command
+```
 
-48.显示当前目录中所有子目录的大小
-du -h --max-depth=1
-du -h --max-depth=n path
-du -h --max-depth=n ./ | sort -nr 显示当前目录下子目录的大小并且排序.
-注意,du 是统计文件大小最后相加,df是统计数据块使用情况,
-如果有一个进程在打开一个大文件的时候,这个大文件直接被rm或者mv掉,则du会更新统计数值,df不会更新统计数值,还是认为空间没有释放.直到这个打开大文件的进程被kill掉.
-df -h 统计
-du -sh path 统计总数大小
-du -sm * | sort -n 统计当前目录大小,并按照大小排序
-du -sk * | sort -n
-du -sk * | grep username 查看用户的大小
-du -s * | sort -n | tail 列出当前目录最大的10个文件
-du -m | cut -d "/" -f 2 看第二个/ 字符前的文字
-查看该文件夹下有多少个文件
-du path/
-du path/*/*/* | wc -l
-wc 的-l 是多少行,-m是多少字符,-w是多少字
-
- 
-
-49.显示消耗内容最多的10个运行中的进程.
+46.显示消耗内容最多的10个运行中的进程.
+```
 ps aux | sort -nk +4 | tail
+```
 
-50.查看ascii码
+47.查看ascii码
+```
 man 7 ascii
 man 7 regex 正则
 man 7 suffixes 文件后缀
@@ -1332,35 +1342,57 @@ man 7 bootparam
 man 5 filesystems 各种linux文件系统
 man 5 proc /proc的文件系统
 man 内容后, 用/来搜索 enter(或者n)来进入,shift+n来返回.
+```
 
-51.简易计时器 time command
+48.简易计时器
+```
+time command
+```
 
-52.远程关掉windows主机
+49.远程关掉windows主机
+```
 net rpc shutdown -l ip_address -U username%password
+```
 
-53.告知服务器什么时候重启完
+50.告知服务器什么时候重启完
+```
 ping -a IP
+```
 
-54.列出最常用的10个命令
+51.列出最常用的10个命令
+```
 history | awk '{a[$2]++}END{for(i in a){print a[i] "" i}}' | sort -rn | head 
-55.lastlog 显示每个用户最后登录的时间
 
-56.tzselect 时区选择 5,9,1,1 亚洲 中国 北京时间 确认 
+history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10
+history | awk '{CMD[$3]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c4 -s " " -t | sort -nr | nl | head -n10
+```
+zshrc
+```
+history | awk '{CMD[$4]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c4 -s " " -t | sort -nr | nl | head -n10
+
+```
+
+52.lastlog 显示每个用户最后登录的时间
+
+53.tzselect 时区选择 5,9,1,1 亚洲 中国 北京时间 确认 
+```
 不用就去 /etc/sysconfig/clock UTC=false ARC=false 
-#ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 图形设置timeconfig
-#ntpdate 210.72.145.44 同步时间
-#crontab -e 
-*/20 * * * * /usr/sbin/ntpdate 210.72.145.44
-30 5 * * * /usr/sbin/ntpdate 210.72.145.44
+    ntpdate 210.72.145.44 同步时间
+    crontab -e 
+        */20 * * * * /usr/sbin/ntpdate 210.72.145.44
+        30 5 * * * /usr/sbin/ntpdate 210.72.145.44
 ntpdate ns1.bluehost.com
 ntpdate pool.ntp.org
 dig pool.ntp.org
 ntpdate 67.213.74.13
 ntpdate 0.ubuntu.pool.ntp.org
 ntpdate timeserver2.domain.org
+```
 
-57.
+54.System index
+```
 vmstat 2 每两秒显示虚拟内存状态 
 vmstat virtual memory statistics 虚拟内存统计  vmstat 3 5 表示每3秒更新一次输出信息,循环输出,统计5次后停止输出
 	procs
@@ -1407,9 +1439,10 @@ iostat 系统输出输出统计 -c cpu的 -d 磁盘的使用情况 -k 每秒按k
 					
 mpstat 实时系统监控工具 监控-P 监控哪个CPU ALL -P ALL 2 每2秒产生统计
 pmap -d PID 显示PID的内存信息
+```
 
-终端操作快捷键.
-1,echo "aa" > test.txt 和 echo "bb" >> test.txt //>将原文件清空,并且内容写入到文件中,>>将内容放到文件的尾部
+55.
+```
 2,chmod go+w -R /home/zhangy //给组用户和其他用户添加写的权限
 3,tar -tzvf test.tar.gz //列出归档内容
 4,du -ah //查看文件列表大小
@@ -1570,6 +1603,7 @@ tar -zcvf xxx.tar.gz xxx --exclude .svn
 .zip  unzip xxx.zip             zip xxx.zip Dirname
 .xz   tar --xz -xvf filename.tar.gz 
 .tgz  tar -xzf xxx.tgz
+```
 
 
 
@@ -2729,10 +2763,6 @@ git sobmodule update 来从上游库拉取所有数据
 
 108. 统计最常用的
 
-history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10
-history | awk '{CMD[$3]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c4 -s " " -t | sort -nr | nl | head -n10
-zshrc
-history | awk '{CMD[$4]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c4 -s " " -t | sort -nr | nl | head -n10
 109. cat来读取文本赋值
 touch 1.txt
 echo -ne 'aaa\nbbbbbbb\ncccc=3a\n' >> 1.txt 分行输入
