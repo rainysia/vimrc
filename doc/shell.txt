@@ -2843,6 +2843,105 @@ awk '{ for (i=0;i<=length;i++){ if ($i !=0 && $i !=""){ print $i }}}' ./test.log
 bind IP address
 iptables -I INPUT -s 185.130.5.xxx -j DROP
 
+清除所有 iptables rules
+```
+iptables -F
+iptables -X
+iptables -Z
+```
+开放指定的端口
+    #允许本地回环接口(即运行本机访问本机)
+        iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT
+    # 允许已建立的或相关连的通行
+        iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+    #允许所有本机向外的访问
+        iptables -A OUTPUT -j ACCEPT
+    # 允许访问22端口
+        iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+    #允许访问80端口
+        iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+    #允许FTP服务的21和20端口
+        iptables -A INPUT -p tcp --dport 21 -j ACCEPT
+        iptables -A INPUT -p tcp --dport 20 -j ACCEPT
+    #禁止其他未允许的规则访问（注意：如果22端口未加入允许规则，SSH链接会直接断开。）
+        1）.用DROP方法
+            iptables -A INPUT -p tcp -j DROP
+        2）.用REJECT方法
+            iptables -A INPUT -j REJECT
+            iptables -A FORWARD -j REJECT
+        4、屏蔽IP
+            #如果只是想屏蔽IP的话“3、开放指定的端口”可以直接跳过。
+            #屏蔽单个IP的命令是
+                iptables -I INPUT -s 123.45.6.7 -j DROP
+            #封整个段即从123.0.0.1到123.255.255.254的命令
+                iptables -I INPUT -s 123.0.0.0/8 -j DROP
+            #封IP段即从123.45.0.1到123.45.255.254的命令
+                iptables -I INPUT -s 124.45.0.0/16 -j DROP
+            #封IP段即从123.45.6.1到123.45.6.254的命令是
+                iptables -I INPUT -s 123.45.6.0/24 -j DROP
+    4、查看已添加的iptables规则
+        iptables -L -n
+        v：显示详细信息，包括每条规则的匹配包数量和匹配字节数
+        x：在 v 的基础上，禁止自动单位换算（K、M） vps侦探
+        n：只显示IP地址和端口号，不将ip解析为域名
+    5、删除已添加的iptables规则
+    将所有iptables以序号标记显示，执行：
+        iptables -L -n --line-numbers
+    比如要删除INPUT里序号为8的规则，执行：
+        iptables -D INPUT 8
+    6 保存规则
+        CentOS上可以执行：service iptables save保存规则。
+        Debian/Ubuntu上iptables是不会保存规则的。
+            需要按如下步骤进行，让网卡关闭是保存iptables规则，启动时加载iptables规则。
+            如果当前用户不是root,即使使用了sudo,也会提示你没有权限,无法保存,所以执行本命令,你必须使用root用户.
+            可以使用sudo -i快速转到root,使用完成,请及时使用su username切换到普通帐户.
+            为了重启服务器后,规则自动加载,我们创建如下文件:
+            sudo vim /etc/network/if-pre-up.d/iptables#!/bin/bash
+            iptables-save > /etc/iptables.rules
+
+            添加执行权限。
+            chmod +x /etc/network/if-pre-up.d/iptables
+                附上基础规则：
+                *filter
+                :INPUT ACCEPT [106:85568]
+                :FORWARD ACCEPT [0:0]
+                :OUTPUT ACCEPT [188:168166]
+                :RH-Firewall-1-INPUT - [0:0]
+            允许本地回环接口(即运行本机访问本机)
+               -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT
+            允许已建立的或相关连的通行
+               -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+            允许所有本机向外的访问
+               -A OUTPUT -j ACCEPT
+            允许PPTP拨号到外网
+               -A INPUT -p tcp -m tcp --dport 1723 -j ACCEPT
+            仅特定主机访问Rsync数据同步服务
+               -A INPUT -s 8.8.8.8/32 -p tcp -m tcp --dport 873 -j ACCEPT
+            仅特定主机访问WDCP管理系统
+               -A INPUT -s 6.6.6.6/32 -p tcp -m tcp --dport 8080 -j ACCEPT
+            允许访问SSH
+               -A INPUT -p tcp -m tcp --dport 1622 -j ACCEPT
+            允许访问FTP
+               -A INPUT -p tcp -m tcp --dport 21 -j ACCEPT
+               -A INPUT -p tcp -m tcp --dport 20 -j ACCEPT
+            允许访问网站服务
+               -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+            禁止所有未经允许的连接
+               -A INPUT -p tcp -j DROP
+        注意：如果22端口未加入允许规则，SSH链接会直接断开。
+        -A INPUT -j REJECT
+        -A FORWARD -j REJECT
+                COMMIT
+                可以使用一下方法直接载入：
+                1、复制上面的规则粘贴到这里,保存本文件
+                sudo vim /etc/iptables.test.rules
+                2、把本规则加载,使之生效,注意,iptables不需要重启,加载一次规则就成了
+                sudo iptables-restore < /etc/iptables.test.rules
+                3、查看最新的配置,应该所有的设置都生效了.
+                sudo iptables -L -n
+                4、保存生效的配置,让系统重启的时候自动加载有效配置（iptables提供了保存当前运行的规则功能）
+                iptables-save > /etc/iptables.rules
+
 116.chkconfig --list 列出系统所有服务
 chkconfig --list | grep on 列出所有启动的系统服务
 
