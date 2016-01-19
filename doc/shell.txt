@@ -2840,6 +2840,8 @@ awk '{ for (i=0;i<=length;i++){ if ($i !=0 && $i !=""){ print $i }}}' ./test.log
 114. lsblk 列出块设备,除了RAM外显示, -l 可以了解新插入的USB设备的名称.
 
 115.iptables -L 查看防火墙
+bind IP address
+iptables -I INPUT -s 185.130.5.xxx -j DROP
 
 116.chkconfig --list 列出系统所有服务
 chkconfig --list | grep on 列出所有启动的系统服务
