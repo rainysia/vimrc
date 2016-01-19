@@ -1,153 +1,118 @@
-/*
- * shell.txt
-
- * @package    
- * @subpackage 
- * @author     rainysia <rainysia@gmail.com>
- * @copyright  2006-2015 BTROOT.ORG
- * @license    http://www.btroot.com/user_guide/license.html V1
- * @createTime 2009-11-14 11:14:23
- * @lastChange 2015-12-21 15:05:10
-*/
-Shell好玩的
-
-三个概念:
-stdout 标准输出设备 (printf(“..”)) 
-stderr 标准错误输出设备 
-两者默认向屏幕输出,其中stdout 输出到磁盘文件,stderr输出到屏幕
-stdin 标准输入设备
+Shell Notes
+============
 
 1.录制屏幕操作
-$script -t 2> time.log -a output.session
+```
+script -t 2> time.log -a output.session
 time.log描述每个命令在何时运行 output.session存储命令输出
 -t 将数序数据导入stderr 2> 将stderr重定向到time.log
-$scriptreplay time.log output.session 按照播放命令序列输出
+scriptreplay time.log output.session 按照播放命令序列输出
+```
 
 2.在第二个终端演示操作
+```
 terminal_1
-$mkfifo scriptfifo
+    mkfifo scriptfifo
 terminal_2
-$car scriptfifo
+    car scriptfifo
 terminal_1
-$script -f scriptfifo
-$command;
-$exit;
+    script -f scriptfifo
+    command;
+    exit;
+```
 
 3.显示行号 移除空白行
-#$cat -n file.txt | tr -s '\n'
+```
+cat -n file.txt | tr -s '\n'
 创建多级目录树
-#$mkdir -p /path1/path2/path3
-#$mkdir -p /home/user/{test1,test2,test3}
-#$mkdir filenames && chown tommy:tommy -R !$ 创建目录并且授权。
+    mkdir -p /path1/path2/path3
+    mkdir -p /home/user/{test1,test2,test3}
+    mkdir filenames && chown tommy:tommy -R !$ 创建目录并且授权.
 打印访问时间超过7分钟的所有文件 atime 访问时间 mtime 修改时间 ctime 变化时间 分钟amin mmin cmin 后面参数 用+ -来控制大于还是小于 这个时间参数
-#$find . -type f -amin +7 -print 打印访问时间超过7分钟的所有文件
-#$find . -type f -newer file.txt -print 找出比file.txt更新的文件
-
-#$find . -type f -size +2k 找出大于2KB的文件 b块 c字节 w字 k千字节M兆字节G吉字节
-
-#$find . -type f -name “*.swp” -delete 删除找到的swp 文件
-
-#$find . -type f -perm 644 -print 找出特定权限的所有文件
-
-#$find . -type f -name “*.php” ! -perm 644 -print 找出没有设置644权限的php文件
-
-#$find . -type f -user slynux -print 找出用户slynux拥有的所有文件 -user跟用户名或UID
-
-#find . -type f -user root -exec chown tom {} \; 用-exec执行找到的文件的后续操作 {}特殊的字符串，配合-exec 使用。对于每个匹配的文件{}会被替换成相应的文件名
-
-#find . -type f -name “*.c” -exec cat {} \;>all_c_files.txt 把所有的c文件合并到一个文件。
-
-#find . -type f -mtime +10 -name “*.txt” -exec cp {} OLD \; 把10天前的txt文件复制到OLD目录中.
-
--exec 只能直接使用单个命令，可以 -exec ./commands.sh {} \; 来把多个命令写到sh里面去
-
-
-#$find devel/source_path \( -name “.git” -prune \) -o \( -type f -print \)
-跳过含有.git目录的 \( -name “.git” -prune \) 排除.git目录
+    find . -type f -amin +7 -print 打印访问时间超过7分钟的所有文件
+    find . -type f -newer file.txt -print 找出比file.txt更新的文件
+    find . -type f -size +2k 找出大于2KB的文件 b块 c字节 w字 k千字节M兆字节G吉字节
+    find . -type f -name "*.swp" -delete 删除找到的swp 文件
+    find . -type f -perm 644 -print 找出特定权限的所有文件
+    find . -type f -name "*.php" ! -perm 644 -print 找出没有设置644权限的php文件
+    find . -type f -user slynux -print 找出用户slynux拥有的所有文件 -user跟用户名或UID
+    find . -type f -user root -exec chown tom {} \; 用-exec执行找到的文件的后续操作 {}特殊的字符串,
+        配合-exec 使用.对于每个匹配的文件{}会被替换成相应的文件名
+    find . -type f -name "*.c" -exec cat {} \;>all_c_files.txt 把所有的c文件合并到一个文件.
+    find . -type f -mtime +10 -name "*.txt" -exec cp {} OLD \; 把10天前的txt文件复制到OLD目录中.
+        -exec 只能直接使用单个命令,可以 -exec ./commands.sh {} \; 来把多个命令写到sh里面去
+跳过含有.git目录的 \( -name ".git" -prune \) 排除.git目录
+    find devel/source_path \( -name ".git" -prune \) -o \( -type f -print \)
 \( -type f -print \) 然后 -o匹配多个条件中的1个
-#find ./etc -name “*.php” | xargs grep -n “需要匹配的文字” >>/home/www    (在grep 后跟-A num
+    find ./etc -name "*.php" | xargs grep -n "需要匹配的文字" >>/home/www    (在grep 后跟-A num
             来指定后面几行,-b是前几行.)
-
-#cat test.txt | xargs 把多行输入转换成单行输出
-#cat test.txt | xargs -n 3 把单行输入转换成多行输出 每行n个参数(根据空格来划分参数)
-
-$find . -name 'core' -type f -exec rm {} /;
-$find . -name 'core' -type f | xargs rm
-    第一种，-exec，相当于把前面find的结果替换到{} /;的位置去进行rm操作。
-    第二种，|xargs 是相当于把管道前面的find结果替换到管道后面的末尾（默认是末尾）去执行rm操作。
-    -exec的方式只开启了一个rm进程去删除文件，而xargs因为是分批处理，所以会开启多个进程处理，效率自然稍微低一点，但为什么有时候还要用它呢？
-因为一次性替换find到的结果，如果结果过多，会出现参数过长的错误，这时候就需要用到xargs来分批处理了
-$touch 1 2 3
-$find . -type f -exec mv {} {}.bak \;
-$ls
-1.bak 2.bak  3.bak
-$rm -f *
-$touch 1 2 3
-$find . -type f|xargs -i mv {} {}.bak
-$ls
-1.bak 2.bak  3.bak
-$find . -type f|xargs -I [] mv [] [].tmp
-$ls
-1.bak.tmp 2.bak.tmp  3.bak.tmp
-    怎么才能知道系统最大支持多少个命令参数呢？
-$getconf ARG_MAX
-2621440
-    就是说，如果在我的系统find结果不超过2621440个文件的话，就不用担心参数超长问题了。
+    cat test.txt | xargs 把多行输入转换成单行输出
+    cat test.txt | xargs -n 3 把单行输入转换成多行输出 每行n个参数(根据空格来划分参数)
+    find . -name 'core' -type f -exec rm {} /;
+    find . -name 'core' -type f | xargs rm
+        第一种,-exec,相当于把前面find的结果替换到{} /;的位置去进行rm操作.
+        第二种,|xargs 是相当于把管道前面的find结果替换到管道后面的末尾(默认是末尾)去执行rm操作.
+        -exec的方式只开启了一个rm进程去删除文件,而xargs因为是分批处理,所以会开启多个进程处理,效率自然稍微低一点,但为什么有时候还要用它呢？
+        因为一次性替换find到的结果,如果结果过多,会出现参数过长的错误,这时候就需要用到xargs来分批处理了
+    touch 1 2 3
+    find . -type f -exec mv {} {}.bak \;
+    ls
+    1.bak 2.bak  3.bak
+    rm -f *
+    touch 1 2 3
+    find . -type f|xargs -i mv {} {}.bak
+    ls
+    1.bak 2.bak  3.bak
+    find . -type f|xargs -I [] mv [] [].tmp
+    ls
+    1.bak.tmp 2.bak.tmp  3.bak.tmp
+怎么才能知道系统最大支持多少个命令参数呢？
+    getconf ARG_MAX
+    2621440
+就是说,如果在我的系统find结果不超过2621440个文件的话,就不用担心参数超长问题了.
 
 统计某个文件夹下所有文件的行数
-find ./nn_cms/ -name '*.*' | xargs wc -l
-
-find . -name "*.py" | xargs cat | wc -l 统计所有行数,包含空格
-find . -name "*.py" | xargs cat|grep -v ^$|wc -l  去除空行
-find . -name "*.py" | xargs cat | grep -v -e  ^$ -e ^\s*\/\/.*$|wc -l 去除空行和注释
-find . -name "*.py" | sed '/^$/d; /\/\//d' | wc -l
+    find ./proj_name/ -name '*.*' | xargs wc -l
+    find . -name "*.py" | xargs cat | wc -l 统计所有行数,包含空格
+    find . -name "*.py" | xargs cat|grep -v ^$|wc -l  去除空行
+    find . -name "*.py" | xargs cat | grep -v -e  ^$ -e ^\s*\/\/.*$|wc -l 去除空行和注释
+    find . -name "*.py" | sed '/^$/d; /\/\//d' | wc -l
 
 apt-get install cloc
 cloc ./ --3 来代码统计, 可以按照语言排序
-
-
+```
 
 4.echp 输出
-#$echo “efwkfjwfjewklfjweklfjeklwjfwe4tjrklegnmer12312j3kljklfwe” | xargs -d X 
--d用来指定采定界符 这里用的X分开
-#$echo “efjwkfjewklfjewklfjweklfjekwfjlekw” | xargs -d k -n 2 
-把输入划分成2行，以k为定界符
-#$echo -ne 'aaa\nbbb\nccc\n'>>1.txt -n不显示换行-e解释反斜杠 \n新行
-#$echo file.txt | tr -d '[set1]' 删除file.txt 含有[set1] 并打印剩余的
-
-#$echo file.txt | tr -d -c '[set2]' 删除除了 -c 补集以外的所有内容
-
-#$echo “string. string” | tr -s '' 用tr -s 压缩空白字符
-
-#$cat sum.txt | echo $(tr '\n' '+') 0 ] 
-sum.txt 为 1 2 3 4 5 6
+```
+echo "efwkfjwfjewklfjweklfjeklwjfwe4tjrklegnmer12312j3kljklfwe" | xargs -d X 
+    -d用来指定采定界符 这里用的X分开
+echo "efjwkfjewklfjewklfjweklfjekwfjlekw" | xargs -d k -n 2 
+    把输入划分成2行,以k为定界符
+echo -ne 'aaa\nbbb\nccc\n'>>1.txt -n不显示换行-e解释反斜杠 \n新行
+echo file.txt | tr -d '[set1]' 删除file.txt 含有[set1] 并打印剩余的
+echo file.txt | tr -d -c '[set2]' 删除除了 -c 补集以外的所有内容
+echo "string. string" | tr -s '' 用tr -s 压缩空白字符
+cat sum.txt | echo $(tr '\n' '+') 0 ] 
+    sum.txt 为 1 2 3 4 5 6
 用tr把 \n 替换为+ ,这样变成了1+2+3+4+5+6+,追加0,$[] 执行算数运算,变成了
 echo $(1+2+3+4+5+6+0)
-
-        读取文件的首行并赋值给变量
+    读取文件的首行并赋值给变量
         read -r line < file  line是变量 或 $line=$(head -l file)
-        
-        依次读入文件每一行
+    依次读入文件每一行
         $while read -r line;do
             #do something with $line
         done < file
-
-        随机读取一行并赋值给变量
+    随机读取一行并赋值给变量
         read -r random_line << (shuf file)
-
-        保存文件的大小到变量
+    保存文件的大小到变量
         $size =$(wc-c < file)
-
-        从文件路径中获取文件名
+    从文件路径中获取文件名
         $filename=$(path##*/)
-
-        从文件路径中获取目录名
+    从文件路径中获取目录名
         $dirname=$(path%/*)
-
-        快速copy文件
+    快速copy文件
         cp /path/to/file{,_copy} 等价cp /path/to/file /path/to/file_copy  mv也可以类似
-
-        生成a~z字母
+    生成a~z字母
         echo {a..z}
         printf "%c" {a..z} 不包含空格
         printf "%c\n" {a..z} 每行一个字母
@@ -155,36 +120,32 @@ echo $(1+2+3+4+5+6+0)
         echo {w,t,}h{e{n{,ce{,forth}},re{,in,fore,with{,al}}},ither,at} 随机生成30个英文单词
         echo {a,b,c}{1,2,3} 生成a1 a2 a3 b1 b2...
         
-        重复输出10次字符串
+    重复输出10次字符串
         echo foo{,,,,,,,,,,} 
-
-        拼接字符串
+    拼接字符串
         echo "$x$y"
-
-        替换字符串中的foo为bar
+    替换字符串中的foo为bar
         echo ${str/foo/bar}
-
-        计算字符串长度
+    计算字符串长度
         echo ${#str}
-
-        提取字符串的子串
+    提取字符串的子串
         $str="hello world"
         echo ${str:6}  提取到world ${var:offset:length}
-
-        转换成大写，小写
+    转换成大写,小写
         declare -u var
         declare -l var
+```
 
 5.校检文件
+```
 md5sum sha1summ
 md5sum filename > filename.md5 把产生的md5码重定向到.md5
 获取文本的md5值: echo -n "text" | md5sum
-echo -n "text" | md5sum| cut -d ' ' -f1
-
-#uniq 从文本stdin中提取单一的行,并且去掉重复的行
-#cat sorted_file.txt | uniq>uniq_lines.txt 找出已排序文件中不重复的行
+    echo -n "text" | md5sum| cut -d ' ' -f1
+```
 
 6.排序
+```
 #$sort -n file.txt 按照数字排序
 #$sort -r file.txt 按照逆序进行排序
 #$sort -M months.txt 按照月份时间排序
@@ -208,6 +169,8 @@ echo -n "text" | md5sum| cut -d ' ' -f1
 2 winxp 4000
 -k 可以是一个范围,当字符串没有用空格隔开时, #$sork -nk 2,4 data.txt
 用第一个字符作为键 #$sork -nk 1,1 data.txt
+#uniq 从文本stdin中提取单一的行,并且去掉重复的行
+#cat sorted_file.txt | uniq>uniq_lines.txt 找出已排序文件中不重复的行
 #$sort unsorted.txt | uniq 排序并且去掉重复行 等于 #$sort -u unsorted.txt
 #$sort unsorted.txt | uniq -d 找出文件中重复的行
 #$sort unsorted.txt | uniq -c 统计各行出现的次数
@@ -217,7 +180,7 @@ echo -n "text" | md5sum| cut -d ' ' -f1
 #$du -s path | sort -rn | head 选出排前10个的
 #$du -s path | sort -rn | tail ...尾
 
-#$find /etc -name “*” | xargs grep “hello abcserver” > ./cqtest.txt
+#$find /etc -name "*" | xargs grep "hello abcserver" > ./cqtest.txt
 grep 后-n 可以显示行号
 #$uniq 消除重复内容, 只能用于排过序的数据输入,找出单一的行
 #$cat 1.txt
@@ -237,58 +200,62 @@ ddd
 和 #$sort -u 1.txt 一个意思 #$sort 1.txt | uniq -u 
 #$sort 1.txt | uniq -c 统计各行出现的次数
 #$sort 1.txt | uniq -d 找出重复的行
-#$ls -s | sort -k 1 -n 对当前目录下文件按照大小排序。
+#$ls -s | sort -k 1 -n 对当前目录下文件按照大小排序.
+```
 
 
 7.排序末尾和开头
-#$tail head -n num filename 打印后 前 多少行
-#$tail -f /log -f随着数据的更新实时打印更新的内容 和#$dmesg | tail -f
-#$tail -f /log –pid $PID 跟踪进程PID来实时
+```
+tail head -n num filename 打印后 前 多少行
+tail -f /log -f随着数据的更新实时打印更新的内容 和#$dmesg | tail -f
+tail -f /log –pid $PID 跟踪进程PID来实时
 tail -f /tmp/log | sed -u 's/^/key=791f28\&content=/' | sed -u 's/"/-@-/g' | sed -u 's/.*/"&"/' | xargs -I {} curl -d {} http://115.29.161.122/webtail/chunk
-可以实现把tail的加载到浏览器中 tail >> file >> web
- 
+把tail的加载到浏览器中 tail >> file >> web
 
 列出目录 目录的文件类型字符是d, ^是行首标记
-#$ls -d */ 
-#$ls -F | grep “/$”
-#$ls -l | grep “^d”
-
- 
+    ls -d */ 
+    ls -F | grep "/$"
+    ls -l | grep "^d"
+```
 
 8.pushd popd 快速定位
+```
 pushd 把路径压入栈, 依次压入 popd 依次栈目录删除路径 dirs 查看栈内容
-#$pushd /home/www
-#$pushd /usr/share
-#$pushd /usr/src
-#$dirs
-~ /usr/src /usr/share /home/www
-0 1 2 3
-切换路径#$pushd +3 会切换到/home/www 并且改变栈地址(栈翻转) popd pushd +no o从左到邮 从0-n计数
-
-两个目录 可以用 #$cd - 切换
+    pushd /home/www
+    pushd /usr/share
+    pushd /usr/src
+    dirs
+        ~ /usr/src /usr/share /home/www
+        0 1 2 3
+切换路径pushd +3 会切换到/home/www 并且改变栈地址(栈翻转) popd pushd +no o从左到邮 从0-n计数
+```
 
 9.统计文件
 wc统计文件的行数,单词数,字符数 (word count) 直接wc file 会打印出文件的行数 单词数 字符数
-#$wc -l file 统计行数
-#$cat file | wc -1 将stdin作为输入 
-#$wc -w file 统计单词数
-#$cat file | wc -w 
-#$wc -c file 统计字符数
-#$cat file | wc -c
-#$echo -n 12345 | wc -c 统计文本的字符数 -n避免echo添加额外的换行符
-#$wc file -L 打印最长行的长度
+```
+    wc -l file 统计行数
+    cat file | wc -1 将stdin作为输入 
+    wc -w file 统计单词数
+    cat file | wc -w 
+    wc -c file 统计字符数
+    cat file | wc -c
+    echo -n 12345 | wc -c 统计文本的字符数 -n避免echo添加额外的换行符
+    wc file -L 打印最长行的长度
+```
 
-10. 打印文件目录
+10.打印文件目录
+```
 tree 以图形化的树状结构打印文件和目录 
-#aptitude install tree
-#tree path =P pattern 重点标记出匹配某种样式的文件.
-#$tree PATH -p “*.sh”
-#tree path -I pattern 重点标记出除符合某种样式之外的那些文件
-#tree -h PATH同时打印出文件和目录的大小
-#$tree path -H http://localhost -o out.html 用tree打印出html输出
+aptitude install tree
+tree path =P pattern 重点标记出匹配某种样式的文件.
+tree PATH -p "*.sh"
+tree path -I pattern 重点标记出除符合某种样式之外的那些文件
+tree -h PATH同时打印出文件和目录的大小
+tree path -H http://localhost -o out.html 用tree打印出html输出
+```
 
 11.shell正则
-
+```
 ^ 行起始标记 
 $ 行尾标记 所以^$就匹配空行
 . 匹配任意一个字符
@@ -320,168 +287,168 @@ perl的元字符
 \s 单个空白字符 x\sx匹配x x,不匹配xx
 \S 单个非空白字符 \x\S\x 匹配xkx,不匹配xx
 \r 回车
+```
 
 12.greo详解
-#$grep 搜索文本
-#$grep “match_text” file1 file2 file3 … 搜索多个文件
-#$grep wold filename –color=auto 重点标记出匹配到的单词
-#$grep -E “正则表达式” 或者用egrep “正则表达式” 
-#$echo “match_text” | grep -o -E “[a-z]+\.” 只输出文件中匹配到的文本部分,用-o
-#$grep -v “match_pattern” file 打印除包含match_pattern的行之外的所有行 -v将结果反转
-#$grep -c “match_pattern” file 统计文本或者文本中包含匹配字符串的行数,不是匹配的次数
-统计文件中匹配项的数量,
-#$echo -e “1 2 3 4\nhello\n5 6” | egrep -o “[0-9]” | wc -l 
-#$grep -n 打印出包含匹配字符串的行数
-#$grep -b 打印字符偏移值 一般是配合-b -o
-#$grep -l 搜索所个文件并找出匹配文本位于哪一个文件中 -L 返回一个不匹配的文件列表
-#$grep “match_text” . -R -n 多级目录递归
-#$grep -i 不考虑字符的大小写
-#$grep -e “pattern1” -e “pattern2” 匹配多个样式 
+```
+grep 搜索文本
+grep "match_text" file1 file2 file3 … 搜索多个文件
+grep wold filename –color=auto 重点标记出匹配到的单词
+grep -E "正则表达式" 或者用egrep "正则表达式" 
+echo "match_text" | grep -o -E "[a-z]+\." 只输出文件中匹配到的文本部分,用-o
+grep -v "match_pattern" file 打印除包含match_pattern的行之外的所有行 -v将结果反转
+grep -c "match_pattern" file 统计文本或者文本中包含匹配字符串的行数,不是匹配的次数
+    统计文件中匹配项的数量,
+echo -e "1 2 3 4\nhello\n5 6" | egrep -o "[0-9]" | wc -l 
+grep -n 打印出包含匹配字符串的行数
+grep -b 打印字符偏移值 一般是配合-b -o
+grep -l 搜索所个文件并找出匹配文本位于哪一个文件中 -L 返回一个不匹配的文件列表
+grep "match_text" . -R -n 多级目录递归
+grep -i 不考虑字符的大小写
+grep -e "pattern1" -e "pattern2" 匹配多个样式 
 或者是先指定多个pattern 然后用-f 执行grep #$echo hello this is cool | grep -f patfile
-#$grep “main()” . -r –include *.{c.cpp} 在目录中递归搜索所有的.c 和.cpp文件
-#$grep “main()” . -r -exclude “readme” 排除所有readme文件 
+grep "main()" . -r –include *.{c.cpp} 在目录中递归搜索所有的.c 和.cpp文件
+grep "main()" . -r -exclude "readme" 排除所有readme文件 
 排除目录—exclude-dir 从文件中读取所许排除的文件列表 –exclude-from file
-#$grep -A 3匹配某个结果之后的3行 -B 3 匹配结果之前的3行 -C 3匹配结果之前和之后的3行
-#echo -e “a\nb\nc\na\nb\nc” | grep a -A 1 多个匹配,以一行 – 作为各匹配之前的定界符
+grep -A 3匹配某个结果之后的3行 -B 3 匹配结果之前的3行 -C 3匹配结果之前和之后的3行
+echo -e "a\nb\nc\na\nb\nc" | grep a -A 1 多个匹配,以一行 – 作为各匹配之前的定界符
 grep "keyword1\|keyword2" 用 | 来分割来, 需要转义, 来多个匹配
 
-egrep=grep -E   利用此命令可以使用扩展的正则表达式对文本进行搜索，并把符合用户需求的字符串打印出来。
-fgrep=grep -F   它利用固定的字符串来对文本进行搜索，但不支持正则表达式的引用，所以此命令的执行速度也最快。
+egrep=grep -E   利用此命令可以使用扩展的正则表达式对文本进行搜索,并把符合用户需求的字符串打印出来.
+fgrep=grep -F   它利用固定的字符串来对文本进行搜索,但不支持正则表达式的引用,所以此命令的执行速度也最快.
 
 ls | egrep -E "*\.[0-9]" | xargs rm 删除/var/log下面的数字备份文件, 支持1级
 find ./ -type f | grep -E "[a-z]+\.[0-9]+" | xargs rm, 支持多级
+```
 
+13.cut切分文件
+```
+cut 切分文件
+cut -f field_list filename 提取第一个字段或者列,field_list用逗号分割
+cut -f 2,3 filename 显示第2,3列
+cut -f1 filename cut -s 不打印制表符
+cat student_data.txt
+    No Name Mark Percent
+    1 Sara 45 90
+    2 Alex 49 98
+    3 Anu 45 90
+cut -f1 student_data.txt
+    No
+    1
+    2
+    3
+cut -f2,4 student_data.txt
+    Name Percent
+    Sara 90
+    Alex 98
+    Anu 90
+cut –cimplement 补集
+cut -f3 –complement student_data.txt 分割除了第3列的其他列
+    No Name Percent
+    1 Sara 90
+    2 Alex 98
+    3 Anu 90
+cat delimited_data.txt 指定字段的定界符 使用-d选项
+cut delimited_data.txt
+    No;Name;Mark;Percent
+    1;Sara;45;90
+    2;Alex;49;98
+    3;Anu;45;90
+cut -f2 -d";" delimited_data.txt
+    Name
+    Sara
+    Alex
+    Anu
+cut 指定字段的字符或者字节范围
+    N- 从第N个字节,字符或者字段到行尾
+    N-M 在N~M的范围内
+    -M 从第一个字节,字符,字段到第M个(包括M)个字节,字符或者字节.
+cat range_fields.txt
+    abcdefghijklmopqrstuvwxyz
+    abcdefghijklmopqrstuvwxyz
+    abcdefghijklmopqrstuvwxyz
+    abcdefghijklmopqrstuvwxy
+cut -c1-5 range_fields.txt 显示c后5个字符
+    abcde
+    abcde
+    abcde
+    abcde
+cut range_fields.txt -c-2 显示c前两个字符,
+    将-c 替换成-b,可以用字节作为计数单位 在使用-c ,-f ,-b 时可以指定输出定界符
+    --output-delimiter "delimiter string"
+    当用-b或者-c提取多个字段时,必须使用—output-delimiter
+cut range_fields.txt -c1-3,6-9 –output-delimiter ","
+    abc,fghi
+    abc,fghi
+    abc,fghi
+    abc,fghi
+```
 
-12. cut切分文件
-#cut 切分文件
-#$cut -f field_list filename 提取第一个字段或者列,field_list用逗号分割
-#$cut -f 2,3 filename 显示第2,3列
-#$cut -f1 filename cut -s 不打印制表符
-#$cat student_data.txt
-No Name Mark Percent
-1 Sara 45 90
-2 Alex 49 98
-3 Anu 45 90
-#$cut -f1 student_data.txt
-No
-1
-2
-3
-#$cut -f2,4 student_data.txt
-Name Percent
-Sara 90
-Alex 98
-Anu 90
-#$cut –cimplement 补集
-#$cut -f3 –complement student_data.txt 分割除了第3列的其他列
-No Name Percent
-1 Sara 90
-2 Alex 98
-3 Anu 90
-#$cat delimited_data.txt 指定字段的定界符 使用-d选项
-#$cut delimited_data.txt
-No;Name;Mark;Percent
-1;Sara;45;90
-2;Alex;49;98
-3;Anu;45;90
-#$cut -f2 -d”;” delimited_data.txt
-Name
-Sara
-Alex
-Anu
-#$cut 指定字段的字符或者字节范围
-N- 从第N个字节,字符或者字段到行尾
-N-M 在N~M的范围内
--M 从第一个字节,字符,字段到第M个(包括M)个字节,字符或者字节.
-#$cat range_fields.txt
-abcdefghijklmopqrstuvwxyz
-abcdefghijklmopqrstuvwxyz
-abcdefghijklmopqrstuvwxyz
-abcdefghijklmopqrstuvwxy
-#$cut -c1-5 range_fields.txt 显示c后5个字符
-abcde
-abcde
-abcde
-abcde
-#$cut range_fields.txt -c-2 显示c前两个字符
-将-c 替换成-b,可以用字节作为计数单位 在使用-c ,-f ,-b 时可以指定输出定界符
---output-delimiter “delimiter string”
-当用-b或者-c提取多个字段时,必须使用—output-delimiter
-#$cut range_fields.txt -c1-3,6-9 –output-delimiter “,”
-abc,fghi
-abc,fghi
-abc,fghi
-abc,fghi
-
-13.统计词频
+14.统计词频
 sed stream editor流编辑器
-
-#$sed 's/pattern/replace_string/' file
-#$cat file | sed 's/pattern/replace_string/' file
-#$sed -i 's/text/replace/' file 使用-i选项,可以将替换结果应用于源文件
-#$sed 's/pattern/replace_string/g' file 替换所有内容
-#$echo this thisthisthis | sed 's/this/THIS/2g'
-this THISTHISTHIS
-#$echo this thisthisthis | sed 's/this/THIS/3g'
-thisthisTHISTHIS
-#$echo this thisthisthis | sed 's/this/THIS/4g'
-thisthisthisTHIS
+```
+sed 's/pattern/replace_string/' file
+cat file | sed 's/pattern/replace_string/' file
+sed -i 's/text/replace/' file 使用-i选项,可以将替换结果应用于源文件
+sed 's/pattern/replace_string/g' file 替换所有内容
+echo this thisthisthis | sed 's/this/THIS/2g'
+    this THISTHISTHIS
+echo this thisthisthis | sed 's/this/THIS/3g'
+    thisthisTHISTHIS
+echo this thisthisthis | sed 's/this/THIS/4g'
+    thisthisthisTHIS
 从第N处匹配开始替换时,可以用/Ng
 字符/ 在sed中作为定界符使用,也可以使用其他任意的定界符
 sed 's:text:replace:g'
 sed 's|text|replace|g' 如果定界符出现在样式内部,需要\转义
 sed 's|te\|xt|replace|g'
 
-#$sed '/^$/d' file 移除空白行
-#$sed 用&标记匹配样式的字符串
-#$echo this is an example | sed 's/\w\+/[&]/g' 正则表达式匹配单词\w\+ ,替换[&]
-[this] [is] [an] [example]
-#$echo this is digit 8 in a number | sed 's/digit \([0-9]\)/\1/'
-this is 7 in a number
-#$echo seven EIGHT | sed 's/\([a-z]\+\) \([A-Z]\+\)/\2 \1/'
-EIGHT seven
+sed '/^$/d' file 移除空白行
+sed 用&标记匹配样式的字符串
+echo this is an example | sed 's/\w\+/[&]/g' 正则表达式匹配单词\w\+ ,替换[&]
+    [this] [is] [an] [example]
+echo this is digit 8 in a number | sed 's/digit \([0-9]\)/\1/'
+    this is 7 in a number
+echo seven EIGHT | sed 's/\([a-z]\+\) \([A-Z]\+\)/\2 \1/'
+    EIGHT seven
 ([a-z]\+\) 匹配第一个单词 ([A-Z]\+\) 匹配第二个单词 \1 \2 引用它们,这种引用叫向后引用
-
+```
 
 14.awk 操作数据流的列和行
-awk 用于数据流对列和行进行操作
-awk ' BEGIN{ print “start” } pattern { commands } END{ print “end” }
-file awk由三部分组成,BEGIN,END语句块和使用模式匹配的通用语句块 是可选的,脚本包含在单引号或者双引号中
-#$awk 'BEGIN { i=0 } { i++ } END{ print i}' filename 或者
-#$awk “BEGIN { i=0 } { i++ } END{ print i}” filename
+```
+awk ' BEGIN{ print "start" } pattern { commands } END{ print "end" }
+    file awk由三部分组成,BEGIN,END语句块和使用模式匹配的通用语句块 是可选的,脚本包含在单引号或者双引号中
+awk 'BEGIN { i=0 } { i++ } END{ print i}' filename 或者
+awk "BEGIN { i=0 } { i++ } END{ print i}" filename
 
-#$echo -e “line1\nline2” | awk 'BEGIN{ print “start” } { print } END{ print “end” }
-start
-line1
-line2
-end
+echo -e "line1\nline2" | awk 'BEGIN{ print "start" } { print } END{ print "end" }
+    start
+    line1
+    line2
+    end
 当不指定pattern时,默认就是打印.print的参数是以逗号进行分割时,参数打印时则以空格作为定界符,在awk的print语句中,双引号是被作为凭借操作符(concatenation opeartor) 使用的
-#$echo | awk '{ var1=”v1”; var2=”v2”; var3=”v3”; print var1,var2,var3 ; }'
-v1 v2 v3
-#$echo | awk '{ var1=”v1”; var2=”v2”; var3=”v3”; print var1”-”var2”-”var3 ;}'
-v1-v2-v3
-
+echo | awk '{ var1="v1"; var2="v2"; var3="v3"; print var1,var2,var3 ; }'
+    v1 v2 v3
+echo | awk '{ var1="v1"; var2="v2"; var3="v3"; print var1"-"var2"-"var3 ;}'
+    v1-v2-v3
 awk 的特殊变量 NR 记录数量,在执行过程中对应于当前行号, NF 字段数量,在执行过程中对应于当前行的字段数 $0 包含执行过程中当前行的文本内容
-$1 包含第一个字段的文本内容
-$2 包含第二个字段的文本内容
-#$awk '{ print $3,$2 }' file 打印每一行的第2和第3个字段
-#$awk 'END{ print NR }' file 统计文件中的行数
--v 将外部值传递给awk
-#$var=10000
-#$echo | awk -v variable=$var'{ print variable }'
+    $1 包含第一个字段的文本内容
+    $2 包含第二个字段的文本内容
+awk '{ print $3,$2 }' file 打印每一行的第2和第3个字段
+awk 'END{ print NR }' file 统计文件中的行数
+    -v 将外部值传递给awk
+var=10000
+echo | awk -v variable=$var'{ print variable }'
 getline 读取一行的var内容 getline var
-
-#$awk 'NR < 5' #行号小于5的行
-#$awk 'NR==1,NR==4' #行号在1到5之间的行,(从0开始的)
-#$awk '/linux/' #包含样式linux的行
-#$awk '!/linux/' #不包含样式linux的行
-
-设置字段定界符 默认是空格 用-F “delimiter” 指定
-#$awk -F: '{ print $NF }' /etc/passwd 或者
-#$awk 'BEGIN { FS=”:” } { print $NF }' /etc/passwd 在begin语句块中用OFS=”delimiter” 设置输出字段的定界符
+awk 'NR < 5'        行号小于5的行
+awk 'NR==1,NR==4'   行号在1到5之间的行,(从0开始的)
+awk '/linux/'       包含样式linux的行
+awk '!/linux/'      不包含样式linux的行
+设置字段定界符 默认是空格 用-F "delimiter" 指定
+awk -F: '{ print $NF }' /etc/passwd 或者
+awk 'BEGIN { FS=":" } { print $NF }' /etc/passwd 在begin语句块中用OFS="delimiter" 设置输出字段的定界符
 查看系统所有用户 cut -d: -f1 /etc/passwd
 查看系统所有组   cut -d: -f1 /etc/group
-
 
 awk中使用循环 for(i=0;i<10;i++){ print $i; } 或者
 for (I in array ){ print array[i];}
@@ -493,266 +460,265 @@ split(string,array,delimiter) 用定界符生成一个字符串列表,并将该�
 substr(string,start-position,end-position) 在字符串中用字符起止偏移量生成子串,并返回该子串
 sub(regex,replacement_str,string) 将正则表达式匹配到的第一处内容替换成repalcement_str
 gsub(regex,replacement_str,string) 和sub类似,不过会替换正则表达式匹配到的所有内容
-match(regex,string) 检查正则表达式是否能够匹配字符串,返回非0值. 否则返回0 ,有两个特殊的变量,RSTART和RLENGTH 表示包含正则表达式所匹配内容的起始位置和包含正则表达式所匹配内容的长度
+match(regex,string) 检查正则表达式是否能够匹配字符串,返回非0值. 否则返回0 ,有两个特殊的变量,
+    RSTART和RLENGTH 表示包含正则表达式所匹配内容的起始位置和包含正则表达式所匹配内容的长度
 
- 
-# 每行后面增加一行空行
-awk '1;{print ""}'
-awk 'BEGIN{ORS="\n\n"};1'
-# 每行后面增加一行空行。输出文件不会包含连续的两个或两个以上的空行
-# 注意：在Unix系统， DOS行包括的 CRLF （\r\n） 通常会被作为非空行对待
-# 因此 'NF' 将会返回TRUE。
-awk 'NF{print $0 "\n"}'
-# 每行后面增加两行空行
-awk '1;{print "\n"}'
+每行后面增加一行空行
+    awk '1;{print ""}'
+    awk 'BEGIN{ORS="\n\n"};1'
+每行后面增加一行空行.输出文件不会包含连续的两个或两个以上的空行
+注意：在Unix系统, DOS行包括的 CRLF (\r\n) 通常会被作为非空行对待
+因此 'NF' 将会返回TRUE.
+    awk 'NF{print $0 "\n"}'
+每行后面增加两行空行
+    awk '1;{print "\n"}'
 编号和计算：
-# 以文件为单位，在每句行前加上编号 （左对齐）.
-# 使用制表符 （\t） 来代替空格可以有效保护页变的空白。
-awk '{print FNR "\t" $0}' files*
-# 用制表符 （\t） 给所有文件加上连贯的编号。
-awk '{print NR "\t" $0}' files*
-# number each line of a file （number on left, right-aligned）
-# Double the percent signs if typing from the DOS command prompt.
-awk '{printf("%5d : %s\n", NR,$0)}'
-# 给非空白行的行加上编号
-# 记得Unix对于 \r 的处理的特殊之处。（上面已经提到）
-awk 'NF{$0=++a " :" $0};{print}'
-awk '{print (NF? ++a " :" :"") $0}'
-# 计算行数 （模拟 "wc -l"）
-awk 'END{print NR}'
-# 计算每行每个区域之和
-awk '{s=0; for (i=1; i<=NF; i++) s=s+$i; print s}'
-# 计算所有行所有区域的总和
-awk '{for (i=1; i<=NF; i++) s=s+$i}; END{print s}'
-# 打印每行每区域的绝对值
-awk '{for (i=1; i<=NF; i++) if ($i < 0) $i = -$i; print }'
-awk '{for (i=1; i<=NF; i++) $i = ($i < 0) ? -$i : $i; print }'
-# 计算所有行所有区域（词）的个数
-awk '{ total = total + NF }; END {print total}' file
-# 打印包含 "Beth" 的行数
-awk '/Beth/{n++}; END {print n+0}' file
-# 打印第一列最大的行
-# 并且在行前打印出这个最大的数
-awk '$1 > max {max=$1; maxline=$0}; END{ print max, maxline}'
-# 打印每行的列数，并在后面跟上此行内容
-awk '{ print NF ":" $0 } '
-# 打印每行的最后一列
-awk '{ print $NF }'
-# 打印最后一行的最后一列
-awk '{ field = $NF }; END{ print field }'
-# 打印列数超过4的行
-awk 'NF > 4'
-# 打印最后一列大于4的行
-awk '$NF > 4'
+以文件为单位,在每句行前加上编号 (左对齐).
+使用制表符 (\t) 来代替空格可以有效保护页变的空白.
+    awk '{print FNR "\t" $0}' files*
+用制表符 (\t) 给所有文件加上连贯的编号.
+    awk '{print NR "\t" $0}' files*
+number each line of a file (number on left, right-aligned)
+Double the percent signs if typing from the DOS command prompt.
+    awk '{printf("%5d : %s\n", NR,$0)}'
+给非空白行的行加上编号
+记得Unix对于 \r 的处理的特殊之处.(上面已经提到)
+    awk 'NF{$0=++a " :" $0};{print}'
+    awk '{print (NF? ++a " :" :"") $0}'
+计算行数 (模拟 "wc -l")
+    awk 'END{print NR}'
+计算每行每个区域之和
+    awk '{s=0; for (i=1; i<=NF; i++) s=s+$i; print s}'
+计算所有行所有区域的总和
+    awk '{for (i=1; i<=NF; i++) s=s+$i}; END{print s}'
+打印每行每区域的绝对值
+    awk '{for (i=1; i<=NF; i++) if ($i < 0) $i = -$i; print }'
+    awk '{for (i=1; i<=NF; i++) $i = ($i < 0) ? -$i : $i; print }'
+计算所有行所有区域(词)的个数
+    awk '{ total = total + NF }; END {print total}' file
+打印包含 "Beth" 的行数
+    awk '/Beth/{n++}; END {print n+0}' file
+打印第一列最大的行
+并且在行前打印出这个最大的数
+    awk '$1 > max {max=$1; maxline=$0}; END{ print max, maxline}'
+打印每行的列数,并在后面跟上此行内容
+    awk '{ print NF ":" $0 } '
+打印每行的最后一列
+    awk '{ print $NF }'
+打印最后一行的最后一列
+    awk '{ field = $NF }; END{ print field }'
+打印列数超过4的行
+    awk 'NF > 4'
+打印最后一列大于4的行
+    awk '$NF > 4'
 文本转换和替代：
-# 在Unix环境：转换DOS新行 （CR/LF） 为Unix格式
-awk '{sub(/\r$/,"");print}' # 假设每行都以Ctrl-M结尾
-# 在Unix环境：转换Unix新行 （LF） 为DOS格式
-awk '{sub(/$/,"\r");print}
-# 在DOS环境：转换Unix新行 （LF） 为DOS格式
-awk 1
-# 在DOS环境：转换DOS新行 （CR/LF） 为Unix格式
-# DOS版本的awk不能运行, 只能用gawk:
-gawk -v BINMODE="w" '1' infile >outfile
-# 用 "tr" 替代的方法。
-tr -d \r <infile >outfile # GNU tr 版本为 1.22 或者更高
-# 删除每行前的空白（包括空格符和制表符）
-# 使所有文本左对齐
-awk '{sub(/^[ \t]+/, ""); print}'
-# 删除每行结尾的空白（包括空格符和制表符）
-awk '{sub(/[ \t]+$/, "");print}'
-# 删除每行开头和结尾的所有空白（包括空格符和制表符）
-awk '{gsub(/^[ \t]+|[ \t]+$/,"");print}'
-awk '{$1=$1;print}' # 每列之间的空白也被删除
-# 在每一行开头处插入5个空格 （做整页的左位移）
-awk '{sub(/^/, " ");print}'
-# 用79个字符为宽度，将全部文本右对齐
-awk '{printf "%79s\n", $0}' file*
-# 用79个字符为宽度，将全部文本居中对齐
-awk '{l=length();s=int((79-l)/2); printf "%"(s+l)"s\n",$0}' file*
-# 每行用 "bar" 查找替换 "foo"
-awk '{sub(/foo/,"bar");print}' # 仅仅替换第一个找到的"foo"
-gawk '{$0=gensub(/foo/,"bar",4);print}' # 仅仅替换第四个找到的"foo"
-awk '{gsub(/foo/,"bar");print}' # 全部替换
-# 在包含 "baz" 的行里，将 "foo" 替换为 "bar"
-awk '/baz/{gsub(/foo/, "bar")};{print}'
-# 在不包含 "baz" 的行里，将 "foo" 替换为 "bar"
-awk '!/baz/{gsub(/foo/, "bar")};{print}'
-# 将 "scarlet" 或者 "ruby" 或者 "puce" 替换为 "red"
-awk '{gsub(/scarlet|ruby|puce/, "red"); print}'
-# 倒排文本 （模拟 "tac"）
-awk '{a[i++]=$0} END {for (j=i-1; j>=0;) print a[j--] }' file*
-# 如果一行结尾为反斜线符，将下一行接到这行后面
-# （如果有连续多行后面带反斜线符，将会失败）
-awk '/\\$/ {sub(/\\$/,""); getline t; print $0 t; next}; 1' file*
-# 排序并打印所有登录用户的姓名
-awk -F ":" '{ print $1 | "sort" }' /etc/passwd
-# 以相反的顺序打印出每行的前两列
-awk '{print $2, $1}' file
-# 调换前两列的位置
-awk '{temp = $1; $1 = $2; $2 = temp}' file
-# 打印每行，并删除第二列
-awk '{ $2 = ""; print }'
-# 倒置每行并打印
-awk '{for (i=NF; i>0; i--) printf("%s ",i);printf ("\n")}' file
-# 删除重复连续的行 （模拟 "uniq"）
-awk 'a !~ $0; {a=$0}'
-# 删除重复的、非连续的行
-awk '! a[$0]++' # 最简练
-awk '!($0 in a) {a[$0];print}' # 最有效
-# 用逗号链接每5行
-awk 'ORS=%NR%5?",":"\n"' file #bug awk 'ORS=NR%5?",":"\n"' file
+在Unix环境：转换DOS新行 (CR/LF) 为Unix格式
+    awk '{sub(/\r$/,"");print}' 假设每行都以Ctrl-M结尾
+在Unix环境：转换Unix新行 (LF) 为DOS格式
+    awk '{sub(/$/,"\r");print}
+在DOS环境：转换Unix新行 (LF) 为DOS格式
+    awk 1
+在DOS环境：转换DOS新行 (CR/LF) 为Unix格式
+DOS版本的awk不能运行, 只能用gawk:
+    gawk -v BINMODE="w" '1' infile >outfile
+用 "tr" 替代的方法.
+    tr -d \r <infile >outfile GNU tr 版本为 1.22 或者更高
+删除每行前的空白(包括空格符和制表符)
+使所有文本左对齐
+    awk '{sub(/^[ \t]+/, ""); print}'
+删除每行结尾的空白(包括空格符和制表符)
+    awk '{sub(/[ \t]+$/, "");print}'
+删除每行开头和结尾的所有空白(包括空格符和制表符)
+    awk '{gsub(/^[ \t]+|[ \t]+$/,"");print}'
+    awk '{$1=$1;print}' 每列之间的空白也被删除
+在每一行开头处插入5个空格 (做整页的左位移)
+    awk '{sub(/^/, " ");print}'
+用79个字符为宽度,将全部文本右对齐
+    awk '{printf "%79s\n", $0}' file*
+用79个字符为宽度,将全部文本居中对齐
+    awk '{l=length();s=int((79-l)/2); printf "%"(s+l)"s\n",$0}' file*
+每行用 "bar" 查找替换 "foo"
+    awk '{sub(/foo/,"bar");print}' 仅仅替换第一个找到的"foo"
+    awk '{$0=gensub(/foo/,"bar",4);print}' 仅仅替换第四个找到的"foo"
+    awk '{gsub(/foo/,"bar");print}' 全部替换
+在包含 "baz" 的行里,将 "foo" 替换为 "bar"
+    awk '/baz/{gsub(/foo/, "bar")};{print}'
+在不包含 "baz" 的行里,将 "foo" 替换为 "bar"
+    awk '!/baz/{gsub(/foo/, "bar")};{print}'
+将 "scarlet" 或者 "ruby" 或者 "puce" 替换为 "red"
+    awk '{gsub(/scarlet|ruby|puce/, "red"); print}'
+倒排文本 (模拟 "tac")
+    awk '{a[i++]=$0} END {for (j=i-1; j>=0;) print a[j--] }' file*
+如果一行结尾为反斜线符,将下一行接到这行后面
+(如果有连续多行后面带反斜线符,将会失败)
+    awk '/\\$/ {sub(/\\$/,""); getline t; print $0 t; next}; 1' file*
+排序并打印所有登录用户的姓名
+    awk -F ":" '{ print $1 | "sort" }' /etc/passwd
+以相反的顺序打印出每行的前两列
+    awk '{print $2, $1}' file
+调换前两列的位置
+    awk '{temp = $1; $1 = $2; $2 = temp}' file
+打印每行,并删除第二列
+    awk '{ $2 = ""; print }'
+倒置每行并打印
+    awk '{for (i=NF; i>0; i--) printf("%s ",i);printf ("\n")}' file
+删除重复连续的行 (模拟 "uniq")
+    awk 'a !~ $0; {a=$0}'
+删除重复的、非连续的行
+    awk '! a[$0]++' 最简练
+    awk '!($0 in a) {a[$0];print}' 最有效
+用逗号链接每5行
+    awk 'ORS=%NR%5?",":"\n"' file #bug awk 'ORS=NR%5?",":"\n"' file
 选择性的打印某些行：
-# 打印文件的前十行 （模拟 "head"）
-awk 'NR < 11'
-# 打印文件的第一行 （模拟 "head -1"）
-awk 'NR>1{exit};1'
-# 打印文件的最后两行 （模拟 "tail -2"）
-awk '{y=x "\n" $0; x=$0};END{print y}'
-# 打印文件的最后一行 （模拟 "tail -1"）
-awk 'END{print}'
-# 打印匹配正则表达式的行 （模拟 "grep"）
-awk '/regex/'
-# 打印不匹配正则表达式的行 （模拟 "grep -v"）
-awk '!/regex/'
-# 打印匹配正则表达式的前一行，但是不打印当前行
-awk '/regex/{print x};{x=$0}'
-awk '/regex/{print (x=="" ? "match on line 1" : x)};{x=$0}'
-# 打印匹配正则表达式的后一行，但是不打印当前行
-awk '/regex/{getline;print}'
-# 以任何顺序查找包含 AAA、BBB 和 CCC 的行
-awk '/AAA/; /BBB/; /CCC/'
-# 以指定顺序查找包含 AAA、BBB 和 CCC 的行
-awk '/AAA.*BBB.*CCC/'
-# 打印长度大于64个字节的行
-awk 'length > 64'
-# 打印长度小于64个字节的行
-awk 'length < 64'
-# 打印从匹配正则起到文件末尾的内容
-awk '/regex/,0'
-awk '/regex/,EOF'
-# 打印指定行之间的内容 （8-12行, 包括第8和第12行）
-awk 'NR==8,NR==12'
-# 打印第52行
-awk 'NR==52'
-awk 'NR==52 {print;exit}' # 对于大文件更有效率
-# 打印两个正则匹配间的内容 （包括正则的内容）
-awk '/Iowa/,/Montana/' # 大小写敏感
+打印文件的前十行 (模拟 "head")
+    awk 'NR < 11'
+打印文件的第一行 (模拟 "head -1")
+    awk 'NR>1{exit};1'
+打印文件的最后两行 (模拟 "tail -2")
+    awk '{y=x "\n" $0; x=$0};END{print y}'
+打印文件的最后一行 (模拟 "tail -1")
+    awk 'END{print}'
+打印匹配正则表达式的行 (模拟 "grep")
+    awk '/regex/'
+打印不匹配正则表达式的行 (模拟 "grep -v")
+    awk '!/regex/'
+打印匹配正则表达式的前一行,但是不打印当前行
+    awk '/regex/{print x};{x=$0}'
+    awk '/regex/{print (x=="" ? "match on line 1" : x)};{x=$0}'
+打印匹配正则表达式的后一行,但是不打印当前行
+    awk '/regex/{getline;print}'
+以任何顺序查找包含 AAA、BBB 和 CCC 的行
+    awk '/AAA/; /BBB/; /CCC/'
+以指定顺序查找包含 AAA、BBB 和 CCC 的行
+    awk '/AAA.*BBB.*CCC/'
+打印长度大于64个字节的行
+    awk 'length > 64'
+打印长度小于64个字节的行
+    awk 'length < 64'
+打印从匹配正则起到文件末尾的内容
+    awk '/regex/,0'
+    awk '/regex/,EOF'
+打印指定行之间的内容 (8-12行, 包括第8和第12行)
+    awk 'NR==8,NR==12'
+打印第52行
+    awk 'NR==52'
+    awk 'NR==52 {print;exit}' 对于大文件更有效率
+打印两个正则匹配间的内容 (包括正则的内容)
+    awk '/Iowa/,/Montana/' 大小写敏感
 选择性的删除某些行：
-# 删除所有空白行 （类似于 "grep '.' "）
-awk NF
-awk '/./'
-例子 list1.txt:
-yes test1@domain.com test1@domian.net test1@163.com
+删除所有空白行 (类似于 "grep '.' ")
+    awk NF
+    awk '/./'
+    例子 list1.txt:
+        yes test1@domain.com test1@domian.net test1@163.com
 
 cat 1.txt | awk -F":" '{gsub(/\//, "-", $1);"date +%Y-%m-%d -d" $1|getline d;print d" "$2":"$3":"$4$5}'
 18/Apr/2015:09:34:12 +0800  => 转成 2015-04-18 09:34:12 +0800
-
-
+```
  
-#sendmail.sh
+sendmail.sh
+```
 CHECK=`curl http://sendmail.domain.com/list1.txt`
 STATUS=`echo $CHECK|awk '{print $1}'`
 LIST=`echo $CHECK|awk '{for (i=2; i<=NF; i++) if ($i~/@domain.com$/ || $i~/@domain.net$/) print $i }'`
- 
+
 if [ "$STATUS" != "yes" -a "$STATUS" != "YES" -a "$STATUS" != "Yes" ];then
 exit
 fi
  
 echo "sendmail text" | /usr/bin/mutt -F /usr/mutt/etc/.muttrc -s "`hostname` Love Domain! " $LIST
+```
 
- 
-
-15. 服务器管理
+15.服务器管理
+```
 ps top pgrep
-#ps 显示当前终端TTY的进程
-#ps -f 更多消息 -e (every) -ax(all) 获取运行在系统中的每一个进程的信息
-#ps -e 或者#ps -ef 或者 #ps -ax #ps -axf
-#ps -e | head用head过滤 打印前10项
+    ps 显示当前终端TTY的进程
+    ps -f 更多消息 -e (every) -ax(all) 获取运行在系统中的每一个进程的信息
+    ps -e 或者#ps -ef 或者 #ps -ax #ps -axf
+    ps -e | head用head过滤 打印前10项
 
 -o 参数,参数,参数 用,定界符且没有空格 指定想要显示的列
-#$ps -eo comm,pcpu | head 其中comm标示command,pcpu表示cpu占有率
+ps -eo comm,pcpu | head 其中comm标示command,pcpu表示cpu占有率
 参数有 
-pcpu cpu占用率
-pid 进程id
-ppid 父进程id
-pmem 内存使用率
-comm 可执行文件名
-cmd 简单命令 simple command(简单命令是由空白字符分割的一系列单词,以shell控制操作符作为结尾. 第一个单词指定要执行的命令,余下的单词作为命令参数. Shell控制操作符可以是换行符,或者是 : ||,&&,&,;,;;,|,\&,(,) 
-user 启动进程的用户
-nice 优先级(niceness)
-time 累计的cpu时间
-etime 进程启动后度过的时间
-tty 所关联的tty设备
-euid 有效用户id
-stat 进程状态
+    pcpu cpu占用率
+    pid 进程id
+    ppid 父进程id
+    pmem 内存使用率
+    comm 可执行文件名
+    cmd 简单命令 simple command(简单命令是由空白字符分割的一系列单词,以shell控制操作符作为结尾. 第一个单词指定要执行的命令,余下的单词作为命令参数. Shell控制操作符可以是换行符,或者是 : ||,&&,&,;,;;,|,\&,(,) 
+    user 启动进程的用户
+    nice 优先级(niceness)
+    time 累计的cpu时间
+    etime 进程启动后度过的时间
+    tty 所关联的tty设备
+    euid 有效用户id
+    stat 进程状态
 
-
-#$top 默认输出一个占用cpu最多的进程列表 类似的还有atop 和ltop (没有这几个命令的需要自行安装)
+top 默认输出一个占用cpu最多的进程列表 类似的还有atop 和ltop (没有这几个命令的需要自行安装)
 
 根据参数对ps输出进行排序 
-#$ps [options] –sort –paramter1,+parameter2,parameter3...
-#$ps -eo comm,pcpu –sort -pcpu | head 列出占用CPU最多的10个进程
-用grep从ps的输出中提取相关的 | grep “进程名或者其他的相关参数”
+    ps [options] –sort –paramter1,+parameter2,parameter3...
+    ps -eo comm,pcpu –sort -pcpu | head 列出占用CPU最多的10个进程
+用grep从ps的输出中提取相关的 | grep "进程名或者其他的相关参数"
 找出给定命令名对应的进程ID
-#$ps -C command_name -o pid= 如ps -C bash -o pid= 列出所有bash进程的所有的进程ID
+    ps -C command_name -o pid= 如ps -C bash -o pid= 列出所有bash进程的所有的进程ID
 pgrep 获得一个特定命令的进程ID列表
-
-#$pgrep COMMAND -d delimiter_string 指定输出定界符
-#$pgrep bash -d “:”
-1255:1680
+    pgrep COMMAND -d delimiter_string 指定输出定界符
+    pgrep bash -d ":"
+    1255:1680
 指定进程的用户(拥有者)的列表
-#$pgrep -u root,slynux command 返回所匹配的进程数量
-#$ps -u root -U root -o user,pcpu 显示root作为有效用户和真实用户id的所有进程,以及用户,cpu占用率
-#$ps -eo cmd e 输出环境变量
-#$ps -eo pid,cmd e | tail -n 3
-ps axwef 以树状列出进程及子进程
-pstree 进程树
+    pgrep -u root,slynux command 返回所匹配的进程数量
+    ps -u root -U root -o user,pcpu 显示root作为有效用户和真实用户id的所有进程,以及用户,cpu占用率
+    ps -eo cmd e 输出环境变量
+    ps -eo pid,cmd e | tail -n 3
+    ps axwef 以树状列出进程及子进程
+    pstree 进程树
 杀死进程
-#$kill -l 列出所有可用的信号
-#$kill -s SIGNAL Pid 向指定的进程发送指定信号 (或者直接kill -9 PID)常用的是singal 
-sighup 1 对控制进程或者终端进行挂起检测
-sigint 2 当按下ctrl+c时发送该信号
-sigusr1 用户自定义,表示重新加载内核模块的符号信息 kill -USR1 PID
-sigusr2 表示同时重新加载模块和静态内核的符号信息, kill -USR2 PID
-sigkill 9 用于强行杀死进程
-sigterm 15 默认用于终止进程
-sigtstp 20 当按下ctrl+z时发送该信号
-
-#$killall process_name 杀死一组命令 = killall -9
-#$killall -u username process_name 杀死用户的指定进程 如果需要确认 -i
-
-#$pkill process_name 
-#$pkill -s signal process_name
+kill -l 列出所有可用的信号
+kill -s SIGNAL Pid 向指定的进程发送指定信号 (或者直接kill -9 PID)常用的是singal 
+    sighup 1 对控制进程或者终端进行挂起检测
+    sigint 2 当按下ctrl+c时发送该信号
+    sigusr1 用户自定义,表示重新加载内核模块的符号信息 kill -USR1 PID
+    sigusr2 表示同时重新加载模块和静态内核的符号信息, kill -USR2 PID
+    sigkill 9 用于强行杀死进程
+    sigterm 15 默认用于终止进程
+    sigtstp 20 当按下ctrl+z时发送该信号
+killall process_name 杀死一组命令 = killall -9
+killall -u username process_name 杀死用户的指定进程 如果需要确认 -i
+pkill process_name 
+pkill -s signal process_name
 
 trap 捕捉并相应信号
-#$trap 'signal_handler_function_name' signal list 其中signal list以空格分隔,可以是信号数字或者信号名称
+trap 'signal_handler_function_name' signal list 其中signal list以空格分隔,可以是信号数字或者信号名称
+```
 
-17.查找命令
+16.查找命令
+```
 which 找出某个命令的位置
 #export PATH=$PATH:/home/test/bin 添加/home/test/bin到PATH
 whereis 返回命令的路径还可以打印出命令手册的位置以及命令源代码的路径
 file 确定文件的类型
 whatis 输出作为参数的命令的简短描述信息
-
 apropos command 搜索和某个单词相关的命令是否存在
+```
 
-uptime 或者平均负载 第一个值1分钟内的平均值 第二个5分钟的平均值 第三个15分钟内的平均值
-
-18.向终端发送消息
+17.向终端发送消息
+```
 wall向所有当前登录用户的终端写入消息 因为终端是作为设备存在的,在/etc/pts都有对应的设备节点文件
-#$cat message | wall 或者#$wall < message
+cat message | wall 或者#$wall < message
+```
 
-19.收集系统信息
-#$hostname 打印当前系统的主机名
-#$uname -n 打印内核版本 硬件架构等 -a 打印内核发行版本 -r 打印主机主机类型 -m 打印出cpu的相关信息
-#$cat /proc/cpuinfo 获取处理器名称 #$cat /proc/cpuinfo | head -n 5 | tail -1 (cpuinfo的第5行包含处理器的名称,提取出前5,再提取最后一行)
-#$cat /proc/meminfo 打印内存的详细信息
-#$cat /proc/meminfo | head -l 打印可用内存总量
+18.收集系统信息
+```
+hostname 打印当前系统的主机名
+uname -n 打印内核版本 硬件架构等 -a 打印内核发行版本 -r 打印主机主机类型 -m 打印出cpu的相关信息
+cat /proc/cpuinfo 获取处理器名称 #$cat /proc/cpuinfo | head -n 5 | tail -1 (cpuinfo的第5行包含处理器的名称,提取出前5,再提取最后一行)
+cat /proc/meminfo 打印内存的详细信息
+cat /proc/meminfo | head -l 打印可用内存总量
 grep MemTotal /proc/meminfo 查看内存总量
 grep MemFree /proc/meminfo 查看空闲内存总量
 cat /proc/loadavg    查看系统负载
-#$cat /proc/partitions 打印系统分区信息 或者 #$fdisk -l
+cat /proc/partitions 打印系统分区信息 或者 #$fdisk -l
 /proc/pid/statm 进程所占用的内存
 获取系统的详细信息 lshw
 lshw -short 简化输出
@@ -776,12 +742,13 @@ cat /proc/scsi/scsi 查看raid的盘
 bash的进程id 加入是4295 (pgrep bash) 系统每个运行的进程都在/proc中都有一个对应的目录,进程的目录名和进程ID相同,这个目录包含了大量的相关进程的信息
 cat /proc/4295/envion 显示所有传递给该进程的环境变量
 exe 是一个到进程工作目录的符号链接 
-#$readlink /proc/4295/exe
+readlink /proc/4295/exe
 /bin/bash
 fd 包含了由进程所使用的文件描述符
+```
 
-
-20.让进程后台运行 ,在命令后加上 & 把命令放入一个作业队列中
+19.让进程后台运行 ,在命令后加上 & 把命令放入一个作业队列中
+```
 查看后台进程 jobs -l
 对已经在前台执行的命令,也可以重新放到后台执行,首先ctrl+z (不是ctrl+c中断)暂停已经运行的进程,然后使用bg命令将停止的作业放到后台运行
 
@@ -791,7 +758,7 @@ $bg %1
 [1]+./test.sh & 
 $jobs -l
 [1]+22794 Running ./test.sh &
-但是如上方到后台执行的进程，其父进程还是当前终端shell的进程，而一旦父进程退出，则会发送hangup信号给所有子进程，子进程收到hangup以后也会退出。如果我们要在退出shell的时候继续运行进程，则需要使用nohup忽略hangup信号，或者setsid将将父进程设为init进程(进程号为1) 
+但是如上方到后台执行的进程,其父进程还是当前终端shell的进程,而一旦父进程退出,则会发送hangup信号给所有子进程,子进程收到hangup以后也会退出.如果我们要在退出shell的时候继续运行进程,则需要使用nohup忽略hangup信号,或者setsid将将父进程设为init进程(进程号为1) 
 $ echo $$
 21734
 
@@ -808,18 +775,18 @@ $ ps -ef | grep test
 515 410 1 0 11:49 ? 00:00:00 /bin/sh ./test.sh
 515 413 21734 0 11:49 pts/12 00:00:00 grep test
 
-面的试验演示了使用nohup/setsid加上&使进程在后台运行，同时不受当前shell退出的影响。那么对于已经在后台运行的进程，该怎么办呢？可以使用disown命令：
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
+面的试验演示了使用nohup/setsid加上&使进程在后台运行,同时不受当前shell退出的影响.那么对于已经在后台运行的进程,该怎么办呢？可以使用disown命令：
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+    11
 $ ./test.sh &
 [1] 2539
 
@@ -831,122 +798,107 @@ $ disown -h %1
 $ ps -ef | grep test
 515 410 1 0 11:49 ? 00:00:00 /bin/sh ./test.sh
 515 2542 21734 0 11:52 pts/12 00:00:00 grep test
-另外还有一种方法，即使将进程在一个subshell中执行，其实这和setsid异曲同工。方法很简单，将命令用括号() 括起来即可：
-1
-2
-3
-4
-5
+另外还有一种方法,即使将进程在一个subshell中执行,其实这和setsid异曲同工.方法很简单,将命令用括号() 括起来即可：
+    1
+    2
+    3
+    4
+    5
 $ (./test.sh &)
 
 $ ps -ef | grep test
 515 410 1 0 11:49 ? 0:00:00 /bin/sh ./test.sh
 515 12483 21734 0 11:59 pts/12 00:00:00 grep test
-注：这部分试验环境为Red Hat Enterprise Linux AS release 4 (Nahant Update 5),shell为/bin/bash，不同的OS和shell可能命令有些不一样。例如AIX的ksh，没有disown，但是可以使用nohup -p PID来获得disown同样的效果。
-还有一种更加强大的方式是使用screen，首先创建一个断开模式的虚拟终端，然后用-r选项重新连接这个虚拟终端，在其中执行的任何命令，都能达到nohup的效果，这在有多个命令需要在后台连续执行的时候比较方便：
-1
-2
-3
-4
-5
-6
-7
-8
-$ screen -dmS screen_test
+注：这部分试验环境为Red Hat Enterprise Linux AS release 4 (Nahant Update 5),shell为/bin/bash,不同的OS和shell可能命令有些不一样.例如AIX的ksh,没有disown,但是可以使用nohup -p PID来获得disown同样的效果.
+还有一种更加强大的方式是使用screen,首先创建一个断开模式的虚拟终端,然后用-r选项重新连接这个虚拟终端,在其中执行的任何命令,都能达到nohup的效果,这在有多个命令需要在后台连续执行的时候比较方便：
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+```
 
+20.Screen命令语法：
+$ screen -dmS screen_test
 $ screen -list
 There is a screen on:
 27963.screen_test (Detached)
 1 Socket in /tmp/uscreens/S-jiangfeng.
 
 $ screen -r screen_test
-Screen命令语法：
 
 screen [-AmRvx -ls -wipe][-d <作业名称>][-h <行数>][-r <作业名称>][-s ][-S <作业名称>]
 
 Screen命令参数：
--A -[r|R]          将所有的视窗都调整为目前终端机的大小。
--c filename        用指定的filename文件替代screen的配置文件’.screenrc’.
--d [pid.tty.host]  断开screen进程(使用该命令时，screen的状态一定要是Attached，也就是说有用户连在screen里)。一般进程的名字是以pid.tty.host这种形式表示(用screen -list命令可以看出状态)。
--D [pid.tty.host]  与-d命令实现一样的功能，区别就是如果执行成功，会踢掉原来在screen里的用户并让他logout。
--h <行数> 　       指定视窗的缓冲区行数。
+    -A -[r|R]          将所有的视窗都调整为目前终端机的大小.
+    -c filename        用指定的filename文件替代screen的配置文件’.screenrc’.
+    -d [pid.tty.host]  断开screen进程(使用该命令时,screen的状态一定要是Attached,也就是说有用户连在screen里).一般进程的名字是以pid.tty.host这种形式表示(用screen -list命令可以看出状态).
+    -D [pid.tty.host]  与-d命令实现一样的功能,区别就是如果执行成功,会踢掉原来在screen里的用户并让他logout.
+    -h <行数> 　       指定视窗的缓冲区行数.
 
--ls或–list        显示目前所有的screen作业。
--m                    即使目前已在作业中的screen作业，仍强制建立新的screen作业。
--p number or name  预先选择一个窗口。
--r [pid.tty.host]  恢复离线的screen进程，如果有多个断开的进程，需要指定[pid.tty.host]
--R                      先试图恢复离线的作业。若找不到离线的作业，即建立新的screen作业。
--s shell             指定建立新视窗时，所要执行的shell。
--S <作业名称>  指定screen作业的名称。(用来替代[pid.tty.host]的命名方式,可以简化操作).
--v                     显示版本信息。
--wipe                检查目前所有的screen作业，并删除已经无法使用的screen作业。
--x                     恢复之前离线的screen作业。
+    -ls或–list        显示目前所有的screen作业.
+    -m                    即使目前已在作业中的screen作业,仍强制建立新的screen作业.
+    -p number or name  预先选择一个窗口.
+    -r [pid.tty.host]  恢复离线的screen进程,如果有多个断开的进程,需要指定[pid.tty.host]
+    -R                      先试图恢复离线的作业.若找不到离线的作业,即建立新的screen作业.
+    -s shell             指定建立新视窗时,所要执行的shell.
+    -S <作业名称>  指定screen作业的名称.(用来替代[pid.tty.host]的命名方式,可以简化操作).
+    -v                     显示版本信息.
+    -wipe                检查目前所有的screen作业,并删除已经无法使用的screen作业.
+    -x                     恢复之前离线的screen作业.
 
 Screen命令的常规用法:
-
-screen -d -r:连接一个screen进程，如果该进程是attached，就先踢掉远端用户再连接。
-
-screen -D -r:连接一个screen进程，如果该进程是attached，就先踢掉远端用户并让他logout再连接
-
-screen -ls或者-list:显示存在的screen进程，常用命令
-
-screen -m:如果在一个Screen进程里，用快捷键crtl+a c或者直接打screen可以创建一个新窗口,screen -m可以新建一个screen进程。
-
-screen -dm:新建一个screen，并默认是detached模式，也就是建好之后不会连上去。
-
-screen -p number or name:预先选择一个窗口。
-
+screen -d -r:连接一个screen进程,如果该进程是attached,就先踢掉远端用户再连接.
+screen -D -r:连接一个screen进程,如果该进程是attached,就先踢掉远端用户并让他logout再连接
+screen -ls或者-list:显示存在的screen进程,常用命令
+screen -m:如果在一个Screen进程里,用快捷键crtl+a c或者直接打screen可以创建一个新窗口,screen -m可以新建一个screen进程.
+screen -dm:新建一个screen,并默认是detached模式,也就是建好之后不会连上去.
+screen -p number or name:预先选择一个窗口.
 Screen实现后台运行程序的简单步骤:
 
-1> 要进行某项操作时，先使用命令创建一个Screen:
+1> 要进行某项操作时,先使用命令创建一个Screen:
 [linux@user~]$ screen -S testname1
 
-2>接着就可以在里面进行操作了，如果你的任务还没完成就要走开的话，使用命令保留Screen：
-[linux@user~]$ Ctrl+a+d                    #按Ctrl+a，然后再按d即可保留Screen
-[detached]                                 #这时会显示出这个提示，说明已经保留好Screen了
+2>接着就可以在里面进行操作了,如果你的任务还没完成就要走开的话,使用命令保留Screen：
+[linux@user~]$ Ctrl+a+d                    #按Ctrl+a,然后再按d即可保留Screen
+[detached]                                 #这时会显示出这个提示,说明已经保留好Screen了
 
-如果你工作完成的话，就直接输入:
+如果你工作完成的话,就直接输入:
 [linux@user~]$ exit                        #这样就表示成功退出了
 [screen is terminating]
 
-3> 如果你上一次保留了Screen，可以使用命令查看：
+3> 如果你上一次保留了Screen,可以使用命令查看：
 [linux@user~]$ screen -ls
 There is a screen on:
 9649.test1   (Detached)
 
-恢复Screen，使用命令：
+恢复Screen,使用命令：
 [linux@user~]$ screen -r test1 (or 9649)
 
 Screen命令中用到的快捷键
-
-Ctrl+a c ：创建窗口
-
-Ctrl+a w ：窗口列表
-
-Ctrl+a n ：下一个窗口
-
-Ctrl+a p ：上一个窗口
-
-Ctrl+a 0-9 ：在第0个窗口和第9个窗口之间切换
-
-Ctrl+a K(大写) ：关闭当前窗口，并且切换到下一个窗口（当退出最后一个窗口时，该终端自动终止，并且退回到原始shell状态）
-
-exit ：关闭当前窗口，并且切换到下一个窗口（当退出最后一个窗口时，该终端自动终止，并且退回到原始shell状态）
-
-Ctrl+a d ：退出当前终端，返回加载screen前的shell命令状态
-
-#### 关闭其中一个screen
+    Ctrl+a c ：创建窗口
+    Ctrl+a w ：窗口列表
+    Ctrl+a n ：下一个窗口
+    Ctrl+a p ：上一个窗口
+    Ctrl+a 0-9 ：在第0个窗口和第9个窗口之间切换
+    Ctrl+a K(大写) ：关闭当前窗口,并且切换到下一个窗口(当退出最后一个窗口时,该终端自动终止,并且退回到原始shell状态)
+    exit ：关闭当前窗口,并且切换到下一个窗口(当退出最后一个窗口时,该终端自动终止,并且退回到原始shell状态)
+    Ctrl+a d ：退出当前终端,返回加载screen前的shell命令状态
+关闭其中一个screen
 screen -ls
 screen -r sessionID #确认下内容
 screen -S sessionID -X quit
-
-
+```
 
 21.cron 调度
+```
 cron 表由6部分组成 
 分钟 小时 天 月份 工作日 命令
 * 星号指定某个命令实例所要执行的时间 
-(“5,10” 在第5分钟和第10分钟运行命令) 
+("5,10" 在第5分钟和第10分钟运行命令) 
 特定时间运行命令 */5 每5分钟运行一次命令
 02 * * * * /home/user/test.sh 这个cron作业会每天每个小时的第2分钟执行脚本
 00 5,6,7 * * /home/user/test.sh 这个corn作业会在每天的第5,6,7小时执行脚本
@@ -957,9 +909,12 @@ crontab -e
 02 02 * * * /home/test.sh
 然后就会进入vi供用户输入cron作业并且保存,然后这个作业会在指定时间调用
 或者crontab task.cron 创建一个文本文件task.cron并且写入cron作业
-crontab<<EOF 在行内inline指定cron作业
-02 * * * * /home/user/test.sh
-EOF
+```
+```
+    crontab<<EOF 在行内inline指定cron作业
+    02  /home/user/test.sh
+    EOF
+```
 cron作业需要写在crontab<<EOF和EOF之间 (注意cron作业使用的权限同执行crontab命令所使用的权限同,在cron命令中指定的命令需要使用完整路径,因为cron的作业环境与终端的环境变量PATH的不一样)
 cron表插入一行变量赋值语句来设置环境变量
 比如用代理链接internet
@@ -975,11 +930,10 @@ crontab -l -u user
 crontab -r
 移除指定用户的cron表
 crontab -u user -r
-
- 
-
+```
 
 22.网站下载
+```
 wget url1 url2 url3 … -O 指定输出名 -o 写入日志
 wget -t 重试次数 url 中断后尝试次数
 下载限速 wget –limit-rate 20k url k或者m
@@ -992,17 +946,20 @@ wget –mirror url 或者 wget -r -N -1 depeth url 其中-1 是指定的页面�
 访问需要http或者ftp的认证页面
 wget –user username –paswword pass url
 也可以改成需要网页提示并且手动输入密码 –password 改成 –ask-password
-
+```
 
 23.命令行的web浏览器
-lynx -dump url>webpage_as_text.txt (以ascii字符下载到文本中) 这会把所有的超链接(<a href=”link”>) 作为文本输出的页脚列在reference标题之下
+```
+lynx -dump url>webpage_as_text.txt (以ascii字符下载到文本中) 这会把所有的超链接(<a href="link">) 作为文本输出的页脚列在reference标题之下
 
 curl 将下载文件输出到stdou,将进度信息输出到stderr,如果不想显示进度信息,需要用—slient
 curl url –silent
-curl ifconfig.me 当机器在内网的时候，可以通过这个命令查看外网IP
+curl ifconfig.me 当机器在内网的时候,可以通过这个命令查看外网IP
 curl -I http://xxx.com 获取http头
+```
 
 24.网络 
+```
 ifconfig 位于/sbin/ifconfig 需要加入/sbin为环境变量
 ifconfig | cut -c-19 | tr -d ' ' | tr -s '\n' 打印系统可用的网络接口列表
 #ifconfig wlan0 ip 设置wlan0的ip地址
@@ -1034,80 +991,84 @@ traceroute 域名 跟踪跳hop
 查看网络流量watch -n 1 "/sbin/ifconfig eth0 | grep bytes"
 
 lsof -i 列出系统中的开放端口以及运行在端口上的服务的详细信息
-lsof -Pnl -i:80 查看80端口。
+lsof -Pnl -i:80 查看80端口.
 netstat 查看开放端口和服务
 netstat -nlp |grep LISTEN 查看LISTEN的
+```
+
 25.磁盘
+```
 du filename 查找某个文件占用的磁盘空间 df = disk free du=disk usage
 du -a directory 递归输出指定目录或者多个目录所有文件的统计结果
-du -b 用字节单位 -k 以KB为单位 -m 以MB为单位 -B 以块为单位 如果要排除 用—exclude “文件”
+du -b 用字节单位 -k 以KB为单位 -m 以MB为单位 -B 以块为单位 如果要排除 用—exclude "文件"
 找出指定目录中最大的10个文件
 #$du -ak source_dir | sort -nrk 1 | head
 du -sh 列出当前目录大小
 
-#cd -
-到上一次的目录
 #chmod u+s 给user增加suid 如果user有x的权限,那么x位就变成s,如果没有x的权限,那么就变成S
 #chmod g+s 给group增加sgid 如果group有x的权限,那么x位就变成s,如果没有x的权限,那么变成S
 u-s g-s 类似
 #find 路径 选项 操作
 参数有 name 根据文件名查找
-	perm 根据文件权限
-	prune 使find命令不在当前指定的目录中查找,如果同时有-depth选项那么-prune会被忽略
-	user 根据文件属主查找
-	group 文件属组查找
-	mtime -n +n 根据文件的更改时间查找文件,-n表示更改时间距今在n天之内.+n表示文件更改时间距今在n天前
-	nogroup 查找无效所属组的文件 即文件所属的组在/etc/groups不存在
-	nouser 查找无有效属主的文件,即该文件的属主在/etc/passwd中不存在
-	-newer file1 !file2 查找更改时间比文件file1新但是比文件file2旧的文件
-	type 查找某一类型的文件 b 块设备 d目录 c字符 p管道l符号链接 f普通文件
-	size n:[c] 查找文件长度为n块的文件,带有c时表示文件长度以字节计
-	depth 查找文件时,首先查找当前目录中的文件,然后在其子目录中查找
+    perm 根据文件权限
+    prune 使find命令不在当前指定的目录中查找,如果同时有-depth选项那么-prune会被忽略
+    user 根据文件属主查找
+    group 文件属组查找
+    mtime -n +n 根据文件的更改时间查找文件,-n表示更改时间距今在n天之内.+n表示文件更改时间距今在n天前
+    nogroup 查找无效所属组的文件 即文件所属的组在/etc/groups不存在
+    nouser 查找无有效属主的文件,即该文件的属主在/etc/passwd中不存在
+    -newer file1 !file2 查找更改时间比文件file1新但是比文件file2旧的文件
+    type 查找某一类型的文件 b 块设备 d目录 c字符 p管道l符号链接 f普通文件
+    size n:[c] 查找文件长度为n块的文件,带有c时表示文件长度以字节计
+    depth 查找文件时,首先查找当前目录中的文件,然后在其子目录中查找
 find命令的操作用户指定结果的输出方式
 print 将匹配的文件输出到标准输出 exec 将匹配的文件执行该参数所给出的shell,对应的命令形式为'command' {} \; 注意{}和\;之间的空格 ok 会验证exec执行的时候给出提示
     find -iname 'file' 忽略大小写
-	find / -name passwd 指定名
-	find -maxdepth 2 -name passwd 找到root及子层的内容
-	find -mindepth 3 -maxdepth 5 -name passwd 查找第二层子目录和第四层子目录之间的passwd文件
-	find -maxdepth 1 -exec md5sum {} \; 执行md5sum {}将会被当前文件名取代
-	find -maxdepth 1 -not -iname 'xxx.name' 相反匹配
-	ls -li 可以查看节点inode编号
-	find -inum 1534343 -exec mv {} new-test-file-name \;
-	find -inum 3021321 -exec rm {} \;
-	find / -perm g=r -type f -exec ls -l {} \; 找到组有读的文件
-	find / -perm 040 -type f -exec ls -l {} \; 同上
-	find ~ -empty 找到空文件 0字节文件
-	find . -maxdepth 1 -empty
-	find . -maxdepth 1 -empty -not -name ".*" 列出当前目录下的非隐藏空文件
-	find . -type f -exec ls -s {} \; | sort -n -r | head -5 列出当前和子目录下最大的5个文件
-	find . -type f -exec ls -s {} \; | sort -n | head -5 同上，列出最小的5个
-	find . -not -empty -type f -exec ls -s {} \; | sort -n | head -5 列出非空的最小5个文件
-	find . -type s 查找socket文件
-	find . -type d 查找所有的目录
-	find . -type f 查找所有的一般文件
-	find . -type f -name ".*" 查找所有的隐藏文件
-	find . -type f !-name ".*" 查找所有的非藏文件,排除
-	find -type d -name ".*"  查找所有的隐藏目录
-	ls -lrt 列出修改时间
-	find -newer file_name 显示指定文件之后做出修改的文件，显示所有的在file_name后创建的文件
-	find ~ -size +100M 查找比指定文件大的文件
-	find ~ -size -100M 查找比指定文件小的文件
-	find ~ -size 100M 查找符合给定大小的文件
-	find . -mmin -60 查找当前目录以及子目录下最近一次修改时间在1个小时内的文件
-	find / -mtime -1 找到1天内修改的文件
-	find . -amin -60 找到当前目录以及子目录下最近一次访问时间在1该小时内的文件
-	find / -atime -l 找到1天内被访问了的文件
-	find . -cmin -60 找到1小时内状态被改变的文件
-	find / -ctime -l 找到1天内状态被改变的文件
-	find . -mmin -15 \( ! -regex ".*"/\..*" \) 查找15分钟被修改过的非隐藏文件
-	find -cnewer /etc/fstab 查找修改fstab后的所有文件状态被改变过的文件
-	find / -xdev -name "*.log" 其他参数 仅仅在当前文件系统中搜索，不会搜索其他挂载
-	find -name *.conf" cp {} {}.bak \; 使用多个{}
-	find . -type -f -iname "*.mp3" -exec rename "s/ /_/g" {} \; 把文件名中的空格换成下划线
-	下面的find命令的例子，遍历文件系统一次，列出拥有setuid属性的文件和目录，写入/root/suid.txt文件， 如果文件大小超过100M，将其记录到/root/big.txt中
-	find / \( -perm -4000 -fprintf /root/suid.txt '%#m %u %p\n' \) , \ 
-	\( -size +100M -fprintf /root/big.txt '%-10s %p\n' \)
-26.
+    find / -name passwd 指定名
+    find -maxdepth 2 -name passwd 找到root及子层的内容
+    find -mindepth 3 -maxdepth 5 -name passwd 查找第二层子目录和第四层子目录之间的passwd文件
+    find -maxdepth 1 -exec md5sum {} \; 执行md5sum {}将会被当前文件名取代
+    find -maxdepth 1 -not -iname 'xxx.name' 相反匹配
+    ls -li 可以查看节点inode编号
+    find -inum 1534343 -exec mv {} new-test-file-name \;
+    find -inum 3021321 -exec rm {} \;
+    find / -perm g=r -type f -exec ls -l {} \; 找到组有读的文件
+    find / -perm 040 -type f -exec ls -l {} \; 同上
+    find ~ -empty 找到空文件 0字节文件
+    find . -maxdepth 1 -empty
+    find . -maxdepth 1 -empty -not -name ".*" 列出当前目录下的非隐藏空文件
+    find . -type f -exec ls -s {} \; | sort -n -r | head -5 列出当前和子目录下最大的5个文件
+    find . -type f -exec ls -s {} \; | sort -n | head -5 同上,列出最小的5个
+    find . -not -empty -type f -exec ls -s {} \; | sort -n | head -5 列出非空的最小5个文件
+    find . -type s 查找socket文件
+    find . -type d 查找所有的目录
+    find . -type f 查找所有的一般文件
+    find . -type f -name ".*" 查找所有的隐藏文件
+    find . -type f !-name ".*" 查找所有的非藏文件,排除
+    find -type d -name ".*"  查找所有的隐藏目录
+    ls -lrt 列出修改时间
+    find -newer file_name 显示指定文件之后做出修改的文件,显示所有的在file_name后创建的文件
+    find ~ -size +100M 查找比指定文件大的文件
+    find ~ -size -100M 查找比指定文件小的文件
+    find ~ -size 100M 查找符合给定大小的文件
+    find . -mmin -60 查找当前目录以及子目录下最近一次修改时间在1个小时内的文件
+    find / -mtime -1 找到1天内修改的文件
+    find . -amin -60 找到当前目录以及子目录下最近一次访问时间在1该小时内的文件
+    find / -atime -l 找到1天内被访问了的文件
+    find . -cmin -60 找到1小时内状态被改变的文件
+    find / -ctime -l 找到1天内状态被改变的文件
+    find . -mmin -15 \( ! -regex ".*"/\..*" \) 查找15分钟被修改过的非隐藏文件
+    find -cnewer /etc/fstab 查找修改fstab后的所有文件状态被改变过的文件
+    find / -xdev -name "*.log" 其他参数 仅仅在当前文件系统中搜索,不会搜索其他挂载
+    find -name *.conf" cp {} {}.bak \; 使用多个{}
+    find . -type -f -iname "*.mp3" -exec rename "s/ /_/g" {} \; 把文件名中的空格换成下划线
+    下面的find命令的例子,遍历文件系统一次,列出拥有setuid属性的文件和目录,写入/root/suid.txt文件, 如果文件大小超过100M,将其记录到/root/big.txt中
+    find / \( -perm -4000 -fprintf /root/suid.txt '%#m %u %p\n' \) , \ 
+    \( -size +100M -fprintf /root/big.txt '%-10s %p\n' \)
+```
+
+26.Others Command
+```
 find /var/log -mtime -3 -ok rm {} \; 删除/var/log目录下更改时间距今3天内的所有文件
 ps -aux | awk '{print $4"\t"$11}' | grep -v MEM |sort -r | head -n 1
 找出最占内存的进程
@@ -1133,7 +1094,7 @@ kill 进程名 /就是ps -A中的第一列的数字 或者killall 进程名
 kill -9 进程号 //强制中止一个进程. killall -9 进程名
 xkill //以图形方式中止一个进程 出现骷髅的标志 点要中止的
 lsof xxx // xxx的进程的
-uptime /查看系统时间
+uptime 显示系统已经运行了多长时间,它依次显示下列信息：现在时间、系统已经运行了多长时间、目前有多少登陆用户、系统在过去的1分钟、5分钟和15分钟内的平均负载
 ulimit -a //查看系统限制
 ipcs -l //查看内核限制
 xrandr //查看当前屏幕分辨率
@@ -1146,163 +1107,156 @@ du //查看文件已用容量 参数 -a列出所有文件与目录,默认值是�
 find . -type f |wc -l//查看当前目录的文件总数 可以跟path 比如 find /home/rainysia/www -type f |wc -l 
 find . -type d |wc -l //查看当前目录的目录总数 可以跟path 同上
 find ./ -type l | wc -l //
+``` 
 
-27.
-从历史中执行命令 有时候，我们需要在 Bash 中重复执行先前的命令。你当然可以使用上方向键来查看之前曾经运行过的命令。但这里有一种更好的方式：你可以按 Ctrl + r 组合键进入历史搜索模式，一旦找到需要重复执行的命令，按回车键即可。
-重复命令参数 先来看一个例子：mkdir /path/to/exampledir cd !$本例中，第一行命令将创建一个目录，而第二行的命令则转到刚创建的目录。这里，“!$”的作用就是重复前一个命令的参数。事实上，不仅是命令的参数可以重复，命令的选项同样可以。另外，Esc + . 快捷键可以切换这些命令参数或选项。
-  !$ 代表了上一个命令的最后一个字符串，所以就可以在第二个命令的时候直接调用!$ 来节约输入
+27.Terminal Command
+从历史中执行命令 有时候,我们需要在 Bash 中重复执行先前的命令.你当然可以使用上方向键来查看之前曾经运行过的命令.但这里有一种更好的方式：你可以按 Ctrl + r 组合键进入历史搜索模式,一旦找到需要重复执行的命令,按回车键即可.
+重复命令参数 先来看一个例子：mkdir /path/to/exampledir cd !$本例中,第一行命令将创建一个目录,而第二行的命令则转到刚创建的目录.这里,"!$"的作用就是重复前一个命令的参数.事实上,不仅是命令的参数可以重复,命令的选项同样可以.另外,Esc + . 快捷键可以切换这些命令参数或选项.
+  !$ 代表了上一个命令的最后一个字符串,所以就可以在第二个命令的时候直接调用!$ 来节约输入
   !! 重复执行上一条命令
-
-
+```
 用于编辑的终端快捷键
-ctrl+a 将光标定位到命令的开头
-ctrl+e 与上一个快捷键相反，将光标定位到命令的结尾
-ctrl+u 剪切光标之前的内容
-ctrl+k 与上一个快捷键相反，剪切光标之后的内容
-ctrl+y 粘贴以上两个快捷键所剪切的内容
-ctrl+t 交换光标之前两个字符的顺序
-ctrl+w 删除光标左边的参数（选项）或内容
-ctrl+p 返回上一次输入命令字符
-ctrl+r 输入单词搜索历史命令
-ctrl+l 清屏
-ctrl+c 令起一行
-ctrl+i 类似tab补全
-ctrl+o 重复执行命令
-alt+t 交换两个光标当前所处位置单词和光标前一个单词
-alt+u 把光标当前位置单词变为大写
-alt+l 把光标当前位置字母往后的这个单词的所有字母变为小写
-alt+c 把光标当前位置单词头一个字母变为大写
-alt+p 输入字符查找与字符相接近的历史命令
-处理作业 首先，使用 Ctrl + z 快捷键可以让正在执行的命令挂起。如果要让该进程在后台执行，那么可以执行 bg 命令。而 fg 命令则可以让该进程重新回到前台来。使用 jobs 命令能够查看到哪些进程在后台执行。 你也可以在 fg 或 bg 命令中使用作业 id，如：fg %3又如：bg %7
+    ctrl + a 将光标定位到命令的开头
+    ctrl + b 按字符后移(左向)
+    ctrl + c 令起一行, 终止命令
+    ctrl + d 删除光标处的字符
+    ctrl + e 与上一个快捷键相反,将光标定位到命令的结尾
+    ctrl + f 按字符前移(右向)
+    ctrl + g 从历史搜索模式退出
+    ctrl + h 删除光标前的字符
+    ctrl + i 类似tab补全
+    ctrl + k 与上一个快捷键相反,剪切光标之后的内容,从光标处删除至命令行尾
+    ctrl + l 清屏
+    ctrl + n 历史中的下一条命令
+    ctrl + o 重复执行命令, 执行当前命令,并选择上一条命令
+    ctrl + p 返回上一次输入命令字符, 历史中的上一条命令
+    ctrl + q 允许屏幕输出
+    ctrl + r 输入单词搜索历史命令, 逆向搜索命令历史
+    ctrl + s 阻止屏幕输出
+    ctrl + t 交换光标之前两个字符的顺序,交换光标处和之前的字符
+    ctrl + u 剪切光标之前的内容, 从光标处删除至命令行首
+    ctrl + w 删除光标左边的参数(选项)或内容,从光标处删除至字首
+    ctrl + y 粘贴以上两个快捷键所剪切的内容,粘贴至光标后
+    ctrl + z 挂起命令
+    Ctrl + xx在命令行首和光标之间移动
+     alt + b ：按单词后移(左向)
+     alt + c 把光标当前位置单词头一个字母变为大写,从光标处更改为首字母大写的单词
+     alt + d ：从光标处删除至字尾
+     alt + f ：按单词前移(右向)
+     alt + l 把光标当前位置字母往后的这个单词的所有字母变为小写,从光标处更改为全部小写的单词
+     alt + p 输入字符查找与字符相接近的历史命令
+     alt + t 交换两个光标当前所处位置单词和光标前一个单词, 交换光标处和之前的单词
+     alt + u 把光标当前位置单词变为大,从光标处更改为全部大写的单词
+     alt + . 使用上一条命令的最后一个参数
+     alt + backspace 与 ctrl + w 相同类似,分隔符有些差别
+    Bang (!) 命令
+        !! 执行上一条命令
+        !blah 执行最近的以 blah 开头的命令,如 !ls
+        !blah:p 仅打印输出,而不执行
+        !$ 上一条命令的最后一个参数,与 Alt + . 相同
+        !$:p 打印输出 !$ 的内容
+        !* 上一条命令的所有参数
+        !*:p 打印输出 !* 的内容
+        ^blah 删除上一条命令中的 blah
+        ^blah^foo 将上一条命令中的 blah 替换为 foo
+        ^blah^foo^ 将上一条命令中所有的 blah 都替换为 foo
+        $0  执行shell脚本时的命令行参数
+        $#  正在执行的命令名称
+        $?  当前启动的命令中传入的参数个数 echo $? 也表示上一个运行结束的程序的退出状态.
+        $$  上一条命令的执行返回值
+        $*  该shell的进程号
+
+处理作业 首先,使用 Ctrl + z 快捷键可以让正在执行的命令挂起.如果要让该进程在后台执行,那么可以执行 bg 命令.而 fg 命令则可以让该进程重新回到前台来.使用 jobs 命令能够查看到哪些进程在后台执行.你也可以在 fg 或 bg 命令中使用作业 id,如：fg %3又如：bg %7
 使用置换
-命令置换 先看例子：du -h -a -c $(find . -name *.conf 2>&-)注意 $() 中的部分，这将告诉 Bash 运行 find 命令，然后把返回的结果作为 du 的参数。
-进程置换 仍然先看例子：diff <(ps axo comm) <(ssh user@host ps axo comm)该命令将比较本地系统和远程系统中正在运行的进程。请注意 <() 中的部分。
-xargs 看例：find . -name *.conf -print0 | xargs -0 grep -l -Z mem_limit | xargs -0 -i cp {} {}.bak该命令将备份当前目录中的所有 .conf 文件。
-使用管道 下面是一个简单的使用管道的例子：ps aux | grep init这里，“|”操作符将 ps aux 的输出重定向给 grep init。 下面还有两个稍微复杂点的例子：ps aux | tee filename | grep init及：ps aux | tee -a filename | grep init
-将标准输出保存为文件 你可以将命令的标准输出内容保存到一个文件中，举例如下：ps aux > filename注意其中的“>”符号。 你也可以将这些输出内容追加到一个已存在的文件中：ps aux >> filename你还可以分割一个较长的行：command1 | command2 | ... | commandN > tempfile1 cat tempfile1 | command1 | command2 | ... | commandN > tempfile2
+命令置换 先看例子：du -h -a -c $(find . -name *.conf 2>&-)注意 $() 中的部分,这将告诉 Bash 运行 find 命令,然后把返回的结果作为 du 的参数.
+进程置换 仍然先看例子：diff <(ps axo comm) <(ssh user@host ps axo comm)该命令将比较本地系统和远程系统中正在运行的进程.请注意 <() 中的部分.
+xargs 看例：find . -name *.conf -print0 | xargs -0 grep -l -Z mem_limit | xargs -0 -i cp {} {}.bak该命令将备份当前目录中的所有 .conf 文件.
+使用管道 下面是一个简单的使用管道的例子：ps aux | grep init这里,"|"操作符将 ps aux 的输出重定向给 grep init.下面还有两个稍微复杂点的例子：ps aux | tee filename | grep init及：ps aux | tee -a filename | grep init
+将标准输出保存为文件 你可以将命令的标准输出内容保存到一个文件中,举例如下：ps aux > filename注意其中的">"符号.你也可以将这些输出内容追加到一个已存在的文件中：ps aux >> filename你还可以分割一个较长的行：command1 | command2 | ... | commandN > tempfile1 cat tempfile1 | command1 | command2 | ... | commandN > tempfile2
 标准流：重定向与组合 重定向流的例子：ps aux 2>&1 | grep init这里的数字代表：
-0：stdin
-1：stdout
-2：sterr
-上面的命令中，“grep init”不仅搜索“ps aux”的标准输出，而且搜索 sterr 输出。
-
-28
-编辑命令, 注意有时间顺序,按压ctrl后,再按.不是组合
-Ctrl + a ：移到命令行首
-Ctrl + e ：移到命令行尾
-Ctrl + f ：按字符前移（右向）
-Ctrl + b ：按字符后移（左向）
-Alt + f ：按单词前移（右向）
-Alt + b ：按单词后移（左向）
-Ctrl + xx：在命令行首和光标之间移动
-Ctrl + u ：从光标处删除至命令行首
-Ctrl + k ：从光标处删除至命令行尾
-Ctrl + w ：从光标处删除至字首
-Alt + d ：从光标处删除至字尾
-Ctrl + d ：删除光标处的字符
-Ctrl + h ：删除光标前的字符
-Ctrl + y ：粘贴至光标后
-Alt + c ：从光标处更改为首字母大写的单词
-Alt + u ：从光标处更改为全部大写的单词
-Alt + l ：从光标处更改为全部小写的单词
-Ctrl + t ：交换光标处和之前的字符
-Alt + t ：交换光标处和之前的单词
-Alt + Backspace：与 Ctrl + w 相同类似，分隔符有些差别
-
-重新执行命令
-Ctrl + r：逆向搜索命令历史
-Ctrl + g：从历史搜索模式退出
-Ctrl + p：历史中的上一条命令
-Ctrl + n：历史中的下一条命令
-Alt + .：使用上一条命令的最后一个参数
-
-控制命令
-Ctrl + l：清屏
-Ctrl + o：执行当前命令，并选择上一条命令
-Ctrl + s：阻止屏幕输出
-Ctrl + q：允许屏幕输出
-Ctrl + c：终止命令
-Ctrl + z：挂起命令
-Bang (!) 命令
-
-!!：执行上一条命令
-!blah：执行最近的以 blah 开头的命令，如 !ls
-!blah:p：仅打印输出，而不执行
-!$：上一条命令的最后一个参数，与 Alt + . 相同
-!$:p：打印输出 !$ 的内容
-!*：上一条命令的所有参数
-!*:p：打印输出 !* 的内容
-^blah：删除上一条命令中的 blah
-^blah^foo：将上一条命令中的 blah 替换为 foo
-^blah^foo^：将上一条命令中所有的 blah 都替换为 foo
-$0  执行shell脚本时的命令行参数
-$#  正在执行的命令名称
-$?  当前启动的命令中传入的参数个数 echo $? 也表示上一个运行结束的程序的退出状态.
-$$  上一条命令的执行返回值
-$*  该shell的进程号
-
-
+0 stdin 标准输入设备
+1 stdout 标准输出设备 (printf("..")) 
+2 sterr 标准错误输出设备 
+两者默认向屏幕输出,其中stdout 输出到磁盘文件,stderr输出到屏幕
+stdin 上面的命令中,"grep init"不仅搜索"ps aux"的标准输出,而且搜索 sterr 输出.
 bash 模式可通过 set -o emacs 设置 vi 模式set -o vi
-^S、^Q、^C、^Z 是由终端设备处理的，可用 stty 命令设置。
+^S、^Q、^C、^Z 是由终端设备处理的,可用 stty 命令设置.
+```
 
-
-.LOG
-# FileName: shell_tips.txt
-# Version: 0.0.1
-# CreateTime: 2013-03-04 16:10:07
-# LastChange: 2013-03-04 16:10:19
-
-29.以HTTP方式局域网共享当前文件夹内容
+28.以HTTP方式局域网共享当前文件夹内容
+```
 $python -m SimpleHTTPServer
+```
 
-30.以普通用户打开的VIM当中保存一个ROOT文件,仅对sudo的有效
+29.以普通用户打开的VIM当中保存一个ROOT文件,仅对sudo的有效
+```
 :w !sudo tee %
-ctrl-x e  快速启动默认编辑器，由变量$EDITOR设置
+ctrl-x e  快速启动默认编辑器,由变量$EDITOR设置
 vim scp://usrname@host//path/to/somefile  vim远程一个文件
+```
 
-31.切换到上一个目录 等价于cd $OLDPWD $PWD是当前目录的路径
+30.切换到上一个目录 等价于cd $OLDPWD $PWD是当前目录的路径
+```
 cd -
+```
 
-32.替换上一条命令中的一个短语 把foo替换成bar,然后直接会运行上一条替换后的命令
+31.替换上一条命令中的一个短语 把foo替换成bar,然后直接会运行上一条替换后的命令
+```
 $^foo^bar^
 上述命令的原始命令是!!:s/foo/bar/ !!:gs/foo/bar
+```
 
-33.时间引用符!!
+32.时间引用符!!
+```
 比如少打了命令,注意空格
-$:checkout svn_url svn_path
-$:svn !! 
-!-1 引用前一条命令
-!-2 前第二条命令...类推
+checkout svn_url svn_path
+svn !!
+    !-1 引用前一条命令
+    !-2 前第二条命令...类推
+```
 
-34.快速备份一个文件,大括号是一个排列的意思,filename{,.bak}类似filename filenam.bak
-$cp filename{,.bak}
+33.快速备份一个文件,大括号是一个排列的意思,filename{,.bak}类似filename filenam.bak
+```
+cp filename{,.bak}
+```
 
-35.免密码ssh登录主机,把公钥串写入远程主机~/.ssh/authorized_keys,前提是当前用户有公钥,默认没有,需要ssh-keygen,如果需要删除,需要打开远程主机上authorized_keys,你的用户名,删除掉该行
-$ssh-copy_id remote-machine
-
+34.免密码ssh登录主机,把公钥串写入远程主机~/.ssh/authorized_keys,前提是当前用户有公钥,默认没有,需要ssh-keygen,如果需要删除,需要打开远程主机上authorized_keys,你的用户名,删除掉该行
+```
+    ssh-copy_id remote-machine
 指定ssh 的private key 来登录
-ssh -i private_key_file root@ip_address -p port_num
+    ssh -i private_key_file root@ip_address -p port_num
+```
 
-36.抓取桌面的视频,-f x11grab 指定输入类型,-s wxga 1366x768的区域,-r 25帧率,-i:0.0
+35.抓取桌面的视频,-f x11grab 指定输入类型,-s wxga 1366x768的区域,-r 25帧率,-i:0.0
+```
 设置输入源,本地X默认在0.0 -sameq 保持跟输入量一样的图像质量
-$ffmpeg -f x11grab -s wxga -r 25 -i:0.0 -sameq /tmp/out.mpg
+ffmpeg -f x11grab -s wxga -r 25 -i:0.0 -sameq /tmp/out.mpg
+```
 
-37.清空或创建一个文件
+36.清空或创建一个文件
+```
 >file.txt 有些是:>file.txt
+```
 
-38.在午夜的时候执行某命令,at用于定时一次性任务,cron是定时周期性任务,参数很灵活
+37.在午夜的时候执行某命令,at用于定时一次性任务,cron是定时周期性任务,参数很灵活
+```
 echo cmd | at midnight
+```
 
-39.远程传送麦克风语音
+38.远程传送麦克风语音
+```
 dd if=/dev/dsp | ssh username@host dd of=/dev/dsp
 如果没的远程主机 dd if=/dev/dsp of=/dev/dsp 直接回放麦克风的声音
 如果有其他音频在工作用alsa的组件arecord和aplay
 arecord | ssh username@host aplay
 本地回放arecord | aplay
 吓人 cat /dev/urandom | ssh username@host aplay
+```
 
-40.diff对比远程文件和本地文件
+39.diff对比远程文件和本地文件
+```
 ssh user@host cat /path/to/remotefile | diff /path/to/localfile -
+```
 
 41.netstat -tulnp 查看占用端口的进程
 -a all 网络端口 -at tcp的端口 -s 所有连接的统计 -c 动态持续输出
@@ -1346,11 +1300,11 @@ ALT+.(or ESC+.)
 du -h --max-depth=1
 du -h --max-depth=n path
 du -h --max-depth=n ./ | sort -nr 显示当前目录下子目录的大小并且排序.
-注意，du 是统计文件大小最后相加，df是统计数据块使用情况,
-如果有一个进程在打开一个大文件的时候，这个大文件直接被rm或者mv掉，则du会更新统计数值，df不会更新统计数值，还是认为空间没有释放。直到这个打开大文件的进程被kill掉。
+注意,du 是统计文件大小最后相加,df是统计数据块使用情况,
+如果有一个进程在打开一个大文件的时候,这个大文件直接被rm或者mv掉,则du会更新统计数值,df不会更新统计数值,还是认为空间没有释放.直到这个打开大文件的进程被kill掉.
 df -h 统计
 du -sh path 统计总数大小
-du -sm * | sort -n 统计当前目录大小，并按照大小排序
+du -sm * | sort -n 统计当前目录大小,并按照大小排序
 du -sk * | sort -n
 du -sk * | grep username 查看用户的大小
 du -s * | sort -n | tail 列出当前目录最大的10个文件
@@ -1358,7 +1312,7 @@ du -m | cut -d "/" -f 2 看第二个/ 字符前的文字
 查看该文件夹下有多少个文件
 du path/
 du path/*/*/* | wc -l
-wc 的-l 是多少行，-m是多少字符，-w是多少字
+wc 的-l 是多少行,-m是多少字符,-w是多少字
 
  
 
@@ -1408,41 +1362,41 @@ ntpdate timeserver2.domain.org
 
 57.
 vmstat 2 每两秒显示虚拟内存状态 
-vmstat virtual memory statistics 虚拟内存统计  vmstat 3 5 表示每3秒更新一次输出信息，循环输出，统计5次后停止输出
+vmstat virtual memory statistics 虚拟内存统计  vmstat 3 5 表示每3秒更新一次输出信息,循环输出,统计5次后停止输出
 	procs
 	r 列 结果分析 procs 表示运行和等待cpu时间片的进程数 
-	b 列 表示在等待资源的进程数。比如正在等待I/O或者内存交换等
+	b 列 表示在等待资源的进程数.比如正在等待I/O或者内存交换等
 	memory
-	swpd 表示切换到内存交换区的内存大小（KB）。如果不为0，或比较大，只要si，so的值为0就没问题。
-	free 当前空闲的物理内存数量（KB）
-	buff 表示buffers cache的内存数量，一般对块设备的读写才需要缓冲
+	swpd 表示切换到内存交换区的内存大小(KB).如果不为0,或比较大,只要si,so的值为0就没问题.
+	free 当前空闲的物理内存数量(KB)
+	buff 表示buffers cache的内存数量,一般对块设备的读写才需要缓冲
 	cache 表示page
-	cached的内存数量。一般作为文件系统进行缓存。如果cache太大，说明缓存的文件太多，而如果io的bi比较小，说明文件系统效率比较高。
+	cached的内存数量.一般作为文件系统进行缓存.如果cache太大,说明缓存的文件太多,而如果io的bi比较小,说明文件系统效率比较高.
 	swap 
-	si 由磁盘调入内存，即由内存进入内存交换区的内存大小
-	so 由内存调入磁盘，即内存交换区进入内存的内存大小
-        一般si，so都为0.如果长期不为0，则需要增加系统内存
+	si 由磁盘调入内存,即由内存进入内存交换区的内存大小
+	so 由内存调入磁盘,即内存交换区进入内存的内存大小
+        一般si,so都为0.如果长期不为0,则需要增加系统内存
 	io
-	bi 块设备读入数据的总量（读磁盘）kb/s
-	bo 写到块设备的数据总量 （写磁盘）kb/s
-	   如果bi+bo参考值大于1000，并且wa值较大，则I/O有问题，需要提交磁盘的读写性能
+	bi 块设备读入数据的总量(读磁盘)kb/s
+	bo 写到块设备的数据总量 (写磁盘)kb/s
+	   如果bi+bo参考值大于1000,并且wa值较大,则I/O有问题,需要提交磁盘的读写性能
 	system 显示采集区间发生的中断数
 	in 表示某一时间间隔内观察到的每秒设备中断数
 	cs 表示每秒产生的上下文切换次数 
-		上述两个值越大，由内核消耗的CPU时间越多
+		上述两个值越大,由内核消耗的CPU时间越多
 	cpu
-	us 显示了用户进程消耗的CPU时间百分比，如果长期>50% 需要优化程序或算法
-	sy 显示了内核进程消耗的CPU时间百分比，如果较高表明内核消耗的CPU资源很多。
+	us 显示了用户进程消耗的CPU时间百分比,如果长期>50% 需要优化程序或算法
+	sy 显示了内核进程消耗的CPU时间百分比,如果较高表明内核消耗的CPU资源很多.
 		一般是us+sy 参考值80%
 	id 显示CPU处于空闲状态的时间百分比
-	wa 显示了IO等待所占用的CPU时间百分比，wa越高索命I/O等待越严重。参考值20%，超过说明越严重。
+	wa 显示了IO等待所占用的CPU时间百分比,wa越高索命I/O等待越严重.参考值20%,超过说明越严重.
 
 iostat 系统输出输出统计 -c cpu的 -d 磁盘的使用情况 -k 每秒按kb -m 每秒按M -t 时间 -v版本
 	iostat -d 2 3 的Blk_read/s 每秒读取的数据块数
 					Blk_wrtn/s 每秒写入的数据块数
 					Blk_read	读取的所有块数
 					Blk_wrtn	写入的所有块数
-	iostat -x /dev/sda 2 3   -x是对每个磁盘的单独统计，不指定就默认所有磁盘
+	iostat -x /dev/sda 2 3   -x是对每个磁盘的单独统计,不指定就默认所有磁盘
 				输出与sar -d一致
 				rrqm/s 每秒进行合并的读操作数
 				wrqm/s 每秒进行合并的写操作数
@@ -1455,19 +1409,19 @@ mpstat 实时系统监控工具 监控-P 监控哪个CPU ALL -P ALL 2 每2秒产
 pmap -d PID 显示PID的内存信息
 
 终端操作快捷键.
-1，echo "aa" > test.txt 和 echo "bb" >> test.txt //>将原文件清空，并且内容写入到文件中，>>将内容放到文件的尾部
-2，chmod go+w -R /home/zhangy //给组用户和其他用户添加写的权限
-3，tar -tzvf test.tar.gz //列出归档内容
-4，du -ah //查看文件列表大小
-5，du -sh //查看所有文件的大小总和
-6，echo '1+2'|bc -l //数学运算
-7，uname -a //查看linux内核等的一些信息
+1,echo "aa" > test.txt 和 echo "bb" >> test.txt //>将原文件清空,并且内容写入到文件中,>>将内容放到文件的尾部
+2,chmod go+w -R /home/zhangy //给组用户和其他用户添加写的权限
+3,tar -tzvf test.tar.gz //列出归档内容
+4,du -ah //查看文件列表大小
+5,du -sh //查看所有文件的大小总和
+6,echo '1+2'|bc -l //数学运算
+7,uname -a //查看linux内核等的一些信息
 head -n 1 /etc/issue 查看操作系统版本
-8，badblocks -s /dev/sda //坏道扫描时显示进度
-9，time command //查看命令的运行时间
+8,badblocks -s /dev/sda //坏道扫描时显示进度
+9,time command //查看命令的运行时间
 	date -d@12345677890 时间截转时间
-	>file.txt 创建一个空文件。类似touch
-	mtr 域名，类似traceroute
+	>file.txt 创建一个空文件.类似touch
+	mtr 域名,类似traceroute
 	echo "ls -l" | at midnight 在某个时间运行某个命令
 10,ls -lrt //按时间的倒序排序
     ls -lrta // 按照时间的倒序排序并且显示所有的
@@ -1477,40 +1431,39 @@ head -n 1 /etc/issue 查看操作系统版本
     ls -lah 显示文件大小, 以对应单位k.显示
 11,rsync -P //同步时显示进度
 12.history -c //清楚历史命令
-13，cd - //返回上次目录
-14，tree //显示目录树
-15，umount -n /mnt/hda2 //强制卸载
-16，echo ~/ //显示用户的home目录
-17，echo $[5*5] //算术运算
-18，echo $((5*5)) //算术运算
-19，eval ls;ps aux|grep httpd //这二个命令都能执行
-20，free -m //有MB为单位显示内存 -s 3 设置每3秒持续检测使用状态
-21，uptime //显示系统已经运行了多长时间，它依次显示下列信息：现在时间、系统已经运行了多长时间、目前有多少登陆用户、系统在过去的1分钟、5分钟和15分钟内的平均负载
-22，加法运算
+13,cd - //返回上次目录
+14,tree //显示目录树
+15,umount -n /mnt/hda2 //强制卸载
+16,echo ~/ //显示用户的home目录
+17,echo $[5*5] //算术运算
+18,echo $((5*5)) //算术运算
+19,eval ls;ps aux|grep httpd //这二个命令都能执行
+20,free -m //有MB为单位显示内存 -s 3 设置每3秒持续检测使用状态
+22,加法运算
 [root@krlcgcms01 mytest]# let a=34+3;
 [root@krlcgcms01 mytest]# echo $a;
-23，export //查看所有环境变量
-24，echo $PATH //查看单个变量
-25，cmp file1 file2 //文件内容比对
-26，clear //清屏
-27，echo 23423 |awk --re-interval '/[0-9]{3,}/' //如果不加re-interval的话，不显示
-28，cal //得到一个整齐的日历格式
-29，wc -l //统计行数，wc -w 统计单词
-30，echo "AaDCbd23" |tr "[A-Z]" "[a-z]" 大写变小写，echo "AaDCbdc23" |tr -c b-d = 将b-d之外的字符串替换成=
-31，echo "ADSF" | iconv -f UTF8 -t GBK //把字符由utf8转成gbk -f是from和简写，-t好像terminal的简写
-32，cat -n file //内容的前面会显示行号
-33，chattr +i file //只读，root用户也没法对其进行修改
-34，lsattr file //查看文件属性
-35，cat /etc/passwd |awk -F: '{print $1}' //查看系统中所有用户
-36，cat /etc/group //查看系统中所有的组
-37，groups //查前当前用户所在的，所有组
-38，usermod -g 组名 用户 //这种方式是覆盖的方式，用的时候要小心，如果用户A性于mysql usermod -g php mysql这样的话只
-属于php了，
-39，usermod -G 组名 用户 //这种方式是增加的方式，如果用户A性于mysql usermod -g php mysql这样的话，mysql就属于2个组了
-usermod -a -G 组名 用户 ，把已有的用户名添加到已有的组里面
-40，bc //进入数学计算中去
-41，umask 003 u权限是7,g权限是7，其他用户是4，也就是774，777-003=774
-42，mkfs -t vfat /dev/hda6 //将移动硬盘里面的一个分区格式化成vfat格式
+23,export //查看所有环境变量
+24,echo $PATH //查看单个变量
+25,cmp file1 file2 //文件内容比对
+26,clear //清屏
+27,echo 23423 |awk --re-interval '/[0-9]{3,}/' //如果不加re-interval的话,不显示
+28,cal //得到一个整齐的日历格式
+29,wc -l //统计行数,wc -w 统计单词
+30,echo "AaDCbd23" |tr "[A-Z]" "[a-z]" 大写变小写,echo "AaDCbdc23" |tr -c b-d = 将b-d之外的字符串替换成=
+31,echo "ADSF" | iconv -f UTF8 -t GBK //把字符由utf8转成gbk -f是from和简写,-t好像terminal的简写
+32,cat -n file //内容的前面会显示行号
+33,chattr +i file //只读,root用户也没法对其进行修改
+34,lsattr file //查看文件属性
+35,cat /etc/passwd |awk -F: '{print $1}' //查看系统中所有用户
+36,cat /etc/group //查看系统中所有的组
+37,groups //查前当前用户所在的,所有组
+38,usermod -g 组名 用户 //这种方式是覆盖的方式,用的时候要小心,如果用户A性于mysql usermod -g php mysql这样的话只
+属于php了,
+39,usermod -G 组名 用户 //这种方式是增加的方式,如果用户A性于mysql usermod -g php mysql这样的话,mysql就属于2个组了
+usermod -a -G 组名 用户 ,把已有的用户名添加到已有的组里面
+40,bc //进入数学计算中去
+41,umask 003 u权限是7,g权限是7,其他用户是4,也就是774,777-003=774
+42,mkfs -t vfat /dev/hda6 //将移动硬盘里面的一个分区格式化成vfat格式
     mkfs.ext4 /dev/sdb1 -L ULTRA    //格式化一个U盘为ext4,并且命名卷标未ULTRA, 格式化前需要umount,可以通过blkid查看,
         重命名卷标可用e2label /dev/sdb1 new_volumn_tagname或者tune2fs -L new_volumn_tagname /dev/sdb1 
     df -H 首先查看盘符, 拿到/dev/sdb1 是否真实挂载到U盘
@@ -1520,19 +1473,19 @@ usermod -a -G 组名 用户 ，把已有的用户名添加到已有的组里面
 
 
 
-43，mount /dev/cdrom /media/cdrom //挂载cdrom, 要挂在的设备， 挂在的目录
-44，getent group 532 //通过组ID,来查找组信息
-45，last //登录成功用户记录 last reboot 查看重启时间
+43,mount /dev/cdrom /media/cdrom //挂载cdrom, 要挂在的设备, 挂在的目录
+44,getent group 532 //通过组ID,来查找组信息
+45,last //登录成功用户记录 last reboot 查看重启时间
 46,lastb //登录不成功用户记录
-47，dump -S /dev/sda2 //查看一下要备份/dev/sda2所要的容量
-48，dump -0j -f /dev/hda2/sda2_bak.dump.bz2 /dev/sda2 //将sda2进行备份并压缩
-49，restore -t -f /dev/hda2/sda2_bak.dump //查看备份信息
-50，restore -r -f /dev/hda2/sda2_bak.dump //还原备份
-51，fc-list //查看系统中安装的字体
-52，find ./ -type f -exec grep -q "root" {} \; -exec echo {} \; //查找目录下文件所包涵的字符串
-53，vmstat 5 //每5显示一下次系统信息，cpu,memory,i/o等
-54，top 后 在shift + P 所占进程的排序显示 process
-55，top 后 在shift + M 所占内存的排序显示 memory
+47,dump -S /dev/sda2 //查看一下要备份/dev/sda2所要的容量
+48,dump -0j -f /dev/hda2/sda2_bak.dump.bz2 /dev/sda2 //将sda2进行备份并压缩
+49,restore -t -f /dev/hda2/sda2_bak.dump //查看备份信息
+50,restore -r -f /dev/hda2/sda2_bak.dump //还原备份
+51,fc-list //查看系统中安装的字体
+52,find ./ -type f -exec grep -q "root" {} \; -exec echo {} \; //查找目录下文件所包涵的字符串
+53,vmstat 5 //每5显示一下次系统信息,cpu,memory,i/o等
+54,top 后 在shift + P 所占进程的排序显示 process
+55,top 后 在shift + M 所占内存的排序显示 memory
     top 后 在shift + A 按照不同类别排序显示
     top 后 在shift + H Thread 和Task切换
     top 后 在shift + L 搜索 
@@ -1540,40 +1493,40 @@ usermod -a -G 组名 用户 ，把已有的用户名添加到已有的组里面
     top 后 在shift + H Thread 和Task切换
 
 
-56，iptraf -g //查看各个接口的流量
-57，iostat -d -x /dev/sda2 2 //用iostat查看磁盘/dev/sda2的磁盘i/o情况，每两秒刷新一次
-58, paste -sd '|||\n' test //文件的每4行转换成1行，并用|隔开。
-59，lsof -i :22 //知道22端口现在运行什么程序
-60，lsof -c abc //显示abc进程现在打开的文件
-61，lsof -p 12 //看进程号为12的进程打开了哪些文件
-63，route //查看路由信息
-64，ifup //开启网卡
-65，ifdown //关闭网卡
-66，route del -net 172.168.0.0 netmask 255.255.0.0 dev eth0 //删除 172.168这个网段
-67，route add -net 172.168.10.0 netmask 255.255.255.0 dev eth0 //增加一个路由
-68，netstat -tunl //列出监听的网络服务端口
-69，netstat -tun //列出已连接的网络服务端口
-70，nmap -sP 172.30.4.0/24 //在这个网段内有多少用户在我的主机上操作，一个不错的安全检查工具
-71，vgdisplay //查看系统中的可用空间
-72，lvextend -L+20G /dev/tank/part1 //向part1这个分区增加20G的空间
-73，lvresize -L-10G /dev/tank/part2 //向part2这个分区减少10G的空间
-74，pvdisplay //查看磁盘信息
+56,iptraf -g //查看各个接口的流量
+57,iostat -d -x /dev/sda2 2 //用iostat查看磁盘/dev/sda2的磁盘i/o情况,每两秒刷新一次
+58, paste -sd '|||\n' test //文件的每4行转换成1行,并用|隔开.
+59,lsof -i :22 //知道22端口现在运行什么程序
+60,lsof -c abc //显示abc进程现在打开的文件
+61,lsof -p 12 //看进程号为12的进程打开了哪些文件
+63,route //查看路由信息
+64,ifup //开启网卡
+65,ifdown //关闭网卡
+66,route del -net 172.168.0.0 netmask 255.255.0.0 dev eth0 //删除 172.168这个网段
+67,route add -net 172.168.10.0 netmask 255.255.255.0 dev eth0 //增加一个路由
+68,netstat -tunl //列出监听的网络服务端口
+69,netstat -tun //列出已连接的网络服务端口
+70,nmap -sP 172.30.4.0/24 //在这个网段内有多少用户在我的主机上操作,一个不错的安全检查工具
+71,vgdisplay //查看系统中的可用空间
+72,lvextend -L+20G /dev/tank/part1 //向part1这个分区增加20G的空间
+73,lvresize -L-10G /dev/tank/part2 //向part2这个分区减少10G的空间
+74,pvdisplay //查看磁盘信息
 75,mplayer -loop 10 /mnt/song/music/花儿开了.mp3 //循环播放10遍
 76,pacman -S firefox -nd //nd去掉依赖
 77,wget -c //断点下载
 78,chroot /mnt/ubuntu //改变根目录到/mnt/ubuntu
-79,ctrl+a //命令行下，光标称动到开头
-80,ctrl+e //命令行下，光标移动结尾
-81,cut -d: -f 1-4 test //用：分割文件，取分割后的1－4列
+79,ctrl+a //命令行下,光标称动到开头
+80,ctrl+e //命令行下,光标移动结尾
+81,cut -d: -f 1-4 test //用：分割文件,取分割后的1－4列
 82,file /home/zhangy/test.php //用于查看文件的一些基本信息
 83,touch test.txt //创建一个空文件 text.txt
    touch /tmp/{test1,test2,test3} 按照test1~3的顺序建造文件
 84,htpasswd -cbd /usr/local/nginx/conf/authfile //创建访问控制文件
-85,df //查看磁盘空间，和当前的磁盘数
+85,df //查看磁盘空间,和当前的磁盘数
 86,fdisk -l //查看所有磁盘数
-87,alsamixer //进入后，m键可以实现静音
+87,alsamixer //进入后,m键可以实现静音
 88,killall httpd //把所有httpd进程杀掉
-89,killall -9 mysqld_safe //有些进程超级用户也停止不了，-9是强制删除
+89,killall -9 mysqld_safe //有些进程超级用户也停止不了,-9是强制删除
 90,mirror /mysql //下载mysql目录
 91,mirror -R /mysql //上传mysql目录
 92,rmmod pcspkr //关掉tab提示音
@@ -1581,11 +1534,11 @@ usermod -a -G 组名 用户 ，把已有的用户名添加到已有的组里面
 的读读取读取读取了里俩脸链接练级链接链接位万恶问文件文集问价文件文件你呢内内容内容哦内容内容内容户添加到wheel这个组
 95,dd if=/dev/zero of=/virtual/ubuntu.virt.img bs=1M count=4096 //创建一个4G的IMG镜像
 dd if=xxx.iso of=/dev/sdb bs=1M //把镜像烧进U盘
-96，lspic //显示pci设备
-97，lsusb //显示usb设备
-98，history | less //less根more有点像，感觉less用着更舒服点
-99，ln -s //如果忘了-s就变成硬链接了  readlink 读取链接文件内容
-100，tar zxvf test.tar.gz -C /home/zhangy //将内容解压到指定目录
+96,lspic //显示pci设备
+97,lsusb //显示usb设备
+98,history | less //less根more有点像,感觉less用着更舒服点
+99,ln -s //如果忘了-s就变成硬链接了  readlink 读取链接文件内容
+100,tar zxvf test.tar.gz -C /home/zhangy //将内容解压到指定目录
 压缩
 tar zcvf xxx.tar.gz /home/www 
 gzip -q xxx.tar
@@ -1620,17 +1573,17 @@ tar -zcvf xxx.tar.gz xxx --exclude .svn
 
 
 
-101. 把当前一个文件copy到远程另外一台主机上，可以如下命令。(注意都是本地操作)
+101. 把当前一个文件copy到远程另外一台主机上,可以如下命令.(注意都是本地操作)
 
 scp 文件名 用户名@计算机IP或者计算机名称:远程路径 
 scp /home/tom/111.tar.gz root@10.xx.xx.xxx:/home/www 
-然后会提示你输入另外那台10.xx.xx.xxx主机的root用户的登录密码，接着就开始copy了。
+然后会提示你输入另外那台10.xx.xx.xxx主机的root用户的登录密码,接着就开始copy了.
 
-如果想反过来操作，把文件从远程主机copy到当前系统，也很简单。
+如果想反过来操作,把文件从远程主机copy到当前系统,也很简单.
 scp 用户名@计算机IP或者计算机名称:名称 本地路径
 scp root@10.xx.xx.xxx:/home/www/home/tom/111.tar.gz 
 scp root@184.82.117.212:/etc/httpd/conf/httpd.conf /home/suans/Desktop/
-目录的话， 加-r 
+目录的话, 加-r 
 scp -r 目录名 用户名@计算机IP或者计算机名称:远程路径
 scp -r 用户名@计算机IP或者计算机名称:目录名 本地路径
 scp -P端口号 xxx 命令
@@ -1645,30 +1598,30 @@ scp -P端口号 xxx 命令
 删除指定数据库的所有表, 但是不删除数据库
 SELECT CONCAT('DROP TABLE IF EXISTS ', table_name, ';') FROM  information_schema.tables WHERE table_schema='wordpress';
 
-（1）导出整个数据库
+(1)导出整个数据库
 
 mysqldump -u 用户名 -p 数据库名 > 导出的文件名 
 mysqldump -u wcnc -p smgp_apps_wcnc > wcnc.sql
 mysqldump --single-transaction -u wcnc -p smgp_apps_wcnc > xxx.sql
-（2）导出一个表
+(2)导出一个表
 
 mysqldump -u 用户名 -p 数据库名 表名> 导出的文件名
 mysqldump -u wcnc -p smgp_apps_wcnc users> wcnc_users.sql
 
 mysqldump -u user -p database_name table_1 table_2 table_3 > filename.sql
-（3）导出一个数据库结构
+(3)导出一个数据库结构
 
 mysqldump -u wcnc -p -d --add-drop-table smgp_apps_wcnc >d:\wcnc_db.sql
 #-d 不导出数据只导出结构 --add-drop-table 在每个create语句之前增加一个drop table 
-（4）导入数据库，常用source 命令
+(4)导入数据库,常用source 命令
 
-#进入mysql数据库控制台，
+#进入mysql数据库控制台,
 mysql -u root -p 
 mysql>use 数据库
-mysql>set names utf8; （先确认编码，如果不设置可能会出现乱码，注意不是UTF-8） 
-#然后使用source命令，后面参数为脚本文件（如这里用到的.sql）
+mysql>set names utf8; (先确认编码,如果不设置可能会出现乱码,注意不是UTF-8) 
+#然后使用source命令,后面参数为脚本文件(如这里用到的.sql)
 mysql>source d:\wcnc_db.sql
-上边的实例只是最基础的，有的时候我们可能需要批量导出多个库，我们就可以加上--databases 或者-B，如下语句：
+上边的实例只是最基础的,有的时候我们可能需要批量导出多个库,我们就可以加上--databases 或者-B,如下语句：
 
 可以进去mysql后用load infile 来导入txt格式的,需要有自增的id之类的.
 格式
@@ -1678,56 +1631,56 @@ load data infile "/home/www/dbm/bigdb/test.txt" into table `12306_14` fields ter
 
 mysqldump -uroot -p --databases test mysql #空格分隔
 
-还有的时候我们可能需要把数据库内所有的库全部备份，我们就可以使用-all-databases，如下语句：
+还有的时候我们可能需要把数据库内所有的库全部备份,我们就可以使用-all-databases,如下语句：
 mysqldump -uroot -p -all-databases
 
-可能我们还会有更多的需求，下面是我在网上找的感觉比较全的参数说明，贴出来供大家参考。
-参数说明 --all-databases , -A 导出全部数据库。
+可能我们还会有更多的需求,下面是我在网上找的感觉比较全的参数说明,贴出来供大家参考.
+参数说明 --all-databases , -A 导出全部数据库.
 mysqldump -uroot -p --all-databases
 --all-tablespaces , -Y
 
-导出全部表空间。 mysqldump -uroot -p --all-databases --all-tablespaces
+导出全部表空间.mysqldump -uroot -p --all-databases --all-tablespaces
 
---no-tablespaces , -y 不导出任何表空间信息。
+--no-tablespaces , -y 不导出任何表空间信息.
 mysqldump -uroot -p --all-databases --no-tablespaces
 
---add-drop-database 每个数据库创建之前添加drop数据库语句。
+--add-drop-database 每个数据库创建之前添加drop数据库语句.
 mysqldump -uroot -p --all-databases --add-drop-database
 
---add-drop-table 每个数据表创建之前添加drop数据表语句。(默认为打开状态，使用--skip-add-drop-table取消选项)
+--add-drop-table 每个数据表创建之前添加drop数据表语句.(默认为打开状态,使用--skip-add-drop-table取消选项)
 mysqldump -uroot -p --all-databases (默认添加drop语句)
 mysqldump -uroot -p --all-databases –skip-add-drop-table (取消drop语句)
 
---add-locks 在每个表导出之前增加LOCK TABLES并且之后UNLOCK TABLE。(默认为打开状态，使用--skip-add-locks取消选项)
+--add-locks 在每个表导出之前增加LOCK TABLES并且之后UNLOCK TABLE.(默认为打开状态,使用--skip-add-locks取消选项)
 mysqldump -uroot -p --all-databases (默认添加LOCK语句)
 mysqldump -uroot -p --all-databases –skip-add-locks (取消LOCK语句)
 
---allow-keywords 允许创建是关键词的列名字。这由表名前缀于每个列名做到。
+--allow-keywords 允许创建是关键词的列名字.这由表名前缀于每个列名做到.
 mysqldump -uroot -p --all-databases --allow-keywords
 
---apply-slave-statements 在'CHANGE MASTER'前添加'STOP SLAVE'，并且在导出的最后添加'START SLAVE'。
+--apply-slave-statements 在'CHANGE MASTER'前添加'STOP SLAVE',并且在导出的最后添加'START SLAVE'.
 mysqldump -uroot -p --all-databases --apply-slave-statements
 
 --character-sets-dir
 字符集文件的目录
 mysqldump -uroot -p --all-databases --character-sets-dir=/usr/local/mysql/share/mysql/charsets
 
---comments 附加注释信息。默认为打开，可以用--skip-comments取消
+--comments 附加注释信息.默认为打开,可以用--skip-comments取消
 
 mysqldump -uroot -p --all-databases (默认记录注释)
 mysqldump -uroot -p --all-databases --skip-comments (取消注释)
 
 --compatible
-导出的数据将和其它数据库或旧版本的MySQL 相兼容。值可以为ansi、mysql323、mysql40、postgresql、oracle、mssql、db2、maxdb、no_key_options、no_tables_options、no_field_options等，
-要使用几个值，用逗号将它们隔开。它并不保证能完全兼容，而是尽量兼容。
+导出的数据将和其它数据库或旧版本的MySQL 相兼容.值可以为ansi、mysql323、mysql40、postgresql、oracle、mssql、db2、maxdb、no_key_options、no_tables_options、no_field_options等,
+要使用几个值,用逗号将它们隔开.它并不保证能完全兼容,而是尽量兼容.
 
 mysqldump -uroot -p --all-databases --compatible=ansi
 --compact
-导出更少的输出信息(用于调试)。去掉注释和头尾等结构。可以使用选项：--skip-add-drop-table --skip-add-locks --skip-comments --skip-disable-keys
+导出更少的输出信息(用于调试).去掉注释和头尾等结构.可以使用选项：--skip-add-drop-table --skip-add-locks --skip-comments --skip-disable-keys
 mysqldump -uroot -p --all-databases --compact
 
 --complete-insert, -c
-使用完整的insert语句(包含列名称)。这么做能提高插入效率，但是可能会受到max_allowed_packet参数的影响而导致插入失败。
+使用完整的insert语句(包含列名称).这么做能提高插入效率,但是可能会受到max_allowed_packet参数的影响而导致插入失败.
 mysqldump -uroot -p --all-databases --complete-insert
 
 --compress, -C
@@ -1735,20 +1688,20 @@ mysqldump -uroot -p --all-databases --complete-insert
 mysqldump -uroot -p --all-databases --compress
 
 --create-options, -a
-在CREATE TABLE语句中包括所有MySQL特性选项。(默认为打开状态)
+在CREATE TABLE语句中包括所有MySQL特性选项.(默认为打开状态)
 mysqldump -uroot -p --all-databases
 
 --databases, -B
-导出几个数据库。参数后面所有名字参量都被看作数据库名。
+导出几个数据库.参数后面所有名字参量都被看作数据库名.
 mysqldump -uroot -p --databases test mysql
 
 --debug
-输出debug信息，用于调试。默认值为：d:t:o,/tmp/mysqldump.trace
+输出debug信息,用于调试.默认值为：d:t:o,/tmp/mysqldump.trace
 mysqldump -uroot -p --all-databases --debug
-mysqldump -uroot -p --all-databases --debug=” d:t:o,/tmp/debug.trace”
+mysqldump -uroot -p --all-databases --debug=" d:t:o,/tmp/debug.trace"
 
 --debug-check
-检查内存和打开文件使用说明并退出。
+检查内存和打开文件使用说明并退出.
 mysqldump -uroot -p --all-databases --debug-check
 
 --debug-info
@@ -1756,68 +1709,68 @@ mysqldump -uroot -p --all-databases --debug-check
 mysqldump -uroot -p --all-databases --debug-info
 
 --default-character-set
-设置默认字符集，默认值为utf8
+设置默认字符集,默认值为utf8
 mysqldump -uroot -p --all-databases --default-character-set=latin1
 
 --delayed-insert
-采用延时插入方式（INSERT DELAYED）导出数据
+采用延时插入方式(INSERT DELAYED)导出数据
 mysqldump -uroot -p --all-databases --delayed-insert
 
 --delete-master-logs
-master备份后删除日志. 这个参数将自动激活--master-data。
+master备份后删除日志. 这个参数将自动激活--master-data.
 mysqldump -uroot -p --all-databases --delete-master-logs
 
 --disable-keys
-对于每个表，用/*!40000 ALTER TABLE tbl_name DISABLE KEYS */;和/*!40000 ALTER TABLE tbl_name ENABLE KEYS */;语句引用INSERT语句。这样可以更快地导入dump出来的文件，因为它是在插入所有行后创建索引的。该选项只适合MyISAM表，默认为打开状态。
+对于每个表,用/*!40000 ALTER TABLE tbl_name DISABLE KEYS */;和/*!40000 ALTER TABLE tbl_name ENABLE KEYS */;语句引用INSERT语句.这样可以更快地导入dump出来的文件,因为它是在插入所有行后创建索引的.该选项只适合MyISAM表,默认为打开状态.
 mysqldump -uroot -p --all-databases
 
 --dump-slave
-该选项将导致主的binlog位置和文件名追加到导出数据的文件中。设置为1时，将会以CHANGE MASTER命令输出到数据文件；设置为2时，在命令前增加说明信息。该选项将会打开--lock-all-tables，除非--single-transaction被指定。该选项会自动关闭--lock-tables选项。默认值为0。
+该选项将导致主的binlog位置和文件名追加到导出数据的文件中.设置为1时,将会以CHANGE MASTER命令输出到数据文件；设置为2时,在命令前增加说明信息.该选项将会打开--lock-all-tables,除非--single-transaction被指定.该选项会自动关闭--lock-tables选项.默认值为0.
 mysqldump -uroot -p --all-databases --dump-slave=1
 mysqldump -uroot -p --all-databases --dump-slave=2
 
 --events, -E
-导出事件。
+导出事件.
 mysqldump -uroot -p --all-databases --events
 
 --extended-insert, -e
-使用具有多个VALUES列的INSERT语法。这样使导出文件更小，并加速导入时的速度。默认为打开状态，使用--skip-extended-insert取消选项。
+使用具有多个VALUES列的INSERT语法.这样使导出文件更小,并加速导入时的速度.默认为打开状态,使用--skip-extended-insert取消选项.
 mysqldump -uroot -p --all-databases
 mysqldump -uroot -p --all-databases--skip-extended-insert (取消选项)
 
 --fields-terminated-by
-导出文件中忽略给定字段。与--tab选项一起使用，不能用于--databases和--all-databases选项
-mysqldump -uroot -p test test --tab=”/home/mysql” --fields-terminated-by=”#”
+导出文件中忽略给定字段.与--tab选项一起使用,不能用于--databases和--all-databases选项
+mysqldump -uroot -p test test --tab="/home/mysql" --fields-terminated-by="#"
 
 --fields-enclosed-by
-输出文件中的各个字段用给定字符包裹。与--tab选项一起使用，不能用于--databases和--all-databases选项
-mysqldump -uroot -p test test --tab=”/home/mysql” --fields-enclosed-by=”#”
+输出文件中的各个字段用给定字符包裹.与--tab选项一起使用,不能用于--databases和--all-databases选项
+mysqldump -uroot -p test test --tab="/home/mysql" --fields-enclosed-by="#"
 
 --fields-optionally-enclosed-by
-输出文件中的各个字段用给定字符选择性包裹。与--tab选项一起使用，不能用于--databases和--all-databases选项
-mysqldump -uroot -p test test --tab=”/home/mysql” --fields-enclosed-by=”#” --fields-optionally-enclosed-by =”#”
+输出文件中的各个字段用给定字符选择性包裹.与--tab选项一起使用,不能用于--databases和--all-databases选项
+mysqldump -uroot -p test test --tab="/home/mysql" --fields-enclosed-by="#" --fields-optionally-enclosed-by ="#"
 
 --fields-escaped-by
-输出文件中的各个字段忽略给定字符。与--tab选项一起使用，不能用于--databases和--all-databases选项
-mysqldump -uroot -p mysql user --tab=”/home/mysql” --fields-escaped-by=”#”
+输出文件中的各个字段忽略给定字符.与--tab选项一起使用,不能用于--databases和--all-databases选项
+mysqldump -uroot -p mysql user --tab="/home/mysql" --fields-escaped-by="#"
 
 --flush-logs
-开始导出之前刷新日志。
-请注意：假如一次导出多个数据库(使用选项--databases或者--all-databases)，将会逐个数据库刷新日志。除使用--lock-all-tables或者--master-data外。在这种情况下，日志将会被刷新一次，相应的所以表同时被锁定。因此，如果打算同时导出和刷新日志应该使用--lock-all-tables 或者--master-data 和--flush-logs。
+开始导出之前刷新日志.
+请注意：假如一次导出多个数据库(使用选项--databases或者--all-databases),将会逐个数据库刷新日志.除使用--lock-all-tables或者--master-data外.在这种情况下,日志将会被刷新一次,相应的所以表同时被锁定.因此,如果打算同时导出和刷新日志应该使用--lock-all-tables 或者--master-data 和--flush-logs.
 mysqldump -uroot -p --all-databases --flush-logs
 
 --flush-privileges
-在导出mysql数据库之后，发出一条FLUSH PRIVILEGES 语句。为了正确恢复，该选项应该用于导出mysql数据库和依赖mysql数据库数据的任何时候。
+在导出mysql数据库之后,发出一条FLUSH PRIVILEGES 语句.为了正确恢复,该选项应该用于导出mysql数据库和依赖mysql数据库数据的任何时候.
 mysqldump -uroot -p --all-databases --flush-privileges
 
 --force
-在导出过程中忽略出现的SQL错误。
+在导出过程中忽略出现的SQL错误.
 mysqldump -uroot -p --all-databases --force
 
---help 显示帮助信息并退出。 mysqldump --help
+--help 显示帮助信息并退出.mysqldump --help
 
 --hex-blob
-使用十六进制格式导出二进制字符串字段。如果有二进制数据就必须使用该选项。影响到的字段类型有BINARY、VARBINARY、BLOB。
+使用十六进制格式导出二进制字符串字段.如果有二进制数据就必须使用该选项.影响到的字段类型有BINARY、VARBINARY、BLOB.
 mysqldump -uroot -p --all-databases --hex-blob
 
 --host, -h
@@ -1825,11 +1778,11 @@ mysqldump -uroot -p --all-databases --hex-blob
 mysqldump -uroot -p --host=localhost --all-databases
 
 --ignore-table
-不导出指定表。指定忽略多个表时，需要重复多次，每次一个表。每个表必须同时指定数据库和表名。例如：--ignore-table=database.table1 --ignore-table=database.table2 ……
+不导出指定表.指定忽略多个表时,需要重复多次,每次一个表.每个表必须同时指定数据库和表名.例如：--ignore-table=database.table1 --ignore-table=database.table2 ……
 mysqldump -uroot -p --host=localhost --all-databases --ignore-table=mysql.user
 
 --include-master-host-port
-在--dump-slave产生的'CHANGE MASTER TO..'语句中增加'MASTER_HOST=<host>，MASTER_PORT=<port>' 
+在--dump-slave产生的'CHANGE MASTER TO..'语句中增加'MASTER_HOST=<host>,MASTER_PORT=<port>' 
 mysqldump -uroot -p --host=localhost --all-databases --include-master-host-port
 
 --insert-ignore
@@ -1837,16 +1790,16 @@ mysqldump -uroot -p --host=localhost --all-databases --include-master-host-port
 mysqldump -uroot -p --host=localhost --all-databases --insert-ignore
 
 --lines-terminated-by
-输出文件的每行用给定字符串划分。与--tab选项一起使用，不能用于--databases和--all-databases选项。
-mysqldump -uroot -p --host=localhost test test --tab=”/tmp/mysql” --lines-terminated-by=”##”
+输出文件的每行用给定字符串划分.与--tab选项一起使用,不能用于--databases和--all-databases选项.
+mysqldump -uroot -p --host=localhost test test --tab="/tmp/mysql" --lines-terminated-by="##"
 
 --lock-all-tables, -x
-提交请求锁定所有数据库中的所有表，以保证数据的一致性。这是一个全局读锁，并且自动关闭--single-transaction 和--lock-tables 选项。
+提交请求锁定所有数据库中的所有表,以保证数据的一致性.这是一个全局读锁,并且自动关闭--single-transaction 和--lock-tables 选项.
 mysqldump -uroot -p --host=localhost --all-databases --lock-all-tables
 
 --lock-tables, -l
-开始导出前，锁定所有表。用READ LOCAL锁定表以允许MyISAM表并行插入。对于支持事务的表例如InnoDB和BDB，--single-transaction是一个更好的选择，因为它根本不需要锁定表。
-请注意当导出多个数据库时，--lock-tables分别为每个数据库锁定表。因此，该选项不能保证导出文件中的表在数据库之间的逻辑一致性。不同数据库表的导出状态可以完全不同。
+开始导出前,锁定所有表.用READ LOCAL锁定表以允许MyISAM表并行插入.对于支持事务的表例如InnoDB和BDB,--single-transaction是一个更好的选择,因为它根本不需要锁定表.
+请注意当导出多个数据库时,--lock-tables分别为每个数据库锁定表.因此,该选项不能保证导出文件中的表在数据库之间的逻辑一致性.不同数据库表的导出状态可以完全不同.
 mysqldump -uroot -p --host=localhost --all-databases --lock-tables
 
 --log-error
@@ -1854,32 +1807,32 @@ mysqldump -uroot -p --host=localhost --all-databases --lock-tables
 mysqldump -uroot -p --host=localhost --all-databases --log-error=/tmp/mysqldump_error_log.err
 
 --master-data
-该选项将binlog的位置和文件名追加到输出文件中。如果为1，将会输出CHANGE MASTER 命令；如果为2，输出的CHANGE MASTER命令前添加注释信息。该选项将打开--lock-all-tables 选项，除非--single-transaction也被指定（在这种情况下，全局读锁在开始导出时获得很短的时间；其他内容参考下面的--single-transaction选项）。该选项自动关闭--lock-tables选项。
+该选项将binlog的位置和文件名追加到输出文件中.如果为1,将会输出CHANGE MASTER 命令；如果为2,输出的CHANGE MASTER命令前添加注释信息.该选项将打开--lock-all-tables 选项,除非--single-transaction也被指定(在这种情况下,全局读锁在开始导出时获得很短的时间；其他内容参考下面的--single-transaction选项).该选项自动关闭--lock-tables选项.
 mysqldump -uroot -p --host=localhost --all-databases --master-data=1;
 mysqldump -uroot -p --host=localhost --all-databases --master-data=2;
 
 --max_allowed_packet
-服务器发送和接受的最大包长度。
+服务器发送和接受的最大包长度.
 mysqldump -uroot -p --host=localhost --all-databases --max_allowed_packet=10240
 
 --net_buffer_length
-TCP/IP和socket连接的缓存大小。
+TCP/IP和socket连接的缓存大小.
 mysqldump -uroot -p --host=localhost --all-databases --net_buffer_length=1024
 
 --no-autocommit
-使用autocommit/commit 语句包裹表。
+使用autocommit/commit 语句包裹表.
 mysqldump -uroot -p --host=localhost --all-databases --no-autocommit
 
 --no-create-db, -n
-只导出数据，而不添加CREATE DATABASE 语句。
+只导出数据,而不添加CREATE DATABASE 语句.
 mysqldump -uroot -p --host=localhost --all-databases --no-create-db
 
 --no-create-info, -t
-只导出数据，而不添加CREATE TABLE 语句。
+只导出数据,而不添加CREATE TABLE 语句.
 mysqldump -uroot -p --host=localhost --all-databases --no-create-info
 
 --no-data, -d
-不导出任何数据，只导出数据库表结构。
+不导出任何数据,只导出数据库表结构.
 mysqldump -uroot -p --host=localhost --all-databases --no-data
 
 --no-set-names, -N
@@ -1891,7 +1844,7 @@ mysqldump -uroot -p --host=localhost --all-databases --no-set-names
 mysqldump -uroot -p --host=localhost --all-databases --opt
 
 --order-by-primary
-如果存在主键，或者第一个唯一键，对每个表的记录进行排序。在导出MyISAM表到InnoDB表时有效，但会使得导出工作花费很长时间。 
+如果存在主键,或者第一个唯一键,对每个表的记录进行排序.在导出MyISAM表到InnoDB表时有效,但会使得导出工作花费很长时间.
 mysqldump -uroot -p --host=localhost --all-databases --order-by-primary
 
 --password, -p
@@ -1905,16 +1858,16 @@ mysqldump -uroot -p --host=localhost --all-databases --pipe
 连接数据库端口号
 
 --protocol
-使用的连接协议，包括：tcp, socket, pipe, memory.
+使用的连接协议,包括：tcp, socket, pipe, memory.
 mysqldump -uroot -p --host=localhost --all-databases --protocol=tcp
 
 --quick, -q
-不缓冲查询，直接导出到标准输出。默认为打开状态，使用--skip-quick取消该选项。
+不缓冲查询,直接导出到标准输出.默认为打开状态,使用--skip-quick取消该选项.
 mysqldump -uroot -p --host=localhost --all-databases 
 mysqldump -uroot -p --host=localhost --all-databases --skip-quick
 
 --quote-names,-Q
-使用（`）引起表和列名。默认为打开状态，使用--skip-quote-names取消该选项。
+使用(`)引起表和列名.默认为打开状态,使用--skip-quote-names取消该选项.
 mysqldump -uroot -p --host=localhost --all-databases
 mysqldump -uroot -p --host=localhost --all-databases --skip-quote-names
 
@@ -1923,11 +1876,11 @@ mysqldump -uroot -p --host=localhost --all-databases --skip-quote-names
 mysqldump -uroot -p --host=localhost --all-databases --replace
 
 --result-file, -r
-直接输出到指定文件中。该选项应该用在使用回车换行对（\\r\\n）换行的系统上（例如：DOS，Windows）。该选项确保只有一行被使用。
+直接输出到指定文件中.该选项应该用在使用回车换行对(\\r\\n)换行的系统上(例如：DOS,Windows).该选项确保只有一行被使用.
 mysqldump -uroot -p --host=localhost --all-databases --result-file=/tmp/mysqldump_result_file.txt
 
 --routines, -R
-导出存储过程以及自定义函数。
+导出存储过程以及自定义函数.
 mysqldump -uroot -p --host=localhost --all-databases --routines
 经常使用 下面的命令来导出函数,存储过程.
 mysqldump -uroot -p -hlocalhost -P3306 -ntd -R dbname > procedure_name.sql
@@ -1937,16 +1890,16 @@ mysqldump -uroot -p -hlocalhost -P3306 -ntd -R dbname > procedure_name.sql
 		-R	--routines
 
 --set-charset
-添加'SET NAMES default_character_set'到输出文件。默认为打开状态，使用--skip-set-charset关闭选项。
+添加'SET NAMES default_character_set'到输出文件.默认为打开状态,使用--skip-set-charset关闭选项.
 mysqldump -uroot -p --host=localhost --all-databases 
 mysqldump -uroot -p --host=localhost --all-databases --skip-set-charset
 
 --single-transaction
-该选项在导出数据之前提交一个BEGIN SQL语句，BEGIN 不会阻塞任何应用程序且能保证导出时数据库的一致性状态。它只适用于多版本存储引擎，仅InnoDB。本选项和--lock-tables 选项是互斥的，因为LOCK TABLES 会使任何挂起的事务隐含提交。要想导出大表的话，应结合使用--quick 选项。
+该选项在导出数据之前提交一个BEGIN SQL语句,BEGIN 不会阻塞任何应用程序且能保证导出时数据库的一致性状态.它只适用于多版本存储引擎,仅InnoDB.本选项和--lock-tables 选项是互斥的,因为LOCK TABLES 会使任何挂起的事务隐含提交.要想导出大表的话,应结合使用--quick 选项.
 mysqldump -uroot -p --host=localhost --all-databases --single-transaction
 
 --dump-date
-将导出时间添加到输出文件中。默认为打开状态，使用--skip-dump-date关闭选项。
+将导出时间添加到输出文件中.默认为打开状态,使用--skip-dump-date关闭选项.
 mysqldump -uroot -p --host=localhost --all-databases
 mysqldump -uroot -p --host=localhost --all-databases --skip-dump-date
 
@@ -1955,49 +1908,49 @@ mysqldump -uroot -p --host=localhost --all-databases --skip-dump-date
 mysqldump -uroot -p --host=localhost --all-databases --skip-opt
 
 --socket,-S
-指定连接mysql的socket文件位置，默认路径/tmp/mysql.sock
+指定连接mysql的socket文件位置,默认路径/tmp/mysql.sock
 mysqldump -uroot -p --host=localhost --all-databases --socket=/tmp/mysqld.sock
 
 --tab,-T
-为每个表在给定路径创建tab分割的文本文件。注意：仅仅用于mysqldump和mysqld服务器运行在相同机器上。
+为每个表在给定路径创建tab分割的文本文件.注意：仅仅用于mysqldump和mysqld服务器运行在相同机器上.
 mysqldump -uroot -p --host=localhost test test --tab="/home/mysql"
 
 --tables
-覆盖--databases (-B)参数，指定需要导出的表名。
+覆盖--databases (-B)参数,指定需要导出的表名.
 mysqldump -uroot -p --host=localhost --databases test --tables test
 
 --triggers
-导出触发器。该选项默认启用，用--skip-triggers禁用它。
+导出触发器.该选项默认启用,用--skip-triggers禁用它.
 mysqldump -uroot -p --host=localhost --all-databases --triggers
 
 --tz-utc
-在导出顶部设置时区TIME_ZONE='+00:00' ，以保证在不同时区导出的TIMESTAMP 数据或者数据被移动其他时区时的正确性。
+在导出顶部设置时区TIME_ZONE='+00:00' ,以保证在不同时区导出的TIMESTAMP 数据或者数据被移动其他时区时的正确性.
 mysqldump -uroot -p --host=localhost --all-databases --tz-utc
 
 --user, -u
-指定连接的用户名。
+指定连接的用户名.
 
 --verbose, --v
-输出多种平台信息。
+输出多种平台信息.
 
 --version, -V
 输出mysqldump版本信息并退出
 
 --where, -w
-只转储给定的WHERE条件选择的记录。请注意如果条件包含命令解释符专用空格或字符，一定要将条件引用起来。
-mysqldump -uroot -p --host=localhost --all-databases --where=” user=’root’”
+只转储给定的WHERE条件选择的记录.请注意如果条件包含命令解释符专用空格或字符,一定要将条件引用起来.
+mysqldump -uroot -p --host=localhost --all-databases --where=" user=’root’"
 
 --xml, -X
 导出XML格式.
 mysqldump -uroot -p --host=localhost --all-databases --xml
 
 --plugin_dir
-客户端插件的目录，用于兼容不同的插件版本。
-mysqldump -uroot -p --host=localhost --all-databases --plugin_dir=”/usr/local/lib/plugin”
+客户端插件的目录,用于兼容不同的插件版本.
+mysqldump -uroot -p --host=localhost --all-databases --plugin_dir="/usr/local/lib/plugin"
 
 --default_auth
-客户端插件默认使用权限。
-mysqldump -uroot -p --host=localhost --all-databases --default-auth=”/usr/local/lib/plugin/<PLUGIN>”
+客户端插件默认使用权限.
+mysqldump -uroot -p --host=localhost --all-databases --default-auth="/usr/local/lib/plugin/<PLUGIN>"
 
 
 103. chown user:usergroup -R file/ 同时修改文件夹属性为用户和组
@@ -2019,13 +1972,13 @@ DDL ----Data Definition Language 数据库定义语言
 创建一张新表
 CRTATE TABLE [IF NOT EXISTS] TBNAME(col_name col_definition,...)
 mysql>CREATE TABLE students(Id INT PRIMARY KEY NOT NULL AUTO_INCREMENT UNSIGNED,Name CHAR(20) UNIQUE KEY NOT NULL,Age TINYINT UNSIGNED INDEX,Gender CHAR(1) NOT NULL) [ENGINE={MyISAM | InnoDB }];
-也可以这样写(区别在于单独定义主键，唯一键和索引)： 
+也可以这样写(区别在于单独定义主键,唯一键和索引)： 
 mysql>CREATE TABLE students(Id INT NOT NULL AUTO_INCREMENT UNSIGNED,Name CHAR(20) NOT NULL,Age TINYINT UNSIGNED,Gender CHAR(1) NOT NULL,PRIMARY KEY(id),UNIQUE KEY(name),INDEX(age))
 查询出一张表的数据后创建新表(字段定义会丢失,数据会保留)
 CREATE TABLE TBNAME SELECT...
 EXAMPLE:
 mysql>CREATE TABLE test SELECT * FROM students WHERE Id>5;
-以一张表的格式定义，创建一张新的空表
+以一张表的格式定义,创建一张新的空表
 CREATE TABLE TBNAME1 LIKE TBNAME2
 修改表:
 ALTER TABLE tb_name
@@ -2039,7 +1992,7 @@ mysql>ALTER TABLE students ADD (course VARCHAR(100),teacher CHAR(20));
 添加惟一键
 mysql>ALTER TABLE students ADD UNIQUE KEY Name;
 修改字段：
-修改course字段为Course字段，并放在Name字段之后（修改字段需要带上新的字段的定义）ps：MODIFY只能修改字段定义
+修改course字段为Course字段,并放在Name字段之后(修改字段需要带上新的字段的定义)ps：MODIFY只能修改字段定义
 mysql>ALTER TABLE students CHANGE course Course VARCHAR(100) [AFTER Name];
 重命名表名
 mysql>ALTER TABLE students RENAME TO stu;
@@ -2056,7 +2009,7 @@ DML
 ----Data Manipulation Language 数据操纵语言
 如insert,delete,update,select(插入、删除、修改、检索)
 插入修改数据
-#如果每个字段都有值，不需要写字段名称,每组值用,隔开
+#如果每个字段都有值,不需要写字段名称,每组值用,隔开
 mysql>INSERT INTO tb_name (col1,col2) VALUES ('STRING',NUM),('STRING',NUM);
 mysql>INSERT INTO tb_name SET col1='string',col2='string';
 mysql>INSERT INTO tb_name (col1,col2,col3) SELECT...;
@@ -2089,19 +2042,19 @@ mysql>SELECT DISTINCT Gender FROM students;
 mysql>SELECT * FROM students WHERE Age>20 AND Gender='M';
 #使用BETWEEN...AND...筛选出年龄介于20-25之间的数据
 mysql>SELECT * FROM students WHERE Age BETWEEN 20 AND 25;
-#查询Name以Y开头的的数据，%表示任意长度的任意字符，_表示任意单个字符
+#查询Name以Y开头的的数据,%表示任意长度的任意字符,_表示任意单个字符
 mysql>SELECT * FROM student WHERE Name LIKE 'Y%';
 #使用正则表达式匹配查询,关键词为RLINK或者REGEXP
 mysql> SELECT * FROM students WHERE Name RLINK '^[MNY].*$';
-#使用IN关键词，将条件限定在一个列表中。用IS关键词，表示条件是否为空（IS NULL 或者 IS NOT NULL）
+#使用IN关键词,将条件限定在一个列表中.用IS关键词,表示条件是否为空(IS NULL 或者 IS NOT NULL)
 mysql>SELECT * FROM students WHERE Age IN (20,22,24);
 #将查询的结果进行排序
 mysql>SELECT * FROM students ORDER BY Name {ASC|DESC};
 #查询结果别名显示
 mysql>SELECT Name AS Stu_Name FROM students;
-#LIMIT限定查询结果的条数,LIMIT 2,3表示偏移2条数据后，取3条数据
+#LIMIT限定查询结果的条数,LIMIT 2,3表示偏移2条数据后,取3条数据
 mysql>SELECT * FROM students LIMIT 2;
-#求平均数:AVG()，最大值:MAX() 最小值MIN() 数量:COUNT() 求和:SUM()
+#求平均数:AVG(),最大值:MAX() 最小值MIN() 数量:COUNT() 求和:SUM()
 mysql>SELECT AVG(age) FROM students;
 #分组GROUP BY
 mysql>SELECT Age, Gender FROM students GROUP BY Gender;
@@ -2129,7 +2082,7 @@ mysql>(SELECT Name,Age FROM students) UNION (SELECT Tname,Age FROM tutors);
 CREATE VIEW VIEW_NAME AS SELECT....
 DCL
 ----Data Control Language 数据库控制语言
-如grant,deny,revoke等，只有管理员才有这样的权限。
+如grant,deny,revoke等,只有管理员才有这样的权限.
 创建用户
 mysql>CREATE USER 'USERNAME'@'HOST' IDENTIFIED BY 'PASSWORD'
 删除用户
@@ -2147,11 +2100,11 @@ mysql>CREATE USER 'lujunyi'@'%' IDENTIFIED BY '123456';
 mysql>SHOW GRANTS FOR 'lujunyi'@'%';
 mysql>GRANT ALL PRIVILEGES ON testdb.* TO 'lujunyi'@'%';
 
-下面列出了您可以使用的 JOIN 类型，以及它们之间的差异。
-JOIN: 如果表中有至少一个匹配，则返回行
-LEFT JOIN: 即使右表中没有匹配，也从左表返回所有的行
-RIGHT JOIN: 即使左表中没有匹配，也从右表返回所有的行
-FULL JOIN: 只要其中一个表中存在匹配，就返回行
+下面列出了您可以使用的 JOIN 类型,以及它们之间的差异.
+JOIN: 如果表中有至少一个匹配,则返回行
+LEFT JOIN: 即使右表中没有匹配,也从左表返回所有的行
+RIGHT JOIN: 即使左表中没有匹配,也从右表返回所有的行
+FULL JOIN: 只要其中一个表中存在匹配,就返回行
 
 mysql 备份和ibdata1瘦身
 1.备份数据库
@@ -2210,12 +2163,12 @@ myqsl 查询格式化的时间戳为时间 select *, FROM_UNIXTIME(*.TIMESTAMP) 
 
 106. apt & aptitude
 apt-cache search package 搜索包
-apt-cache show package 获取包的相关信息，如说明、大小、版本等
+apt-cache show package 获取包的相关信息,如说明、大小、版本等
 apt-get install package 安装包
 apt-get install package - - reinstall 重新安装包
 apt-get -f install 修复安装"-f = --fix-missing"
 apt-get remove package 删除包
-apt-get remove package - - purge 删除包，包括删除配置文件等
+apt-get remove package - - purge 删除包,包括删除配置文件等
 apt-get update 更新源
 apt-get upgrade 更新已安装的包
 apt-get dist-upgrade 升级系统
@@ -2280,10 +2233,10 @@ git rev-parse --show-cdup       显示从当前目录cd 后退 up 到工作区�
 
 /root/.gitconfig
 git的配置
-cd /xxxgit 后，git config -e 是版本库的配置文件
+cd /xxxgit 后,git config -e 是版本库的配置文件
 $git config -e --global 编辑的是/home/username/.gitconfig全局配置
-$git config -e --system 编辑的是/root/.gitconfig系统配置，可能在/etc/.gitconfig
-配置文件分了<section> 段落， key 键 value 值
+$git config -e --system 编辑的是/root/.gitconfig系统配置,可能在/etc/.gitconfig
+配置文件分了<section> 段落, key 键 value 值
 git config <section>.<key> 来读取对应的属性值
 git config <section>.<key> <value> 改变某个属性的值
 
@@ -2307,10 +2260,10 @@ git log --pretty=fuller 查看提交log
 git config --global user.name "rainysia"
 git config --global user.email "rainysia@gmail.com"
 git commit --amend --allow-empty --reset-author
-对提交修补 允许空 将作者ID同步修改，会重置uthorDate
+对提交修补 允许空 将作者ID同步修改,会重置uthorDate
 
 git config --global alisa.ci "commit -s" 别名可以带参数
--s 参数，会在提交说明中自动添加上包含提交者姓名和邮件地址的签名标识
+-s 参数,会在提交说明中自动添加上包含提交者姓名和邮件地址的签名标识
 like: Signed-off-by: UserName <email@address>
 
 git config --list  列出config
@@ -2353,7 +2306,7 @@ git diff tag号 tag2号 --name-only 可以用tag来标记对比
 
 ls --full-time xxx 显示完整的时间
 当对工作区修改(新增)的文件执行git add 命令时, 暂存区的目录树将更新,同时工作区修改(新增)的文件内容会被写入到对象库中的一个新的对象中,而该对象的ID被记录在暂存区的文件索引中
-当执行提交操作 git commit 时，暂存区的目录树会写到版本库(对象库)中,master分支会作相应的更新,即master最新指向的目录树就是提交时原暂存区的目录树.
+当执行提交操作 git commit 时,暂存区的目录树会写到版本库(对象库)中,master分支会作相应的更新,即master最新指向的目录树就是提交时原暂存区的目录树.
 当执行git reset HEAD 时,暂存区的目录树将重写,会被master分支指向的目录树替换,但是工作区不受影响
 当执行git rm --cached <file> 时,会直接从暂存区删除文件, 工作区则不会做出改变
 当执行git checkout . 或者git checkout -- <file> 时,会用暂存区全部的文件或者指定的文件替换工作区的文件,这个操作会清除工作区中未添加到暂存区的改动.
@@ -2524,7 +2477,7 @@ scp -r my_project.git git@ git.csdn.net:~ # 将纯仓库上传到服务器上
 mkdir robbin_site.git && cd robbin_site.git && git --bare init # 在服务器创建纯仓库
 git remote add origin git@ github.com:robbin/robbin_site.git # 设置远程仓库地址
 git push -u origin master # 客户端首次提交
-git push -u origin develop # 首次将本地develop分支提交到远程develop分支，并且track
+git push -u origin develop # 首次将本地develop分支提交到远程develop分支,并且track
 git remote set-head origin master # 设置远程仓库的HEAD指向master分支
 也可以命令设置跟踪远程库和本地库
 
@@ -2544,17 +2497,17 @@ git merge tag_name
 git checkout tags/<tag_name>
 
 
-(1)首先用git status命令查看下状态。
-(2)用git pull更新代码，确保代码是库上最新代码，防止覆盖其他人的提交。
-(3)用git add arch/arm/mach-msm/board-xxx.c把修改后的文件加入到缓冲区。
-(4)用git commit提交入库到本地服务器中，这一步会加入注释。
-(5)用git log命令查看已提交的修改，是否正确。
-(6)用git push命令把本地服务器上的内容更新到远程服务器上。
+(1)首先用git status命令查看下状态.
+(2)用git pull更新代码,确保代码是库上最新代码,防止覆盖其他人的提交.
+(3)用git add arch/arm/mach-msm/board-xxx.c把修改后的文件加入到缓冲区.
+(4)用git commit提交入库到本地服务器中,这一步会加入注释.
+(5)用git log命令查看已提交的修改,是否正确.
+(6)用git push命令把本地服务器上的内容更新到远程服务器上.
 root#~//msm$ git remote -v
 origin git@git.com:/kernel/msm.git (fetch)
 origin git@git.com:/kernel/msm.git (push)
 解析：
-origin 是git@git.com:/kernel/msm.git的别名。fetch表示取的分支。 push表示上传的分支。
+origin 是git@git.com:/kernel/msm.git的别名.fetch表示取的分支.push表示上传的分支.
 git push origin(远程库) ngemini(本地分支):ngemini(远程分支)
 表示把本地的ngemini分支的修改push到远程origin库中的ngemini分支中
 
@@ -2565,9 +2518,9 @@ github
         ssh-keygen -t rsa -C "rainysia@gmail.com" 一直回车ok
         # -t 指定协议, rsa是加密方式, -P
     cat ~/.ssh/id_rsa.pub  | ssh username@yourhost `cat >> .ssh/authorized_keys`     ssh username@yourhost.com
-    登陆github系统。点击右上角的 Account Settings--->SSH Public keys ---> add another public keys
-    把你本地生成的密钥复制到里面（key文本框中）， 点击 add key 就ok了
-    接着打开git ，测试连接是否成功
+    登陆github系统.点击右上角的 Account Settings--->SSH Public keys ---> add another public keys
+    把你本地生成的密钥复制到里面(key文本框中), 点击 add key 就ok了
+    接着打开git ,测试连接是否成功
         ssh -T git@github.com
     如果提示：Hi rainysia! You've successfully authenticated, but GitHub does not provide shell access. 说明你连接成功了
 
@@ -2581,13 +2534,13 @@ github
         git commit -a -m '注释'
         git remote add origin git@github.com:rainysia/simple_upload
         git push -u origin master
-    如果push失败，先要git pull origin master一次
+    如果push失败,先要git pull origin master一次
     如果fatal:remote origin already exists: git remote rm origin 然后重新
         git remote add origin git@github.com:rainysia/simple_upload.git
          termail里边 输入  git remote -v 可以看到形如一下的返回结果
             origin https://github.com/yuquan0821/demo.git (fetch)
             origin https://github.com/yuquan0821/demo.git (push)
-         下面把它换成ssh方式的。
+         下面把它换成ssh方式的.
             1. git remote rm origin
             2. git remote add origin git@github.com:yuquan0821/demo.git
             3. git push origin 
@@ -2598,9 +2551,9 @@ git push origin 本地分支名:服务器分支名 这样就会在服务器上�
 git pull origin 远程分支名:本地分支名  这样会把服务器上的分支拉到本地的一个分支, pull的操作还会进行合并.
 git fetch origin 远程分支名:本地分支名 会只拉取.
 
-git blame file_name  查看文件每一行的修改。
-git cherry-pick commit_hash 从不同的分支中捡出一个单独的commit，并把它和你当前的分支合并
-git log --author="$(git config --get user.name)" --no-merges --since=1am --stat --oneline 统计当天代码。
+git blame file_name  查看文件每一行的修改.
+git cherry-pick commit_hash 从不同的分支中捡出一个单独的commit,并把它和你当前的分支合并
+git log --author="$(git config --get user.name)" --no-merges --since=1am --stat --oneline 统计当天代码.
 git log --author="$(git config --get user.name)" --no-merges --since=1am --stat --oneline| awk '{print $3}' | awk '{ sub(/[^0-9]*/, "", $0); print}' | awk 'BEGIN{sum=0}{sum=sum+$0}END{print strftime("%F %T") " Today Code Rows="sum}'
 sub做替换,然后计算行,最后输出
 git log --author="$(git config --get user.name)" --no-merges --since=1am --stat --oneline| awk '{print $3}' | awk '{ sub(/[^0-9]*/, "", $0); print}' | awk 'BEGIN{sum=0}{sum=sum+$0}END{print "\033[42m" strftime("%F %T")"\033[0m" " Today Code Rows=" "\033[44m" sum "\033[0m"}'
@@ -2739,7 +2692,7 @@ git config --global user.name
 
 ====github更新fork仓库===================
 1, 先git clone fork的到自己用户的仓库, 注意要用git@git的地址
-2, 增加源分支地址到你项目远程分支列表中，先得将原来的仓库指定为upstream，命令为：
+2, 增加源分支地址到你项目远程分支列表中,先得将原来的仓库指定为upstream,命令为：
    git remote add upstream https://github.com/被fork的仓库.git
    git remote add upstream git@gitxxxx.git
 可使用git remote -v查看远程分支列表
@@ -2796,7 +2749,7 @@ show status like '%thread%';
  
 
 111. php 优化
-使用vld。
+使用vld.
 php -dvld.active=1 代码.php
 php -m 查看模块
 php --ini 查看配置
@@ -2804,16 +2757,16 @@ php -dvld.verbosity=3 来更详情的查看opcode
 php -dvld.execute=0 禁止代码的执行,只看中间输出
 php -dvld.save_dir=xxx.file 输出到文件
 php -dvld.save_paths=1 -dvld.dump_paths=1 控制是否输出和控制输出的内容
-    -dvld.active 是否在执行PHP时激活VLD挂钩，默认为0，表示禁用。可以使用-dvld.active=1启用。
-    -dvld.skip_prepend 是否跳过php.ini配置文件中auto_prepend_file指定的文件， 默认为0，即不跳过包含的文件，显示这些包含的文件中的代码所生成的中间代码。此参数生效有一个前提条件：-dvld.execute=0
-    -dvld.skip_append 是否跳过php.ini配置文件中auto_append_file指定的文件， 默认为0，即不跳过包含的文件，显示这些包含的文件中的代码所生成的中间代码。此参数生效有一个前提条件：-dvld.execute=0
-    -dvld.execute 是否执行这段PHP脚本，默认值为1，表示执行。可以使用-dvld.execute=0，表示只显示中间代码，不执行生成的中间代码。
-    -dvld.format 是否以自定义的格式显示，默认为0，表示否。可以使用-dvld.format=1，表示以自己定义的格式显示。这里自定义的格式输出是以-dvld.col_sep指定的参数间隔
-    -dvld.col_sep 在-dvld.format参数启用时此函数才会有效，默认为 “\t”。
-    -dvld.verbosity 是否显示更详细的信息，默认为1，其值可以为0,1,2,3 其实比0小的也可以，只是效果和0一样，比如0.1之类，但是负数除外，负数和效果和3的效果一样 比3大的值也是可以的，只是效果和3一样。
-    -dvld.save_dir 指定文件输出的路径，默认路径为/tmp。
-    -dvld.save_paths 控制是否输出文件，默认为0，表示不输出文件
-    -dvld.dump_paths 控制输出的内容，现在只有0和1两种情况，默认为1,输出内容
+    -dvld.active 是否在执行PHP时激活VLD挂钩,默认为0,表示禁用.可以使用-dvld.active=1启用.
+    -dvld.skip_prepend 是否跳过php.ini配置文件中auto_prepend_file指定的文件, 默认为0,即不跳过包含的文件,显示这些包含的文件中的代码所生成的中间代码.此参数生效有一个前提条件：-dvld.execute=0
+    -dvld.skip_append 是否跳过php.ini配置文件中auto_append_file指定的文件, 默认为0,即不跳过包含的文件,显示这些包含的文件中的代码所生成的中间代码.此参数生效有一个前提条件：-dvld.execute=0
+    -dvld.execute 是否执行这段PHP脚本,默认值为1,表示执行.可以使用-dvld.execute=0,表示只显示中间代码,不执行生成的中间代码.
+    -dvld.format 是否以自定义的格式显示,默认为0,表示否.可以使用-dvld.format=1,表示以自己定义的格式显示.这里自定义的格式输出是以-dvld.col_sep指定的参数间隔
+    -dvld.col_sep 在-dvld.format参数启用时此函数才会有效,默认为 "\t".
+    -dvld.verbosity 是否显示更详细的信息,默认为1,其值可以为0,1,2,3 其实比0小的也可以,只是效果和0一样,比如0.1之类,但是负数除外,负数和效果和3的效果一样 比3大的值也是可以的,只是效果和3一样.
+    -dvld.save_dir 指定文件输出的路径,默认路径为/tmp.
+    -dvld.save_paths 控制是否输出文件,默认为0,表示不输出文件
+    -dvld.dump_paths 控制输出的内容,现在只有0和1两种情况,默认为1,输出内容
 
 112. 用shell取出一个文本里面的单词,每个单词一行.单词里面有单引号比如it's
 
@@ -2824,18 +2777,18 @@ awk '{ for (i=0;i<=length;i++){ if ($i !=0 && $i !=""){ print $i }}}' ./test.log
 113. root无法删除
 	lsattr查看文件状态 返回如果是----ia---------
 	就执行chattr -ia 文件名 来改变文件属性  + -
-	chmod只改变文件的读写，执行权限，底层是chattr 参数
-	A 文件或目录的atime （access time） 不可被修改，可以预防磁盘IO错误的发生。
-	S 硬盘I/O同步选项，类似sync
-	a append，设置后只能添加数据，而不能删除，多用于服务器日志文件
-	c compress 设置文件是否压缩后再存储。读取时需经过自动解压
+	chmod只改变文件的读写,执行权限,底层是chattr 参数
+	A 文件或目录的atime (access time) 不可被修改,可以预防磁盘IO错误的发生.
+	S 硬盘I/O同步选项,类似sync
+	a append,设置后只能添加数据,而不能删除,多用于服务器日志文件
+	c compress 设置文件是否压缩后再存储.读取时需经过自动解压
 	d no dump 设定文件不能成为dump程序的备份目标
-	i 设定文件不能被删除，改名，设置链接。同时不能写入或新增内容。
+	i 设定文件不能被删除,改名,设置链接.同时不能写入或新增内容.
 	j journal 当通过mount参数：data=ordered
-	或data=writeback挂载的文件系统，文件在写入时会先被记录（在journal中）。如果filesystem被设定参数位data=journal，则该参数自动失效。
-	s 保密性地删除文件或目录，即磁盘空间被全部收回
-	u 与s相反，当设置位u时，数据内容还存在磁盘中，多用于undeletion
-	常用的就是a和i，a强制只能加不能删。
+	或data=writeback挂载的文件系统,文件在写入时会先被记录(在journal中).如果filesystem被设定参数位data=journal,则该参数自动失效.
+	s 保密性地删除文件或目录,即磁盘空间被全部收回
+	u 与s相反,当设置位u时,数据内容还存在磁盘中,多用于undeletion
+	常用的就是a和i,a强制只能加不能删.
 
 114. lsblk 列出块设备,除了RAM外显示, -l 可以了解新插入的USB设备的名称.
 
@@ -2863,14 +2816,14 @@ iptables -Z
     #允许FTP服务的21和20端口
         iptables -A INPUT -p tcp --dport 21 -j ACCEPT
         iptables -A INPUT -p tcp --dport 20 -j ACCEPT
-    #禁止其他未允许的规则访问（注意：如果22端口未加入允许规则，SSH链接会直接断开。）
-        1）.用DROP方法
+    #禁止其他未允许的规则访问(注意：如果22端口未加入允许规则,SSH链接会直接断开.)
+        1).用DROP方法
             iptables -A INPUT -p tcp -j DROP
-        2）.用REJECT方法
+        2).用REJECT方法
             iptables -A INPUT -j REJECT
             iptables -A FORWARD -j REJECT
         4、屏蔽IP
-            #如果只是想屏蔽IP的话“3、开放指定的端口”可以直接跳过。
+            #如果只是想屏蔽IP的话"3、开放指定的端口"可以直接跳过.
             #屏蔽单个IP的命令是
                 iptables -I INPUT -s 123.45.6.7 -j DROP
             #封整个段即从123.0.0.1到123.255.255.254的命令
@@ -2881,25 +2834,25 @@ iptables -Z
                 iptables -I INPUT -s 123.45.6.0/24 -j DROP
     4、查看已添加的iptables规则
         iptables -L -n
-        v：显示详细信息，包括每条规则的匹配包数量和匹配字节数
-        x：在 v 的基础上，禁止自动单位换算（K、M） vps侦探
-        n：只显示IP地址和端口号，不将ip解析为域名
+        v：显示详细信息,包括每条规则的匹配包数量和匹配字节数
+        x：在 v 的基础上,禁止自动单位换算(K、M) vps侦探
+        n：只显示IP地址和端口号,不将ip解析为域名
     5、删除已添加的iptables规则
-    将所有iptables以序号标记显示，执行：
+    将所有iptables以序号标记显示,执行：
         iptables -L -n --line-numbers
-    比如要删除INPUT里序号为8的规则，执行：
+    比如要删除INPUT里序号为8的规则,执行：
         iptables -D INPUT 8
     6 保存规则
-        CentOS上可以执行：service iptables save保存规则。
-        Debian/Ubuntu上iptables是不会保存规则的。
-            需要按如下步骤进行，让网卡关闭是保存iptables规则，启动时加载iptables规则。
+        CentOS上可以执行：service iptables save保存规则.
+        Debian/Ubuntu上iptables是不会保存规则的.
+            需要按如下步骤进行,让网卡关闭是保存iptables规则,启动时加载iptables规则.
             如果当前用户不是root,即使使用了sudo,也会提示你没有权限,无法保存,所以执行本命令,你必须使用root用户.
             可以使用sudo -i快速转到root,使用完成,请及时使用su username切换到普通帐户.
             为了重启服务器后,规则自动加载,我们创建如下文件:
             sudo vim /etc/network/if-pre-up.d/iptables#!/bin/bash
             iptables-save > /etc/iptables.rules
 
-            添加执行权限。
+            添加执行权限.
             chmod +x /etc/network/if-pre-up.d/iptables
                 附上基础规则：
                 *filter
@@ -2928,7 +2881,7 @@ iptables -Z
                -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
             禁止所有未经允许的连接
                -A INPUT -p tcp -j DROP
-        注意：如果22端口未加入允许规则，SSH链接会直接断开。
+        注意：如果22端口未加入允许规则,SSH链接会直接断开.
         -A INPUT -j REJECT
         -A FORWARD -j REJECT
                 COMMIT
@@ -2939,7 +2892,7 @@ iptables -Z
                 sudo iptables-restore < /etc/iptables.test.rules
                 3、查看最新的配置,应该所有的设置都生效了.
                 sudo iptables -L -n
-                4、保存生效的配置,让系统重启的时候自动加载有效配置（iptables提供了保存当前运行的规则功能）
+                4、保存生效的配置,让系统重启的时候自动加载有效配置(iptables提供了保存当前运行的规则功能)
                 iptables-save > /etc/iptables.rules
 
 116.chkconfig --list 列出系统所有服务
@@ -2959,34 +2912,34 @@ sar [option] [-o filename] [interval [count]]
 	-d 显示所有硬盘设备在采样时间内的使用状态
 	-r 显示系统内存在采样时间内的使用状态
 	-b 显示缓冲区在采样时间内的使用状态
-	-v 显示进程，文件，节点和锁表状态
+	-v 显示进程,文件,节点和锁表状态
 	-n 显示网络运行状态 DEV 网络接口信息
-						EDEV 网络错误的统计数据，SOCK 套接字信息 FILL显示前三参数的所有信息
-	-q 显示运行队列的大小，与系统的当时的平均负载有关
+						EDEV 网络错误的统计数据,SOCK 套接字信息 FILL显示前三参数的所有信息
+	-q 显示运行队列的大小,与系统的当时的平均负载有关
 	-R 显示进程在采样时间内的活动情况
 	-y 显示终端设备在采样时间内的活动情况
 	-w 显示系统交换活动在采样时间内的状态
-	-o filename 表示将命令结果以二进制格式存到文件中。
-	interval 采样时间间隔。必须参数
-	count 采样次数，默认1.
+	-o filename 表示将命令结果以二进制格式存到文件中.
+	interval 采样时间间隔.必须参数
+	count 采样次数,默认1.
 
 118. top 解释
-	输出位两个部分，统计信心区和进程信息区
+	输出位两个部分,统计信心区和进程信息区
 		统计信息区
-			当前系统时间，启动后到现在的时间，当前登录数，负载（1，5，15分钟的）
-			进程的总数，正在运行的进程数，处于休眠的进程数，停止的进程数，僵尸进程数
-			用户进程占CPU百分比us，用户进程空间内改变优先级的进程占CPU百分比ni，空闲CPU百分比id，等待输入输入进程占用CPU百分比wa，
-			系统物理内存大小total，已经使用的物理内存大小used，空余内存大小free，用作内核缓冲区的内存大小buffers
-			交换分区的内存大小swap，已经使用的交换分区的大小used，空闲的交换分区大小free，高速缓存的大小cached
+			当前系统时间,启动后到现在的时间,当前登录数,负载(1,5,15分钟的)
+			进程的总数,正在运行的进程数,处于休眠的进程数,停止的进程数,僵尸进程数
+			用户进程占CPU百分比us,用户进程空间内改变优先级的进程占CPU百分比ni,空闲CPU百分比id,等待输入输入进程占用CPU百分比wa,
+			系统物理内存大小total,已经使用的物理内存大小used,空余内存大小free,用作内核缓冲区的内存大小buffers
+			交换分区的内存大小swap,已经使用的交换分区的大小used,空闲的交换分区大小free,高速缓存的大小cached
 		进程信息区
-			PID 进程PID，USER进程的用户，PR进程优先级，NI nice值负值高表示优先级高，正值表示低优先级。
-			VIRT使用的虚拟内存大小KB，VIRT=SWAP+RES
-			RES 进程使用的，未被换出的物理内存大小KB，RES=CODE+DATA
+			PID 进程PID,USER进程的用户,PR进程优先级,NI nice值负值高表示优先级高,正值表示低优先级.
+			VIRT使用的虚拟内存大小KB,VIRT=SWAP+RES
+			RES 进程使用的,未被换出的物理内存大小KB,RES=CODE+DATA
 			SHR 共享内存大小KB
-			S   进程状态 D不可中断的睡眠状态，R运行状态，S睡眠状态，T跟踪/停止，Z僵死进程
+			S   进程状态 D不可中断的睡眠状态,R运行状态,S睡眠状态,T跟踪/停止,Z僵死进程
 			%CPU 上次更新到现在的CPU时间占用百分比
 			%MEM 进程占用的物理内存百分比
-			TIME+ 进程使用的CPU时间总计，单位1/100秒
+			TIME+ 进程使用的CPU时间总计,单位1/100秒
 			COMMAND 正在运行进程的命令名或路径
 
 按照指定应用输出内存占用
@@ -3000,20 +2953,20 @@ sar [option] [-o filename] [interval [count]]
 	平滑重启
 	/nginx_env/nginx -t -c nginx.conf判断新修改的nginx.conf是否正确
 	kill -HUP `/nginx.pid`
-		nginx支持 term,int 快速关闭，QUIT从容关闭，HUP平滑重启（重新加载配置文件）,
-		USR1 重新打开日志文件，(切割日志时) . USR2 平滑升级可执行程序
+		nginx支持 term,int 快速关闭,QUIT从容关闭,HUP平滑重启(重新加载配置文件),
+		USR1 重新打开日志文件,(切割日志时) . USR2 平滑升级可执行程序
 		WINCH 从容关闭工作进程
 	
 	参数nginx.conf
-		user www www;				用户，用户组
+		user www www;				用户,用户组
 		worker_processes 8;			指定工作衍生进程数
 		error_log /var/log/nginx/nginx_error.log crit;
-				指定错误日志路径，等级debug,info,notice,warn,error,crit
+				指定错误日志路径,等级debug,info,notice,warn,error,crit
 		pid							指定pid存放的路径
 		worker_rlimit_nofile 51200;	指定文件描诉符数量
 		events
 		{
-			use epoll;				使用的网络I/O模型，linux用epoll，freebsd用kqueue
+			use epoll;				使用的网络I/O模型,linux用epoll,freebsd用kqueue
 			worker_connections 51200; 允许的连接数
 		}
 
@@ -3022,7 +2975,7 @@ sar [option] [-o filename] [interval [count]]
 			include mime.types;
 			default_type application/octet-stream;
 			#charset gb2312;
-				设置使用的字符集，如果一个网站有多种字符集，不能乱设，需要在HTML代码中通过Meta标签设置
+				设置使用的字符集,如果一个网站有多种字符集,不能乱设,需要在HTML代码中通过Meta标签设置
 			server_names_hash_bucket_siee 128;
 			client_header_buffer_size 32k;
 			large_client_header_buffers 4 32k;
@@ -3071,7 +3024,7 @@ sar [option] [-o filename] [interval [count]]
 			第二个虚拟主机 (基于IP)
 			server
 			{
-				listen 192.168.2.2xx:80;		监听IP，端口
+				listen 192.168.2.2xx:80;		监听IP,端口
 				server_name 192.168.2.2xx;		主机名
 				access_log /var/log/nginx/server2.access.log combind;
 				location /
@@ -3101,13 +3054,13 @@ sar [option] [-o filename] [interval [count]]
 	nginx 支持自动列目录
 		在location / {
 			autoindex on;
-			autoindex_exact_size [on|off]; 设定索引文件的大小B，KB，MB，or GB
-			autoindex_localtime [on|off];  开启以本地时间来显示文件时间的功能，默认GMT
+			autoindex_exact_size [on|off]; 设定索引文件的大小B,KB,MB,or GB
+			autoindex_localtime [on|off];  开启以本地时间来显示文件时间的功能,默认GMT
 		}
 	nginx的浏览器本地缓存设置
-		expires [time|epoch|max|off] 默认是off，作用域 http,server,location.可以控制HTTP的Expires和Cache-Control
-			time 正数|负数 epoch 指定位1 GMT时间 max为31， Cache-Control的值为10年。
-			-1指当前时间-1s，即永远过期  Cache-Control:no-cache
+		expires [time|epoch|max|off] 默认是off,作用域 http,server,location.可以控制HTTP的Expires和Cache-Control
+			time 正数|负数 epoch 指定位1 GMT时间 max为31, Cache-Control的值为10年.
+			-1指当前时间-1s,即永远过期  Cache-Control:no-cache
 			正数 Cache-Control:max-age=#, #为指定的秒数
 			off 表示不修改Expires 和Cache-Control值
 			一般在location里面
@@ -3131,13 +3084,13 @@ sar [option] [-o filename] [interval [count]]
 
 	netstat -anp | grep 9000 查看9000
 	关闭 killall -HUP php5-cgi
-	　　-f 指定调用FastCGI的进程的执行程序位置，根据系统上所装的PHP的情况具体设置
+	　　-f 指定调用FastCGI的进程的执行程序位置,根据系统上所装的PHP的情况具体设置
 	　　-a 绑定到地址addr
 	　　-p 绑定到端口port
 	　　-s 绑定到unix socket的路径path
-	　　-C 指定产生的FastCGI的进程数，默认为5(仅用于PHP)
+	　　-C 指定产生的FastCGI的进程数,默认为5(仅用于PHP)
 	　　-P 指定产生的进程的PID文件路径
-	　　-u和-g FastCGI使用什么身份(-u 用户 -g 用户组)运行，Ubuntu下可以使用www-data，其他的根据情况配置，如nobody、apache等
+	　　-u和-g FastCGI使用什么身份(-u 用户 -g 用户组)运行,Ubuntu下可以使用www-data,其他的根据情况配置,如nobody、apache等
 	#vim /etc/nginx/sites-avilable/default 添加(要去修改前面的root的路径为/home/www)
         location ~ \.php$ {
             fastcgi_pass 127.0.0.1:9000;
@@ -3146,7 +3099,7 @@ sar [option] [-o filename] [interval [count]]
             include fastcgi_params;
         }
 	/etc/init.d/nginx restart
-	netstat -ln | more   9000端口是spawn-fcgi的，80端口是nginx的，需要关掉apache
+	netstat -ln | more   9000端口是spawn-fcgi的,80端口是nginx的,需要关掉apache
 	
     #php5-fpm
     #apt-get install php5-fpm
@@ -3160,7 +3113,7 @@ sar [option] [-o filename] [interval [count]]
             fastcgi_param SCRIPT_FILENAME /home/www$fastcgi_script_name;
             include fastcgi_params;
         }
-120. rsync (remoter synchronize)远程数据同步工具,可以通过ssh华人rsh使用，也可以用daemon模式运行，daemon的时rsync server会打开873端口，然后进行增量备份,windows上有cwRsync和sync2NAS
+120. rsync (remoter synchronize)远程数据同步工具,可以通过ssh华人rsh使用,也可以用daemon模式运行,daemon的时rsync server会打开873端口,然后进行增量备份,windows上有cwRsync和sync2NAS
 	rsync [option] src [DEST]
 rsync --info=progress2 source dest 显示复制的进度和百分比
 	
@@ -3170,7 +3123,7 @@ rsync --info=progress2 source dest 显示复制的进度和百分比
 	dpkg --set-selections < /home/bak/packagelist.txt
 	apt-get -u dselect-upgrade
 
-122. export EDITOR=vim 在.bashrc里面，设置默认编辑器为vim
+122. export EDITOR=vim 在.bashrc里面,设置默认编辑器为vim
 bashrc 原始的存在/etc/skel/.bashrc 
 
 123. jumei-extend
@@ -3191,7 +3144,7 @@ bashrc 原始的存在/etc/skel/.bashrc
 		
 		pecl install channel://pecl.php.net/proctitle-0.1.2
 		pecl install inotify
-		上面都需要去ln -s 对应的ini文件，修改添加so所在的路径
+		上面都需要去ln -s 对应的ini文件,修改添加so所在的路径
 		(so 在/usr/lib/php5/20100525/)
 		/etc/php5/conf.d/ ln -s ../mods-available/xxx.ini xxx.ini
 		然后重启服务器就可以了
@@ -3224,21 +3177,21 @@ panels   管理
 其他有用的命令
     tmux list-keys      列出所有可以的快捷键和其运行tmux命令
     tmux list-commands  列出所有的tmux命令及其参数
-    tmux info           列出所有的session，window，panel，运行的进程号
-    tmux source-file ~/.tmux.conf   重新加载当前的tmux配置（基于一个默认的tmux配置)
+    tmux info           列出所有的session,window,panel,运行的进程号
+    tmux source-file ~/.tmux.conf   重新加载当前的tmux配置(基于一个默认的tmux配置)
 
 
-	有一个快捷键（需要配合前缀来使用，默认是C-b）
+	有一个快捷键(需要配合前缀来使用,默认是C-b)
 	系统操作
-		? 列出所有快捷键，q返回
-		d 脱离当前会话，这样可以暂时返回shell界面，输入tmux attach后重新进去之前的会话
-		D 选择要脱离的会话，在同时开启了多个会话时使用
+		? 列出所有快捷键,q返回
+		d 脱离当前会话,这样可以暂时返回shell界面,输入tmux attach后重新进去之前的会话
+		D 选择要脱离的会话,在同时开启了多个会话时使用
 		Ctrl+z 挂起当前会话
 		r 强制重绘未脱离的会话
-		s 选择并切换会话，在同时开启了多个会话时使用
-		: 进入命令行模式，此时可以输入支持的命令，比如kill-server可以关闭服务器
-		[ 进入复制模式，此时的操作与vi/emacs相同，按q/Esc退出、
-		~ 列出提示信息缓存，其中包含了之前tmux返回的各种提示信息
+		s 选择并切换会话,在同时开启了多个会话时使用
+		: 进入命令行模式,此时可以输入支持的命令,比如kill-server可以关闭服务器
+		[ 进入复制模式,此时的操作与vi/emacs相同,按q/Esc退出、
+		~ 列出提示信息缓存,其中包含了之前tmux返回的各种提示信息
 	窗口操作
 		c 创建新窗口
 		& 关闭当前窗口
@@ -3248,8 +3201,8 @@ panels   管理
 		l 在前后两个窗口间互相切换
 		w 通过窗口列表切换窗口
 		t 显示时钟
-		，重命名当前窗口，这样便于识别
-		. 修改当前窗口编号，相当于窗口重新排序
+		,重命名当前窗口,这样便于识别
+		. 修改当前窗口编号,相当于窗口重新排序
 		; 切换到最后一个使用的面板
 		f 在所有窗口中查找指定文本
 	面板操作
@@ -3257,12 +3210,12 @@ panels   管理
 		- 将当前面板评分为左右两块
 		x 关闭当前面板
 		& 关闭窗口
-		! 将当前面板置于新窗口，即新建一个窗口，其中仅包含当前面板
+		! 将当前面板置于新窗口,即新建一个窗口,其中仅包含当前面板
 		" 横向分割窗口
 		% 纵向分割窗口
 		Shift+hjkl 以5个单元格为单元移动边缘以调整当前面板大小
 		Space
-		在预置的面板布局中循环切换,依次包括even-horizontal，even-ertical，main-horizontal，main-vertical,tiled
+		在预置的面板布局中循环切换,依次包括even-horizontal,even-ertical,main-horizontal,main-vertical,tiled
 		q 显示分割面板编号
 		o 跳到下一个分割窗口
 		{ 向前置换当前窗口
@@ -3270,11 +3223,11 @@ panels   管理
 		Alt+o 逆时针旋转当前窗口的面板
 		Ctrl+o 顺时针旋转当前窗口的面板
 
-	tmux使用C/S模型，包括了4个单元模块
-		server 服务器，输入tmux命令就开启一个服务器
-		session 会话，一个服务器可以包含多个会话
-		window 窗口，一个会话可以包含多个窗口
-		pane 面板，一个窗口可以包含多个面板
+	tmux使用C/S模型,包括了4个单元模块
+		server 服务器,输入tmux命令就开启一个服务器
+		session 会话,一个服务器可以包含多个会话
+		window 窗口,一个会话可以包含多个窗口
+		pane 面板,一个窗口可以包含多个面板
 
 125 .mercurial hg 
 	安装apt-get install tortoisehg mercurial mercurial-common
@@ -3361,9 +3314,9 @@ panels   管理
     #hg recover         roll back an interrupted transaction
     #hg remove,rm       remove the specified files on the next
 commit(提交前删除库中指定文件)
-    #hg rename,move,mv  重命名，等于复制后删除
+    #hg rename,move,mv  重命名,等于复制后删除
     #hg resolve         redo merges or set/view the merge status of
-        files重做合并，或设置/查看文件的合并状态 
+        files重做合并,或设置/查看文件的合并状态 
     #hg revert          撤销最近的一次操作
     #hg rollback        撤销自上一次push后的所有操作
     #hg root            显示当前库的跟目录
@@ -3386,7 +3339,7 @@ commit(提交前删除库中指定文件)
     hg commit -m 'xxxx' 提交分支
     hg up branch-1 切换到分支上
     如果需要fork的代码同步更新default, 需要在hgrc 文件里面指定master = https://xxxx
-    然后hg pull master更新，最后hg update/up 更新工作目录
+    然后hg pull master更新,最后hg update/up 更新工作目录
     hg pull -u 可以获取代码库的修改的同时更新工作目录
     hg outgoing 查看本地代码库做了那些修改
     hg push 发布代码库的修改
@@ -3407,26 +3360,26 @@ commit(提交前删除库中指定文件)
     hg update default 切换回默认分支
     hg update xxx 切换到XXX分支
     hg merge XXX 合并分支
-    hg status 查看文件状态，是否有变更
+    hg status 查看文件状态,是否有变更
     hg purge 删除未曾控制的文件
     hg fetch 更新代码
     hg commit --close-branch -m "close" 关闭 分支
     hg revert --all --rev 版本  回滚版本
 
 
-    hg status M已经被修改  ! 丢失 ? 未知，未被hg管理
-    hg remove 把文件放进出库等候队列中，在commit前是不会从版本库中移除的
+    hg status M已经被修改  ! 丢失 ? 未知,未被hg管理
+    hg remove 把文件放进出库等候队列中,在commit前是不会从版本库中移除的
     hg cat 显示任何文件的任何版本 -r 版本号 
     hg incoming 列出等待pull的变更列表
-    hg outgoing 列出当前版本库等待推送的变更列表，即列出提交的draft状态的变更列表
-    hg push 把一个版本库的新增变更推送到另一个版本库（需要有ssl） 可以把提交后的更改变更到中央版本库（即把draft状态改为public）
+    hg outgoing 列出当前版本库等待推送的变更列表,即列出提交的draft状态的变更列表
+    hg push 把一个版本库的新增变更推送到另一个版本库(需要有ssl) 可以把提交后的更改变更到中央版本库(即把draft状态改为public)
     
     hg revert 将变更的文i恢复到最近依次提交后的状态
-    hg revert 具体文件，恢复到上次提交的状态
+    hg revert 具体文件,恢复到上次提交的状态
     hg revert --all 恢复当前目录的操作到上次提交的状态
     hg revert --all --rev 版本  回滚 
     hg revert 文件 --rev 版本号 回滚单个文件到指定版本号.
-    hg rollback 撤销最后一次提交，前提是还没有push（即删除掉draft状态）
+    hg rollback 撤销最后一次提交,前提是还没有push(即删除掉draft状态)
     hg paths 显示远程版本库列表
     hg parent 显示正基于哪几个变更集进行开发
     hg backout 拆除早些时候的变更集
@@ -3449,7 +3402,7 @@ commit(提交前删除库中指定文件)
     查看自己分支 hg branch
     hg pull master
     hg merge linj_bufa 拉取合并别人分支
-    hg diff 查看差异，确认
+    hg diff 查看差异,确认
     hg commit -m '提交差异'
     hg push 推
 
@@ -3473,13 +3426,13 @@ commit(提交前删除库中指定文件)
     hg merge optool_2.6.0
     hg commit -m 'xxx'
     hg push --new-branch
-    如果出现自己的repo和服务器的不一直，有多头，就hg push -f --new-branch来强制更新服务器上的文件
+    如果出现自己的repo和服务器的不一直,有多头,就hg push -f --new-branch来强制更新服务器上的文件
 
     hg关闭分支,先切到A分支,然后提交
     hg update A,
     hg commit --close-branch -m"close".
 
-    如果需要在自己的分支上合并其他分支来测试。不能提交
+    如果需要在自己的分支上合并其他分支来测试.不能提交
     做如下操作
     1: hg up 自己分支
     2: hg pull default/master 拉取default内容
@@ -3516,29 +3469,29 @@ commit(提交前删除库中指定文件)
 
 128. mysqldump 转码
     Mysql 字符集的修改步骤 
-    如果在应用开始阶段没有正确的设置字符集，在运行一段时间以后才发现　存在不能满足要求需要调整，又不想丢弃这段时间的数据，那么就需要进行字符集的修改。　字符集的修改不能直接通过　
-    alter dataabase character set *** 或者　alter table tablename character set ***; 命令进行，这两个命令都没有更新已有记录的字符集，　而只是对新创建的表或者记录生效。
-    已有的记录的字符集调整，需要先将数据导出，经过适当的调整重新导入后才可完成。
-    以下模拟的是将latin1字符集的数据库修改成GBK字符集的数据库的过程。
+    如果在应用开始阶段没有正确的设置字符集,在运行一段时间以后才发现　存在不能满足要求需要调整,又不想丢弃这段时间的数据,那么就需要进行字符集的修改.　字符集的修改不能直接通过　
+    alter dataabase character set *** 或者　alter table tablename character set ***; 命令进行,这两个命令都没有更新已有记录的字符集,　而只是对新创建的表或者记录生效.
+    已有的记录的字符集调整,需要先将数据导出,经过适当的调整重新导入后才可完成.
+    以下模拟的是将latin1字符集的数据库修改成GBK字符集的数据库的过程.
     1> 导出表结构：
     mysqldump -uroot -p --default-character-set=gbk -d databasename > createtab.sql
-    其中　--default-character-set=gbk 表示设置以什么字符集连接，　-d 表示只导出表结构，不导出数据。
-    2>手工修改　createtab.sql 中表结构定义中的字符集为新的字符集。
-    3>确保记录不再更新，导出所有记录。
+    其中　--default-character-set=gbk 表示设置以什么字符集连接,　-d 表示只导出表结构,不导出数据.
+    2>手工修改　createtab.sql 中表结构定义中的字符集为新的字符集.
+    3>确保记录不再更新,导出所有记录.
     mysqldump -uroot -p --quick --no-create-info --extended-insert --default-character-set=latin1 databasename > data.sql
-    --quick: 该选项用于转储大的表。　它强制　mysqldump 从服务器一次一行地检索表中的行而不是　检索所有行，并在输出前将它缓存到内存中。
-    --extended-insert: 使用包括几个　values 列表的多行insert语法，这样使转储文件更小，重载文件时可以加速插入。
-    --no-create-info: 不写重新创建每个转储表的create table 语句。
-    --default-character-set=latin1: 按照原有的字符集导出所有数据，这样导出的文件中，所有中文都是可见的，不会保存成乱码。
-    4>打开data.sql,将　set names latin1 修改成　set names gbk 。
-    5>使用新的字符集创建新的数据库。
+    --quick: 该选项用于转储大的表.　它强制　mysqldump 从服务器一次一行地检索表中的行而不是　检索所有行,并在输出前将它缓存到内存中.
+    --extended-insert: 使用包括几个　values 列表的多行insert语法,这样使转储文件更小,重载文件时可以加速插入.
+    --no-create-info: 不写重新创建每个转储表的create table 语句.
+    --default-character-set=latin1: 按照原有的字符集导出所有数据,这样导出的文件中,所有中文都是可见的,不会保存成乱码.
+    4>打开data.sql,将　set names latin1 修改成　set names gbk .
+    5>使用新的字符集创建新的数据库.
     create database databasename default charset gbk;
-    6>创建表，执行　createtab.sql
+    6>创建表,执行　createtab.sql
     mysql -uroot -p databasename < createtab.sql
-    7>导入数据，执行data.sql
+    7>导入数据,执行data.sql
     mysql -uroot -p databasename < data.sql
 
-    在导入大的csv sql文件时，可以用load data 命令
+    在导入大的csv sql文件时,可以用load data 命令
         use db；
         创建好表,执行
         load data infile '/home/tom/Desktop/tmall_1111/运动鞋服.csv'  into table `product` fields terminated by ',' (band_name,p_name,now_price,mall_price,low_price,1111_price,links,click); 
@@ -3608,7 +3561,7 @@ tcpdump host sundown 监视指定主机的数据包 也可以是IP
     -e  每行的打印输出中将包括数据包的数据链路层头部信息
     -E  spi@ipaddr algo:secret,...
         可通过spi@ipaddr algo:secret 来解密IPsec ESP包(nt | rt:IPsec Encapsulating Security Payload,IPsec 封装安全负载, IPsec可理解为, 一整套对ip数据包的加密协议, ESP 为整个IP 数据包或其中上层协议部分被加密后的数据,前者的工作模式称为隧道模式; 后者的工作模式称为传输模式 . 工作原理, 另需补充).
-        需要注意的是, 在终端启动tcpdump 时, 可以为IPv4 ESP packets 设置密钥(secret）.
+        需要注意的是, 在终端启动tcpdump 时, 可以为IPv4 ESP packets 设置密钥(secret).
         可用于加密的算法包括des-cbc, 3des-cbc, blowfish-cbc, rc3-cbc, cast128-cbc, 或者没有(none).默认的是des-cbc(nt: des, Data Encryption Standard, 数据加密标准, 加密算法未知, 另需补充).secret 为用于ESP 的密钥, 使用ASCII 字符串方式表达. 如果以 0x 开头, 该密钥将以16进制方式读入.
         该选项中ESP 的定义遵循RFC2406, 而不是 RFC1827. 并且, 此选项只是用来调试的, 不推荐以真实密钥(secret)来使用该选项, 因为这样不安全: 在命令行中输入的secret 可以被其他人通过ps 等命令查看到.
         除了以上的语法格式(nt: 指spi@ipaddr algo:secret), 还可以在后面添加一个语法输入文件名字供tcpdump 使用(nt：即把spi@ipaddr algo:secret,... 中...换成一个语法文件名). 此文件在接受到第一个ESP　包时会打开此文件, 所以最好此时把赋予tcpdump 的一些特权取消(nt: 可理解为, 这样防范之后, 当该文件为恶意编写时,不至于造成过大损害).
@@ -3619,12 +3572,12 @@ tcpdump host sundown 监视指定主机的数据包 也可以是IP
     -i  interface
         指定tcpdump 需要监听的接口.  如果没有指定, tcpdump 会从系统接口列表中搜寻编号最小的已配置好的接口(不包括 loopback 接口).一但找到第一个符合条件的接口, 搜寻马上结束.
         在采用2.2版本或之后版本内核的Linux 操作系统上, 'any' 这个虚拟网络接口可被用来接收所有网络接口上的数据包(nt: 这会包括目的是该网络接口的, 也包括目的不是该网络接口的). 需要注意的是如果真实网络接口不能工作在'混杂'模式(promiscuous)下,则无法在'any'这个虚拟的网络接口上抓取其数据包.
-        如果 -D 标志被指定, tcpdump会打印系统中的接口编号，而该编号就可用于此处的interface 参数.
+        如果 -D 标志被指定, tcpdump会打印系统中的接口编号,而该编号就可用于此处的interface 参数.
     -l  对标准输出进行行缓冲(nt: 使标准输出设备遇到一个换行符就马上把这行的内容打印出来).在需要同时观察抓包打印以及保存抓包记录的时候很有用. 比如, 可通过以下命令组合来达到此目的:
         ``tcpdump  -l  |  tee dat'' 或者 ``tcpdump  -l   > dat  &  tail  -f  dat''.(nt: 前者使用tee来把tcpdump 的输出同时放到文件dat和标准输出中, 而后者通过重定向操作'>', 把tcpdump的输出放到dat 文件中, 同时通过tail把dat文件中的内容放到标准输出中)
     -L  列出指定网络接口所支持的数据链路层的类型后退出.(nt: 指定接口通过-i 来指定)
     -m  module
-        通过module 指定的file 装载SMI MIB 模块(nt: SMI，Structure of Management Information, 管理信息结构MIB, Management Information Base, 管理信息库. 可理解为, 这两者用于SNMP(Simple Network Management Protoco)协议数据包的抓取. 具体SNMP 的工作原理未知, 另需补充).
+        通过module 指定的file 装载SMI MIB 模块(nt: SMI,Structure of Management Information, 管理信息结构MIB, Management Information Base, 管理信息库. 可理解为, 这两者用于SNMP(Simple Network Management Protoco)协议数据包的抓取. 具体SNMP 的工作原理未知, 另需补充).
         此选项可多次使用, 从而为tcpdump 装载不同的MIB 模块.
     -M  secret  如果TCP 数据包(TCP segments)有TCP-MD5选项(在RFC 2385有相关描述), 则为其摘要的验证指定一个公共的密钥secret.
     -n  不对地址(比如, 主机地址, 端口号)进行数字表示到名字表示的转换.
@@ -3632,12 +3585,12 @@ tcpdump host sundown 监视指定主机的数据包 也可以是IP
     -O  不启用进行包匹配时所用的优化代码. 当怀疑某些bug是由优化代码引起的, 此选项将很有用.
     -p  一般情况下, 把网络接口设置为非'混杂'模式. 但必须注意 , 在特殊情况下此网络接口还是会以'混杂'模式来工作； 从而, '-p' 的设与不设, 不能当做以下选现的代名词:'ether host {local-hw-add}' 或  'ether broadcast'(nt: 前者表示只匹配以太网地址为host 的包, 后者表示匹配以太网地址为广播地址的数据包).
     -q  快速(也许用'安静'更好?)打印输出. 即打印很少的协议相关信息, 从而输出行都比较简短.
-    -R  设定tcpdump 对 ESP/AH 数据包的解析按照 RFC1825而不是RFC1829(nt: AH, 认证头, ESP， 安全负载封装, 这两者会用在IP包的安全传输机制中). 如果此选项被设置, tcpdump 将不会打印出'禁止中继'域(nt: relay prevention field). 另外,由于ESP/AH规范中没有规定ESP/AH数据包必须拥有协议版本号域,所以tcpdump不能从收到的ESP/AH数据包中推导出协议版本号.
+    -R  设定tcpdump 对 ESP/AH 数据包的解析按照 RFC1825而不是RFC1829(nt: AH, 认证头, ESP, 安全负载封装, 这两者会用在IP包的安全传输机制中). 如果此选项被设置, tcpdump 将不会打印出'禁止中继'域(nt: relay prevention field). 另外,由于ESP/AH规范中没有规定ESP/AH数据包必须拥有协议版本号域,所以tcpdump不能从收到的ESP/AH数据包中推导出协议版本号.
     -r  file
         从文件file 中读取包数据. 如果file 字段为 '-' 符号, 则tcpdump 会从标准输入中读取包数据.
     -S  打印TCP 数据包的顺序号时, 使用绝对的顺序号, 而不是相对的顺序号.(nt: 相对顺序号可理解为, 相对第一个TCP 包顺序号的差距,比如, 接受方收到第一个数据包的绝对顺序号为232323, 对于后来接收到的第2个,第3个数据包, tcpdump会打印其序列号为1, 2分别表示与第一个数据包的差距为1 和 2. 而如果此时-S 选项被设置, 对于后来接收到的第2个, 第3个数据包会打印出其绝对顺序号:232324, 232325).
     -s  snaplen
-        设置tcpdump的数据包抓取长度为snaplen, 如果不设置默认将会是68字节(而支持网络接口分接头(nt: NIT, 上文已有描述,可搜索'网络接口分接头'关键字找到那里)的SunOS系列操作系统中默认的也是最小值是96).68字节对于IP, ICMP(nt: Internet Control Message Protocol,因特网控制报文协议), TCP 以及 UDP 协议的报文已足够, 但对于名称服务(nt: 可理解为dns, nis等服务), NFS服务相关的数据包会产生包截短. 如果产生包截短这种情况, tcpdump的相应打印输出行中会出现''[|proto]''的标志（proto 实际会显示为被截短的数据包的相关协议层次). 需要注意的是, 采用长的抓取长度(nt: snaplen比较大), 会增加包的处理时间, 并且会减少tcpdump 可缓存的数据包的数量， 从而会导致数据包的丢失. 所以, 在能抓取我们想要的包的前提下, 抓取长度越小越好.把snaplen 设置为0 意味着让tcpdump自动选择合适的长度来抓取数据包.
+        设置tcpdump的数据包抓取长度为snaplen, 如果不设置默认将会是68字节(而支持网络接口分接头(nt: NIT, 上文已有描述,可搜索'网络接口分接头'关键字找到那里)的SunOS系列操作系统中默认的也是最小值是96).68字节对于IP, ICMP(nt: Internet Control Message Protocol,因特网控制报文协议), TCP 以及 UDP 协议的报文已足够, 但对于名称服务(nt: 可理解为dns, nis等服务), NFS服务相关的数据包会产生包截短. 如果产生包截短这种情况, tcpdump的相应打印输出行中会出现''[|proto]''的标志(proto 实际会显示为被截短的数据包的相关协议层次). 需要注意的是, 采用长的抓取长度(nt: snaplen比较大), 会增加包的处理时间, 并且会减少tcpdump 可缓存的数据包的数量, 从而会导致数据包的丢失. 所以, 在能抓取我们想要的包的前提下, 抓取长度越小越好.把snaplen 设置为0 意味着让tcpdump自动选择合适的长度来抓取数据包.
     -T  type
         强制tcpdump按type指定的协议所描述的包结构来分析收到的数据包.  目前已知的type 可取的协议为:
         aodv (Ad-hoc On-demand Distance Vector protocol, 按需距离向量路由协议, 在Ad hoc(点对点模式)网络中使用),
@@ -3672,7 +3625,7 @@ tcpdump host sundown 监视指定主机的数据包 也可以是IP
 
 133.系统启动控制服务
     第一个是invoke-rc.d
-        这个命令可以停止或启动服务，比如：
+        这个命令可以停止或启动服务,比如：
         invoke-rc.d exim4 stop
         invoke-rc.d nfs-common start
     第二个是update-rc.d
@@ -3681,7 +3634,7 @@ tcpdump host sundown 监视指定主机的数据包 也可以是IP
         update-rc.d nfs-common start 20 3 4 5
 
 134.在命令行直接ctrl-x-e 可以快速打开系统默认编辑器.
-ss “ss”表示socket统计。这个命令调查socket，显示类似netstat命令的信息。它可以比其他工具显示更多的TCP和状态信息。
+ss "ss"表示socket统计.这个命令调查socket,显示类似netstat命令的信息.它可以比其他工具显示更多的TCP和状态信息.
 
 135. 终端改256
     终端里面, 默认是8色的, 可以通过tput colors来查看到底是几色的, 没有做修改就是8色
@@ -3702,7 +3655,7 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
     ~/.Xresources文件添加
     xterm*termName: xterm-256color
 
-    编辑编辑vimrc文件，添加
+    编辑编辑vimrc文件,添加
     set t_Co=256 让vim来支持
     可以参考
     http://vim.wikia.com/wiki/256_colors_setup_for_console_Vim
@@ -3724,7 +3677,7 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
     vboxmanage controlvm XP resume 恢复
     vboxmanage controlvm XP savestate 保存当前虚拟机的运行状态
 
-    共享文件夹\\Vboxsvr->\\vboxsvr\tmp，选择\\vboxsvr\tmp
+    共享文件夹\\Vboxsvr->\\vboxsvr\tmp,选择\\vboxsvr\tmp
 
 
 138. shell 计算
@@ -3746,8 +3699,8 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
     command < filename > filename2 把command命令以filename文件作为标准输入,以filename2文件作为标准输出
     command < filename      把command命令以filename文件作为标准输入.
     read A < a.txt 会把a.txt的内容读取一个字符串赋值给A
-    grep "standard"* > grep.out 2>&1 就是将标准输出与错误输出一并送入grep.out文件中，写文件方式为覆盖写（>）。
-    cat >>filetest 2>&1 <<MAYDAY 就是从MAYDAY中读取文件内容，将标准输出与错误输出一并送入filetest文件中，写文件方式为附加写（>>）。
+    grep "standard"* > grep.out 2>&1 就是将标准输出与错误输出一并送入grep.out文件中,写文件方式为覆盖写(>).
+    cat >>filetest 2>&1 <<MAYDAY 就是从MAYDAY中读取文件内容,将标准输出与错误输出一并送入filetest文件中,写文件方式为附加写(>>).
 
     tr "[a-z]" "[A-Z]" < a.txt > b.txt 这会从把a.txt的小写全部转换成大写保存到b.txt
 
@@ -3810,7 +3763,7 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
          $*      传递给脚本/函数的所有参数(把所有参数当成一个字符串
     用[[]](双层中括号)替代[]
 
-    使用[[]]能避免像异常的文件扩展名之类的问题，而且能带来很多语法上的改进，而且还增加了很多新功能：
+    使用[[]]能避免像异常的文件扩展名之类的问题,而且能带来很多语法上的改进,而且还增加了很多新功能：
 
     操作符  功能说明
         ||      逻辑or(仅双中括号里使用)
@@ -3818,8 +3771,8 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
         <       字符串比较(双中括号里不需要转移)
         -lt     数字比较
         =       字符串相等
-        ==      以Globbing方式进行字符串比较(仅双中括号里使用，参考下文)
-        =~      用正则表达式进行字符串比较(仅双中括号里使用，参考下文)
+        ==      以Globbing方式进行字符串比较(仅双中括号里使用,参考下文)
+        =~      用正则表达式进行字符串比较(仅双中括号里使用,参考下文)
         -n      非空字符串
         -z      空字符串
         -eq     数字相等
@@ -3828,11 +3781,11 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
      #!/bin/bash
         set -o nounset
         set -o errexit
-    Bash里可以对变量进行有限的注解。最重要的两个注解是：
+    Bash里可以对变量进行有限的注解.最重要的两个注解是：
         local(函数内部变量)
         readonly(只读变量)
     用$()代替反单引号(`)
-        反单引号很难看，在有些字体里跟正单引号很相似。$()能够内嵌使用，而且避免了转义符的麻烦。
+        反单引号很难看,在有些字体里跟正单引号很相似.$()能够内嵌使用,而且避免了转义符的麻烦.
             # both commands below print out: A-B-C-D
             echo "A-`echo B-`echo C-\\`echo D\\```"
             echo "A-$(echo B-$(echo C-$(echo D)))"
@@ -3878,10 +3831,10 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
             # 以贪婪匹配方式删除字符串尾部
             root="${f%%/*}"      # = "path1"
         避免使用临时文件
-            有些命令需要以文件名为参数，这样一来就不能使用管道。这个时候 <() 就显出用处了，它可以接受一个命令，并把它转换成可以当成文件名之类的什么东西：
+            有些命令需要以文件名为参数,这样一来就不能使用管道.这个时候 <() 就显出用处了,它可以接受一个命令,并把它转换成可以当成文件名之类的什么东西：
                 # 下载并比较两个网页
             diff &lt;(wget -O - url1) &lt;(wget -O - url2)
-        还有一个非常有用处的是”here documents”，它能让你在标准输入上输入多行字符串。下面的’MARKER’可以替换成任何字词。
+        还有一个非常有用处的是"here documents",它能让你在标准输入上输入多行字符串.下面的’MARKER’可以替换成任何字词.
             # 任何字词都可以当作分界符
             command  &lt;&lt; MARKER
             ...
@@ -3889,7 +3842,7 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
             $(cmd)
             ...
             MARKER
-        如果文本里没有内嵌变量替换操作，你可以把第一个MARKER用单引号包起来：
+        如果文本里没有内嵌变量替换操作,你可以把第一个MARKER用单引号包起来：
             command &lt;&lt; 'MARKER'
             ...
             no substitution is happening here.
@@ -3904,13 +3857,13 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
             bash -v myscripts.sh
         跟踪脚本里每个命令的执行并附加扩充信息：
             bash -x myscript.sh
-        你可以在脚本头部使用set -o verbose和set -o xtrace来永久指定-v和-o。当在远程机器上执行脚本时，这样做非常有用，用它来输出远程信息。
+        你可以在脚本头部使用set -o verbose和set -o xtrace来永久指定-v和-o.当在远程机器上执行脚本时,这样做非常有用,用它来输出远程信息.
 
 
 139. vim中一些高级替换技巧
-前几天在实验室一个师姐在写Verilog代码时问了我一个问题，就是她需要定义一系列变量output rca_out_data0~rca_out_data15，现在她已经写好output rca_out_data0，然后复制了15行，她问我怎么把data后面的0一次替换成1~15，我不假思索的说，用脚本呗（我以前coding碰到这 种情况都是用perl -ne来做的）。她说不想用脚本，问能不能就用vim就实现，这我倒是没尝试过。这两天腰受伤了，闲在宿舍休息，于是为了解决这个问题，去网上搜了不少资 料，经过整理，总结下述4条对于自己来说比较实用的替换技巧，其中第2条、第3条和第4条都可以完美的解决师姐的问题。过两天去实验室，又可以show一 下这么cool的操作，哈哈~~~
+前几天在实验室一个师姐在写Verilog代码时问了我一个问题,就是她需要定义一系列变量output rca_out_data0~rca_out_data15,现在她已经写好output rca_out_data0,然后复制了15行,她问我怎么把data后面的0一次替换成1~15,我不假思索的说,用脚本呗(我以前coding碰到这 种情况都是用perl -ne来做的).她说不想用脚本,问能不能就用vim就实现,这我倒是没尝试过.这两天腰受伤了,闲在宿舍休息,于是为了解决这个问题,去网上搜了不少资 料,经过整理,总结下述4条对于自己来说比较实用的替换技巧,其中第2条、第3条和第4条都可以完美的解决师姐的问题.过两天去实验室,又可以show一 下这么cool的操作,哈哈~~~
     1.替换变量
-        在正规表达式中使用 \( 和 \) 符号括起正规表达式，即可在后面使用\1、\2等变量来访问 \( 和 \) 中的内容。
+        在正规表达式中使用 \( 和 \) 符号括起正规表达式,即可在后面使用\1、\2等变量来访问 \( 和 \) 中的内容.
         example:
         ·将 data1 data2 修改为 data2 data1
         -----------------------------------
@@ -3926,11 +3879,11 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
         :s/替换字符串/\=函数式
         ---------------------------
         说明：
-        ·函数式可以有多个，返回值可以用字符串连接符.连接起来，如line(".")返回匹配行号（:help line()  ），submatch(n)可以引用\1、\2的内容，其中submatch(0)引用匹配的整个内容；
-        ·函数式也可以是字符串常量，用双引号引起来。函数式也可以是任意表达式，需要用小括号引起来，如(3+2*6)；
-        ·函数式还可以是寄存器中的内容，通过"@寄存器名"访问，如@a（不需要加引号，但是还是需要用.来连接）；
+        ·函数式可以有多个,返回值可以用字符串连接符.连接起来,如line(".")返回匹配行号(:help line()  ),submatch(n)可以引用\1、\2的内容,其中submatch(0)引用匹配的整个内容；
+        ·函数式也可以是字符串常量,用双引号引起来.函数式也可以是任意表达式,需要用小括号引起来,如(3+2*6)；
+        ·函数式还可以是寄存器中的内容,通过"@寄存器名"访问,如@a(不需要加引号,但是还是需要用.来连接)；
         example:
-        ·要将下列8行的data0依次变成data0~7（前面的数字是行号）
+        ·要将下列8行的data0依次变成data0~7(前面的数字是行号)
         double data0;
         double data0;
         double data0;
@@ -3939,34 +3892,34 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
         double data0;
         double data0;
         double data0;
-        如果安装有perl的话，我以前一般都是借助perl来完成这件事情：
+        如果安装有perl的话,我以前一般都是借助perl来完成这件事情：
         ---------------------------------------------------------------------------
         :r !perl -n -le "if(s/^(double\s+data)\d;/$1$k;/){ $k++; print $_; }" %:p---------------------------------------------------------------------------
         其中%:p表示包含完整路径的文件名
         现在只用vim我们就可以完成这样的事情：
-        首先将光标移到125行（line(".")返回当前匹配行的行号，line("'a")返回mark a的行号）：
+        首先将光标移到125行(line(".")返回当前匹配行的行号,line("'a")返回mark a的行号)：
         ---------------------------------------------------------------------------
         ma
         :%s/^\(double\s\+data\)\d\(;\)/\=submatch(1).(line(".")-line("'a")+1).submatch(2)/g
         ---------------------------------------------------------------------------
         再或者
-        首先将光标移到125行（line("'V7j
+        首先将光标移到125行(line("'V7j
         :%s/^\(double\s\+data\)\d\(;\)/\=submatch(1).(line(".")-line("'
         ---------------------------------------------------------------------------
     3.匹配的开始与结束
-        \zs和\ze可以用于替换操作中指明替换的开始与结束，如上例中可以以更短的操作来实现：
+        \zs和\ze可以用于替换操作中指明替换的开始与结束,如上例中可以以更短的操作来实现：
         ---------------------------------------------------------------------------
         ma
         :%s#^double\s\+data\zs\d\ze#\=(line(".")-line("'a")+1)#g
         ---------------------------------------------------------------------------
-        另外，还可以使用vim表达式来实现上述功能：
+        另外,还可以使用vim表达式来实现上述功能：
         ---------------------------------------------------------------------------
         :let n=0 | g/^double\s\+data\zs\d/s//\=n/ | let n+=1
         ---------------------------------------------------------------------------
         其中 ·|      用来分割不用的命令；
         ·g      在匹配后面模式的行中执行指定的ex命令
         ·\zs    指明匹配由此开始
-        ·s//\=n 对匹配模式进行替换，匹配模式为空，表示以上一次匹配成功的模式，
+        ·s//\=n 对匹配模式进行替换,匹配模式为空,表示以上一次匹配成功的模式,
         并且指明替换是一个表达式；
     4. 高级递增替换
         把下面几句放到 _vimrc
@@ -3977,11 +3930,11 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
         return g:I
         endfunction
         ------------------------------
-        ·对于上述问题，可以这样解决：
+        ·对于上述问题,可以这样解决：
         -----------------------------------------------------
         :let I=-1 | %s/^ double\s\+data\zs\d\ze/\=INC(1)/
         -----------------------------------------------------
-        ·还可以生成数字序列，如生成1~100间隔为5的数字序列：
+        ·还可以生成数字序列,如生成1~100间隔为5的数字序列：
         --------------------------------------
         :let I=0 | ‘a,’b s/^/\=INC(5)/
         --------------------------------------
@@ -4009,23 +3962,23 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
     删除0字节文件
                     find . -type f -size 0 -exec rm -rf {} \;
                     find . type f -size 0 -delete
-    查看进程，按内存从大到小排列
-                    ps -e -o “%C : %p : %z : %a”|sort -k5 -nr
+    查看进程,按内存从大到小排列
+                    ps -e -o "%C : %p : %z : %a"|sort -k5 -nr
     按cpu利用率从大到小排列
-                    ps -e -o “%C : %p : %z : %a”|sort -nr
+                    ps -e -o "%C : %p : %z : %a"|sort -nr
     打印说cache里的url 
-                    grep -r -a jpg /data/cache/* | strings | grep “http:” | awk -F’http:’ ‘{print “http:”$2;}’
+                    grep -r -a jpg /data/cache/* | strings | grep "http:" | awk -F’http:’ ‘{print "http:"$2;}’
     查看http的并发请求数及其TCP连接状态 
                     netstat -n | awk ‘/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}’
-    sed在这个文里Root的一行，匹配Root一行，将no替换成yes。
+    sed在这个文里Root的一行,匹配Root一行,将no替换成yes.
                     sed -i ‘/Root/s/no/yes/’ /etc/ssh/sshd_config
     如何杀掉mysql进程 
                     ps aux |grep mysql |grep -v grep  |awk ‘{print $2}’ |xargs kill -9
                     killall -TERM mysqld
                     kill -9 `cat /usr/local/apache2/logs/httpd.pid`
-    显示运行3级别开启的服务(从中了解到cut的用途，截取数据)
+    显示运行3级别开启的服务(从中了解到cut的用途,截取数据)
                     ls /etc/rc3.d/S* |cut -c 15-
-    如何在编写SHELL显示多个信息，用EOF
+    如何在编写SHELL显示多个信息,用EOF
                     cat << EOF
                         +————————————————————–+
                         |   === Welcome to Tunoff services ===                         |
@@ -4037,17 +3990,17 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
                         do ln /usr/local/mysql/bin/$i /usr/bin/$i
                         done
     取IP地址
-                    ifconfig eth0 |grep “inet addr:” |awk ‘{print $2}’|cut -c 6-
+                    ifconfig eth0 |grep "inet addr:" |awk ‘{print $2}’|cut -c 6-
                     ifconfig | grep ‘inet addr:’| grep -v ’127.0.0.1′ |cut -d: -f2 | awk ‘{ print $1}’
     内存的大小
-                    free -m |grep “Mem” | awk ‘{print $2}’
+                    free -m |grep "Mem" | awk ‘{print $2}’
     统计httpd进程数,结果表明服务器可以处理多少个并发请求.一般是几千
                 ps -ef | grep httpd | wc -l
     返回当前所有80端口的请求总数
                 netstat -nat | grep -i "80" | wc -l
     打印系统所有80端口已建立的连接总数
                 netstat -na | grep ESTABLISHED | wc -l
-    查看80端口的连接，并排序
+    查看80端口的连接,并排序
                     netstat -an -t | grep ":80" | grep ESTABLISHED | awk '{printf "%s %s\n",$5,$6}' | sort
     查看Apache的并发请求数及其TCP连接状态
                     netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
@@ -4104,7 +4057,7 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
                     free
     磁盘空间
                     df -h
-    如发现某个分区空间接近用尽，可以进入该分区的挂载点，用以下命令找出占用空间最多的文件或目录
+    如发现某个分区空间接近用尽,可以进入该分区的挂载点,用以下命令找出占用空间最多的文件或目录
                     du -cks * | sort -rn | head -n 10
     磁盘I/O负载 
                     iostat -x 1 2
@@ -4114,14 +4067,14 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
                     netstat -i
                     cat /proc/net/dev
     网络连接数目
-                    netstat -an | grep -E “^(tcp)” | cut -c 68- | sort | uniq -c | sort -n
+                    netstat -an | grep -E "^(tcp)" | cut -c 68- | sort | uniq -c | sort -n
     进程总数
                     ps aux | wc -l
     查看进程树
                     ps aufx
     可运行进程数目
                     vmwtat 1 5
-    检查DNS Server工作是否正常，这里以61.139.2.69为例 
+    检查DNS Server工作是否正常,这里以61.139.2.69为例 
                     dig www.baidu.com @61.139.2.69
     检查当前登录的用户个数
                     who | wc -l
@@ -4134,10 +4087,10 @@ ss “ss”表示socket统计。这个命令调查socket，显示类似netstat�
     时间            date
     已经打开的句柄数
                     lsof | wc -l
-    网络抓包，直接输出摘要信息到文件。 
+    网络抓包,直接输出摘要信息到文件.
                     tcpdump -c 10000 -i eth0 -n dst port 80 > /root/pkts
-    然后检查IP的重复数 并从小到大排序 注意 “-t\  +0″ 中间是两个空格，less命令的用法。
-                    less pkts | awk {‘printf $3″\n”‘} | cut -d. -f 1-4 | sort | uniq -c | awk {‘printf $1″ “$2″\n”‘} | sort -n -t\  +0
+    然后检查IP的重复数 并从小到大排序 注意 "-t\  +0″ 中间是两个空格,less命令的用法.
+                    less pkts | awk {‘printf $3″\n"‘} | cut -d. -f 1-4 | sort | uniq -c | awk {‘printf $1″ "$2″\n"‘} | sort -n -t\  +0
     kudzu查看网卡型号
                     kudzu –probe –class=network
 
@@ -4164,7 +4117,7 @@ command: sslocal -c /etc/shadowsocks-libev/shadowsocks.json
          ss-local -c /etc/shadowsocks-libev/config.json 
 client: sslocal -s server_name -p server_port -l local_port -k password -m bf-cfb
 
-146. ldd 用于打印程序或者库文件所依赖的共享库列表。
+146. ldd 用于打印程序或者库文件所依赖的共享库列表.
     ladd xxx.so
     ldd(选项)(参数) 
     选项
@@ -4172,9 +4125,9 @@ client: sslocal -s server_name -p server_port -l local_port -k password -m bf-cf
     ldd -v 详细信息模式
     ldd -u 打印未使用的直接依赖
     ldd -d 执行重定位和报告任何丢失的对象
-    ldd -r 执行数据对象和函数的重定位，并且报告任何丢失的对象和函数
+    ldd -r 执行数据对象和函数的重定位,并且报告任何丢失的对象和函数
     ldd --help  显示帮助信息
-    参数 文件,指定可执行程序或者文库。
+    参数 文件,指定可执行程序或者文库.
 
 147. zsh
     apt-get install zsh
@@ -4183,7 +4136,7 @@ client: sslocal -s server_name -p server_port -l local_port -k password -m bf-cf
     chsh -s /bin/zsh
 
 148 rename
-rename [-v -n -f] <pcre> <files>   -v 会显示文件名改变的细节 -n 选项告诉rename命令在不实际改变名称的情况下显示文件将会重命名的情况。这个选项在你想要在不改变文件名的情况下模拟改变文件名的情况下很有用。 -f 选项强制覆盖存在的文件。
+rename [-v -n -f] <pcre> <files>   -v 会显示文件名改变的细节 -n 选项告诉rename命令在不实际改变名称的情况下显示文件将会重命名的情况.这个选项在你想要在不改变文件名的情况下模拟改变文件名的情况下很有用.-f 选项强制覆盖存在的文件.
 rename 's/\.jpeg$/\.jpg/' *.jpeg 重名令jpg为jpeg
 rename 'y/A-Z/a-z/' *             大写改成小写
 rename -v 's/img_\d{3}(\d{4})\.jpeg$/dan_$1\.jpg/' *jpeg    将img_000NNNN.jpeg变成dan_NNNN.jpg
@@ -4370,7 +4323,7 @@ CALL selectnum(@a);
         END lable1;
         可以用levae label1; 来跳出区块,执行区块后的代码
 
-函数库,字符串类型，数值类型，日期类型
+函数库,字符串类型,数值类型,日期类型
 一、字符串类
 CHARSET(str) //返回字串字符集
 CONCAT (string2 [,… ]) //连接字串
@@ -4388,7 +4341,7 @@ RPAD (string2 ,length ,pad) //在str后用pad补充,直到长度为length
 RTRIM (string2 ) //去除后端空格
 STRCMP (string1 ,string2 ) //逐字符比较两字串大小,
 SUBSTRING (str , position [,length ]) //从str的position开始,取length个字符,
-注：mysql中处理字符串时，默认第一个字符下标为1，即参数position必须大于等于1
+注：mysql中处理字符串时,默认第一个字符下标为1,即参数position必须大于等于1
 mysql> select substring(’abcd’,0,2);
 +———————–+
 | substring(’abcd’,0,2) |
@@ -4419,15 +4372,15 @@ CONV(number2,from_base,to_base) //进制转换
 FLOOR (number2 ) //向下取整
 FORMAT (number,decimal_places ) //保留小数位数
 HEX (DecimalNumber ) //转十六进制
-注：HEX()中可传入字符串，则返回其ASC-11码，如HEX(’DEF’)返回4142143
-也可以传入十进制整数，返回其十六进制编码，如HEX(25)返回19
+注：HEX()中可传入字符串,则返回其ASC-11码,如HEX(’DEF’)返回4142143
+也可以传入十进制整数,返回其十六进制编码,如HEX(25)返回19
 LEAST (number , number2 [,..]) //求最小值
 MOD (numerator ,denominator ) //求余
 POWER (number ,power ) //求指数
 RAND([seed]) //随机数
 ROUND (number [,decimals ]) //四舍五入,decimals为小数位数]
 
-注：返回类型并非均为整数，如：
+注：返回类型并非均为整数,如：
 
 (1)默认变为整形值
 mysql> select round(1.23);
@@ -4446,7 +4399,7 @@ mysql> select round(1.56);
 +————-+
 1 row in set (0.00 sec)
 
-(2)可以设定小数位数，返回浮点型数据
+(2)可以设定小数位数,返回浮点型数据
 
 mysql> select round(1.567,2);
 +—————-+
@@ -4495,7 +4448,7 @@ MINUTE(datetime) //分
 
 注：可用在INTERVAL中的类型：DAY ,DAY_HOUR ,DAY_MINUTE ,DAY_SECOND ,HOUR ,HOUR_MINUTE ,HOUR_SECOND ,MINUTE ,MINUTE_SECOND,MONTH ,SECOND ,YEAR
 DECLARE variable_name [,variable_name...] datatype [DEFAULT value]; 
-其中，datatype为mysql的数据类型，如:INT, FLOAT, DATE, VARCHAR(length)
+其中,datatype为mysql的数据类型,如:INT, FLOAT, DATE, VARCHAR(length)
 
 例：
 
@@ -4508,20 +4461,20 @@ DECLARE l_varchar VARCHAR(255) DEFAULT 'This will not be padded';
 
 158. strace命令
 显示streams跟踪消息, 
-没有参数的 strace 命令将所有的驱动程序和模块中的所有 STREAMS 事件跟踪消息写入它的标准输出。这些消息是从 STREAMS 日志驱动程序中获取的。如果提供参数，它们必须是在三元组中。每个三元组表明跟踪消息要从给定的模块或驱动程序、子标识（通常表明次要设备）以及优先级别等于或小于给定级别的模块或驱动程序中接收。all 标记可由任何成员使用，以表明对该属性没有限制。
+没有参数的 strace 命令将所有的驱动程序和模块中的所有 STREAMS 事件跟踪消息写入它的标准输出.这些消息是从 STREAMS 日志驱动程序中获取的.如果提供参数,它们必须是在三元组中.每个三元组表明跟踪消息要从给定的模块或驱动程序、子标识(通常表明次要设备)以及优先级别等于或小于给定级别的模块或驱动程序中接收.all 标记可由任何成员使用,以表明对该属性没有限制.
 
 语法 strace [ mid sid level ] mid 指定STREAMS模块的标识号.  sid指定子标识号. level指定跟踪优先级别
 输出格式 每个跟踪消息输出的格式是： <seq> <time> <ticks> <level> <flags> <mid> <sid> <text>
 <seq>跟踪序列号. <time>消息时间(hh:mm:ss) <ticks>系统启动后以机器滴答信号表示消息的时间.<level>跟踪优先级别.<flag> E消息也在错误日志那个/F表示致命错误/N邮件已发送给SA
 <mid>源的模块标识号.<sid>源的子标识号.<text>跟踪消息的格式化文本.(在多处理器系统上,由两部分组成,消息发送者发送处的处理器号码,格式化文本本身)
 一旦strace启动将继续执行直到用户终止.
-由于性能的考虑，所以一次只允许一个 strace 命令来打开 STREAMS 日志驱动程序。日志驱动程序有一个三元组的列表（该列表在命令调用中指定），并且程序会根据该列表比较每个潜在的跟踪消息，以决定是否要格式化和发送这个信息到 strace 进程中。因此，长的三元组列表会对 STREAMS 的总体性能的影响更大。运行 strace 命令对于某些模块和驱动程序（生成要发送给 strace 进程的跟踪消息的模块和驱动程序）的定时的影响最大。如果跟踪消息生成过快，以至 strace 进程无法处理，那么就会丢失一些消息。最后的情况可以通过检查跟踪消息输出上的序列号来确定。
+由于性能的考虑,所以一次只允许一个 strace 命令来打开 STREAMS 日志驱动程序.日志驱动程序有一个三元组的列表(该列表在命令调用中指定),并且程序会根据该列表比较每个潜在的跟踪消息,以决定是否要格式化和发送这个信息到 strace 进程中.因此,长的三元组列表会对 STREAMS 的总体性能的影响更大.运行 strace 命令对于某些模块和驱动程序(生成要发送给 strace 进程的跟踪消息的模块和驱动程序)的定时的影响最大.如果跟踪消息生成过快,以至 strace 进程无法处理,那么就会丢失一些消息.最后的情况可以通过检查跟踪消息输出上的序列号来确定.
 
 strace用法, 
     1.可以找到被一个程序读取的配置文件.e.g: strace php 2>&1 | grep php.ini
     2.跟踪指定的系统调用, -e选项仅仅被用来展示特定的系统调用.比如open,write
         e.g: strace -e open cat dead.letter
-    3. 通过使用-p选项能用在运行的进程上。
+    3. 通过使用-p选项能用在运行的进程上.
         e.g: strace -p 6543
     4. 统计概要. -c选项以一种整洁的方式展示.
         e.g: strace -c ls
@@ -4597,8 +4550,8 @@ systemctl status mysql      #show the mysql status
 
     (8)锁定状态
     mysql> show global  status like '%lock%';
-    Table_locks_waited/Table_locks_immediate=0.3%  如果这个比值比较大的话，说明表锁造成的阻塞比较严重
-    Innodb_row_lock_waits innodb行锁，太大可能是间隙锁造成的 
+    Table_locks_waited/Table_locks_immediate=0.3%  如果这个比值比较大的话,说明表锁造成的阻塞比较严重
+    Innodb_row_lock_waits innodb行锁,太大可能是间隙锁造成的 
 
     (9)复制延时量
     mysql > show slave status 
@@ -4606,23 +4559,23 @@ systemctl status mysql      #show the mysql status
 
     (10) Tmp Table 状况(临时表状况) 
     mysql > show status like 'Create_tmp%'; 
-    Created_tmp_disk_tables/Created_tmp_tables比值最好不要超过10%，如果Created_tmp_tables值比较大， 
+    Created_tmp_disk_tables/Created_tmp_tables比值最好不要超过10%,如果Created_tmp_tables值比较大, 
     可能是排序句子过多或者是连接句子不够优化 
 
     (11) Binlog Cache 使用状况 
     mysql > show status like 'Binlog_cache%'; 
-    如果Binlog_cache_disk_use值不为0 ，可能需要调大 binlog_cache_size大小 
+    如果Binlog_cache_disk_use值不为0 ,可能需要调大 binlog_cache_size大小 
 
     (12) Innodb_log_waits 量 
     mysql > show status like 'innodb_log_waits'; 
-    Innodb_log_waits值不等于0的话，表明 innodb log  buffer 因为空间不足而等待 
+    Innodb_log_waits值不等于0的话,表明 innodb log  buffer 因为空间不足而等待 
 
     比如命令： 
     >#show global status; 
     虽然可以使用： 
     >#show global status like %...%; 
 
-    TPS - Transactions Per Second（每秒传输的事物处理个数），即服务器每秒处理的事务数，如果是InnoDB会显示，没有InnoDB就不会显示。
+    TPS - Transactions Per Second(每秒传输的事物处理个数),即服务器每秒处理的事务数,如果是InnoDB会显示,没有InnoDB就不会显示.
     TPS = (COM_COMMIT + COM_ROLLBACK)/UPTIME
 
     use information_schema;
@@ -4632,7 +4585,7 @@ systemctl status mysql      #show the mysql status
     select (@num_com+@num_roll)/@uptime;
 
 
-    QPS - Queries Per Second（每秒查询处理量）MyISAM 引擎
+    QPS - Queries Per Second(每秒查询处理量)MyISAM 引擎
     QUESTIONS/UPTIME
 
     use information_schema;
@@ -4677,7 +4630,7 @@ dmidecode -t1
 ipmitool fru print
 
 dmidecode -t   -t是类型, 后面跟要输出的类型,比如processor
-    -d, --dev-mem FILE Read memory from device FILE (default: /dev/mem) #从设备文件读信息，输出内容与不加参数标准输出相同
+    -d, --dev-mem FILE Read memory from device FILE (default: /dev/mem) #从设备文件读信息,输出内容与不加参数标准输出相同
     -h, --help Display this help text and exit #显示帮助信息
     -q, --quiet Less verbose output #显示更少的简化信息
     -s, --string KEYWORD Only display the value of the given DMI string #只显示指定DMI字符串的信息
@@ -4735,11 +4688,11 @@ dmidecode -t   -t是类型, 后面跟要输出的类型,比如processor
         38  IPMI Device
         39  Power Supply
 
-    7、查看内存槽数、那个槽位插了内存，大小是多少 
+    7、查看内存槽数、那个槽位插了内存,大小是多少 
         dmidecode|grep -P -A5 "Memory\s+Device"|grep Size|grep -v Range
     8、查看最大支持内存数
         dmidecode|grep -P 'Maximum\s+Capacity'
-    9、查看槽位上内存的速率，没插就是unknown。
+    9、查看槽位上内存的速率,没插就是unknown.
         dmidecode|grep -A16 "Memory Device"|grep 'Speed'
 
 167. Xfce4 notes file folder
@@ -4749,46 +4702,46 @@ dmidecode -t   -t是类型, 后面跟要输出的类型,比如processor
 168A. 通过OS监控本地服务,实现对本地服务器的管理
 
 ipmitool -I open command 意思是用Openipmi接口, command选项如下
-    raw #发送一个原始的IPMI请求，并且打印回复信息。
-    Lan #配置网络（lan）信道(channel)
+    raw #发送一个原始的IPMI请求,并且打印回复信息.
+    Lan #配置网络(lan)信道(channel)
     chassis #查看底盘的状态和设置电源
-    event #向BMC发送一个已经定义的事件（event），可用于测试配置的SNMP是否成功
-    mc #查看MC（Management Contollor）状态和各种允许的项
-    sdr #打印传感器仓库中的所有监控项和从传感器读取到的值。
-    Sensor #打印详细的传感器信息。
+    event #向BMC发送一个已经定义的事件(event),可用于测试配置的SNMP是否成功
+    mc #查看MC(Management Contollor)状态和各种允许的项
+    sdr #打印传感器仓库中的所有监控项和从传感器读取到的值.
+    Sensor #打印详细的传感器信息.
     Fru #打印内建的Field Replaceable Unit (FRU)信息
     Sel #打印 System Event Log (SEL)
-    Pef #设置 Platform Event Filtering (PEF)，事件过滤平台用于在监控系统发现有event时候，用PEF中的策略进行事件过滤，然后看是否需要报警。
+    Pef #设置 Platform Event Filtering (PEF),事件过滤平台用于在监控系统发现有event时候,用PEF中的策略进行事件过滤,然后看是否需要报警.
     Sol/isol #用于配置通过串口的Lan进行监控
-    User #设置BMC中用户的信息 。
-    Channel #设置Management Controller信道。
-        ipmitool –I open sensor list #命令可以获取传感器中的各种监测值和该值的监测阈值，包括（CPU温度，电压，风扇转速，电源调制模块温度，电源电压等信息）
-        ipmitool –I open sensor get “CPU0Temp” #可以获取ID为CPU0Temp监测值，CPU0Temp是sensor的ID，服务器不同，ID表示也不同。
-        ipmitool –I open sensor thresh #设置ID值等于id的监测项的各种限制值。
-        ipmitool –I open chassis status #查看底盘状态，其中包括了底盘电源信息，底盘工作状态等
+    User #设置BMC中用户的信息 .
+    Channel #设置Management Controller信道.
+        ipmitool –I open sensor list #命令可以获取传感器中的各种监测值和该值的监测阈值,包括(CPU温度,电压,风扇转速,电源调制模块温度,电源电压等信息)
+        ipmitool –I open sensor get "CPU0Temp" #可以获取ID为CPU0Temp监测值,CPU0Temp是sensor的ID,服务器不同,ID表示也不同.
+        ipmitool –I open sensor thresh #设置ID值等于id的监测项的各种限制值.
+        ipmitool –I open chassis status #查看底盘状态,其中包括了底盘电源信息,底盘工作状态等
         ipmitool –I open chassis restart_cause #查看上次系统重启的原因
-        ipmitool –I open chassis policy list #查看支持的底盘电源相关策略。
-        ipmitool –I open chassis power on #启动底盘，用此命令可以远程开机
-        ipmitool –I open chassis power off #关闭底盘，用此命令可以远程关机
-        ipmitool –I open chassis power reset #实现硬重启，用此命令可以远程重启
-    #Ipmi还可以设置系统启动boot的设备，具体见ipmitool帮助文档
+        ipmitool –I open chassis policy list #查看支持的底盘电源相关策略.
+        ipmitool –I open chassis power on #启动底盘,用此命令可以远程开机
+        ipmitool –I open chassis power off #关闭底盘,用此命令可以远程关机
+        ipmitool –I open chassis power reset #实现硬重启,用此命令可以远程重启
+    #Ipmi还可以设置系统启动boot的设备,具体见ipmitool帮助文档
         ipmitool –I open mc reset #使BMC重新硬启动
         ipmitool –I open mc info #查看BMC硬件信息
         ipmitool –I open mc getenables #列出BMC所有允许的选项
-        ipmitool –I open mc setenables =[on|off] #设置bmc相应的允许/禁止选项。
-        ipmitool  -I open event 1 #发送一个温度过高的消息到System Event Log中，可以发送的Event有：
+        ipmitool –I open mc setenables =[on|off] #设置bmc相应的允许/禁止选项.
+        ipmitool  -I open event 1 #发送一个温度过高的消息到System Event Log中,可以发送的Event有：
             Temperature: Upper Critical: Going High
             Voltage Threshold: Lower Critical: Going Low
             Memory: Correctable ECC Error Detected
-        ipmitool -I open event #命令可以用测试配置的IPMI中的snmp功能是否成功。
-        ipmitool -I open lan print 1 #打印现咱channel 1的信息 。
+        ipmitool -I open event #命令可以用测试配置的IPMI中的snmp功能是否成功.
+        ipmitool -I open lan print 1 #打印现咱channel 1的信息 .
         ipmitool -I open lan set 1 ipaddr 10.10.113.95 #设置channel 1的IP地址为10.10.113.95
-        ipmitool -I open lan set 1 snmp public #设置channel 1 上snmp的community为public。
-        ipmitool -I open lan set 1 access on #设置channel 1允许访问。
-        ipmitool -I open pef info #打印Platform Event Filtering （pef）信息
-        ipmitool -I open pef status #查看Platform Event Filtering （pef）状态
-        ipmitool -I open pef policy #查看Platform Event Filtering （pef）策略设置
-        ipmitool -I open sdr list fru #读取fru信息并显示。
+        ipmitool -I open lan set 1 snmp public #设置channel 1 上snmp的community为public.
+        ipmitool -I open lan set 1 access on #设置channel 1允许访问.
+        ipmitool -I open pef info #打印Platform Event Filtering (pef)信息
+        ipmitool -I open pef status #查看Platform Event Filtering (pef)状态
+        ipmitool -I open pef policy #查看Platform Event Filtering (pef)策略设置
+        ipmitool -I open sdr list fru #读取fru信息并显示.
         ipmitool sel clear #清除记录
         ipmitool sel elist
         ipmitool sel list
@@ -4811,7 +4764,7 @@ ipmitool -I open command 意思是用Openipmi接口, command选项如下
         ipmitool sol payload enable 1
 
 168B 通过网络监控远程服务器
-被监控服务器需要硬件和操作系统接口驱动的支持，可以无需安装应用软件。监控客户端需要应用软件如ipmitool工具，可以无需硬件和操作系统接口驱动的支持。 ipmi的远程监控是通过向与BMC相连的网络接口发送udp数据包实现的，udp数据包的定位是通过把ip地址写BMC芯片来实现，而这需要本地的Ipmi系统接口来完成连接。Ipmitool可以通过LAN远程监控系统，同时BMC中保存有一序列用户名和密码，通过LAN进行远端访问需要用户名和密码。
+被监控服务器需要硬件和操作系统接口驱动的支持,可以无需安装应用软件.监控客户端需要应用软件如ipmitool工具,可以无需硬件和操作系统接口驱动的支持.ipmi的远程监控是通过向与BMC相连的网络接口发送udp数据包实现的,udp数据包的定位是通过把ip地址写BMC芯片来实现,而这需要本地的Ipmi系统接口来完成连接.Ipmitool可以通过LAN远程监控系统,同时BMC中保存有一序列用户名和密码,通过LAN进行远端访问需要用户名和密码.
 
     被监控服务器使用ipmitool更改ip,查看ip
         ipmitool lan set 1 ipaddr  172.16.6.222
