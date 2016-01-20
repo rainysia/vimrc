@@ -3,9 +3,16 @@ RabbitMQ
 ##Centos7
 --------
 ```
-#yum install erlang*
+#wget http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
+#rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
+#yum clean metadata
+#yum install erlang* --skip-broken
+#rpm --import https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+#yum install rabbitmq-server-3.6.0-1.noarch.rpm
 #yum install rabbitmq-server
 #yum install librabbitmq librabbitmq-tools
+
+wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.0/rabbitmq-server-3.6.0-1.noarch.rpm
 ```
 ##Debian8
 --------
