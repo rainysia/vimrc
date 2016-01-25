@@ -8,7 +8,7 @@
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2015-09-11 17:03:59
+" LastChange: 2016-01-25 17:50:42
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -621,7 +621,7 @@ let g:mwDefaultHighlightingPalette = 'extended'
 "{{                                        " EasyMotion.vim的设定
 "let g:EasyMotion_leader_key = '<Leader>'  " conflict with mark.vim
 "}}
-"{{                                        " phpqa.vim的设定
+"{{                                        " phpqa.vim的设定    https://github.com/joonty/vim-phpqa 2015-10-15
 "let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = "--standard=Btroot"
 let g:phpqa_codesniffer_args = " --encoding=utf-8"
