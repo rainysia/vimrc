@@ -188,7 +188,7 @@ PASSWORD_HASHERS = (
 )
 
 
-## Celery
+##Celery
 --------------
 pip install celery
 celery -A codefilename worker --loglevel=info
@@ -204,6 +204,14 @@ app = Celery('tasks', broker='amqp://guest@192.168.85.116//')
 def add(x, y):
     return x + y
 ```
+
+##Halo
+--------------
+```
+/home/weblogic/.virtualenvs/halo/bin/python /home/weblogic/.virtualenvs/halo/bin/celery -A halo.worker.server.app worker --pool=eventlet -l info
+/home/weblogic/.virtualenvs/HaloFuncTest/bin/python /home/weblogic/.virtualenvs/HaloFuncTest/bin/locust -f tests/uut.py --host=http://192.168.85.116:8888
+```
+
 
 
 =========process testview=====================
