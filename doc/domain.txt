@@ -210,6 +210,11 @@ def add(x, y):
 ```
 /home/weblogic/.virtualenvs/halo/bin/python /home/weblogic/.virtualenvs/halo/bin/celery -A halo.worker.server.app worker --pool=eventlet -l info
 /home/weblogic/.virtualenvs/HaloFuncTest/bin/python /home/weblogic/.virtualenvs/HaloFuncTest/bin/locust -f tests/uut.py --host=http://192.168.85.116:8888
+
+node server
+
+/usr/hdp/current/hbase-client/bin/hbase thrift start
+/usr/hdp/current/hbase-client/bin/hbase-daemon restart thrift
 ```
 
 
