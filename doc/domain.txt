@@ -214,7 +214,13 @@ def add(x, y):
 node server
 
 /usr/hdp/current/hbase-client/bin/hbase thrift start
+
 /usr/hdp/current/hbase-client/bin/hbase-daemon restart thrift
+/usr/hdp/current/hbase-client/bin/hbase-daemon stop thrift
+
+need to kill `ps aux | grep thrift`
+
+
 ```
 
 
