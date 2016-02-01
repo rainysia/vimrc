@@ -2370,6 +2370,10 @@ git stash drop # 删除暂存区
 git stash save #暂存内容到暂存区
 git stash pop #弹出暂存的内容
 
+git stash save "save_name"  # give the stash a name
+git stash clear             # delete a stashed commit 
+git stash save --keep-index # stash only unstaged files
+
 
 git log -1 --pretty=raw 
 
