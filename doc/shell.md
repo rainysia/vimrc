@@ -2370,6 +2370,10 @@ git stash drop # 删除暂存区
 git stash save #暂存内容到暂存区
 git stash pop #弹出暂存的内容
 
+git stash save "save_name"  # give the stash a name
+git stash clear             # delete a stashed commit 
+git stash save --keep-index # stash only unstaged files
+
 
 git log -1 --pretty=raw 
 
@@ -2464,7 +2468,7 @@ git merge <branch> # 将branch分支合并到当前分支
 git merge origin/master --no-ff # 不要Fast-Foward 合并,这样可以生成merge提交
 
 git rebase master <branch> # 将master rebase到branch.相当于
-git co <branch> && git rebase master && git co master && git merge <branch>
+git co <branch> && git rebase master && git co master && git merge <branch>, 变基会通过在原来的分支中为每次提交创建全新提交来重写项目历史。变基的主要好处在于你会得到一个更加整洁的项目历史
 git checkout --track origin/dev 切换到远程dev分支
 git checkout -b dev 本地建立一个dev分支 = git branch dev
 
