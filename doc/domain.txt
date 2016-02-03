@@ -205,7 +205,27 @@ def add(x, y):
     return x + y
 ```
 
+##HALO
+----
+```
+/usr/bin/python2 /usr/lib/python2.6/site-packages/ambari_agent/AmbariAgent.py start
+/usr/bin/python2 /usr/lib/python2.6/site-packages/ambari_agent/main.py start
 
+cd /usr/hdp/current/hbase-client/bin
+./hbase-daemon.sh stop thrift
+./hbase-daemon.sh start thrift
+./hbase-daemon.sh restart thrift
+
+hbase thrift restart
+
+celery server
+tmux new -s halo_celery
+tmux attach halo_celery
+tmux detach halo_celery
+
+cd HALO
+celery -A halo.worker.server.app worker --pool=eventlet -l info
+```
 =========process testview=====================
 python manage.py makemigrations
 python manage.py migrate
