@@ -54,4 +54,5 @@ Updates
                     add /usr/share/php/PHP/CodeSniffer.php as usr_share_php_PHP_CodeSniffer.php <br />
 2014-06-24 14:08:32 add vim plugins vim-multiple-cursors in /usr/share/vim/ <br />
 2014-07-14 12:29:40 add vim new map F8/S-F8 for !ctags -R<br />
+2016-02-15 10:20:30 make vim configuration simple<br />
 ```
