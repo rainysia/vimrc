@@ -3,7 +3,7 @@
 " syntax errors and coding standard violations.
 "
 " License:
-"   GPL (http://www.gnu.org/licenses/gpl.txt)
+"   MIT (https://raw.githubusercontent.com/joonty/vim-phpqa/master/LICENSE)
 "
 " Authors:
 " Jon Cairns <jon@joncairns.com>
@@ -31,6 +31,9 @@ let g:phpqa_num_cc_signs = 0
 "
 function! s:AddSigns(buffer)
     for line in getloclist(0)
+        if line.lnum == 0
+            continue
+        endif
         if has_key(g:phpqa_sign_type_map,line.type)
             let l:name=g:phpqa_sign_type_map[line.type]
         else
@@ -82,7 +85,7 @@ endf
 " GLOBAL FUNCTIONS {{{1
 
 " Run the PHP linter to check for syntax errors
-function! phpqa#PhpLint()
+function! Phpqa#PhpLint()
     if &filetype == "php"
         if 0 != len(g:phpqa_php_cmd)
             let l:bufNo = bufnr('%')
@@ -90,12 +93,14 @@ function! phpqa#PhpLint()
             let l:php_output=system(g:phpqa_php_cmd." -l ".@%." 1>/dev/null")
             let l:php_list=split(l:php_output, "\n")
 
-            if 0 != len(l:php_list) && match(l:php_list[0],"No syntax errors") == -1
+            if 0 != v:shell_error && match(l:php_list[0],"No syntax errors") == -1
                 let l:php_list[0] = "P ".l:php_list[0]
                 set errorformat=%t\ %m\ in\ %f\ on\ line\ %l
                 lexpr l:php_list[0]
                 call s:AddSigns(l:bufNo)
-                lope
+                if g:phpqa_open_loc
+                    lope
+                endif
                 return 1
             else
                 if 1 == g:phpqa_verbose
@@ -112,7 +117,7 @@ function! phpqa#PhpLint()
 endfunction
 
 " Run PHP code sniffer.
-function! phpqa#PhpCodeSniffer()
+function! Phpqa#PhpCodeSniffer()
     if @% == ""
         echohl Error | echo "Invalid buffer (are you in the error window?)" |echohl None
         return []
@@ -133,7 +138,7 @@ endf
 " Run mess detector.
 "
 " The user is required to specify a ruleset XML file if they haven't already.
-function! phpqa#PhpMessDetector()
+function! Phpqa#PhpMessDetector()
     if @% == ""
         echohl Error | echo "Invalid buffer (are you in the error window?)" |echohl None
         return []
@@ -142,12 +147,8 @@ function! phpqa#PhpMessDetector()
     if 0 != len(g:phpqa_messdetector_cmd)
         let file_tmp = ""
         while 0 == len(g:phpqa_messdetector_ruleset)
-            let file_tmp = expand(resolve(input("Please specify a mess detector ruleset XML file: ",file_tmp,"file")))
-            if filereadable(file_tmp)
-                let g:phpqa_messdetector_ruleset = file_tmp
-            else
-                echohl Error |echo "Not a valid or readable file"|echohl None
-            endif
+            let file_tmp = input("Please specify a mess detector ruleset file, or built in rule: ",file_tmp)
+            let g:phpqa_messdetector_ruleset = file_tmp
         endwhile
         let l:phpmd_output=system(g:phpqa_messdetector_cmd." ".@%." text ".g:phpqa_messdetector_ruleset)
         let l:phpmd_list=split(l:phpmd_output, "\n")
@@ -159,18 +160,18 @@ function! phpqa#PhpMessDetector()
 endf
 
 " Run Code Sniffer and Mess Detector.
-function! phpqa#PhpQaTools(runcs,runmd)
+function! Phpqa#PhpQaTools(runcs,runmd)
     let l:bufNo = bufnr('%')
     call s:RemoveSigns()
 
     if 1 == a:runcs
-        let l:phpcs_list=phpqa#PhpCodeSniffer()
+        let l:phpcs_list=Phpqa#PhpCodeSniffer()
     else
         let l:phpcs_list = []
     endif
 
     if 1 == a:runmd
-        let l:phpmd_list = phpqa#PhpMessDetector()
+        let l:phpmd_list = Phpqa#PhpMessDetector()
     else
         let l:phpmd_list = []
     endif
@@ -178,7 +179,7 @@ function! phpqa#PhpQaTools(runcs,runmd)
     let error_list=s:CombineLists(l:phpcs_list,l:phpmd_list)
     if 0 != len(error_list)
         set errorformat=%t\ %f:%l:%c:\ %m,%t\ %f:%l\	%m
-        lgete error_list 
+        lgete error_list
         call s:AddSigns(l:bufNo)
         if g:phpqa_open_loc
             lope
@@ -192,43 +193,49 @@ endf
 " Toggle the code coverage markers.
 "
 " If the command has been run, remove the signs. Otherwise run it with
-" phpqa#PhpCodeCoverage()
-function! phpqa#CodeCoverageToggle()
+" Phpqa#PhpCodeCoverage()
+function! Phpqa#CodeCoverageToggle()
     if 0 != g:phpqa_num_cc_signs
         let g:phpqa_codecoverage_autorun = 0
         call s:RemoveCodeCoverageSigns()
     else
         let g:phpqa_codecoverage_autorun = 1
-        call phpqa#PhpCodeCoverage()
+        call Phpqa#PhpCodeCoverage()
     endif
 
 endf
 
-function! phpqa#QAToolsToggle()
-    call phpqa#ToggleSigns()
+function! Phpqa#QAToolsToggle()
     if g:phpqa_run_on_write == 1
+        call s:RemoveSigns()
         let g:phpqa_run_on_write = 0
         echohl Error | echo "PHP QA tools won't run automatically on save" | echohl None
     else
         let g:phpqa_run_on_write = 1
+        echohl Error | echo "PHP QA tools has been enabled" | echohl None
     endif
 endf
 
 
 " Run code coverage, and ask the user for the coverage file if not specified
-function! phpqa#PhpCodeCoverage()
+function! Phpqa#PhpCodeCoverage()
     call s:RemoveCodeCoverageSigns()
 
     let file_tmp = ""
     while 0 == len(g:phpqa_codecoverage_file)
-        let file_tmp = resolve(expand(input("Please specify a clover code coverage XML file: ",file_tmp,"file")))
+        let file_tmp = resolve(expand(input("Please specify a clover code coverage XML file (leave blank to cancel): ",file_tmp,"file")))
         if filereadable(file_tmp)
             let g:phpqa_codecoverage_file = file_tmp
+        elseif file_tmp == ""
+            echo "Cancelled"
+            break
         else
             echohl Error |echo "Not a valid or readable file"|echohl None
         endif
     endwhile
-    call AddCodeCoverageSigns(g:phpqa_codecoverage_file)
+    if filereadable(g:phpqa_codecoverage_file)
+        call AddCodeCoverageSigns(g:phpqa_codecoverage_file)
+    endif
 endf
 " }}}1
 "=============================================================================
