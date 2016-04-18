@@ -99,7 +99,6 @@ set undodir=$HOME/.vimdata/undofile
 "                                          " 可在开始的花括号前添加介绍，花括号后添加级别号，级别号不能为0。如：/*折叠介绍###1*/ code... /*###*/ (用###代替了折叠符号) 
 set formatoptions=tcrqn                    " 自动格式化
 set foldenable                             " 开始折叠
-set foldmethod=syntax                      " 设置语法折叠
 set foldcolumn=0                           " 设置折叠区域的宽度
 setlocal foldlevel=1                       " 设置折叠层数为
 " set foldclose=all                        " 设置为自动关闭折叠
@@ -398,7 +397,7 @@ let g:ctrlp_user_command = {
 	\ }
 "}}
 "{{                                        " CTags的设定
-"                                          "     (地址自定义,我的www在F:/php/www下)
+"                                          "     (地址自定义,我的www在/home/www下)
 "                                          "     vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
 "                                          " ctrl_] 跳转到对应函数 ctrl_t 回跳 ctrl_o 回跳
 map <F8> :!ctags -R<CR>
@@ -407,7 +406,7 @@ set tags=/home/www/tags
 set tags=tags;                             " 分号必须，让vim递归向上查找tags
 set autochdir
 "}}
-"{{                                        " Taglist的设定
+"{{                                        " Taglist的设定 https://github.com/vim-scripts/taglist.vim 2016-04-18 17:32:07
 "                                          "     F9开关 按wm会启动.F9是单独开关
 "                                          "     :Tlist --呼出变量和函数列表 [TagList插件]
 map <F9> :TlistToggle<cr>
@@ -426,7 +425,7 @@ set tags=tags;/                            "     找不到tags文件到上层找
 " php的折叠
 let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 "}}
-"{{                                        " authorinfo.vim的设定
+"{{                                        " authorinfo.vim的设定 https://github.com/vim-scripts/AuthorInfo 2016-04-18 17:36:25
 "                                          "     vim自动添加作者信息（需要和NERD_commenter联用)使用,
 "                                          "     :AuthorInfoDetect呼出
 let g:vimrc_author='rainysia'
@@ -437,7 +436,7 @@ let g:vimrc_license='http://www.btroot.com/user_guide/license.html V1'
 let g:vimrc_version='Version 1.0'
 nmap <F4> :AuthorInfoDetect<cr>
 "}}
-"{{                                        " NERD_commenter.vim的设定
+"{{                                        " NERD_commenter.vim的设定 https://github.com/vim-scripts/The-NERD-Commenter 2016-04-18 17:37:03
 "                                          "      vim加入注释
 "                                          "      <leader>ca 在可选的注释方式之间切换，比如C/C++ 的块注释/* */和行注释//
 "                                          "      <leader>cc 注释当前行
@@ -462,7 +461,7 @@ map <F12> <ESC>04x$hh3x<ESC>
 "                                          "      :n1,n2s/\/\///g  删除//的注释
 "                                          "      :n1,n2s/^I/','/g 把tab替换成','
 "}}
-"{{                                        " nerdtree_plugin的设定
+"{{                                        " nerdtree_plugin的设定 https://github.com/scrooloose/nerdtree 2016-04-18 17:43:05
 "                                          "      wm 开启
 let g:winManagerWindowLayout='FileExplorer|TagList'
 nmap wm :WMToggle<cr>
@@ -471,7 +470,20 @@ autocmd vimenter * if !argc() | NERDTree | endif
 "                                          " 只剩NREDTree时自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "}}
-"{{                                        " minibufexpl.vim的设定
+"{{                                        " nerdtree-git-plugin https://github.com/Xuyuanp/nerdtree-git-plugin 2016-04-18 17:51:25
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+"}}
+"{{                                        " minibufexpl.vim的设定 https://github.com/fholgado/minibufexpl.vim 2016-04-18 18:46:26
 "                                          "     切换c+Tab前c+s+Tab后buff,ctrl+h,j,k,l上下左右
 "                                          "     bp和bn分别是切换到上一个和下一个Buffer、bd则删除当前显示的单个Buffer
 let g:miniBufExplMapCTabSwitchBufs=1
@@ -479,12 +491,11 @@ let g:miniBufExplMapWindowsNavVim=1
 let g:miniBufExplMapWindowNavArrows=1
 let g:miniBufExplModSelTarget = 1
 "}}
-"{{                                        " grep.vim的设定
+"{{                                        " grep.vim的设定 https://github.com/yegappan/grep 2016-04-18 18:51:15
 "                                          "     在工程中快速查找 F3
 nnoremap <silent> <F3> :Grep<CR>
 "}}
-"{{                                        " EasyGrep.vim的设定 2014-01
-"                                          " http://www.vim.org/scripts/script.php?script_id=2438
+"{{                                        " EasyGrep.vim的设定 https://github.com/dkprice/vim-easygrep 2016-04-18 19:00:03
 " <Leader>vv                               "  Grep for the word under the cursor, match all occurences, like |gstar|   :Grep xxx
 " <Leader>vV                               "  Grep for the word under the cursor, match whole word, like |star|         :Grep xxx !
 " <Leader>va                               "    Like vv, but add to existing list   :GrepAdd xxx
@@ -493,8 +504,7 @@ nnoremap <silent> <F3> :Grep<CR>
 " <Leader>vo                               "    Select the files to search in and set grep options
 "                                          " :GrepOptions [arg] 新开窗口来设置grep选项.
 "}}
-"{{                                        " mru.vim的设定 2014-03
-"                                          " http://www.vim.org/scripts/script.php?script_id=521
+"{{                                        " mru.vim的设定 https://github.com/vim-scripts/mru.vim 2016-04-18 19:01:22
 " :MRU
 "let MRU_File = 'd:\myhome\_vim_mru_files' " 指定缓存地址.
 let MRU_Max_Entries = 1000
