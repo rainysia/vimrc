@@ -8,7 +8,7 @@
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2015-09-11 17:03:59
+" LastChange: 2016-01-25 17:50:42
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -54,7 +54,21 @@ set shortmess=atI                          " 启动的时候不显示援助索�
 set noerrorbells                           " 不让vim发出讨厌的滴滴声 set noeb
 set nobomb                                 " 不使用unicode签名
 set textwidth=100                          " 每行显示多少字符
+"set relativenumber                        " 相对行号
 "set cc=101                                 " 红色高亮第101行.
+set undofile
+set undolevels=1000                        " undo 记忆1000
+let g:data_dir = $HOME . '/.vimdata/'
+let g:undo_dir = g:data_dir . 'undofile'
+if finddir(g:data_dir) == ''
+    silent call mkdir(g:data_dir)
+endif
+if finddir(g:undo_dir) == ''
+    silent call mkdir(g:undo_dir)
+endif
+unlet g:undo_dir
+unlet g:data_dir
+set undodir=$HOME/.vimdata/undofile
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  2=> text pattern
@@ -115,12 +129,15 @@ if has("win32")
     au GUIEnter * simalt ~x
 endif
 "}}
-"{{                                        " make标记 :marks 取得所有标记, :jumps可在多文件跳转
+"{{                                        " make标记 :marks 取得所有标记, :jumps可在多文件跳转, :delmarks 删除指定标记, :delmarks!删除所有
 "                                          " ma用a标记当前光标未知,可以用a~z
 "                                          " 跳转到标记 `a
 "                                          " 跳转到标记所在行首 'a
 "                                          " '' 跳转前的位置 Ctrl+O (older)跳转到较老的地方
-"                                          " " 最后编辑的位置Ctrl+I 跳转到较新的地方
+"                                          " . 最近编辑的位置
+"                                          " 0-9 最近使用的文件
+"                                          "∧ 最近插入的位置
+"                                          " " 最后编辑的位置Ctrl+I 跳转到较新的地方,上一次退出文件时的位置
 "                                          " [ 最后修改的位置的开头
 "                                          " [ 最后修改的位置的结尾
 "}}
@@ -309,7 +326,7 @@ endif                                      " has("autocmd")
 "hi StatuslineChar      cterm=none    ctermbg=white  ctermfg=yellow  gui=none guibg=#66b06f guifg=black
 
 hi StatuslineBufNr     cterm=none    ctermfg=red        ctermbg=darkgrey    gui=none guibg=#696969 guifg=#D8BFD8
-hi StatuslineFlag      cterm=none    ctermfg=black   ctermbg=grey    gui=none guibg=#330223 guifg=#cdcde1
+hi StatuslineFlag      cterm=none    ctermfg=black      ctermbg=grey        gui=none guibg=#330223 guifg=#cdcde1
 hi StatuslinePath      cterm=none    ctermfg=white      ctermbg=green       gui=none guibg=#210222 guifg=#cdcde2
 hi StatuslineFileName  cterm=none    ctermfg=white      ctermbg=blue        gui=none guibg=#410041 guifg=#cdcde3
 hi StatuslineFileEnc   cterm=bold    ctermfg=white      ctermbg=darkblue    gui=none guibg=#400342 guifg=#cdcde4
@@ -408,7 +425,7 @@ let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 let g:vimrc_author='rainysia'
 let g:vimrc_email='rainysia@gmail.com'
 let g:vimrc_link='http://www.btroot.org'
-let g:vimrc_copyright='2006-2013 BTROOT.ORG' 
+let g:vimrc_copyright='2006-2016 BTROOT.ORG' 
 let g:vimrc_license='http://www.btroot.com/user_guide/license.html V1'
 let g:vimrc_version='Version 1.0'
 nmap <F4> :AuthorInfoDetect<cr>
@@ -543,6 +560,8 @@ autocmd FileType mysql set omnifunc=mysqlcomplete#CompleteMYSQL
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType c set omnifunc=ccomplete#Complete
+autocmd FileType text setlocal textwidth=80
+
 set completeopt=longest,menu               " 提示菜单后输入字母实现即时的过滤和匹配
 "}}
 "{{                                        " snipmates的设定
@@ -621,12 +640,12 @@ let g:mwDefaultHighlightingPalette = 'extended'
 "{{                                        " EasyMotion.vim的设定
 "let g:EasyMotion_leader_key = '<Leader>'  " conflict with mark.vim
 "}}
-"{{                                        " phpqa.vim的设定
+"{{                                        " phpqa.vim的设定    https://github.com/joonty/vim-phpqa 2015-10-15
 "let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = "--standard=Btroot"
 let g:phpqa_codesniffer_args = " --encoding=utf-8"
 let g:phpqa_codesniffer_cmd  = '/usr/bin/phpcs'
-let g:phpqa_codesniffer_autorun = 0        "  default =1 on save
+let g:phpqa_codesniffer_autorun = 1        "  default =1 on save
 "                                          " :return NULL Void Boolean Float String Array Object Resource Callback
 let g:phpqa_messdetector_ruleset = ''
 let g:phpqa_messdetector_cmd = '/usr/bin/phpmd'
@@ -734,6 +753,9 @@ let g:PyFlakeCWindow = 6                   "Default height of quickfix window:
 let g:PyFlakeSigns = 1                     "Whether to place signs or not:
 let g:PyFlakeMaxLineLength = 100           "Maximum line length for PyFlakeAuto command
 let g:PyFlakeRangeCommand = 'Q'            "Visual-mode key command for PyFlakeAuto
+"}}
+"{{                                        " Vundle https://github.com/VundleVim/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
