@@ -900,7 +900,7 @@ if has("gui_running")
     hi        DiffText       guifg=#FFFFCD          guibg=#4A2A4A           gui=NONE        "diff: 改变行里的改动文本#007F00 #1C1D1F
     hi        ErrorMsg       guifg=#FF3F3F          guibg=#1C1D1F           gui=NONE        "命令行上的错误信息
     hi        VertSplit      guifg=#FF3F3F          guibg=#3F3FFF           gui=NONE        "分离垂直分割窗口的列
-    hi        Folded         guifg=#DDEEFE          guibg=#FF3F3A           gui=NONE        "用于关闭的折叠的行
+    hi        Folded         guifg=#DDEEFE          guibg=#20BAAA           gui=NONE        "用于关闭的折叠的行
     hi        IncSearch      guifg=#FF0000          guibg=#DDA0DD           gui=NONE        "'incsearch' 高亮
     hi        LineNr         guifg=#4D4D4B          guibg=#000000           gui=NONE        "置位number选项时的行号
     hi        MatchParen     guifg=#FFD6EB          guibg=#FF5CAF           gui=NONE        "配对的括号
@@ -1134,7 +1134,7 @@ elseif &t_Co == 256
     hi        DiffText       ctermfg=red              ctermbg=black             cterm=BOLD        "diff: 改变行里的改动文本
     hi        ErrorMsg       ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "命令行上的错误信息
     hi        VertSplit      ctermfg=darkcyan         ctermbg=lightblue         cterm=BOLD        "分离垂直分割窗口的列
-    hi        Folded         ctermfg=lightgrey        ctermbg=lightgreen        cterm=BOLD        "用于关闭的折叠的行
+    hi        Folded         ctermfg=lightgrey        ctermbg=darkgreen        cterm=BOLD        "用于关闭的折叠的行
     hi        IncSearch      ctermfg=darkred          ctermbg=lightgrey         cterm=BOLD        "'incsearch' 高亮
     hi        LineNr         ctermfg=darkgrey         ctermbg=black             cterm=BOLD        "置位 number 选项时的行号
     hi        MatchParen     ctermfg=lightred         ctermbg=black             cterm=BOLD        "配对的括号
