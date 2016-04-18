@@ -1,20 +1,19 @@
-" {{{
+" 0 => Author {{{
 "========================================================================
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 7.09.01
+"    Version: 7.09.02
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2016-01-25 17:50:42
+" LastChange: 2016-04-18 17:01:45
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  1=> system configure
+" 1 => System Configure {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{{
 "{{                                        " work in linux
 let $VIMRUNTIME="/usr/share/vim/vim74"
 set runtimepath=/usr/share/vim/vim74,~/.vim,~/.vim/after
@@ -49,7 +48,7 @@ set scrolloff=3                            " 光标移动到buffer的顶部和�
 setlocal noswapfile                        " 关闭临时文件,不生成swap文件,
 set bufhidden=hide                         " 当buffer丢弃时隐藏它
 set linespace=0                            " 字符间插入的像素行数目
-set wildmenu                               " 增强模式中的命令行自动完成操作
+set wildmenu                               " 增强模式中的命令行自动完成操作,状态栏预览
 set shortmess=atI                          " 启动的时候不显示援助索马里儿童提示
 set noerrorbells                           " 不让vim发出讨厌的滴滴声 set noeb
 set nobomb                                 " 不使用unicode签名
@@ -71,24 +70,33 @@ unlet g:data_dir
 set undodir=$HOME/.vimdata/undofile
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  2=> text pattern
+" 2 => Text Pattern {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{{
 "                                          " "折叠相关的快捷键
 "                                          " "zf 创建折叠
 "                                               zf\`a   折叠当前光标处到标记a的文本
 "                                               zf3j    向下折叠3行
 "                                               zf%     在括号光标处折叠括号内文本
+"                                          " 
+"                                          " "zd 删除光标下的折叠。  
+"                                          " "zD 删除光标下的折叠，以及嵌套的折叠。  
+"                                          " "zE 删除窗口内的所有折叠。仅当 manual 和 marker 折叠方法下有效。  
+"                                          " "zF 在当前行创建折叠。当一开始就计划要折叠所写代码的时候，可以用该命令创建一对折叠符号，然后再往里面填写内容
 "                                          " "zR 打开所有的折叠
 "                                          " "za Open/Close (toggle) a folded group of lines.
 "                                          " "zA Open a Closed fold or close and open fold recursively.
 "                                          " "zi 全部 展开/关闭 折叠
-"                                          " "zo 打开 (open) 在光标下的折叠
+"                                          " "zo 打开 (open) 在光标下的折叠,
+"                                          " "zO 打开光标下的折叠，以及嵌套的折叠。
 "                                          " "zc 关闭 (close) 在光标下的折叠
 "                                          " "zC 循环关闭 (Close) 在光标下的所有折叠
 "                                          " "zM 关闭所有可折叠区域
 "                                          " "zj 移动到下一个折叠的开始
 "                                          " "zk 移动到上一个折叠的结束
+"                                          " "zv 打开当前光标所在折叠，仅打开足够的折叠使光标所在的行不被折叠
+"                                          " "[z 到当前打开折叠的开始。如果已在开始处，移到包含这个折叠的折叠开始处。  
+"                                          " "]z 到当前打开折叠的结束。如果已在结束处，移到包含这个折叠的折叠结束处。  
+"                                          " 可在开始的花括号前添加介绍，花括号后添加级别号，级别号不能为0。如：/*折叠介绍###1*/ code... /*###*/ (用###代替了折叠符号) 
 set formatoptions=tcrqn                    " 自动格式化
 set foldenable                             " 开始折叠
 set foldmethod=syntax                      " 设置语法折叠
@@ -114,11 +122,11 @@ set smarttab                               " 在行和段开始处使用制表�
 "{{                                        " 用空格键来开关折叠
 "                                          " 设置语法折叠
 "                                          " manual  手工定义折叠
-"                                          " indent  更多的缩进表示更高级别的折叠
+"                                          " indent  更多的缩进表示更高级别的折叠,相同的缩进中代码会被折叠
 "                                          " expr    用表达式来定义折叠
 "                                          " syntax  用语法高亮来定义折叠
 "                                          " diff    对没有更改的文本进行折叠
-"                                          " marker  对文中的标志折叠
+"                                          " marker  对文中的标志折叠,标记折叠方法
 set foldmethod=marker
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 "}}
@@ -143,9 +151,8 @@ endif
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  3=> encoding configure
+"  3 => Encoding Configure {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{{
 set enc=utf-8                              " vim 支持中文 内部编码
 set termencoding=utf-8                     " work in linux
 set fenc=utf-8                             " work in linux 解析出来的当前文件编码(可能解析错误)
@@ -183,9 +190,8 @@ set viminfo='1000,f1,<500
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  4=> display
+"  4 => Display {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{{
 colorscheme desert                         " 设置配色方案
 set background=dark                        " 设置背景为黑
 set novisualbell                           " No mouseflash
@@ -349,9 +355,8 @@ set virtualedit=block                      " block 允许可视列块模式的�
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  5=> search match
+"  5 => Search Match {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{{
 "{{                                        " 插入邮箱<ctrl+E>,邮箱自动切换,账户自动替换
 map  irainysia@gmail.com
 "}}
@@ -366,9 +371,11 @@ set incsearch                              " 在 搜索时，输入的词句的�
 set nowrapscan                             " 禁止搜索到文件两端时重新搜索
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  6=> plugins
+"  6 => Plugins {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{{
+"{{                                        " Vundle https://github.com/VundleVim/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim
+"}}
 "{{
 "                                          " Ctrlp的设定 https://github.com/kien/ctrlp.vim 2013-07
 let g:ctrlp_map = '<c-p>'
@@ -754,14 +761,10 @@ let g:PyFlakeSigns = 1                     "Whether to place signs or not:
 let g:PyFlakeMaxLineLength = 100           "Maximum line length for PyFlakeAuto command
 let g:PyFlakeRangeCommand = 'Q'            "Visual-mode key command for PyFlakeAuto
 "}}
-"{{                                        " Vundle https://github.com/VundleVim/Vundle.vim
-set rtp+=~/.vim/bundle/Vundle.vim
-"}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  7=> c/c++
+"  7 => c/c++ {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{{
 "                                          " F5编译和运行C程序，F6编译和运行C++程序
 "                                          " 请注意，下述代码在windows下使用会报错
 "                                          " 需要去掉./这两个字符
@@ -796,9 +799,8 @@ au BufReadPost *.nfo call RestoreFileEncodings()
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  8=> original _vimrc
+"  8 => Original _vimrc {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{{
 "source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
 "behave mswin
@@ -843,9 +845,8 @@ endfunction
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  9=> End
+"  9 => End {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{{
 "                                          " .vimrc修改后不需重启生效
 autocmd! bufwritepost _vimrc source %
 "{{                                        " 自动补齐符号
@@ -881,9 +882,8 @@ au BufRead,BufNewFile *.s,*.asm,*.h,*.c,*.cpp,*.cc,*.java,*.cs,*.erl,*.hs,*.sh,*
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  10=> color configure
+"  10 => Color Configure "{{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{{
 "                                          " term 黑白终端 cterm 彩色终端 ctermfg彩色终端前景色 ctermbg 彩色终端背景色
 "                                          " gui GUI版本属性 guifg GUI版本的前景色 guibg GUI版本的背景色
 if has("gui_running")
@@ -1301,9 +1301,8 @@ else
 endif
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  11=> key shortcuts
+"  11 => Key Shortcuts {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{{
 "{{                                        " all shortcuts
 " :%s/^\s\+//g                             " 删除行首空格
 " :%s/\s\+$//g                             " 删除行末空格 要转义斜杠等, 用\,而+ |转义用\\
@@ -1726,5 +1725,6 @@ endif
 " 7.06.01                                  " change terminal fg/bg color 2015-06-16 15:30:59
 " 7.07.01                                  " add flake8=pyflake+pep8 2015-07-06 14:39:19
 " 7.09.01                                  " add set iskeyword 2015-09-11 17:03:59
+" 7.09.02                                  " add vundle 2016-04-18 17:12:52
 "}}
 "}}}
