@@ -609,18 +609,20 @@ hi IndentGuidesOdd  ctermbg=black
 "                                          "      win vimfiles/after/syntax/css.vim
 "                                          "      linux .vim/after/syntax/css.vim
 "}}
-"{{                                        " csExplorer.vim的设定
+"{{                                        " csExplorer.vim的设定 https://github.com/vimscripts-song/csExplorer 2016-04-19 09:56:24
 "                                          "      win vimfiles/plugin
 "                                          "      linux .vim/plugin
 "                                          "      :ColorSchemeExplorer
 "}}
-"{{                                        " calendar.vim的设定
+"{{                                        " calendar.vim的设定 https://github.com/vim-scripts/calendar.vim--Matsumoto 2016-04-19 09:58:17
 "                                          "      win vimfiles/after/syntax/calendar.vim
 "                                          "      linux .vim/after/syntax/calendar.vim
 "                                          "      :Calendar  :CalendarH
 let g:calendar_diary="$VIMRUNTIME/diary/"
 "}}
-"{{                                        " mark.vba.gz的设定(mark.vim) http://www.vim.org/scripts/script.php?script_id=1238
+"{{                                        " calendar.vim https://github.com/itchyny/calendar.vim 2016-04-19 10:00:39
+"}}
+"{{                                        " mark.vba.gz的设定(mark.vim) https://github.com/dimasg/vim-mark 2016-04-19 10:06:30
 "                                          " :Mark regexp   to mark a regular expression 
 "                                          " :Mark regexp   with exactly the same regexp to unmark it 
 "                                          " :Mark          to clear all marks 
@@ -636,9 +638,16 @@ let g:calendar_diary="$VIMRUNTIME/diary/"
 "                                          "      /?  把光标向后切换到所有被Mark的MarkWords中的上一个MarkWord.
 let g:mwDefaultHighlightingPalette = 'extended'
 "}}
-"{{                                        " statusline.vim的设定
+"{{                                        " statusline.vim的设定 https://github.com/vim-scripts/statusline.vim 2016-04-19 10:10:27
 "}}
-"{{                                        " zencoding.vim 的设定
+"{{                                        " powerline https://github.com/Lokaltog/vim-powerline 2016-04-19 10:10:13
+"}}
+"{{                                        " indentLine.vim 另外一个对齐线.https://github.com/Yggdroot/indentLine 2014-05-29
+let g:indentLine_color_term = 239
+let g:indentLine_color_gui = '#3E3F40'
+let g:indentLine_char = '|'
+"}}
+"{{                                        " zencoding.vim 的设定 https://github.com/vim-scripts/Emmet.vim 2016-04-19 10:11:36
 "                                          "      html:xxs>div#header+div#container>ul>li.class_$#id_$*2
 "                                          "      按下 <ctrl+y> 然后 点 , 逗号
 "                                          "      ul>li*
@@ -648,14 +657,14 @@ let g:mwDefaultHighlightingPalette = 'extended'
 "                                          "      ul>li*
 "                                          "      html:xt <c+y> ,
 "}}
-"{{                                        " Multisearch.vim的设定 matchit.vim
+"{{                                        " Multisearch.vim的设定 matchit.vim  https://github.com/vim-scripts/multisearch.vim 2016-04-19 10:12:12
 "}}
-"{{                                        " EasyMotion.vim的设定
+"{{                                        " EasyMotion.vim的设定 deprecated 2016-04-19 10:14:01
 "let g:EasyMotion_leader_key = '<Leader>'  " conflict with mark.vim
 "}}
-"{{                                        " phpqa.vim的设定    https://github.com/joonty/vim-phpqa 2015-10-15
+"{{                                        " phpqa.vim的设定 https://github.com/joonty/vim-phpqa 2015-10-15
 "let g:phpqa_codesniffer_args = "--standard=Zend"
-let g:phpqa_codesniffer_args = "--standard=Btroot"
+let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = " --encoding=utf-8"
 let g:phpqa_codesniffer_cmd  = '/usr/bin/phpcs'
 let g:phpqa_codesniffer_autorun = 1        "  default =1 on save
@@ -680,9 +689,9 @@ let g:phpqa_messdetector_autorun = 0
 "{{                                        " php code sniffer ,php md模式
 "                                          " :!phpcs :!phpmd
 "}}
-"{{                                        " php autocomplpop 插件，自动完成提示。
+"{{                                        " php autocomplpop 插件，自动完成提示。 https://github.com/othree/vim-autocomplpop 2016-04-19 10:16:43
 "}}
-"{{                                        " Surround.vim 针对包含在文字外的括号、引号、XML 标签做快速的修改
+"{{                                        " Surround.vim 针对包含在文字外的括号、引号、XML 标签做快速的修改 https://github.com/tpope/vim-surround 2016-04-19 10:17:41
 "                                          " cs"' 修改双引号为单引号 cs'<q> 修改单引号为<q>包围的.
 "                                          " ds"  删除包围的符号
 "                                          " cs"<q> 修改双引号为<q></q>包围
@@ -695,12 +704,7 @@ let g:phpqa_messdetector_autorun = 0
 "                                          " ysiw' 为光标下的单词包围
 "                                          " 可视模式下，选中，S"  可插入包裹的
 "}}
-"{{                                        " indentLine.vim 另外一个对齐线.https://github.com/Yggdroot/indentLine 2014-05-29
-let g:indentLine_color_term = 239
-let g:indentLine_color_gui = '#3E3F40'
-let g:indentLine_char = '|'
-"}}
-"{{                                        " colorv.vim 插件，颜色画板。
+"{{                                        " colorv.vim 插件，颜色画板。 https://github.com/Rykka/colorv.vim 2016-04-19 10:19:31
 " :h colorv                                "  帮助.
 " :h colorv-options                        "  帮助选项.
 " :h colorv-mapping-buffer                 "  映射.
@@ -739,18 +743,17 @@ let g:indentLine_char = '|'
 "                                          "    K/C search item under cursor with Kuler/ColourLover
 "                                          "    sn to create new scheme
 "}}
-"{{                                        " vim-multiple-cursors 插件。多重选择
-"                                          "    https://github.com/terryma/vim-multiple-cursors
+"{{                                        " vim-multiple-cursors 插件。多重选择 https://github.com/terryma/vim-multiple-cursors 2016-04-19 10:20:24
 "                                          "    ctrl-n  select, c modify the content, <esc> exit;
 "let g:multi_cursor_next_key='<C-n>'       "    next 
 "let g:multi_cursor_prev_key='<C-d>'       "    prev
 "let g:multi_cursor_skip_key='<C-x>'       "    skip the next.
 "}}
-"{{                                        " pydiction 插件 http://www.vim.org/scripts/script.php?script_id=850
+"{{                                        " pydiction 插件 https://github.com/rkulla/pydiction 2016-04-19 10:21:10
 let g:pydiction_location = '~/.vim/after/ftplugin/pydiction/complete-dict'
 let g:pydiction_menu_height = 3
 "}}
-"{{                                        " flake8插件 http://www.vim.org/scripts/script.php?script_id=4440
+"{{                                        " flake8插件 https://github.com/andviro/flake8-vim 2016-04-19 10:23:26
 "                                          " command
 "                                               :PyFlakeToggle  "Disable/enable automatic checking of current file
 "                                               :PyFlake        "Run checks for current file
@@ -769,7 +772,7 @@ let g:PyFlakeRangeCommand = 'Q'            "Visual-mode key command for PyFlakeA
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  7 => c/c++ {{{
+"  7 => Function {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                          " F5编译和运行C程序，F6编译和运行C++程序
 "                                          " 请注意，下述代码在windows下使用会报错
