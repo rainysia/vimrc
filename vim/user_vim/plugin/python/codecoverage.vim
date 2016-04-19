@@ -16,10 +16,10 @@ except NameError:
 
 clover = vim.eval('a:clover')
 buf = vim.eval('bufname("%")')
-fileName = vim.eval('fnamemodify("'+buf+'",":p")')
+fileName = vim.eval('fnamemodify("'+buf+'","%")')
 
-""" 
-XML may already be parsed and held in memory 
+"""
+XML may already be parsed and held in memory
 Check the file modification time, and only re-parse
 if it's been modified.
 """
@@ -39,9 +39,9 @@ try:
     if doc is None:
         doc = libxml2.parseFile(clover)
         mtime = time.ctime(os.path.getmtime(clover))
-        
+
     ctxt = doc.xpathNewContext()
-    res = ctxt.xpathEval("/coverage/project/file[@name='"+fileName+"']/line[@type='stmt']")
+    res = ctxt.xpathEval("//file[substring(@name, string-length(@name) - string-length('"+fileName+"') + 1)='"+fileName+"']/line[@type='stmt']")
     cur_signs = int(vim.eval('g:phpqa_num_cc_signs'))
     showcovered = int(vim.eval('g:phpqa_codecoverage_showcovered'))
     cmd_list = ''
@@ -59,7 +59,7 @@ try:
     vim.command(cmd_list)
     vim.command('let g:phpqa_num_cc_signs='+str(cur_signs))
 
-    """ 
+    """
     t = time.time() - t0
     print "Completed in "+str(t)+" seconds"
     """
