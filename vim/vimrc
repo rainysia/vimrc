@@ -546,7 +546,8 @@ let MRU_Max_Submenu_Entries = 15
 "}}
 "                                          " PHP 语法检查 F5
 "map <F5> :!/usr/local/php/bin/php -l %<CR>
-"                                          " php高亮highlight
+"                                          " php高亮highlight https://jasonwoof.com/gitweb/?p=vim-syntax.git;a=tree;hb=HEAD
+"                                          " https://github.com/2072/vim-syntax-for-PHP
 source $VIMRUNTIME/syntax/php.vim
 "                                          " php缩进
 let PHP_autoformatcomment=1
