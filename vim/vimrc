@@ -78,25 +78,25 @@ set undodir=$HOME/.vimdata/undofile
 "                                               zf3j    向下折叠3行
 "                                               zf%     在括号光标处折叠括号内文本
 "                                          " 
-"                                          " "zd 删除光标下的折叠。  
-"                                          " "zD 删除光标下的折叠，以及嵌套的折叠。  
-"                                          " "zE 删除窗口内的所有折叠。仅当 manual 和 marker 折叠方法下有效。  
-"                                          " "zF 在当前行创建折叠。当一开始就计划要折叠所写代码的时候，可以用该命令创建一对折叠符号，然后再往里面填写内容
+"                                          " "zd 删除光标下的折叠.  
+"                                          " "zD 删除光标下的折叠,以及嵌套的折叠.  
+"                                          " "zE 删除窗口内的所有折叠.仅当 manual 和 marker 折叠方法下有效.  
+"                                          " "zF 在当前行创建折叠.当一开始就计划要折叠所写代码的时候,可以用该命令创建一对折叠符号,然后再往里面填写内容
 "                                          " "zR 打开所有的折叠
 "                                          " "za Open/Close (toggle) a folded group of lines.
 "                                          " "zA Open a Closed fold or close and open fold recursively.
 "                                          " "zi 全部 展开/关闭 折叠
 "                                          " "zo 打开 (open) 在光标下的折叠,
-"                                          " "zO 打开光标下的折叠，以及嵌套的折叠。
+"                                          " "zO 打开光标下的折叠,以及嵌套的折叠.
 "                                          " "zc 关闭 (close) 在光标下的折叠
 "                                          " "zC 循环关闭 (Close) 在光标下的所有折叠
 "                                          " "zM 关闭所有可折叠区域
 "                                          " "zj 移动到下一个折叠的开始
 "                                          " "zk 移动到上一个折叠的结束
-"                                          " "zv 打开当前光标所在折叠，仅打开足够的折叠使光标所在的行不被折叠
-"                                          " "[z 到当前打开折叠的开始。如果已在开始处，移到包含这个折叠的折叠开始处。  
-"                                          " "]z 到当前打开折叠的结束。如果已在结束处，移到包含这个折叠的折叠结束处。  
-"                                          " 可在开始的花括号前添加介绍，花括号后添加级别号，级别号不能为0。如：/*折叠介绍###1*/ code... /*###*/ (用###代替了折叠符号) 
+"                                          " "zv 打开当前光标所在折叠,仅打开足够的折叠使光标所在的行不被折叠
+"                                          " "[z 到当前打开折叠的开始.如果已在开始处,移到包含这个折叠的折叠开始处.  
+"                                          " "]z 到当前打开折叠的结束.如果已在结束处,移到包含这个折叠的折叠结束处.  
+"                                          " 可在开始的花括号前添加介绍,花括号后添加级别号,级别号不能为0.如: /*折叠介绍###1*/ code... /*###*/ (用###代替了折叠符号) 
 set formatoptions=tcrqn                    " 自动格式化
 set foldenable                             " 开始折叠
 set foldcolumn=0                           " 设置折叠区域的宽度
@@ -129,7 +129,7 @@ set smarttab                               " 在行和段开始处使用制表�
 set foldmethod=marker
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 "}}
-"                                          " 在被分割的窗口间显示空白，便于阅读
+"                                          " 在被分割的窗口间显示空白,便于阅读
 set fillchars=vert:\ ,stl:\ ,stlnc:\
 "{{                                        " 启动后自动最大化
 if has("win32")
@@ -197,19 +197,19 @@ set novisualbell                           " No mouseflash
 set nu                                     " 设置行号
 syntax enable                              " 启用语法高亮
 syntax on                                  " 设置语法高亮
-"{{                                        " 高亮字符，让其不受100列限制
+"{{                                        " 高亮字符,让其不受100列限制
 highlight OverLength ctermbg=darkgray ctermfg=lightblue guibg=#1C1D1E guifg=#DCDCDC
 match OverLength '\%500v.*'
 "}}
-"{{                                        " 高亮显示普通txt文件（需要txt.vim脚本）
+"{{                                        " 高亮显示普通txt文件(需要txt.vim脚本)
 au BufRead,BufNewFile * setfiletype txt    " work in linux
 set syntax=txt                             " work in linux
 au BufRead,BufNewFile *.txt setlocal ft=txt
-"                                          " 高亮显示普通txt文件（需要txt.vim脚本）
+"                                          " 高亮显示普通txt文件(需要txt.vim脚本)
 au BufRead,BufNewFile * setfiletype txt
 "                                          " 自动.c .h .sh .java自动插入文件头
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.py exec ":call SetTitle()" 
-"                                          " 定义函数SetTitle，自动插入文件头 
+"                                          " 定义函数SetTitle,自动插入文件头 
 func SetTitle()
     "                                          " 如果文件类型为.sh文件 
     if &filetype == 'sh'
@@ -243,7 +243,7 @@ func SetTitle()
     "		call append(line(".")+6,"public class ".expand("%"))
     "		call append(line(".")+7,"")
     "	endif
-    "                                          " 新建文件后，自动定位到文件末尾
+    "                                          " 新建文件后,自动定位到文件末尾
 endfunc
 autocmd BufNewFile * normal G
 "}}
@@ -258,11 +258,11 @@ map <silent> <F2> :if &guioptions =~# 'T' <Bar>
     \endif<CR>
 "{{                                        " 状态栏
 set laststatus=2                           " 总是显示状态栏,默认1无法显示
-"                                          " 我的状态行显示的内容（包括文件类型和解码）
+"                                          " 我的状态行显示的内容(包括文件类型和解码)
 set ruler                                  " 在状态行上显示光标所在位置的行号和列号
 set rulerformat=%20(%2*%<%f%=\ %m%r\ %3l\ %c\ %p%%%)
-set cmdheight=2                            " 命令行（在状态行下）的高度，默认为1，这里是2
-"set report=0                               " 通过使用: commands命令，告诉我们文件的哪一行被改变过
+set cmdheight=2                            " 命令行(在状态行下)的高度,默认为1,这里是2
+"set report=0                               " 通过使用: commands命令,告诉我们文件的哪一行被改变过
 "}}
 "{{                                        " 空格的缩进颜色
 "indent color
@@ -284,7 +284,7 @@ syn match 24spa /\s\&\%24v.*\%25v/
 syn match 80spa /.\&\%80v.*\%81v/
 set list                                   " 缩进线
 "set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$
-" 制表符显示方式定义：trail为拖尾空白显示字符，extends和precedes分别是wrap关闭时，所在行在屏幕右边和左边显示的指示字符
+" 制表符显示方式定义: trail为拖尾空白显示字符,extends和precedes分别是wrap关闭时,所在行在屏幕右边和左边显示的指示字符
 " set listchars=tab:▸\ ,eol:¬ 
 " ¬	U+00AC	not sign
 " ▸	U+25B8	black right-pointing small triangle
@@ -333,10 +333,10 @@ set showmatch                              " 高亮显示匹配的括号
 set showcmd
 set cursorline                             " 高亮显示当前行
 set cursorcolumn                           " 高亮光标列
-set matchtime=5                            " 匹配括号高亮的时间（单位是十分之一秒）
+set matchtime=5                            " 匹配括号高亮的时间(单位是十分之一秒)
 set ignorecase                             " 在搜索的时候忽略大小写
-set hlsearch                               " 高亮被搜索的句子（phrases）
-set incsearch                              " 在 搜索时，输入的词句的逐字符高亮（类似firefox的搜索）
+set hlsearch                               " 高亮被搜索的句子(phrases)
+set incsearch                              " 在 搜索时,输入的词句的逐字符高亮(类似firefox的搜索)
 set nowrapscan                             " 禁止搜索到文件两端时重新搜索
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -381,28 +381,34 @@ Bundle 'vim-scripts/multisearch.vim'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'dimasg/vim-mark'
 
-"Bundle 'lilydjwg/colorizer'
-"Bundle 'skammer/vim-css-color'
-"Bundle 'Rykka/colorv.vim'
+"" 显示实际颜色
+Bundle 'lilydjwg/colorizer'
+Bundle 'skammer/vim-css-color'
 
+"" 日历
 Bundle 'itchyny/calendar.vim'
 
 "" 自动缩进线, 彩色渐变
 Bundle 'nathanaelkane/vim-indent-guides'
-"" 自动缩进线, 点
+"" 自动缩进线
 Bundle 'Yggdroot/indentLine'
-
-Bundle 'Lokaltog/vim-powerline'
-"Bundle 'itchyny/lightline.vim'
+"" lightline statusline
+Bundle 'itchyny/lightline.vim'
 
 "" zencoding,快速生成代码
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'vim-scripts/Emmet.vim'
+Bundle 'vim-scripts/snipMate'
 Bundle 'vim-scripts/L9'
 Bundle 'othree/vim-autocomplpop'
 Bundle 'joonty/vim-phpqa'
 Bundle 'tpope/vim-surround'
 Bundle 'rkulla/pydiction'
 Bundle 'andviro/flake8-vim'
+
+"" php indent and syntax
+Bundle '2072/PHP-Indenting-for-VIm'
+Bundle '2072/vim-syntax-for-PHP'
 
 if $USER == 'root'
     "echo &rtp
@@ -421,10 +427,20 @@ filetype plugin indent on
 map <F8> :!ctags -R<CR>
 nnoremap <silent> <S-F8> :!ctags -R<CR>
 set tags=/home/www/tags
-set tags=tags;                             " 分号必须，让vim递归向上查找tags
+set tags=tags;                             " 分号必须,让vim递归向上查找tags
 set autochdir
 "}}
 "{{                                        " Ctrlp的设定 https://github.com/kien/ctrlp.vim 2013-07
+"                                          "  运行命令:CtrlP或:CtrlP [starting-directory]来以查找文件模式来启用 ctrlp
+"                                          "  运行命令:CtrlPBuffer或:CtrlPMRU来以查找缓冲或最近打开文件模式来启用ctrlp
+"                                          "  运行命令CtrlPMixed来查找文件、查找缓冲和最近打开文件混合模式来启动 ctrlp
+"                                          "    按<c-f>和<c-b>在三种查找模式中互相切换
+"                                          "    按<c-y>来创建新文件和对应的父目录
+"                                          "    按<c-d>来切换到只查找文件名而不是全路径
+"                                          "    按<c-j>，<c-k>或箭头方向键来移动查找结果列表
+"                                          "    按<c-t>或<c-v>，<c-x>来以新标签或分割窗口的方式来打开文件
+"                                          "    按<c-z>来标识或取消标识文件，然后按<c-o>来打开文件
+"                                          "    按<c-n>，<c-p>来在提示历史中选择下一个/上一个字符串
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip   " Linux/MacOSX
@@ -450,13 +466,13 @@ let g:ctrlp_user_command = {
 map <F9> :TlistToggle<cr>
 let Tlist_Auto_Open = 0                    "     默认打开Taglist
 let Tlist_Sort_Type = "name"               "     按照名称排序
-let Tlist_Show_One_File=1                  "     不同时显示多个文件的tag，只显示当前文件的
+let Tlist_Show_One_File=1                  "     不同时显示多个文件的tag,只显示当前文件的
 let Tlist_Use_Right_Window = 0             "     在右侧显示窗口
 let Tlist_Compart_Format = 1               "     不显示空白行
-let Tlist_Exist_OnlyWindow = 1             "     如果只有一个buffer，kill窗口也kill掉buffer
+let Tlist_Exist_OnlyWindow = 1             "     如果只有一个buffer,kill窗口也kill掉buffer
 let Tlist_File_Fold_Auto_Close = 1         "     打开其他文件的时候自动关闭,只显示一个文件的tag
 let Tlist_Exit_OnlyWindow=1
-let Tlist_Auto_Update=1                    "     自动更新，包含新文件时候
+let Tlist_Auto_Update=1                    "     自动更新,包含新文件时候
 let Tlist_Enable_Fold_Column = 0           "     不要显示折叠树
 let Tlist_Use_Right_Window=1               "     左边显示
 set tags=tags;/                            "     找不到tags文件到上层找寻"
@@ -464,7 +480,7 @@ set tags=tags;/                            "     找不到tags文件到上层找
 let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 "}}
 "{{                                        " authorinfo.vim的设定 https://github.com/vim-scripts/AuthorInfo 2016-04-18 17:36:25
-"                                          "     vim自动添加作者信息（需要和NERD_commenter联用)使用,
+"                                          "     vim自动添加作者信息(需要和NERD_commenter联用)使用,
 "                                          "     :AuthorInfoDetect呼出
 let g:vimrc_author='Tommy Xia'
 let g:vimrc_email='tommyx@synnex.com'
@@ -476,10 +492,10 @@ nmap <F4> :AuthorInfoDetect<cr>
 "}}
 "{{                                        " NERD_commenter.vim的设定 https://github.com/vim-scripts/The-NERD-Commenter 2016-04-18 17:37:03
 "                                          "      vim加入注释
-"                                          "      <leader>ca 在可选的注释方式之间切换，比如C/C++ 的块注释/* */和行注释//
+"                                          "      <leader>ca 在可选的注释方式之间切换,比如C/C++ 的块注释/* */和行注释//
 "                                          "      <leader>cc 注释当前行
 "                                          "      <leader>cs 以”性感”的方式注释
-"                                          "      <leader>cA 在当前行尾添加注释符，并进入Insert模式
+"                                          "      <leader>cA 在当前行尾添加注释符,并进入Insert模式
 "                                          "      <leader>cu 取消注释
 "                                          "      <leader>cm 添加块注释
 "                                          "      [count],c命令 依次从本行开始注释,取消注释,count 为数字 7,cc
@@ -532,14 +548,37 @@ let g:NERDTreeIndicatorMapCustom = {
 "}}
 "{{                                        " minibufexpl.vim的设定 https://github.com/fholgado/minibufexpl.vim 2016-04-18 18:46:26
 "                                          "     切换c+Tab前c+s+Tab后buff,ctrl+h,j,k,l上下左右
-"                                          "     bp和bn分别是切换到上一个和下一个Buffer、bd则删除当前显示的单个Buffer
+"                                          "     :bp和:bn分别是切换到上一个和下一个Buffer, :bd则删除当前显示的单个Buffer
 let g:miniBufExplMapCTabSwitchBufs=1
 let g:miniBufExplMapWindowsNavVim=1
 let g:miniBufExplMapWindowNavArrows=1
 let g:miniBufExplModSelTarget = 1
 "}}
 "{{                                        " winmanager 的设定 https://github.com/vim-scripts/winmanager
-"                                          "      wm 开启
+"                                          "    wm 开启, 窗口管理
+"                                          "        ctrl+w+ h,j,k,l  在窗口上下左右移动
+"                                          "        ctrl+w+w: 在所有窗口循环,ctrl+w+t: 移动到最左上角的窗口
+"                                          "        ctrl+w+b: 移动到最右下角的窗口 ctrl+w+p: 移动到前一个访问的窗口
+"                                          "        ctrl+w+r: 向右或向下方交换窗口,而ctrl+w+R: 则和它方向相反
+"                                          "        ctrl+w+K: 移动当前窗口至屏幕顶端,并占用全部宽度
+"                                          "        ctrl+w+J: 移动窗口至屏幕底端,并占用全部宽度
+"                                          "        ctrl+w+H: 移动窗口至屏幕左端,并占用全部高度
+"                                          "        ctrl+w+L: 移动窗口至屏幕右端,并占用全部高度
+"                                          "        ctrl+w+T: 移动窗口至屏新的现有分页
+"                                          "        ctrl+w+=: 让所有窗口调整至相同尺寸(平均划分)
+"                                          "        ctrl+w+-: 将当前窗口的高度减少一行,也可在ex命令中,:resize -4明确指定减少的尺寸
+"                                          "        ctrl+w++: 将当前窗口的高度增加一行.同样在ex命令中,:resize +n 明确指定增加尺寸
+"                                          "        ctrl+w+<: 将当前窗口的宽度减少
+"                                          "        ctrl+w+>: 将当前窗口的宽度增加
+"                                          "        ctrl+w+|: 将当前窗口的宽度调到最大,也可通过ex命令 :vertical resize n明确指定改变宽度
+"                                          "        :tabnew filename  打开新分页并编辑新文件(可选的).如果未指定文件,则只打开新分页,并附上空的缓冲区.
+"                                          "        :tabclose  关闭当前分页
+"                                          "        :tabonly  关闭其他所有的分页.如果其他分页中有修改过的文件,则不会移除该分页
+"                                          "        ctrl+PageDown: 移动到下一个分页
+"                                          "        ctrl+PageUp: 移动到上一个分页
+"                                          "        ctrl+w+q: 离开当前窗口
+"                                          "        ctrl+w+c: 关闭当前的窗口
+"                                          "        ctrl+w+o: 关闭当前窗口以外的所有窗口
 let g:winManagerWindowLayout='FileExplorer|TagList'
 nmap wm :WMToggle<cr>
 "}}
@@ -568,7 +607,7 @@ let MRU_Max_Submenu_Entries = 15
 "{{                                        " Multisearch.vim的设定 matchit.vim  https://github.com/vim-scripts/multisearch.vim 2016-04-19 10:12:12
 "                                          " :help Msearch, :Msearch <command>
 "}}
-"{{                                        " vim-multiple-cursors 插件。多重选择 https://github.com/terryma/vim-multiple-cursors 2016-04-19 10:20:24
+"{{                                        " vim-multiple-cursors 插件.多重选择 https://github.com/terryma/vim-multiple-cursors 2016-04-19 10:20:24
 "                                          "    ctrl-n  select, c modify the content, <esc> exit;
 "let g:multi_cursor_next_key='<C-n>'       "    next 
 "let g:multi_cursor_prev_key='<C-d>'       "    prev
@@ -578,7 +617,7 @@ let MRU_Max_Submenu_Entries = 15
 "                                          " :Mark regexp   to mark a regular expression 
 "                                          " :Mark regexp   with exactly the same regexp to unmark it 
 "                                          " :Mark          to clear all marks 
-"                                          " ,m mark关键词，,n 取消关键词， ,r输入想要高亮的   / 已经替换成了，
+"                                          " ,m mark关键词,,n 取消关键词, ,r输入想要高亮的   / 已经替换成了,
 "                                          "      解压后,用vim打开  :so %
 "                                          "      颜色值 'extended'18色 'maximum' 77色
 "                                          "      /m  mark or unmark the word under (or before) the cursor
@@ -589,6 +628,11 @@ let MRU_Max_Submenu_Entries = 15
 "                                          "      //  把光标向前切换到所有被Mark的MarkWords中的下一个MarkWord.
 "                                          "      /?  把光标向后切换到所有被Mark的MarkWords中的上一个MarkWord.
 let g:mwDefaultHighlightingPalette = 'extended'
+"}}
+"{{                                        " css-highlight https://github.com/lilydjwg/colorizer
+"}}
+"{{                                        " vim-css-color https://github.com/skammer/vim-css-color
+"let g:cssColorVimDoNotMessMyUpdatetime = 1
 "}}
 "{{                                        " calendar.vim https://github.com/itchyny/calendar.vim 2016-04-19 10:00:39
 "                                          " :Calendar, :Calendar 2016 04 19, :Calendar -view=year, 
@@ -622,23 +666,64 @@ let g:Powerline_symbols = 'fancy'
 set fillchars+=stl:\ ,stlnc:\
 let g:lightline = {
       \ 'colorscheme': 'landscape',
+      \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
       \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ 'component_function': {
+      \   'modified': 'LightLineModified',
+      \   'readonly': 'LightLineReadonly',
+      \   'fugitive': 'LightLineFugitive',
+      \   'filename': 'LightLineFilename',
+      \   'fileformat': 'LightLineFileformat',
+      \   'filetype': 'LightLineFiletype',
+      \   'fileencoding': 'LightLineFileencoding',
+      \   'mode': 'LightLineMode',
       \ },
       \ 'separator': { 'left': '⮀', 'right': '⮂' },
       \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
       \ }
+
+function! LightLineModified()
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightLineReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '⭤' : ''
+endfunction
+
+function! LightLineFilename()
+  return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+function! LightLineFugitive()
+  if &ft !~? 'vimfiler\|gundo' && exists("*fugitive#head")
+    let _ = fugitive#head()
+    return strlen(_) ? '⭠ '._ : ''
+  endif
+  return ''
+endfunction
+
+function! LightLineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightLineFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightLineFileencoding()
+  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! LightLineMode()
+  return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
 "}}
 "{{                                        " zencoding.vim 的设定 https://github.com/vim-scripts/Emmet.vim 2016-04-19 10:11:36
 "                                          "      html:xxs>div#header+div#container>ul>li.class_$#id_$*2
@@ -650,9 +735,11 @@ let g:lightline = {
 "                                          "      ul>li*
 "                                          "      html:xt <c+y> ,
 "}}
+"{{                                        " snipmate https://github.com/vim-scripts/snipMate
+"}}
 "{{                                        " L9 library for autocomplpop https://github.com/vim-scripts/L9
 "}}
-"{{                                        " autocomplpop 插件，自动完成提示。 https://github.com/othree/vim-autocomplpop 2016-04-19 10:16:43
+"{{                                        " autocomplpop 插件,自动完成提示. https://github.com/othree/vim-autocomplpop 2016-04-19 10:16:43
 "}}
 "{{                                        " phpqa.vim的设定 https://github.com/joonty/vim-phpqa 2015-10-15
 "let g:phpqa_codesniffer_args = "--standard=Zend"
@@ -674,7 +761,7 @@ let g:phpqa_messdetector_autorun = 0
 "                                          " :cp 跳到上一个错误 ( :help :cp )
 "                                          " :cn 跳到下一个错误 ( :help :cn )
 "                                          " :cl 列出所有错误 ( :help :cl )
-"                                          " :cw 如果有错误列表，则打开quickfix窗口 ( :help :cw )
+"                                          " :cw 如果有错误列表,则打开quickfix窗口 ( :help :cw )
 "                                          " :col到前一个旧的错误列表 ( :help :col )
 "                                          " :cnew 到后一个较新的错误列表 ( :help :cnew ) 
 "}}
@@ -692,7 +779,7 @@ let g:phpqa_messdetector_autorun = 0
 "                                          " ySS" same as ySs", try ysw,yswb",yas')
 "                                          " ysw' 为字符串开始处加上单引号
 "                                          " ysiw' 为光标下的单词包围
-"                                          " 可视模式下，选中，S"  可插入包裹的
+"                                          " 可视模式下,选中,S"  可插入包裹的
 "}}
 "{{                                        " pydiction 插件 https://github.com/rkulla/pydiction 2016-04-19 10:21:10
 let g:pydiction_location = '~/.vim/after/ftplugin/pydiction/complete-dict'
@@ -715,12 +802,15 @@ let g:PyFlakeSigns = 1                     "Whether to place signs or not:
 let g:PyFlakeMaxLineLength = 100           "Maximum line length for PyFlakeAuto command
 let g:PyFlakeRangeCommand = 'Q'            "Visual-mode key command for PyFlakeAuto
 "}}
+"{{                                        " php-indent https://github.com/2072/PHP-Indenting-for-VIm
+"                                          " php-syntax https://github.com/2072/vim-syntax-for-PHP
+"}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  7 => Function {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                          " F5编译和运行C程序，F6编译和运行C++程序
-"                                          " 请注意，下述代码在windows下使用会报错
+"                                          " F5编译和运行C程序,F6编译和运行C++程序
+"                                          " 请注意,下述代码在windows下使用会报错
 "                                          " 需要去掉./这两个字符
 "{{                                        " C的编译和运行
 "map <F7> :call CompileRunGcc()<CR>
@@ -864,11 +954,11 @@ if has("gui_running")
     hi        Normal         guifg=#BFBFBF          guibg=#1C1D1F           gui=NONE        "正常内容
     hi        Pmenu          guifg=#FFFFFF          guibg=#7373CF           gui=NONE        "弹出菜单普通项目
     hi        PmenuSel       guifg=#DDEEFF          guibg=#FF3F3F           gui=NONE        "弹出菜单选中项目
-    hi        PmenuSbar      guifg=#3F3FFF          guibg=#FFF43F           gui=NONE        "弹出菜单滚动条。
+    hi        PmenuSbar      guifg=#3F3FFF          guibg=#FFF43F           gui=NONE        "弹出菜单滚动条.
     hi        PmenuThumb     guifg=#FFF43F          guibg=#757473           gui=NONE        "弹出菜单滚动条的拇指
     hi        Question       guifg=#7F7F7F          guibg=#1C1D1F           gui=NONE        "提示和yes/no 问题
     hi        Search         guifg=#E10000          guibg=#ffffff           gui=NONE        "最近搜索模式的高亮
-    hi        SpecialKey     guifg=#4c4c4c          guibg=#1C1D1F           gui=NONE        "特殊键，字符和'listchars'
+    hi        SpecialKey     guifg=#4c4c4c          guibg=#1C1D1F           gui=NONE        "特殊键,字符和'listchars'
     hi        SpellBad       guifg=#FF0000          guibg=#1C1D1F           gui=NONE        "拼写检查器不能识别的单词
     hi        SpellCap       guifg=#BF0000          guibg=#1C1D1F           gui=NONE        "应该大写字母开头的单词
     hi        SpellLocal     guifg=#FF00FF          guibg=#1C1D1F           gui=NONE        "只在其它区域使用的单词
@@ -923,8 +1013,8 @@ if has("gui_running")
     hi        SpecialComment guifg=#FF00BF          guibg=#1C1D1F           gui=NONE        "注释里的特殊字符 #FF00BF
     hi        Debug          guifg=#BF00FF          guibg=#1C1D1F           gui=NONE        "调试语句
     "-----------------------------------------------------------------------------------------------------------------------"
-    hi        Underlined     guifg=#3F3FFF          guibg=#1C1D1F           gui=UNDERLINE   "需要突出的文本，HTML 链接
-    hi        Ignore         guifg=#7F7F7F          guibg=#1C1D1F           gui=NONE        "留空，被隐藏
+    hi        Underlined     guifg=#3F3FFF          guibg=#1C1D1F           gui=UNDERLINE   "需要突出的文本,HTML 链接
+    hi        Ignore         guifg=#7F7F7F          guibg=#1C1D1F           gui=NONE        "留空,被隐藏
     hi        Error          guifg=#CFCFCF          guibg=#CF6C6C           gui=NONE        "任何有错的构造
     hi        Todo           guifg=#FFFFFF          guibg=#0000FF           gui=NONE        "任何需要特殊注意的部分
     "-----------------------------------------------------------------------------------------------------------------------"
@@ -1099,11 +1189,11 @@ elseif &t_Co == 256
     hi        Normal         ctermfg=lightgrey        ctermbg=black             cterm=none        "正常内容
     hi        Pmenu          ctermfg=darkgrey         ctermbg=lightgrey         cterm=BOLD        "弹出菜单普通项目
     hi        PmenuSel       ctermfg=lightcyan        ctermbg=lightred          cterm=BOLD        "弹出菜单选中项目
-    hi        PmenuSbar      ctermfg=lightblue        ctermbg=lightyellow       cterm=BOLD        "弹出菜单滚动条。
+    hi        PmenuSbar      ctermfg=lightblue        ctermbg=lightyellow       cterm=BOLD        "弹出菜单滚动条.
     hi        PmenuThumb     ctermfg=black            ctermbg=lightgreen        cterm=BOLD        "弹出菜单滚动条的拇指
     hi        Question       ctermfg=yellow           ctermbg=black             cterm=BOLD        "提示和 yes/no 问题
     hi        Search         ctermfg=red              ctermbg=white             cterm=BOLD        "最近搜索模式的高亮
-    hi        SpecialKey     ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "特殊键，字符和'listchars'
+    hi        SpecialKey     ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "特殊键,字符和'listchars'
     hi        SpellBad       ctermfg=lightred         ctermbg=black             cterm=BOLD        "拼写检查器不能识别的单词
     hi        SpellCap       ctermfg=lightred         ctermbg=black             cterm=BOLD        "应该大写字母开头的单词
     hi        SpellLocal     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "只在其它区域使用的单词
@@ -1158,8 +1248,8 @@ elseif &t_Co == 256
     hi        SpecialComment ctermfg=lightred         ctermbg=black             cterm=BOLD        "注释里的特殊字符
     hi        Debug          ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "调试语句
     "	-----------------------------------------------------------------------------------------------------------------------
-    hi        Underlined     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "需要突出的文本，HTML 链接
-    hi        Ignore         ctermfg=darkgrey         ctermbg=black             cterm=NONE        "留空，被隐藏
+    hi        Underlined     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "需要突出的文本,HTML 链接
+    hi        Ignore         ctermfg=darkgrey         ctermbg=black             cterm=NONE        "留空,被隐藏
     hi        Error          ctermfg=yellow           ctermbg=lightred          cterm=BOLD        "任何有错的构造
     hi        Todo           ctermfg=lightgrey        ctermbg=lightblue         cterm=BOLD        "任何需要特殊注意的部分
     "	=======================================================================================================================
@@ -1188,11 +1278,11 @@ else
     hi        Normal         ctermfg=lightgrey        ctermbg=black             cterm=NONE        "正常内容
     hi        Pmenu          ctermfg=darkgrey         ctermbg=lightgrey         cterm=BOLD        "弹出菜单普通项目
     hi        PmenuSel       ctermfg=lightcyan        ctermbg=lightred          cterm=BOLD        "弹出菜单选中项目
-    hi        PmenuSbar      ctermfg=lightblue        ctermbg=lightyellow       cterm=BOLD        "弹出菜单滚动条。
+    hi        PmenuSbar      ctermfg=lightblue        ctermbg=lightyellow       cterm=BOLD        "弹出菜单滚动条.
     hi        PmenuThumb     ctermfg=black            ctermbg=lightgreen        cterm=BOLD        "弹出菜单滚动条的拇指
     hi        Question       ctermfg=yellow           ctermbg=black             cterm=BOLD        "提示和 yes/no 问题
     hi        Search         ctermfg=red              ctermbg=white             cterm=BOLD        "最近搜索模式的高亮
-    hi        SpecialKey     ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "特殊键，字符和'listchars'
+    hi        SpecialKey     ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "特殊键,字符和'listchars'
     hi        SpellBad       ctermfg=lightred         ctermbg=black             cterm=BOLD        "拼写检查器不能识别的单词
     hi        SpellCap       ctermfg=lightred         ctermbg=black             cterm=BOLD        "应该大写字母开头的单词
     hi        SpellLocal     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "只在其它区域使用的单词
@@ -1247,8 +1337,8 @@ else
     hi        SpecialComment ctermfg=lightred         ctermbg=black             cterm=BOLD        "注释里的特殊字符
     hi        Debug          ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "调试语句
     "	-----------------------------------------------------------------------------------------------------------------------
-    hi        Underlined     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "需要突出的文本，HTML 链接
-    hi        Ignore         ctermfg=darkgrey         ctermbg=black             cterm=NONE        "留空，被隐藏
+    hi        Underlined     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "需要突出的文本,HTML 链接
+    hi        Ignore         ctermfg=darkgrey         ctermbg=black             cterm=NONE        "留空,被隐藏
     hi        Error          ctermfg=yellow           ctermbg=lightred          cterm=BOLD        "任何有错的构造
     hi        Todo           ctermfg=lightgrey        ctermbg=lightblue         cterm=BOLD        "任何需要特殊注意的部分
     "	=======================================================================================================================
@@ -1266,9 +1356,9 @@ endif
 " :%s/^\n\+/\r/                            " 压缩多行空行为一行 2013-11-26 15:42:58
 " :                                        " 把正则用\( \) 扩起来后, 后面替换的时候可以用\1 \2来引用对应的正则
 " : 将 Doe, John 修改为 John Doe   :%s/\(\w\+\), \(\w\+\)/\2 \1/
-" :s/替换字符串/\=函数式                   " 函数式可以有多个，返回值可以用字符串连接符.连接起来，如line(".") 返回匹配行号（:help line()  ），submatch(n)可以引用\1、\2的内容，其中submatch(0)引用匹配的整个内容;
-"                                          " 函数式也可以是字符串常量，用双引号引起来。函数式也可以是任意表达式，需要用小括号引起来，如(3+2*6)；
-"                                          " 函数式还可以是寄存器中的内容，通过"@寄存器名"访问，如@a（不需要加引号，但是还是需要用.来连接）
+" :s/替换字符串/\=函数式                   " 函数式可以有多个,返回值可以用字符串连接符.连接起来,如line(".") 返回匹配行号(:help line()  ),submatch(n)可以引用\1、\2的内容,其中submatch(0)引用匹配的整个内容;
+"                                          " 函数式也可以是字符串常量,用双引号引起来.函数式也可以是任意表达式,需要用小括号引起来,如(3+2*6)；
+"                                          " 函数式还可以是寄存器中的内容,通过"@寄存器名"访问,如@a(不需要加引号,但是还是需要用.来连接)
 ":%s/\(.*\) \(.*\)/\1+\2/                  " 把行尾的空格替换成+号
 " :noh                                     " 取消搜索高亮
 " :%!nl -ba                                " 对包含空行的所有行进行编号.
@@ -1329,7 +1419,7 @@ endif
 " ]p                                       " 类似p, 但是会自动调整被粘贴的文本适应缩进
 " gd                                       " 到达光标所在处函数或者变量的定义处
 " \'.                                      " 跳到最后修改的那一行
-" `.                                       " 跳到最后修改的那一行，定位到修改点
+" `.                                       " 跳到最后修改的那一行,定位到修改点
 " :ju(mps)                                 " 列出跳转足迹
 " !!date                                   " 读取date的输出 (但是会替换当前行的内容) :r!date 输出系统时间. :r!date \+\%F\ \%T 格式化输出
 " :bn                                      " 跳转到下一个buffer
@@ -1354,7 +1444,7 @@ endif
 " gvim -d file1 file2                      " vimdiff (比较不同)
 "                                          "    ]c 跳转下一个差异点 :diffget 把另外一个文件的差异点的内容复制过来  :diffput 把当前差异点的内容复制过去. :diffupdate 更多比较文件
 "                                          "    前面加行号表示多少行开始  :2,30diffget 把2~30行的差异取过来
-" c{ motion }                              " 删除motion命令跨过的，并且进入插入 c$删到行尾的并进入插入，ct! 删除从光标位到下一个！位置
+" c{ motion }                              " 删除motion命令跨过的,并且进入插入 c$删到行尾的并进入插入,ct! 删除从光标位到下一个！位置
 " dp                                       " 把光标处的不同放到另一个文件
 " do                                       " 在光标处从另一个文件取得不同
 " diw                                      " 删除光标上的单词 (不包括空白字符)
@@ -1389,19 +1479,19 @@ endif
 " N  T{char}                               " 至左边第 N 次出现 {char} 之前 (Till)
 " N  ;                                     " 重复上次 f、F、t 或 T 命令 N 次
 " N  ,                                     " 以相反方向重复上次 f、F、T 或 t 命令 N
-" N  -                                     " 上移 N 行，至第一个非空白字符
-" N  +                                     " 下移 N 行，至第一个非空白字符 (亦: CTRL-M 和 <CR>)
-" N  _                                     " 下移 N - 1 行，至第一个非空白字符
+" N  -                                     " 上移 N 行,至第一个非空白字符
+" N  +                                     " 下移 N 行,至第一个非空白字符 (亦: CTRL-M 和 <CR>)
+" N  _                                     " 下移 N - 1 行,至第一个非空白字符
 " N  G                                     " 至第 N 行 (缺省: 末行) 第一个非空白字符
 " N  gg                                    " 至第 N 行 (缺省: 首行) 第一个非空白字符
-" N  %                                     " 至全文件行数百分之 N 处；必须给出 N，否则是 |%| 命令
+" N  %                                     " 至全文件行数百分之 N 处；必须给出 N,否则是 |%| 命令
 " N  gk                                    " 上移 N 屏幕行 (回绕行时不同于 k)
 " N  gj                                    " 下移 N 屏幕行 (回绕行时不同于 j)
-" N  w                                     " 向前 (正向，下同) N 个单词(word)
+" N  w                                     " 向前 (正向,下同) N 个单词(word)
 " N  W                                     " 向前 N 个空白隔开的字串 |WORD|            (WORD)
 " N  e                                     " 向后至第 N 个单词词尾/ ge是前跳词尾                     (end)
 " N  E                                     " 向前至第 N 个空白隔开的字串 |WORD| 的词尾 (End)
-" N  b                                     " 向后 (反向，下同) N 个单词                (backward)
+" N  b                                     " 向后 (反向,下同) N 个单词                (backward)
 " N  B                                     " 向后至第 N 个空白隔开的字串 |WORD| 的词尾 (Backward)
 " N  ge                                    " 向后至第 N 个单词词尾
 " N  gE                                    " 向后至第 N 个空白隔开的字串 |WORD| 的词尾
@@ -1409,10 +1499,10 @@ endif
 " N  (                                     " 向后 N 个句子
 " N  }                                     " 向前 N 个段落
 " N  {                                     " 向后 N 个段落
-" N  ]]                                    " 向前 N 个小节，置于小节的开始
-" N  [[                                    " 向后 N 个小节，置于小节的开始
-" N  ][                                    " 向前 N 个小节，置于小节的末尾
-" N  []                                    " 向后 N 个小节，置于小节的末尾
+" N  ]]                                    " 向前 N 个小节,置于小节的开始
+" N  [[                                    " 向后 N 个小节,置于小节的开始
+" N  ][                                    " 向前 N 个小节,置于小节的末尾
+" N  []                                    " 向后 N 个小节,置于小节的末尾
 " N  [(                                    " 向后至第 N 个未闭合的 '('
 " N  [{                                    " 向后至第 N 个未闭合的 '{'
 " N  [m                                    " 向后至第 N 个方法 (method) 的开始 (用于 Java)
@@ -1458,7 +1548,7 @@ endif
 " `<                                       " 至 (前次) 可视区域的开始
 " `>                                       " 至 (前次) 可视区域的结尾
 " `.                                       " 至当前文件最后被改动的位置
-" '{a-zA-Z0-9[]'"<>.}                      " 同 `，但同时移动至该行的第一个非空白字符
+" '{a-zA-Z0-9[]'"<>.}                      " 同 `,但同时移动至该行的第一个非空白字符
 " :marks                                   " 列出活动的标记
 " N  ctrl+O                                " 跳转到跳转表中第 N 个较早的位置
 " N  ctrl+I                                " 跳转到跳转表中第 N 个较晚的位置
@@ -1530,15 +1620,15 @@ endif
 " :ve[rsion]                               " 显示版本信息
 " :vimgrep /test/ *                        " 查找当前目录下所有包含test关键字  ** 代表的是递归查找大于100层目录
 " :vimgrep /test/ **                       " 递归查找当前目录下所有包含test关键字
-" :vimgrep /\<test\>/ **                   " 递归查找当前目录下所有包含只有test关键字,不包括testabc、abctest、abctestabc等等，如果一行有多个test的话，只搜索一个test结果
-" :vimgrep /\<test\>/g **                  " 递归查找当前目录下所有包含只有test关键字,不包括testabc、abctest、abctestabc等等，如果一行有多个test的话，搜索多个test结果
-" :vimgrep /\<test\>/ *.html               " 查找当前目录下所有的html文件包含只有test关键字,不包括testabc、abctest、abctestabc等等，如果一行有多个test的话，搜索多个test结果
+" :vimgrep /\<test\>/ **                   " 递归查找当前目录下所有包含只有test关键字,不包括testabc、abctest、abctestabc等等,如果一行有多个test的话,只搜索一个test结果
+" :vimgrep /\<test\>/g **                  " 递归查找当前目录下所有包含只有test关键字,不包括testabc、abctest、abctestabc等等,如果一行有多个test的话,搜索多个test结果
+" :vimgrep /\<test\>/ *.html               " 查找当前目录下所有的html文件包含只有test关键字,不包括testabc、abctest、abctestabc等等,如果一行有多个test的话,搜索多个test结果
 "                                          "  :cnext (:cn) 当前页下一个结果
 "                                          "  :cprevious (:cp) 当前页上一个结果
-"                                          "  :clist (:cl) 打开quickfix窗口，列出所有结果，不能直接用鼠标点击打开，只能看
-"                                          "  :copen (:cope) 打开quickfix窗口，列出所有结果，可以直接用鼠标点击打开
+"                                          "  :clist (:cl) 打开quickfix窗口,列出所有结果,不能直接用鼠标点击打开,只能看
+"                                          "  :copen (:cope) 打开quickfix窗口,列出所有结果,可以直接用鼠标点击打开
 "                                          "  :ccl[ose] 关闭 quickfix 窗口
-"                                          "   ctrl + ww 切换编辑窗口和quickfix窗口，在quickfix里面和编辑窗口一样jk表示上下移动，回车选中进入编辑窗口
+"                                          "   ctrl + ww 切换编辑窗口和quickfix窗口,在quickfix里面和编辑窗口一样jk表示上下移动,回车选中进入编辑窗口
 " vim启动参数
 "     -v                                   " vi模式
 "     -d                                   " diff模式
@@ -1548,7 +1638,7 @@ endif
 "     -F                                   " 波斯模式
 "     -H                                   " 希伯来模式
 "     --noplugin                           " 不加载,无插件模式
-"     --startuptime {fname}                " 启动时把计时信息写入文件 {fname}。可用于分析载入 .vimrc、插件和打开首个文件的过程中时哪一步最耗时
+"     --startuptime {fname}                " 启动时把计时信息写入文件 {fname}.可用于分析载入 .vimrc、插件和打开首个文件的过程中时哪一步最耗时
 " /\Cxxx                                   " 大小写敏感 /\cxxx 搜索xxx不敏感
 " vsp                                      " 垂直分割窗口
 " sp                                       " 竖向分割窗口
@@ -1569,9 +1659,9 @@ endif
 "                                          " :let @a=@_ 清除寄存器a :let @*=@a 寄存器赋值 :scriptnames 列出所有加载的插件,_vimrcs :verbose set history 显示设置history值并指出设置文件的位置
 "                                          " i<c-r>/ 把最后一个搜索指令贴到当前位置 i<c-r>把最后一个命令贴到当前位置 :X 加密文件
 " advanced tips                            " vit 选中a标签里面的文本,高亮选中标签内部的内容.visually select inside the tag
-"                                          " A 当前行尾插入,=$a  ;   C是删除当前行尾并插入，=$c    .是重复上一次插入的所有操作
-"                                          " s 删除当前字符串并进入插入，=cl; S删除该行有内容的内容,=^c; I=^i;o=A<CR> O=ko
-"                                          " 在符号前后加空格 f+ 搜索+号，s<space>+<spance><Esc>这里完成一次添加, ;查找下一次f查找的符号， .重复, ;.重复   ,反查f的符号
+"                                          " A 当前行尾插入,=$a  ;   C是删除当前行尾并插入,=$c    .是重复上一次插入的所有操作
+"                                          " s 删除当前字符串并进入插入,=cl; S删除该行有内容的内容,=^c; I=^i;o=A<CR> O=ko
+"                                          " 在符号前后加空格 f+ 搜索+号,s<space>+<spance><Esc>这里完成一次添加, ;查找下一次f查找的符号, .重复, ;.重复   ,反查f的符号
 "                                          " 修改时, 重复. 回退u ;  行内查找f/t/F/T 重复;回退, ; /?<CR>文档查找 重复n 回退N;  :s/pattern/replacement 执行替换 重复& 回退u ; 执行一系列修改qx{}q
 "                                          " <C-a><C-x>对数字执行加和减操作.比如光标在5上,执行10<C-a> 会变成15.如果改行光标不在数字上,直接输入数字<C-a/x>会自动跳在第一个数字上进行对应加减操作.
 "                                          "    上面的加减以0开头的数字会默认以八进制来计算,如果需要以十进制,需要set nrformats=    如果要查找设置的参数值,用set xxx?来获取设置值 set xxx&为设置为默认值
