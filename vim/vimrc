@@ -708,7 +708,6 @@ let g:phpqa_messdetector_autorun = 0
 " :h colorv                                "  帮助.
 " :h colorv-options                        "  帮助选项.
 " :h colorv-mapping-buffer                 "  映射.
-"                                          "    https://github.com/Rykka/colorv.vim
 "                                          "  :ColorV
 "                                          "  :ColorVView
 "                                          "  :ColorVEdit
