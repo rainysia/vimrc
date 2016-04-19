@@ -57,7 +57,7 @@ set textwidth=100                          " 每行显示多少字符
 "set cc=101                                 " 红色高亮第101行.
 set undofile
 set undolevels=1000                        " undo 记忆1000
-let g:data_dir = $HOME . '/.vimdata/'
+let g:data_dir = $HOME . '/.vim/'
 let g:undo_dir = g:data_dir . 'undofile'
 if finddir(g:data_dir) == ''
     silent call mkdir(g:data_dir)
@@ -67,7 +67,7 @@ if finddir(g:undo_dir) == ''
 endif
 unlet g:undo_dir
 unlet g:data_dir
-set undodir=$HOME/.vimdata/undofile
+set undodir=$HOME/.vim/undofile
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 2 => Text Pattern {{{
@@ -397,14 +397,17 @@ Bundle 'itchyny/lightline.vim'
 
 "" zencoding,快速生成代码
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'scrooloose/syntastic'
 Bundle 'vim-scripts/Emmet.vim'
-Bundle 'vim-scripts/snipMate'
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
 Bundle 'vim-scripts/L9'
 Bundle 'othree/vim-autocomplpop'
 Bundle 'joonty/vim-phpqa'
 Bundle 'tpope/vim-surround'
 Bundle 'rkulla/pydiction'
 Bundle 'andviro/flake8-vim'
+Bundle 'jiangmiao/auto-pairs'
 
 "" php indent and syntax
 Bundle '2072/PHP-Indenting-for-VIm'
@@ -460,7 +463,7 @@ let g:ctrlp_user_command = {
     \ 'fallback': 'find %s -type f'
     \ }
 "}}
-"{{                                        " Taglist的设定 https://github.com/vim-scripts/taglist.vim 2016-04-18 17:32:07
+"{{                                        " Taglist的设定 https://github.com/vim-scripts/taglist.vim
 "                                          "     F9开关 按wm会启动.F9是单独开关
 "                                          "     :Tlist --呼出变量和函数列表 [TagList插件]
 map <F9> :TlistToggle<cr>
@@ -479,7 +482,7 @@ set tags=tags;/                            "     找不到tags文件到上层找
 " php的折叠
 let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 "}}
-"{{                                        " authorinfo.vim的设定 https://github.com/vim-scripts/AuthorInfo 2016-04-18 17:36:25
+"{{                                        " authorinfo.vim的设定 https://github.com/vim-scripts/AuthorInfo
 "                                          "     vim自动添加作者信息(需要和NERD_commenter联用)使用,
 "                                          "     :AuthorInfoDetect呼出
 let g:vimrc_author='Tommy Xia'
@@ -490,7 +493,7 @@ let g:vimrc_license='http://www.synnex.org/user_guide/license.html V1'
 let g:vimrc_version='Version 1.0'
 nmap <F4> :AuthorInfoDetect<cr>
 "}}
-"{{                                        " NERD_commenter.vim的设定 https://github.com/vim-scripts/The-NERD-Commenter 2016-04-18 17:37:03
+"{{                                        " NERD_commenter.vim的设定 https://github.com/vim-scripts/The-NERD-Commenter
 "                                          "      vim加入注释
 "                                          "      <leader>ca 在可选的注释方式之间切换,比如C/C++ 的块注释/* */和行注释//
 "                                          "      <leader>cc 注释当前行
@@ -515,7 +518,7 @@ map <F12> <ESC>04x$hh3x<ESC>
 "                                          "      :n1,n2s/\/\///g  删除//的注释
 "                                          "      :n1,n2s/^I/','/g 把tab替换成','
 "}}
-"{{                                        " NERDTree的设定 https://github.com/scrooloose/nerdtree 2016-04-18 17:43:05
+"{{                                        " NERDTree的设定 https://github.com/scrooloose/nerdtree
 "                                          "     插件F10开启list.tree
 "                                          "      :NERDTree   --启动NERDTree插件
 "                                          "      o [小写]    --切换当前文件或目录的打开、关闭状态
@@ -533,7 +536,7 @@ autocmd vimenter * if !argc() | NERDTree | endif
 "                                          " 只剩NREDTree时自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "}}
-"{{                                        " nerdtree-git-plugin https://github.com/Xuyuanp/nerdtree-git-plugin 2016-04-18 17:51:25
+"{{                                        " nerdtree-git-plugin https://github.com/Xuyuanp/nerdtree-git-plugin
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
@@ -546,7 +549,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 "}}
-"{{                                        " minibufexpl.vim的设定 https://github.com/fholgado/minibufexpl.vim 2016-04-18 18:46:26
+"{{                                        " minibufexpl.vim的设定 https://github.com/fholgado/minibufexpl.vim
 "                                          "     切换c+Tab前c+s+Tab后buff,ctrl+h,j,k,l上下左右
 "                                          "     :bp和:bn分别是切换到上一个和下一个Buffer, :bd则删除当前显示的单个Buffer
 let g:miniBufExplMapCTabSwitchBufs=1
@@ -582,10 +585,10 @@ let g:miniBufExplModSelTarget = 1
 let g:winManagerWindowLayout='FileExplorer|TagList'
 nmap wm :WMToggle<cr>
 "}}
-"{{                                        " grep.vim的设定 https://github.com/yegappan/grep 2016-04-18 18:51:15
+"{{                                        " grep.vim的设定 https://github.com/yegappan/grep
 nnoremap <silent> <F3> :Grep<CR>
 "}}
-"{{                                        " EasyGrep.vim的设定 https://github.com/dkprice/vim-easygrep 2016-04-18 19:00:03
+"{{                                        " EasyGrep.vim的设定 https://github.com/dkprice/vim-easygrep
 " <Leader>vv                               "  Grep for the word under the cursor, match all occurences, like |gstar|   :Grep xxx
 " <Leader>vV                               "  Grep for the word under the cursor, match whole word, like |star|         :Grep xxx !
 " <Leader>va                               "    Like vv, but add to existing list   :GrepAdd xxx
@@ -594,7 +597,7 @@ nnoremap <silent> <F3> :Grep<CR>
 " <Leader>vo                               "    Select the files to search in and set grep options
 "                                          " :GrepOptions [arg] 新开窗口来设置grep选项.
 "}}
-"{{                                        " mru.vim的设定 https://github.com/vim-scripts/mru.vim 2016-04-18 19:01:22
+"{{                                        " mru.vim的设定 https://github.com/vim-scripts/mru.vim
 "                                          " :MRU
 "let MRU_File = '\myhome\_vim_mru_files' " 指定缓存地址.
 let MRU_Max_Entries = 1000
@@ -604,16 +607,16 @@ let MRU_Add_Menu = 1                       " 增加到菜单.
 let MRU_Max_Menu_Entries = 20 
 let MRU_Max_Submenu_Entries = 15 
 "}}
-"{{                                        " Multisearch.vim的设定 matchit.vim  https://github.com/vim-scripts/multisearch.vim 2016-04-19 10:12:12
+"{{                                        " Multisearch.vim的设定 matchit.vim  https://github.com/vim-scripts/multisearch.vim
 "                                          " :help Msearch, :Msearch <command>
 "}}
-"{{                                        " vim-multiple-cursors 插件.多重选择 https://github.com/terryma/vim-multiple-cursors 2016-04-19 10:20:24
+"{{                                        " vim-multiple-cursors 插件.多重选择 https://github.com/terryma/vim-multiple-cursors
 "                                          "    ctrl-n  select, c modify the content, <esc> exit;
 "let g:multi_cursor_next_key='<C-n>'       "    next 
 "let g:multi_cursor_prev_key='<C-d>'       "    prev
 "let g:multi_cursor_skip_key='<C-x>'       "    skip the next.
 "}}
-"{{                                        " mark.vba.gz的设定(mark.vim) https://github.com/dimasg/vim-mark 2016-04-19 10:06:30
+"{{                                        " mark.vba.gz的设定(mark.vim) https://github.com/dimasg/vim-mark
 "                                          " :Mark regexp   to mark a regular expression 
 "                                          " :Mark regexp   with exactly the same regexp to unmark it 
 "                                          " :Mark          to clear all marks 
@@ -634,7 +637,7 @@ let g:mwDefaultHighlightingPalette = 'extended'
 "{{                                        " vim-css-color https://github.com/skammer/vim-css-color
 "let g:cssColorVimDoNotMessMyUpdatetime = 1
 "}}
-"{{                                        " calendar.vim https://github.com/itchyny/calendar.vim 2016-04-19 10:00:39
+"{{                                        " calendar.vim https://github.com/itchyny/calendar.vim
 "                                          " :Calendar, :Calendar 2016 04 19, :Calendar -view=year, 
 "                                          " :Calendar -view=year -split=vertical -width=27
 "                                          " :Calendar -view=year -split=horizontal -position=below -height=12
@@ -642,7 +645,7 @@ let g:mwDefaultHighlightingPalette = 'extended'
 "                                          " :Calendar -view=clock
 let g:calendar_frame = 'default'
 "}}
-"{{                                        " indent.guides的设定 https://github.com/nathanaelkane/vim-indent-guides 2016-04-19 00:47:18
+"{{                                        " indent.guides的设定 https://github.com/nathanaelkane/vim-indent-guides
 "                                          "      自动缩进,<Leader>ig 唤出, /usr/share/vim , ~/.vim
 let g:indent_guides_auto_colors = 1
 let g:indent_guides_guide_size = 1
@@ -653,7 +656,7 @@ hi IndentGuidesEven guibg=green ctermbg=4
 hi IndentGuidesEven ctermbg=darkgrey
 hi IndentGuidesOdd  ctermbg=black
 "}}
-"{{                                        " indentLine.vim 另外一个对齐线.https://github.com/Yggdroot/indentLine 2014-05-29
+"{{                                        " indentLine.vim 另外一个对齐线.https://github.com/Yggdroot/indentLine
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#3E3F40'
 let g:indentLine_char = '|'
@@ -725,7 +728,47 @@ function! LightLineMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 "}}
-"{{                                        " zencoding.vim 的设定 https://github.com/vim-scripts/Emmet.vim 2016-04-19 10:11:36
+"{{                                       " YouCompleteMe https://github.com/Valloric/YouCompleteMe
+"                                         "   git submodule update --init --recursive
+"                                         "   need apt-get install cmake, go to YouCompleteMe Directory: ./install.sh --clang-completer
+"                                         "   need python-dev
+let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+let g:ycm_complete_in_comments = 1        "   在注释输入中也能补全
+let g:ycm_complete_in_strings = 1         "   在字符串输入中也能补全
+let g:ycm_use_ultisnips_completer = 1     "   提示UltiSnips
+let g:ycm_cache_omnifunc = 0              "   禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_collect_identifiers_from_comments_and_strings = 0   "注释和字符串中的文字也会被收入补全
+let g:ycm_seed_identifiers_with_syntax = 0    "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
+"let g:ycm_collect_identifiers_from_tags_files = 1      "会导致一直更新标签，python2 占用内存80%以上
+"let g:ycm_key_invoke_completion = '<C-Space>'          " 直接触发自动补全
+let g:ycm_goto_buffer_command = 'horizontal-split'      " 跳转到定义处, 分屏打开
+" nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+"                                         " 黑名单,不启用
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar' : 1,
+      \ 'gitcommit' : 1,
+      \}
+"}}
+"{{                                       " syntastic https://github.com/scrooloose/syntastic
+let g:syntastic_error_symbol = '✗'        "set error or warning signs
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_highlighting = 0
+let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快
+let g:syntastic_javascript_checkers = ['jsl', 'jshint']
+let g:syntastic_html_checkers=['tidy', 'jshint']
+let g:syntastic_cpp_include_dirs = ['/usr/include/']
+let g:syntastic_cpp_remove_include_errors = 1
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
+let g:syntastic_enable_balloons = 1 "whether to show balloons
+highlight SyntasticErrorSign guifg=white guibg=black
+"}}
+"{{                                        " zencoding.vim 的设定 https://github.com/vim-scripts/Emmet.vim
 "                                          "      html:xxs>div#header+div#container>ul>li.class_$#id_$*2
 "                                          "      按下 <ctrl+y> 然后 点 , 逗号
 "                                          "      ul>li*
@@ -735,13 +778,44 @@ endfunction
 "                                          "      ul>li*
 "                                          "      html:xt <c+y> ,
 "}}
-"{{                                        " snipmate https://github.com/vim-scripts/snipMate
+"{{                                        " ultisnips https://github.com/SirVer/ultisnips
+"                                          " Trigger configuration, will conflict with YouCompleteMe
+let g:UltiSnipsExpandTrigger       = "<s-tab>"
+let g:UltiSnipsJumpForwardTrigger  = "<s-tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-s-tab>"
+let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
+let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
+"                                          " :UltiSnipsEdit to split your window.
+map <leader>us :UltiSnipsEdit<CR>
+let g:UltiSnipsEditSplit="vertical"
+"                                          " ctrl+j/k 进行选择
+func! g:JInYCM()
+    if pumvisible()
+        return "\<C-n>"
+    else
+        return "\<c-j>"
+    endif
+endfunction
+
+func! g:KInYCM()
+    if pumvisible()
+        return "\<C-p>"
+    else
+        return "\<c-k>"
+    endif
+endfunction
+inoremap <c-j> <c-r>=g:JInYCM()<cr>
+au BufEnter,BufRead * exec "inoremap <silent> " . g:UltiSnipsJumpBackwordTrigger . " <C-R>=g:KInYCM()<cr>"
+let g:UltiSnipsJumpBackwordTrigger = "<c-k>"
+"}}
+"{{                                        " vim-snippets https://github.com/honza/vim-snippets
+"
 "}}
 "{{                                        " L9 library for autocomplpop https://github.com/vim-scripts/L9
 "}}
-"{{                                        " autocomplpop 插件,自动完成提示. https://github.com/othree/vim-autocomplpop 2016-04-19 10:16:43
+"{{                                        " autocomplpop 插件,自动完成提示. https://github.com/othree/vim-autocomplpop
 "}}
-"{{                                        " phpqa.vim的设定 https://github.com/joonty/vim-phpqa 2015-10-15
+"{{                                        " phpqa.vim的设定 https://github.com/joonty/vim-phpqa
 "let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = " --encoding=utf-8"
@@ -768,7 +842,7 @@ let g:phpqa_messdetector_autorun = 0
 "{{                                        " php code sniffer ,php md模式
 "                                          " :!phpcs :!phpmd
 "}}
-"{{                                        " Surround.vim 针对包含在文字外的括号、引号、XML 标签做快速的修改 https://github.com/tpope/vim-surround 2016-04-19 10:17:41
+"{{                                        " Surround.vim 针对包含在文字外的括号、引号、XML 标签做快速的修改 https://github.com/tpope/vim-surround
 "                                          " cs"' 修改双引号为单引号 cs'<q> 修改单引号为<q>包围的.
 "                                          " ds"  删除包围的符号
 "                                          " cs"<q> 修改双引号为<q></q>包围
@@ -781,11 +855,11 @@ let g:phpqa_messdetector_autorun = 0
 "                                          " ysiw' 为光标下的单词包围
 "                                          " 可视模式下,选中,S"  可插入包裹的
 "}}
-"{{                                        " pydiction 插件 https://github.com/rkulla/pydiction 2016-04-19 10:21:10
+"{{                                        " pydiction 插件 https://github.com/rkulla/pydiction
 let g:pydiction_location = '~/.vim/after/ftplugin/pydiction/complete-dict'
 let g:pydiction_menu_height = 3
 "}}
-"{{                                        " flake8插件 https://github.com/andviro/flake8-vim 2016-04-19 10:23:26
+"{{                                        " flake8插件 https://github.com/andviro/flake8-vim
 "                                          " command
 "                                               :PyFlakeToggle  "Disable/enable automatic checking of current file
 "                                               :PyFlake        "Run checks for current file
@@ -793,14 +867,16 @@ let g:pydiction_menu_height = 3
 "                                          " Bind F6 to auto fix,F5 to check
 map <F6> :PyFlakeAuto<CR>
 map <F5> :PyFlake<CR>
-let g:PyFlakeOnWrite = 0                   "Auto-check file for errors on write:
+let g:PyFlakeOnWrite = 0                   " Auto-check file for errors on write:
 let g:PyFlakeCheckers = 'pep8,mccabe,pyflakes' "List of checkers used:
-let g:PyFlakeDefaultComplexity=10          "Default maximum complexity for mccabe:
-let g:PyFlakeDisabledMessages = 'E501'     "List of disabled pep8 warnings and errors:
-let g:PyFlakeCWindow = 6                   "Default height of quickfix window:
-let g:PyFlakeSigns = 1                     "Whether to place signs or not:
-let g:PyFlakeMaxLineLength = 100           "Maximum line length for PyFlakeAuto command
-let g:PyFlakeRangeCommand = 'Q'            "Visual-mode key command for PyFlakeAuto
+let g:PyFlakeDefaultComplexity=10          " Default maximum complexity for mccabe:
+let g:PyFlakeDisabledMessages = 'E501'     " List of disabled pep8 warnings and errors:
+let g:PyFlakeCWindow = 6                   " Default height of quickfix window:
+let g:PyFlakeSigns = 1                     " Whether to place signs or not:
+let g:PyFlakeMaxLineLength = 100           " Maximum line length for PyFlakeAuto command
+let g:PyFlakeRangeCommand = 'Q'            " Visual-mode key command for PyFlakeAuto
+"}}
+"{{                                        " auto-pairs https://github.com/jiangmiao/auto-pairs
 "}}
 "{{                                        " php-indent https://github.com/2072/PHP-Indenting-for-VIm
 "                                          " php-syntax https://github.com/2072/vim-syntax-for-PHP
@@ -893,24 +969,6 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                          " .vimrc修改后不需重启生效
 autocmd! bufwritepost _vimrc source %
-"{{                                        " 自动补齐符号
-:inoremap ( ()<ESC>i
-:inoremap ) <c-r>=ClosePair(')')<CR>
-":inoremap { {<CR>}<ESC>O
-:inoremap { {}<ESC>i
-:inoremap } <c-r>=ClosePair('}')<CR>
-:inoremap [ []<ESC>i
-:inoremap ] <c-r>=ClosePair(']')<CR>
-:inoremap " ""<ESC>i
-:inoremap ' ''<ESC>i
-function! ClosePair(char)
-    if getline('.')[col('.') - 1] == a:char
-        return "/<Right>"
-    else
-        return a:char
-    endif
-endfunction
-"}}
 "                                          " 每行超过80个的字符用下划线标示
 au BufRead,BufNewFile *.s,*.asm,*.h,*.c,*.cpp,*.cc,*.java,*.cs,*.erl,*.hs,*.sh,*.lua,*.pl,*.pm,*.php,*.py,*.rb,*.erb,*.vim,*.js,*.css,*.xml,*.html,*.xhtml 2match Underlined /.\%81v/
 "{{                                        " work in windows ,not work in linux
@@ -1770,5 +1828,6 @@ endif
 " 7.07.01                                  " add flake8=pyflake+pep8 2015-07-06 14:39:19
 " 7.09.01                                  " add set iskeyword 2015-09-11 17:03:59
 " 7.09.02                                  " add vundle 2016-04-18 17:12:52
+" 7.09.03                                  " add others plugin 2016-04-20 00:55:32
 "}}
 "}}}
