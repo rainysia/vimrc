@@ -14,7 +14,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 1 => System Configure {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{                                        " work in linux
+"{{                                        " work in linux, echo &rtp
 let $VIMRUNTIME="/usr/share/vim/vim74"
 set runtimepath=/usr/share/vim/vim74,~/.vim,~/.vim/after
 "}}
@@ -22,10 +22,10 @@ set nocp                                   " close compeletion with vi
 set helplang=cn                            " 帮助菜单
 set history=1000                           " 设置history文件记录的行数
 set confirm                                " 处理为保存或只读文件的时候弹出确定comfirm
-filetype on                                " 检测文件的类型,vundle 关闭,其它on
+filetype off                               " 检测文件的类型,vundle 关闭,其它on
 filetype plugin on                         " 载入ftplugin文件类型插件
 filetype indent on                         " 为特定文件类型载入相关缩进文件
-filetype plugin indent on
+filetype plugin indent off
 set binary                                 " 可读二进制文件
 "set nrformats=                             " 默认<C-a> <C-x> 以十进制来计算. :h nrformats
 "{{                                        " 不同文件类型的缩进
@@ -201,10 +201,6 @@ syntax on                                  " 设置语法高亮
 highlight OverLength ctermbg=darkgray ctermfg=lightblue guibg=#1C1D1E guifg=#DCDCDC
 match OverLength '\%500v.*'
 "}}
-"{{                                        " 状态行颜色
-highlight StatusLine guifg=SlateBlue guibg=#FFFF00
-highlight StatusLineNC guifg=Gray guibg=White
-"}}
 "{{                                        " 高亮显示普通txt文件（需要txt.vim脚本）
 au BufRead,BufNewFile * setfiletype txt    " work in linux
 set syntax=txt                             " work in linux
@@ -263,7 +259,6 @@ map <silent> <F2> :if &guioptions =~# 'T' <Bar>
 "{{                                        " 状态栏
 set laststatus=2                           " 总是显示状态栏,默认1无法显示
 "                                          " 我的状态行显示的内容（包括文件类型和解码）
-"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
 set ruler                                  " 在状态行上显示光标所在位置的行号和列号
 set rulerformat=%20(%2*%<%f%=\ %m%r\ %3l\ %c\ %p%%%)
 set cmdheight=2                            " 命令行（在状态行下）的高度，默认为1，这里是2
@@ -278,14 +273,6 @@ hi 16spa guibg = #777444
 hi 20spa guibg = #555777
 hi 24spa guibg = #cc9966
 hi 80spa guibg = #ff1111
-
-"style 1
-"syn match 4spa /\(\s\{4}\|\n\)\&\%1v.*\%2v/
-"syn match 8spa /\s\{4}\&\%5v.*\%6v/
-"syn match 12spa /\s\{4}\&\%9v.*\%10v/
-"syn match 16spa /\s\{4}\&\%13v.*\%14v/
-"syn match 20spa /\s\{4}\&\%17v.*\%18v/
-"syn match 24spa /\s\{4}\&\%21v.*\%22v/
 
 "style 2
 syn match 4spa /\(\s\|\n\)\&\%4v.*\%5v/
@@ -319,32 +306,15 @@ if has("autocmd")
                 \   exe "normal g`\"" |
                 \ endif
 endif                                      " has("autocmd")
-"}}
-"{{                                        " 状态栏彩色
-"hi StatuslineBufNr     cterm=none    ctermfg=black  ctermbg=cyan    gui=none guibg=#840c0c guifg=#ffffff
-"hi StatuslineFlag      cterm=none    ctermfg=black  ctermbg=cyan    gui=none guibg=#bc5b4c guifg=#ffffff
-"hi StatuslinePath      cterm=none    ctermfg=white  ctermbg=green   gui=none guibg=#8d6c47 guifg=black
-"hi StatuslineFileName  cterm=none    ctermfg=white  ctermbg=blue    gui=none guibg=#d59159 guifg=black
-"hi StatuslineFileEnc   cterm=none    ctermfg=white  ctermbg=yellow  gui=none guibg=#ffff77 guifg=black
-"hi StatuslineFileType  cterm=bold    ctermbg=white  ctermfg=black   gui=none guibg=#acff84 guifg=black
-"hi StatuslineTermEnc   cterm=none    ctermbg=white  ctermfg=yellow  gui=none guibg=#77cf77 guifg=black
-"hi StatuslineChar      cterm=none    ctermbg=white  ctermfg=yellow  gui=none guibg=#66b06f guifg=black
-
-hi StatuslineBufNr     cterm=none    ctermfg=red        ctermbg=darkgrey    gui=none guibg=#696969 guifg=#D8BFD8
-hi StatuslineFlag      cterm=none    ctermfg=black      ctermbg=grey        gui=none guibg=#330223 guifg=#cdcde1
-hi StatuslinePath      cterm=none    ctermfg=white      ctermbg=green       gui=none guibg=#210222 guifg=#cdcde2
-hi StatuslineFileName  cterm=none    ctermfg=white      ctermbg=blue        gui=none guibg=#410041 guifg=#cdcde3
-hi StatuslineFileEnc   cterm=bold    ctermfg=white      ctermbg=darkblue    gui=none guibg=#400342 guifg=#cdcde4
-hi StatuslineFileType  cterm=bold    ctermfg=grey       ctermbg=darkgrey    gui=none guibg=#52096C guifg=#cdcde5
-hi StatuslineTermEnc   cterm=none    ctermfg=lightblue  ctermbg=darkgrey    gui=none guibg=#79318B guifg=#cdcde6
-hi StatuslineChar      cterm=none    ctermfg=lightgreen ctermbg=darkgrey    gui=none guibg=#8C63A4 guifg=#cdcde7
-hi StatuslineSyn       cterm=none    ctermfg=lightblue  ctermbg=black       gui=none guibg=#AA87B8 guifg=#cdcde8
-hi StatuslineRealSyn   cterm=none    ctermfg=lightgreen ctermbg=darkgrey    gui=none guibg=#C9B5D4 guifg=#7F8794
-hi StatusLine          cterm=none    ctermfg=white      ctermbg=darkgrey    gui=none guibg=#8C7E95 guifg=#cdcdea
-hi StatuslineTime      cterm=none    ctermfg=lightblue  ctermbg=darkgrey    gui=none guibg=#504855 guifg=#cdcdeb
-hi StatuslineSomething cterm=reverse ctermfg=white      ctermbg=darkred     gui=none guibg=#400342 guifg=#cdcdec
-hi StatusLineNC        cterm=bold    ctermfg=white      ctermbg=red         gui=none guibg=#250342 guifg=#cdcded
-
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType mysql set omnifunc=mysqlcomplete#CompleteMYSQL
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType c set omnifunc=ccomplete#Complete
+set completeopt=longest,menu               " 提示菜单后输入字母实现即时的过滤和匹配
 "}}
 "{{
 set virtualedit=block                      " block 允许可视列块模式的虚拟编辑
@@ -372,11 +342,89 @@ set nowrapscan                             " 禁止搜索到文件两端时重�
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  6 => Plugins {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{                                        " Vundle https://github.com/VundleVim/Vundle.vim
-set rtp+=~/.vim/bundle/Vundle.vim
+"{{                                        " Vundle git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
+if has('win32')
+    set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
+    call vundle#begin('$VIM/vimfiles/bundle/')
+else
+    set rtp+=~/.vim/bundle/Vundle.vim/
+    call vundle#begin()
+    "set rtp+=$VIMRUNTIME/bundle/vundle/
+    "call vundle#begin('$VIMRUNTIME/bundle')
+endif
+
+Bundle 'VundleVim/Vundle.vim'
+"" 快速文件查找
+Bundle 'kien/ctrlp.vim'
+"" 显示tag列表
+Bundle 'vim-scripts/taglist.vim'
+"" 在开头加入作者信息
+Bundle 'vim-scripts/AuthorInfo'
+"" 多种方式加入代码注释
+Bundle 'vim-scripts/The-NERD-Commenter'
+"" 显示文件浏览
+Bundle 'scrooloose/nerdtree'
+"" 在文件浏览是git时显示状态
+Bundle 'Xuyuanp/nerdtree-git-plugin'
+"" 显示minibuf列表在导航
+Bundle 'fholgado/minibufexpl.vim'
+"" 窗口管理
+Bundle 'vim-scripts/winmanager'
+"" 在工程中快速查找 F3
+Bundle 'yegappan/grep'
+"" 更好的查找
+Bundle 'dkprice/vim-easygrep'
+"" 最近使用文件浏览
+Bundle 'vim-scripts/mru.vim'
+"" 显示多次搜索结果
+Bundle 'vim-scripts/multisearch.vim'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'dimasg/vim-mark'
+
+"Bundle 'lilydjwg/colorizer'
+"Bundle 'skammer/vim-css-color'
+"Bundle 'Rykka/colorv.vim'
+
+Bundle 'itchyny/calendar.vim'
+
+"" 自动缩进线, 彩色渐变
+Bundle 'nathanaelkane/vim-indent-guides'
+"" 自动缩进线, 点
+Bundle 'Yggdroot/indentLine'
+
+Bundle 'Lokaltog/vim-powerline'
+"Bundle 'itchyny/lightline.vim'
+
+"" zencoding,快速生成代码
+Bundle 'vim-scripts/Emmet.vim'
+Bundle 'vim-scripts/L9'
+Bundle 'othree/vim-autocomplpop'
+Bundle 'joonty/vim-phpqa'
+Bundle 'tpope/vim-surround'
+Bundle 'rkulla/pydiction'
+Bundle 'andviro/flake8-vim'
+
+if $USER == 'root'
+    "echo &rtp
+else
+    "echo &rtp
+endif
+
+call vundle#end()
+filetype plugin indent on
 "}}
-"{{
-"                                          " Ctrlp的设定 https://github.com/kien/ctrlp.vim 2013-07
+
+"{{                                        " CTags的设定
+"                                          "     (地址自定义,我的www在/home/www下)
+"                                          "     vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
+"                                          " ctrl_] 跳转到对应函数 ctrl_t 回跳 ctrl_o 回跳
+map <F8> :!ctags -R<CR>
+nnoremap <silent> <S-F8> :!ctags -R<CR>
+set tags=/home/www/tags
+set tags=tags;                             " 分号必须，让vim递归向上查找tags
+set autochdir
+"}}
+"{{                                        " Ctrlp的设定 https://github.com/kien/ctrlp.vim 2013-07
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip   " Linux/MacOSX
@@ -389,22 +437,12 @@ let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 let g:ctrlp_user_command = {
-	\ 'types': {
-		\ 1: ['.git', 'cd %s && git ls-files'],
-		\ 2: ['.hg', 'hg --cwd %s locate -I .'],
-		\ },
-	\ 'fallback': 'find %s -type f'
-	\ }
-"}}
-"{{                                        " CTags的设定
-"                                          "     (地址自定义,我的www在/home/www下)
-"                                          "     vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
-"                                          " ctrl_] 跳转到对应函数 ctrl_t 回跳 ctrl_o 回跳
-map <F8> :!ctags -R<CR>
-nnoremap <silent> <S-F8> :!ctags -R<CR>
-set tags=/home/www/tags
-set tags=tags;                             " 分号必须，让vim递归向上查找tags
-set autochdir
+    \ 'types': {
+        \ 1: ['.git', 'cd %s && git ls-files'],
+        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+        \ },
+    \ 'fallback': 'find %s -type f'
+    \ }
 "}}
 "{{                                        " Taglist的设定 https://github.com/vim-scripts/taglist.vim 2016-04-18 17:32:07
 "                                          "     F9开关 按wm会启动.F9是单独开关
@@ -428,11 +466,11 @@ let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 "{{                                        " authorinfo.vim的设定 https://github.com/vim-scripts/AuthorInfo 2016-04-18 17:36:25
 "                                          "     vim自动添加作者信息（需要和NERD_commenter联用)使用,
 "                                          "     :AuthorInfoDetect呼出
-let g:vimrc_author='rainysia'
-let g:vimrc_email='rainysia@gmail.com'
-let g:vimrc_link='http://www.btroot.org'
-let g:vimrc_copyright='2006-2016 BTROOT.ORG' 
-let g:vimrc_license='http://www.btroot.com/user_guide/license.html V1'
+let g:vimrc_author='Tommy Xia'
+let g:vimrc_email='tommyx@synnex.com'
+let g:vimrc_link='http://www.synnex.org'
+let g:vimrc_copyright='2013-2016 SYNNEX.ORG' 
+let g:vimrc_license='http://www.synnex.org/user_guide/license.html V1'
 let g:vimrc_version='Version 1.0'
 nmap <F4> :AuthorInfoDetect<cr>
 "}}
@@ -474,11 +512,6 @@ map <F12> <ESC>04x$hh3x<ESC>
 "                                          "      ?           --弹出帮助菜单
 "                                          "      q           --退出该插件
 map <F10> :NERDTreeToggle<CR>
-"}}
-"{{                                        " nerdtree_plugin的设定 https://github.com/scrooloose/nerdtree 2016-04-18 17:43:05
-"                                          "      wm 开启
-let g:winManagerWindowLayout='FileExplorer|TagList'
-nmap wm :WMToggle<cr>
 "                                          " 当打开vim且没有文件时自动打开NERDTREE
 autocmd vimenter * if !argc() | NERDTree | endif
 "                                          " 只剩NREDTree时自动关闭
@@ -505,8 +538,12 @@ let g:miniBufExplMapWindowsNavVim=1
 let g:miniBufExplMapWindowNavArrows=1
 let g:miniBufExplModSelTarget = 1
 "}}
+"{{                                        " winmanager 的设定 https://github.com/vim-scripts/winmanager
+"                                          "      wm 开启
+let g:winManagerWindowLayout='FileExplorer|TagList'
+nmap wm :WMToggle<cr>
+"}}
 "{{                                        " grep.vim的设定 https://github.com/yegappan/grep 2016-04-18 18:51:15
-"                                          "     在工程中快速查找 F3
 nnoremap <silent> <F3> :Grep<CR>
 "}}
 "{{                                        " EasyGrep.vim的设定 https://github.com/dkprice/vim-easygrep 2016-04-18 19:00:03
@@ -519,8 +556,8 @@ nnoremap <silent> <F3> :Grep<CR>
 "                                          " :GrepOptions [arg] 新开窗口来设置grep选项.
 "}}
 "{{                                        " mru.vim的设定 https://github.com/vim-scripts/mru.vim 2016-04-18 19:01:22
-" :MRU
-"let MRU_File = 'd:\myhome\_vim_mru_files' " 指定缓存地址.
+"                                          " :MRU
+"let MRU_File = '\myhome\_vim_mru_files' " 指定缓存地址.
 let MRU_Max_Entries = 1000
 let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*'  " For Unix  /windows '^c:\\temp\\.*'
 " let MRU_Include_Files = '\.c$\|\.h$'     " 指定类型的最近打开
@@ -528,100 +565,14 @@ let MRU_Add_Menu = 1                       " 增加到菜单.
 let MRU_Max_Menu_Entries = 20 
 let MRU_Max_Submenu_Entries = 15 
 "}}
-"{{                                        " debugger.vim的设定  不用需要删除掉debugger.vim .py
-"let g:debuggerPort = 9001
-"                                          "      ,dr ,di ,do ,dt  = F1,F2,F3,F4
-"                                          "      ,e debugger_watch_input
-"                                          "      F1 debugger_resize
-"                                          "      F2 debugger_step_into
-"                                          "      F3 debugger_step_over
-"                                          "      F4 debugger_step_out
-"                                          "      S-F5 debugger_quit
-"                                          "      F5 debugger_run
-"                                          "      F10 debugger_watch_input
-"                                          "      F11 debugger_context
-"                                          "      F12 debugger_property
-"                                          "      F11 debugger_watch_input A
-"                                          "      F12 debugger_watch_input
+"{{                                        " Multisearch.vim的设定 matchit.vim  https://github.com/vim-scripts/multisearch.vim 2016-04-19 10:12:12
+"                                          " :help Msearch, :Msearch <command>
 "}}
-"                                          " PHP 语法检查 F5
-"map <F5> :!/usr/local/php/bin/php -l %<CR>
-"                                          " php高亮highlight https://jasonwoof.com/gitweb/?p=vim-syntax.git;a=tree;hb=HEAD
-"                                          " https://github.com/2072/vim-syntax-for-PHP
-source $VIMRUNTIME/syntax/php.vim
-"                                          " php缩进
-let PHP_autoformatcomment=1
-"{{                                        " 自动补全 Ctrl-x Ctrl-o  long press
-"                                          "      整行补全,complete             C-xC-l
-"                                          "      根据当前文件complete关键字    C-n         p顺序相反
-"                                          "      根据当前文件buffer关键字补全  C-x C-N     P顺序相反
-"
-"                                          "      根据字典补全                  C-x C-k
-"                                          "      根据同义词字典补全            C-x C-t tag
-"                                          "      根据分类文件thesaurus补全     C-x C-h
-"                                          "      拼写建议                      C-x C-s
-"                                          "      全能补全,自定义函数列表       C-x C-o
-"                                          "      用户自定义补全,自定义函数     C-x C-u
-"
-"                                          "      根据头文件buffer,include file C-x C-i
-"                                          "      根据标签tag补全               C-x C-]
-"                                          "      补全文件名                    C-x C-f
-"                                          "      补全宏定义,buffer,include fileC-x C-d
-"                                          "      补全vim命令,查找Vim命令,函数名C-x C-v
-"                                          "      下拉翻页                      C-x C-n
-"                                          "      下拉翻页                      C-x C-p
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType mysql set omnifunc=mysqlcomplete#CompleteMYSQL
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType c set omnifunc=ccomplete#Complete
-set completeopt=longest,menu               " 提示菜单后输入字母实现即时的过滤和匹配
-"}}
-"{{                                        " snipmates的设定 https://github.com/msanders/snipmate.vim 2016-04-19 00:40:27
-let g:snips_author = 'rainysia <rainysia@gmail.com>'
-let g:snips_copyright = '2012-2015 btroot.org'
-let g:snips_license = 'http://www.btroot.com/user_guide/license.html V1'
-let g:snips_email = 'rainysia@gmail.com'
-let g:snips_site =  'www.btroot.org'
-let g:snips_link = 'http://www.btroot.org'
-let g:snips_php_version='PHP version 5'
-"}}
-"{{                                        " indent.guides的设定 https://github.com/nathanaelkane/vim-indent-guides 2016-04-19 00:47:18
-"                                          "      自动缩进,<Leader>ig 唤出, /usr/share/vim , ~/.vim
-let g:indent_guides_auto_colors = 1
-let g:indent_guides_guide_size = 1
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
-hi IndentGuidesOdd  guibg=red   ctermbg=3
-hi IndentGuidesEven guibg=green ctermbg=4
-hi IndentGuidesEven ctermbg=darkgrey
-hi IndentGuidesOdd  ctermbg=black
-"}}
-"{{                                        " colorizer.vim的设定 https://github.com/lilydjwg/colorizer 2016-04-19 00:51:42
-"                                          "      :ColorHighlight - start/update highlighting
-"                                          "      :ColorClear     - clear all highlights
-"                                          "      :ColorToggle    - toggle highlights
-"
-"}}
-"{{                                        " css.vim的设定 影响自动补全,换了个版本, https://github.com/skammer/vim-css-color 2016-04-19 00:53:33
-"                                          "      win vimfiles/after/syntax/css.vim
-"                                          "      linux .vim/after/syntax/css.vim
-"}}
-"{{                                        " csExplorer.vim的设定 https://github.com/vimscripts-song/csExplorer 2016-04-19 09:56:24
-"                                          "      win vimfiles/plugin
-"                                          "      linux .vim/plugin
-"                                          "      :ColorSchemeExplorer
-"}}
-"{{                                        " calendar.vim的设定 https://github.com/vim-scripts/calendar.vim--Matsumoto 2016-04-19 09:58:17
-"                                          "      win vimfiles/after/syntax/calendar.vim
-"                                          "      linux .vim/after/syntax/calendar.vim
-"                                          "      :Calendar  :CalendarH
-let g:calendar_diary="$VIMRUNTIME/diary/"
-"}}
-"{{                                        " calendar.vim https://github.com/itchyny/calendar.vim 2016-04-19 10:00:39
+"{{                                        " vim-multiple-cursors 插件。多重选择 https://github.com/terryma/vim-multiple-cursors 2016-04-19 10:20:24
+"                                          "    ctrl-n  select, c modify the content, <esc> exit;
+"let g:multi_cursor_next_key='<C-n>'       "    next 
+"let g:multi_cursor_prev_key='<C-d>'       "    prev
+"let g:multi_cursor_skip_key='<C-x>'       "    skip the next.
 "}}
 "{{                                        " mark.vba.gz的设定(mark.vim) https://github.com/dimasg/vim-mark 2016-04-19 10:06:30
 "                                          " :Mark regexp   to mark a regular expression 
@@ -639,14 +590,36 @@ let g:calendar_diary="$VIMRUNTIME/diary/"
 "                                          "      /?  把光标向后切换到所有被Mark的MarkWords中的上一个MarkWord.
 let g:mwDefaultHighlightingPalette = 'extended'
 "}}
-"{{                                        " statusline.vim的设定 https://github.com/vim-scripts/statusline.vim 2016-04-19 10:10:27
+"{{                                        " calendar.vim https://github.com/itchyny/calendar.vim 2016-04-19 10:00:39
+"                                          " :Calendar, :Calendar 2016 04 19, :Calendar -view=year, 
+"                                          " :Calendar -view=year -split=vertical -width=27
+"                                          " :Calendar -view=year -split=horizontal -position=below -height=12
+"                                          " :Calendar -first_day=monday
+"                                          " :Calendar -view=clock
+let g:calendar_frame = 'default'
 "}}
-"{{                                        " powerline https://github.com/Lokaltog/vim-powerline 2016-04-19 10:10:13
+"{{                                        " indent.guides的设定 https://github.com/nathanaelkane/vim-indent-guides 2016-04-19 00:47:18
+"                                          "      自动缩进,<Leader>ig 唤出, /usr/share/vim , ~/.vim
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_guide_size = 1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+hi IndentGuidesOdd  guibg=red   ctermbg=3
+hi IndentGuidesEven guibg=green ctermbg=4
+hi IndentGuidesEven ctermbg=darkgrey
+hi IndentGuidesOdd  ctermbg=black
 "}}
 "{{                                        " indentLine.vim 另外一个对齐线.https://github.com/Yggdroot/indentLine 2014-05-29
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#3E3F40'
 let g:indentLine_char = '|'
+"}}
+"{{                                        " powerline https://github.com/Lokaltog/vim-powerline
+"                                          " install powerline font
+"                                          " https://github.com/eugeii/consolas-powerline-vim, copy to /usr/share/fonts
+"                                          " mkfontscale,mkfontdir,fc-cache -vf,:PowerlineClearCache
+let g:Powerline_symbols = 'fancy'
+set fillchars+=stl:\ ,stlnc:\
 "}}
 "{{                                        " zencoding.vim 的设定 https://github.com/vim-scripts/Emmet.vim 2016-04-19 10:11:36
 "                                          "      html:xxs>div#header+div#container>ul>li.class_$#id_$*2
@@ -658,10 +631,9 @@ let g:indentLine_char = '|'
 "                                          "      ul>li*
 "                                          "      html:xt <c+y> ,
 "}}
-"{{                                        " Multisearch.vim的设定 matchit.vim  https://github.com/vim-scripts/multisearch.vim 2016-04-19 10:12:12
+"{{                                        " L9 library for autocomplpop https://github.com/vim-scripts/L9
 "}}
-"{{                                        " EasyMotion.vim的设定 deprecated 2016-04-19 10:14:01
-"let g:EasyMotion_leader_key = '<Leader>'  " conflict with mark.vim
+"{{                                        " autocomplpop 插件，自动完成提示。 https://github.com/othree/vim-autocomplpop 2016-04-19 10:16:43
 "}}
 "{{                                        " phpqa.vim的设定 https://github.com/joonty/vim-phpqa 2015-10-15
 "let g:phpqa_codesniffer_args = "--standard=Zend"
@@ -690,8 +662,6 @@ let g:phpqa_messdetector_autorun = 0
 "{{                                        " php code sniffer ,php md模式
 "                                          " :!phpcs :!phpmd
 "}}
-"{{                                        " php autocomplpop 插件，自动完成提示。 https://github.com/othree/vim-autocomplpop 2016-04-19 10:16:43
-"}}
 "{{                                        " Surround.vim 针对包含在文字外的括号、引号、XML 标签做快速的修改 https://github.com/tpope/vim-surround 2016-04-19 10:17:41
 "                                          " cs"' 修改双引号为单引号 cs'<q> 修改单引号为<q>包围的.
 "                                          " ds"  删除包围的符号
@@ -704,50 +674,6 @@ let g:phpqa_messdetector_autorun = 0
 "                                          " ysw' 为字符串开始处加上单引号
 "                                          " ysiw' 为光标下的单词包围
 "                                          " 可视模式下，选中，S"  可插入包裹的
-"}}
-"{{                                        " colorv.vim 插件，颜色画板。 https://github.com/Rykka/colorv.vim 2016-04-19 10:19:31
-" :h colorv                                "  帮助.
-" :h colorv-options                        "  帮助选项.
-" :h colorv-mapping-buffer                 "  映射.
-"                                          "  :ColorV
-"                                          "  :ColorVView
-"                                          "  :ColorVEdit
-"                                          "  :ColorVEditTo {fmt}
-"                                          "  :ColorVEditAll
-"                                          "  :ColorVInsert {fmt}
-"                                          "  :ColorVList {gen}
-"                                          "  :ColorVTurn2 {hex1} {hex2}
-"                                          "  :ColorVPreview
-"                                          "  :ColorVPreviewLine
-"                                          "  :ColorVClear
-"                                          "  :ColorVScheme
-"                                          "  :ColorVSchemeFav
-"                                          "  :ColorVSchemeNew
-"                                          "  :ColorVPicker
-"                                          "  In ColorV window: Double Click or Press <Enter> to trigger actions.
-"                                          "    Hue Line: change hue pallete: set current color
-"                                          "    Attrbuite: change attr of current color
-"                                          "    history pallete: previous 3 colors
-"                                          "    Tips: show tips or trigger relevant actions.
-"                                          "    Stats: change relevant setting.
-"                                          "    <Tab>/<S-tab> will jump to next/prev input
-"                                          "    +=/-_/scroll up/scroll down to change RGB/HSV attributes under cursor
-"                                          "    yy/cc/p/yr/... to copy/paste colors
-"                                          "    gg/g2/... to generate a list
-"                                          "    ss/sf/... to trigger scheme actions
-"                                          "    ? to show tips
-"                                          " In Color Scheme window:
-"                                          "    n/N/p to navigate through multi schemes.
-"                                          "    f/F to fav/Unfav schemes
-"                                          "    e on a color to edit the color
-"                                          "    K/C search item under cursor with Kuler/ColourLover
-"                                          "    sn to create new scheme
-"}}
-"{{                                        " vim-multiple-cursors 插件。多重选择 https://github.com/terryma/vim-multiple-cursors 2016-04-19 10:20:24
-"                                          "    ctrl-n  select, c modify the content, <esc> exit;
-"let g:multi_cursor_next_key='<C-n>'       "    next 
-"let g:multi_cursor_prev_key='<C-d>'       "    prev
-"let g:multi_cursor_skip_key='<C-x>'       "    skip the next.
 "}}
 "{{                                        " pydiction 插件 https://github.com/rkulla/pydiction 2016-04-19 10:21:10
 let g:pydiction_location = '~/.vim/after/ftplugin/pydiction/complete-dict'
