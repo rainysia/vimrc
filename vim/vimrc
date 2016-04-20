@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 " 0 => Author {{{
 "========================================================================
 "      Title: vim configure
@@ -665,7 +663,6 @@ let g:indentLine_char = '|'
 "                                          " mkfontscale,mkfontdir,fc-cache -vf,:PowerlineClearCache
 let g:Powerline_symbols = 'fancy'
 set fillchars+=stl:\ ,stlnc:\
->>>>>>> master
 let g:lightline = {
       \ 'colorscheme': 'landscape',
       \ 'mode_map': { 'c': 'NORMAL' },
@@ -701,8 +698,6 @@ function! LightLineFilename()
         \  &ft == 'vimshell' ? vimshell#get_status_string() :
         \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
         \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-<<<<<<< HEAD
-=======
 endfunction
 
 function! LightLineFugitive()
@@ -794,9 +789,9 @@ let g:snips_php_version='PHP version 5.6'
 "}}
 "{{                                        " ultisnips https://github.com/SirVer/ultisnips
 "                                          " Trigger configuration, will conflict with YouCompleteMe
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
 "let g:UltiSnipsSnippetsDir = $HOME . '/.vim/ultisnips'
 "
@@ -806,7 +801,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 "                                          " :UltiSnipsEdit to split your window.
 "map <leader>us :UltiSnipsEdit<CR>
-let g:UltiSnipsEditSplit="vertical"
+"let g:UltiSnipsEditSplit="vertical"
 ""                                          " ctrl+j/k 进行选择
 "func! g:JInYCM()
 "    if pumvisible()
@@ -932,34 +927,59 @@ set encoding=utf-8
 function! SetFileEncodings(encodings)
     let b:myfileencodingsbak=&fileencodings
     let &fileencodings=a:encodings
->>>>>>> master
 endfunction
-
-function! LightLineFugitive()
-  if &ft !~? 'vimfiler\|gundo' && exists("*fugitive#head")
-    let _ = fugitive#head()
-    return strlen(_) ? '⭠ '._ : ''
-  endif
-  return ''
+function! RestoreFileEncodings()
+    let &fileencodings=b:myfileencodingsbak
+    unlet b:myfileencodingsbak
 endfunction
-
-function! LightLineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
+au BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
+au BufReadPost *.nfo call RestoreFileEncodings()
+"}}
+"}}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  8 => Original _vimrc {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"source $VIMRUNTIME/vimrc_example.vim
+"source $VIMRUNTIME/mswin.vim
+"behave mswin
+"{{
+set diffexpr=MyDiff()
+function! MyDiff()
+    let opt = '-a --binary '
+    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+    let arg1 = v:fname_in
+    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+    let arg2 = v:fname_new
+    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+    let arg3 = v:fname_out
+    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+    let eq = ''
+    if $VIMRUNTIME =~ ' '
+        if &sh =~ '\<cmd'
+            let cmd = '""' . $VIMRUNTIME . '\diff"'
+            let eq = '"'
+        else
+            let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+        endif
+    else
+        let cmd = $VIMRUNTIME . '\diff'
+    endif
+    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
-
-function! LightLineFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+"}}
+"{{
+" 高亮当前光标列.
+map ,ch :call SetColorColumn()<CR>
+function! SetColorColumn()
+    let col_num = virtcol(".")
+    let cc_list = split(&cc, ',')
+    if count(cc_list, string(col_num)) <= 0
+        execute "set cc+=".col_num
+    else
+        execute "set cc-=".col_num
+    endif
 endfunction
-<<<<<<< HEAD
-
-function! LightLineFileencoding()
-  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-
-function! LightLineMode()
-  return winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-=======
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1829,4 +1849,3 @@ endif
 " 7.09.03                                  " add others plugin 2016-04-20 00:55:32
 "}}
 "}}}
->>>>>>> master
