@@ -359,7 +359,7 @@ Bundle 'kien/ctrlp.vim'
 "" 显示tag列表
 Bundle 'vim-scripts/taglist.vim'
 "" 在开头加入作者信息
-Bundle 'vim-scripts/AuthorInfo'
+Bundle 'rainysia/authorinfo_php'
 "" 多种方式加入代码注释
 Bundle 'vim-scripts/The-NERD-Commenter'
 "" 显示文件浏览
@@ -482,7 +482,7 @@ set tags=tags;/                            "     找不到tags文件到上层找
 " php的折叠
 let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 "}}
-"{{                                        " authorinfo.vim的设定 https://github.com/vim-scripts/AuthorInfo
+"{{                                        " authorinfo.vim的设定 https://github.com/rainysia/authorinfo_php
 "                                          "     vim自动添加作者信息(需要和NERD_commenter联用)使用,
 "                                          "     :AuthorInfoDetect呼出
 let g:vimrc_author='Tommy Xia'
@@ -490,7 +490,7 @@ let g:vimrc_email='tommyx@synnex.com'
 let g:vimrc_link='http://www.synnex.org'
 let g:vimrc_copyright='2013-2016 SYNNEX.ORG' 
 let g:vimrc_license='http://www.synnex.org/user_guide/license.html V1'
-let g:vimrc_version='Version 1.0'
+let g:vimrc_version='0.0.1'
 nmap <F4> :AuthorInfoDetect<cr>
 "}}
 "{{                                        " NERD_commenter.vim的设定 https://github.com/vim-scripts/The-NERD-Commenter
@@ -619,17 +619,17 @@ let MRU_Max_Submenu_Entries = 15
 "{{                                        " mark.vba.gz的设定(mark.vim) https://github.com/dimasg/vim-mark
 "                                          " :Mark regexp   to mark a regular expression 
 "                                          " :Mark regexp   with exactly the same regexp to unmark it 
-"                                          " :Mark          to clear all marks 
+"                                          " :Mark          to clear all marks , :Marks, show all mark color
 "                                          " ,m mark关键词,,n 取消关键词, ,r输入想要高亮的   / 已经替换成了,
 "                                          "      解压后,用vim打开  :so %
 "                                          "      颜色值 'extended'18色 'maximum' 77色
-"                                          "      /m  mark or unmark the word under (or before) the cursor
-"                                          "      /r  manually input a regular expression. 用于搜索.
-"                                          "      /n  clear this mark (i.e. the mark under the cursor), or clear all highlighted marks .
-"                                          "      /*  把光标向前切换到当前被Mark的MarkWords中的下一个MarkWord.
-"                                          "      /#  把光标向后切换到当前被Mark的MarkWords中的上一个MarkWord.
-"                                          "      //  把光标向前切换到所有被Mark的MarkWords中的下一个MarkWord.
-"                                          "      /?  把光标向后切换到所有被Mark的MarkWords中的上一个MarkWord.
+"                                          "      <Leader>/m ,/m  mark or unmark the word under (or before) the cursor
+"                                          "      <Leader>/r ,/r manually input a regular expression. 用于搜索.
+"                                          "      <Leader>/n ,/n clear this mark (i.e. the mark under the cursor), or clear all highlighted marks .
+"                                          "      <Leader>/* ,/* 把光标向前切换到当前被Mark的MarkWords中的下一个MarkWord.
+"                                          "      <Leader>/# ,/# 把光标向后切换到当前被Mark的MarkWords中的上一个MarkWord.
+"                                          "      <Leader>// ,// 把光标向前切换到所有被Mark的MarkWords中的下一个MarkWord.
+"                                          "      <Leader>/? ,/? 把光标向后切换到所有被Mark的MarkWords中的上一个MarkWord.
 let g:mwDefaultHighlightingPalette = 'extended'
 "}}
 "{{                                        " css-highlight https://github.com/lilydjwg/colorizer
@@ -743,6 +743,8 @@ let g:ycm_seed_identifiers_with_syntax = 0    "语言关键字补全, 不过pyth
 "let g:ycm_collect_identifiers_from_tags_files = 1      "会导致一直更新标签，python2 占用内存80%以上
 "let g:ycm_key_invoke_completion = '<C-Space>'          " 直接触发自动补全
 let g:ycm_goto_buffer_command = 'horizontal-split'      " 跳转到定义处, 分屏打开
+let g:ycm_semantic_triggers = {}          " 不让C的时候只有在 ./-> 时才会弹出补全菜单
+let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
 " nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
@@ -756,16 +758,18 @@ let g:ycm_filetype_blacklist = {
 let g:syntastic_error_symbol = '✗'        "set error or warning signs
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快
 let g:syntastic_javascript_checkers = ['jsl', 'jshint']
 let g:syntastic_html_checkers=['tidy', 'jshint']
+let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
 let g:syntastic_cpp_include_dirs = ['/usr/include/']
 let g:syntastic_cpp_remove_include_errors = 1
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
-let g:syntastic_enable_balloons = 1 "whether to show balloons
+let g:syntastic_enable_balloons = 1        " whether to show balloons
 highlight SyntasticErrorSign guifg=white guibg=black
 "}}
 "{{                                        " zencoding.vim 的设定 https://github.com/vim-scripts/Emmet.vim
@@ -780,9 +784,9 @@ highlight SyntasticErrorSign guifg=white guibg=black
 "}}
 "{{                                        " ultisnips https://github.com/SirVer/ultisnips
 "                                          " Trigger configuration, will conflict with YouCompleteMe
-let g:UltiSnipsExpandTrigger       = "<s-tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<s-tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-s-tab>"
+let g:UltiSnipsExpandTrigger       = "<tab>"
+let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 "                                          " :UltiSnipsEdit to split your window.
