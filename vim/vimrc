@@ -25,7 +25,7 @@ set confirm                                " 处理为保存或只读文件的�
 filetype off                               " 检测文件的类型,vundle 关闭,其它on
 filetype plugin on                         " 载入ftplugin文件类型插件
 filetype indent on                         " 为特定文件类型载入相关缩进文件
-filetype plugin indent on
+filetype plugin indent off
 set binary                                 " 可读二进制文件
 "set nrformats=                             " 默认<C-a> <C-x> 以十进制来计算. :h nrformats
 "{{                                        " 不同文件类型的缩进
@@ -382,7 +382,6 @@ Bundle 'dimasg/vim-mark'
 
 "" 显示实际颜色
 Bundle 'lilydjwg/colorizer'
-Bundle 'skammer/vim-css-color'
 
 "" 日历
 Bundle 'itchyny/calendar.vim'
@@ -398,8 +397,10 @@ Bundle 'itchyny/lightline.vim'
 "Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'vim-scripts/Emmet.vim'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
+Bundle 'rainysia/snipmate.vim'
+"Bundle 'SirVer/ultisnips'
+"Bundle 'honza/vim-snippets'
+"Bundle 'msanders/snipmate.vim'
 Bundle 'vim-scripts/L9'
 Bundle 'othree/vim-autocomplpop'
 Bundle 'joonty/vim-phpqa'
@@ -483,11 +484,11 @@ let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 "{{                                        " authorinfo.vim的设定 https://github.com/rainysia/authorinfo_php
 "                                          "     vim自动添加作者信息(需要和NERD_commenter联用)使用,
 "                                          "     :AuthorInfoDetect呼出
-let g:vimrc_author='Tommy Xia'
-let g:vimrc_email='tommyx@synnex.com'
-let g:vimrc_link='http://www.synnex.org'
-let g:vimrc_copyright='2013-2016 SYNNEX.ORG' 
-let g:vimrc_license='http://www.synnex.org/user_guide/license.html V1'
+let g:vimrc_author='Rainy Sia'
+let g:vimrc_email='rainysia#gmail.com'
+let g:vimrc_link='http://www.btroot.org'
+let g:vimrc_copyright='2013-2016 BTROOT.ORG' 
+let g:vimrc_license='http://www..org/user_guide/license.html V1'
 let g:vimrc_version='0.0.1'
 nmap <F4> :AuthorInfoDetect<cr>
 "}}
@@ -631,9 +632,6 @@ let MRU_Max_Submenu_Entries = 15
 let g:mwDefaultHighlightingPalette = 'extended'
 "}}
 "{{                                        " css-highlight https://github.com/lilydjwg/colorizer
-"}}
-"{{                                        " vim-css-color https://github.com/skammer/vim-css-color
-"let g:cssColorVimDoNotMessMyUpdatetime = 1
 "}}
 "{{                                        " calendar.vim https://github.com/itchyny/calendar.vim
 "                                          " :Calendar, :Calendar 2016 04 19, :Calendar -view=year, 
@@ -780,38 +778,56 @@ highlight SyntasticErrorSign guifg=white guibg=black
 "                                          "      ul>li*
 "                                          "      html:xt <c+y> ,
 "}}
+"{{                                        " Integrate vim-snippets and snipmate https://github.com/rainysia/snipmate.vim
+let g:snips_author=g:vimrc_author
+let g:snips_copyright=g:vimrc_copyright
+let g:snips_license=g:vimrc_license
+let g:snips_email=g:vimrc_email
+let g:snips_site =g:vimrc_link
+let g:snips_link=g:vimrc_link
+let g:snips_php_version='PHP version 5.6'
+"}}
 "{{                                        " ultisnips https://github.com/SirVer/ultisnips
 "                                          " Trigger configuration, will conflict with YouCompleteMe
-let g:UltiSnipsExpandTrigger       = "<tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
-let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips/'
-"                                          " :UltiSnipsEdit to split your window.
-map <leader>us :UltiSnipsEdit<CR>
-let g:UltiSnipsEditSplit="vertical"
-"                                          " ctrl+j/k 进行选择
-func! g:JInYCM()
-    if pumvisible()
-        return "\<C-n>"
-    else
-        return "\<c-j>"
-    endif
-endfunction
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
+"let g:UltiSnipsSnippetsDir = $HOME . '/.vim/ultisnips'
+"
+"if finddir(g:UltiSnipsSnippetsDir) == ''
+"    silent call mkdir(g:UltiSnipsSnippetsDir)
+"endif
 
-func! g:KInYCM()
-    if pumvisible()
-        return "\<C-p>"
-    else
-        return "\<c-k>"
-    endif
-endfunction
-inoremap <c-j> <c-r>=g:JInYCM()<cr>
-au BufEnter,BufRead * exec "inoremap <silent> " . g:UltiSnipsJumpBackwordTrigger . " <C-R>=g:KInYCM()<cr>"
-let g:UltiSnipsJumpBackwordTrigger = "<c-k>"
+"                                          " :UltiSnipsEdit to split your window.
+"map <leader>us :UltiSnipsEdit<CR>
+let g:UltiSnipsEditSplit="vertical"
+""                                          " ctrl+j/k 进行选择
+"func! g:JInYCM()
+"    if pumvisible()
+"        return "\<C-n>"
+"    else
+"        return "\<c-j>"
+"    endif
+"endfunction
+"
+"func! g:KInYCM()
+"    if pumvisible()
+"        return "\<C-p>"
+"    else
+"        return "\<c-k>"
+"    endif
+"endfunction
+"inoremap <c-j> <c-r>=g:JInYCM()<cr>
+"au BufEnter,BufRead * exec "inoremap <silent> " . g:UltiSnipsJumpBackwordTrigger . " <C-R>=g:KInYCM()<cr>"
+"let g:UltiSnipsJumpBackwordTrigger = "<c-k>"
 "}}
 "{{                                        " vim-snippets https://github.com/honza/vim-snippets
 "
+"{{                                        " snipmate https://github.com/msanders/snipmate.vim
+
+"
+"}}
 "}}
 "{{                                        " L9 library for autocomplpop https://github.com/vim-scripts/L9
 "}}
