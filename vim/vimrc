@@ -25,7 +25,7 @@ set confirm                                " 处理为保存或只读文件的�
 filetype off                               " 检测文件的类型,vundle 关闭,其它on
 filetype plugin on                         " 载入ftplugin文件类型插件
 filetype indent on                         " 为特定文件类型载入相关缩进文件
-filetype plugin indent off
+filetype plugin indent on
 set binary                                 " 可读二进制文件
 "set nrformats=                             " 默认<C-a> <C-x> 以十进制来计算. :h nrformats
 "{{                                        " 不同文件类型的缩进
@@ -206,7 +206,6 @@ au BufRead,BufNewFile * setfiletype txt    " work in linux
 set syntax=txt                             " work in linux
 au BufRead,BufNewFile *.txt setlocal ft=txt
 "                                          " 高亮显示普通txt文件(需要txt.vim脚本)
-au BufRead,BufNewFile * setfiletype txt
 "                                          " 自动.c .h .sh .java自动插入文件头
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.py exec ":call SetTitle()" 
 "                                          " 定义函数SetTitle,自动插入文件头 
@@ -422,7 +421,6 @@ endif
 call vundle#end()
 filetype plugin indent on
 "}}
-
 "{{                                        " CTags的设定
 "                                          "     (地址自定义,我的www在/home/www下)
 "                                          "     vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
