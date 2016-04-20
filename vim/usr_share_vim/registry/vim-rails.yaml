@@ -1,7 +1,0 @@
-addon: rails
-description: "RAD tools for Rails development"
-disabledby: "let g:loaded_rails = 1"
-files:
-  - autoload/rails.vim
-  - doc/rails.txt
-  - plugin/rails.vim
