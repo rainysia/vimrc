@@ -396,7 +396,7 @@ Bundle 'Yggdroot/indentLine'
 Bundle 'itchyny/lightline.vim'
 
 "" zencoding,快速生成代码
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'vim-scripts/Emmet.vim'
 Bundle 'SirVer/ultisnips'
@@ -732,27 +732,27 @@ endfunction
 "                                         "   git submodule update --init --recursive
 "                                         "   need apt-get install cmake, go to YouCompleteMe Directory: ./install.sh --clang-completer
 "                                         "   need python-dev
-let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-let g:ycm_complete_in_comments = 1        "   在注释输入中也能补全
-let g:ycm_complete_in_strings = 1         "   在字符串输入中也能补全
-let g:ycm_use_ultisnips_completer = 1     "   提示UltiSnips
-let g:ycm_cache_omnifunc = 0              "   禁止缓存匹配项,每次都重新生成匹配项
-let g:ycm_collect_identifiers_from_comments_and_strings = 0   "注释和字符串中的文字也会被收入补全
-let g:ycm_seed_identifiers_with_syntax = 0    "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
-"let g:ycm_collect_identifiers_from_tags_files = 1      "会导致一直更新标签，python2 占用内存80%以上
-"let g:ycm_key_invoke_completion = '<C-Space>'          " 直接触发自动补全
-let g:ycm_goto_buffer_command = 'horizontal-split'      " 跳转到定义处, 分屏打开
-let g:ycm_semantic_triggers = {}          " 不让C的时候只有在 ./-> 时才会弹出补全菜单
-let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
-" nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+"let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+"let g:ycm_complete_in_comments = 1        "   在注释输入中也能补全
+"let g:ycm_complete_in_strings = 1         "   在字符串输入中也能补全
+"let g:ycm_use_ultisnips_completer = 1     "   提示UltiSnips
+"let g:ycm_cache_omnifunc = 0              "   禁止缓存匹配项,每次都重新生成匹配项
+"let g:ycm_collect_identifiers_from_comments_and_strings = 0   "注释和字符串中的文字也会被收入补全
+"let g:ycm_seed_identifiers_with_syntax = 0    "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
+""let g:ycm_collect_identifiers_from_tags_files = 1      "会导致一直更新标签，python2 占用内存80%以上
+""let g:ycm_key_invoke_completion = '<C-Space>'          " 直接触发自动补全
+"let g:ycm_goto_buffer_command = 'horizontal-split'      " 跳转到定义处, 分屏打开
+"let g:ycm_semantic_triggers = {}          " 不让C的时候只有在 ./-> 时才会弹出补全菜单
+"let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
+"" nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
 "                                         " 黑名单,不启用
-let g:ycm_filetype_blacklist = {
-      \ 'tagbar' : 1,
-      \ 'gitcommit' : 1,
-      \}
+"let g:ycm_filetype_blacklist = {
+"      \ 'tagbar' : 1,
+"      \ 'gitcommit' : 1,
+"      \}
 "}}
 "{{                                       " syntastic https://github.com/scrooloose/syntastic
 let g:syntastic_error_symbol = '✗'        "set error or warning signs
@@ -760,7 +760,7 @@ let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_highlighting = 0
-let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快
+let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快,pip install pyflakes
 let g:syntastic_javascript_checkers = ['jsl', 'jshint']
 let g:syntastic_html_checkers=['tidy', 'jshint']
 let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
