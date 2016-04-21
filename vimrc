@@ -314,6 +314,9 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType c set omnifunc=ccomplete#Complete
 set completeopt=longest,menu               " 提示菜单后输入字母实现即时的过滤和匹配
+"                                          " 绑定j,k来替换掉Ctrl+n,Ctrl+p下,上 在complete弹出层上下翻
+inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
+inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 "}}
 "{{
 set virtualedit=block                      " block 允许可视列块模式的虚拟编辑
