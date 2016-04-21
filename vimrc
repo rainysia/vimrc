@@ -379,6 +379,8 @@ Bundle 'vim-scripts/mru.vim'
 Bundle 'vim-scripts/multisearch.vim'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'dimasg/vim-mark'
+"" Chinese doc
+Bundle 'asinc/vimcdoc'
 
 "" 显示实际颜色
 Bundle 'lilydjwg/colorizer'
@@ -632,6 +634,9 @@ let MRU_Max_Submenu_Entries = 15
 "                                          "      <Leader>/? ,/? 把光标向后切换到所有被Mark的MarkWords中的上一个MarkWord.
 let g:mwDefaultHighlightingPalette = 'extended'
 "}}
+"{{                                        " vimcdoc https://github.com/asins/vimcdoc
+"
+"}}
 "{{                                        " css-highlight https://github.com/lilydjwg/colorizer
 "}}
 "{{                                        " calendar.vim https://github.com/itchyny/calendar.vim
@@ -862,9 +867,9 @@ let g:snips_php_version='PHP version 5.6'
 "}}
 "{{                                        " ultisnips https://github.com/SirVer/ultisnips
 "                                          " Trigger configuration, will conflict with YouCompleteMe
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsExpandTrigger="<Leader><tab>"
+"let g:UltiSnipsJumpForwardTrigger="<Leader><tab>"
+"let g:UltiSnipsJumpBackwardTrigger="<Leader><s-tab>"
 "let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
 "let g:UltiSnipsSnippetsDir = $HOME . '/.vim/ultisnips'
 "
@@ -873,7 +878,7 @@ let g:snips_php_version='PHP version 5.6'
 "endif
 
 "                                          " :UltiSnipsEdit to split your window.
-"map <leader>us :UltiSnipsEdit<CR>
+"map <Leader>us :UltiSnipsEdit<CR>
 "let g:UltiSnipsEditSplit="vertical"
 ""                                          " ctrl+j/k 进行选择
 "func! g:JInYCM()
@@ -898,7 +903,8 @@ let g:snips_php_version='PHP version 5.6'
 "{{                                        " vim-snippets https://github.com/honza/vim-snippets
 "
 "{{                                        " snipmate https://github.com/msanders/snipmate.vim
-
+:let g:snips_trigger_key = "<tab>"
+:let g:snips_trigger_key_backwards = "<s-tab>"
 "
 "}}
 "}}
@@ -1806,6 +1812,26 @@ endif
 "                                          " \"a5yy 复制5行到register a中, \"A5yy 再添加5行到a中.
 "                                          " [I 显示光标处的关键字匹配的行 :g/^/pu 把文中空行扩1倍 :g/^/m0 按行翻转文章 :g/关键字/t$ 拷贝行,从关键字到文件末尾
 "                                          " :let @a=@_ 清除寄存器a :let @*=@a 寄存器赋值 :scriptnames 列出所有加载的插件,_vimrcs :verbose set history 显示设置history值并指出设置文件的位置
+"                                          " :verbose map<Tab> 可以查看tab键是绑定到什么动作上的, 
+"                                          "  Command     Normal      Visual  Operator    Insert      Command_Line
+"                                          "  映射命令    常规模式    可视化  运算符模式  插入模式    命令行
+"                                          "  :map        y           y       y
+"                                          "  :nmap       y
+"                                          "  :vmap                   y
+"                                          "  :omap                           y
+"                                          "  :map!                                       y           y
+"                                          "  :imap                                       y
+"                                          "  :cmap                                                   y
+"                                          "  查看键盘符号:h key-notation
+"                                          "  <Esc>=Escape, <CR>=Enter, <S-F1>=Shift+F1,<C>=<Ctrl> Mac:<D>=Command, <M-key>=<A-key>=Alt
+"                                          "  :map 查看所有, 第一列内容显示如下, 取消:umap, 取消所有:mapclear
+"                                          "      <space> 常规模式，可视化模式，运算符模式
+"                                          "      n       常规模式
+"                                          "      v       可视化模式
+"                                          "      o       运算符模式
+"                                          "      !       插入模式，命令行模式
+"                                          "      i       插入模式
+"                                          "      c       命令模式
 "                                          " i<c-r>/ 把最后一个搜索指令贴到当前位置 i<c-r>把最后一个命令贴到当前位置 :X 加密文件
 " advanced tips                            " vit 选中a标签里面的文本,高亮选中标签内部的内容.visually select inside the tag
 "                                          " A 当前行尾插入,=$a  ;   C是删除当前行尾并插入,=$c    .是重复上一次插入的所有操作
