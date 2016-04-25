@@ -8,8 +8,10 @@ we map the <Leader> as ,
 
 Usage && Installation.
 ---------------------------------
-you can separate the files with _  and copy the files into your Debian OS filepath.
-The vimrc file contains many usage for vim and the plugins. you can read it.
+1. Copy the vimrc into your Debian OS filepath or server vimrc path mostly in /etc/vim.
+2. For different user like `user` and `root`, Just run `:BundleInstall` in different user in vim.
+3. Unpack the consolas-powerline-vim.tar.gz fonts into your fonts folder.
+4. You may need to install python pip package, also some python packages.
 
 ### Screenshot
 ![gvim](https://cloud.githubusercontent.com/assets/1259324/14772527/f963df04-0ad1-11e6-9f35-8dd2dbb0ff9e.png)
@@ -60,12 +62,6 @@ Bundle '2072/vim-syntax-for-PHP'
 Bundle 'junegunn/vim-easy-align'
 ```
 
-### Details.
-    Use `:BundleInstall` plugins.
-    Unpack the consolas-powerline-vim.tar.gz fonts into your fonts folder.
-    You may need to install python pip package, also some python packages.
-
-
 ### vim needs ctags for index func,class and so on, so you need to install ctags like this:
 
         >   For ctags windows:
@@ -78,12 +74,12 @@ Bundle 'junegunn/vim-easy-align'
                 and run ./configure make &&make install in shell.
                 Make sure you have permission make it.
                 Need cmake for YouCompleteMe plugins
-
+                Need consolas-powerline-vim font for git branch status.
 
 
 Contact
 ---------------------------------
-Follow me @[rainy_sia](https://twitter.com/rainy_sia) in twitter, [@rainysia](http://weibo.com/rainysia) in weibo, mail me at rainysia@gmail.com 
+Follow me @[rainy_sia](https://twitter.com/rainy_sia) in twitter, [@rainysia](http://weibo.com/rainysia) in weibo, mail me at rainysia#gmail.com 
 
 License
 ---------------------------------
@@ -92,6 +88,7 @@ Copyright by rainy.sia, 2010 Licensed under the [MIT license](http://www.opensou
 Updates
 ---------------------------------
 ```
+2008-04-20 15:27:58 Initial<br />
 2014-04-10 12:21:50 add /home/tom/.vim/ files as user_vim files. <br />
 2014-05-30 00:56:04 add /usr/share/vim/ files as usr_share_vim files.  <br />
                     add /usr/share/php/PHP/CodeSniffer/ as usr_share_php_PHP_CodeSniffer/ <br />
@@ -99,5 +96,5 @@ Updates
 2014-06-24 14:08:32 add vim plugins vim-multiple-cursors in /usr/share/vim/ <br />
 2014-07-14 12:29:40 add vim new map F8/S-F8 for !ctags -R<br />
 2016-02-15 10:20:30 make vim configuration simple<br />
-2016-04-25 10:26:22 mae new vimrc for 2016<br />
+2016-04-25 10:26:22 make new vimrc for 2016<br />
 ```
