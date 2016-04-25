@@ -1,25 +1,29 @@
 vimrc
 =====
-
 It's a vim configuration file,has some custom color for vim-code,lots of tips for vim.
 we map the <Leader> as , 
     so you can use ,ig for indentLine  ,cc for comments, ,ch for highligh ColorColumn etc.
     There are full vim files in here.
 
-Usage && Installation.
+#### Usage && Installation.
 ---------------------------------
 1. Copy the vimrc into your Debian OS filepath or server vimrc path mostly in /etc/vim.
 2. For different user like `user` and `root`, Just run `:BundleInstall` in different user in vim.
 3. Unpack the consolas-powerline-vim.tar.gz fonts into your fonts folder.
 4. You may need to install python pip package, also some python packages.
 
-### Screenshot
+#### Screenshot
+---------------------------------
 ![gvim](https://cloud.githubusercontent.com/assets/1259324/14772527/f963df04-0ad1-11e6-9f35-8dd2dbb0ff9e.png)
+
 ![gvim 2](https://cloud.githubusercontent.com/assets/1259324/14772526/f96138ee-0ad1-11e6-8dd8-1d2f501c850f.png)
+
 ![terminal](https://cloud.githubusercontent.com/assets/1259324/14772525/f9468bf2-0ad1-11e6-8e41-4ec15ca9fa84.png)
+
 ![css](https://cloud.githubusercontent.com/assets/1259324/14772524/f9183db0-0ad1-11e6-8477-b4907e44c14e.png)
 
-### Plugin list
+#### Plugin list
+---------------------------------
 ```
 Bundle 'VundleVim/Vundle.vim'
 Bundle 'kien/ctrlp.vim'
@@ -62,30 +66,38 @@ Bundle '2072/vim-syntax-for-PHP'
 Bundle 'junegunn/vim-easy-align'
 ```
 
-### vim needs ctags for index func,class and so on, so you need to install ctags like this:
+#### Some others components
+---------------------------------
+1. For ctags windows:
+```
+cp ctags.exe into /vim74
+The ctags URL: http://sourceforge.net/projects/ctags/files/ctags/5.8/ctags58.zip/download
+Add configuration into your _vimrc: set tags=tags;
+The tags="$path" means your can modify the $path as your project path, then run :!ctags -R in vim.
+```
 
-        >   For ctags windows:
-                cp ctags.exe into /vim74
-                    The ctags URL: http://sourceforge.net/projects/ctags/files/ctags/5.8/ctags58.zip/download
-                    Add configuration into your _vimrc: set tags=tags;
-                    The tags="$path" means your can modify the $path as your project path, then run :!ctags -R in vim.
-        >   For linux:
-                Download ctags-5.8.tar.gz and  tar -zxvf it,cd ctags-5.8,
-                and run ./configure make &&make install in shell.
-                Make sure you have permission make it.
-                Need cmake for YouCompleteMe plugins
-                Need consolas-powerline-vim font for git branch status.
+2. For linux:
+```
+Download ctags-5.8.tar.gz and  tar -zxvf ctags-5.8.tar.gz,cd ctags-5.8,
+and run ./configure make &&make install in shell.
+Make sure you have permission make it.
+```
 
+3. Others
+```
+Need cmake for [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) plugins
+Need [consolas-powerline-vim](https://github.com/rainysia/vimrc/blob/master/consolas-powerline-vim.tar.gz) font for git branch status.
+```
 
-Contact
+#### Contact
 ---------------------------------
 Follow me @[rainy_sia](https://twitter.com/rainy_sia) in twitter, [@rainysia](http://weibo.com/rainysia) in weibo, mail me at rainysia#gmail.com 
 
-License
+#### License
 ---------------------------------
 Copyright by rainy.sia, 2010 Licensed under the [MIT license](http://www.opensource.org/licenses/mit-license.php)
 
-Updates
+#### Updates
 ---------------------------------
 ```
 2008-04-20 15:27:58 Initial<br />
