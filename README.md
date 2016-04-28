@@ -8,9 +8,10 @@ we map the <Leader> as ,
 #### Usage && Installation.
 ---------------------------------
 1. Copy the vimrc into your Debian OS filepath or server vimrc path mostly in /etc/vim.
-2. For different user like `user` and `root`, Just run `:BundleInstall` in different user in vim.
-3. Unpack the consolas-powerline-vim.tar.gz fonts into your fonts folder.
-4. You may need to install python pip package, also some python packages.
+2. `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim` in different user.
+3. For different user like `user` and `root`, Just run `:BundleInstall` in different user in vim.
+4. Unpack the consolas-powerline-vim.tar.gz fonts into your fonts folder.
+5. You may need to install python pip package, also some python packages.
 
 #### Screenshot
 ---------------------------------
