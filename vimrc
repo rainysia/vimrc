@@ -568,7 +568,7 @@ let g:miniBufExplModSelTarget = 1
 "}}
 "{{                                        " winmanager 的设定 https://github.com/vim-scripts/winmanager
 "                                          "    wm 开启, 窗口管理
-"                                          "        ctrl+w+ h,j,k,l  在窗口上下左右移动
+"                                          "        ctrl+w+ h,j,k,l  在窗口左下上右移动交换鼠标
 "                                          "        ctrl+w+w: 在所有窗口循环,ctrl+w+t: 移动到最左上角的窗口
 "                                          "        ctrl+w+b: 移动到最右下角的窗口 ctrl+w+p: 移动到前一个访问的窗口
 "                                          "        ctrl+w+r: 向右或向下方交换窗口,而ctrl+w+R: 则和它方向相反
