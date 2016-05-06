@@ -295,11 +295,10 @@ set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
 "                                          " 只在下列文件类型被侦测时显示行号,普通文本文件不显示
 "{{
 if has("autocmd")
-    autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby set number
+    autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,scala,go,lua set number
     autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
     autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o/*<ESC>'>o*/
-    autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setlocal textwidth=100
-    autocmd Filetype html,xml,xsl source $VIMRUNTIME/plugin/closetag.vim
+    autocmd FileType html,xml,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setlocal textwidth=100
     autocmd BufReadPost *
                 \ if line("'\"") > 0 && line("'\"") <= line("$") |
                 \   exe "normal g`\"" |
@@ -421,6 +420,9 @@ Bundle 'tpope/vim-surround'
 Bundle 'rkulla/pydiction'
 Bundle 'andviro/flake8-vim'
 Bundle 'jiangmiao/auto-pairs'
+
+"" (x)html close tag
+Bundle 'vim-scripts/closetag.vim'
 
 "" Switch in c to h
 Bundle 'vim-scripts/a.vim'
@@ -998,6 +1000,9 @@ let g:PyFlakeMaxLineLength = 100           " Maximum line length for PyFlakeAuto
 let g:PyFlakeRangeCommand = 'Q'            " Visual-mode key command for PyFlakeAuto
 "}}
 "{{                                        " auto-pairs https://github.com/jiangmiao/auto-pairs
+"}}
+"{{                                        " closetag.vim https://github.com/vim-scripts/closetag.vim
+"                                          " <C-_> to get hit
 "}}
 "{{                                        " a.vim https://github.com/vim-scripts/a.vim
 "                                          " :A switches to the header file corresponding to the current file being edited (or vise versa)
