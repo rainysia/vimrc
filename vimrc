@@ -298,7 +298,7 @@ if has("autocmd")
     autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby set number
     autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
     autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o/*<ESC>'>o*/
-    autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go setlocal textwidth=100
+    autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setlocal textwidth=100
     autocmd Filetype html,xml,xsl source $VIMRUNTIME/plugin/closetag.vim
     autocmd BufReadPost *
                 \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -315,6 +315,7 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd FileType go set omnifunc=gocomplete#Complete
 autocmd FileType scala set omnifunc=scalacomplete#CompleteTags
+autocmd FileType lua set omnifunc=luacomplete#Complete
 
 autocmd BufNewFile,BufRead *.go                    set filetype=go syntax=go 
 autocmd BufNewFile,BufRead *.scala                 set filetype=scala
@@ -431,6 +432,10 @@ Bundle '2072/vim-syntax-for-PHP'
 "" scala
 Bundle 'derekwyatt/vim-scala'
 Bundle 'vim-scripts/scala.vim'
+
+"" lua
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-lua-ftplugin'
 
 "" format
 Bundle 'junegunn/vim-easy-align'
@@ -1016,6 +1021,16 @@ let g:PyFlakeRangeCommand = 'Q'            " Visual-mode key command for PyFlake
 "}}
 "{{                                        " scala.vim https://github.com/vim-scripts/scala.vim
 
+"}}
+"{{                                        " xolox/vim-lua-ftplugin https://github.com/xolox/vim-lua-ftplugin
+"                                          " xolox/vim-misc https://github.com/xolox/vim-misc
+"let g:lua_compiler_name = '/usr/local/bin/luac'
+let g:lua_complete_omni = 1
+let g:lua_check_syntax = 0
+let g:lua_check_globals = 0
+let g:lua_define_completefunc = 0
+let g:lua_define_omnifunc = 0
+"                                          " :LuaCheckSyntax, :LuaCheckGlobals
 "}}
 "{{                                        " vim-easy-align https://github.com/junegunn/vim-easy-align
 "                                          "    <Space>, =, :, ., |, &, #, and ,.
@@ -1992,6 +2007,6 @@ endif
 " 7.09.01                                  " add set iskeyword 2015-09-11 17:03:59
 " 7.09.02                                  " add vundle 2016-04-18 17:12:52
 " 7.09.03                                  " add others plugin 2016-04-20 00:55:32
-" 7.09.04                                  " add scala 2016-05-06 11:16:41
+" 7.09.04                                  " add lua,scala 2016-05-06 11:16:41
 "}}
 "}}}
