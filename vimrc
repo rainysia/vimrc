@@ -298,7 +298,7 @@ if has("autocmd")
     autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby set number
     autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
     autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o/*<ESC>'>o*/
-    autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python setlocal textwidth=100
+    autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go setlocal textwidth=100
     autocmd Filetype html,xml,xsl source $VIMRUNTIME/plugin/closetag.vim
     autocmd BufReadPost *
                 \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -313,10 +313,14 @@ autocmd FileType mysql set omnifunc=mysqlcomplete#CompleteMYSQL
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd FileType c set omnifunc=ccomplete#Complete
+autocmd FileType go set omnifunc=gocomplete#Complete
+autocmd FileType scala set omnifunc=scalacomplete#CompleteTags
+
+autocmd BufNewFile,BufRead *.go                    set filetype=go syntax=go 
 autocmd BufNewFile,BufRead *.scala                 set filetype=scala
 autocmd BufNewFile,BufRead *Spec.scala,*Test.scala set filetype=scalatest syntax=scala
 autocmd BufNewFile,BufRead *.sbt                   set filetype=scala
+
 set completeopt=longest,menu               " 提示菜单后输入字母实现即时的过滤和匹配
 "                                          " 绑定j,k来替换掉Ctrl+n,Ctrl+p下,上 在complete弹出层上下翻
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
@@ -1988,5 +1992,6 @@ endif
 " 7.09.01                                  " add set iskeyword 2015-09-11 17:03:59
 " 7.09.02                                  " add vundle 2016-04-18 17:12:52
 " 7.09.03                                  " add others plugin 2016-04-20 00:55:32
+" 7.09.04                                  " add scala 2016-05-06 11:16:41
 "}}
 "}}}
