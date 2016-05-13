@@ -16,7 +16,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{                                        " work in linux, echo &rtp
 let $VIMRUNTIME="/usr/share/vim/vim74"
-set runtimepath=/usr/share/vim/vim74,~/.vim,~/.vim/after
+set runtimepath=/usr/share/vim/vim74,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 "}}
 set nocp                                   " close compeletion with vi
 set helplang=cn                            " 帮助菜单
@@ -29,9 +29,9 @@ filetype plugin indent off
 set binary                                 " 可读二进制文件
 "set nrformats=                             " 默认<C-a> <C-x> 以十进制来计算. :h nrformats
 "{{                                        " 不同文件类型的缩进
-au FileType html,python,vim,javascript,php,java setl shiftwidth=4
-au FileType html,python,vim,javascript,php,java setl tabstop=4
-au FileType html,python,vim,javascript,php,java setl softtabstop=4
+au FileType html,python,vim,javascript,php,java,scala,lua,c setl shiftwidth=4
+au FileType html,python,vim,javascript,php,java,scala,lua,c setl tabstop=4
+au FileType html,python,vim,javascript,php,java,scala,lua,c setl softtabstop=4
 "}}
 "{{                                        " 修改一个文件后自动备份,备份文件名为原文件名加~后缀
 "if has("vms")                             " linux取消
@@ -409,15 +409,17 @@ Bundle 'tpope/vim-fugitive'
 "Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'vim-scripts/Emmet.vim'
-Bundle 'rainysia/snipmate.vim'
+
 "Bundle 'SirVer/ultisnips'
-"Bundle 'honza/vim-snippets'
-"Bundle 'msanders/snipmate.vim'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'garbas/vim-snipmate'
+Bundle 'rainysia/vim-snippets'
+
 Bundle 'vim-scripts/L9'
 Bundle 'othree/vim-autocomplpop'
 Bundle 'joonty/vim-phpqa'
 Bundle 'tpope/vim-surround'
-Bundle 'rkulla/pydiction'
 Bundle 'andviro/flake8-vim'
 Bundle 'jiangmiao/auto-pairs'
 
@@ -882,7 +884,10 @@ highlight SyntasticErrorSign guifg=white guibg=black
 "                                          "      ul>li*
 "                                          "      html:xt <c+y> ,
 "}}
-"{{                                        " Integrate vim-snippets and snipmate https://github.com/rainysia/snipmate.vim
+"                                          " MarcWeber/vim-addon-mw-utils https://github.com/MarcWeber/vim-addon-mw-utils'
+"                                          " tomtom/tlib_vim              https://github.com/tomtom/tlib_vim'
+"                                          " garbas/vim-snipmate          https://github.com/garbas/vim-snipmate'
+"                                          " rainysia/vim-snippets        https://github.com/rainysia/vim-snippets'
 let g:snips_author=g:vimrc_author
 let g:snips_copyright=g:vimrc_copyright
 let g:snips_license=g:vimrc_license
@@ -929,9 +934,7 @@ let g:snips_php_version='PHP version 5.6'
 "{{                                        " vim-snippets https://github.com/honza/vim-snippets
 "
 "{{                                        " snipmate https://github.com/msanders/snipmate.vim
-:let g:snips_trigger_key = "<tab>"
-:let g:snips_trigger_key_backwards = "<s-tab>"
-"
+" :h SnipMate-mappings
 "}}
 "}}
 "{{                                        " L9 library for autocomplpop https://github.com/vim-scripts/L9
@@ -977,10 +980,6 @@ let g:phpqa_messdetector_autorun = 0
 "                                          " ysw' 为字符串开始处加上单引号
 "                                          " ysiw' 为光标下的单词包围
 "                                          " 可视模式下,选中,S"  可插入包裹的
-"}}
-"{{                                        " pydiction 插件 https://github.com/rkulla/pydiction
-let g:pydiction_location = '~/.vim/after/ftplugin/pydiction/complete-dict'
-let g:pydiction_menu_height = 3
 "}}
 "{{                                        " flake8插件 https://github.com/andviro/flake8-vim
 "                                          " command
@@ -2004,7 +2003,6 @@ endif
 " 6.08.01                                  " add引用替换
 " 6.09.01                                  " add ,m mark
 " 6.11.01                                  " add new C-x C-N 2014-11-17 14:01:15
-" 6.11.02                                  " add pydiction 2014-11-20 11:21:53
 " 7.01.01                                  " add new vimdiff color 2015-02-04 11:22:49
 " 7.04.01                                  " add foldenable zf 2015-04-17 17:59:15
 " 7.06.01                                  " change terminal fg/bg color 2015-06-16 15:30:59
