@@ -47,24 +47,33 @@ Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'Yggdroot/indentLine'
 Bundle 'itchyny/lightline.vim'
 Bundle 'tpope/vim-fugitive'
+
 "Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'vim-scripts/Emmet.vim'
-Bundle 'rainysia/snipmate.vim'
+
 "Bundle 'SirVer/ultisnips'
-"Bundle 'honza/vim-snippets'
-"Bundle 'msanders/snipmate.vim'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'garbas/vim-snipmate'
+Bundle 'rainysia/vim-snippets'
+
 Bundle 'vim-scripts/L9'
 Bundle 'othree/vim-autocomplpop'
 Bundle 'joonty/vim-phpqa'
 Bundle 'tpope/vim-surround'
-Bundle 'rkulla/pydiction'
 Bundle 'andviro/flake8-vim'
 Bundle 'jiangmiao/auto-pairs'
+Bundle 'vim-scripts/closetag.vim'
 Bundle 'vim-scripts/a.vim'
 Bundle '2072/PHP-Indenting-for-VIm'
 Bundle '2072/vim-syntax-for-PHP'
+Bundle 'derekwyatt/vim-scala'
+Bundle 'vim-scripts/scala.vim'
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-lua-ftplugin'
 Bundle 'junegunn/vim-easy-align'
+
 ```
 
 #### Some others components
