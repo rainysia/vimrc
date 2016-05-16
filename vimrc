@@ -322,9 +322,9 @@ autocmd BufNewFile,BufRead *Spec.scala,*Test.scala set filetype=scalatest syntax
 autocmd BufNewFile,BufRead *.sbt                   set filetype=scala
 
 set completeopt=longest,menu               " 提示菜单后输入字母实现即时的过滤和匹配
-"                                          " 绑定j,k来替换掉Ctrl+n,Ctrl+p下,上 在complete弹出层上下翻
-inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
-inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
+"                                          " 绑定ctrl+j,ctrl+k来替换掉Ctrl+n,Ctrl+p下,上 在complete弹出层上下翻
+inoremap <expr> <C-j> ((pumvisible())?("\<C-n>"):("j"))
+inoremap <expr> <C-k> ((pumvisible())?("\<C-p>"):("k"))
 "}}
 "{{
 set virtualedit=block                      " block 允许可视列块模式的虚拟编辑
