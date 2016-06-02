@@ -390,6 +390,8 @@ Bundle 'vim-scripts/mru.vim'
 Bundle 'vim-scripts/multisearch.vim'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'dimasg/vim-mark'
+"" 中文vim文档
+Bundle 'asins/vimcdoc'
 
 "" 显示实际颜色
 Bundle 'lilydjwg/colorizer'
@@ -519,8 +521,9 @@ let g:vimrc_author='Rainy Sia'
 let g:vimrc_email='rainysia#gmail.com'
 let g:vimrc_link='http://www.btroot.org'
 let g:vimrc_copyright='2013-2016 BTROOT.ORG' 
-let g:vimrc_license='http://www..org/user_guide/license.html V1'
-let g:vimrc_version='0.0.1'
+let g:vimrc_license='http://php.net/license/3_01.txt PHP License 3.01'
+let g:vimrc_version='GIT: 0.0.1'
+let g:vimrc_php_version='PHP version 5.6'
 nmap <F4> :AuthorInfoDetect<cr>
 "}}
 "{{                                        " NERD_commenter.vim的设定 https://github.com/vim-scripts/The-NERD-Commenter
@@ -884,7 +887,7 @@ let g:snips_license=g:vimrc_license
 let g:snips_email=g:vimrc_email
 let g:snips_site =g:vimrc_link
 let g:snips_link=g:vimrc_link
-let g:snips_php_version='PHP version 5.6'
+let g:snips_php_version=g:vimrc_php_version
 "}}
 "{{                                        " ultisnips https://github.com/SirVer/ultisnips
 "                                          " Trigger configuration, will conflict with YouCompleteMe
@@ -1032,6 +1035,10 @@ let g:lua_define_omnifunc = 0
 xmap ga <Plug>(EasyAlign)
 "                                          "   motion/text object (gaip=)
 nmap ga <Plug>(EasyAlign)
+"                                          " :EasyAlign *=      gaip*=
+"                                          " :EasyAlign =      gaip=
+"                                          " :EasyAlign 2=      gaip2=
+"                                          " :EasyAlign **=      gaip**=
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1560,7 +1567,7 @@ endif
 "{{                                        " all shortcuts
 " :s/^/#                                   " 用'#'注释当前行
 " :2,50s/^ /#                              " 在2~50行首添加'#'注释
-" :2,50s/$/#                               " 在2~50末加','
+" :2,50s/$/#                               " 在2~50末加'#'
 " :.,+3s/^/#                               " 用'#'注释当前行和当前行后面的三行
 " :%s/^/#                                  " 用'#'注释所有行
 " :n1,n2s/^/#/g                            " 用'#'注释n1~n2行,下面为删除
