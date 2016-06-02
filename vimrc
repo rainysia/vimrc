@@ -207,9 +207,9 @@ set syntax=txt                             " work in linux
 au BufRead,BufNewFile *.txt setlocal ft=txt
 "                                          " 高亮显示普通txt文件(需要txt.vim脚本)
 "                                          " 自动.c .h .sh .java自动插入文件头
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.py exec ":call SetTitle()" 
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.py,*.php exec ":call SetTitle()" 
 "                                          " 定义函数SetTitle,自动插入文件头 
-func SetTitle()
+function! SetTitle()
     "                                          " 如果文件类型为.sh文件 
     if &filetype == 'sh'
         call setline(1,"\#!/bin/bash")
@@ -218,9 +218,22 @@ func SetTitle()
         call setline(1,"#!/usr/bin/env python")
         call append(line("."),"# -*- coding: UTF-8 -*-")
         call append(line(".")+1, "")
-        "    elseif &filetype == 'mkd'
-        "        call setline(1,"<head><meta charset=\"UTF-8\"></head>")
-    else 
+    " elseif &filetype == 'mkd'
+    "    call setline(1,"<head><meta charset=\"UTF-8\"></head>")
+    elseif &filetype == 'php'
+        call setline(1,"<?php")
+        call append(line("."), "")
+    elseif &filetype == 'cpp'
+        call append(line(".")+6, "#include<iostream>")
+        call append(line(".")+7, "using namespace std;")
+        call append(line(".")+8, "")
+    elseif &filetype == 'c'
+        call append(line(".")+6, "#include <stdio.h>")
+        call append(line(".")+7, "")
+    elseif &filetype == 'java'
+       call append(line(".")+6,"public class ".expand("%"))
+       call append(line(".")+7,"")
+   else
         call setline(1, "/*************************************************************************")
         call append(line("."), "	> File Name: ".expand("%"))
         call append(line(".")+1, "	> Author: rainysia")
@@ -229,21 +242,8 @@ func SetTitle()
         call append(line(".")+4, " ************************************************************************/")
         call append(line(".")+5, "")
     endif
-    if &filetype == 'cpp'
-        call append(line(".")+6, "#include<iostream>")
-        call append(line(".")+7, "using namespace std;")
-        call append(line(".")+8, "")
-    endif
-    if &filetype == 'c'
-        call append(line(".")+6, "#include <stdio.h>")
-        call append(line(".")+7, "")
-    endif
-    "	if &filetype == 'java'
-    "		call append(line(".")+6,"public class ".expand("%"))
-    "		call append(line(".")+7,"")
-    "	endif
     "                                          " 新建文件后,自动定位到文件末尾
-endfunc
+endfunction
 autocmd BufNewFile * normal G
 "}}
 set guioptions-=m                              " 去除vim的GUI版本中的toolbar
@@ -518,12 +518,12 @@ let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 "                                          "     vim自动添加作者信息(需要和NERD_commenter联用)使用,
 "                                          "     :AuthorInfoDetect呼出
 let g:vimrc_author='Rainy Sia'
-let g:vimrc_email='rainysia#gmail.com'
+let g:vimrc_email='rainysia@gmail.com'
 let g:vimrc_link='http://www.btroot.org'
 let g:vimrc_copyright='2013-2016 BTROOT.ORG' 
-let g:vimrc_license='http://php.net/license/3_01.txt PHP License 3.01'
+let g:vimrc_license='https://opensource.org/licenses/MIT license'
 let g:vimrc_version='GIT: 0.0.1'
-let g:vimrc_php_version='PHP version 5.6'
+let g:vimrc_lang_version=' version num'
 nmap <F4> :AuthorInfoDetect<cr>
 "}}
 "{{                                        " NERD_commenter.vim的设定 https://github.com/vim-scripts/The-NERD-Commenter
@@ -887,7 +887,7 @@ let g:snips_license=g:vimrc_license
 let g:snips_email=g:vimrc_email
 let g:snips_site =g:vimrc_link
 let g:snips_link=g:vimrc_link
-let g:snips_php_version=g:vimrc_php_version
+let g:snips_php_version=g:vimrc_lang_version
 "}}
 "{{                                        " ultisnips https://github.com/SirVer/ultisnips
 "                                          " Trigger configuration, will conflict with YouCompleteMe
