@@ -130,7 +130,6 @@ set foldmethod=marker
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 "}}
 "                                          " 在被分割的窗口间显示空白,便于阅读
-set fillchars=vert:\ ,stl:\ ,stlnc:\
 "{{                                        " 启动后自动最大化
 if has("win32")
     au GUIEnter * simalt ~x
@@ -696,7 +695,7 @@ autocmd QuickFixCmdPost *grep* cwindow
 "                                          " https://github.com/eugeii/consolas-powerline-vim, copy to /usr/share/fonts
 "                                          " mkfontscale,mkfontdir,fc-cache -vf,:PowerlineClearCache
 let g:Powerline_symbols = 'fancy'
-set fillchars+=stl:\ ,stlnc:\
+set fillchars=vert:\ ,stl:\ ,stlnc:\ ,fold:-,diff:-      " vim的窗口分割线,分别设置垂直,上下,折叠,差异的填充字符
 let g:lightline = {
       \ 'colorscheme': 'landscape',
       \ 'active': {
