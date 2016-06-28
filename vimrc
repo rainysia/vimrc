@@ -958,8 +958,7 @@ let g:snips_php_version=g:vimrc_lang_version
 "{{                                        " autocomplpop 插件,自动完成提示. https://github.com/othree/vim-autocomplpop
 "}}
 "{{                                        " phpqa.vim的设定 https://github.com/joonty/vim-phpqa
-"                                          " debian apt-get install php-codesniffer,pe
-"                                          " pear install PHP_CodeSniffer
+"                                          " debian apt-get install php-codesniffer, pear install PHP_CodeSniffer
 "let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = " --encoding=utf-8"
