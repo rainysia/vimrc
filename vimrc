@@ -369,8 +369,6 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 "" ack 更快的搜索
 Bundle 'mileszs/ack.vim'
-"" 大纲查看
-Bundle 'majutsushi/tagbar'
 "" 显示tag列表
 Bundle 'vim-scripts/taglist.vim'
 "" 在开头加入作者信息
@@ -468,7 +466,7 @@ let mapleader = ","                        "      键盘映射为 ,
 map <F8> :!ctags -R<CR>
 nnoremap <silent> <S-F8> :!ctags -R<CR>
 set tags=/home/www/tags
-set tags=tags;                             " 分号必须,让vim递归向上查找tags
+set tags+=tags,./tags,tags;                             " 分号必须,让vim递归向上查找tags
 set autochdir
 "}}
 "{{                                        " Ctrlp的设定 https://github.com/kien/ctrlp.vim 2013-07
@@ -511,27 +509,21 @@ let g:ctrlp_funky_syntax_highlight = 1
 "                                          " apt-get install ack-grep
 "                                          " :Ack [options] {pattern} [{directories}]
 "                                          " :Ack, :AckAdd, :LAck, and :LAckAdd
+"                                          " -w 递归搜索
+"                                          " -i 忽略大小写
+"                                          " -Q '$path=.' path 搜索特殊字符串
+"                                          " --ignore-dir=xxxpath 忽略某个目录
+"                                          " --php --group protected 只搜索php文件中包含protected的文件, 同理--make, --py
+"                                          " :ack --help-type
 "                                          " 在ack搜索的list中  
 "                                          " ?  打开快捷列表, 重复关闭
-"                                          " o  打开（同回车）
-"                                          " O  打开并关闭quickfix窗口
-"                                          " go 预览文件,打开,但保持专注ack.vim结果
-"                                          " t  对新标签中打开
-"                                          " T  对新标签不动,将其打开
-"                                          " h  至水平分割开
-"                                          " H  键水平分割开,保持专注于结果
-"                                          " v  垂直分割开
-"                                          " gv 垂直分割开,保持专注于结果
-"                                          " q  关闭quickfix窗口
-nmap <F6> :Ack -i<CR>
 "}}
-"{{                                        " tagbar的设定 https://github.com/majutsushi/tagbar
-nmap <F5> :TagbarToggle<CR>
-"}}
+"{{
 "{{                                        " Taglist的设定 https://github.com/vim-scripts/taglist.vim
 "                                          "     F9开关 按wm会启动.F9是单独开关
 "                                          "     :Tlist --呼出变量和函数列表 [TagList插件]
 map <F9> :TlistToggle<CR>
+let Tlist_Ctags_Cmd='ctags'                "     基于ctags
 let Tlist_Auto_Open = 0                    "     默认打开Taglist
 let Tlist_Sort_Type = "name"               "     按照名称排序
 let Tlist_Show_One_File=1                  "     不同时显示多个文件的tag,只显示当前文件的
@@ -542,8 +534,7 @@ let Tlist_File_Fold_Auto_Close = 1         "     打开其他文件的时候自�
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Auto_Update=1                    "     自动更新,包含新文件时候
 let Tlist_Enable_Fold_Column = 0           "     不要显示折叠树
-let Tlist_Use_Right_Window=1               "     左边显示
-set tags=tags;/                            "     找不到tags文件到上层找寻"
+let Tlist_Use_Right_Window=1               "     右边显示 Left_Window 会左边显示
 " php的折叠
 let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 "}}

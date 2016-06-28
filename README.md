@@ -33,8 +33,6 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 "" ack  linux ack
 Bundle 'mileszs/ack.vim'
-"" tagbar
-Bundle 'majutsushi/tagbar'
 "" display tag 
 Bundle 'vim-scripts/taglist.vim'
 "" add author info
