@@ -3,12 +3,12 @@
 "      Title: vim configure
 "   FileName: vimrc
 "Description: It's a vimrc
-"    Version: 7.09.02
+"    Version: 7.09.05
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2016-04-18 17:01:45
+" LastChange: 2016-06-28 16:30:16
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1145,6 +1145,21 @@ function! SetColorColumn()
         execute "set cc-=".col_num
     endif
 endfunction
+"}}
+"{{
+" vim 打开不存在的文件夹下的文件时自动创建文件夹
+function s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
