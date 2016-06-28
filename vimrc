@@ -135,7 +135,7 @@ if has("win32")
     au GUIEnter * simalt ~x
 endif
 "}}
-"{{                                        " make标记 :marks 取得所有标记, :jumps可在多文件跳转, :delmarks 删除指定标记, :delmarks!删除所有
+"{{                                        " mark标记 :marks 取得所有标记, :jumps可在多文件跳转, :delmarks 删除指定标记, :delmarks!删除所有
 "                                          " ma用a标记当前光标未知,可以用a~z
 "                                          " 跳转到标记 `a
 "                                          " 跳转到标记所在行首 'a
@@ -365,6 +365,12 @@ endif
 Bundle 'VundleVim/Vundle.vim'
 "" 快速文件查找
 Bundle 'kien/ctrlp.vim'
+"" ctrlp 函数查找
+Bundle 'tacahiroy/ctrlp-funky'
+"" ack 更快的搜索
+Bundle 'mileszs/ack.vim'
+"" 大纲查看
+Bundle 'majutsushi/tagbar'
 "" 显示tag列表
 Bundle 'vim-scripts/taglist.vim'
 "" 在开头加入作者信息
@@ -453,6 +459,7 @@ endif
 
 call vundle#end()
 filetype plugin indent on
+let mapleader = ","                        "      键盘映射为 ,
 "}}
 "{{                                        " CTags的设定
 "                                          "     (地址自定义,我的www在/home/www下)
@@ -467,20 +474,20 @@ set autochdir
 "{{                                        " Ctrlp的设定 https://github.com/kien/ctrlp.vim 2013-07
 "                                          "  运行命令:CtrlP或:CtrlP [starting-directory]来以查找文件模式来启用 ctrlp
 "                                          "  运行命令:CtrlPBuffer或:CtrlPMRU来以查找缓冲或最近打开文件模式来启用ctrlp
-"                                          "  运行命令CtrlPMixed来查找文件、查找缓冲和最近打开文件混合模式来启动 ctrlp
+"                                          "  运行命令:CtrlPMixed来查找文件、查找缓冲和最近打开文件混合模式来启动 ctrlp
 "                                          "    按<c-f>和<c-b>在三种查找模式中互相切换
 "                                          "    按<c-y>来创建新文件和对应的父目录
 "                                          "    按<c-d>来切换到只查找文件名而不是全路径
-"                                          "    按<c-j>，<c-k>或箭头方向键来移动查找结果列表
-"                                          "    按<c-t>或<c-v>，<c-x>来以新标签或分割窗口的方式来打开文件
-"                                          "    按<c-z>来标识或取消标识文件，然后按<c-o>来打开文件
-"                                          "    按<c-n>，<c-p>来在提示历史中选择下一个/上一个字符串
+"                                          "    按<c-j>,<c-k>或箭头方向键来移动查找结果列表
+"                                          "    按<c-t>或<c-v>,<c-x>来以新标签或分割窗口的方式来打开文件
+"                                          "    按<c-z>来标识或取消标识文件,然后按<c-o>来打开文件
+"                                          "    按<c-n>,<c-p>来在提示历史中选择下一个/上一个字符串
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip   " Linux/MacOSX
 "set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe" Windows
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rvm)$'
-let g:ctrlp_working_path_mode=0
+let g:ctrlp_working_path_mode=0            " :cd 父目录, :CtrlP 父目录 或者上级目录来查找
 let g:ctrlp_match_window_bottom=1
 let g:ctrlp_max_height=15
 let g:ctrlp_match_window_reversed=0
@@ -494,10 +501,37 @@ let g:ctrlp_user_command = {
     \ 'fallback': 'find %s -type f'
     \ }
 "}}
+"{{                                        " ctrlp-funky的设定 https://github.com/tacahiroy/ctrlp-funky
+nnoremap <Leader>fu :CtrlPFunky<CR>
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<CR>
+let g:ctrlp_funky_matchtype = 'path'
+let g:ctrlp_funky_syntax_highlight = 1
+"}}
+"{{                                        " ACK的设定 https://github.com/mileszs/ack.vim
+"                                          " apt-get install ack-grep
+"                                          " :Ack [options] {pattern} [{directories}]
+"                                          " :Ack, :AckAdd, :LAck, and :LAckAdd
+"                                          " 在ack搜索的list中  
+"                                          " ?  打开快捷列表, 重复关闭
+"                                          " o  打开（同回车）
+"                                          " O  打开并关闭quickfix窗口
+"                                          " go 预览文件,打开,但保持专注ack.vim结果
+"                                          " t  对新标签中打开
+"                                          " T  对新标签不动,将其打开
+"                                          " h  至水平分割开
+"                                          " H  键水平分割开,保持专注于结果
+"                                          " v  垂直分割开
+"                                          " gv 垂直分割开,保持专注于结果
+"                                          " q  关闭quickfix窗口
+nmap <F6> :Ack -i<CR>
+"}}
+"{{                                        " tagbar的设定 https://github.com/majutsushi/tagbar
+nmap <F5> :TagbarToggle<CR>
+"}}
 "{{                                        " Taglist的设定 https://github.com/vim-scripts/taglist.vim
 "                                          "     F9开关 按wm会启动.F9是单独开关
 "                                          "     :Tlist --呼出变量和函数列表 [TagList插件]
-map <F9> :TlistToggle<cr>
+map <F9> :TlistToggle<CR>
 let Tlist_Auto_Open = 0                    "     默认打开Taglist
 let Tlist_Sort_Type = "name"               "     按照名称排序
 let Tlist_Show_One_File=1                  "     不同时显示多个文件的tag,只显示当前文件的
@@ -523,7 +557,7 @@ let g:vimrc_copyright='2013-2016 BTROOT.ORG'
 let g:vimrc_license='https://opensource.org/licenses/MIT license'
 let g:vimrc_version='GIT: 0.0.1'
 let g:vimrc_lang_version=' version num'
-nmap <F4> :AuthorInfoDetect<cr>
+nmap <F4> :AuthorInfoDetect<CR>
 "}}
 "{{                                        " NERD_commenter.vim的设定 https://github.com/vim-scripts/The-NERD-Commenter
 "                                          "      vim加入注释
@@ -534,7 +568,6 @@ nmap <F4> :AuthorInfoDetect<cr>
 "                                          "      <leader>cu 取消注释
 "                                          "      <leader>cm 添加块注释
 "                                          "      [count],c命令 依次从本行开始注释,取消注释,count 为数字 7,cc
-let mapleader = ","                        "      键盘映射为 ,
 "                                          "      定义F11为html的注释
 map <F11> <ESC>0i<!--<ESC>$a--><ESC>
 "                                          "      定义F12为html的注释取消
@@ -605,7 +638,7 @@ let g:miniBufExplModSelTarget = 1
 "                                          "        ctrl+w+c: 关闭当前的窗口
 "                                          "        ctrl+w+o: 关闭当前窗口以外的所有窗口
 let g:winManagerWindowLayout='FileExplorer|TagList'
-nmap wm :WMToggle<cr>
+nmap wm :WMToggle<CR>
 "}}
 "{{                                        " grep.vim的设定 https://github.com/yegappan/grep
 nnoremap <silent> <F3> :Grep<CR>
@@ -833,8 +866,8 @@ endfunction
 "let g:ycm_use_ultisnips_completer = 1     "   提示UltiSnips
 "let g:ycm_cache_omnifunc = 0              "   禁止缓存匹配项,每次都重新生成匹配项
 "let g:ycm_collect_identifiers_from_comments_and_strings = 0   "注释和字符串中的文字也会被收入补全
-"let g:ycm_seed_identifiers_with_syntax = 0    "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
-""let g:ycm_collect_identifiers_from_tags_files = 1      "会导致一直更新标签，python2 占用内存80%以上
+"let g:ycm_seed_identifiers_with_syntax = 0    "语言关键字补全, 不过python关键字都很短,所以,需要的自己打开
+""let g:ycm_collect_identifiers_from_tags_files = 1      "会导致一直更新标签,python2 占用内存80%以上
 ""let g:ycm_key_invoke_completion = '<C-Space>'          " 直接触发自动补全
 "let g:ycm_goto_buffer_command = 'horizontal-split'      " 跳转到定义处, 分屏打开
 "let g:ycm_semantic_triggers = {}          " 不让C的时候只有在 ./-> 时才会弹出补全菜单
@@ -981,8 +1014,8 @@ let g:phpqa_messdetector_autorun = 0
 "                                               :PyFlake        "Run checks for current file
 "                                               :PyFlakeAuto    "Auto-fix pep8 errors for current file
 "                                          " Bind F6 to auto fix,F5 to check
-map <F6> :PyFlakeAuto<CR>
-map <F5> :PyFlake<CR>
+"map <F6> :PyFlakeAuto<CR>
+"map <F5> :PyFlake<CR>
 let g:PyFlakeOnWrite = 0                   " Auto-check file for errors on write:
 let g:PyFlakeCheckers = 'pep8,mccabe,pyflakes' "List of checkers used:
 let g:PyFlakeDefaultComplexity=10          " Default maximum complexity for mccabe:
@@ -1898,11 +1931,11 @@ endif
 "                                          "  查看键盘符号:h key-notation
 "                                          "  <Esc>=Escape, <CR>=Enter, <S-F1>=Shift+F1,<C>=<Ctrl> Mac:<D>=Command, <M-key>=<A-key>=Alt
 "                                          "  :map 查看所有, 第一列内容显示如下, 取消:umap, 取消所有:mapclear
-"                                          "      <space> 常规模式，可视化模式，运算符模式
+"                                          "      <space> 常规模式,可视化模式,运算符模式
 "                                          "      n       常规模式
 "                                          "      v       可视化模式
 "                                          "      o       运算符模式
-"                                          "      !       插入模式，命令行模式
+"                                          "      !       插入模式,命令行模式
 "                                          "      i       插入模式
 "                                          "      c       命令模式
 "                                          " i<c-r>/ 把最后一个搜索指令贴到当前位置 i<c-r>把最后一个命令贴到当前位置 :X 加密文件
@@ -2019,5 +2052,6 @@ endif
 " 7.09.02                                  " add vundle 2016-04-18 17:12:52
 " 7.09.03                                  " add others plugin 2016-04-20 00:55:32
 " 7.09.04                                  " add lua,scala 2016-05-06 11:16:41
+" 7.09.05                                  " add fast search 2016-06-28 14:13:48
 "}}
 "}}}

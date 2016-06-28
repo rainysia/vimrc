@@ -27,28 +27,56 @@ we map the <Leader> as ,
 ---------------------------------
 ```
 Bundle 'VundleVim/Vundle.vim'
+"" 快速文件查找
 Bundle 'kien/ctrlp.vim'
+"" ctrlp 函数查找
+Bundle 'tacahiroy/ctrlp-funky'
+"" ack 更快的搜索
+Bundle 'mileszs/ack.vim'
+"" 大纲查看
+Bundle 'majutsushi/tagbar'
+"" 显示tag列表
 Bundle 'vim-scripts/taglist.vim'
+"" 在开头加入作者信息
 Bundle 'rainysia/authorinfo_php'
+"" 多种方式加入代码注释
 Bundle 'vim-scripts/The-NERD-Commenter'
+"" 显示文件浏览
 Bundle 'scrooloose/nerdtree'
+"" 在文件浏览是git时显示状态
 Bundle 'Xuyuanp/nerdtree-git-plugin'
+"" 显示minibuf列表在导航
 Bundle 'fholgado/minibufexpl.vim'
+"" 窗口管理
 Bundle 'vim-scripts/winmanager'
+"" 在工程中快速查找 F3
 Bundle 'yegappan/grep'
+"" 更好的查找
 Bundle 'dkprice/vim-easygrep'
+"" 最近使用文件浏览
 Bundle 'vim-scripts/mru.vim'
+"" 显示多次搜索结果
 Bundle 'vim-scripts/multisearch.vim'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'dimasg/vim-mark'
+"" 中文vim文档
 Bundle 'asins/vimcdoc'
+
+"" 显示实际颜色
 Bundle 'lilydjwg/colorizer'
+
+"" 日历
 Bundle 'itchyny/calendar.vim'
+
+"" 自动缩进线, 彩色渐变
 Bundle 'nathanaelkane/vim-indent-guides'
+"" 自动缩进线
 Bundle 'Yggdroot/indentLine'
+"" lightline statusline
 Bundle 'itchyny/lightline.vim'
 Bundle 'tpope/vim-fugitive'
 
+"" zencoding,快速生成代码
 "Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'vim-scripts/Emmet.vim'
@@ -65,14 +93,26 @@ Bundle 'joonty/vim-phpqa'
 Bundle 'tpope/vim-surround'
 Bundle 'andviro/flake8-vim'
 Bundle 'jiangmiao/auto-pairs'
+
+"" (x)html close tag
 Bundle 'vim-scripts/closetag.vim'
+
+"" Switch in c to h
 Bundle 'vim-scripts/a.vim'
+
+"" php indent and syntax
 Bundle '2072/PHP-Indenting-for-VIm'
 Bundle '2072/vim-syntax-for-PHP'
+
+"" scala
 Bundle 'derekwyatt/vim-scala'
 Bundle 'vim-scripts/scala.vim'
+
+"" lua
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-lua-ftplugin'
+
+"" format
 Bundle 'junegunn/vim-easy-align'
 
 ```
