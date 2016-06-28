@@ -902,6 +902,11 @@ highlight SyntasticErrorSign guifg=white guibg=black
 "}}
 "                                          " MarcWeber/vim-addon-mw-utils https://github.com/MarcWeber/vim-addon-mw-utils'
 "                                          " tomtom/tlib_vim              https://github.com/tomtom/tlib_vim'
+"{{                                        " vim-snippets https://github.com/honza/vim-snippets
+"
+"{{                                        " snipmate https://github.com/msanders/snipmate.vim
+" :h SnipMate-mappings
+"}}
 "                                          " garbas/vim-snipmate          https://github.com/garbas/vim-snipmate'
 "                                          " rainysia/vim-snippets        https://github.com/rainysia/vim-snippets'
 let g:snips_author=g:vimrc_author
@@ -946,11 +951,6 @@ let g:snips_php_version=g:vimrc_lang_version
 "inoremap <c-j> <c-r>=g:JInYCM()<cr>
 "au BufEnter,BufRead * exec "inoremap <silent> " . g:UltiSnipsJumpBackwordTrigger . " <C-R>=g:KInYCM()<cr>"
 "let g:UltiSnipsJumpBackwordTrigger = "<c-k>"
-"}}
-"{{                                        " vim-snippets https://github.com/honza/vim-snippets
-"
-"{{                                        " snipmate https://github.com/msanders/snipmate.vim
-" :h SnipMate-mappings
 "}}
 "}}
 "{{                                        " L9 library for autocomplpop https://github.com/vim-scripts/L9
