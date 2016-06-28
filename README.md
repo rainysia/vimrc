@@ -27,56 +27,56 @@ we map the <Leader> as ,
 ---------------------------------
 ```
 Bundle 'VundleVim/Vundle.vim'
-"" 快速文件查找
+"" Fast search in current directory
 Bundle 'kien/ctrlp.vim'
-"" ctrlp 函数查找
+"" Fast search function in current directory
 Bundle 'tacahiroy/ctrlp-funky'
-"" ack 更快的搜索
+"" ack  linux ack
 Bundle 'mileszs/ack.vim'
-"" 大纲查看
+"" tagbar
 Bundle 'majutsushi/tagbar'
-"" 显示tag列表
+"" display tag 
 Bundle 'vim-scripts/taglist.vim'
-"" 在开头加入作者信息
+"" add author info
 Bundle 'rainysia/authorinfo_php'
-"" 多种方式加入代码注释
+"" comment code
 Bundle 'vim-scripts/The-NERD-Commenter'
-"" 显示文件浏览
+"" list files and directory
 Bundle 'scrooloose/nerdtree'
-"" 在文件浏览是git时显示状态
+"" add git status for nerdtree
 Bundle 'Xuyuanp/nerdtree-git-plugin'
-"" 显示minibuf列表在导航
+"" minibuffer list
 Bundle 'fholgado/minibufexpl.vim'
-"" 窗口管理
+"" multiple window 
 Bundle 'vim-scripts/winmanager'
-"" 在工程中快速查找 F3
+"" like ack
 Bundle 'yegappan/grep'
-"" 更好的查找
+"" easygrep
 Bundle 'dkprice/vim-easygrep'
-"" 最近使用文件浏览
+"" recently files
 Bundle 'vim-scripts/mru.vim'
-"" 显示多次搜索结果
+"" display recent files search
 Bundle 'vim-scripts/multisearch.vim'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'dimasg/vim-mark'
-"" 中文vim文档
+"" Chinese vim document
 Bundle 'asins/vimcdoc'
 
-"" 显示实际颜色
+"" display color for code code 
 Bundle 'lilydjwg/colorizer'
 
-"" 日历
+"" calendar
 Bundle 'itchyny/calendar.vim'
 
-"" 自动缩进线, 彩色渐变
+"" indent
 Bundle 'nathanaelkane/vim-indent-guides'
-"" 自动缩进线
+"" indentLine
 Bundle 'Yggdroot/indentLine'
 "" lightline statusline
 Bundle 'itchyny/lightline.vim'
 Bundle 'tpope/vim-fugitive'
 
-"" zencoding,快速生成代码
+"" zencoding for generate code
 "Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'vim-scripts/Emmet.vim'
