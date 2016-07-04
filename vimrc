@@ -1614,7 +1614,7 @@ endif
 " :n1,n2s/^/\/\//g                         " 用//注释n1~n2
 " :n1,n2s/\/\///g                          " 删除//的注释
 " :g/keywords/d                            " 删除所有含有keywords的行
-" :v/error\|warn\|fail/d                   " 删除不含有error,warn,fail的行, v=g!, g!/error\|warn\|fail/d
+" :v/error\|warn\|fail/d                   " 删除不含有error,warn,fail的行, v=g!, :%g!/error\|warn\|fail/d
 " :n1,n2s/^I/','/g                         " 把tab替换成','
 " :%s/^\s\+//g                             " 删除行首空格
 " :%s/\s\+$//g                             " 删除行末空格 要转义斜杠等, 用\,而+ |转义用\\
