@@ -234,10 +234,10 @@ function! SetTitle()
        call append(line(".")+7,"")
    else
         call setline(1, "/*************************************************************************")
-        call append(line("."), "	> File Name: ".expand("%"))
-        call append(line(".")+1, "	> Author: rainysia")
-        call append(line(".")+2, "	> Mail: rainysia@gmail.com ")
-        call append(line(".")+3, "	> Created Time: ".strftime("%F %T"))
+        call append(line("."), "    > File Name: ".expand("%"))
+        call append(line(".")+1, "  > Author: rainysia")
+        call append(line(".")+2, "  > Mail: rainysia@gmail.com ")
+        call append(line(".")+3, "  > Created Time: ".strftime("%F %T"))
         call append(line(".")+4, " ************************************************************************/")
         call append(line(".")+5, "")
     endif
@@ -458,7 +458,7 @@ endif
 call vundle#end()
 filetype plugin indent on
 let mapleader = ","                         "      键盘映射为 ,
-                                            " ,c   搜索统计光标处单词的次数
+"                                           " ,c   搜索统计光标处单词的次数
 nmap <Leader>c *<C-O>:%s///gn<CR>
 "}}
 "{{                                         " CTags的设定
@@ -1243,8 +1243,8 @@ if has("gui_running")
     hi        SpellCap       guifg=#BF0000          guibg=#1C1D1F           gui=NONE        "应该大写字母开头的单词
     hi        SpellLocal     guifg=#FF00FF          guibg=#1C1D1F           gui=NONE        "只在其它区域使用的单词
     hi        SpellRare      guifg=#FF7FFF          guibg=#1C1D1F           gui=NONE        "很少使用的单词
-    "	hi        StatusLine     guifg=#D8BFD8          guibg=#696969           gui=NONE        "当前窗口的状态行
-    "	hi        StatusLineNC   guifg=#FFFFFF          guibg=#3F3F3F           gui=NONE        "非当前窗口的状态行
+    "   hi        StatusLine     guifg=#D8BFD8          guibg=#696969           gui=NONE        "当前窗口的状态行
+    "   hi        StatusLineNC   guifg=#FFFFFF          guibg=#3F3F3F           gui=NONE        "非当前窗口的状态行
     hi        TabLine        guifg=#1C1D1F          guibg=#BFBFBF           gui=NONE        "非活动标签页标签
     hi        TabLineFill    guifg=#1C1D1F          guibg=#FFFFFF           gui=NONE        "没有标签的地方
     hi        TabLineSel     guifg=#FFFF00          guibg=#0000FF           gui=NONE        "活动标签页标签
@@ -1298,154 +1298,154 @@ if has("gui_running")
     hi        Error          guifg=#CFCFCF          guibg=#CF6C6C           gui=NONE        "任何有错的构造
     hi        Todo           guifg=#FFFFFF          guibg=#0000FF           gui=NONE        "任何需要特殊注意的部分
     "-----------------------------------------------------------------------------------------------------------------------"
-    "	hi        HtmlTagN       guifg=#7F7F7F          guibg=#1C1D1F           gui=NONE        "HtmlTagN
-    "	hi        cssStyle       guifg=#008B8B          guibg=#1C1D1F           gui=NONE        "cssStyle
-    "	hi        phpLabel       guifg=#008B8B          guibg=#1C1D1F           gui=NONE        "phpLabel
+    "   hi        HtmlTagN       guifg=#7F7F7F          guibg=#1C1D1F           gui=NONE        "HtmlTagN
+    "   hi        cssStyle       guifg=#008B8B          guibg=#1C1D1F           gui=NONE        "cssStyle
+    "   hi        phpLabel       guifg=#008B8B          guibg=#1C1D1F           gui=NONE        "phpLabel
     "======================================================================================================================="
-    "	html,css,php highlight
-    "	hi        cssAttributeSelector    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   html,css,php highlight
+    "   hi        cssAttributeSelector    guifg=#800000    guibg=#00FF00    gui=NONE
     hi        cssDefinition    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        cssFontDescriptorBlock    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        cssLength    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        cssMediaBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        cssFontDescriptorBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        cssLength    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        cssMediaBlock    guifg=#800000    guibg=#00FF00    gui=NONE
     hi        cssMediaComma  guifg=#008B8B          guibg=#1C1D1F           gui=NONE        "css逗号
     hi        cssPseudoClass guifg=#008B8B          guibg=#1C1D1F           gui=NONE        "css伪类符号
     hi        cssSpecialCharQ    guifg=#800000    guibg=#00FF00    gui=NONE
     hi        cssSpecialCharQQ    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        cssString    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        cssString    guifg=#800000    guibg=#00FF00    gui=NONE
     hi        cssStringQ    guifg=#F4E3DC    guibg=#808080    gui=NONE                      "css 字体单引号扩起来,src单引号
     hi        cssStringQQ    guifg=#F4E3DC    guibg=#808080    gui=NONE                     "css 字体双引号扩起来,src双引号
-    "	hi        cssStyle    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        cssStyle    guifg=#800000    guibg=#00FF00    gui=NONE
     hi        cssURL         guifg=#BAB5C9          guibg=#1C1D1F           gui=NONE        "css url color
-    "	hi        htmlBold    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlBoldItalic    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlBoldItalicUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlBoldUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlBoldUnderlineItalic    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlItalic    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlItalicBold    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlItalicBoldUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlItalicUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlItalicUnderlineBold    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlPreAttr    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlBold    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlBoldItalic    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlBoldItalicUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlBoldUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlBoldUnderlineItalic    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlItalic    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlItalicBold    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlItalicBoldUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlItalicUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlItalicUnderlineBold    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlPreAttr    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlRegion    guifg=#800000    guibg=#00FF00    gui=NONE
     hi        htmlString     guifg=#D7CDE4          guibg=#1C1D1F           gui=NONE        "HTML string,html的属性,""里面的
-    "	hi        htmlStyleArg    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlTagN    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlUnderlineBold    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlUnderlineBoldItalic    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlUnderlineItalic    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlUnderlineItalicBold    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        htmlValue    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        javaScriptCommentSkip    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        javaScriptNumber    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        javaScriptParens    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        javaScriptRegexpString    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        javaScriptStringD    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        javaScriptStringS    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        javaScriptValue    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpArrayComma    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpArrayRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpArrayRegionSimple    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpBacktick    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpBlockRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpBracketRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpCaseRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpCatchBlock    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpCatchRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpClassBlock    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpClassStart    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpConstructRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpDefineClassBlockCommentOneline    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpDefineClassImplementsComma    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpDefineClassImplementsCommentOneLine    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpDefineClassImplementsName    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpDefineClassName    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpDefineFuncBlockCommentOneline    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpDefineFuncName    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpDefineFuncProto    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpDefineInterfaceName    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpDefineMethodName    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpDoBlock    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpDoWhileConstructRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpEchoRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpErraticBracketRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpFoldCatch    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpFoldClass    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpFoldFunction    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpFoldHtmlInside    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpFoldInterface    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpFoldTry    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpForRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpForeachRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpFuncBlock    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpHereDoc    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpIdentifierComplex    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpIdentifierInString    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpIdentifierInStringComplex    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpIdentifierInStringErratic    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpLabel    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpListComma    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpListRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpMemberHere    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpMethodHere    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpMethodsVar    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpPREGArrayComma    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpPREGArrayOpenParent    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpPREGArrayRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpPREGArrayStringDouble    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpPREGArrayStringSingle    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpPREGOpenParentMulti    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpPREGRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpPREGRegionMulti    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpPREGStringDouble    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpPREGStringSingle    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpPREGStringStarter    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpParentRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpPropertyHere    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpPropertyInString    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpProtoArray    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpQuoteDouble    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpQuoteSingle    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpRegionAsp    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpRegionSc    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpRegionSync    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpSpecialCharfold    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpStatementRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpStaticAccess    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpStaticCall    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpStaticUsage    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpStaticVariable    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpStringDouble    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpStringDoubleConstant    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpStringRegular    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpStringSingle    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpStructureHere    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpSwitchBlock    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpSwitchConstructRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpSyncComment    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpSyncStartOfFile    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpSyncString    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpTernaryRegion    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        phpTryBlock    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        pregClassEscapeDouble2    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        pregClassEscapeMainQuote    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        pregConcat    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        pregEscapeMainQuote    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        pregNonSpecial    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        pregNonSpecialEscape    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        pregNonSpecial_D    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        pregNonSpecial_S    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        pregPattern    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        pregPattern_D    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        pregPattern_S    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        sqlString    guifg=#800000    guibg=#00FF00    gui=NONE
-    "	hi        vbString    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlStyleArg    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlTagN    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlUnderline    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlUnderlineBold    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlUnderlineBoldItalic    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlUnderlineItalic    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlUnderlineItalicBold    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        htmlValue    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        javaScriptCommentSkip    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        javaScriptNumber    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        javaScriptParens    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        javaScriptRegexpString    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        javaScriptStringD    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        javaScriptStringS    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        javaScriptValue    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpArrayComma    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpArrayRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpArrayRegionSimple    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpBacktick    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpBlockRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpBracketRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpCaseRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpCatchBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpCatchRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpClassBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpClassStart    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpConstructRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpDefineClassBlockCommentOneline    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpDefineClassImplementsComma    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpDefineClassImplementsCommentOneLine    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpDefineClassImplementsName    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpDefineClassName    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpDefineFuncBlockCommentOneline    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpDefineFuncName    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpDefineFuncProto    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpDefineInterfaceName    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpDefineMethodName    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpDoBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpDoWhileConstructRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpEchoRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpErraticBracketRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpFoldCatch    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpFoldClass    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpFoldFunction    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpFoldHtmlInside    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpFoldInterface    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpFoldTry    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpForRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpForeachRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpFuncBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpHereDoc    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpIdentifierComplex    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpIdentifierInString    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpIdentifierInStringComplex    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpIdentifierInStringErratic    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpLabel    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpListComma    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpListRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpMemberHere    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpMethodHere    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpMethodsVar    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpPREGArrayComma    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpPREGArrayOpenParent    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpPREGArrayRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpPREGArrayStringDouble    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpPREGArrayStringSingle    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpPREGOpenParentMulti    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpPREGRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpPREGRegionMulti    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpPREGStringDouble    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpPREGStringSingle    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpPREGStringStarter    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpParentRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpPropertyHere    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpPropertyInString    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpProtoArray    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpQuoteDouble    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpQuoteSingle    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpRegionAsp    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpRegionSc    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpRegionSync    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpSpecialCharfold    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpStatementRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpStaticAccess    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpStaticCall    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpStaticUsage    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpStaticVariable    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpStringDouble    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpStringDoubleConstant    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpStringRegular    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpStringSingle    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpStructureHere    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpSwitchBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpSwitchConstructRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpSyncComment    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpSyncStartOfFile    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpSyncString    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpTernaryRegion    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        phpTryBlock    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        pregClassEscapeDouble2    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        pregClassEscapeMainQuote    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        pregConcat    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        pregEscapeMainQuote    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        pregNonSpecial    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        pregNonSpecialEscape    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        pregNonSpecial_D    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        pregNonSpecial_S    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        pregPattern    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        pregPattern_D    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        pregPattern_S    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        sqlString    guifg=#800000    guibg=#00FF00    gui=NONE
+    "   hi        vbString    guifg=#800000    guibg=#00FF00    gui=NONE
 elseif &t_Co == 256
     "Console xterm 256
-    "	=======================================================================================================================
+    "   =======================================================================================================================
     hi        Cursor         ctermfg=black            ctermbg=lightyellow       cterm=BOLD        "光标所在的字符
     hi        CursorColumn   ctermfg=black            ctermbg=darkgrey          cterm=BOLD        "光标所在的屏幕列
     hi        CursorLine     ctermfg=black            ctermbg=lightblue          cterm=NONE        "光标所在的屏幕行
@@ -1487,21 +1487,21 @@ elseif &t_Co == 256
     hi        Visual         ctermfg=yellow           ctermbg=lightblue         cterm=BOLD        "可视模式的选择区
     hi        WarningMsg     ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "警告消息
     hi        WildMenu       ctermfg=lightgreen       ctermbg=lightblue         cterm=BOLD        "wildmenu补全的当前匹配
-    "	=======================================================================================================================
-    "	"Console group-name
-    "	=======================================================================================================================
+    "   =======================================================================================================================
+    "   "Console group-name
+    "   =======================================================================================================================
     hi        Comment        ctermfg=darkgrey         ctermbg=black             cterm=BOLD        "任何注释
-    "	-----------------------------------------------------------------------------------------------------------------------
+    "   -----------------------------------------------------------------------------------------------------------------------
     hi        Constant       ctermfg=brown            ctermbg=black             cterm=NONE        "任何常数
     hi        String         ctermfg=grey             ctermbg=black             cterm=NONE        "一个字符串常数:字符串
     hi        Character      ctermfg=grey             ctermbg=black             cterm=NONE        "一个字符常数: 'c'、'\n'
     hi        Number         ctermfg=lightblue        ctermbg=black             cterm=NONE        "一个数字常数: 234、0xff
     hi        Float          ctermfg=lightblue        ctermbg=black             cterm=NONE        "一个浮点常数: 2.3e10
     hi        Boolean        ctermfg=grey             ctermbg=black             cterm=NONE        "一个布尔型常数: TRUE、false
-    "	-----------------------------------------------------------------------------------------------------------------------
+    "   -----------------------------------------------------------------------------------------------------------------------
     hi        Identifier     ctermfg=lightgreen       ctermbg=black             cterm=NONE        "任何变量名
     hi        Function       ctermfg=lightcyan        ctermbg=black             cterm=NONE        "函数名 (也包括: 类的方法名)
-    "	-----------------------------------------------------------------------------------------------------------------------
+    "   -----------------------------------------------------------------------------------------------------------------------
     hi        Statement      ctermfg=yellow           ctermbg=black             cterm=NONE        "任何语句
     hi        Conditional    ctermfg=yellow           ctermbg=black             cterm=NONE        "if、then、else、endif、switch
     hi        Repeat         ctermfg=yellow           ctermbg=black             cterm=NONE        "for、do、while 等
@@ -1509,30 +1509,30 @@ elseif &t_Co == 256
     hi        Operator       ctermfg=yellow           ctermbg=black             cterm=NONE        ""sizeof"、"+"、"*" 等
     hi        Keyword        ctermfg=yellow           ctermbg=black             cterm=NONE        "任何其它关键字
     hi        Exception      ctermfg=lightred         ctermbg=black             cterm=NONE        "try、catch、throw
-    "	-----------------------------------------------------------------------------------------------------------------------
+    "   -----------------------------------------------------------------------------------------------------------------------
     hi        PreProc        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "通用预处理命令
     hi        Include        ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "预处理命令 #include
     hi        Define         ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "预处理命令 #define
     hi        Macro          ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "等同于 Define
     hi        PreCondit      ctermfg=lightred         ctermbg=black             cterm=BOLD        "预处理命令 #if、#else、#endif
-    "	-----------------------------------------------------------------------------------------------------------------------
+    "   -----------------------------------------------------------------------------------------------------------------------
     hi        Type           ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "int、long、char 等
     hi        StorageClass   ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "static、register、volatile 等
     hi        Structure      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "struct、union、enum 等
     hi        Typedef        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "一个 typedef
-    "	-----------------------------------------------------------------------------------------------------------------------
+    "   -----------------------------------------------------------------------------------------------------------------------
     hi        Special        ctermfg=brown            ctermbg=black             cterm=BOLD        "任何特殊符号
     hi        SpecialChar    ctermfg=brown            ctermbg=black             cterm=BOLD        "常数中的特殊字符
     hi        Tag            ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "这里可以使用 CTRL-]
     hi        Delimiter      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "需要注意的字符
     hi        SpecialComment ctermfg=lightred         ctermbg=black             cterm=BOLD        "注释里的特殊字符
     hi        Debug          ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "调试语句
-    "	-----------------------------------------------------------------------------------------------------------------------
+    "   -----------------------------------------------------------------------------------------------------------------------
     hi        Underlined     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "需要突出的文本,HTML 链接
     hi        Ignore         ctermfg=darkgrey         ctermbg=black             cterm=NONE        "留空,被隐藏
     hi        Error          ctermfg=yellow           ctermbg=lightred          cterm=BOLD        "任何有错的构造
     hi        Todo           ctermfg=lightgrey        ctermbg=lightblue         cterm=BOLD        "任何需要特殊注意的部分
-    "	=======================================================================================================================
+    "   =======================================================================================================================
 else
     "Console xterm 8
     hi        Cursor         ctermfg=black            ctermbg=lightyellow       cterm=BOLD        "光标所在的字符
@@ -1576,21 +1576,21 @@ else
     hi        Visual         ctermfg=yellow           ctermbg=lightblue         cterm=BOLD        "可视模式的选择区
     hi        WarningMsg     ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "警告消息
     hi        WildMenu       ctermfg=lightgreen       ctermbg=lightblue         cterm=BOLD        "wildmenu补全的当前匹配
-    "	=======================================================================================================================
-    "	"Console group-name
-    "	=======================================================================================================================
+    "   =======================================================================================================================
+    "   "Console group-name
+    "   =======================================================================================================================
     hi        Comment        ctermfg=darkgrey         ctermbg=black             cterm=BOLD        "任何注释
-    "	-----------------------------------------------------------------------------------------------------------------------
+    "   -----------------------------------------------------------------------------------------------------------------------
     hi        Constant       ctermfg=brown            ctermbg=black             cterm=NONE        "任何常数
     hi        String         ctermfg=grey             ctermbg=black             cterm=NONE        "一个字符串常数:字符串
     hi        Character      ctermfg=grey             ctermbg=black             cterm=NONE        "一个字符常数: 'c'、'\n'
     hi        Number         ctermfg=lightblue        ctermbg=black             cterm=NONE        "一个数字常数: 234、0xff
     hi        Float          ctermfg=lightblue        ctermbg=black             cterm=NONE        "一个浮点常数: 2.3e10
     hi        Boolean        ctermfg=grey             ctermbg=black             cterm=NONE        "一个布尔型常数: TRUE、false
-    "	-----------------------------------------------------------------------------------------------------------------------
+    "   -----------------------------------------------------------------------------------------------------------------------
     hi        Identifier     ctermfg=lightgreen       ctermbg=black             cterm=NONE        "任何变量名
     hi        Function       ctermfg=lightcyan        ctermbg=black             cterm=NONE        "函数名 (也包括: 类的方法名)
-    "	-----------------------------------------------------------------------------------------------------------------------
+    "   -----------------------------------------------------------------------------------------------------------------------
     hi        Statement      ctermfg=yellow           ctermbg=black             cterm=NONE        "任何语句
     hi        Conditional    ctermfg=yellow           ctermbg=black             cterm=NONE        "if、then、else、endif、switch
     hi        Repeat         ctermfg=yellow           ctermbg=black             cterm=NONE        "for、do、while 等
@@ -1598,30 +1598,30 @@ else
     hi        Operator       ctermfg=yellow           ctermbg=black             cterm=NONE        ""sizeof"、"+"、"*" 等
     hi        Keyword        ctermfg=yellow           ctermbg=black             cterm=NONE        "任何其它关键字
     hi        Exception      ctermfg=lightred         ctermbg=black             cterm=NONE        "try、catch、throw
-    "	-----------------------------------------------------------------------------------------------------------------------
+    "   -----------------------------------------------------------------------------------------------------------------------
     hi        PreProc        ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "通用预处理命令
     hi        Include        ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "预处理命令 #include
     hi        Define         ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "预处理命令 #define
     hi        Macro          ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "等同于 Define
     hi        PreCondit      ctermfg=lightred         ctermbg=black             cterm=BOLD        "预处理命令 #if、#else、#endif
-    "	-----------------------------------------------------------------------------------------------------------------------
+    "   -----------------------------------------------------------------------------------------------------------------------
     hi        Type           ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "int、long、char 等
     hi        StorageClass   ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "static、register、volatile 等
     hi        Structure      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "struct、union、enum 等
     hi        Typedef        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "一个 typedef
-    "	-----------------------------------------------------------------------------------------------------------------------
+    "   -----------------------------------------------------------------------------------------------------------------------
     hi        Special        ctermfg=brown            ctermbg=black             cterm=BOLD        "任何特殊符号
     hi        SpecialChar    ctermfg=brown            ctermbg=black             cterm=BOLD        "常数中的特殊字符
     hi        Tag            ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "这里可以使用 CTRL-]
     hi        Delimiter      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "需要注意的字符
     hi        SpecialComment ctermfg=lightred         ctermbg=black             cterm=BOLD        "注释里的特殊字符
     hi        Debug          ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "调试语句
-    "	-----------------------------------------------------------------------------------------------------------------------
+    "   -----------------------------------------------------------------------------------------------------------------------
     hi        Underlined     ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "需要突出的文本,HTML 链接
     hi        Ignore         ctermfg=darkgrey         ctermbg=black             cterm=NONE        "留空,被隐藏
     hi        Error          ctermfg=yellow           ctermbg=lightred          cterm=BOLD        "任何有错的构造
     hi        Todo           ctermfg=lightgrey        ctermbg=lightblue         cterm=BOLD        "任何需要特殊注意的部分
-    "	=======================================================================================================================
+    "   =======================================================================================================================
 endif
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
