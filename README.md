@@ -139,7 +139,8 @@ Make sure you have permission make it.
 
 3. Others
 ```
-Need cmake for [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) plugins
+Need cmake for [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) plugin.
+Need ack for [ack.vim](https://github.com/mileszs/ack) plugin.
 Need [consolas-powerline-vim](https://github.com/rainysia/vimrc/blob/master/consolas-powerline-vim.tar.gz) font for git branch status.
 ```
 
