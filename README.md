@@ -51,6 +51,8 @@ Bundle 'vim-scripts/winmanager'
 Bundle 'yegappan/grep'
 "" easygrep
 Bundle 'dkprice/vim-easygrep'
+"" Expand V-selected region
+Bundle 'terryma/vim-expand-region'
 "" recently files
 Bundle 'vim-scripts/mru.vim'
 "" display recent files search
@@ -73,6 +75,7 @@ Bundle 'Yggdroot/indentLine'
 "" lightline statusline
 Bundle 'itchyny/lightline.vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'airblade/vim-gitgutter'
 
 "" zencoding for generate code
 "Bundle 'Valloric/YouCompleteMe'

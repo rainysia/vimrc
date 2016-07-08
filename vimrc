@@ -1,14 +1,14 @@
 " 0 => Author {{{
 "========================================================================
 "      Title: vim configure
-"   FileName: vimrc
+"   Filename: Vimrc
 "Description: It's a vimrc
 "    Version: 7.09.05
 "     Author: rainysia
 "      Email: rainysia@gmail.com
 "   HomePage: http://www.btroot.org
 " CreateDate: 2008-04-01 02:14:55
-" LastChange: 2016-06-28 16:30:16
+" LastChange: 2016-07-08 10:47:27
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -387,12 +387,16 @@ Bundle 'vim-scripts/winmanager'
 Bundle 'yegappan/grep'
 "" 更好的查找
 Bundle 'dkprice/vim-easygrep'
+"" 区块伸缩选中
+Bundle 'terryma/vim-expand-region'
 "" 最近使用文件浏览
 Bundle 'vim-scripts/mru.vim'
 "" 显示多次搜索结果
 Bundle 'vim-scripts/multisearch.vim'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'dimasg/vim-mark'
+"" 关键字多文件搜索
+Bundle 'dyng/ctrlsf.vim'
 "" 中文vim文档
 Bundle 'asins/vimcdoc'
 
@@ -409,6 +413,7 @@ Bundle 'Yggdroot/indentLine'
 "" lightline statusline
 Bundle 'itchyny/lightline.vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'airblade/vim-gitgutter'
 
 "" zencoding,快速生成代码
 "Bundle 'Valloric/YouCompleteMe'
@@ -478,8 +483,8 @@ set autochdir
 "                                           "    按<c-f>和<c-b>在三种查找模式中互相切换
 "                                           "    按<c-y>来创建新文件和对应的父目录
 "                                           "    按<c-d>来切换到只查找文件名而不是全路径
-"                                           "    按<c-j>,<c-k>或箭头方向键来移动查找结果列表
-"                                           "    按<c-t>或<c-v>,<c-x>来以新标签或分割窗口的方式来打开文件
+"                                           "    按<c-j>,<c-k>或箭头方向键来移动查找结果列表***
+"                                           "    按<c-t>或<c-v>,<c-x>来以新标签或分割窗口的方式来打开文件***
 "                                           "    按<c-z>来标识或取消标识文件,然后按<c-o>来打开文件
 "                                           "    按<c-n>,<c-p>来在提示历史中选择下一个/上一个字符串
 let g:ctrlp_map = '<c-p>'
@@ -623,8 +628,10 @@ let g:miniBufExplModSelTarget = 1
 "                                           "        ctrl+w+>: 将当前窗口的宽度增加
 "                                           "        ctrl+w+|: 将当前窗口的宽度调到最大,也可通过ex命令 :vertical resize n明确指定改变宽度
 "                                           "        :tabnew filename  打开新分页并编辑新文件(可选的).如果未指定文件,则只打开新分页,并附上空的缓冲区.
-"                                           "        :tabclose  关闭当前分页
-"                                           "        :tabonly  关闭其他所有的分页.如果其他分页中有修改过的文件,则不会移除该分页
+"                                           "        :tabclose  :tabc关闭当前分页
+"                                           "        :tabonly  :tabo关闭其他所有的分页.如果其他分页中有修改过的文件,则不会移除该分页
+"                                           "        :tabp  前一个, :tabn 后一个, 
+"                                           "        普通模式下 gt下一个, gT前一个tab, 2gt直接跳到后2个tab, 3gT跳到前三个tab
 "                                           "        ctrl+PageDown: 移动到下一个分页
 "                                           "        ctrl+PageUp: 移动到上一个分页
 "                                           "        ctrl+w+q: 离开当前窗口
@@ -645,6 +652,10 @@ nnoremap <silent> <F3> :Grep<CR>
 " <Leader>vo                                "    Select the files to search in and set grep options
 "                                           " :GrepOptions [arg] 新开窗口来设置grep选项.
 "}}
+"{{                                         " vim-expand-region https://github.com/terryma/vim-expand-region
+"                                           " + 扩展选择, - 缩小选择
+
+"}}
 "{{                                         " mru.vim的设定 https://github.com/vim-scripts/mru.vim
 "                                           " :MRU
 "let MRU_File = '\myhome\_vim_mru_files' " 指定缓存地址.
@@ -659,10 +670,10 @@ let MRU_Max_Submenu_Entries = 15
 "                                           " :help Msearch, :Msearch <command>
 "}}
 "{{                                         " vim-multiple-cursors 插件.多重选择 https://github.com/terryma/vim-multiple-cursors
-"                                           "    ctrl-n  select, c modify the content, <esc> exit;
-"let g:multi_cursor_next_key='<C-n>'        "    next 
-"let g:multi_cursor_prev_key='<C-d>'        "    prev
-"let g:multi_cursor_skip_key='<C-x>'        "    skip the next.
+"                                           " v选中后, ctrl-n select next, c modify the content, <esc> exit;
+let g:multi_cursor_next_key='<C-n>'         "    next 
+let g:multi_cursor_prev_key='<C-d>'         "    prev
+let g:multi_cursor_skip_key='<C-x>'         "    skip the next.
 "}}
 "{{                                         " mark.vba.gz的设定(mark.vim) https://github.com/dimasg/vim-mark
 "                                           " :Mark regexp   to mark a regular expression 
@@ -679,6 +690,9 @@ let MRU_Max_Submenu_Entries = 15
 "                                           "      <Leader>// ,// 把光标向前切换到所有被Mark的MarkWords中的下一个MarkWord.
 "                                           "      <Leader>/? ,/? 把光标向后切换到所有被Mark的MarkWords中的上一个MarkWord.
 let g:mwDefaultHighlightingPalette = 'extended'
+"}}
+"{{                                         " dyng/ctrlsf.vim git@github.com:dyng/ctrlsf.vim.git
+"                                           " :CtrlSF [keywords], t 在tab中打开,T 在tab打开但光标在搜索结果, q quit CtrlSF mode
 "}}
 "{{                                         " vimcdoc https://github.com/asins/vimcdoc
 "
@@ -715,6 +729,25 @@ let g:indentLine_char = '|'
 "                                           " :Gstatus , press - to add/reset, p to add/reset --patch
 "                                           " :Gwrite, :Gbrowse, :Git
 autocmd QuickFixCmdPost *grep* cwindow
+"}}
+"{{                                         " vim-gitgutter https://github.com/airblade/vim-gitgutter
+"                                           "   ,hn跳转下一个修改,hp前跳修改,ht关闭开启该插件,hh高亮轮换
+"                                           "   :GitGutterDisable/Enable/Toggle 禁用/启用/轮换 该插件
+"                                           "   :GitGutterLineHighlightsEnable/Disable/Toggle 高亮修改行,default off
+"                                           "   ☺ ☻ ♻ ✗ ✚ ✪ ✯ ➜ ❀ ☢ ✖️ 
+"                                           "   关闭占用vim左侧列
+let g:gitgutter_sign_column_always = 0
+let g:gitgutter_max_signs = 500 
+nmap <Leader>hn <Plug>GitGutterNextHunk
+nmap <Leader>hp <Plug>GitGutterPrevHunk
+nmap <Leader>ht :GitGutterToggle<CR>
+nmap <Leader>hh :GitGutterLineHighlightsToggle<CR>
+let g:gitgutter_sign_added = '✚'
+let g:gitgutter_sign_modified = '✗'
+let g:gitgutter_sign_removed = '✖️'
+let g:gitgutter_sign_removed_first_line = '♻'
+let g:gitgutter_sign_modified_removed = '☢'
+
 "}}
 "{{                                         " lightline https://github.com/itchyny/lightline.vim
 "                                           " install powerline font
@@ -847,28 +880,6 @@ function! s:syntastic()
   SyntasticCheck
   call lightline#update()
 endfunction
-"                                           " count selected words 
-let s:prevcountcache=[[], 0]
-function! ShowCount()
-    let key=[@/, b:changedtick]
-    if s:prevcountcache[0]==#key
-        return s:prevcountcache[1]
-    endif
-    let s:prevcountcache[0]=key
-    let s:prevcountcache[1]=0
-    let pos=getpos('.')
-    try
-        redir => subscount
-        silent %s///gne
-        redir END
-        let result=matchstr(subscount, '\d\+')
-        let s:prevcountcache[1]=result
-        return result
-    finally
-        call setpos('.', pos)
-    endtry
-endfunction
-let &statusline='%{ShowCount()} %<%f %h%m%r%=%-14.(%l,%c%V%) %P'
 "}}
 "{{                                         " YouCompleteMe https://github.com/Valloric/YouCompleteMe
 "                                           "   git submodule update --init --recursive
@@ -1123,6 +1134,43 @@ function! RestoreFileEncodings()
 endfunction
 au BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
 au BufReadPost *.nfo call RestoreFileEncodings()
+"                                           " count selected words 
+let s:prevcountcache=[[], 0]
+function! ShowCount()
+    let key=[@/, b:changedtick]
+    if s:prevcountcache[0]==#key
+        return s:prevcountcache[1]
+    endif
+    let s:prevcountcache[0]=key
+    let s:prevcountcache[1]=0
+    let pos=getpos('.')
+    try
+        redir => subscount
+        silent %s///gne
+        redir END
+        let result=matchstr(subscount, '\d\+')
+        let s:prevcountcache[1]=result
+        return result
+    finally
+        call setpos('.', pos)
+    endtry
+endfunction
+let &statusline='%{ShowCount()} %<%f %h%m%r%=%-14.(%l,%c%V%) %P'
+"                                           " use alt+<N> to switch tab
+function! TabPos_ActivateBuffer(num)
+    let s:count = a:num
+    exe "tabfirst"
+    exe "tabnext" s:count
+endfunction
+ 
+function! TabPos_Initialize()
+for i in range(1, 9)
+        exe "map <M-" . i . "> :call TabPos_ActivateBuffer(" . i . ")<CR>"
+    endfor
+    exe "map <M-0> :call TabPos_ActivateBuffer(10)<CR>"
+endfunction
+ 
+autocmd VimEnter * call TabPos_Initialize()
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
