@@ -140,7 +140,7 @@ Make sure you have permission make it.
 3. Others
 ```
 Need cmake for [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) plugin.
-Need ack for [ack.vim](https://github.com/mileszs/ack) plugin.
+Need Install ack(debian:apt-get install ack-grep, redhat:yum install ack) for [ack.vim](https://github.com/mileszs/ack) plugin.
 Need [consolas-powerline-vim](https://github.com/rainysia/vimrc/blob/master/consolas-powerline-vim.tar.gz) font for git branch status.
 ```
 
@@ -164,4 +164,5 @@ Copyright by rainy.sia, 2010 Licensed under the [MIT license](http://www.opensou
 2014-07-14 12:29:40 add vim new map F8/S-F8 for !ctags -R<br />
 2016-02-15 10:20:30 make vim configuration simple<br />
 2016-04-25 10:26:22 make new vimrc for 2016<br />
+2016-07-08 15:44:47 add vim plugin vim-gitgutter, vim-expand-region plugin. <br />
 ```
