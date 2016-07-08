@@ -1,14 +1,18 @@
 " 0 => Author {{{
 "========================================================================
-"      Title: vim configure
-"   Filename: Vimrc
-"Description: It's a vimrc
-"    Version: 7.09.05
-"     Author: rainysia
-"      Email: rainysia@gmail.com
-"   HomePage: http://www.btroot.org
-" CreateDate: 2008-04-01 02:14:55
-" LastChange: 2016-07-08 10:47:27
+" * For vim Configuration file
+
+" * VIM 7.4
+
+" * @filename   vimrc
+" * @author     Rainy Sia <rainysia@gmail.com>
+" * @copyright  2013-2016 BTROOT.ORG
+" * @license    https://opensource.org/licenses/MIT license
+" * @version    GIT: 7.09.05
+" * @createTime 2008-04-01 02:14:55
+" * @lastChange 2016-07-08 17:34:19
+
+" * @link http://www.btroot.org
 "========================================================================
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
