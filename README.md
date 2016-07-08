@@ -23,6 +23,8 @@ we map the <Leader> as ,
 
 ![css](https://cloud.githubusercontent.com/assets/1259324/14772524/f9183db0-0ad1-11e6-8477-b4907e44c14e.png)
 
+![git status](https://cloud.githubusercontent.com/assets/1259324/16680190/776c7b4a-451f-11e6-8e6f-423bdd29f6aa.png)
+
 #### Plugin list
 ---------------------------------
 ```
