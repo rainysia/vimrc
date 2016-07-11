@@ -234,11 +234,11 @@ function! SetTitle()
         call append(line(".")+6, "#include <stdio.h>")
         call append(line(".")+7, "")
     elseif &filetype == 'java'
-       call append(line(".")+6,"public class ".expand("%"))
-       call append(line(".")+7,"")
+        call append(line(".")+6,"public class ".expand("%"))
+        call append(line(".")+7,"")
     elseif &filetype == 'lua'
-        call setline(1,"\#!/usr/local/bin/lua")
-        call append(line("."), "")
+        call setline(1,"#!/usr/local/bin/lua")
+        call append(line(".")+1, "")
     else
         call setline(1, "/*************************************************************************")
         call append(line("."), "    > File Name: ".expand("%"))
@@ -449,6 +449,7 @@ Bundle 'vim-scripts/a.vim'
 "" php indent and syntax
 Bundle '2072/PHP-Indenting-for-VIm'
 Bundle '2072/vim-syntax-for-PHP'
+Bundle 'shawncplus/phpcomplete.vim'
 
 "" scala
 Bundle 'derekwyatt/vim-scala'
@@ -458,8 +459,13 @@ Bundle 'vim-scripts/scala.vim'
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-lua-ftplugin'
 
+"" go
+Bundle 'fatih/vim-go'
+
 "" format
 Bundle 'junegunn/vim-easy-align'
+"" Dockerfile syntax
+Bundle 'ekalinin/Dockerfile.vim'
 
 if $USER == 'root'
     "echo &rtp
@@ -1080,10 +1086,11 @@ let g:PyFlakeRangeCommand = 'Q'             " Visual-mode key command for PyFlak
 "{{                                         " php-indent https://github.com/2072/PHP-Indenting-for-VIm
 "                                           " php-syntax https://github.com/2072/vim-syntax-for-PHP
 "}}
+"{{                                         " phpcomplete https://github.com/shawncplus/phpcomplete.vim
+"}}
 "{{                                         " vim-scala https://github.com/derekwyatt/vim-scala
 "}}
 "{{                                         " scala.vim https://github.com/vim-scripts/scala.vim
-
 "}}
 "{{                                         " xolox/vim-lua-ftplugin https://github.com/xolox/vim-lua-ftplugin
 "                                           " xolox/vim-misc https://github.com/xolox/vim-misc
@@ -1095,6 +1102,18 @@ let g:lua_define_completefunc = 0
 let g:lua_define_omnifunc = 0
 "                                           " :LuaCheckSyntax, :LuaCheckGlobals
 "}}
+"{{                                         " vim-go https://github.com/fatih/vim-go
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+"au FileType go nmap <leader>r <Plug>(go-run)
+"au FileType go nmap <leader>b <Plug>(go-build)
+"au FileType go nmap <leader>t <Plug>(go-test)
+"au FileType go nmap <leader>c <Plug>(go-coverage)
+"}}
 "{{                                         " vim-easy-align https://github.com/junegunn/vim-easy-align
 "                                           "    <Space>, =, :, ., |, &, #, and ,.
 "                                           "   visual mode (vipga=)
@@ -1105,6 +1124,8 @@ nmap ga <Plug>(EasyAlign)
 "                                           " :EasyAlign =      gaip=
 "                                           " :EasyAlign 2=      gaip2=
 "                                           " :EasyAlign **=      gaip**=
+"}}
+"{{                                         " Dockerfile https://github.com/ekalinin/Dockerfile.vim
 "}}
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
