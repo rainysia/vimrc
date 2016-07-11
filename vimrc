@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2013-2016 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 7.09.05
+" * @version    GIT: 7.09.06
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2016-07-08 17:34:19
+" * @lastChange 2016-07-11 10:31:00
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -236,7 +236,10 @@ function! SetTitle()
     elseif &filetype == 'java'
        call append(line(".")+6,"public class ".expand("%"))
        call append(line(".")+7,"")
-   else
+    elseif &filetype == 'lua'
+        call setline(1,"\#!/usr/local/bin/lua")
+        call append(line("."), "")
+    else
         call setline(1, "/*************************************************************************")
         call append(line("."), "    > File Name: ".expand("%"))
         call append(line(".")+1, "  > Author: rainysia")
@@ -2137,5 +2140,6 @@ endif
 " 7.09.03                                   " add others plugin 2016-04-20 00:55:32
 " 7.09.04                                   " add lua,scala 2016-05-06 11:16:41
 " 7.09.05                                   " add fast search 2016-06-28 14:13:48
+" 7.09.06                                   " add expand and gitgutter plugin 2016-07-11 10:33:25
 "}}
 "}}}
