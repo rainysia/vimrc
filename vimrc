@@ -32,11 +32,6 @@ filetype indent on                          " 为特定文件类型载入相关�
 filetype plugin indent off
 set binary                                  " 可读二进制文件
 "set nrformats=                             " 默认<C-a> <C-x> 以十进制来计算. :h nrformats
-"{{                                         " 不同文件类型的缩进
-au FileType html,python,vim,javascript,php,java,scala,lua,c setl shiftwidth=4
-au FileType html,python,vim,javascript,php,java,scala,lua,c setl tabstop=4
-au FileType html,python,vim,javascript,php,java,scala,lua,c setl softtabstop=4
-"}}
 "{{                                         " 修改一个文件后自动备份,备份文件名为原文件名加~后缀
 "if has("vms")                              " linux取消
 set nobackup
@@ -300,32 +295,43 @@ set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
 "}}
 "                                           " 只在下列文件类型被侦测时显示行号,普通文本文件不显示
 "{{
+"                                           " au[tocmd]
+set noerrorbells visualbell t_vb=           " disable beep when error
 if has("autocmd")
+    autocmd GUIEnter * set visualbell t_vb=
+
+    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl shiftwidth=4
+    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl tabstop=4
+    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl softtabstop=4
+    autocmd FileType html,xml,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setlocal textwidth=100
     autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,scala,go,lua set number
     autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
     autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o/*<ESC>'>o*/
-    autocmd FileType html,xml,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setlocal textwidth=100
+
+    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+    autocmd FileType mysql set omnifunc=mysqlcomplete#CompleteMYSQL
+    autocmd FileType python set omnifunc=pythoncomplete#Complete
+    autocmd FileType java set omnifunc=javacomplete#Complete
+    autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+    autocmd FileType c set omnifunc=ccomplete#Complete
+    autocmd FileType go set omnifunc=gocomplete#Complete
+    autocmd FileType scala set omnifunc=scalacomplete#CompleteTags
+    autocmd FileType lua set omnifunc=luacomplete#Complete
+
+    autocmd BufNewFile,BufRead *.go                    set filetype=go syntax=go 
+    autocmd BufNewFile,BufRead *.scala                 set filetype=scala
+    autocmd BufNewFile,BufRead *Spec.scala,*Test.scala set filetype=scalatest syntax=scala
+    autocmd BufNewFile,BufRead *.sbt                   set filetype=scala
+
     autocmd BufReadPost *
                 \ if line("'\"") > 0 && line("'\"") <= line("$") |
                 \   exe "normal g`\"" |
                 \ endif
 endif                                       " has("autocmd")
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType mysql set omnifunc=mysqlcomplete#CompleteMYSQL
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd FileType go set omnifunc=gocomplete#Complete
-autocmd FileType scala set omnifunc=scalacomplete#CompleteTags
-autocmd FileType lua set omnifunc=luacomplete#Complete
 
-autocmd BufNewFile,BufRead *.go                    set filetype=go syntax=go 
-autocmd BufNewFile,BufRead *.scala                 set filetype=scala
-autocmd BufNewFile,BufRead *Spec.scala,*Test.scala set filetype=scalatest syntax=scala
-autocmd BufNewFile,BufRead *.sbt                   set filetype=scala
 
 set completeopt=longest,menu                " 提示菜单后输入字母实现即时的过滤和匹配
 "                                           " 绑定ctrl+j,ctrl+k来替换掉Ctrl+n,Ctrl+p下,上 在complete弹出层上下翻
@@ -1093,13 +1099,14 @@ let g:PyFlakeRangeCommand = 'Q'             " Visual-mode key command for PyFlak
 "{{                                         " scala.vim https://github.com/vim-scripts/scala.vim
 "}}
 "{{                                         " xolox/vim-lua-ftplugin https://github.com/xolox/vim-lua-ftplugin
-"                                           " xolox/vim-misc https://github.com/xolox/vim-misc
+"}}
+"{{                                         " xolox/vim-misc https://github.com/xolox/vim-misc
 "let g:lua_compiler_name = '/usr/local/bin/luac'
 let g:lua_complete_omni = 1
 let g:lua_check_syntax = 0
 let g:lua_check_globals = 0
-let g:lua_define_completefunc = 0
-let g:lua_define_omnifunc = 0
+let g:lua_define_completefunc = 1
+let g:lua_define_omnifunc = 1
 "                                           " :LuaCheckSyntax, :LuaCheckGlobals
 "}}
 "{{                                         " vim-go https://github.com/fatih/vim-go
