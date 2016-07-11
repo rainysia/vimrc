@@ -210,7 +210,7 @@ set syntax=txt                              " work in linux
 au BufRead,BufNewFile *.txt setlocal ft=txt
 "                                           " 高亮显示普通txt文件(需要txt.vim脚本)
 "                                           " 自动.c .h .sh .java自动插入文件头
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.py,*.php exec ":call SetTitle()" 
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.lua,*.py,*.php exec ":call SetTitle()" 
 "                                           " 定义函数SetTitle,自动插入文件头 
 function! SetTitle()
     "                                       " 如果文件类型为.sh文件 
@@ -238,7 +238,7 @@ function! SetTitle()
         call append(line(".")+7,"")
     elseif &filetype == 'lua'
         call setline(1,"#!/usr/local/bin/lua")
-        call append(line(".")+1, "")
+        call append(line("."), "")
     else
         call setline(1, "/*************************************************************************")
         call append(line("."), "    > File Name: ".expand("%"))
