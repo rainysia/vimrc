@@ -498,7 +498,7 @@ set autochdir
 "{{                                         " Ctrlp的设定 https://github.com/kien/ctrlp.vim 2013-07
 "                                           "  运行命令:CtrlP或:CtrlP [starting-directory]来以查找文件模式来启用 ctrlp
 "                                           "  运行命令:CtrlPBuffer或:CtrlPMRU来以查找缓冲或最近打开文件模式来启用ctrlp
-"                                           "  运行命令:CtrlPMixed来查找文件、查找缓冲和最近打开文件混合模式来启动 ctrlp
+"                                           "  运行命令:CtrlPMixed来查找文件,查找缓冲和最近打开文件混合模式来启动 ctrlp
 "                                           "    按<c-f>和<c-b>在三种查找模式中互相切换
 "                                           "    按<c-y>来创建新文件和对应的父目录
 "                                           "    按<c-d>来切换到只查找文件名而不是全路径
@@ -580,7 +580,7 @@ nmap <F4> :AuthorInfoDetect<CR>
 "                                           "      vim加入注释
 "                                           "      <leader>ca 在可选的注释方式之间切换,比如C/C++ 的块注释/* */和行注释//
 "                                           "      <leader>cc 注释当前行
-"                                           "      <leader>cs 以”性感”的方式注释
+"                                           "      <leader>cs 以"性感"的方式注释
 "                                           "      <leader>cA 在当前行尾添加注释符,并进入Insert模式
 "                                           "      <leader>cu 取消注释
 "                                           "      <leader>cm 添加块注释
@@ -593,7 +593,7 @@ map <F12> <ESC>04x$hh3x<ESC>
 "{{                                         " NERDTree的设定 https://github.com/scrooloose/nerdtree
 "                                           "     插件F10开启list.tree
 "                                           "      :NERDTree   --启动NERDTree插件
-"                                           "      o [小写]    --切换当前文件或目录的打开、关闭状态
+"                                           "      o [小写]    --切换当前文件或目录的打开,关闭状态
 "                                           "      u           --打开上层目录
 "                                           "      p [小写]    --返回上层目录
 "                                           "      P [大写]    --返回根目录
@@ -1039,7 +1039,7 @@ let g:phpqa_messdetector_autorun = 0
 "{{                                         " php code sniffer ,php md模式
 "                                           " :!phpcs :!phpmd
 "}}
-"{{                                         " Surround.vim 针对包含在文字外的括号、引号、XML 标签做快速的修改 https://github.com/tpope/vim-surround
+"{{                                         " Surround.vim 针对包含在文字外的括号,引号,XML 标签做快速的修改 https://github.com/tpope/vim-surround
 "                                           " cs"' 修改双引号为单引号 cs'<q> 修改单引号为<q>包围的.
 "                                           " ds"  删除包围的符号
 "                                           " cs"<q> 修改双引号为<q></q>包围
@@ -1342,31 +1342,31 @@ if has("gui_running")
     "-----------------------------------------------------------------------------------------------------------------------"
     hi        Constant       guifg=#BF007F          guibg=#1C1D1F           gui=NONE        "任何常数 #96CBFE #BF007F
     hi        String         guifg=#A3BCBC          guibg=#1C1D1F           gui=NONE        "一个字符串常数: "字符串" #A8FF60 #A3BCBC
-    hi        Character      guifg=#FF3F3F          guibg=#1C1D1F           gui=NONE        "一个字符常数: 'c'、'\n'
-    hi        Number         guifg=#FF7F3F          guibg=#1C1D1F           gui=NONE        "一个数字常数: 234、0xff
+    hi        Character      guifg=#FF3F3F          guibg=#1C1D1F           gui=NONE        "一个字符常数: 'c','\n'
+    hi        Number         guifg=#FF7F3F          guibg=#1C1D1F           gui=NONE        "一个数字常数: 234,0xff
     hi        Float          guifg=#FF7F3F          guibg=#1C1D1F           gui=NONE        "一个浮点常数: 2.3e10
-    hi        Boolean        guifg=#FF0000          guibg=#1C1D1F           gui=NONE        "一个布尔型常数: TRUE、false
+    hi        Boolean        guifg=#FF0000          guibg=#1C1D1F           gui=NONE        "一个布尔型常数: TRUE,false
     "-----------------------------------------------------------------------------------------------------------------------"
     hi        Identifier     guifg=#007FBF          guibg=#1C1D1F           gui=NONE        "任何变量名
     hi        Function       guifg=#00BFBF          guibg=#1C1D1F           gui=NONE        "函数名 (也包括: 类的方法名) #FFD2A7 #00BFBF
     "-----------------------------------------------------------------------------------------------------------------------"
     hi        Statement      guifg=#B8B1D3          guibg=#1C1D1F           gui=NONE        "任何语句
-    hi        Conditional    guifg=#FFFF33          guibg=#1C1D1F           gui=NONE        "if、then、else、endif、switch
-    hi        Repeat         guifg=#FFBF00          guibg=#1C1D1F           gui=NONE        "for、do、while 等
-    hi        Label          guifg=#1E90FF          guibg=#1C1D1F           gui=NONE        "case、default 等
-    hi        Operator       guifg=#BFFF00          guibg=#1C1D1F           gui=NONE        ""sizeof"、"+"、"*" 等
+    hi        Conditional    guifg=#FFFF33          guibg=#1C1D1F           gui=NONE        "if,then,else,endif,switch
+    hi        Repeat         guifg=#FFBF00          guibg=#1C1D1F           gui=NONE        "for,do,while 等
+    hi        Label          guifg=#1E90FF          guibg=#1C1D1F           gui=NONE        "case,default 等
+    hi        Operator       guifg=#BFFF00          guibg=#1C1D1F           gui=NONE        ""sizeof","+","*" 等
     hi        Keyword        guifg=#BFBF00          guibg=#1C1D1F           gui=NONE        "任何其它关键字
-    hi        Exception      guifg=#BF7F00          guibg=#1C1D1F           gui=NONE        "try、catch、throw
+    hi        Exception      guifg=#BF7F00          guibg=#1C1D1F           gui=NONE        "try,catch,throw
     "-----------------------------------------------------------------------------------------------------------------------"
     hi        PreProc        guifg=#FF63FF          guibg=#1C1D1F           gui=NONE        "通用预处理命令 #C71585 #FF63FF
     hi        Include        guifg=#FF00FF          guibg=#1C1D1F           gui=NONE        "预处理命令 #include
     hi        Define         guifg=#BF3FBF          guibg=#1C1D1F           gui=NONE        "预处理命令 #define #96CBEF #BF3FBF
     hi        Macro          guifg=#FFFFFF          guibg=#1C1D1F           gui=NONE        "等同于 Define #7F00BF
-    hi        PreCondit      guifg=#FF007F          guibg=#1C1D1F           gui=NONE        "预处理命令 #if、#else、#endif
+    hi        PreCondit      guifg=#FF007F          guibg=#1C1D1F           gui=NONE        "预处理命令 #if,#else,#endif
     "-----------------------------------------------------------------------------------------------------------------------"
-    hi        Type           guifg=#96CBFE          guibg=#1C1D1F           gui=NONE        "int、long、char 等 #96CBFE #00C000
-    hi        StorageClass   guifg=#B6B7EB          guibg=#1C1D1F           gui=NONE        "static、register、volatile 等 #7FFF00 #B6B7EB
-    hi        Structure      guifg=#00FF7F          guibg=#1C1D1F           gui=NONE        "struct、union、enum 等
+    hi        Type           guifg=#96CBFE          guibg=#1C1D1F           gui=NONE        "int,long,char 等 #96CBFE #00C000
+    hi        StorageClass   guifg=#B6B7EB          guibg=#1C1D1F           gui=NONE        "static,register,volatile 等 #7FFF00 #B6B7EB
+    hi        Structure      guifg=#00FF7F          guibg=#1C1D1F           gui=NONE        "struct,union,enum 等
     hi        Typedef        guifg=#3FFF3F          guibg=#1C1D1F           gui=NONE        "一个typedef
     "-----------------------------------------------------------------------------------------------------------------------"
     hi        Special        guifg=#BFBF3F          guibg=#1C1D1F           gui=NONE        "任何特殊符号
@@ -1577,31 +1577,31 @@ elseif &t_Co == 256
     "   -----------------------------------------------------------------------------------------------------------------------
     hi        Constant       ctermfg=brown            ctermbg=black             cterm=NONE        "任何常数
     hi        String         ctermfg=grey             ctermbg=black             cterm=NONE        "一个字符串常数:字符串
-    hi        Character      ctermfg=grey             ctermbg=black             cterm=NONE        "一个字符常数: 'c'、'\n'
-    hi        Number         ctermfg=lightblue        ctermbg=black             cterm=NONE        "一个数字常数: 234、0xff
+    hi        Character      ctermfg=grey             ctermbg=black             cterm=NONE        "一个字符常数: 'c','\n'
+    hi        Number         ctermfg=lightblue        ctermbg=black             cterm=NONE        "一个数字常数: 234,0xff
     hi        Float          ctermfg=lightblue        ctermbg=black             cterm=NONE        "一个浮点常数: 2.3e10
-    hi        Boolean        ctermfg=grey             ctermbg=black             cterm=NONE        "一个布尔型常数: TRUE、false
+    hi        Boolean        ctermfg=grey             ctermbg=black             cterm=NONE        "一个布尔型常数: TRUE,false
     "   -----------------------------------------------------------------------------------------------------------------------
     hi        Identifier     ctermfg=lightgreen       ctermbg=black             cterm=NONE        "任何变量名
     hi        Function       ctermfg=lightcyan        ctermbg=black             cterm=NONE        "函数名 (也包括: 类的方法名)
     "   -----------------------------------------------------------------------------------------------------------------------
     hi        Statement      ctermfg=yellow           ctermbg=black             cterm=NONE        "任何语句
-    hi        Conditional    ctermfg=yellow           ctermbg=black             cterm=NONE        "if、then、else、endif、switch
-    hi        Repeat         ctermfg=yellow           ctermbg=black             cterm=NONE        "for、do、while 等
-    hi        Label          ctermfg=yellow           ctermbg=black             cterm=NONE        "case、default 等
-    hi        Operator       ctermfg=yellow           ctermbg=black             cterm=NONE        ""sizeof"、"+"、"*" 等
+    hi        Conditional    ctermfg=yellow           ctermbg=black             cterm=NONE        "if,then,else,endif,switch
+    hi        Repeat         ctermfg=yellow           ctermbg=black             cterm=NONE        "for,do,while 等
+    hi        Label          ctermfg=yellow           ctermbg=black             cterm=NONE        "case,default 等
+    hi        Operator       ctermfg=yellow           ctermbg=black             cterm=NONE        ""sizeof","+","*" 等
     hi        Keyword        ctermfg=yellow           ctermbg=black             cterm=NONE        "任何其它关键字
-    hi        Exception      ctermfg=lightred         ctermbg=black             cterm=NONE        "try、catch、throw
+    hi        Exception      ctermfg=lightred         ctermbg=black             cterm=NONE        "try,catch,throw
     "   -----------------------------------------------------------------------------------------------------------------------
     hi        PreProc        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "通用预处理命令
     hi        Include        ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "预处理命令 #include
     hi        Define         ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "预处理命令 #define
     hi        Macro          ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "等同于 Define
-    hi        PreCondit      ctermfg=lightred         ctermbg=black             cterm=BOLD        "预处理命令 #if、#else、#endif
+    hi        PreCondit      ctermfg=lightred         ctermbg=black             cterm=BOLD        "预处理命令 #if,#else,#endif
     "   -----------------------------------------------------------------------------------------------------------------------
-    hi        Type           ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "int、long、char 等
-    hi        StorageClass   ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "static、register、volatile 等
-    hi        Structure      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "struct、union、enum 等
+    hi        Type           ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "int,long,char 等
+    hi        StorageClass   ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "static,register,volatile 等
+    hi        Structure      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "struct,union,enum 等
     hi        Typedef        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "一个 typedef
     "   -----------------------------------------------------------------------------------------------------------------------
     hi        Special        ctermfg=brown            ctermbg=black             cterm=BOLD        "任何特殊符号
@@ -1666,31 +1666,31 @@ else
     "   -----------------------------------------------------------------------------------------------------------------------
     hi        Constant       ctermfg=brown            ctermbg=black             cterm=NONE        "任何常数
     hi        String         ctermfg=grey             ctermbg=black             cterm=NONE        "一个字符串常数:字符串
-    hi        Character      ctermfg=grey             ctermbg=black             cterm=NONE        "一个字符常数: 'c'、'\n'
-    hi        Number         ctermfg=lightblue        ctermbg=black             cterm=NONE        "一个数字常数: 234、0xff
+    hi        Character      ctermfg=grey             ctermbg=black             cterm=NONE        "一个字符常数: 'c','\n'
+    hi        Number         ctermfg=lightblue        ctermbg=black             cterm=NONE        "一个数字常数: 234,0xff
     hi        Float          ctermfg=lightblue        ctermbg=black             cterm=NONE        "一个浮点常数: 2.3e10
-    hi        Boolean        ctermfg=grey             ctermbg=black             cterm=NONE        "一个布尔型常数: TRUE、false
+    hi        Boolean        ctermfg=grey             ctermbg=black             cterm=NONE        "一个布尔型常数: TRUE,false
     "   -----------------------------------------------------------------------------------------------------------------------
     hi        Identifier     ctermfg=lightgreen       ctermbg=black             cterm=NONE        "任何变量名
     hi        Function       ctermfg=lightcyan        ctermbg=black             cterm=NONE        "函数名 (也包括: 类的方法名)
     "   -----------------------------------------------------------------------------------------------------------------------
     hi        Statement      ctermfg=yellow           ctermbg=black             cterm=NONE        "任何语句
-    hi        Conditional    ctermfg=yellow           ctermbg=black             cterm=NONE        "if、then、else、endif、switch
-    hi        Repeat         ctermfg=yellow           ctermbg=black             cterm=NONE        "for、do、while 等
-    hi        Label          ctermfg=yellow           ctermbg=black             cterm=NONE        "case、default 等
-    hi        Operator       ctermfg=yellow           ctermbg=black             cterm=NONE        ""sizeof"、"+"、"*" 等
+    hi        Conditional    ctermfg=yellow           ctermbg=black             cterm=NONE        "if,then,else,endif,switch
+    hi        Repeat         ctermfg=yellow           ctermbg=black             cterm=NONE        "for,do,while 等
+    hi        Label          ctermfg=yellow           ctermbg=black             cterm=NONE        "case,default 等
+    hi        Operator       ctermfg=yellow           ctermbg=black             cterm=NONE        ""sizeof","+","*" 等
     hi        Keyword        ctermfg=yellow           ctermbg=black             cterm=NONE        "任何其它关键字
-    hi        Exception      ctermfg=lightred         ctermbg=black             cterm=NONE        "try、catch、throw
+    hi        Exception      ctermfg=lightred         ctermbg=black             cterm=NONE        "try,catch,throw
     "   -----------------------------------------------------------------------------------------------------------------------
     hi        PreProc        ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "通用预处理命令
     hi        Include        ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "预处理命令 #include
     hi        Define         ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "预处理命令 #define
     hi        Macro          ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "等同于 Define
-    hi        PreCondit      ctermfg=lightred         ctermbg=black             cterm=BOLD        "预处理命令 #if、#else、#endif
+    hi        PreCondit      ctermfg=lightred         ctermbg=black             cterm=BOLD        "预处理命令 #if,#else,#endif
     "   -----------------------------------------------------------------------------------------------------------------------
-    hi        Type           ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "int、long、char 等
-    hi        StorageClass   ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "static、register、volatile 等
-    hi        Structure      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "struct、union、enum 等
+    hi        Type           ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "int,long,char 等
+    hi        StorageClass   ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "static,register,volatile 等
+    hi        Structure      ctermfg=lightgreen       ctermbg=black             cterm=BOLD        "struct,union,enum 等
     hi        Typedef        ctermfg=lightcyan        ctermbg=black             cterm=BOLD        "一个 typedef
     "   -----------------------------------------------------------------------------------------------------------------------
     hi        Special        ctermfg=brown            ctermbg=black             cterm=BOLD        "任何特殊符号
@@ -1732,8 +1732,8 @@ endif
 " :%s/keywords//n                           " 统计关键字出现的次数
 " :                                         " 把正则用\( \) 扩起来后, 后面替换的时候可以用\1 \2来引用对应的正则
 " : 将 Doe, John 修改为 John Doe   :%s/\(\w\+\), \(\w\+\)/\2 \1/
-" :s/替换字符串/\=函数式                    " 函数式可以有多个,返回值可以用字符串连接符.连接起来,如line('.') 返回匹配行号(:help line()  ),submatch(n)可以引用\1、\2的内容,其中submatch(0)引用匹配的整个内容;
-"                                           " 函数式也可以是字符串常量,用双引号引起来.函数式也可以是任意表达式,需要用小括号引起来,如(3+2*6)；
+" :s/替换字符串/\=函数式                    " 函数式可以有多个,返回值可以用字符串连接符.连接起来,如line('.') 返回匹配行号(:help line()  ),submatch(n)可以引用\1,\2的内容,其中submatch(0)引用匹配的整个内容;
+"                                           " 函数式也可以是字符串常量,用双引号引起来.函数式也可以是任意表达式,需要用小括号引起来,如(3+2*6);
 "                                           " 函数式还可以是寄存器中的内容,通过'@寄存器名'访问,如@a(不需要加引号,但是还是需要用.来连接)
 ":%s/\(.*\) \(.*\)/\1+\2/                   " 把行尾的空格替换成+号
 " :noh                                      " 取消搜索高亮
@@ -1820,7 +1820,7 @@ endif
 " gvim -d file1 file2                       " vimdiff (比较不同)
 "                                           "    ]c 跳转下一个差异点 :diffget 把另外一个文件的差异点的内容复制过来  :diffput 把当前差异点的内容复制过去. :diffupdate 更多比较文件
 "                                           "    前面加行号表示多少行开始  :2,30diffget 把2~30行的差异取过来
-" c{ motion }                               " 删除motion命令跨过的,并且进入插入 c$删到行尾的并进入插入,ct! 删除从光标位到下一个！位置
+" c{ motion }                               " 删除motion命令跨过的,并且进入插入 c$删到行尾的并进入插入,ct! 删除从光标位到下一个!位置
 " dp                                        " 把光标处的不同放到另一个文件
 " do                                        " 在光标处从另一个文件取得不同
 " diw                                       " 删除光标上的单词 (不包括空白字符)
@@ -1853,14 +1853,14 @@ endif
 " N  F{char}                                " 至左边第 N 次出现 {char} 之处 (Find)
 " N  t{char}                                " 至右边第 N 次出现 {char} 之前 (till)
 " N  T{char}                                " 至左边第 N 次出现 {char} 之前 (Till)
-" N  ;                                      " 重复上次 f、F、t 或 T 命令 N 次
-" N  ,                                      " 以相反方向重复上次 f、F、T 或 t 命令 N
+" N  ;                                      " 重复上次 f,F,t 或 T 命令 N 次
+" N  ,                                      " 以相反方向重复上次 f,F,T 或 t 命令 N
 " N  -                                      " 上移 N 行,至第一个非空白字符
 " N  +                                      " 下移 N 行,至第一个非空白字符 (亦: CTRL-M 和 <CR>)
 " N  _                                      " 下移 N - 1 行,至第一个非空白字符
 " N  G                                      " 至第 N 行 (缺省: 末行) 第一个非空白字符
 " N  gg                                     " 至第 N 行 (缺省: 首行) 第一个非空白字符
-" N  %                                      " 至全文件行数百分之 N 处；必须给出 N,否则是 |%| 命令
+" N  %                                      " 至全文件行数百分之 N 处;必须给出 N,否则是 |%| 命令
 " N  gk                                     " 上移 N 屏幕行 (回绕行时不同于 k)
 " N  gj                                     " 下移 N 屏幕行 (回绕行时不同于 j)
 " N  w                                      " 向前 (正向,下同) N 个单词(word)
@@ -1990,15 +1990,15 @@ endif
 " :%!xxd -r                                 " 转回来
 " ga                                        " 以十进制,十六进制,八进制显示当前光标下的字符的ASCII值
 " g8                                        " 对 utf-8 编码: 显示光标所在字符的十六进制字节序列
-" g CTRL-G                                  " 显示当前光标的列、行、以及字符位置
+" g CTRL-G                                  " 显示当前光标的列,行,以及字符位置
 " g;                                        " 在修改记录中向后选择
 " g,                                        " 在修改记录中向前选择
 " :ve[rsion]                                " 显示版本信息
 " :vimgrep /test/ *                         " 查找当前目录下所有包含test关键字  ** 代表的是递归查找大于100层目录
 " :vimgrep /test/ **                        " 递归查找当前目录下所有包含test关键字
-" :vimgrep /\<test\>/ **                    " 递归查找当前目录下所有包含只有test关键字,不包括testabc、abctest、abctestabc等等,如果一行有多个test的话,只搜索一个test结果
-" :vimgrep /\<test\>/g **                   " 递归查找当前目录下所有包含只有test关键字,不包括testabc、abctest、abctestabc等等,如果一行有多个test的话,搜索多个test结果
-" :vimgrep /\<test\>/ *.html                " 查找当前目录下所有的html文件包含只有test关键字,不包括testabc、abctest、abctestabc等等,如果一行有多个test的话,搜索多个test结果
+" :vimgrep /\<test\>/ **                    " 递归查找当前目录下所有包含只有test关键字,不包括testabc,abctest,abctestabc等等,如果一行有多个test的话,只搜索一个test结果
+" :vimgrep /\<test\>/g **                   " 递归查找当前目录下所有包含只有test关键字,不包括testabc,abctest,abctestabc等等,如果一行有多个test的话,搜索多个test结果
+" :vimgrep /\<test\>/ *.html                " 查找当前目录下所有的html文件包含只有test关键字,不包括testabc,abctest,abctestabc等等,如果一行有多个test的话,搜索多个test结果
 "                                           "  :cnext (:cn) 当前页下一个结果
 "                                           "  :cprevious (:cp) 当前页上一个结果
 "                                           "  :clist (:cl) 打开quickfix窗口,列出所有结果,不能直接用鼠标点击打开,只能看
@@ -2014,7 +2014,7 @@ endif
 "     -F                                    " 波斯模式
 "     -H                                    " 希伯来模式
 "     --noplugin                            " 不加载,无插件模式
-"     --startuptime {fname}                 " 启动时把计时信息写入文件 {fname}.可用于分析载入 .vimrc、插件和打开首个文件的过程中时哪一步最耗时
+"     --startuptime {fname}                 " 启动时把计时信息写入文件 {fname}.可用于分析载入 .vimrc,插件和打开首个文件的过程中时哪一步最耗时
 " /\Cxxx                                    " 大小写敏感 /\cxxx 搜索xxx不敏感
 " vsp                                       " 垂直分割窗口
 " sp                                        " 竖向分割窗口
