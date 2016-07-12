@@ -207,18 +207,25 @@ au BufRead,BufNewFile *.txt setlocal ft=txt
 "                                           " 自动.c .h .sh .java自动插入文件头
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.lua,*.py,*.php exec ":call SetTitle()" 
 "                                           " 定义函数SetTitle,自动插入文件头 
+let g:vimrc_author='Rainy Sia'
+let g:vimrc_email='rainysia@gmail.com'
 function! SetTitle()
     "                                       " 如果文件类型为.sh文件 
     if &filetype == 'sh'
         call setline(1,"\#!/bin/bash")
         call append(line("."), "")
     elseif &filetype == 'python'
+        let g:vimrc_lang_version=' 2.7.9'
+        "let g:vimrc_lang_version=system('python -V')
+        let g:snips_php_version=g:vimrc_lang_version
         call setline(1,"#!/usr/bin/env python")
         call append(line("."),"# -*- coding: UTF-8 -*-")
         call append(line(".")+1, "")
     " elseif &filetype == 'mkd'
     "    call setline(1,"<head><meta charset=\"UTF-8\"></head>")
     elseif &filetype == 'php'
+        let g:vimrc_lang_version=' version 5.6.22'
+        let g:snips_php_version=g:vimrc_lang_version
         call setline(1,"<?php")
         call append(line("."), "")
     elseif &filetype == 'cpp'
@@ -232,13 +239,16 @@ function! SetTitle()
         call append(line(".")+6,"public class ".expand("%"))
         call append(line(".")+7,"")
     elseif &filetype == 'lua'
+        let g:vimrc_lang_version=' version 5.3.1'
+        let g:snips_php_version=g:vimrc_lang_version
         call setline(1,"#!/usr/local/bin/lua")
         call append(line("."), "")
     else
+        let g:vimrc_lang_version=' version num'
         call setline(1, "/*************************************************************************")
         call append(line("."), "    > File Name: ".expand("%"))
-        call append(line(".")+1, "  > Author: rainysia")
-        call append(line(".")+2, "  > Mail: rainysia@gmail.com ")
+        call append(line(".")+1, "  > Author: ".g:vimrc_author)
+        call append(line(".")+2, "  > Mail: ".g:vimrc_email)
         call append(line(".")+3, "  > Created Time: ".strftime("%F %T"))
         call append(line(".")+4, " ************************************************************************/")
         call append(line(".")+5, "")
@@ -573,7 +583,7 @@ let g:vimrc_link='http://www.btroot.org'
 let g:vimrc_copyright='2013-2016 BTROOT.ORG' 
 let g:vimrc_license='https://opensource.org/licenses/MIT license'
 let g:vimrc_version='GIT: 0.0.1'
-let g:vimrc_lang_version=' version num'
+"let g:vimrc_lang_version=' version num'
 nmap <F4> :AuthorInfoDetect<CR>
 "}}
 "{{                                         " NERD_commenter.vim的设定 https://github.com/vim-scripts/The-NERD-Commenter
