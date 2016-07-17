@@ -583,7 +583,7 @@ let g:vimrc_link='http://www.btroot.org'
 let g:vimrc_copyright='2013-2016 BTROOT.ORG' 
 let g:vimrc_license='https://opensource.org/licenses/MIT license'
 let g:vimrc_version='GIT: 0.0.1'
-"let g:vimrc_lang_version=' version num'
+let g:vimrc_lang_version = exists('g:vimrc_lang_version') ? g:vimrc_lang_version : ' version num'
 nmap <F4> :AuthorInfoDetect<CR>
 "}}
 "{{                                         " NERD_commenter.vim的设定 https://github.com/vim-scripts/The-NERD-Commenter
