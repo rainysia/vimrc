@@ -245,6 +245,7 @@ function! SetTitle()
         call append(line("."), "")
     else
         let g:vimrc_lang_version=' version num'
+        let g:snips_php_version=g:vimrc_lang_version
         call setline(1, "/*************************************************************************")
         call append(line("."), "    > File Name: ".expand("%"))
         call append(line(".")+1, "  > Author: ".g:vimrc_author)
@@ -765,6 +766,7 @@ autocmd QuickFixCmdPost *grep* cwindow
 "                                           "   :GitGutterLineHighlightsEnable/Disable/Toggle 高亮修改行,default off
 "                                           "   ☺ ☻ ♻ ✗ ✚ ✪ ✯ ➜ ❀ ☢ ✖️ 
 "                                           "   关闭占用vim左侧列
+let g:gitgutter_enabled = 0                 " close gitgutter
 let g:gitgutter_sign_column_always = 0
 let g:gitgutter_max_signs = 500 
 nmap <Leader>hn <Plug>GitGutterNextHunk
@@ -979,7 +981,7 @@ let g:snips_license=g:vimrc_license
 let g:snips_email=g:vimrc_email
 let g:snips_site =g:vimrc_link
 let g:snips_link=g:vimrc_link
-let g:snips_php_version=g:vimrc_lang_version
+"let g:snips_php_version=g:vimrc_lang_version
 "}}
 "{{                                         " ultisnips https://github.com/SirVer/ultisnips
 "                                           " Trigger configuration, will conflict with YouCompleteMe
