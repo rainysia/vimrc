@@ -10,7 +10,7 @@
 " * @license    https://opensource.org/licenses/MIT license
 " * @version    GIT: 7.09.06
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2016-07-11 10:31:00
+" * @lastChange 2016-07-25 23:34:00
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -229,19 +229,22 @@ function! SetTitle()
         call setline(1,"<?php")
         call append(line("."), "")
     elseif &filetype == 'cpp'
-        call append(line(".")+6, "#include<iostream>")
-        call append(line(".")+7, "using namespace std;")
-        call append(line(".")+8, "")
+        call setline(1, "#include<iostream>")
+        call append(line("."), "using namespace std;")
+        call append(line(".")+1, "")
     elseif &filetype == 'c'
-        call append(line(".")+6, "#include <stdio.h>")
-        call append(line(".")+7, "")
+        call setline(1, "#include <stdio.h>")
+        call append(line("."), "")
     elseif &filetype == 'java'
-        call append(line(".")+6,"public class ".expand("%"))
-        call append(line(".")+7,"")
+        call setline(1,"public class ".expand("%"))
+        call append(line("."),"")
     elseif &filetype == 'lua'
         let g:vimrc_lang_version=' version 5.3.1'
         let g:snips_php_version=g:vimrc_lang_version
         call setline(1,"#!/usr/local/bin/lua")
+        call append(line("."), "")
+    elseif &filetype == 'go'
+        call setline(1,"#!/usr/local/go/bin")
         call append(line("."), "")
     else
         let g:vimrc_lang_version=' version num'
