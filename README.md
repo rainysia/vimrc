@@ -165,4 +165,5 @@ Copyright by rainy.sia, 2010 Licensed under the [MIT license](http://www.opensou
 2016-02-15 10:20:30 make vim configuration simple<br />
 2016-04-25 10:26:22 make new vimrc for 2016<br />
 2016-07-08 15:44:47 add vim plugin vim-gitgutter, vim-expand-region plugin. <br />
+2016-07-26 05:22:57 fix c,cpp,py ctags filetype and support omnicomplete. <br />
 ```
