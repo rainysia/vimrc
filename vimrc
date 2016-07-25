@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2013-2016 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 7.09.06
+" * @version    GIT: 7.09.07
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2016-07-25 23:34:00
+" * @lastChange 2016-07-26 04:44:04
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -307,52 +307,6 @@ set list                                    " 缩进线
 " ‽	U+203d	interobang
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
 "}}
-"                                           " 只在下列文件类型被侦测时显示行号,普通文本文件不显示
-"{{
-"                                           " au[tocmd]
-set noerrorbells visualbell t_vb=           " disable beep when error
-if has("autocmd")
-    autocmd GUIEnter * set visualbell t_vb=
-
-    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl shiftwidth=4
-    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl tabstop=4
-    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl softtabstop=4
-    autocmd FileType html,xml,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setlocal textwidth=100
-    autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,scala,go,lua set number
-    autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
-    autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o/*<ESC>'>o*/
-
-    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-    autocmd FileType mysql set omnifunc=mysqlcomplete#CompleteMYSQL
-    autocmd FileType python set omnifunc=pythoncomplete#Complete
-    autocmd FileType java set omnifunc=javacomplete#Complete
-    autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-    autocmd FileType c set omnifunc=ccomplete#Complete
-    autocmd FileType cpp set omnifunc=cppcomplete#CompleteCPP
-    autocmd FileType go set omnifunc=gocomplete#Complete
-    autocmd FileType scala set omnifunc=scalacomplete#CompleteTags
-    autocmd FileType lua set omnifunc=luacomplete#Complete
-
-    autocmd BufNewFile,BufRead *.go                    set filetype=go syntax=go
-    autocmd BufNewFile,BufRead *.scala                 set filetype=scala
-    autocmd BufNewFile,BufRead *Spec.scala,*Test.scala set filetype=scalatest syntax=scala
-    autocmd BufNewFile,BufRead *.sbt                   set filetype=scala
-
-    autocmd BufReadPost *
-                \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                \   exe "normal g`\"" |
-                \ endif
-endif                                       " has("autocmd")
-"                                           " ctrl+x_ctrl+o后,ctrl+e来停止补全并回到原来录入的文字.ctrl+y接受当前补全并返回
-
-set completeopt=longest,menu                " 提示菜单后输入字母实现即时的过滤和匹配,去掉预览窗口的显示
-"                                           " 绑定ctrl+j,ctrl+k来替换掉Ctrl+n,Ctrl+p下,上 在complete弹出层上下翻
-inoremap <expr> <C-j> ((pumvisible())?("\<C-n>"):("j"))
-inoremap <expr> <C-k> ((pumvisible())?("\<C-p>"):("k"))
-"}}
 "{{
 set virtualedit=block                       " block 允许可视列块模式的虚拟编辑
                                             " insert 允许插入模式的虚拟编辑
@@ -504,13 +458,69 @@ nmap <Leader>c *<C-O>:%s///gn<CR>
 "{{                                         " CTags的设定
 "                                           "     (地址自定义,我的www在/home/www下)
 "                                           "     vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
-"                                           " ctrl_] 跳转到对应函数 ctrl_t 回跳 ctrl_o 回跳
+"                                           " ctrl_] 跳转到对应函数 ctrl_t 回跳 ctrl_o 回跳 :tag Tagname
+"                                           " ctrl_W_] 新窗口打开跳转
+
+set tags=/home/www/tags
+set tags+=tags,./tags,tags                 " 分号必须,让vim递归向上查找tags
 map <F8> :!ctags -R<CR>
 nnoremap <silent> <S-F8> :!ctags -R<CR>
-au BufWritePost *.c,*.cpp,*.h,*.go,*.js,*.php,*.py,*.lua,*.scala silent! !ctags -R &
-set tags=/home/www/tags
-set tags+=tags,./tags,tags;                 " 分号必须,让vim递归向上查找tags
 set autochdir
+"}}
+"                                           " 只在下列文件类型被侦测时显示行号,普通文本文件不显示
+"{{
+"                                           " au[tocmd]
+set noerrorbells visualbell t_vb=           " disable beep when error
+if has("autocmd")
+    autocmd GUIEnter * set visualbell t_vb=
+
+    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl shiftwidth=4
+    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl tabstop=4
+    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl softtabstop=4
+    autocmd FileType html,xml,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setlocal textwidth=100
+    autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,scala,go,lua set number
+    autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
+    autocmd FileType java,c,cpp,cs,php vmap <C-o> <ESC>'<o/*<ESC>'>o*/
+
+    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+    autocmd FileType mysql set omnifunc=mysqlcomplete#CompleteMYSQL
+    autocmd FileType python set omnifunc=pythoncomplete#Complete
+    autocmd FileType java set omnifunc=javacomplete#Complete
+    autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+    autocmd FileType c set omnifunc=ccomplete#Complete
+    autocmd FileType cpp set omnifunc=cppcomplete#CompleteCPP
+    autocmd FileType go set omnifunc=gocomplete#Complete
+    autocmd FileType scala set omnifunc=scalacomplete#CompleteTags
+    autocmd FileType lua set omnifunc=luacomplete#Complete
+
+    autocmd FileType c,cpp,h map <F8> :!ctags -R -f ~/.vim/csystags --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q /usr/include /usr/local/include<CR>
+    autocmd FileType c,cpp,h nnoremap <silent> <S-F8> :!ctags -R -f ~/.vim/csystags --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q /usr/include /usr/local/include<CR>
+    autocmd FileType python map <F8> :!ctags -R -f ~/.vim/pysystags --python-kinds=-i --fields=+iaS --extra=+q /usr/lib/python2.7<CR>
+    autocmd FileType python nnoremap <silent> <S-F8> :!ctags -R -f ~/.vim/pysystags --python-kinds=-i --fields=+iaS --extra=+q /usr/lib/python2.7<CR>
+
+    autocmd BufNewFile,BufRead *.c,*.cpp               set tags+=tags,~/.vim/csystags;
+    autocmd BufNewFile,BufRead *.py                    set tags+=tags,~/.vim/pysystags;
+    autocmd BufNewFile,BufRead *.go                    set filetype=go syntax=go
+    autocmd BufNewFile,BufRead *.scala                 set filetype=scala
+    autocmd BufNewFile,BufRead *Spec.scala,*Test.scala set filetype=scalatest syntax=scala
+    autocmd BufNewFile,BufRead *.sbt                   set filetype=scala
+
+    autocmd BufWritePost *.go,*.js,*.php,*.lua,*.scala silent! !ctags -R &
+
+    autocmd BufReadPost *
+                \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                \   exe "normal g`\"" |
+                \ endif
+endif                                       " has("autocmd")
+"                                           " ctrl+x_ctrl+o后,ctrl+e来停止补全并回到原来录入的文字.ctrl+y接受当前补全并返回
+
+set completeopt=longest,menu                " 提示菜单后输入字母实现即时的过滤和匹配,去掉预览窗口的显示
+"                                           " 绑定ctrl+j,ctrl+k来替换掉Ctrl+n,Ctrl+p下,上 在complete弹出层上下翻
+inoremap <expr> <C-j> ((pumvisible())?("\<C-n>"):("j"))
+inoremap <expr> <C-k> ((pumvisible())?("\<C-p>"):("k"))
 "}}
 "{{                                         " Ctrlp的设定 https://github.com/kien/ctrlp.vim 2013-07
 "                                           "  运行命令:CtrlP或:CtrlP [starting-directory]来以查找文件模式来启用 ctrlp
@@ -919,31 +929,31 @@ function! s:syntastic()
 endfunction
 "}}
 "{{                                         " YouCompleteMe https://github.com/Valloric/YouCompleteMe
+"                                           "   need apt-get install build-essential, cmake, python-dev, python3-dev,
 "                                           "   git submodule update --init --recursive
-"                                           "   need apt-get install cmake, go to YouCompleteMe Directory: ./install.sh --clang-completer
-"                                           "   need python-dev
+"                                           "   go YouCompleteMe Directory: ./install.sh --clang-completer
 "let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 "let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-"let g:ycm_complete_in_comments = 1         "   在注释输入中也能补全
-"let g:ycm_complete_in_strings = 1          "   在字符串输入中也能补全
-"let g:ycm_use_ultisnips_completer = 1      "   提示UltiSnips
-"let g:ycm_cache_omnifunc = 0               "   禁止缓存匹配项,每次都重新生成匹配项
+"let g:ycm_complete_in_comments = 1          "   在注释输入中也能补全
+"let g:ycm_complete_in_strings = 1           "   在字符串输入中也能补全
+"let g:ycm_use_ultisnips_completer = 1       "   提示UltiSnips
+"let g:ycm_cache_omnifunc = 0                "   禁止缓存匹配项,每次都重新生成匹配项
 "let g:ycm_collect_identifiers_from_comments_and_strings = 0   "注释和字符串中的文字也会被收入补全
-"let g:ycm_seed_identifiers_with_syntax = 0             "语言关键字补全, 不过python关键字都很短,所以,需要的自己打开
+"let g:ycm_seed_identifiers_with_syntax = 0              "语言关键字补全, 不过python关键字都很短,所以,需要的自己打开
 ""let g:ycm_collect_identifiers_from_tags_files = 1      "会导致一直更新标签,python2 占用内存80%以上
 ""let g:ycm_key_invoke_completion = '<C-Space>'          " 直接触发自动补全
 "let g:ycm_goto_buffer_command = 'horizontal-split'      " 跳转到定义处, 分屏打开
-"let g:ycm_semantic_triggers = {}           " 不让C的时候只有在 ./-> 时才会弹出补全菜单
+"let g:ycm_semantic_triggers = {}            " 不让C的时候只有在 ./-> 时才会弹出补全菜单
 "let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
 "" nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 "nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
-"                                           " 黑名单,不启用
+"                                            " 黑名单,不启用
 "let g:ycm_filetype_blacklist = {
-"      \ 'tagbar' : 1,
-"      \ 'gitcommit' : 1,
-"      \}
-"}}
+"     \ 'tagbar' : 1,
+"     \ 'gitcommit' : 1,
+"     \}
+""}}
 "{{                                         " syntastic https://github.com/scrooloose/syntastic
 let g:syntastic_error_symbol = '✗'          "set error or warning signs
 let g:syntastic_warning_symbol = '⚠'
@@ -1108,7 +1118,18 @@ let g:PyFlakeRangeCommand = 'Q'             " Visual-mode key command for PyFlak
 "                                           " <Leader>ihn cycles through matches
 "}}
 "{{                                         " OmniCppComplete https://github.com/vim-scripts/OmniCppComplete
-
+"                                           " :ctags -R -f ~/.vim/systags --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q /usr/include /usr/local/include
+let OmniCpp_MayCompleteDot = 1              " autocomplete with .
+let OmniCpp_MayCompleteArrow = 1            " autocomplete with ->
+let OmniCpp_MayCompleteScope = 1            " autocomplete with ::
+let OmniCpp_SelectFirstItem = 2             " select first item (but don't insert)
+let OmniCpp_NamespaceSearch = 2             " search namespaces in this and included files
+let OmniCpp_ShowPrototypeInAbbr = 1         " show function prototype in popup window
+let OmniCpp_GlobalScopeSearch=1             " enable the global scope search
+let OmniCpp_DisplayMode=1                   " Class scope completion mode: always show all members
+"let OmniCpp_DefaultNamespaces=["std"]
+let OmniCpp_ShowScopeInAbbr=1               " show scope in abbreviation and remove the last column
+let OmniCpp_ShowAccess=1 
 "}}
 "{{                                         " php-indent https://github.com/2072/PHP-Indenting-for-VIm
 "                                           " php-syntax https://github.com/2072/vim-syntax-for-PHP
@@ -2193,5 +2214,6 @@ endif
 " 7.09.04                                   " add lua,scala 2016-05-06 11:16:41
 " 7.09.05                                   " add fast search 2016-06-28 14:13:48
 " 7.09.06                                   " add expand and gitgutter plugin 2016-07-11 10:33:25
+" 7.09.07                                   " fix c,cpp omniComplete,refine tags 2016-07-26 04:45:01
 "}}
 "}}}
