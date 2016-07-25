@@ -331,11 +331,12 @@ if has("autocmd")
     autocmd FileType java set omnifunc=javacomplete#Complete
     autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
     autocmd FileType c set omnifunc=ccomplete#Complete
+    autocmd FileType cpp set omnifunc=cppcomplete#CompleteCPP
     autocmd FileType go set omnifunc=gocomplete#Complete
     autocmd FileType scala set omnifunc=scalacomplete#CompleteTags
     autocmd FileType lua set omnifunc=luacomplete#Complete
 
-    autocmd BufNewFile,BufRead *.go                    set filetype=go syntax=go 
+    autocmd BufNewFile,BufRead *.go                    set filetype=go syntax=go
     autocmd BufNewFile,BufRead *.scala                 set filetype=scala
     autocmd BufNewFile,BufRead *Spec.scala,*Test.scala set filetype=scalatest syntax=scala
     autocmd BufNewFile,BufRead *.sbt                   set filetype=scala
@@ -345,9 +346,9 @@ if has("autocmd")
                 \   exe "normal g`\"" |
                 \ endif
 endif                                       " has("autocmd")
+"                                           " ctrl+x_ctrl+o后,ctrl+e来停止补全并回到原来录入的文字.ctrl+y接受当前补全并返回
 
-
-set completeopt=longest,menu                " 提示菜单后输入字母实现即时的过滤和匹配
+set completeopt=longest,menu                " 提示菜单后输入字母实现即时的过滤和匹配,去掉预览窗口的显示
 "                                           " 绑定ctrl+j,ctrl+k来替换掉Ctrl+n,Ctrl+p下,上 在complete弹出层上下翻
 inoremap <expr> <C-j> ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> <C-k> ((pumvisible())?("\<C-p>"):("k"))
@@ -463,8 +464,9 @@ Bundle 'jiangmiao/auto-pairs'
 "" (x)html close tag
 Bundle 'vim-scripts/closetag.vim'
 
-"" Switch in c to h
+"" C/C++, Switch in c to h
 Bundle 'vim-scripts/a.vim'
+Bundle 'vim-scripts/OmniCppComplete'
 
 "" php indent and syntax
 Bundle '2072/PHP-Indenting-for-VIm'
@@ -505,6 +507,7 @@ nmap <Leader>c *<C-O>:%s///gn<CR>
 "                                           " ctrl_] 跳转到对应函数 ctrl_t 回跳 ctrl_o 回跳
 map <F8> :!ctags -R<CR>
 nnoremap <silent> <S-F8> :!ctags -R<CR>
+au BufWritePost *.c,*.cpp,*.h,*.go,*.js,*.php,*.py,*.lua,*.scala silent! !ctags -R &
 set tags=/home/www/tags
 set tags+=tags,./tags,tags;                 " 分号必须,让vim递归向上查找tags
 set autochdir
@@ -1103,6 +1106,9 @@ let g:PyFlakeRangeCommand = 'Q'             " Visual-mode key command for PyFlak
 "                                           " <Leader>ih switches to file under cursor
 "                                           " <Leader>is switches to the alternate file of file under cursor (e.g. on  <foo.h> switches to foo.cpp)
 "                                           " <Leader>ihn cycles through matches
+"}}
+"{{                                         " OmniCppComplete https://github.com/vim-scripts/OmniCppComplete
+
 "}}
 "{{                                         " php-indent https://github.com/2072/PHP-Indenting-for-VIm
 "                                           " php-syntax https://github.com/2072/vim-syntax-for-PHP
@@ -2030,6 +2036,9 @@ endif
 "     -H                                    " 希伯来模式
 "     --noplugin                            " 不加载,无插件模式
 "     --startuptime {fname}                 " 启动时把计时信息写入文件 {fname}.可用于分析载入 .vimrc,插件和打开首个文件的过程中时哪一步最耗时
+"     -V9debugVimLog                        " 启动时加入debug信息, 可以跟踪vim crash, 
+"     :messages                             "  show all crash log, 
+"     :echo                                 "  errmsg print recent msg 
 " /\Cxxx                                    " 大小写敏感 /\cxxx 搜索xxx不敏感
 " vsp                                       " 垂直分割窗口
 " sp                                        " 竖向分割窗口
