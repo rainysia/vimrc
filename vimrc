@@ -216,7 +216,7 @@ function! SetTitle()
         call append(line("."), "")
     elseif &filetype == 'python'
         let g:vimrc_lang_version=' 2.7.9'
-        "let g:vimrc_lang_version=system('python -V')
+        "let g:vimrc_lang_version=system('python --version')
         let g:snips_php_version=g:vimrc_lang_version
         call setline(1,"#!/usr/bin/env python")
         call append(line("."),"# -*- coding: UTF-8 -*-")
@@ -224,7 +224,8 @@ function! SetTitle()
     " elseif &filetype == 'mkd'
     "    call setline(1,"<head><meta charset=\"UTF-8\"></head>")
     elseif &filetype == 'php'
-        let g:vimrc_lang_version=' version 5.6.22'
+        "let g:vimrc_lang_version=' version 5.6.24'
+        let g:vimrc_lang_version=' version '.system('php -r "echo phpversion();"')
         let g:snips_php_version=g:vimrc_lang_version
         call setline(1,"<?php")
         call append(line("."), "")
@@ -239,7 +240,7 @@ function! SetTitle()
         call setline(1,"public class ".expand("%"))
         call append(line("."),"")
     elseif &filetype == 'lua'
-        let g:vimrc_lang_version=' version 5.3.1'
+        let g:vimrc_lang_version=' version 5.3.3'
         let g:snips_php_version=g:vimrc_lang_version
         call setline(1,"#!/usr/local/bin/lua")
         call append(line("."), "")
