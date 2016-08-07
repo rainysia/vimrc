@@ -509,6 +509,7 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *Spec.scala,*Test.scala set filetype=scalatest syntax=scala
     autocmd BufNewFile,BufRead *.sbt                   set filetype=scala
 
+    autocmd BufWritePost *.go,*.c silent! !ctags -R & 
     "autocmd BufWritePost *.go,*.js,*.php,*.lua,*.scala silent! !ctags -R &  "自动从当前目录构建ctags,根目录就惨了
 
     autocmd BufReadPost *
