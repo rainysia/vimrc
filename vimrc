@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2013-2016 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 7.09.07
+" * @version    GIT: 7.09.08
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2016-07-26 04:44:04
+" * @lastChange 2016-08-09 02:28:27
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -415,6 +415,7 @@ Bundle 'joonty/vim-phpqa'
 Bundle 'tpope/vim-surround'
 Bundle 'andviro/flake8-vim'
 Bundle 'jiangmiao/auto-pairs'
+Bundle 'elzr/vim-json'
 
 "" (x)html close tag
 Bundle 'vim-scripts/closetag.vim'
@@ -1100,6 +1101,11 @@ let g:PyFlakeMaxLineLength = 100            " Maximum line length for PyFlakeAut
 let g:PyFlakeRangeCommand = 'Q'             " Visual-mode key command for PyFlakeAuto
 "}}
 "{{                                         " auto-pairs https://github.com/jiangmiao/auto-pairs
+"}}
+"{{                                         " A better JSON for Vim https://github.com/elzr/vim-json
+let g:vim_json_syntax_conceal = 0           "   disable json quote concealing, 0=Null, 1='', 2=\"\"
+"let g:indentLine_noConcealCursor=""
+"
 "}}
 "{{                                         " closetag.vim https://github.com/vim-scripts/closetag.vim
 "                                           " <C-_> to get hit
@@ -2217,5 +2223,6 @@ endif
 " 7.09.05                                   " add fast search 2016-06-28 14:13:48
 " 7.09.06                                   " add expand and gitgutter plugin 2016-07-11 10:33:25
 " 7.09.07                                   " fix c,cpp omniComplete,refine tags 2016-07-26 04:45:01
+" 7.09.08                                   " add vim-json for disable json concealing quotes 2016-08-09 02:28:27
 "}}
 "}}}
