@@ -19,8 +19,21 @@
 " 1 => System Configure {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{                                         " work in linux, echo &rtp
-let $VIMRUNTIME="/usr/share/vim/vim74"
-set runtimepath=/usr/share/vim/vim74,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+if has("unix")
+    if system('uname') =~ "Darwin"
+        let $VIMRUNTIME="/usr/share/vim/vim73"
+        set runtimepath=/usr/share/vim/vim73,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    else
+        let $VIMRUNTIME="/usr/share/vim/vim74"
+        set runtimepath=/usr/share/vim/vim74,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    endif
+elseif has("win32")
+    let $VIMRUNTIME="~/vim74"
+    set runtimepath=~/vim74,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+else
+    let $VIMRUNTIME="/usr/share/vim/vim74"
+    set runtimepath=/usr/share/vim/vim74,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+endif
 "}}
 set nocp                                    " close compeletion with vi
 set helplang=cn                             " 帮助菜单
