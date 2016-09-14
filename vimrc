@@ -10,7 +10,7 @@
 " * @license    https://opensource.org/licenses/MIT license
 " * @version    GIT: 7.09.08
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2016-08-09 02:28:27
+" * @lastChange 2016-09-14 11:00:15
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -1156,6 +1156,20 @@ let OmniCpp_ShowAccess=1
 "                                           " php-syntax https://github.com/2072/vim-syntax-for-PHP
 "}}
 "{{                                         " phpcomplete https://github.com/shawncplus/phpcomplete.vim
+let g:phpcomplete_relax_static_constraint = 0
+let g:phpcomplete_complete_for_unknown_classes = 0
+let g:phpcomplete_search_tags_for_variables = 0
+let g:phpcomplete_min_num_of_chars_for_namespace_completion = 0
+let g:phpcomplete_parse_docblock_comments = 0
+let g:phpcomplete_cache_taglists = 0
+let g:phpcomplete_enhance_jump_to_definition = 1
+"                                           "
+let g:phpcomplete_mappings = {
+   \ 'jump_to_def': '<C-]>',
+   \ 'jump_to_def_split': '<C-W><C-]>',
+   \ 'jump_to_def_vsplit': '<C-W><C-\>',
+   \}
+
 "}}
 "{{                                         " vim-scala https://github.com/derekwyatt/vim-scala
 "}}
