@@ -798,8 +798,8 @@ autocmd QuickFixCmdPost *grep* cwindow
 "                                           "   :GitGutterLineHighlightsEnable/Disable/Toggle 高亮修改行,default off
 "                                           "   ☺ ☻ ♻ ✗ ✚ ✪ ✯ ➜ ❀ ☢ ✖️ 
 "                                           "   关闭占用vim左侧列
-let g:gitgutter_enabled = 0                 " close gitgutter
-let g:gitgutter_sign_column_always = 0
+let g:gitgutter_enabled = 1                 " close gitgutter 0
+let g:gitgutter_sign_column_always = 1
 let g:gitgutter_max_signs = 500 
 nmap <Leader>hn <Plug>GitGutterNextHunk
 nmap <Leader>hp <Plug>GitGutterPrevHunk
