@@ -440,7 +440,7 @@ Bundle 'vim-scripts/OmniCppComplete'
 "" php indent and syntax
 Bundle '2072/PHP-Indenting-for-VIm'
 Bundle '2072/vim-syntax-for-PHP'
-Bundle 'shawncplus/phpcomplete.vim'
+"Bundle 'shawncplus/phpcomplete.vim'
 
 "" scala
 Bundle 'derekwyatt/vim-scala'
@@ -973,7 +973,7 @@ endfunction
 "{{                                         " syntastic https://github.com/scrooloose/syntastic
 let g:syntastic_error_symbol = '✗'          "set error or warning signs
 let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_check_on_open=1
+let g:syntastic_check_on_open=0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快,pip install pyflakes
@@ -1061,7 +1061,7 @@ let g:snips_link=g:vimrc_link
 let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = " --encoding=utf-8"
 let g:phpqa_codesniffer_cmd  = '/usr/bin/phpcs'
-let g:phpqa_codesniffer_autorun = 1         "  default =1 on save
+let g:phpqa_codesniffer_autorun = 0         "  default =1 on save
 "                                           " :return NULL Void Boolean Float String Array Object Resource Callback
 let g:phpqa_messdetector_ruleset = ''
 let g:phpqa_messdetector_cmd = '/usr/bin/phpmd'
@@ -1155,7 +1155,7 @@ let OmniCpp_ShowAccess=1
 "{{                                         " php-indent https://github.com/2072/PHP-Indenting-for-VIm
 "                                           " php-syntax https://github.com/2072/vim-syntax-for-PHP
 "}}
-"{{                                         " phpcomplete https://github.com/shawncplus/phpcomplete.vim
+"{{                                         " phpcomplete https://github.com/shawncplus/phpcomplete.vim, php will jammed
 let g:phpcomplete_relax_static_constraint = 0
 let g:phpcomplete_complete_for_unknown_classes = 0
 let g:phpcomplete_search_tags_for_variables = 0
