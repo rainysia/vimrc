@@ -471,12 +471,13 @@ let mapleader = ","                         "      键盘映射为 ,
 nmap <Leader>c *<C-O>:%s///gn<CR>
 "}}
 "{{                                         " CTags的设定
-"                                           "     (地址自定义,我的www在/home/www下)
-"                                           "     vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
+"                                           "    (地址自定义,我的www在/home/www下)
+"                                           "    vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
+"                                           "    !ctags -R --exclude=.git --languages=php ./ -V   
 "                                           " ctrl_] 跳转到对应函数 ctrl_t 回跳 ctrl_o 回跳 :tag Tagname
 "                                           " ctrl_W_] 新窗口打开跳转
 
-set tags=/home/www/tags
+set tags=/home/www/tags                     " php will jammed
 set tags+=tags,./tags,tags                 " 分号必须,让vim递归向上查找tags
 map <F8> :!ctags -R<CR>
 nnoremap <silent> <S-F8> :!ctags -R<CR>
