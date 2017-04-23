@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2013-2016 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 7.09.08
+" * @version    GIT: 8.01.01
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2016-11-18 18:30:14
+" * @lastChange 2017-04-24 00:15:51
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -490,9 +490,9 @@ set noerrorbells visualbell t_vb=           " disable beep when error
 if has("autocmd")
     autocmd GUIEnter * set visualbell t_vb=
 
-    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl shiftwidth=4
-    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl tabstop=4
-    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl softtabstop=4
+    autocmd FileType html,python,vim,javascript,php,java,scala,bash,shell,go,lua,c setl shiftwidth=4
+    autocmd FileType html,python,vim,javascript,php,java,scala,bash,shell,go,lua,c setl tabstop=4
+    autocmd FileType html,python,vim,javascript,php,java,scala,bash,shell,go,lua,c setl softtabstop=4
     autocmd FileType html,xml,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setlocal textwidth=100
     autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,scala,go,lua set number
     autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
@@ -974,7 +974,7 @@ endfunction
 "{{                                         " syntastic https://github.com/scrooloose/syntastic
 let g:syntastic_error_symbol = '✗'          "set error or warning signs
 let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_check_on_open=0
+let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快,pip install pyflakes
