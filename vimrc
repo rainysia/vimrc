@@ -2,15 +2,15 @@
 "========================================================================
 " * For vim Configuration file
 
-" * VIM 7.4
+" * VIM 8.0
 
 " * @filename   vimrc
 " * @author     Rainy Sia <rainysia@gmail.com>
-" * @copyright  2013-2016 BTROOT.ORG
+" * @copyright  2013-2017 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
 " * @version    GIT: 8.01.01
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2017-04-24 00:15:51
+" * @lastChange 2017-06-21 17:11:58
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -24,15 +24,15 @@ if has("unix")
         let $VIMRUNTIME="/usr/share/vim/vim73"
         set runtimepath=/usr/share/vim/vim73,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     else
-        let $VIMRUNTIME="/usr/share/vim/vim74"
-        set runtimepath=/usr/share/vim/vim74,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+        let $VIMRUNTIME="/usr/share/vim/vim80"
+        set runtimepath=/usr/share/vim/vim80,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     endif
 elseif has("win32")
-    let $VIMRUNTIME="~/vim74"
-    set runtimepath=~/vim74,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    let $VIMRUNTIME="~/vim80"
+    set runtimepath=~/vim80,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 else
-    let $VIMRUNTIME="/usr/share/vim/vim74"
-    set runtimepath=/usr/share/vim/vim74,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    let $VIMRUNTIME="/usr/share/vim/vim80"
+    set runtimepath=/usr/share/vim/vim80,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 endif
 "}}
 set nocp                                    " close compeletion with vi
@@ -166,8 +166,8 @@ set enc=utf-8                               " vim 支持中文 内部编码
 set termencoding=utf-8                      " work in linux
 set fenc=utf-8                              " work in linux 解析出来的当前文件编码(可能解析错误)
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936    " 文件解析猜测识别的编码顺序
-set langmenu=zh_CN.UTF-8                    " Console output coding
-language message zh_CN.UTF-8                " 控制台console编码
+set langmenu=en_US.UTF-8                    " Console output coding
+language message en_US.UTF-8                " 控制台console编码
 set ambiwidth=double                        " 把不明宽度字符设置为双倍字符宽度(中文字符宽度)
 set fileencoding=utf-8                      " 当前编辑的文件编码(新文件的编码)
 set fileencodings=usc-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin-1
@@ -490,9 +490,9 @@ set noerrorbells visualbell t_vb=           " disable beep when error
 if has("autocmd")
     autocmd GUIEnter * set visualbell t_vb=
 
-    autocmd FileType html,python,vim,javascript,php,java,scala,bash,shell,go,lua,c setl shiftwidth=4
-    autocmd FileType html,python,vim,javascript,php,java,scala,bash,shell,go,lua,c setl tabstop=4
-    autocmd FileType html,python,vim,javascript,php,java,scala,bash,shell,go,lua,c setl softtabstop=4
+    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl shiftwidth=4
+    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl tabstop=4
+    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl softtabstop=4
     autocmd FileType html,xml,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setlocal textwidth=100
     autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,scala,go,lua set number
     autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
@@ -1792,6 +1792,7 @@ endif
 " :s/^/#                                    " 用'#'注释当前行
 " :2,50s/^ /#                               " 在2~50行首添加'#'注释
 " :2,50s/$/#                                " 在2~50末加'#'
+" :%s/#/#\r/g                               " transfer # to #\r
 " :.,+3s/^/#                                " 用'#'注释当前行和当前行后面的三行
 " :%s/^/#                                   " 用'#'注释所有行
 " :n1,n2s/^/#/g                             " 用'#'注释n1~n2行,下面为删除
