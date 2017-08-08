@@ -423,7 +423,8 @@ Bundle 'garbas/vim-snipmate'
 Bundle 'rainysia/vim-snippets'
 
 Bundle 'vim-scripts/L9'
-Bundle 'othree/vim-autocomplpop'
+"Bundle 'othree/vim-autocomplpop'
+Bundle 'Shougo/neocomplete.vim'
 Bundle 'joonty/vim-phpqa'
 Bundle 'tpope/vim-surround'
 Bundle 'andviro/flake8-vim'
@@ -440,7 +441,7 @@ Bundle 'vim-scripts/OmniCppComplete'
 "" php indent and syntax
 Bundle '2072/PHP-Indenting-for-VIm'
 Bundle '2072/vim-syntax-for-PHP'
-"Bundle 'shawncplus/phpcomplete.vim'
+Bundle 'shawncplus/phpcomplete.vim'
 
 "" scala
 Bundle 'derekwyatt/vim-scala'
@@ -499,7 +500,7 @@ if has("autocmd")
     autocmd FileType java,c,cpp,cs,php vmap <C-o> <ESC>'<o/*<ESC>'>o*/
 
     autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType php set omnifunc=phpcomplete#CompletePHP
     autocmd FileType mysql set omnifunc=mysqlcomplete#CompleteMYSQL
@@ -800,7 +801,8 @@ autocmd QuickFixCmdPost *grep* cwindow
 "                                           "   ☺ ☻ ♻ ✗ ✚ ✪ ✯ ➜ ❀ ☢ ✖️ 
 "                                           "   关闭占用vim左侧列
 let g:gitgutter_enabled = 1                 " close gitgutter 0
-let g:gitgutter_sign_column_always = 1
+"let g:gitgutter_sign_column_always = 1
+set signcolumn=yes
 let g:gitgutter_max_signs = 500 
 nmap <Leader>hn <Plug>GitGutterNextHunk
 nmap <Leader>hp <Plug>GitGutterPrevHunk
@@ -1055,6 +1057,14 @@ let g:snips_link=g:vimrc_link
 "{{                                         " L9 library for autocomplpop https://github.com/vim-scripts/L9
 "}}
 "{{                                         " autocomplpop 插件,自动完成提示. https://github.com/othree/vim-autocomplpop
+"}}
+"{{                                         " neocomplete.vim 插件,自动完成提示. https://github.com/Shougo/neocomplete.vim
+":NeoCompleteEnable
+let g:neocomplete#enable_at_startup = 1     " faster than vim-autocomplpop
+let g:acp_enableAtStartup = 0               " Disable AutoComplPop.
+let g:neocomplete#enable_at_startup = 1     " Use neocomplete.
+let g:neocomplete#enable_smart_case = 1     " Use smartcase.
+let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
 "}}
 "{{                                         " phpqa.vim的设定 https://github.com/joonty/vim-phpqa
 "                                           " debian apt-get install php-codesniffer, pear install PHP_CodeSniffer
