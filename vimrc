@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2013-2017 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 8.01.01
+" * @version    GIT: 8.11.01
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2017-06-21 17:11:58
+" * @lastChange 2017-11-29 15:38:10
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -80,6 +80,9 @@ endif
 unlet g:undo_dir
 unlet g:data_dir
 set undodir=$HOME/.vim/undofile
+" python support                            " apt-get install libpython2.7 libpython2.7-dev libpython2.7-dbg
+"                                           " apt-get install vim-nox
+"                                            +python 意味着安装了, -python意味着缺失
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 2 => Text Pattern {{{
@@ -258,7 +261,7 @@ function! SetTitle()
         call setline(1,"#!/usr/local/bin/lua")
         call append(line("."), "")
     elseif &filetype == 'go'
-        call setline(1,"#!/usr/local/go/bin")
+        call setline(1,"#!/usr/local/bin/go")
         call append(line("."), "")
     else
         let g:vimrc_lang_version=' version num'
@@ -395,6 +398,8 @@ Bundle 'dimasg/vim-mark'
 Bundle 'dyng/ctrlsf.vim'
 "" 中文vim文档
 Bundle 'asins/vimcdoc'
+"" 大文件打开
+Bundle 'vim-scripts/LargeFile'
 
 "" 显示实际颜色
 Bundle 'lilydjwg/colorizer'
@@ -761,6 +766,9 @@ let g:mwDefaultHighlightingPalette = 'extended'
 "{{                                         " vimcdoc https://github.com/asins/vimcdoc
 "
 "}}
+"{{                                         " LargeFile https://github.com/vim-scripts/LargeFile
+"
+"}}
 "{{                                         " css-highlight https://github.com/lilydjwg/colorizer
 "}}
 "{{                                         " calendar.vim https://github.com/itchyny/calendar.vim
@@ -790,6 +798,7 @@ let g:indentLine_char = '|'
 "{{                                         " vim-fugitive https://github.com/tpope/vim-fugitive
 "                                           " :Gedit, :Gsplit, :Gvsplit, :Gtabedit, :Gdiff, :Gcommit,
 "                                           " :Gblame, :Gmove, :Ggrep, :Glog, :Gread=git checkout --filename
+nmap <Leader>gb :Gblame<CR>
 "                                           " :Gstatus , press - to add/reset, p to add/reset --patch
 "                                           " :Gwrite, :Gbrowse, :Git
 autocmd QuickFixCmdPost *grep* cwindow
