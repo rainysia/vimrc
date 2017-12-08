@@ -440,9 +440,6 @@ Bundle 'andviro/flake8-vim'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'elzr/vim-json'
 
-"" All language indent,syntax
-Bundle 'sheerun/vim-polyglot'
-
 "" (x)html close tag
 Bundle 'vim-scripts/closetag.vim'
 
@@ -1151,9 +1148,6 @@ let g:PyFlakeRangeCommand = 'Q'             " Visual-mode key command for PyFlak
 let g:vim_json_syntax_conceal = 0           "   disable json quote concealing, 0=Null, 1='', 2=\"\"
 "let g:indentLine_noConcealCursor=""
 "
-"}}
-"{{                                         " A collection of language packs for Vim https://github.com/sheerun/vim-polyglot
-"let g:polyglot_disabled = ['css']          " ignore language packs
 "}}
 "}}
 "{{                                         " closetag.vim https://github.com/vim-scripts/closetag.vim
