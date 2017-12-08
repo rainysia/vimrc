@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2013-2017 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 8.11.01
+" * @version    GIT: 8.12.01
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2017-11-29 15:38:10
+" * @lastChange 2017-12-08 14:13:43
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -363,7 +363,7 @@ endif
 
 Bundle 'VundleVim/Vundle.vim'
 "" 快速文件查找
-Bundle 'kien/ctrlp.vim'
+Bundle 'ctrlpvim/ctrlp.vim'
 "" ctrlp 函数查找
 Bundle 'tacahiroy/ctrlp-funky'
 "" ack 更快的搜索
@@ -388,6 +388,8 @@ Bundle 'yegappan/grep'
 Bundle 'dkprice/vim-easygrep'
 "" 区块伸缩选中
 Bundle 'terryma/vim-expand-region'
+"" 匹配html,xml等成对括号跳转
+Bundle 'vim-scripts/matchit.zip'
 "" 最近使用文件浏览
 Bundle 'vim-scripts/mru.vim'
 "" 显示多次搜索结果
@@ -415,6 +417,8 @@ Bundle 'Yggdroot/indentLine'
 Bundle 'itchyny/lightline.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'airblade/vim-gitgutter'
+"" 高亮行末空格,一键去除
+Bundle 'bronson/vim-trailing-whitespace'
 
 "" zencoding,快速生成代码
 "Bundle 'Valloric/YouCompleteMe'
@@ -435,6 +439,9 @@ Bundle 'tpope/vim-surround'
 Bundle 'andviro/flake8-vim'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'elzr/vim-json'
+
+"" All language indent,syntax
+Bundle 'sheerun/vim-polyglot'
 
 "" (x)html close tag
 Bundle 'vim-scripts/closetag.vim'
@@ -545,7 +552,7 @@ set completeopt=longest,menu                " 提示菜单后输入字母实现�
 inoremap <expr> <C-j> ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> <C-k> ((pumvisible())?("\<C-p>"):("k"))
 "}}
-"{{                                         " Ctrlp的设定 https://github.com/kien/ctrlp.vim 2013-07
+"{{                                         " Ctrlp的设定 https://github.com/ctrlpvim/ctrlp.vim 2013-07
 "                                           "  运行命令:CtrlP或:CtrlP [starting-directory]来以查找文件模式来启用 ctrlp
 "                                           "  运行命令:CtrlPBuffer或:CtrlPMRU来以查找缓冲或最近打开文件模式来启用ctrlp
 "                                           "  运行命令:CtrlPMixed来查找文件,查找缓冲和最近打开文件混合模式来启动 ctrlp
@@ -723,7 +730,9 @@ nnoremap <silent> <F3> :Grep<CR>
 "}}
 "{{                                         " vim-expand-region https://github.com/terryma/vim-expand-region
 "                                           " + 扩展选择, - 缩小选择
-
+"}}
+"{{                                         " matchit.vim的设定 https://github.com/vim-scripts/matchit.zip
+"                                           " %
 "}}
 "{{                                         " mru.vim的设定 https://github.com/vim-scripts/mru.vim
 "                                           " :MRU
@@ -822,7 +831,10 @@ let g:gitgutter_sign_modified = '✗'
 let g:gitgutter_sign_removed = '✖️'
 let g:gitgutter_sign_removed_first_line = '♻'
 let g:gitgutter_sign_modified_removed = '☢'
-
+"}}
+"{{                                         " Remove trailing whitespace https://github.com/bronson/vim-trailing-whitespace
+":FixWhiteSpace
+nmap <Leader>rs :FixWhitespace<CR>
 "}}
 "{{                                         " lightline https://github.com/itchyny/lightline.vim
 "                                           " install powerline font
@@ -1139,6 +1151,10 @@ let g:PyFlakeRangeCommand = 'Q'             " Visual-mode key command for PyFlak
 let g:vim_json_syntax_conceal = 0           "   disable json quote concealing, 0=Null, 1='', 2=\"\"
 "let g:indentLine_noConcealCursor=""
 "
+"}}
+"{{                                         " A collection of language packs for Vim https://github.com/sheerun/vim-polyglot
+"let g:polyglot_disabled = ['css']          " ignore language packs
+"}}
 "}}
 "{{                                         " closetag.vim https://github.com/vim-scripts/closetag.vim
 "                                           " <C-_> to get hit
