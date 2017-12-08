@@ -363,7 +363,8 @@ endif
 
 Bundle 'VundleVim/Vundle.vim'
 "" 快速文件查找
-Bundle 'ctrlpvim/ctrlp.vim'
+"Bundle 'ctrlpvim/ctrlp.vim'
+Bundle 'kien/ctrlp.vim'
 "" ctrlp 函数查找
 Bundle 'tacahiroy/ctrlp-funky'
 "" ack 更快的搜索
@@ -550,6 +551,7 @@ inoremap <expr> <C-j> ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> <C-k> ((pumvisible())?("\<C-p>"):("k"))
 "}}
 "{{                                         " Ctrlp的设定 https://github.com/ctrlpvim/ctrlp.vim 2013-07
+"                                           "  https://github.com/kien/ctrlp.vim
 "                                           "  运行命令:CtrlP或:CtrlP [starting-directory]来以查找文件模式来启用 ctrlp
 "                                           "  运行命令:CtrlPBuffer或:CtrlPMRU来以查找缓冲或最近打开文件模式来启用ctrlp
 "                                           "  运行命令:CtrlPMixed来查找文件,查找缓冲和最近打开文件混合模式来启动 ctrlp
@@ -564,7 +566,12 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip    " Linux/MacOSX
 "set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe" Windows
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rvm)$'
+"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rvm)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 let g:ctrlp_working_path_mode=0             " :cd 父目录, :CtrlP 父目录 或者上级目录来查找
 let g:ctrlp_match_window_bottom=1
 let g:ctrlp_max_height=15
@@ -573,7 +580,7 @@ let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 let g:ctrlp_user_command = {
     \ 'types': {
-        \ 1: ['.git', 'cd %s && git ls-files'],
+        \ 1: ['.git', 'cd %s && git ls-files -co --exclude-standard'],
         \ 2: ['.hg', 'hg --cwd %s locate -I .'],
         \ },
     \ 'fallback': 'find %s -type f'
