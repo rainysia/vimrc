@@ -1353,6 +1353,8 @@ function! MyDiff()
     endif
     silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
+map <Leader>dg :diffget<CR>
+map <Leader>dp :diffput<CR>
 "}}
 "{{
 " 高亮当前光标列.
