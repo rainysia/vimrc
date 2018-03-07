@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2013-2017 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 8.12.01
+" * @version    GIT: 8.13.01
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2017-12-08 14:13:43
+" * @lastChange 2018-03-07 10:11:28
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -205,12 +205,13 @@ set viminfo='1000,f1,<500
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  4 => Display {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme desert                          " 设置配色方案
+colorscheme desert                          " 设置配色方案, 需要用自定义的覆盖/usr/share/vim/vim80/colors/desert.vim
 set background=dark                         " 设置背景为黑
 set novisualbell                            " No mouseflash
 set nu                                      " 设置行号
 syntax enable                               " 启用语法高亮
 syntax on                                   " 设置语法高亮
+"set termguicolors                           " 设置终端支持真彩色
 "{{                                         " 高亮字符,让其不受100列限制
 highlight OverLength ctermbg=darkgray ctermfg=lightblue guibg=#1C1D1E guifg=#DCDCDC
 match OverLength '\%500v.*'
@@ -2292,5 +2293,6 @@ endif
 " 7.09.06                                   " add expand and gitgutter plugin 2016-07-11 10:33:25
 " 7.09.07                                   " fix c,cpp omniComplete,refine tags 2016-07-26 04:45:01
 " 7.09.08                                   " add vim-json for disable json concealing quotes 2016-08-09 02:28:27
+" 8.01.00                                   " set desert highlight for self configuration 2018-03-07 10:12:02
 "}}
 "}}}
