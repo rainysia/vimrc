@@ -81,7 +81,7 @@ unlet g:undo_dir
 unlet g:data_dir
 set undodir=$HOME/.vim/undofile
 " python support                            " apt-get install libpython2.7 libpython2.7-dev libpython2.7-dbg
-"                                           " apt-get install vim-nox
+"                                           " apt-get install vim-nox(支持py, +lua)
 "                                            +python 意味着安装了, -python意味着缺失
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -458,7 +458,7 @@ Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'vim-scripts/scala.vim'
 
-"" lua
+"" lua, apt-get install vim-nox
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-lua-ftplugin'
 
