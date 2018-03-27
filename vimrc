@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2013-2017 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 8.13.01
+" * @version    GIT: 8.13.02
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2018-03-07 10:11:28
+" * @lastChange 2018-03-27 14:31:06
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -1224,17 +1224,19 @@ let g:lua_define_completefunc = 1
 let g:lua_define_omnifunc = 1
 "                                           " :LuaCheckSyntax, :LuaCheckGlobals
 "}}
-"{{                                         " vim-go https://github.com/fatih/vim-go
+"{{                                         " vim-go https://github.com/fatih/vim-go, Need go.tools :GoInstallBinaries
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-"au FileType go nmap <leader>r <Plug>(go-run)
-"au FileType go nmap <leader>b <Plug>(go-build)
-"au FileType go nmap <leader>t <Plug>(go-test)
-"au FileType go nmap <leader>c <Plug>(go-coverage)
+autocmd FileType go nmap <leader>r <Plug>(go-run)
+autocmd FileType go nmap <leader>b <Plug>(go-build)
+autocmd FileType go nmap <leader>t <Plug>(go-test)
+"autocmd FileType go nmap <leader>c <Plug>(go-coverage)
+"                                           " :GoDoc, GoRun, GoBuild, GoInstall, GoTest, GoCoverage,
+"                                           GoErrCheck, GoFiles, GoDeps, GoImplements, GoRename
 "}}
 "{{                                         " vim-easy-align https://github.com/junegunn/vim-easy-align
 "                                           "    <Space>, =, :, ., |, &, #, and ,.
