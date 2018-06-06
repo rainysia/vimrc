@@ -1650,7 +1650,7 @@ elseif &t_Co == 256
     "   =======================================================================================================================
     hi        Cursor         ctermfg=black            ctermbg=lightyellow       cterm=BOLD        "光标所在的字符
     hi        CursorColumn   ctermfg=black            ctermbg=darkgrey          cterm=BOLD        "光标所在的屏幕列
-    hi        CursorLine     ctermfg=black            ctermbg=lightblue          cterm=NONE        "光标所在的屏幕行
+    hi        CursorLine     ctermfg=black            ctermbg=lightblue         cterm=NONE        "光标所在的屏幕行
     hi        CursorLineNr   ctermfg=white            ctermfg=red               cterm=BOLD        "光标所在的行号
     hi        ColorColumn    ctermfg=lightgrey        ctermbg=white             cterm=BOLD        "高亮光标所在列.
     hi        Directory      ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "目录名
@@ -1739,7 +1739,7 @@ else
     "Console xterm 8
     hi        Cursor         ctermfg=black            ctermbg=lightyellow       cterm=BOLD        "光标所在的字符
     hi        CursorColumn   ctermfg=black            ctermbg=darkgrey          cterm=BOLD        "光标所在的屏幕列
-    hi        CursorLine     ctermfg=black            ctermbg=lightblue          cterm=NONE        "光标所在的屏幕行
+    hi        CursorLine     ctermfg=white            ctermbg=lightblue          cterm=NONE        "光标所在的屏幕行
     hi        CursorLineNr   ctermfg=white            ctermfg=red               cterm=BOLD        "光标所在的行号
     hi        ColorColumn    ctermfg=lightgrey        ctermbg=white             cterm=BOLD        "高亮光标所在列.
     hi        Directory      ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "目录名

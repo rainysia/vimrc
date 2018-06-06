@@ -303,7 +303,7 @@ else
 "Console xterm 8
 hi Cursor ctermfg=black ctermbg=lightyellow cterm=BOLD
 hi CursorColumn ctermfg=black ctermbg=darkgrey cterm=BOLD
-hi CursorLine ctermfg=black ctermbg=lightblue cterm=NONE
+hi CursorLine ctermfg=white ctermbg=lightblue cterm=NONE
 hi CursorLineNr ctermfg=white ctermfg=red cterm=BOLD
 hi ColorColumn ctermfg=lightgrey ctermbg=white cterm=BOLD
 hi Directory ctermfg=darkcyan ctermbg=black cterm=BOLD
