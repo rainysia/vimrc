@@ -6,11 +6,11 @@
 
 " * @filename   vimrc
 " * @author     Rainy Sia <rainysia@gmail.com>
-" * @copyright  2013-2017 BTROOT.ORG
+" * @copyright  2008-2018 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 8.13.02
+" * @version    GIT: 8.07.01
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2018-03-27 14:31:06
+" * @lastChange 2018-07-21 01:25:55
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -1231,9 +1231,9 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-autocmd FileType go nmap <leader>r <Plug>(go-run)
-autocmd FileType go nmap <leader>b <Plug>(go-build)
-autocmd FileType go nmap <leader>t <Plug>(go-test)
+autocmd FileType go nmap <leader>r <Plug>(go-run) %
+autocmd FileType go nmap <leader>b <Plug>(go-build) %
+autocmd FileType go nmap <leader>t <Plug>(go-test) %
 "autocmd FileType go nmap <leader>c <Plug>(go-coverage)
 "                                           " :GoDoc, GoRun, GoBuild, GoInstall, GoTest, GoCoverage,
 "                                           GoErrCheck, GoFiles, GoDeps, GoImplements, GoRename
@@ -2296,5 +2296,6 @@ endif
 " 7.09.07                                   " fix c,cpp omniComplete,refine tags 2016-07-26 04:45:01
 " 7.09.08                                   " add vim-json for disable json concealing quotes 2016-08-09 02:28:27
 " 8.01.00                                   " set desert highlight for self configuration 2018-03-07 10:12:02
+" 8.07.01                                   "  % 当前完整文件名,%:h 文件名头部(path),%:文件名尾部(文件名+后缀),%:r(文件名),%:e扩展
 "}}
 "}}}
