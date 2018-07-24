@@ -1231,10 +1231,12 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-autocmd FileType go nmap <leader>r <Plug>(go-run) %
-autocmd FileType go nmap <leader>b <Plug>(go-build) %
-autocmd FileType go nmap <leader>t <Plug>(go-test) %
+"autocmd FileType go nmap <leader>r <Plug>(go-run) %<CR>
+autocmd FileType go nmap <leader>b <Plug>(go-build) %<CR>
+autocmd FileType go nmap <leader>t <Plug>(go-test) %<CR>
 "autocmd FileType go nmap <leader>c <Plug>(go-coverage)
+autocmd FileType go nmap <Leader>r :!go run %<CR>
+
 "                                           " :GoDoc, GoRun, GoBuild, GoInstall, GoTest, GoCoverage,
 "                                           GoErrCheck, GoFiles, GoDeps, GoImplements, GoRename
 "}}
@@ -1943,7 +1945,7 @@ endif
 "                                           "    前面加行号表示多少行开始  :2,30diffget 把2~30行的差异取过来
 " c{ motion }                               " 删除motion命令跨过的,并且进入插入 c$删到行尾的并进入插入,ct! 删除从光标位到下一个!位置
 " dp                                        " 把光标处的不同放到另一个文件
-" do                                        " 在光标处从另一个文件取得不同
+" dg                                        " 在光标处从另一个文件取得不同
 " diw                                       " 删除光标上的单词 (不包括空白字符)
 " daw                                       " 删除光标上的单词 (包括空白字符)
 " dl                                        " delete character (alias: x)
