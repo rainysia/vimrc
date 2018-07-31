@@ -1193,6 +1193,7 @@ let OmniCpp_ShowAccess=1
 "{{                                         " php-indent https://github.com/2072/PHP-Indenting-for-VIm
 "                                           " php-syntax https://github.com/2072/vim-syntax-for-PHP
 "}}
+autocmd FileType php nmap <Leader>r :!php %<CR>
 "{{                                         " phpcomplete https://github.com/shawncplus/phpcomplete.vim, php will jammed
 let g:phpcomplete_relax_static_constraint = 0
 let g:phpcomplete_complete_for_unknown_classes = 0
