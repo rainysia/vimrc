@@ -464,6 +464,7 @@ Bundle 'xolox/vim-lua-ftplugin'
 
 "" go
 Bundle 'fatih/vim-go'
+"Bundle 'nsf/gocode', {'rtp': 'vim/'}
 
 "" format
 Bundle 'junegunn/vim-easy-align'
@@ -1865,7 +1866,7 @@ endif
 " gf                                        " 在鼠标下打开当前路径的文件
 " <c-w>f                                    " open in a new window
 " <c-w>gf                                   " open in a new tab
-" :n1,n2 co n3                              " copy n1~n2 to under the n3
+" :n1,n2 co n3                              " copy n1~n2 to under the n3  :1 co 3
 " :n1,n2 m n3                               " move n1~n2 to under the n3
 " :n1,n2 w filename                         " save n1~n2 to filename
 " n+   n-                                   " 光标移动多少行
