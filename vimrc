@@ -464,6 +464,7 @@ Bundle 'xolox/vim-lua-ftplugin'
 
 "" go
 Bundle 'fatih/vim-go'
+" gometalinter 
 "Bundle 'nsf/gocode', {'rtp': 'vim/'}
 
 "" format
@@ -1238,9 +1239,49 @@ autocmd FileType go nmap <leader>b <Plug>(go-build) %<CR>
 autocmd FileType go nmap <leader>t <Plug>(go-test) %<CR>
 "autocmd FileType go nmap <leader>c <Plug>(go-coverage)
 autocmd FileType go nmap <Leader>r :!go run %<CR>
-
 "                                           " :GoDoc, GoRun, GoBuild, GoInstall, GoTest, GoCoverage,
 "                                           GoErrCheck, GoFiles, GoDeps, GoImplements, GoRename
+"}}
+"{{                                         " gometalinter https://github.com/alecthomas/gometalinter
+"                                           " install:curl -L https://git.io/vp6lP | sh
+"                                           "     Syntastic let g:syntastic_go_checkers = ['gometalinter'].
+"                                           "     ale let g:ale_linters = {'go': ['gometalinter']}
+"                                           "     vim-go with the :GoMetaLinter command.
+"                                           "        go vet - Reports potential errors that otherwise compile.
+"                                           "        go tool vet --shadow - Reports variables that may have been unintentionally shadowed.
+"                                           "        gotype - Syntactic and semantic analysis similar to the Go compiler.
+"                                           "        gotype -x - Syntactic and semantic analysis in external test packages (similar to the Go compiler).
+"                                           "        deadcode - Finds unused code.
+"                                           "        gocyclo - Computes the cyclomatic complexity of functions.
+"                                           "        golint - Google's (mostly stylistic) linter.
+"                                           "        varcheck - Find unused global variables and constants.
+"                                           "        structcheck - Find unused struct fields.
+"                                           "        maligned - Detect structs that would take less memory if their fields were sorted.
+"                                           "        errcheck - Check that error return values are used.
+"                                           "        megacheck - Run staticcheck, gosimple and unused, sharing work.
+"                                           "        dupl - Reports potentially duplicated code.
+"                                           "        ineffassign - Detect when assignments to existing variables are not used.
+"                                           "        interfacer - Suggest narrower interfaces that can be used.
+"                                           "        unconvert - Detect redundant type conversions.
+"                                           "        goconst - Finds repeated strings that could be replaced by a constant.
+"                                           "        gosec - Inspects source code for security problems by scanning the Go AST.
+"                                           "        Disabled by default (enable with --enable=<linter>):
+"                                           "    打开下面功能需要用参数--enable=<linter>方式。
+"                                           "        testify - Show location of failed testify assertions.
+"                                           "        test - Show location of test failures from the stdlib testing module.
+"                                           "        gofmt -s - Checks if the code is properly formatted and could not be further simplified.
+"                                           "        goimports - Checks missing or unreferenced package imports.
+"                                           "        gosimple - Report simplifications in code.
+"                                           "        gochecknoinits - Report init functions, to reduce side effects in code.
+"                                           "        gochecknoglobals - Report global vars, to reduce side effects in code.
+"                                           "        lll - Report long lines (see --line-length=N).
+"                                           "        misspell - Finds commonly misspelled English words.
+"                                           "        nakedret - Finds naked returns.
+"                                           "        unparam - Find unused function parameters.
+"                                           "        unused - Find unused variables.
+"                                           "        safesql - Finds potential SQL injection vulnerabilities.
+"                                           "        staticcheck - Statically detect bugs, both obvious and subtle ones.
+
 "}}
 "{{                                         " vim-easy-align https://github.com/junegunn/vim-easy-align
 "                                           "    <Space>, =, :, ., |, &, #, and ,.
