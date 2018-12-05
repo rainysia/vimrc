@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2008-2018 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 8.07.01
+" * @version    GIT: 8.12.01
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2018-07-21 01:25:55
+" * @lastChange 2018-12-06 02:10:47
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -362,115 +362,115 @@ else
     "call vundle#begin('$VIMRUNTIME/bundle')
 endif
 
-Bundle 'VundleVim/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 "" 快速文件查找
-"Bundle 'ctrlpvim/ctrlp.vim'
-Bundle 'kien/ctrlp.vim'
+"Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 "" ctrlp 函数查找
-Bundle 'tacahiroy/ctrlp-funky'
+Plugin 'tacahiroy/ctrlp-funky'
 "" ack 更快的搜索
-Bundle 'mileszs/ack.vim'
+Plugin 'mileszs/ack.vim'
 "" 显示tag列表
-Bundle 'vim-scripts/taglist.vim'
+Plugin 'vim-scripts/taglist.vim'
 "" 在开头加入作者信息
-Bundle 'rainysia/authorinfo_php'
+Plugin 'rainysia/authorinfo_php'
 "" 多种方式加入代码注释
-Bundle 'vim-scripts/The-NERD-Commenter'
+Plugin 'vim-scripts/The-NERD-Commenter'
 "" 显示文件浏览
-Bundle 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 "" 在文件浏览是git时显示状态
-Bundle 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 "" 显示minibuf列表在导航
-Bundle 'fholgado/minibufexpl.vim'
+Plugin 'fholgado/minibufexpl.vim'
 "" 窗口管理
-Bundle 'vim-scripts/winmanager'
+Plugin 'vim-scripts/winmanager'
 "" 在工程中快速查找 F3
-Bundle 'yegappan/grep'
+Plugin 'yegappan/grep'
 "" 更好的查找
-Bundle 'dkprice/vim-easygrep'
+Plugin 'dkprice/vim-easygrep'
 "" 区块伸缩选中
-Bundle 'terryma/vim-expand-region'
+Plugin 'terryma/vim-expand-region'
 "" 匹配html,xml等成对括号跳转
-Bundle 'vim-scripts/matchit.zip'
+Plugin 'vim-scripts/matchit.zip'
 "" 最近使用文件浏览
-Bundle 'vim-scripts/mru.vim'
+Plugin 'vim-scripts/mru.vim'
 "" 显示多次搜索结果
-Bundle 'vim-scripts/multisearch.vim'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'dimasg/vim-mark'
+Plugin 'vim-scripts/multisearch.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'dimasg/vim-mark'
 "" 关键字多文件搜索
-Bundle 'dyng/ctrlsf.vim'
+Plugin 'dyng/ctrlsf.vim'
 "" 中文vim文档
-Bundle 'asins/vimcdoc'
+Plugin 'asins/vimcdoc'
 "" 大文件打开
-Bundle 'vim-scripts/LargeFile'
+Plugin 'vim-scripts/LargeFile'
 
 "" 显示实际颜色
-Bundle 'lilydjwg/colorizer'
+Plugin 'lilydjwg/colorizer'
 
 "" 日历
-Bundle 'itchyny/calendar.vim'
+Plugin 'itchyny/calendar.vim'
 
 "" 自动缩进线, 彩色渐变
-Bundle 'nathanaelkane/vim-indent-guides'
+Plugin 'nathanaelkane/vim-indent-guides'
 "" 自动缩进线
-Bundle 'Yggdroot/indentLine'
+Plugin 'Yggdroot/indentLine'
 "" lightline statusline
-Bundle 'itchyny/lightline.vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
+Plugin 'itchyny/lightline.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 "" 高亮行末空格,一键去除
-Bundle 'bronson/vim-trailing-whitespace'
+Plugin 'bronson/vim-trailing-whitespace'
 
 "" zencoding,快速生成代码
-"Bundle 'Valloric/YouCompleteMe'
-Bundle 'scrooloose/syntastic'
-Bundle 'vim-scripts/Emmet.vim'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'vim-scripts/Emmet.vim'
 
-"Bundle 'SirVer/ultisnips'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'rainysia/vim-snippets'
+"Plugin 'SirVer/ultisnips'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'rainysia/vim-snippets'
 
-Bundle 'vim-scripts/L9'
-"Bundle 'othree/vim-autocomplpop'
-Bundle 'Shougo/neocomplete.vim'
-Bundle 'joonty/vim-phpqa'
-Bundle 'tpope/vim-surround'
-Bundle 'andviro/flake8-vim'
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'elzr/vim-json'
+Plugin 'vim-scripts/L9'
+"Plugin 'othree/vim-autocomplpop'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'joonty/vim-phpqa'
+Plugin 'tpope/vim-surround'
+Plugin 'andviro/flake8-vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'elzr/vim-json'
 
 "" (x)html close tag
-Bundle 'vim-scripts/closetag.vim'
+Plugin 'vim-scripts/closetag.vim'
 
 "" C/C++, Switch in c to h
-Bundle 'vim-scripts/a.vim'
-Bundle 'vim-scripts/OmniCppComplete'
+Plugin 'vim-scripts/a.vim'
+Plugin 'vim-scripts/OmniCppComplete'
 
 "" php indent and syntax
-Bundle '2072/PHP-Indenting-for-VIm'
-Bundle '2072/vim-syntax-for-PHP'
-Bundle 'shawncplus/phpcomplete.vim'
+Plugin '2072/PHP-Indenting-for-VIm'
+Plugin '2072/vim-syntax-for-PHP'
+Plugin 'shawncplus/phpcomplete.vim'
 
 "" scala
-Bundle 'derekwyatt/vim-scala'
-Bundle 'vim-scripts/scala.vim'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'vim-scripts/scala.vim'
 
 "" lua, apt-get install vim-nox
-Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-lua-ftplugin'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-lua-ftplugin'
 
 "" go
-Bundle 'fatih/vim-go'
-" gometalinter 
-"Bundle 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'fatih/vim-go'
+" gometalinter
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 
 "" format
-Bundle 'junegunn/vim-easy-align'
+Plugin 'junegunn/vim-easy-align'
 "" Dockerfile syntax
-Bundle 'ekalinin/Dockerfile.vim'
+Plugin 'ekalinin/Dockerfile.vim'
 
 if $USER == 'root'
     "echo &rtp
@@ -1017,6 +1017,8 @@ let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
 let g:syntastic_enable_balloons = 1        " whether to show balloons
+let g:syntastic_go_checkers = ['go', 'gometalinter', 'govet']  " gometalinter required
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']  }
 highlight SyntasticErrorSign guifg=white guibg=black
 "}}
 "{{                                         " zencoding.vim 的设定 https://github.com/vim-scripts/Emmet.vim
@@ -1088,11 +1090,15 @@ let g:snips_link=g:vimrc_link
 "}}
 "{{                                         " neocomplete.vim 插件,自动完成提示. https://github.com/Shougo/neocomplete.vim
 ":NeoCompleteEnable
-let g:neocomplete#enable_at_startup = 1     " faster than vim-autocomplpop
+let g:neocomplete#enable_at_startup = 1     " faster than vim-autocomplpop, Use neocomplete.
 let g:acp_enableAtStartup = 0               " Disable AutoComplPop.
-let g:neocomplete#enable_at_startup = 1     " Use neocomplete.
 let g:neocomplete#enable_smart_case = 1     " Use smartcase.
 let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 "}}
 "{{                                         " phpqa.vim的设定 https://github.com/joonty/vim-phpqa
 "                                           " debian apt-get install php-codesniffer, pear install PHP_CodeSniffer
@@ -1228,20 +1234,43 @@ let g:lua_define_omnifunc = 1
 "                                           " :LuaCheckSyntax, :LuaCheckGlobals
 "}}
 "{{                                         " vim-go https://github.com/fatih/vim-go, Need go.tools :GoInstallBinaries
+"                                           " :GoInstallBinaries 需要配置bashrc `export GOBIN=/usr/local/go/bin`, 会把包安装在$GOBIN或者$GOPATH/bin
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
 "autocmd FileType go nmap <leader>r <Plug>(go-run) %<CR>
 autocmd FileType go nmap <leader>b <Plug>(go-build) %<CR>
 autocmd FileType go nmap <leader>t <Plug>(go-test) %<CR>
 "autocmd FileType go nmap <leader>c <Plug>(go-coverage)
 autocmd FileType go nmap <Leader>r :!go run %<CR>
+au FileType go nmap i (go-info)
+au FileType go nmap gd (go-doc)
+au FileType go nmap gv (go-doc-vertical)
+"au FileType go nmap r (go-run)
+"au FileType go nmap b (go-build)
+"au FileType go nmap t (go-test)
+au FileType go nmap c (go-coverage)
+au FileType go nmap ds (go-def-split)
+au FileType go nmap dv (go-def-vertical)
+au FileType go nmap dt (go-def-tab)
+au FileType go nmap e (go-rename)
 "                                           " :GoDoc, GoRun, GoBuild, GoInstall, GoTest, GoCoverage,
 "                                           GoErrCheck, GoFiles, GoDeps, GoImplements, GoRename
 "}}
+"{                                          " gocode https://github.com/nsf/gocode
+"                                           " if didn't work
+"                                           " 1, killall gocode -9
+"                                           " 2, rm /tmp/gocode-daemon.*
+"                                           " 3, gocode -s -debug
+"                                           or
+"                                           " 1, rm `which gocode`
+"                                           " 2, repeat kill, rm
+"                                           " 4, go get -u github.com/nsf/gocode
+"}
 "{{                                         " gometalinter https://github.com/alecthomas/gometalinter
 "                                           " install:curl -L https://git.io/vp6lP | sh
 "                                           "     Syntastic let g:syntastic_go_checkers = ['gometalinter'].
@@ -2342,5 +2371,6 @@ endif
 " 7.09.08                                   " add vim-json for disable json concealing quotes 2016-08-09 02:28:27
 " 8.01.00                                   " set desert highlight for self configuration 2018-03-07 10:12:02
 " 8.07.01                                   "  % 当前完整文件名,%:h 文件名头部(path),%:文件名尾部(文件名+后缀),%:r(文件名),%:e扩展
+" 8.12.01                                   " configure go env
 "}}
 "}}}
