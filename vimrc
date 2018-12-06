@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2008-2018 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 8.12.01
+" * @version    GIT: 8.12.02
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2018-12-06 02:10:47
+" * @lastChange 2018-12-06 17:20:44
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -466,6 +466,8 @@ Plugin 'xolox/vim-lua-ftplugin'
 Plugin 'fatih/vim-go'
 " gometalinter
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
+" gotags
+Plugin 'majutsushi/tagbar'
 
 "" format
 Plugin 'junegunn/vim-easy-align'
@@ -612,21 +614,33 @@ let g:ctrlp_funky_syntax_highlight = 1
 "{{                                         " Taglist的设定 https://github.com/vim-scripts/taglist.vim
 "                                           "     F9开关 按wm会启动.F9是单独开关
 "                                           "     :Tlist --呼出变量和函数列表 [TagList插件]
-map <F9> :TlistToggle<CR>
-let Tlist_Ctags_Cmd='ctags'                 "     基于ctags
-let Tlist_Auto_Open = 0                     "     默认打开Taglist
-let Tlist_Sort_Type = "name"                "     按照名称排序
-let Tlist_Show_One_File=1                   "     不同时显示多个文件的tag,只显示当前文件的
-let Tlist_Use_Right_Window = 0              "     在右侧显示窗口
-let Tlist_Compart_Format = 1                "     不显示空白行
-let Tlist_Exist_OnlyWindow = 1              "     如果只有一个buffer,kill窗口也kill掉buffer
-let Tlist_File_Fold_Auto_Close = 1          "     打开其他文件的时候自动关闭,只显示一个文件的tag
-let Tlist_Exit_OnlyWindow=1
-let Tlist_Auto_Update=1                     "     自动更新,包含新文件时候
-let Tlist_Enable_Fold_Column = 0            "     不要显示折叠树
-let Tlist_Use_Right_Window=1                "     右边显示 Left_Window 会左边显示
-" php的折叠
-let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
+map <F9> :call CallTaglistOrBar()<CR>
+function! CallTaglistOrBar()
+    if &filetype != 'go'
+        let Tlist_Ctags_Cmd='ctags'                 "     基于ctags
+        let Tlist_Auto_Open = 0                     "     默认打开Taglist
+        let Tlist_Sort_Type = "name"                "     按照名称排序
+        let Tlist_Show_One_File=1                   "     不同时显示多个文件的tag,只显示当前文件的
+        let Tlist_Use_Right_Window = 0              "     在右侧显示窗口
+        let Tlist_Compart_Format = 1                "     不显示空白行
+        let Tlist_Exist_OnlyWindow = 1              "     如果只有一个buffer,kill窗口也kill掉buffer
+        let Tlist_File_Fold_Auto_Close = 1          "     打开其他文件的时候自动关闭,只显示一个文件的tag
+        let Tlist_Exit_OnlyWindow=1
+        let Tlist_Auto_Update=1                     "     自动更新,包含新文件时候
+        let Tlist_Enable_Fold_Column = 0            "     不要显示折叠树
+        let Tlist_Use_Right_Window=1                "     右边显示 Left_Window 会左边显示
+        " php的折叠
+        let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
+        map <F9> :TlistToggle<CR>
+    else
+        " 将开启tagbar的快捷键设置为　<Leader>tb
+        "nmap <Leader>tb :TagbarToggle<CR>
+        let g:tagbar_ctags_bin='ctags'
+        let g:tagbar_width=30
+        autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()　" 在某些情况下自动打开tagbar
+        map <F9> :TagbarToggle<CR>
+    endif
+endfunction
 "}}
 "{{                                         " authorinfo.vim的设定 https://github.com/rainysia/authorinfo_php
 "                                           "     vim自动添加作者信息(需要和NERD_commenter联用)使用,
@@ -1243,25 +1257,36 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 "autocmd FileType go nmap <leader>r <Plug>(go-run) %<CR>
+autocmd FileType go nmap <Leader>r :!go run %<CR>
 autocmd FileType go nmap <leader>b <Plug>(go-build) %<CR>
 autocmd FileType go nmap <leader>t <Plug>(go-test) %<CR>
-"autocmd FileType go nmap <leader>c <Plug>(go-coverage)
-autocmd FileType go nmap <Leader>r :!go run %<CR>
-au FileType go nmap i (go-info)
-au FileType go nmap gd (go-doc)
-au FileType go nmap gv (go-doc-vertical)
-"au FileType go nmap r (go-run)
-"au FileType go nmap b (go-build)
-"au FileType go nmap t (go-test)
-au FileType go nmap c (go-coverage)
-au FileType go nmap ds (go-def-split)
-au FileType go nmap dv (go-def-vertical)
-au FileType go nmap dt (go-def-tab)
-au FileType go nmap e (go-rename)
+autocmd FileType go nmap <Leader>i <Plug>(go-info) %<CR>
+autocmd FileType go nmap <Leader>gd <Plug>(go-doc) %<CR>
+autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical) %<CR>
+autocmd FileType go nmap <Leader>c <Plug>(go-coverage) %<CR>
+autocmd FileType go nmap <Leader>ds <Plug>(go-def-split) %<CR>
+autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical) %<CR>
+autocmd FileType go nmap <Leader>dt <Plug>(go-def-tab) %<CR>
+autocmd FileType go nmap <Leader>e <Plug>(go-name) %<CR>
 "                                           " :GoDoc, GoRun, GoBuild, GoInstall, GoTest, GoCoverage,
 "                                           GoErrCheck, GoFiles, GoDeps, GoImplements, GoRename
+"                                           " :GoImports 移到包上, 自动加到import
+"                                             :GoDef 移到函数上,, 会打开$GOROOT/src/package的函数定义. :b返回
+"                                             :GoLint，运行golint在当前Go源文件上
+"                                             :GoDoc，打开当前光标对应符号的Go文档
+"                                             :GoVet，在当前目录下运行go vet在当前Go源文件上
+"                                             :GoRun，编译运行当前main package
+"                                             :GoBuild，编译当前包，这取决于你的源文件，GoBuild不产生结果文件
+"                                             :GoInstall，安装当前包
+"                                             :GoTest，测试你当前路径下地_test.go文件
+"                                             :GoCoverage，创建一个测试覆盖结果文件，并打开浏览器展示当前包的情况。
+"                                             :GoErrCheck，检查当前包种可能的未捕获的errors。
+"                                             :GoFiles，显示当前包对应的源文件列表。
+"                                             :GoDeps，显示当前包的依赖包列表。
+"                                             :GoImplements，显示当前类型实现的interface列表。
+"                                             :GoRename [to]，将当前光标下的符号替换为[to]
 "}}
-"{                                          " gocode https://github.com/nsf/gocode
+"{{                                         " gocode https://github.com/nsf/gocode
 "                                           " if didn't work
 "                                           " 1, killall gocode -9
 "                                           " 2, rm /tmp/gocode-daemon.*
@@ -1270,7 +1295,9 @@ au FileType go nmap e (go-rename)
 "                                           " 1, rm `which gocode`
 "                                           " 2, repeat kill, rm
 "                                           " 4, go get -u github.com/nsf/gocode
-"}
+"}}
+"{{                                         " tagbar https://github.com/majutsushi/tagbar
+"}}
 "{{                                         " gometalinter https://github.com/alecthomas/gometalinter
 "                                           " install:curl -L https://git.io/vp6lP | sh
 "                                           "     Syntastic let g:syntastic_go_checkers = ['gometalinter'].
@@ -1310,7 +1337,35 @@ au FileType go nmap e (go-rename)
 "                                           "        unused - Find unused variables.
 "                                           "        safesql - Finds potential SQL injection vulnerabilities.
 "                                           "        staticcheck - Statically detect bugs, both obvious and subtle ones.
-
+"}}
+"{{                                         " gotags https://github.com/jstemmer/gotags
+"let g:tagbar_type_go = {
+"    \ 'ctagstype' : 'go',
+"    \ 'kinds'     : [
+"        \ 'p:package',
+"        \ 'i:imports:1',
+"        \ 'c:constants',
+"        \ 'v:variables',
+"        \ 't:types',
+"        \ 'n:interfaces',
+"        \ 'w:fields',
+"        \ 'e:embedded',
+"        \ 'm:methods',
+"        \ 'r:constructor',
+"        \ 'f:functions'
+"    \ ],
+"    \ 'sro' : '.',
+"    \ 'kind2scope' : {
+"        \ 't' : 'ctype',
+"        \ 'n' : 'ntype'
+"    \ },
+"    \ 'scope2kind' : {
+"        \ 'ctype' : 't',
+"        \ 'ntype' : 'n'
+"    \ },
+"    \ 'ctagsbin'  : 'gotags',
+"    \ 'ctagsargs' : '-sort -silent'
+"\ }
 "}}
 "{{                                         " vim-easy-align https://github.com/junegunn/vim-easy-align
 "                                           "    <Space>, =, :, ., |, &, #, and ,.
@@ -2371,6 +2426,6 @@ endif
 " 7.09.08                                   " add vim-json for disable json concealing quotes 2016-08-09 02:28:27
 " 8.01.00                                   " set desert highlight for self configuration 2018-03-07 10:12:02
 " 8.07.01                                   "  % 当前完整文件名,%:h 文件名头部(path),%:文件名尾部(文件名+后缀),%:r(文件名),%:e扩展
-" 8.12.01                                   " configure go env
+" 8.12.01                                   " configure go env, taglist
 "}}
 "}}}
