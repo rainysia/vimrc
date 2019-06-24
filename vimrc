@@ -1147,7 +1147,7 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = " --encoding=utf-8"
 let g:phpqa_codesniffer_cmd  = '/usr/bin/phpcs'
-let g:phpqa_codesniffer_autorun = 0         "  default =1 on save
+let g:phpqa_codesniffer_autorun = 1         "  default =1 on save
 "                                           " :return NULL Void Boolean Float String Array Object Resource Callback
 let g:phpqa_messdetector_ruleset = ''
 let g:phpqa_messdetector_cmd = '/usr/bin/phpmd'
