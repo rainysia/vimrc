@@ -1147,7 +1147,7 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = " --encoding=utf-8"
 let g:phpqa_codesniffer_cmd  = '/usr/bin/phpcs'
-let g:phpqa_codesniffer_autorun = 1         "  default =1 on save
+let g:phpqa_codesniffer_autorun = 0         "  default =1 on save
 "                                           " :return NULL Void Boolean Float String Array Object Resource Callback
 let g:phpqa_messdetector_ruleset = ''
 let g:phpqa_messdetector_cmd = '/usr/bin/phpmd'
@@ -1168,6 +1168,7 @@ let g:phpqa_messdetector_autorun = 0
 "}}
 "{{                                         " php code sniffer ,php md模式
 "                                           " :!phpcs :!phpmd
+"                                           " /usr/local/php/lib/php/PHP/CodeSniffer/Standard
 "}}
 "{{                                         " Surround.vim 针对包含在文字外的括号,引号,XML 标签做快速的修改 https://github.com/tpope/vim-surround
 "                                           " cs"' 修改双引号为单引号 cs'<q> 修改单引号为<q>包围的.
@@ -1283,6 +1284,7 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+let g:go_version_warning = 0
 "autocmd FileType go nmap <leader>r <Plug>(go-run) %<CR>
 autocmd FileType go nmap <Leader>r :!go run %<CR>
 autocmd FileType go nmap <leader>b <Plug>(go-build) %<CR>
