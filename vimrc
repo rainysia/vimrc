@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2008-2018 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 8.12.02
+" * @version    GIT: 8.12.03
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2018-12-06 17:20:44
+" * @lastChange 2019-12-23 09:55:50
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -675,7 +675,7 @@ endfunction
 let g:vimrc_author='Rainy Sia'
 let g:vimrc_email='rainysia@gmail.com'
 let g:vimrc_link='http://www.btroot.org'
-let g:vimrc_copyright='2013-2016 BTROOT.ORG' 
+let g:vimrc_copyright='2013-'.strftime("%Y").' BTROOT.ORG'
 let g:vimrc_license='https://opensource.org/licenses/MIT license'
 let g:vimrc_version='GIT: 0.0.1'
 let g:vimrc_lang_version = exists('g:vimrc_lang_version') ? g:vimrc_lang_version : ' version num'
