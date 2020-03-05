@@ -24,15 +24,15 @@ if has("unix")
         let $VIMRUNTIME="/usr/share/vim/vim73"
         set runtimepath=/usr/share/vim/vim73,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     else
-        let $VIMRUNTIME="/usr/share/vim/vim80"
-        set runtimepath=/usr/share/vim/vim80,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+        let $VIMRUNTIME="/usr/share/vim/vim81"
+        set runtimepath=/usr/share/vim/vim81,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     endif
 elseif has("win32")
-    let $VIMRUNTIME="~/vim80"
-    set runtimepath=~/vim80,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    let $VIMRUNTIME="~/vim81"
+    set runtimepath=~/vim81,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 else
-    let $VIMRUNTIME="/usr/share/vim/vim80"
-    set runtimepath=/usr/share/vim/vim80,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    let $VIMRUNTIME="/usr/share/vim/vim81"
+    set runtimepath=/usr/share/vim/vim81,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 endif
 "}}
 set nocp                                    " close compeletion with vi
@@ -205,7 +205,7 @@ set viminfo='1000,f1,<500
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  4 => Display {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme desert                          " 设置配色方案, 需要用自定义的覆盖/usr/share/vim/vim80/colors/desert.vim
+colorscheme desert                          " 设置配色方案, 需要用自定义的覆盖/usr/share/vim/vim81/colors/desert.vim
 set background=dark                         " 设置背景为黑
 set novisualbell                            " No mouseflash
 set nu                                      " 设置行号
