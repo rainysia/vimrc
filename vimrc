@@ -2,15 +2,15 @@
 "========================================================================
 " * For vim Configuration file
 
-" * VIM 8.0
+" * VIM 8.1
 
 " * @filename   vimrc
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2008-2018 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 8.12.03
+" * @version    GIT: 8.13.01
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2019-12-23 09:55:50
+" * @lastChange 2020-05-22 12:04:59
 
 " * @link http://www.btroot.org
 "========================================================================
