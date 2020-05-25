@@ -509,7 +509,7 @@ if has("autocmd")
     autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl shiftwidth=4
     autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl tabstop=4
     autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl softtabstop=4
-    autocmd FileType html,xml,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setlocal textwidth=100
+    autocmd FileType html,xml,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setl textwidth=120
     autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,scala,go,lua set number
     autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
     autocmd FileType java,c,cpp,cs,php vmap <C-o> <ESC>'<o/*<ESC>'>o*/
