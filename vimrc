@@ -1277,6 +1277,7 @@ let g:lua_define_omnifunc = 1
 "}}
 "{{                                         " vim-go https://github.com/fatih/vim-go, Need go.tools :GoInstallBinaries
 "                                           " :GoInstallBinaries 需要配置bashrc `export GOBIN=/usr/local/go/bin`, 会把包安装在$GOBIN或者$GOPATH/bin
+"                                           " ~/.vim/bundle/vim-go/templates/hello_world.go 修改样式
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
