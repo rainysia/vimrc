@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2008-2018 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 8.13.01
+" * @version    GIT: 8.13.02
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2020-05-22 12:04:59
+" * @lastChange 2020-06-24 10:03:56
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -506,10 +506,10 @@ set noerrorbells visualbell t_vb=           " disable beep when error
 if has("autocmd")
     autocmd GUIEnter * set visualbell t_vb=
 
-    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl shiftwidth=4
-    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl tabstop=4
-    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl softtabstop=4
-    autocmd FileType html,xml,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setl textwidth=120
+    autocmd FileType html,python,vim,javascript,php,java,scala,go,lua,c setl shiftwidth=4
+    autocmd FileType html,python,vim,javascript,php,java,scala,go,lua,c setl tabstop=4
+    autocmd FileType html,python,vim,javascript,php,java,scala,go,lua,c setl softtabstop=4
+    autocmd FileType html,xml,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setlocal textwidth=150
     autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,scala,go,lua set number
     autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
     autocmd FileType java,c,cpp,cs,php vmap <C-o> <ESC>'<o/*<ESC>'>o*/
@@ -524,7 +524,7 @@ if has("autocmd")
     autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
     autocmd FileType c set omnifunc=ccomplete#Complete
     autocmd FileType cpp set omnifunc=cppcomplete#CompleteCPP
-    autocmd FileType go set omnifunc=gocomplete#Complete
+    autocmd FileType go set omnifunc=go#complete#Complete
     autocmd FileType scala set omnifunc=scalacomplete#CompleteTags
     autocmd FileType lua set omnifunc=luacomplete#Complete
 
@@ -1286,6 +1286,7 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 let g:go_version_warning = 0
+let g:go_auto_type_info = 1
 "autocmd FileType go nmap <leader>r <Plug>(go-run) %<CR>
 autocmd FileType go nmap <Leader>r :!go run %<CR>
 autocmd FileType go nmap <leader>b <Plug>(go-build) %<CR>
@@ -2461,5 +2462,6 @@ endif
 " 8.01.00                                   " set desert highlight for self configuration 2018-03-07 10:12:02
 " 8.07.01                                   "  % 当前完整文件名,%:h 文件名头部(path),%:文件名尾部(文件名+后缀),%:r(文件名),%:e扩展
 " 8.12.01                                   " configure go env, taglist
+" 8.13.02                                   " update go complete
 "}}
 "}}}
