@@ -18,7 +18,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 1 => System Configure {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{                                         " work in linux, echo &rtp
+"{{                                         " work in linux, echo &rtp, windows need to add path d:\Program Files\Vim/vim82
 "if has("unix")
 "    if system('uname') =~ "Darwin"
 "        let $VIMRUNTIME="/usr/share/vim/vim73"
@@ -28,7 +28,7 @@
 "        set runtimepath=/usr/share/vim/vim81,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 "    endif
 "elseif has("win32") || has("win64")
-"    let $VIMRUNTIME="D:/\Program\ Files/\Vim/\vim82"
+"    let $VIMRUNTIME="d:/\Program\ Files/\Vim/\vim82"
 "    set runtimepath=$VIMRUNTIME\/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 "else
 "    let $VIMRUNTIME="/usr/share/vim/vim81"
