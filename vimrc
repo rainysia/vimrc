@@ -10,7 +10,7 @@
 " * @license    https://opensource.org/licenses/MIT license
 " * @version    GIT: 8.13.02
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2020-06-24 10:03:56
+" * @lastChange 2020-12-16 15:44:44
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -1492,40 +1492,29 @@ autocmd VimEnter * call TabPos_Initialize()
 "source $VIMRUNTIME/mswin.vim
 "behave mswin
 "{{
-if &diffopt !~# 'internal'
-  set diffexpr=MyDiff()
-endif
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg1 = substitute(arg1, '!', '\!', 'g')
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg2 = substitute(arg2, '!', '\!', 'g')
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let arg3 = substitute(arg3, '!', '\!', 'g')
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      if empty(&shellxquote)
-        let l:shxq_sav = ''
-        set shellxquote&
-      endif
-      let cmd = '"' . $VIMRUNTIME . '\diff"'
+set diffexpr=MyDiff()
+function! MyDiff()
+    let opt = '-a --binary '
+    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+    let arg1 = v:fname_in
+    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+    let arg2 = v:fname_new
+    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+    let arg3 = v:fname_out
+    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+    let eq = ''
+    if $VIMRUNTIME =~ ' '
+        if &sh =~ '\<cmd'
+            let cmd = '""' . $VIMRUNTIME . '\diff"'
+            let eq = '"'
+        else
+            let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+        endif
     else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+        let cmd = $VIMRUNTIME . '\diff'
     endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  let cmd = substitute(cmd, '!', '\!', 'g')
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-  if exists('l:shxq_sav')
-    let &shellxquote=l:shxq_sav
-  endif
+    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 map <Leader>dg :diffget<CR>
 map <Leader>dp :diffput<CR>
@@ -2046,6 +2035,8 @@ endif
 " ctrl+f ctrl+b                             " 向文件首(尾) 翻一屏
 " nz                                        " 将第n行滚至屏幕顶部,不指定n时将当前行滚至屏幕顶
 " :g/^/exe ":s/^/".line(".")                " 每行插入行号
+" :r !seq 10                                " 从当前行开始插入 1 ~ 10
+" :%s/^/\=line(".")/g                       " 从第一行开始插入 1 ~ ...
 " :g/<input|<form/p                         " 显示含<input或<form的行
 " :bufdo /searchstr                         " 在多个buff中搜索
 " :argdo /searchstr
