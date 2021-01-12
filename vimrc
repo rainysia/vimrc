@@ -6,11 +6,11 @@
 
 " * @filename   vimrc
 " * @author     Rainy Sia <rainysia@gmail.com>
-" * @copyright  2008-2018 BTROOT.ORG
+" * @copyright  2008-2021 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 8.13.02
+" * @version    GIT: 21.01.12
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2020-12-16 15:44:44
+" * @lastChange 2021-01-12 16:38:48
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -445,6 +445,12 @@ Plugin 'elzr/vim-json'
 "" (x)html close tag
 Plugin 'vim-scripts/closetag.vim'
 
+"" javascript
+Plugin 'pangloss/vim-javascript'
+
+"" vue
+Plugin 'posva/vim-vue'
+
 "" C/C++, Switch in c to h
 Plugin 'vim-scripts/a.vim'
 Plugin 'vim-scripts/OmniCppComplete'
@@ -539,6 +545,15 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.scala                 set filetype=scala
     autocmd BufNewFile,BufRead *Spec.scala,*Test.scala set filetype=scalatest syntax=scala
     autocmd BufNewFile,BufRead *.sbt                   set filetype=scala
+
+    " vue
+    autocmd BufNewFile,BufRead *.html,*.js,*.vue set tabstop=2
+    autocmd BufNewFile,BufRead *.html,*.js,*.vue set softtabstop=2
+    autocmd BufNewFile,BufRead *.html,*.js,*.vue set shiftwidth=2
+    autocmd BufNewFile,BufRead *.html,*.js,*.vue set expandtab
+    autocmd BufNewFile,BufRead *.html,*.js,*.vue set autoindent
+    autocmd BufNewFile,BufRead *.html,*.js,*.vue set fileformat=unix
+    autocmd FileType vue syntax sync fromstart
 
     autocmd BufWritePost *.go,*.c silent! !ctags -R & 
     "autocmd BufWritePost *.go,*.js,*.php,*.lua,*.scala silent! !ctags -R &  "自动从当前目录构建ctags,根目录就惨了
@@ -714,7 +729,8 @@ autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "}}
 "{{                                         " nerdtree-git-plugin https://github.com/Xuyuanp/nerdtree-git-plugin
-let g:NERDTreeIndicatorMapCustom = {
+"let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
@@ -1049,7 +1065,8 @@ let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快,pip install pyflakes
-let g:syntastic_javascript_checkers = ['jsl', 'jshint']
+let g:syntastic_javascript_checkers = ['jsl', 'jshint', 'eslint']
+                                             " eslint 需要配合npm install eslint eslint-plugin-vue
 let g:syntastic_html_checkers=['tidy', 'jshint']
 let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
 let g:syntastic_cpp_include_dirs = ['/usr/include/']
@@ -1210,6 +1227,13 @@ let g:vim_json_syntax_conceal = 0           "   disable json quote concealing, 0
 "}}
 "{{                                         " closetag.vim https://github.com/vim-scripts/closetag.vim
 "                                           " <C-_> to get hit
+"}}
+"{{                                         " vim-javascript.vim https://github.com/pangloss/vim-javascript
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+"
+"}}
+"{{                                         " vim-vue.vim  https://github.com/posva/vim-vue
 "}}
 "{{                                         " a.vim https://github.com/vim-scripts/a.vim
 "                                           " :A switches to the header file corresponding to the current file being edited (or vise versa)
@@ -2466,5 +2490,6 @@ endif
 " 8.07.01                                   "  % 当前完整文件名,%:h 文件名头部(path),%:文件名尾部(文件名+后缀),%:r(文件名),%:e扩展
 " 8.12.01                                   " configure go env, taglist
 " 8.13.02                                   " update go complete
+" 21.01.12                                   " add vue 2021-01-12 16:39:18
 "}}
 "}}}
