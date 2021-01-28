@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2008-2021 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 21.01.12
+" * @version    GIT: 21.01.28
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2021-01-12 16:38:48
+" * @lastChange 2021-01-28 12:38:40
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -208,7 +208,14 @@ set viminfo='1000,f1,<500
 colorscheme desert                          " 设置配色方案, 需要用自定义的覆盖/usr/share/vim/vim81/colors/desert.vim
 set background=dark                         " 设置背景为黑
 set novisualbell                            " No mouseflash
-set nu                                      " 设置行号
+"set nu                                      " 设置行号
+set number relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
 syntax enable                               " 启用语法高亮
 syntax on                                   " 设置语法高亮
 "set termguicolors                           " 设置终端支持真彩色
@@ -2490,6 +2497,7 @@ endif
 " 8.07.01                                   "  % 当前完整文件名,%:h 文件名头部(path),%:文件名尾部(文件名+后缀),%:r(文件名),%:e扩展
 " 8.12.01                                   " configure go env, taglist
 " 8.13.02                                   " update go complete
-" 21.01.12                                   " add vue 2021-01-12 16:39:18
+" 21.01.12                                  " add vue 2021-01-12 16:39:18
+" 21.01.28                                  " add vim relative number 2021-01-28 12:39:22
 "}}
 "}}}
