@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2008-2021 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 21.01.28
+" * @version    GIT: 21.02.25
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2021-01-28 12:38:40
+" * @lastChange 2021-02-25 21:48:28
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -1104,6 +1104,7 @@ highlight SyntasticErrorSign guifg=white guibg=black
 " :h SnipMate-mappings
 "}}
 "                                           " garbas/vim-snipmate          https://github.com/garbas/vim-snipmate'
+let g:snipMate = {'snippet_version': 1}
 "                                           " rainysia/vim-snippets        https://github.com/rainysia/vim-snippets'
 let g:snips_author=g:vimrc_author
 let g:snips_copyright=g:vimrc_copyright
@@ -2499,5 +2500,6 @@ endif
 " 8.13.02                                   " update go complete
 " 21.01.12                                  " add vue 2021-01-12 16:39:18
 " 21.01.28                                  " add vim relative number 2021-01-28 12:39:22
+" 21.02.25                                  " snipMate deprecate
 "}}
 "}}}
