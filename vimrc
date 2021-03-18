@@ -465,7 +465,7 @@ Plugin 'vim-scripts/OmniCppComplete'
 "" php indent and syntax
 Plugin '2072/PHP-Indenting-for-VIm'
 Plugin '2072/vim-syntax-for-PHP'
-Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'shawncplus/phpcomplete.vim', { 'commit':'ff5b5ef' }
 
 "" scala
 Plugin 'derekwyatt/vim-scala'
@@ -533,6 +533,7 @@ if has("autocmd")
     autocmd FileType php set omnifunc=phpcomplete#CompletePHP
     autocmd FileType mysql set omnifunc=mysqlcomplete#CompleteMYSQL
     autocmd FileType python set omnifunc=pythoncomplete#Complete
+    "autocmd FileType python set omnifunc=python3complete#Complete
     autocmd FileType java set omnifunc=javacomplete#Complete
     autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
     autocmd FileType c set omnifunc=ccomplete#Complete
@@ -1276,7 +1277,7 @@ let OmniCpp_ShowAccess=1
 "                                           " php-syntax https://github.com/2072/vim-syntax-for-PHP
 "}}
 autocmd FileType php nmap <Leader>r :!php %<CR>
-"{{                                         " phpcomplete https://github.com/shawncplus/phpcomplete.vim, php will jammed
+"{{                                         " phpcomplete https://github.com/shawncplus/phpcomplete.vim, lastest has issue, need to use ff5b5ef
 let g:phpcomplete_relax_static_constraint = 0
 let g:phpcomplete_complete_for_unknown_classes = 0
 let g:phpcomplete_search_tags_for_variables = 0
