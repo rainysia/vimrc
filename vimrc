@@ -1586,8 +1586,8 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                           " .vimrc修改后不需重启生效
 autocmd! bufwritepost _vimrc source %
-"                                           " 每行超过80个的字符用下划线标示
-au BufRead,BufNewFile *.s,*.asm,*.h,*.c,*.cpp,*.cc,*.java,*.cs,*.erl,*.hs,*.sh,*.lua,*.pl,*.pm,*.php,*.py,*.rb,*.erb,*.vim,*.js,*.css,*.xml,*.html,*.xhtml 2match Underlined /.\%81v/
+"                                           " 每行超过100个的字符用下划线标示
+au BufRead,BufNewFile *.s,*.asm,*.h,*.c,*.cpp,*.cc,*.java,*.cs,*.erl,*.hs,*.sh,*.lua,*.pl,*.pm,*.php,*.py,*.go,*.rb,*.erb,*.vim,*.js,*.css,*.xml,*.html,*.xhtml 2match Underlined /.\%101v/
 "{{                                         " work in windows ,not work in linux
 "if has("gui_running")
 "    au GUIEnter * simalt ~x                " 窗口启动时自动最大化
