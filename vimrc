@@ -754,6 +754,8 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 "{{                                         " minibufexpl.vim的设定 https://github.com/fholgado/minibufexpl.vim
 "                                           "     切换c+Tab前c+s+Tab后buff,ctrl+h,j,k,l上下左右
 "                                           "     :bp和:bn分别是切换到上一个和下一个Buffer, :bd则删除当前显示的单个Buffer
+nmap <Leader>bp :bp<CR>
+nmap <Leader>bn :bn<CR>
 let g:miniBufExplMapCTabSwitchBufs=1
 let g:miniBufExplMapWindowsNavVim=1
 let g:miniBufExplMapWindowNavArrows=1
