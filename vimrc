@@ -583,6 +583,7 @@ inoremap <expr> <C-k> ((pumvisible())?("\<C-p>"):("k"))
 "                                           "  运行命令:CtrlP或:CtrlP [starting-directory]来以查找文件模式来启用 ctrlp
 "                                           "  运行命令:CtrlPBuffer或:CtrlPMRU来以查找缓冲或最近打开文件模式来启用ctrlp
 "                                           "  运行命令:CtrlPMixed来查找文件,查找缓冲和最近打开文件混合模式来启动 ctrlp
+"                                           "  :CtrlPClearAllCaches 更新目录后需要手动更新文件列表缓存
 "                                           "    按<c-f>和<c-b>在三种查找模式中互相切换
 "                                           "    按<c-y>来创建新文件和对应的父目录
 "                                           "    按<c-d>来切换到只查找文件名而不是全路径
