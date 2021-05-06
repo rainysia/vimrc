@@ -2074,6 +2074,7 @@ endif
 " :g/^/exe ":s/^/".line(".")                " 每行插入行号
 " :r !seq 10                                " 从当前行开始插入 1 ~ 10
 " :%s/^/\=line(".")/g                       " 从第一行开始插入 1 ~ ...
+" :%s/$/\=line(".")/g                       " 从第一行行末开始插入 1 ~ ...
 " :g/<input|<form/p                         " 显示含<input或<form的行
 " :bufdo /searchstr                         " 在多个buff中搜索
 " :argdo /searchstr
