@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2008-2021 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 21.02.25
+" * @version    GIT: 21.05.11
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2021-02-25 21:48:28
+" * @lastChange 2021-05-11 11:07:03
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -882,7 +882,16 @@ let g:indentLine_char = '|'
 "{{                                         " vim-fugitive https://github.com/tpope/vim-fugitive
 "                                           " :Gedit, :Gsplit, :Gvsplit, :Gtabedit, :Gdiff, :Gcommit,
 "                                           " :Gblame, :Gmove, :Ggrep, :Glog, :Gread=git checkout --filename
-nmap <Leader>gb :Gblame<CR>
+"nmap <Leader>gb :Gblame<CR>
+function! s:ToggleBlame()
+    if &l:filetype ==# 'fugitiveblame'
+        close
+    else
+        Gblame
+    endif
+endfunction
+
+nnoremap <Leader>gb :call <SID>ToggleBlame()<CR>
 "                                           " :Gstatus , press - to add/reset, p to add/reset --patch
 "                                           " :Gwrite, :Gbrowse, :Git
 autocmd QuickFixCmdPost *grep* cwindow
@@ -1176,7 +1185,7 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = " --encoding=utf-8"
 let g:phpqa_codesniffer_cmd  = '/usr/bin/phpcs'
-let g:phpqa_codesniffer_autorun = 0         "  default =1 on save
+let g:phpqa_codesniffer_autorun = 1         "  default =1 on save
 "                                           " :return NULL Void Boolean Float String Array Object Resource Callback
 let g:phpqa_messdetector_ruleset = ''
 let g:phpqa_messdetector_cmd = '/usr/bin/phpmd'
@@ -2506,5 +2515,6 @@ endif
 " 21.01.12                                  " add vue 2021-01-12 16:39:18
 " 21.01.28                                  " add vim relative number 2021-01-28 12:39:22
 " 21.02.25                                  " snipMate deprecate
+" 21.05.11                                  " vim-fugitive ,gb close 2021-05-11 11:06:55
 "}}
 "}}}
