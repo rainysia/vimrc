@@ -22,17 +22,17 @@
 if has("unix")
     if system('uname') =~ "Darwin"
         let $VIMRUNTIME="/usr/share/vim/vim73"
-        set runtimepath=/usr/share/vim/vim73,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+        set runtimepath=/usr/share/vim/vim73,~/.vim,~/.vim/after,~/.vim/plugged/vim-snipmate/after
     else
         let $VIMRUNTIME="/usr/share/vim/vim82"
-        set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+        set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/plugged/vim-snipmate/after
     endif
 elseif has("win32")
     let $VIMRUNTIME="~/vim82"
-    set runtimepath=~/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    set runtimepath=~/vim82,~/.vim,~/.vim/after,~/.vim/plugged/vim-snipmate/after
 else
     let $VIMRUNTIME="/usr/share/vim/vim82"
-    set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/plugged/vim-snipmate/after
 endif
 "}}
 set nocp                                    " close compeletion with vi
@@ -358,141 +358,137 @@ set nowrapscan                              " 禁止搜索到文件两端时重�
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  6 => Plugins {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{                                         " Vundle git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
+"{{                                           " vim-plug: curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 if has('win32')
-    set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
-    call vundle#begin('$VIM/vimfiles/bundle/')
+    set rtp+=$VIM/vimfiles/autoload/plug.vim/
+    call plug#begin('$VIM/vimfiles/plugged/')
 else
-    set rtp+=~/.vim/bundle/Vundle.vim/
-    call vundle#begin()
-    "set rtp+=$VIMRUNTIME/bundle/vundle/
-    "call vundle#begin('$VIMRUNTIME/bundle')
+    set rtp+=~/.vim/autoload/plug.vim/
+    call plug#begin('~/.vim/plugged')
 endif
 
-Plugin 'VundleVim/Vundle.vim'
 "" 快速文件查找
-"Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'kien/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 "" ctrlp 函数查找
-Plugin 'tacahiroy/ctrlp-funky'
+Plug 'tacahiroy/ctrlp-funky'
 "" ack 更快的搜索
-Plugin 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 "" 显示tag列表
-Plugin 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/taglist.vim'
 "" 在开头加入作者信息
-Plugin 'rainysia/authorinfo_php'
+Plug 'rainysia/authorinfo_php'
 "" 多种方式加入代码注释
-Plugin 'vim-scripts/The-NERD-Commenter'
+Plug 'vim-scripts/The-NERD-Commenter'
 "" 显示文件浏览
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 "" 在文件浏览是git时显示状态
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 "" 显示minibuf列表在导航
-Plugin 'fholgado/minibufexpl.vim'
+Plug 'fholgado/minibufexpl.vim'
 "" 窗口管理
-Plugin 'vim-scripts/winmanager'
+Plug 'vim-scripts/winmanager'
 "" 在工程中快速查找 F3
-Plugin 'yegappan/grep'
+Plug 'yegappan/grep'
 "" 更好的查找
-Plugin 'dkprice/vim-easygrep'
+Plug 'dkprice/vim-easygrep'
 "" 区块伸缩选中
-Plugin 'terryma/vim-expand-region'
+Plug 'terryma/vim-expand-region'
 "" 匹配html,xml等成对括号跳转
-Plugin 'vim-scripts/matchit.zip'
+Plug 'vim-scripts/matchit.zip'
 "" 最近使用文件浏览
-Plugin 'vim-scripts/mru.vim'
+Plug 'vim-scripts/mru.vim'
 "" 显示多次搜索结果
-Plugin 'vim-scripts/multisearch.vim'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'dimasg/vim-mark'
+Plug 'vim-scripts/multisearch.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'dimasg/vim-mark'
 "" 关键字多文件搜索
-Plugin 'dyng/ctrlsf.vim'
+Plug 'dyng/ctrlsf.vim'
 "" 中文vim文档
-Plugin 'asins/vimcdoc'
+Plug 'asins/vimcdoc'
 "" 大文件打开
-Plugin 'vim-scripts/LargeFile'
+Plug 'vim-scripts/LargeFile'
 
 "" 显示实际颜色
-Plugin 'lilydjwg/colorizer'
+Plug 'lilydjwg/colorizer'
 
 "" 日历
-Plugin 'itchyny/calendar.vim'
+Plug 'itchyny/calendar.vim'
 
 "" 自动缩进线, 彩色渐变
-Plugin 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides'
 "" 自动缩进线
-Plugin 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 "" lightline statusline
-Plugin 'itchyny/lightline.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 "" 高亮行末空格,一键去除
-Plugin 'bronson/vim-trailing-whitespace'
+Plug 'bronson/vim-trailing-whitespace'
 
 "" zencoding,快速生成代码
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
-Plugin 'vim-scripts/Emmet.vim'
+"Plug 'Valloric/YouCompleteMe'
+Plug 'scrooloose/syntastic'
+Plug 'vim-scripts/Emmet.vim'
 
-"Plugin 'SirVer/ultisnips'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'rainysia/vim-snippets'
+"Plug 'SirVer/ultisnips'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'rainysia/vim-snippets'
 
-Plugin 'vim-scripts/L9'
-"Plugin 'othree/vim-autocomplpop'
-"Plugin 'Shougo/neocomplete.vim'
+Plug 'vim-scripts/L9'
+"Plug 'othree/vim-autocomplpop'
 if has('nvim')
-  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
-  Plugin 'Shougo/deoplete.nvim'
-  Plugin 'roxma/nvim-yarp'
-  Plugin 'roxma/vim-hug-neovim-rpc'
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
-Plugin 'joonty/vim-phpqa'
-Plugin 'tpope/vim-surround'
-Plugin 'andviro/flake8-vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'elzr/vim-json'
+Plug 'joonty/vim-phpqa'
+Plug 'tpope/vim-surround'
+Plug 'andviro/flake8-vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'elzr/vim-json'
 
 "" (x)html close tag
-Plugin 'vim-scripts/closetag.vim'
+Plug 'vim-scripts/closetag.vim'
 
 "" javascript
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 
 "" vue
-Plugin 'posva/vim-vue'
+Plug 'posva/vim-vue'
 
 "" C/C++, Switch in c to h
-Plugin 'vim-scripts/a.vim'
-Plugin 'vim-scripts/OmniCppComplete'
+Plug 'vim-scripts/a.vim'
+Plug 'vim-scripts/OmniCppComplete'
 
 "" php indent and syntax
-Plugin '2072/PHP-Indenting-for-VIm'
-Plugin '2072/vim-syntax-for-PHP'
-Plugin 'shawncplus/phpcomplete.vim', { 'commit':'ff5b5ef' }
+Plug '2072/PHP-Indenting-for-VIm'
+Plug '2072/vim-syntax-for-PHP'
+Plug 'shawncplus/phpcomplete.vim'
 
 "" scala
-Plugin 'derekwyatt/vim-scala'
-Plugin 'vim-scripts/scala.vim'
+Plug 'derekwyatt/vim-scala'
+Plug 'vim-scripts/scala.vim'
 
 "" lua, apt-get install vim-nox
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-lua-ftplugin'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-lua-ftplugin'
 
 "" go
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 " gometalinter
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plug 'nsf/gocode', {'rtp': 'vim/'}
 " gotags
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 "" format
-Plugin 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 "" Dockerfile syntax
-Plugin 'ekalinin/Dockerfile.vim'
+Plug 'ekalinin/Dockerfile.vim'
 
 if $USER == 'root'
     "echo &rtp
@@ -500,7 +496,7 @@ else
     "echo &rtp
 endif
 
-call vundle#end()
+"call plug#end()
 filetype plugin indent on
 let mapleader = ","                         "      键盘映射为 ,
 "                                           " ,c   搜索统计光标处单词的次数
@@ -1337,7 +1333,7 @@ let g:lua_define_omnifunc = 1
 "}}
 "{{                                         " vim-go https://github.com/fatih/vim-go, Need go.tools :GoInstallBinaries
 "                                           " :GoInstallBinaries 需要配置bashrc `export GOBIN=/usr/local/go/bin`, 会把包安装在$GOBIN或者$GOPATH/bin
-"                                           " ~/.vim/bundle/vim-go/templates/hello_world.go 修改样式
+"                                           " ~/.vim/plugged/vim-go/templates/hello_world.go 修改样式
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
@@ -1471,6 +1467,7 @@ nmap ga <Plug>(EasyAlign)
 "}}
 "{{                                         " Dockerfile https://github.com/ekalinin/Dockerfile.vim
 "}}
+"call plug#end()
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  7 => Function {{{

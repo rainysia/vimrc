@@ -2,15 +2,15 @@
 "========================================================================
 " * For vim Configuration file
 
-" * VIM 8.2
+" * VIM 8.1
 
 " * @filename   vimrc
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2008-2021 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 21.08.11
+" * @version    GIT: 21.05.11
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2021-08-17 11:09:18
+" * @lastChange 2021-05-11 11:07:03
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -24,15 +24,15 @@ if has("unix")
         let $VIMRUNTIME="/usr/share/vim/vim73"
         set runtimepath=/usr/share/vim/vim73,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     else
-        let $VIMRUNTIME="/usr/share/vim/vim82"
-        set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+        let $VIMRUNTIME="/usr/share/vim/vim81"
+        set runtimepath=/usr/share/vim/vim81,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     endif
 elseif has("win32")
-    let $VIMRUNTIME="~/vim82"
-    set runtimepath=~/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    let $VIMRUNTIME="~/vim81"
+    set runtimepath=~/vim81,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 else
-    let $VIMRUNTIME="/usr/share/vim/vim82"
-    set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    let $VIMRUNTIME="/usr/share/vim/vim81"
+    set runtimepath=/usr/share/vim/vim81,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 endif
 "}}
 set nocp                                    " close compeletion with vi
@@ -205,16 +205,16 @@ set viminfo='1000,f1,<500
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  4 => Display {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme desert                          " 设置配色方案, 需要用自定义的覆盖/usr/share/vim/vim82/colors/desert.vim
+colorscheme desert                          " 设置配色方案, 需要用自定义的覆盖/usr/share/vim/vim81/colors/desert.vim
 set background=dark                         " 设置背景为黑
 set novisualbell                            " No mouseflash
-set nu                                      " 设置行号
-"set number relativenumber
-"augroup numbertoggle
-"  autocmd!
-"  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-"  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-"augroup END
+"set nu                                      " 设置行号
+set number relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
 syntax enable                               " 启用语法高亮
 syntax on                                   " 设置语法高亮
@@ -442,14 +442,7 @@ Plugin 'rainysia/vim-snippets'
 
 Plugin 'vim-scripts/L9'
 "Plugin 'othree/vim-autocomplpop'
-"Plugin 'Shougo/neocomplete.vim'
-if has('nvim')
-  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plugin 'Shougo/deoplete.nvim'
-  Plugin 'roxma/nvim-yarp'
-  Plugin 'roxma/vim-hug-neovim-rpc'
-endif
+Plugin 'Shougo/neocomplete.vim'
 Plugin 'joonty/vim-phpqa'
 Plugin 'tpope/vim-surround'
 Plugin 'andviro/flake8-vim'
@@ -1120,9 +1113,11 @@ highlight SyntasticErrorSign guifg=white guibg=black
 "                                           " tomtom/tlib_vim              https://github.com/tomtom/tlib_vim'
 "{{                                         " vim-snippets https://github.com/honza/vim-snippets
 "
+"{{                                         " snipmate https://github.com/msanders/snipmate.vim
+" :h SnipMate-mappings
+"}}
 "                                           " garbas/vim-snipmate          https://github.com/garbas/vim-snipmate'
 let g:snipMate = {'snippet_version': 1}
-let g:snipMate.scope_aliases = {}
 "                                           " rainysia/vim-snippets        https://github.com/rainysia/vim-snippets'
 let g:snips_author=g:vimrc_author
 let g:snips_copyright=g:vimrc_copyright
@@ -1173,26 +1168,16 @@ let g:snips_link=g:vimrc_link
 "{{                                         " autocomplpop 插件,自动完成提示. https://github.com/othree/vim-autocomplpop
 "}}
 "{{                                         " neocomplete.vim 插件,自动完成提示. https://github.com/Shougo/neocomplete.vim
-"":NeoCompleteEnable
-"let g:neocomplete#enable_at_startup = 1     " faster than vim-autocomplpop, Use neocomplete.
-"let g:acp_enableAtStartup = 0               " Disable AutoComplPop.
-"let g:neocomplete#enable_smart_case = 1     " Use smartcase.
-"let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
-"" Define keyword.
-"if !exists('g:neocomplete#keyword_patterns')
-"    let g:neocomplete#keyword_patterns = {}
-"endif
-"let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-""}}
-"{{                                         " deoplete.vim 插件,自动完成提示(for vim 8.2+) https://github.com/Shougo/deoplete.nvim
-"                                           " pip3 install --user pynvim, pip3 install --user neovim
-"                                           " :python3 import neovim 不报错
-"                                           " :echo has('pythonx')  返回1
-"                                           " :echo exepath('python3') 返回python3的执行位置
-"                                           " :echo neovim_rpc#serveraddr() 显示服务器的IP地址
-set pyxversion=3
-let g:python3_host_prog = "/usr/bin/python3"
-let g:deoplete#enable_at_startup = 1
+":NeoCompleteEnable
+let g:neocomplete#enable_at_startup = 1     " faster than vim-autocomplpop, Use neocomplete.
+let g:acp_enableAtStartup = 0               " Disable AutoComplPop.
+let g:neocomplete#enable_smart_case = 1     " Use smartcase.
+let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 "}}
 "{{                                         " phpqa.vim的设定 https://github.com/joonty/vim-phpqa
 "                                           " debian apt-get install php-codesniffer, pear install PHP_CodeSniffer
@@ -2168,7 +2153,7 @@ endif
 " gvim -d file1 file2                       " vimdiff (比较不同)
 "                                           "    ]c 跳转下一个差异点 :diffget 把另外一个文件的差异点的内容复制过来  :diffput 把当前差异点的内容复制过去. :diffupdate 更多比较文件
 "                                           "    前面加行号表示多少行开始  :2,30diffget 把2~30行的差异取过来
-"                                           "    ln -s /usr/bin/diff /usr/share/vim/vim82diff
+"                                           "    ln -s /usr/bin/diff /usr/share/vim/vim81diff
 " c{ motion }                               " 删除motion命令跨过的,并且进入插入 c$删到行尾的并进入插入,ct! 删除从光标位到下一个!位置
 " dp                                        " 把光标处的不同放到另一个文件
 " dg                                        " 在光标处从另一个文件取得不同
