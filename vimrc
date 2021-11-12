@@ -1190,6 +1190,7 @@ let g:snips_link=g:vimrc_link
 "                                           " :echo has('pythonx')  返回1
 "                                           " :echo exepath('python3') 返回python3的执行位置
 "                                           " :echo neovim_rpc#serveraddr() 显示服务器的IP地址
+"                                           " :pythonx import sys; print (sys.path)  show python3的install位置
 set pyxversion=3
 
 if system('uname') =~ "Darwin"
