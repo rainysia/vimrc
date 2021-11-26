@@ -2,15 +2,15 @@
 "========================================================================
 " * For vim Configuration file
 
-" * VIM 7.4
+" * VIM 8.2
 
 " * @filename   vimrc
 " * @author     Rainy Sia <rainysia@gmail.com>
-" * @copyright  2013-2016 BTROOT.ORG
+" * @copyright  2008-2021 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 7.09.08
+" * @version    GIT: 21.08.11
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2016-08-09 02:28:27
+" * @lastChange 2021-08-17 11:09:18
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -19,8 +19,21 @@
 " 1 => System Configure {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "{{                                         " work in linux, echo &rtp
-let $VIMRUNTIME="/usr/share/vim/vim73"
-set runtimepath=/usr/share/vim/vim73,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+if has("unix")
+    if system('uname') =~ "Darwin"
+        let $VIMRUNTIME="/usr/share/vim/vim82"
+        set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    else
+        let $VIMRUNTIME="/usr/share/vim/vim82"
+        set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    endif
+elseif has("win32")
+    let $VIMRUNTIME="~/vim82"
+    set runtimepath=~/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+else
+    let $VIMRUNTIME="/usr/share/vim/vim82"
+    set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+endif
 "}}
 set nocp                                    " close compeletion with vi
 set helplang=cn                             " 帮助菜单
@@ -67,6 +80,9 @@ endif
 unlet g:undo_dir
 unlet g:data_dir
 set undodir=$HOME/.vim/undofile
+" python support                            " apt-get install libpython2.7 libpython2.7-dev libpython2.7-dbg
+"                                           " apt-get install vim-nox(支持py, +lua)
+"                                            +python 意味着安装了, -python意味着缺失
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 2 => Text Pattern {{{
@@ -76,9 +92,9 @@ set undodir=$HOME/.vim/undofile
 "                                               zf\`a   折叠当前光标处到标记a的文本
 "                                               zf3j    向下折叠3行
 "                                               zf%     在括号光标处折叠括号内文本
-"                                           " "zd 删除光标下的折叠.  
-"                                           " "zD 删除光标下的折叠,以及嵌套的折叠.  
-"                                           " "zE 删除窗口内的所有折叠.仅当 manual 和 marker 折叠方法下有效.  
+"                                           " "zd 删除光标下的折叠.
+"                                           " "zD 删除光标下的折叠,以及嵌套的折叠.
+"                                           " "zE 删除窗口内的所有折叠.仅当 manual 和 marker 折叠方法下有效.
 "                                           " "zF 在当前行创建折叠.当一开始就计划要折叠所写代码的时候,可以用该命令创建一对折叠符号,然后再往里面填写内容
 "                                           " "zR 打开所有的折叠
 "                                           " "za Open/Close (toggle) a folded group of lines.
@@ -92,9 +108,9 @@ set undodir=$HOME/.vim/undofile
 "                                           " "zj 移动到下一个折叠的开始
 "                                           " "zk 移动到上一个折叠的结束
 "                                           " "zv 打开当前光标所在折叠,仅打开足够的折叠使光标所在的行不被折叠
-"                                           " "[z 到当前打开折叠的开始.如果已在开始处,移到包含这个折叠的折叠开始处.  
-"                                           " "]z 到当前打开折叠的结束.如果已在结束处,移到包含这个折叠的折叠结束处.  
-"                                           " 可在开始的花括号前添加介绍,花括号后添加级别号,级别号不能为0.如: /*折叠介绍###1*/ code... /*###*/ (用###代替了折叠符号) 
+"                                           " "[z 到当前打开折叠的开始.如果已在开始处,移到包含这个折叠的折叠开始处.
+"                                           " "]z 到当前打开折叠的结束.如果已在结束处,移到包含这个折叠的折叠结束处.
+"                                           " 可在开始的花括号前添加介绍,花括号后添加级别号,级别号不能为0.如: /*折叠介绍###1*/ code... /*###*/ (用###代替了折叠符号)
 set formatoptions=tcrqn                     " 自动格式化
 set foldenable                              " 开始折叠
 set foldcolumn=0                            " 设置折叠区域的宽度
@@ -153,8 +169,8 @@ set enc=utf-8                               " vim 支持中文 内部编码
 set termencoding=utf-8                      " work in linux
 set fenc=utf-8                              " work in linux 解析出来的当前文件编码(可能解析错误)
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936    " 文件解析猜测识别的编码顺序
-set langmenu=zh_CN.UTF-8                    " Console output coding
-language message zh_CN.UTF-8                " 控制台console编码
+set langmenu=en_US.UTF-8                    " Console output coding,Gtk-WARNING **: Invalid input string,add 'export LANG="zh_CN.UTF-8"' into 对应user的.bashrc
+language message en_US.UTF-8                " 控制台console编码
 set ambiwidth=double                        " 把不明宽度字符设置为双倍字符宽度(中文字符宽度)
 set fileencoding=utf-8                      " 当前编辑的文件编码(新文件的编码)
 set fileencodings=usc-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin-1
@@ -189,12 +205,20 @@ set viminfo='1000,f1,<500
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  4 => Display {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme desert                          " 设置配色方案
+colorscheme desert                          " 设置配色方案, 需要用自定义的覆盖/usr/share/vim/vim82/colors/desert.vim
 set background=dark                         " 设置背景为黑
 set novisualbell                            " No mouseflash
 set nu                                      " 设置行号
+"set number relativenumber
+"augroup numbertoggle
+"  autocmd!
+"  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+"  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+"augroup END
+
 syntax enable                               " 启用语法高亮
 syntax on                                   " 设置语法高亮
+"set termguicolors                           " 设置终端支持真彩色
 "{{                                         " 高亮字符,让其不受100列限制
 highlight OverLength ctermbg=darkgray ctermfg=lightblue guibg=#1C1D1E guifg=#DCDCDC
 match OverLength '\%500v.*'
@@ -205,12 +229,12 @@ set syntax=txt                              " work in linux
 au BufRead,BufNewFile *.txt setlocal ft=txt
 "                                           " 高亮显示普通txt文件(需要txt.vim脚本)
 "                                           " 自动.c .h .sh .java自动插入文件头
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.lua,*.py,*.php exec ":call SetTitle()" 
-"                                           " 定义函数SetTitle,自动插入文件头 
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.lua,*.py,*.php exec ":call SetTitle()"
+"                                           " 定义函数SetTitle,自动插入文件头
 let g:vimrc_author='Rainy Sia'
 let g:vimrc_email='rainysia@gmail.com'
 function! SetTitle()
-    "                                       " 如果文件类型为.sh文件 
+    "                                       " 如果文件类型为.sh文件
     if &filetype == 'sh'
         call setline(1,"\#!/bin/bash")
         call append(line("."), "")
@@ -245,7 +269,7 @@ function! SetTitle()
         call setline(1,"#!/usr/local/bin/lua")
         call append(line("."), "")
     elseif &filetype == 'go'
-        call setline(1,"#!/usr/local/go/bin")
+        call setline(1,"#!/usr/local/bin/go")
         call append(line("."), "")
     else
         let g:vimrc_lang_version=' version num'
@@ -300,7 +324,7 @@ syn match 80spa /.\&\%80v.*\%81v/
 set list                                    " 缩进线
 "set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$
 " 制表符显示方式定义: trail为拖尾空白显示字符,extends和precedes分别是wrap关闭时,所在行在屏幕右边和左边显示的指示字符
-" set listchars=tab:▸\ ,eol:¬ 
+" set listchars=tab:▸\ ,eol:¬
 " ¬	U+00AC	not sign
 " ▸	U+25B8	black right-pointing small triangle
 " ☠	U+2620	skull and crossbones
@@ -345,105 +369,130 @@ else
     "call vundle#begin('$VIMRUNTIME/bundle')
 endif
 
-Bundle 'VundleVim/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 "" 快速文件查找
-Bundle 'kien/ctrlp.vim'
+"Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 "" ctrlp 函数查找
-Bundle 'tacahiroy/ctrlp-funky'
+Plugin 'tacahiroy/ctrlp-funky'
 "" ack 更快的搜索
-Bundle 'mileszs/ack.vim'
+Plugin 'mileszs/ack.vim'
 "" 显示tag列表
-Bundle 'vim-scripts/taglist.vim'
+Plugin 'vim-scripts/taglist.vim'
 "" 在开头加入作者信息
-Bundle 'rainysia/authorinfo_php'
+Plugin 'rainysia/authorinfo_php'
 "" 多种方式加入代码注释
-Bundle 'vim-scripts/The-NERD-Commenter'
+Plugin 'vim-scripts/The-NERD-Commenter'
 "" 显示文件浏览
-Bundle 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 "" 在文件浏览是git时显示状态
-Bundle 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 "" 显示minibuf列表在导航
-Bundle 'fholgado/minibufexpl.vim'
+Plugin 'fholgado/minibufexpl.vim'
 "" 窗口管理
-Bundle 'vim-scripts/winmanager'
+Plugin 'vim-scripts/winmanager'
 "" 在工程中快速查找 F3
-Bundle 'yegappan/grep'
+Plugin 'yegappan/grep'
 "" 更好的查找
-Bundle 'dkprice/vim-easygrep'
+Plugin 'dkprice/vim-easygrep'
 "" 区块伸缩选中
-Bundle 'terryma/vim-expand-region'
+Plugin 'terryma/vim-expand-region'
+"" 匹配html,xml等成对括号跳转
+Plugin 'vim-scripts/matchit.zip'
 "" 最近使用文件浏览
-Bundle 'vim-scripts/mru.vim'
+Plugin 'vim-scripts/mru.vim'
 "" 显示多次搜索结果
-Bundle 'vim-scripts/multisearch.vim'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'dimasg/vim-mark'
+Plugin 'vim-scripts/multisearch.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'dimasg/vim-mark'
 "" 关键字多文件搜索
-Bundle 'dyng/ctrlsf.vim'
+Plugin 'dyng/ctrlsf.vim'
 "" 中文vim文档
-Bundle 'asins/vimcdoc'
+Plugin 'asins/vimcdoc'
+"" 大文件打开
+Plugin 'vim-scripts/LargeFile'
 
 "" 显示实际颜色
-Bundle 'lilydjwg/colorizer'
+Plugin 'lilydjwg/colorizer'
 
 "" 日历
-Bundle 'itchyny/calendar.vim'
+Plugin 'itchyny/calendar.vim'
 
 "" 自动缩进线, 彩色渐变
-Bundle 'nathanaelkane/vim-indent-guides'
+Plugin 'nathanaelkane/vim-indent-guides'
 "" 自动缩进线
-Bundle 'Yggdroot/indentLine'
+Plugin 'Yggdroot/indentLine'
 "" lightline statusline
-Bundle 'itchyny/lightline.vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
+Plugin 'itchyny/lightline.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+"" 高亮行末空格,一键去除
+Plugin 'bronson/vim-trailing-whitespace'
 
 "" zencoding,快速生成代码
-"Bundle 'Valloric/YouCompleteMe'
-Bundle 'scrooloose/syntastic'
-Bundle 'vim-scripts/Emmet.vim'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'vim-scripts/Emmet.vim'
 
-"Bundle 'SirVer/ultisnips'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'rainysia/vim-snippets'
+"Plugin 'SirVer/ultisnips'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'rainysia/vim-snippets'
 
-Bundle 'vim-scripts/L9'
-Bundle 'othree/vim-autocomplpop'
-Bundle 'joonty/vim-phpqa'
-Bundle 'tpope/vim-surround'
-Bundle 'andviro/flake8-vim'
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'elzr/vim-json'
+Plugin 'vim-scripts/L9'
+"Plugin 'othree/vim-autocomplpop'
+"Plugin 'Shougo/neocomplete.vim'
+if has('nvim')
+  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plugin 'Shougo/deoplete.nvim'
+  Plugin 'roxma/nvim-yarp'
+  Plugin 'roxma/vim-hug-neovim-rpc'
+endif
+Plugin 'joonty/vim-phpqa'
+Plugin 'tpope/vim-surround'
+Plugin 'andviro/flake8-vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'elzr/vim-json'
 
 "" (x)html close tag
-Bundle 'vim-scripts/closetag.vim'
+Plugin 'vim-scripts/closetag.vim'
+
+"" javascript
+Plugin 'pangloss/vim-javascript'
+
+"" vue
+Plugin 'posva/vim-vue'
 
 "" C/C++, Switch in c to h
-Bundle 'vim-scripts/a.vim'
-Bundle 'vim-scripts/OmniCppComplete'
+Plugin 'vim-scripts/a.vim'
+Plugin 'vim-scripts/OmniCppComplete'
 
 "" php indent and syntax
-Bundle '2072/PHP-Indenting-for-VIm'
-Bundle '2072/vim-syntax-for-PHP'
-Bundle 'shawncplus/phpcomplete.vim'
+Plugin '2072/PHP-Indenting-for-VIm'
+Plugin '2072/vim-syntax-for-PHP'
+Plugin 'shawncplus/phpcomplete.vim', { 'commit':'ff5b5ef' }
 
 "" scala
-Bundle 'derekwyatt/vim-scala'
-Bundle 'vim-scripts/scala.vim'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'vim-scripts/scala.vim'
 
-"" lua
-Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-lua-ftplugin'
+"" lua, apt-get install vim-nox
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-lua-ftplugin'
 
 "" go
-Bundle 'fatih/vim-go'
+Plugin 'fatih/vim-go'
+" gometalinter
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+" gotags
+Plugin 'majutsushi/tagbar'
 
 "" format
-Bundle 'junegunn/vim-easy-align'
+Plugin 'junegunn/vim-easy-align'
 "" Dockerfile syntax
-Bundle 'ekalinin/Dockerfile.vim'
+Plugin 'ekalinin/Dockerfile.vim'
 
 if $USER == 'root'
     "echo &rtp
@@ -458,12 +507,13 @@ let mapleader = ","                         "      键盘映射为 ,
 nmap <Leader>c *<C-O>:%s///gn<CR>
 "}}
 "{{                                         " CTags的设定
-"                                           "     (地址自定义,我的www在/home/www下)
-"                                           "     vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
+"                                           "    (地址自定义,我的www在/home/www下)
+"                                           "    vim:!ctags -R重编译ctags文件,win先ctags.exe放vim73/
+"                                           "    !ctags -R --exclude=.git --languages=php ./ -V
 "                                           " ctrl_] 跳转到对应函数 ctrl_t 回跳 ctrl_o 回跳 :tag Tagname
 "                                           " ctrl_W_] 新窗口打开跳转
 
-set tags=/home/www/tags
+set tags=/home/www/tags                     " php will jammed
 set tags+=tags,./tags,tags                 " 分号必须,让vim递归向上查找tags
 map <F8> :!ctags -R<CR>
 nnoremap <silent> <S-F8> :!ctags -R<CR>
@@ -476,25 +526,26 @@ set noerrorbells visualbell t_vb=           " disable beep when error
 if has("autocmd")
     autocmd GUIEnter * set visualbell t_vb=
 
-    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl shiftwidth=4
-    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl tabstop=4
-    autocmd FileType html,python,vim,javascript,php,java,scala,lua,c setl softtabstop=4
-    autocmd FileType html,xml,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setlocal textwidth=100
+    autocmd FileType html,python,vim,javascript,php,java,scala,go,lua,c setl shiftwidth=4
+    autocmd FileType html,python,vim,javascript,php,java,scala,go,lua,c setl tabstop=4
+    autocmd FileType html,python,vim,javascript,php,java,scala,go,lua,c setl softtabstop=4
+    autocmd FileType html,xml,text,php,vim,c,java,xml,bash,shell,perl,python,scala,go,lua setlocal textwidth=150
     autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,scala,go,lua set number
     autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
     autocmd FileType java,c,cpp,cs,php vmap <C-o> <ESC>'<o/*<ESC>'>o*/
 
     autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType php set omnifunc=phpcomplete#CompletePHP
     autocmd FileType mysql set omnifunc=mysqlcomplete#CompleteMYSQL
     autocmd FileType python set omnifunc=pythoncomplete#Complete
+    "autocmd FileType python set omnifunc=python3complete#Complete
     autocmd FileType java set omnifunc=javacomplete#Complete
     autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
     autocmd FileType c set omnifunc=ccomplete#Complete
     autocmd FileType cpp set omnifunc=cppcomplete#CompleteCPP
-    autocmd FileType go set omnifunc=gocomplete#Complete
+    autocmd FileType go set omnifunc=go#complete#Complete
     autocmd FileType scala set omnifunc=scalacomplete#CompleteTags
     autocmd FileType lua set omnifunc=luacomplete#Complete
 
@@ -510,7 +561,16 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *Spec.scala,*Test.scala set filetype=scalatest syntax=scala
     autocmd BufNewFile,BufRead *.sbt                   set filetype=scala
 
-    autocmd BufWritePost *.go,*.c silent! !ctags -R & 
+    " vue
+    autocmd BufNewFile,BufRead *.html,*.js,*.vue set tabstop=2
+    autocmd BufNewFile,BufRead *.html,*.js,*.vue set softtabstop=2
+    autocmd BufNewFile,BufRead *.html,*.js,*.vue set shiftwidth=2
+    autocmd BufNewFile,BufRead *.html,*.js,*.vue set expandtab
+    autocmd BufNewFile,BufRead *.html,*.js,*.vue set autoindent
+    autocmd BufNewFile,BufRead *.html,*.js,*.vue set fileformat=unix
+    autocmd FileType vue syntax sync fromstart
+
+    autocmd BufWritePost *.go,*.c silent! !ctags -R &
     "autocmd BufWritePost *.go,*.js,*.php,*.lua,*.scala silent! !ctags -R &  "自动从当前目录构建ctags,根目录就惨了
 
     autocmd BufReadPost *
@@ -525,10 +585,12 @@ set completeopt=longest,menu                " 提示菜单后输入字母实现�
 inoremap <expr> <C-j> ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> <C-k> ((pumvisible())?("\<C-p>"):("k"))
 "}}
-"{{                                         " Ctrlp的设定 https://github.com/kien/ctrlp.vim 2013-07
+"{{                                         " Ctrlp的设定 https://github.com/ctrlpvim/ctrlp.vim 2013-07
+"                                           "  https://github.com/kien/ctrlp.vim
 "                                           "  运行命令:CtrlP或:CtrlP [starting-directory]来以查找文件模式来启用 ctrlp
 "                                           "  运行命令:CtrlPBuffer或:CtrlPMRU来以查找缓冲或最近打开文件模式来启用ctrlp
 "                                           "  运行命令:CtrlPMixed来查找文件,查找缓冲和最近打开文件混合模式来启动 ctrlp
+"                                           "  :CtrlPClearAllCaches 更新目录后需要手动更新文件列表缓存
 "                                           "    按<c-f>和<c-b>在三种查找模式中互相切换
 "                                           "    按<c-y>来创建新文件和对应的父目录
 "                                           "    按<c-d>来切换到只查找文件名而不是全路径
@@ -540,7 +602,12 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip    " Linux/MacOSX
 "set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe" Windows
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rvm)$'
+"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|rvm)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 let g:ctrlp_working_path_mode=0             " :cd 父目录, :CtrlP 父目录 或者上级目录来查找
 let g:ctrlp_match_window_bottom=1
 let g:ctrlp_max_height=15
@@ -549,7 +616,7 @@ let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 let g:ctrlp_user_command = {
     \ 'types': {
-        \ 1: ['.git', 'cd %s && git ls-files'],
+        \ 1: ['.git', 'cd %s && git ls-files -co --exclude-standard'],
         \ 2: ['.hg', 'hg --cwd %s locate -I .'],
         \ },
     \ 'fallback': 'find %s -type f'
@@ -571,28 +638,67 @@ let g:ctrlp_funky_syntax_highlight = 1
 "                                           " --ignore-dir=xxxpath 忽略某个目录
 "                                           " --php --group protected 只搜索php文件中包含protected的文件, 同理--make, --py
 "                                           " :ack --help-type
-"                                           " 在ack搜索的list中  
+"                                           " 在ack搜索的list中
 "                                           " ?  打开快捷列表, 重复关闭
 "}}
 "{{
 "{{                                         " Taglist的设定 https://github.com/vim-scripts/taglist.vim
 "                                           "     F9开关 按wm会启动.F9是单独开关
 "                                           "     :Tlist --呼出变量和函数列表 [TagList插件]
-map <F9> :TlistToggle<CR>
-let Tlist_Ctags_Cmd='ctags'                 "     基于ctags
-let Tlist_Auto_Open = 0                     "     默认打开Taglist
-let Tlist_Sort_Type = "name"                "     按照名称排序
-let Tlist_Show_One_File=1                   "     不同时显示多个文件的tag,只显示当前文件的
-let Tlist_Use_Right_Window = 0              "     在右侧显示窗口
-let Tlist_Compart_Format = 1                "     不显示空白行
-let Tlist_Exist_OnlyWindow = 1              "     如果只有一个buffer,kill窗口也kill掉buffer
-let Tlist_File_Fold_Auto_Close = 1          "     打开其他文件的时候自动关闭,只显示一个文件的tag
-let Tlist_Exit_OnlyWindow=1
-let Tlist_Auto_Update=1                     "     自动更新,包含新文件时候
-let Tlist_Enable_Fold_Column = 0            "     不要显示折叠树
-let Tlist_Use_Right_Window=1                "     右边显示 Left_Window 会左边显示
-" php的折叠
-let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
+map <F9> :call CallTaglistOrBar()<CR>
+function! CallTaglistOrBar()
+    if &filetype != 'go'
+        let Tlist_Ctags_Cmd='ctags'                 "     基于ctags
+        let Tlist_Auto_Open = 0                     "     默认打开Taglist
+        let Tlist_Sort_Type = "name"                "     按照名称排序
+        let Tlist_Show_One_File=1                   "     不同时显示多个文件的tag,只显示当前文件的
+        let Tlist_Use_Right_Window = 0              "     在右侧显示窗口
+        let Tlist_Compart_Format = 1                "     不显示空白行
+        let Tlist_Exist_OnlyWindow = 1              "     如果只有一个buffer,kill窗口也kill掉buffer
+        let Tlist_File_Fold_Auto_Close = 1          "     打开其他文件的时候自动关闭,只显示一个文件的tag
+        let Tlist_Exit_OnlyWindow=1
+        let Tlist_Auto_Update=1                     "     自动更新,包含新文件时候
+        let Tlist_Enable_Fold_Column = 0            "     不要显示折叠树
+        let Tlist_Use_Right_Window=1                "     右边显示 Left_Window 会左边显示
+        " php的折叠
+        let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
+        map <F9> :TlistToggle<CR>
+    else
+        " 将开启tagbar的快捷键设置为　<Leader>tb
+        "nmap <Leader>tb :TagbarToggle<CR>
+        let g:tagbar_ctags_bin='ctags'
+        let g:tagbar_width=30
+        let g:tagbar_type_go = {
+            \ 'ctagstype' : 'go',
+            \ 'kinds'     : [
+                \ 'p:package',
+                \ 'i:imports:1',
+                \ 'c:constants',
+                \ 'v:variables',
+                \ 't:types',
+                \ 'n:interfaces',
+                \ 'w:fields',
+                \ 'e:embedded',
+                \ 'm:methods',
+                \ 'r:constructor',
+                \ 'f:functions'
+            \ ],
+            \ 'sro' : '.',
+            \ 'kind2scope' : {
+                \ 't' : 'ctype',
+                \ 'n' : 'ntype'
+            \ },
+            \ 'scope2kind' : {
+                \ 'ctype' : 't',
+                \ 'ntype' : 'n'
+            \ },
+            \ 'ctagsbin'  : 'gotags',
+            \ 'ctagsargs' : '-sort -silent'
+            \ }
+        autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()　" 在某些情况下自动打开tagbar
+        map <F9> :TagbarToggle<CR>
+    endif
+endfunction
 "}}
 "{{                                         " authorinfo.vim的设定 https://github.com/rainysia/authorinfo_php
 "                                           "     vim自动添加作者信息(需要和NERD_commenter联用)使用,
@@ -600,7 +706,7 @@ let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 let g:vimrc_author='Rainy Sia'
 let g:vimrc_email='rainysia@gmail.com'
 let g:vimrc_link='http://www.btroot.org'
-let g:vimrc_copyright='2013-2016 BTROOT.ORG' 
+let g:vimrc_copyright='2013-'.strftime("%Y").' BTROOT.ORG'
 let g:vimrc_license='https://opensource.org/licenses/MIT license'
 let g:vimrc_version='GIT: 0.0.1'
 let g:vimrc_lang_version = exists('g:vimrc_lang_version') ? g:vimrc_lang_version : ' version num'
@@ -639,7 +745,8 @@ autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "}}
 "{{                                         " nerdtree-git-plugin https://github.com/Xuyuanp/nerdtree-git-plugin
-let g:NERDTreeIndicatorMapCustom = {
+"let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
@@ -654,6 +761,8 @@ let g:NERDTreeIndicatorMapCustom = {
 "{{                                         " minibufexpl.vim的设定 https://github.com/fholgado/minibufexpl.vim
 "                                           "     切换c+Tab前c+s+Tab后buff,ctrl+h,j,k,l上下左右
 "                                           "     :bp和:bn分别是切换到上一个和下一个Buffer, :bd则删除当前显示的单个Buffer
+nmap <Leader>bp :bp<CR>
+nmap <Leader>bn :bn<CR>
 let g:miniBufExplMapCTabSwitchBufs=1
 let g:miniBufExplMapWindowsNavVim=1
 let g:miniBufExplMapWindowNavArrows=1
@@ -679,7 +788,7 @@ let g:miniBufExplModSelTarget = 1
 "                                           "        :tabnew filename  打开新分页并编辑新文件(可选的).如果未指定文件,则只打开新分页,并附上空的缓冲区.
 "                                           "        :tabclose  :tabc关闭当前分页
 "                                           "        :tabonly  :tabo关闭其他所有的分页.如果其他分页中有修改过的文件,则不会移除该分页
-"                                           "        :tabp  前一个, :tabn 后一个, 
+"                                           "        :tabp  前一个, :tabn 后一个,
 "                                           "        普通模式下 gt下一个, gT前一个tab, 2gt直接跳到后2个tab, 3gT跳到前三个tab
 "                                           "        ctrl+PageDown: 移动到下一个分页
 "                                           "        ctrl+PageUp: 移动到上一个分页
@@ -703,7 +812,9 @@ nnoremap <silent> <F3> :Grep<CR>
 "}}
 "{{                                         " vim-expand-region https://github.com/terryma/vim-expand-region
 "                                           " + 扩展选择, - 缩小选择
-
+"}}
+"{{                                         " matchit.vim的设定 https://github.com/vim-scripts/matchit.zip
+"                                           " %
 "}}
 "{{                                         " mru.vim的设定 https://github.com/vim-scripts/mru.vim
 "                                           " :MRU
@@ -712,21 +823,21 @@ let MRU_Max_Entries = 1000
 let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*'  " For Unix  /windows '^c:\\temp\\.*'
 " let MRU_Include_Files = '\.c$\|\.h$'      " 指定类型的最近打开
 let MRU_Add_Menu = 1                        " 增加到菜单.
-let MRU_Max_Menu_Entries = 20 
-let MRU_Max_Submenu_Entries = 15 
+let MRU_Max_Menu_Entries = 20
+let MRU_Max_Submenu_Entries = 15
 "}}
 "{{                                         " Multisearch.vim的设定 matchit.vim  https://github.com/vim-scripts/multisearch.vim
 "                                           " :help Msearch, :Msearch <command>
 "}}
 "{{                                         " vim-multiple-cursors 插件.多重选择 https://github.com/terryma/vim-multiple-cursors
 "                                           " v选中后, ctrl-n select next, c modify the content, <esc> exit;
-let g:multi_cursor_next_key='<C-n>'         "    next 
+let g:multi_cursor_next_key='<C-n>'         "    next
 let g:multi_cursor_prev_key='<C-d>'         "    prev
 let g:multi_cursor_skip_key='<C-x>'         "    skip the next.
 "}}
 "{{                                         " mark.vba.gz的设定(mark.vim) https://github.com/dimasg/vim-mark
-"                                           " :Mark regexp   to mark a regular expression 
-"                                           " :Mark regexp   with exactly the same regexp to unmark it 
+"                                           " :Mark regexp   to mark a regular expression
+"                                           " :Mark regexp   with exactly the same regexp to unmark it
 "                                           " :Mark          to clear all marks , :Marks, show all mark color
 "                                           " ,m mark关键词,,n 取消关键词, ,r输入想要高亮的   / 已经替换成了,
 "                                           "      解压后,用vim打开  :so %
@@ -746,17 +857,20 @@ let g:mwDefaultHighlightingPalette = 'extended'
 "{{                                         " vimcdoc https://github.com/asins/vimcdoc
 "
 "}}
+"{{                                         " LargeFile https://github.com/vim-scripts/LargeFile
+"
+"}}
 "{{                                         " css-highlight https://github.com/lilydjwg/colorizer
 "}}
 "{{                                         " calendar.vim https://github.com/itchyny/calendar.vim
-"                                           " :Calendar, :Calendar 2016 04 19, :Calendar -view=year, 
+"                                           " :Calendar, :Calendar 2016 04 19, :Calendar -view=year,
 "                                           " :Calendar -view=year -split=vertical -width=27
 "                                           " :Calendar -view=year -split=horizontal -position=below -height=12
 "                                           " :Calendar -first_day=monday
 "                                           " :Calendar -view=clock
 let g:calendar_frame = 'default'
 "}}
-"{{                                         " indent.guides的设定 https://github.com/nathanaelkane/vim-indent-guides 
+"{{                                         " indent.guides的设定 https://github.com/nathanaelkane/vim-indent-guides
 "                                           "      自动缩进,<Leader>ig 唤出, /usr/share/vim , ~/.vim
 let g:indent_guides_auto_colors = 1
 let g:indent_guides_guide_size = 1
@@ -775,6 +889,16 @@ let g:indentLine_char = '|'
 "{{                                         " vim-fugitive https://github.com/tpope/vim-fugitive
 "                                           " :Gedit, :Gsplit, :Gvsplit, :Gtabedit, :Gdiff, :Gcommit,
 "                                           " :Gblame, :Gmove, :Ggrep, :Glog, :Gread=git checkout --filename
+"nmap <Leader>gb :Gblame<CR>
+function! s:ToggleBlame()
+    if &l:filetype ==# 'fugitiveblame'
+        close
+    else
+        Gblame
+    endif
+endfunction
+
+nnoremap <Leader>gb :call <SID>ToggleBlame()<CR>
 "                                           " :Gstatus , press - to add/reset, p to add/reset --patch
 "                                           " :Gwrite, :Gbrowse, :Git
 autocmd QuickFixCmdPost *grep* cwindow
@@ -783,11 +907,12 @@ autocmd QuickFixCmdPost *grep* cwindow
 "                                           "   ,hn跳转下一个修改,hp前跳修改,ht关闭开启该插件,hh高亮轮换
 "                                           "   :GitGutterDisable/Enable/Toggle 禁用/启用/轮换 该插件
 "                                           "   :GitGutterLineHighlightsEnable/Disable/Toggle 高亮修改行,default off
-"                                           "   ☺ ☻ ♻ ✗ ✚ ✪ ✯ ➜ ❀ ☢ ✖️ 
+"                                           "   ☺ ☻ ♻ ✗ ✚ ✪ ✯ ➜ ❀ ☢ ✖️
 "                                           "   关闭占用vim左侧列
-let g:gitgutter_enabled = 0                 " close gitgutter
-let g:gitgutter_sign_column_always = 0
-let g:gitgutter_max_signs = 500 
+let g:gitgutter_enabled = 1                 " close gitgutter 0
+"let g:gitgutter_sign_column_always = 1
+set signcolumn=yes
+let g:gitgutter_max_signs = 500
 nmap <Leader>hn <Plug>GitGutterNextHunk
 nmap <Leader>hp <Plug>GitGutterPrevHunk
 nmap <Leader>ht :GitGutterToggle<CR>
@@ -797,7 +922,10 @@ let g:gitgutter_sign_modified = '✗'
 let g:gitgutter_sign_removed = '✖️'
 let g:gitgutter_sign_removed_first_line = '♻'
 let g:gitgutter_sign_modified_removed = '☢'
-
+"}}
+"{{                                         " Remove trailing whitespace https://github.com/bronson/vim-trailing-whitespace
+":FixWhiteSpace
+nmap <Leader>rs :FixWhitespace<CR>
 "}}
 "{{                                         " lightline https://github.com/itchyny/lightline.vim
 "                                           " install powerline font
@@ -964,7 +1092,8 @@ let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快,pip install pyflakes
-let g:syntastic_javascript_checkers = ['jsl', 'jshint']
+let g:syntastic_javascript_checkers = ['jsl', 'jshint', 'eslint']
+                                             " eslint 需要配合npm install eslint eslint-plugin-vue
 let g:syntastic_html_checkers=['tidy', 'jshint']
 let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
 let g:syntastic_cpp_include_dirs = ['/usr/include/']
@@ -973,6 +1102,8 @@ let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
 let g:syntastic_enable_balloons = 1        " whether to show balloons
+let g:syntastic_go_checkers = ['go', 'gometalinter', 'govet']  " gometalinter required
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']  }
 highlight SyntasticErrorSign guifg=white guibg=black
 "}}
 "{{                                         " zencoding.vim 的设定 https://github.com/vim-scripts/Emmet.vim
@@ -989,10 +1120,9 @@ highlight SyntasticErrorSign guifg=white guibg=black
 "                                           " tomtom/tlib_vim              https://github.com/tomtom/tlib_vim'
 "{{                                         " vim-snippets https://github.com/honza/vim-snippets
 "
-"{{                                         " snipmate https://github.com/msanders/snipmate.vim
-" :h SnipMate-mappings
-"}}
 "                                           " garbas/vim-snipmate          https://github.com/garbas/vim-snipmate'
+let g:snipMate = {'snippet_version': 1}
+let g:snipMate.scope_aliases = {}
 "                                           " rainysia/vim-snippets        https://github.com/rainysia/vim-snippets'
 let g:snips_author=g:vimrc_author
 let g:snips_copyright=g:vimrc_copyright
@@ -1042,12 +1172,43 @@ let g:snips_link=g:vimrc_link
 "}}
 "{{                                         " autocomplpop 插件,自动完成提示. https://github.com/othree/vim-autocomplpop
 "}}
+"{{                                         " neocomplete.vim 插件,自动完成提示. https://github.com/Shougo/neocomplete.vim
+"":NeoCompleteEnable
+"let g:neocomplete#enable_at_startup = 1     " faster than vim-autocomplpop, Use neocomplete.
+"let g:acp_enableAtStartup = 0               " Disable AutoComplPop.
+"let g:neocomplete#enable_smart_case = 1     " Use smartcase.
+"let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
+"" Define keyword.
+"if !exists('g:neocomplete#keyword_patterns')
+"    let g:neocomplete#keyword_patterns = {}
+"endif
+"let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+""}}
+"{{                                         " deoplete.vim 插件,自动完成提示(for vim 8.2+) https://github.com/Shougo/deoplete.nvim
+"                                           " pip3 install --user pynvim, pip3 install --user neovim
+"                                           " :python3 import neovim 不报错
+"                                           " :echo has('pythonx')  返回1
+"                                           " :echo exepath('python3') 返回python3的执行位置
+"                                           " :echo neovim_rpc#serveraddr() 显示服务器的IP地址
+set pyxversion=3
+
+if system('uname') =~ "Darwin"
+    let g:python3_host_prog = "/usr/local/bin/python3"
+else
+    let g:python3_host_prog = "/usr/bin/python3"
+endif
+let g:deoplete#enable_at_startup = 1
+"}}
 "{{                                         " phpqa.vim的设定 https://github.com/joonty/vim-phpqa
 "                                           " debian apt-get install php-codesniffer, pear install PHP_CodeSniffer
 "let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = " --encoding=utf-8"
-let g:phpqa_codesniffer_cmd  = '/usr/bin/phpcs'
+if system('uname') =~ "Darwin"
+    let g:phpqa_codesniffer_cmd  = '/usr/local/sbin/phpcs'
+else
+    let g:phpqa_codesniffer_cmd  = '/usr/bin/phpcs'
+endif
 let g:phpqa_codesniffer_autorun = 1         "  default =1 on save
 "                                           " :return NULL Void Boolean Float String Array Object Resource Callback
 let g:phpqa_messdetector_ruleset = ''
@@ -1065,10 +1226,11 @@ let g:phpqa_messdetector_autorun = 0
 "                                           " :cl 列出所有错误 ( :help :cl )
 "                                           " :cw 如果有错误列表,则打开quickfix窗口 ( :help :cw )
 "                                           " :col到前一个旧的错误列表 ( :help :col )
-"                                           " :cnew 到后一个较新的错误列表 ( :help :cnew ) 
+"                                           " :cnew 到后一个较新的错误列表 ( :help :cnew )
 "}}
 "{{                                         " php code sniffer ,php md模式
 "                                           " :!phpcs :!phpmd
+"                                           " /usr/local/php/lib/php/PHP/CodeSniffer/Standard
 "}}
 "{{                                         " Surround.vim 针对包含在文字外的括号,引号,XML 标签做快速的修改 https://github.com/tpope/vim-surround
 "                                           " cs"' 修改双引号为单引号 cs'<q> 修改单引号为<q>包围的.
@@ -1107,8 +1269,16 @@ let g:vim_json_syntax_conceal = 0           "   disable json quote concealing, 0
 "let g:indentLine_noConcealCursor=""
 "
 "}}
+"}}
 "{{                                         " closetag.vim https://github.com/vim-scripts/closetag.vim
 "                                           " <C-_> to get hit
+"}}
+"{{                                         " vim-javascript.vim https://github.com/pangloss/vim-javascript
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+"
+"}}
+"{{                                         " vim-vue.vim  https://github.com/posva/vim-vue
 "}}
 "{{                                         " a.vim https://github.com/vim-scripts/a.vim
 "                                           " :A switches to the header file corresponding to the current file being edited (or vise versa)
@@ -1137,12 +1307,27 @@ let OmniCpp_GlobalScopeSearch=1             " enable the global scope search
 let OmniCpp_DisplayMode=1                   " Class scope completion mode: always show all members
 "let OmniCpp_DefaultNamespaces=["std"]
 let OmniCpp_ShowScopeInAbbr=1               " show scope in abbreviation and remove the last column
-let OmniCpp_ShowAccess=1 
+let OmniCpp_ShowAccess=1
 "}}
 "{{                                         " php-indent https://github.com/2072/PHP-Indenting-for-VIm
 "                                           " php-syntax https://github.com/2072/vim-syntax-for-PHP
 "}}
-"{{                                         " phpcomplete https://github.com/shawncplus/phpcomplete.vim
+autocmd FileType php nmap <Leader>r :!php %<CR>
+"{{                                         " phpcomplete https://github.com/shawncplus/phpcomplete.vim, lastest has issue, need to use ff5b5ef
+let g:phpcomplete_relax_static_constraint = 0
+let g:phpcomplete_complete_for_unknown_classes = 0
+let g:phpcomplete_search_tags_for_variables = 0
+let g:phpcomplete_min_num_of_chars_for_namespace_completion = 0
+let g:phpcomplete_parse_docblock_comments = 0
+let g:phpcomplete_cache_taglists = 0
+let g:phpcomplete_enhance_jump_to_definition = 1
+"                                           "
+let g:phpcomplete_mappings = {
+   \ 'jump_to_def': '<C-]>',
+   \ 'jump_to_def_split': '<C-W><C-]>',
+   \ 'jump_to_def_vsplit': '<C-W><C-\>',
+   \}
+
 "}}
 "{{                                         " vim-scala https://github.com/derekwyatt/vim-scala
 "}}
@@ -1159,17 +1344,128 @@ let g:lua_define_completefunc = 1
 let g:lua_define_omnifunc = 1
 "                                           " :LuaCheckSyntax, :LuaCheckGlobals
 "}}
-"{{                                         " vim-go https://github.com/fatih/vim-go
+"{{                                         " vim-go https://github.com/fatih/vim-go, Need go.tools :GoInstallBinaries
+"                                           " :GoInstallBinaries 需要配置bashrc `export GOBIN=/usr/local/go/bin`, 会把包安装在$GOBIN或者$GOPATH/bin
+"                                           " ~/.vim/bundle/vim-go/templates/hello_world.go 修改样式
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-"au FileType go nmap <leader>r <Plug>(go-run)
-"au FileType go nmap <leader>b <Plug>(go-build)
-"au FileType go nmap <leader>t <Plug>(go-test)
-"au FileType go nmap <leader>c <Plug>(go-coverage)
+let g:go_fmt_command = "goimports"
+let g:go_version_warning = 0
+let g:go_auto_type_info = 1
+"autocmd FileType go nmap <leader>r <Plug>(go-run) %<CR>
+autocmd FileType go nmap <Leader>r :!go run %<CR>
+autocmd FileType go nmap <leader>b <Plug>(go-build) %<CR>
+autocmd FileType go nmap <leader>t <Plug>(go-test) %<CR>
+autocmd FileType go nmap <Leader>i <Plug>(go-info) %<CR>
+autocmd FileType go nmap <Leader>gd <Plug>(go-doc) %<CR>
+autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical) %<CR>
+autocmd FileType go nmap <Leader>c <Plug>(go-coverage) %<CR>
+autocmd FileType go nmap <Leader>ds <Plug>(go-def-split) %<CR>
+autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical) %<CR>
+autocmd FileType go nmap <Leader>dt <Plug>(go-def-tab) %<CR>
+autocmd FileType go nmap <Leader>e <Plug>(go-name) %<CR>
+"                                           " :GoDoc, GoRun, GoBuild, GoInstall, GoTest, GoCoverage,
+"                                           GoErrCheck, GoFiles, GoDeps, GoImplements, GoRename
+"                                           " :GoImports 移到包上, 自动加到import
+"                                             :GoDef 移到函数上,, 会打开$GOROOT/src/package的函数定义. :b返回
+"                                             :GoLint，运行golint在当前Go源文件上
+"                                             :GoDoc，打开当前光标对应符号的Go文档
+"                                             :GoVet，在当前目录下运行go vet在当前Go源文件上
+"                                             :GoRun，编译运行当前main package
+"                                             :GoBuild，编译当前包，这取决于你的源文件，GoBuild不产生结果文件
+"                                             :GoInstall，安装当前包
+"                                             :GoTest，测试你当前路径下地_test.go文件
+"                                             :GoCoverage，创建一个测试覆盖结果文件，并打开浏览器展示当前包的情况。
+"                                             :GoErrCheck，检查当前包种可能的未捕获的errors。
+"                                             :GoFiles，显示当前包对应的源文件列表。
+"                                             :GoDeps，显示当前包的依赖包列表。
+"                                             :GoImplements，显示当前类型实现的interface列表。
+"                                             :GoRename [to]，将当前光标下的符号替换为[to]
+"}}
+"{{                                         " gocode https://github.com/nsf/gocode
+"                                           " if didn't work
+"                                           " 1, killall gocode -9
+"                                           " 2, rm /tmp/gocode-daemon.*
+"                                           " 3, gocode -s -debug
+"                                           or
+"                                           " 1, rm `which gocode`
+"                                           " 2, repeat kill, rm
+"                                           " 4, go get -u github.com/nsf/gocode
+"}}
+"{{                                         " tagbar https://github.com/majutsushi/tagbar
+"}}
+"{{                                         " gometalinter https://github.com/alecthomas/gometalinter
+"                                           " install:curl -L https://git.io/vp6lP | sh
+"                                           "     Syntastic let g:syntastic_go_checkers = ['gometalinter'].
+"                                           "     ale let g:ale_linters = {'go': ['gometalinter']}
+"                                           "     vim-go with the :GoMetaLinter command.
+"                                           "        go vet - Reports potential errors that otherwise compile.
+"                                           "        go tool vet --shadow - Reports variables that may have been unintentionally shadowed.
+"                                           "        gotype - Syntactic and semantic analysis similar to the Go compiler.
+"                                           "        gotype -x - Syntactic and semantic analysis in external test packages (similar to the Go compiler).
+"                                           "        deadcode - Finds unused code.
+"                                           "        gocyclo - Computes the cyclomatic complexity of functions.
+"                                           "        golint - Google's (mostly stylistic) linter.
+"                                           "        varcheck - Find unused global variables and constants.
+"                                           "        structcheck - Find unused struct fields.
+"                                           "        maligned - Detect structs that would take less memory if their fields were sorted.
+"                                           "        errcheck - Check that error return values are used.
+"                                           "        megacheck - Run staticcheck, gosimple and unused, sharing work.
+"                                           "        dupl - Reports potentially duplicated code.
+"                                           "        ineffassign - Detect when assignments to existing variables are not used.
+"                                           "        interfacer - Suggest narrower interfaces that can be used.
+"                                           "        unconvert - Detect redundant type conversions.
+"                                           "        goconst - Finds repeated strings that could be replaced by a constant.
+"                                           "        gosec - Inspects source code for security problems by scanning the Go AST.
+"                                           "        Disabled by default (enable with --enable=<linter>):
+"                                           "    打开下面功能需要用参数--enable=<linter>方式。
+"                                           "        testify - Show location of failed testify assertions.
+"                                           "        test - Show location of test failures from the stdlib testing module.
+"                                           "        gofmt -s - Checks if the code is properly formatted and could not be further simplified.
+"                                           "        goimports - Checks missing or unreferenced package imports.
+"                                           "        gosimple - Report simplifications in code.
+"                                           "        gochecknoinits - Report init functions, to reduce side effects in code.
+"                                           "        gochecknoglobals - Report global vars, to reduce side effects in code.
+"                                           "        lll - Report long lines (see --line-length=N).
+"                                           "        misspell - Finds commonly misspelled English words.
+"                                           "        nakedret - Finds naked returns.
+"                                           "        unparam - Find unused function parameters.
+"                                           "        unused - Find unused variables.
+"                                           "        safesql - Finds potential SQL injection vulnerabilities.
+"                                           "        staticcheck - Statically detect bugs, both obvious and subtle ones.
+"}}
+"{{                                         " gotags https://github.com/jstemmer/gotags
+"let g:tagbar_type_go = {
+"    \ 'ctagstype' : 'go',
+"    \ 'kinds'     : [
+"        \ 'p:package',
+"        \ 'i:imports:1',
+"        \ 'c:constants',
+"        \ 'v:variables',
+"        \ 't:types',
+"        \ 'n:interfaces',
+"        \ 'w:fields',
+"        \ 'e:embedded',
+"        \ 'm:methods',
+"        \ 'r:constructor',
+"        \ 'f:functions'
+"    \ ],
+"    \ 'sro' : '.',
+"    \ 'kind2scope' : {
+"        \ 't' : 'ctype',
+"        \ 'n' : 'ntype'
+"    \ },
+"    \ 'scope2kind' : {
+"        \ 'ctype' : 't',
+"        \ 'ntype' : 'n'
+"    \ },
+"    \ 'ctagsbin'  : 'gotags',
+"    \ 'ctagsargs' : '-sort -silent'
+"\ }
 "}}
 "{{                                         " vim-easy-align https://github.com/junegunn/vim-easy-align
 "                                           "    <Space>, =, :, ., |, &, #, and ,.
@@ -1219,7 +1515,7 @@ function! RestoreFileEncodings()
 endfunction
 au BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
 au BufReadPost *.nfo call RestoreFileEncodings()
-"                                           " count selected words 
+"                                           " count selected words
 let s:prevcountcache=[[], 0]
 function! ShowCount()
     let key=[@/, b:changedtick]
@@ -1247,14 +1543,14 @@ function! TabPos_ActivateBuffer(num)
     exe "tabfirst"
     exe "tabnext" s:count
 endfunction
- 
+
 function! TabPos_Initialize()
 for i in range(1, 9)
         exe "map <M-" . i . "> :call TabPos_ActivateBuffer(" . i . ")<CR>"
     endfor
     exe "map <M-0> :call TabPos_ActivateBuffer(10)<CR>"
 endfunction
- 
+
 autocmd VimEnter * call TabPos_Initialize()
 "}}
 "}}}
@@ -1289,6 +1585,8 @@ function! MyDiff()
     endif
     silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
+map <Leader>dg :diffget<CR>
+map <Leader>dp :diffput<CR>
 "}}
 "{{
 " 高亮当前光标列.
@@ -1324,8 +1622,8 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                           " .vimrc修改后不需重启生效
 autocmd! bufwritepost _vimrc source %
-"                                           " 每行超过80个的字符用下划线标示
-au BufRead,BufNewFile *.s,*.asm,*.h,*.c,*.cpp,*.cc,*.java,*.cs,*.erl,*.hs,*.sh,*.lua,*.pl,*.pm,*.php,*.py,*.rb,*.erb,*.vim,*.js,*.css,*.xml,*.html,*.xhtml 2match Underlined /.\%81v/
+"                                           " 每行超过100个的字符用下划线标示
+au BufRead,BufNewFile *.s,*.asm,*.h,*.c,*.cpp,*.cc,*.java,*.cs,*.erl,*.hs,*.sh,*.lua,*.pl,*.pm,*.php,*.py,*.go,*.rb,*.erb,*.vim,*.js,*.css,*.xml,*.html,*.xhtml 2match Underlined /.\%101v/
 "{{                                         " work in windows ,not work in linux
 "if has("gui_running")
 "    au GUIEnter * simalt ~x                " 窗口启动时自动最大化
@@ -1580,8 +1878,8 @@ elseif &t_Co == 256
     "Console xterm 256
     "   =======================================================================================================================
     hi        Cursor         ctermfg=black            ctermbg=lightyellow       cterm=BOLD        "光标所在的字符
-    hi        CursorColumn   ctermfg=black            ctermbg=darkgrey          cterm=BOLD        "光标所在的屏幕列
-    hi        CursorLine     ctermfg=black            ctermbg=lightblue          cterm=NONE        "光标所在的屏幕行
+    hi        CursorColumn   ctermfg=black            ctermbg=lightgreen        cterm=BOLD        "光标所在的屏幕列
+    hi        CursorLine     ctermfg=black            ctermbg=lightgreen        cterm=NONE        "光标所在的屏幕行
     hi        CursorLineNr   ctermfg=white            ctermfg=red               cterm=BOLD        "光标所在的行号
     hi        ColorColumn    ctermfg=lightgrey        ctermbg=white             cterm=BOLD        "高亮光标所在列.
     hi        Directory      ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "目录名
@@ -1591,7 +1889,7 @@ elseif &t_Co == 256
     hi        DiffText       ctermfg=red              ctermbg=black             cterm=BOLD        "diff: 改变行里的改动文本
     hi        ErrorMsg       ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "命令行上的错误信息
     hi        VertSplit      ctermfg=darkcyan         ctermbg=lightblue         cterm=BOLD        "分离垂直分割窗口的列
-    hi        Folded         ctermfg=lightgrey        ctermbg=darkgreen        cterm=BOLD        "用于关闭的折叠的行
+    hi        Folded         ctermfg=lightgrey        ctermbg=darkgreen         cterm=BOLD        "用于关闭的折叠的行
     hi        IncSearch      ctermfg=darkred          ctermbg=lightgrey         cterm=BOLD        "'incsearch' 高亮
     hi        LineNr         ctermfg=darkgrey         ctermbg=black             cterm=BOLD        "置位 number 选项时的行号
     hi        MatchParen     ctermfg=lightred         ctermbg=black             cterm=BOLD        "配对的括号
@@ -1669,8 +1967,8 @@ elseif &t_Co == 256
 else
     "Console xterm 8
     hi        Cursor         ctermfg=black            ctermbg=lightyellow       cterm=BOLD        "光标所在的字符
-    hi        CursorColumn   ctermfg=black            ctermbg=darkgrey          cterm=BOLD        "光标所在的屏幕列
-    hi        CursorLine     ctermfg=black            ctermbg=lightblue          cterm=NONE        "光标所在的屏幕行
+    hi        CursorColumn   ctermfg=black            ctermbg=lightgreen        cterm=BOLD        "光标所在的屏幕列
+    hi        CursorLine     ctermfg=black            ctermbg=lightgreen        cterm=NONE        "光标所在的屏幕行
     hi        CursorLineNr   ctermfg=white            ctermfg=red               cterm=BOLD        "光标所在的行号
     hi        ColorColumn    ctermfg=lightgrey        ctermbg=white             cterm=BOLD        "高亮光标所在列.
     hi        Directory      ctermfg=darkcyan         ctermbg=black             cterm=BOLD        "目录名
@@ -1764,20 +2062,25 @@ endif
 " :s/^/#                                    " 用'#'注释当前行
 " :2,50s/^ /#                               " 在2~50行首添加'#'注释
 " :2,50s/$/#                                " 在2~50末加'#'
+" :%s/#/#\r/g                               " transfer # to #\r
 " :.,+3s/^/#                                " 用'#'注释当前行和当前行后面的三行
 " :%s/^/#                                   " 用'#'注释所有行
 " :n1,n2s/^/#/g                             " 用'#'注释n1~n2行,下面为删除
 " :n1,n2s/#/^/g                             " :n1,n2s/^/#/g   :n1,n2s/#^//g
+" :n1,n2s/\\$//g                            " 删除行末 \ 
 " :n1,n2s/^/\/\//g                          " 用//注释n1~n2
 " :n1,n2s/\/\///g                           " 删除//的注释
 " :g/keywords/d                             " 删除所有含有keywords的行
 " :v/error\|warn\|fail/d                    " 删除不含有error,warn,fail的行, v=g!, :%g!/error\|warn\|fail/d
+" :%s/\/\/.*//g                             " 删除//(含)后面的字符, 其它也可以替换
+" :%s/\/\/.*/\/\//g                         " 删除//后面的字符, 其它也可以替换. 替换为原符号, 比如只删除括号内的()
 " :n1,n2s/^I/','/g                          " 把tab替换成','
 " :%s/^\s\+//g                              " 删除行首空格
 " :%s/\s\+$//g                              " 删除行末空格 要转义斜杠等, 用\,而+ |转义用\\
 " :g/^$/d                                   " 删除没有内容的空行
 " :g/^\s*$/d                                " 删除有空格组成的空格
 " :%s///g                                 " 删除行末^M的符号
+" :12,$s/keywords//g                        " 删除从12行到最后一行的关键字
 " :%s/^\n\+/\r/                             " 压缩多行空行为一行 2013-11-26 15:42:58
 " :%s/keywords//n                           " 统计关键字出现的次数
 " :                                         " 把正则用\( \) 扩起来后, 后面替换的时候可以用\1 \2来引用对应的正则
@@ -1791,7 +2094,7 @@ endif
 " gf                                        " 在鼠标下打开当前路径的文件
 " <c-w>f                                    " open in a new window
 " <c-w>gf                                   " open in a new tab
-" :n1,n2 co n3                              " copy n1~n2 to under the n3
+" :n1,n2 co n3                              " copy n1~n2 to under the n3  :1 co 3
 " :n1,n2 m n3                               " move n1~n2 to under the n3
 " :n1,n2 w filename                         " save n1~n2 to filename
 " n+   n-                                   " 光标移动多少行
@@ -1802,6 +2105,9 @@ endif
 " ctrl+f ctrl+b                             " 向文件首(尾) 翻一屏
 " nz                                        " 将第n行滚至屏幕顶部,不指定n时将当前行滚至屏幕顶
 " :g/^/exe ":s/^/".line(".")                " 每行插入行号
+" :r !seq 10                                " 从当前行开始插入 1 ~ 10
+" :%s/^/\=line(".")/g                       " 从第一行开始插入 1 ~ ...
+" :%s/$/\=line(".")/g                       " 从第一行行末开始插入 1 ~ ...
 " :g/<input|<form/p                         " 显示含<input或<form的行
 " :bufdo /searchstr                         " 在多个buff中搜索
 " :argdo /searchstr
@@ -1848,6 +2154,7 @@ endif
 " `.                                        " 跳到最后修改的那一行,定位到修改点
 " :ju(mps)                                  " 列出跳转足迹
 " !!date                                    " 读取date的输出 (但是会替换当前行的内容) :r!date 输出系统时间. :r!date \+\%F\ \%T 格式化输出
+" ctrl+r, 输入%                             " 插入当前文件名
 " :bn                                       " 跳转到下一个buffer
 " :bp                                       " 跳转到上一个buffer
 " :wn                                       " 存盘当前文件并跳转到下一个
@@ -1870,9 +2177,10 @@ endif
 " gvim -d file1 file2                       " vimdiff (比较不同)
 "                                           "    ]c 跳转下一个差异点 :diffget 把另外一个文件的差异点的内容复制过来  :diffput 把当前差异点的内容复制过去. :diffupdate 更多比较文件
 "                                           "    前面加行号表示多少行开始  :2,30diffget 把2~30行的差异取过来
+"                                           "    ln -s /usr/bin/diff /usr/share/vim/vim82diff
 " c{ motion }                               " 删除motion命令跨过的,并且进入插入 c$删到行尾的并进入插入,ct! 删除从光标位到下一个!位置
 " dp                                        " 把光标处的不同放到另一个文件
-" do                                        " 在光标处从另一个文件取得不同
+" dg                                        " 在光标处从另一个文件取得不同
 " diw                                       " 删除光标上的单词 (不包括空白字符)
 " daw                                       " 删除光标上的单词 (包括空白字符)
 " dl                                        " delete character (alias: x)
@@ -2065,9 +2373,9 @@ endif
 "     -H                                    " 希伯来模式
 "     --noplugin                            " 不加载,无插件模式
 "     --startuptime {fname}                 " 启动时把计时信息写入文件 {fname}.可用于分析载入 .vimrc,插件和打开首个文件的过程中时哪一步最耗时
-"     -V9debugVimLog                        " 启动时加入debug信息, 可以跟踪vim crash, 
-"     :messages                             "  show all crash log, 
-"     :echo                                 "  errmsg print recent msg 
+"     -V9debugVimLog                        " 启动时加入debug信息, 可以跟踪vim crash,
+"     :messages                             "  show all crash log,
+"     :echo                                 "  errmsg print recent msg
 " /\Cxxx                                    " 大小写敏感 /\cxxx 搜索xxx不敏感
 " vsp                                       " 垂直分割窗口
 " sp                                        " 竖向分割窗口
@@ -2086,7 +2394,7 @@ endif
 "                                           " \"a5yy 复制5行到register a中, \"A5yy 再添加5行到a中.
 "                                           " [I 显示光标处的关键字匹配的行 :g/^/pu 把文中空行扩1倍 :g/^/m0 按行翻转文章 :g/关键字/t$ 拷贝行,从关键字到文件末尾
 "                                           " :let @a=@_ 清除寄存器a :let @*=@a 寄存器赋值 :scriptnames 列出所有加载的插件,_vimrcs :verbose set history 显示设置history值并指出设置文件的位置
-"                                           " :verbose map<Tab> 可以查看tab键是绑定到什么动作上的, 
+"                                           " :verbose map<Tab> 可以查看tab键是绑定到什么动作上的,
 "                                           "  Command     Normal      Visual  Operator    Insert      Command_Line
 "                                           "  映射命令    常规模式    可视化  运算符模式  插入模式    命令行
 "                                           "  :map        y           y       y
@@ -2126,7 +2434,7 @@ endif
 "                                           "        :h i_CTRL-V-digit ,<C-v>跟非数字会插入按键本身的字符, <C-v><TAB>会插入真正的制表符而忽略expandtab是否开启.
 "                                           "        <C-k>{char1}{char2}插入二合字母表示的字符. :h digraph-table
 "                                           " :h vi-differences 查看vi 和vim差异.
-"                                           " ex命令 
+"                                           " ex命令
 "                                           " :[range]delete [x]          删除指定范围内的行.[到寄存器x中]
 "                                           " :[range]yank [x]            复制指定范围内的行.[到寄存器x中]
 "                                           " :[range]put [x]             在指定行后粘贴寄存器x中的内容
@@ -2134,7 +2442,7 @@ endif
 "                                           " :[range]move {address}      把指定范围内的行move到地址所指定的行之下
 "                                           " :[range]join               连接指定范围的行.
 "                                           " :[range]normal {commands}   对指定范围中的每一行执行普通模式命令{commands}
-"                                           " :[range]substitute/{pattern}/{string}/[flags]  把指定范围内出现{pattern}的地方替换为{string} 
+"                                           " :[range]substitute/{pattern}/{string}/[flags]  把指定范围内出现{pattern}的地方替换为{string}
 "                                           " :[range]global/{pattern}/[cmd]     对指定范围内匹配{pattern}的所有行,在其上执行ex命令{cmd}
 "                                           " :$: 等于gg 跳到文件末尾    .代表当前行的地址  %代表当前文件的所有行.
 "                                           " :.,$p 打印当前行到文件末尾行的所有.
@@ -2163,7 +2471,7 @@ endif
 " 5.03.07                                   " add some usage 2013-03-07 17:01:21
 " 5.03.14                                   " 修改超出背景bg#A36666->#1C1D1E fg->#DCDCDC 终端bg由lightred->darkgray fg lightgrey->lightblue 2013-03-14 15:38:09
 " 5.04.01                                   " add diW manual etc.
-" 5.04.02                                   " pear install PHP_CodeSniffer,pear channel-discover pear.phpmd.org,pear channel-discover pear.pdepend.org,pear isntall --alldeps phpmd/PHP_PMD 
+" 5.04.02                                   " pear install PHP_CodeSniffer,pear channel-discover pear.phpmd.org,pear channel-discover pear.pdepend.org,pear isntall --alldeps phpmd/PHP_PMD
 "                                           " apt-get install php5-imagick imagemagick phpqa.vim
 " 5.04.03                                   " 增加vim for php ,css ,html 变量等色彩配置 2013-04-11 15:22:09
 " 5.05.01                                   " 修改了diff 4个颜色的配置 2013-05-13 18:00:00
@@ -2172,7 +2480,7 @@ endif
 " 5.09.01                                   " 增加了大小写敏感 2013-09-04 18:28:17
 " 5.09.02                                   " 增加了分割的操作 2013-09-11 10:20:58
 " 5.09.03                                   " 增加了ctags -R 操作 2013-09-11 16:50:00
-" 5.10.01                                   " 增加.c .h .sh .java 头文件自动添加,其它 2013-10-08 10:25:36 
+" 5.10.01                                   " 增加.c .h .sh .java 头文件自动添加,其它 2013-10-08 10:25:36
 " 5.10.02                                   " 修改set noexpandtab为expandtab用空格来代替制表符,保证代码和staff的兼容.2013-10-18 15:54:50
 " 5.10.03                                   " 增加CodeSniffer效验    2013-10-31 15:35:01
 " 5.11.02                                   " 增加CodeSniffer效验,return type    2013-11-01 17:47:01
@@ -2224,5 +2532,13 @@ endif
 " 7.09.06                                   " add expand and gitgutter plugin 2016-07-11 10:33:25
 " 7.09.07                                   " fix c,cpp omniComplete,refine tags 2016-07-26 04:45:01
 " 7.09.08                                   " add vim-json for disable json concealing quotes 2016-08-09 02:28:27
+" 8.01.00                                   " set desert highlight for self configuration 2018-03-07 10:12:02
+" 8.07.01                                   "  % 当前完整文件名,%:h 文件名头部(path),%:文件名尾部(文件名+后缀),%:r(文件名),%:e扩展
+" 8.12.01                                   " configure go env, taglist
+" 8.13.02                                   " update go complete
+" 21.01.12                                  " add vue 2021-01-12 16:39:18
+" 21.01.28                                  " add vim relative number 2021-01-28 12:39:22
+" 21.02.25                                  " snipMate deprecate
+" 21.05.11                                  " vim-fugitive ,gb close 2021-05-11 11:06:55
 "}}
 "}}}
