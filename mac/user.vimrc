@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2008-2021 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 21.08.11
+" * @version    GIT: 21.11.01
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2021-08-17 11:09:18
+" * @lastChange 2021-11-12 11:22:40
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -2079,7 +2079,8 @@ endif
 " :%s/\s\+$//g                              " 删除行末空格 要转义斜杠等, 用\,而+ |转义用\\
 " :g/^$/d                                   " 删除没有内容的空行
 " :g/^\s*$/d                                " 删除有空格组成的空格
-" :%s///g                                 " 删除行末^M的符号
+" :%s/
+//g                                 " 删除行末^M的符号
 " :12,$s/keywords//g                        " 删除从12行到最后一行的关键字
 " :%s/^\n\+/\r/                             " 压缩多行空行为一行 2013-11-26 15:42:58
 " :%s/keywords//n                           " 统计关键字出现的次数
