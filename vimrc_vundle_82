@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2008-2021 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 21.11.01
+" * @version    GIT: 21.12.01
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2021-11-12 11:25:22
+" * @lastChange 2021-12-21 19:45:12
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -889,12 +889,12 @@ let g:indentLine_char = '|'
 "{{                                         " vim-fugitive https://github.com/tpope/vim-fugitive
 "                                           " :Gedit, :Gsplit, :Gvsplit, :Gtabedit, :Gdiff, :Gcommit,
 "                                           " :Gblame, :Gmove, :Ggrep, :Glog, :Gread=git checkout --filename
-"nmap <Leader>gb :Gblame<CR>
+nmap <Leader>gb :Git blame<CR>
 function! s:ToggleBlame()
     if &l:filetype ==# 'fugitiveblame'
         close
     else
-        Gblame
+        Git blame
     endif
 endfunction
 
