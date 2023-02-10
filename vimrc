@@ -2,7 +2,7 @@
 "========================================================================
 " * For vim Configuration file
 
-" * VIM 8.2
+" * VIM 9.0
 
 " * @filename   vimrc
 " * @author     Rainy Sia <rainysia@gmail.com>
@@ -10,7 +10,7 @@
 " * @license    https://opensource.org/licenses/MIT license
 " * @version    GIT: 21.12.01
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2021-12-21 19:45:12
+" * @lastChange 2022-09-28 17:18:23
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -21,8 +21,8 @@
 "{{                                         " work in linux, echo &rtp
 if has("unix")
     if system('uname') =~ "Darwin"
-        let $VIMRUNTIME="/usr/share/vim/vim82"
-        set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+        let $VIMRUNTIME="/usr/share/vim/vim90"
+        set runtimepath=/usr/share/vim/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     else
         let $VIMRUNTIME="/usr/share/vim/vim82"
         set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
@@ -1190,11 +1190,25 @@ let g:snips_link=g:vimrc_link
 "                                           " :echo has('pythonx')  返回1
 "                                           " :echo exepath('python3') 返回python3的执行位置
 "                                           " :echo neovim_rpc#serveraddr() 显示服务器的IP地址
-"                                           " :pythonx import sys; print (sys.path)  show python3的install位置
+"                                           " :pythonx import sys; print (sys.path)  show python3的install位置, 如果不一致会导致上面neovim报错
+"                                           : :pythonx 的install 是macvim 带进来的，不可修改，所以需要修改上面的python3为pythonx的对应版本
+"                                           : mac:
+"                                               ln -sf /opt/homebrew/Cellar/python@3.11/3.11.1/bin/python3.11-config /opt/homebrew/Cellar/python@3.11/3.11.1/bin/python3-config
+"                                               ln -sf /opt/homebrew/Cellar/python@3.11/3.11.1/bin/python3-config /opt/homebrew/bin/python3.11-config
+"                                               ln -sf /opt/homebrew/bin/python3.11-config /opt/homebrew/bin/python3-config
+"
+"                                               ln -sf /opt/homebrew/Cellar/python@3.11/3.11.1/bin/python3.11 /opt/homebrew/Cellar/python@3.11/3.11.1/bin/python3
+"                                               ln -sf /opt/homebrew/Cellar/python@3.11/3.11.1/bin/python3 /opt/homebrew/bin/python3.11
+"                                               ln -sf /opt/homebrew/bin/python3.11-config /opt/homebrew/bin/python3
+"
+"                                               ln -sf /opt/homebrew/Cellar/python@3.11/3.11.1/bin/pip3.11 /opt/homebrew/Cellar/python@3.11/3.11.1/bin/pip3
+"                                               ln -sf /opt/homebrew/Cellar/python@3.11/3.11.1/bin/pip3 /opt/homebrew/bin/pip3.11
+"                                               ln -sf /opt/homebrew/bin/pip3.11 /opt/homebrew/bin/pip3
+"                                               /opt/homebrew/bin/pip3 install pynvim neovim
 set pyxversion=3
 
 if system('uname') =~ "Darwin"
-    let g:python3_host_prog = "/usr/local/bin/python3"
+    let g:python3_host_prog = "/opt/homebrew/bin/python3"
 else
     let g:python3_host_prog = "/usr/bin/python3"
 endif
@@ -2081,7 +2095,8 @@ endif
 " :%s/\s\+$//g                              " 删除行末空格 要转义斜杠等, 用\,而+ |转义用\\
 " :g/^$/d                                   " 删除没有内容的空行
 " :g/^\s*$/d                                " 删除有空格组成的空格
-" :%s///g                                 " 删除行末^M的符号
+" :%s/
+//g                                 " 删除行末^M的符号
 " :12,$s/keywords//g                        " 删除从12行到最后一行的关键字
 " :%s/^\n\+/\r/                             " 压缩多行空行为一行 2013-11-26 15:42:58
 " :%s/keywords//n                           " 统计关键字出现的次数
