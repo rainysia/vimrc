@@ -4,13 +4,13 @@
 
 " * VIM 9.0
 
-" * @filename   vimrc
+" * @filename   .vimrc
 " * @author     Rainy Sia <rainysia@gmail.com>
-" * @copyright  2008-2021 BTROOT.ORG
+" * @copyright  2008-2023 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 21.12.01
+" * @version    GIT: 23.02.03
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2022-09-28 17:18:23
+" * @lastChange 2023-02-09 12:11:58
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -1220,7 +1220,7 @@ let g:deoplete#enable_at_startup = 1
 let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = " --encoding=utf-8"
 if system('uname') =~ "Darwin"
-    let g:phpqa_codesniffer_cmd  = '/usr/local/sbin/phpcs'
+    let g:phpqa_codesniffer_cmd  = '/opt/homebrew/bin/phpcs'
 else
     let g:phpqa_codesniffer_cmd  = '/usr/bin/phpcs'
 endif
@@ -2094,7 +2094,7 @@ endif
 " :%s/\s\+$//g                              " 删除行末空格 要转义斜杠等, 用\,而+ |转义用\\
 " :g/^$/d                                   " 删除没有内容的空行
 " :g/^\s*$/d                                " 删除有空格组成的空格
-" :%s/<c-v>//g                                 " 删除行末^M的符号
+" :%s/<c-v>//g                              " 删除行末^M的符号
 " :12,$s/keywords//g                        " 删除从12行到最后一行的关键字
 " :%s/^\n\+/\r/                             " 压缩多行空行为一行 2013-11-26 15:42:58
 " :%s/keywords//n                           " 统计关键字出现的次数
