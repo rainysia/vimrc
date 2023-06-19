@@ -8,9 +8,9 @@
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2008-2021 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 21.12.01
+" * @version    GIT: 23.06.19
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2022-09-28 17:18:23
+" * @lastChange 2023-06-19 17:38:25
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -24,15 +24,15 @@ if has("unix")
         let $VIMRUNTIME="/usr/share/vim/vim90"
         set runtimepath=/usr/share/vim/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     else
-        let $VIMRUNTIME="/usr/share/vim/vim82"
-        set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+        let $VIMRUNTIME="/usr/share/vim/vim90"
+        set runtimepath=/usr/share/vim/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     endif
 elseif has("win32")
-    let $VIMRUNTIME="~/vim82"
-    set runtimepath=~/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    let $VIMRUNTIME="~/vim90"
+    set runtimepath=~/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 else
-    let $VIMRUNTIME="/usr/share/vim/vim82"
-    set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    let $VIMRUNTIME="/usr/share/vim/vim90"
+    set runtimepath=/usr/share/vim/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 endif
 "}}
 set nocp                                    " close compeletion with vi
@@ -205,7 +205,7 @@ set viminfo='1000,f1,<500
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  4 => Display {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme desert                          " 设置配色方案, 需要用自定义的覆盖/usr/share/vim/vim82/colors/desert.vim
+colorscheme desert                          " 设置配色方案, 需要用自定义的覆盖/usr/share/vim/vim90/colors/desert.vim
 set background=dark                         " 设置背景为黑
 set novisualbell                            " No mouseflash
 set nu                                      " 设置行号
@@ -2193,7 +2193,7 @@ endif
 " gvim -d file1 file2                       " vimdiff (比较不同)
 "                                           "    ]c 跳转下一个差异点 :diffget 把另外一个文件的差异点的内容复制过来  :diffput 把当前差异点的内容复制过去. :diffupdate 更多比较文件
 "                                           "    前面加行号表示多少行开始  :2,30diffget 把2~30行的差异取过来
-"                                           "    ln -s /usr/bin/diff /usr/share/vim/vim82diff
+"                                           "    ln -s /usr/bin/diff /usr/share/vim/vim90diff
 " c{ motion }                               " 删除motion命令跨过的,并且进入插入 c$删到行尾的并进入插入,ct! 删除从光标位到下一个!位置
 " dp                                        " 把光标处的不同放到另一个文件
 " dg                                        " 在光标处从另一个文件取得不同

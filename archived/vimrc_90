@@ -2,15 +2,15 @@
 "========================================================================
 " * For vim Configuration file
 
-" * VIM 8.2
+" * VIM 9.0
 
 " * @filename   vimrc
 " * @author     Rainy Sia <rainysia@gmail.com>
 " * @copyright  2008-2021 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 21.11.01
+" * @version    GIT: 23.06.19
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2021-11-12 11:25:22
+" * @lastChange 2023-06-19 17:38:25
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -21,18 +21,18 @@
 "{{                                         " work in linux, echo &rtp
 if has("unix")
     if system('uname') =~ "Darwin"
-        let $VIMRUNTIME="/usr/share/vim/vim82"
-        set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/plugged/vim-snipmate/after
+        let $VIMRUNTIME="/usr/share/vim/vim90"
+        set runtimepath=/usr/share/vim/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     else
-        let $VIMRUNTIME="/usr/share/vim/vim82"
-        set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/plugged/vim-snipmate/after
+        let $VIMRUNTIME="/usr/share/vim/vim90"
+        set runtimepath=/usr/share/vim/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     endif
 elseif has("win32")
-    let $VIMRUNTIME="~/vim82"
-    set runtimepath=~/vim82,~/.vim,~/.vim/after,~/.vim/plugged/vim-snipmate/after
+    let $VIMRUNTIME="~/vim90"
+    set runtimepath=~/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 else
-    let $VIMRUNTIME="/usr/share/vim/vim82"
-    set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/plugged/vim-snipmate/after
+    let $VIMRUNTIME="/usr/share/vim/vim90"
+    set runtimepath=/usr/share/vim/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 endif
 "}}
 set nocp                                    " close compeletion with vi
@@ -205,7 +205,7 @@ set viminfo='1000,f1,<500
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  4 => Display {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme desert                          " 设置配色方案, 需要用自定义的覆盖/usr/share/vim/vim82/colors/desert.vim
+colorscheme desert                          " 设置配色方案, 需要用自定义的覆盖/usr/share/vim/vim90/colors/desert.vim
 set background=dark                         " 设置背景为黑
 set novisualbell                            " No mouseflash
 set nu                                      " 设置行号
@@ -358,137 +358,141 @@ set nowrapscan                              " 禁止搜索到文件两端时重�
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  6 => Plugins {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{                                           " vim-plug: curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"{{                                         " Vundle git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
 if has('win32')
-    set rtp+=$VIM/vimfiles/autoload/plug.vim/
-    call plug#begin('$VIM/vimfiles/plugged/')
+    set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
+    call vundle#begin('$VIM/vimfiles/bundle/')
 else
-    set rtp+=~/.vim/autoload/plug.vim/
-    call plug#begin('~/.vim/plugged')
+    set rtp+=~/.vim/bundle/Vundle.vim/
+    call vundle#begin()
+    "set rtp+=$VIMRUNTIME/bundle/vundle/
+    "call vundle#begin('$VIMRUNTIME/bundle')
 endif
 
+Plugin 'VundleVim/Vundle.vim'
 "" 快速文件查找
-"Plug 'ctrlpvim/ctrlp.vim'
-Plug 'kien/ctrlp.vim'
+"Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 "" ctrlp 函数查找
-Plug 'tacahiroy/ctrlp-funky'
+Plugin 'tacahiroy/ctrlp-funky'
 "" ack 更快的搜索
-Plug 'mileszs/ack.vim'
+Plugin 'mileszs/ack.vim'
 "" 显示tag列表
-Plug 'vim-scripts/taglist.vim'
+Plugin 'vim-scripts/taglist.vim'
 "" 在开头加入作者信息
-Plug 'rainysia/authorinfo_php'
+Plugin 'rainysia/authorinfo_php'
 "" 多种方式加入代码注释
-Plug 'vim-scripts/The-NERD-Commenter'
+Plugin 'vim-scripts/The-NERD-Commenter'
 "" 显示文件浏览
-Plug 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 "" 在文件浏览是git时显示状态
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 "" 显示minibuf列表在导航
-Plug 'fholgado/minibufexpl.vim'
+Plugin 'fholgado/minibufexpl.vim'
 "" 窗口管理
-Plug 'vim-scripts/winmanager'
+Plugin 'vim-scripts/winmanager'
 "" 在工程中快速查找 F3
-Plug 'yegappan/grep'
+Plugin 'yegappan/grep'
 "" 更好的查找
-Plug 'dkprice/vim-easygrep'
+Plugin 'dkprice/vim-easygrep'
 "" 区块伸缩选中
-Plug 'terryma/vim-expand-region'
+Plugin 'terryma/vim-expand-region'
 "" 匹配html,xml等成对括号跳转
-Plug 'vim-scripts/matchit.zip'
+Plugin 'vim-scripts/matchit.zip'
 "" 最近使用文件浏览
-Plug 'vim-scripts/mru.vim'
+Plugin 'vim-scripts/mru.vim'
 "" 显示多次搜索结果
-Plug 'vim-scripts/multisearch.vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'dimasg/vim-mark'
+Plugin 'vim-scripts/multisearch.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'dimasg/vim-mark'
 "" 关键字多文件搜索
-Plug 'dyng/ctrlsf.vim'
+Plugin 'dyng/ctrlsf.vim'
 "" 中文vim文档
-Plug 'asins/vimcdoc'
+Plugin 'asins/vimcdoc'
 "" 大文件打开
-Plug 'vim-scripts/LargeFile'
+Plugin 'vim-scripts/LargeFile'
 
 "" 显示实际颜色
-Plug 'lilydjwg/colorizer'
+Plugin 'lilydjwg/colorizer'
 
 "" 日历
-Plug 'itchyny/calendar.vim'
+Plugin 'itchyny/calendar.vim'
 
 "" 自动缩进线, 彩色渐变
-Plug 'nathanaelkane/vim-indent-guides'
+Plugin 'nathanaelkane/vim-indent-guides'
 "" 自动缩进线
-Plug 'Yggdroot/indentLine'
+Plugin 'Yggdroot/indentLine'
 "" lightline statusline
-Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plugin 'itchyny/lightline.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 "" 高亮行末空格,一键去除
-Plug 'bronson/vim-trailing-whitespace'
+Plugin 'bronson/vim-trailing-whitespace'
 
 "" zencoding,快速生成代码
-"Plug 'Valloric/YouCompleteMe'
-Plug 'scrooloose/syntastic'
-Plug 'vim-scripts/Emmet.vim'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'vim-scripts/Emmet.vim'
 
-"Plug 'SirVer/ultisnips'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
-Plug 'rainysia/vim-snippets'
+"Plugin 'SirVer/ultisnips'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'rainysia/vim-snippets'
 
-Plug 'vim-scripts/L9'
-"Plug 'othree/vim-autocomplpop'
+Plugin 'vim-scripts/L9'
+"Plugin 'othree/vim-autocomplpop'
+"Plugin 'Shougo/neocomplete.vim'
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
+  Plugin 'Shougo/deoplete.nvim'
+  Plugin 'roxma/nvim-yarp'
+  Plugin 'roxma/vim-hug-neovim-rpc'
 endif
-Plug 'joonty/vim-phpqa'
-Plug 'tpope/vim-surround'
-Plug 'andviro/flake8-vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'elzr/vim-json'
+Plugin 'joonty/vim-phpqa'
+Plugin 'tpope/vim-surround'
+Plugin 'andviro/flake8-vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'elzr/vim-json'
 
 "" (x)html close tag
-Plug 'vim-scripts/closetag.vim'
+Plugin 'vim-scripts/closetag.vim'
 
 "" javascript
-Plug 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript'
 
 "" vue
-Plug 'posva/vim-vue'
+Plugin 'posva/vim-vue'
 
 "" C/C++, Switch in c to h
-Plug 'vim-scripts/a.vim'
-Plug 'vim-scripts/OmniCppComplete'
+Plugin 'vim-scripts/a.vim'
+Plugin 'vim-scripts/OmniCppComplete'
 
 "" php indent and syntax
-Plug '2072/PHP-Indenting-for-VIm'
-Plug '2072/vim-syntax-for-PHP'
-Plug 'shawncplus/phpcomplete.vim'
+Plugin '2072/PHP-Indenting-for-VIm'
+Plugin '2072/vim-syntax-for-PHP'
+Plugin 'shawncplus/phpcomplete.vim', { 'commit':'ff5b5ef' }
 
 "" scala
-Plug 'derekwyatt/vim-scala'
-Plug 'vim-scripts/scala.vim'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'vim-scripts/scala.vim'
 
 "" lua, apt-get install vim-nox
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-lua-ftplugin'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-lua-ftplugin'
 
 "" go
-Plug 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 " gometalinter
-Plug 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 " gotags
-Plug 'majutsushi/tagbar'
+Plugin 'majutsushi/tagbar'
 
 "" format
-Plug 'junegunn/vim-easy-align'
+Plugin 'junegunn/vim-easy-align'
 "" Dockerfile syntax
-Plug 'ekalinin/Dockerfile.vim'
+Plugin 'ekalinin/Dockerfile.vim'
 
 if $USER == 'root'
     "echo &rtp
@@ -496,7 +500,7 @@ else
     "echo &rtp
 endif
 
-"call plug#end()
+call vundle#end()
 filetype plugin indent on
 let mapleader = ","                         "      键盘映射为 ,
 "                                           " ,c   搜索统计光标处单词的次数
@@ -885,12 +889,12 @@ let g:indentLine_char = '|'
 "{{                                         " vim-fugitive https://github.com/tpope/vim-fugitive
 "                                           " :Gedit, :Gsplit, :Gvsplit, :Gtabedit, :Gdiff, :Gcommit,
 "                                           " :Gblame, :Gmove, :Ggrep, :Glog, :Gread=git checkout --filename
-"nmap <Leader>gb :Gblame<CR>
+nmap <Leader>gb :Git blame<CR>
 function! s:ToggleBlame()
     if &l:filetype ==# 'fugitiveblame'
         close
     else
-        Gblame
+        Git blame
     endif
 endfunction
 
@@ -1186,11 +1190,25 @@ let g:snips_link=g:vimrc_link
 "                                           " :echo has('pythonx')  返回1
 "                                           " :echo exepath('python3') 返回python3的执行位置
 "                                           " :echo neovim_rpc#serveraddr() 显示服务器的IP地址
-"                                           " :pythonx import sys; print (sys.path)  show python3的install位置
+"                                           " :pythonx import sys; print (sys.path)  show python3的install位置, 如果不一致会导致上面neovim报错
+"                                           : :pythonx 的install 是macvim 带进来的，不可修改，所以需要修改上面的python3为pythonx的对应版本
+"                                           : mac:
+"                                               ln -sf /opt/homebrew/Cellar/python@3.11/3.11.1/bin/python3.11-config /opt/homebrew/Cellar/python@3.11/3.11.1/bin/python3-config
+"                                               ln -sf /opt/homebrew/Cellar/python@3.11/3.11.1/bin/python3-config /opt/homebrew/bin/python3.11-config
+"                                               ln -sf /opt/homebrew/bin/python3.11-config /opt/homebrew/bin/python3-config
+"
+"                                               ln -sf /opt/homebrew/Cellar/python@3.11/3.11.1/bin/python3.11 /opt/homebrew/Cellar/python@3.11/3.11.1/bin/python3
+"                                               ln -sf /opt/homebrew/Cellar/python@3.11/3.11.1/bin/python3 /opt/homebrew/bin/python3.11
+"                                               ln -sf /opt/homebrew/bin/python3.11-config /opt/homebrew/bin/python3
+"
+"                                               ln -sf /opt/homebrew/Cellar/python@3.11/3.11.1/bin/pip3.11 /opt/homebrew/Cellar/python@3.11/3.11.1/bin/pip3
+"                                               ln -sf /opt/homebrew/Cellar/python@3.11/3.11.1/bin/pip3 /opt/homebrew/bin/pip3.11
+"                                               ln -sf /opt/homebrew/bin/pip3.11 /opt/homebrew/bin/pip3
+"                                               /opt/homebrew/bin/pip3 install pynvim neovim
 set pyxversion=3
 
 if system('uname') =~ "Darwin"
-    let g:python3_host_prog = "/usr/local/bin/python3"
+    let g:python3_host_prog = "/opt/homebrew/bin/python3"
 else
     let g:python3_host_prog = "/usr/bin/python3"
 endif
@@ -1343,7 +1361,7 @@ let g:lua_define_omnifunc = 1
 "}}
 "{{                                         " vim-go https://github.com/fatih/vim-go, Need go.tools :GoInstallBinaries
 "                                           " :GoInstallBinaries 需要配置bashrc `export GOBIN=/usr/local/go/bin`, 会把包安装在$GOBIN或者$GOPATH/bin
-"                                           " ~/.vim/plugged/vim-go/templates/hello_world.go 修改样式
+"                                           " ~/.vim/bundle/vim-go/templates/hello_world.go 修改样式
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
@@ -1477,7 +1495,6 @@ nmap ga <Plug>(EasyAlign)
 "}}
 "{{                                         " Dockerfile https://github.com/ekalinin/Dockerfile.vim
 "}}
-"call plug#end()
 "}}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  7 => Function {{{
@@ -2072,12 +2089,13 @@ endif
 " :v/error\|warn\|fail/d                    " 删除不含有error,warn,fail的行, v=g!, :%g!/error\|warn\|fail/d
 " :%s/\/\/.*//g                             " 删除//(含)后面的字符, 其它也可以替换
 " :%s/\/\/.*/\/\//g                         " 删除//后面的字符, 其它也可以替换. 替换为原符号, 比如只删除括号内的()
+" :%s/keyword.*/xxxx/g                      " 替换关键字至本行末的所有字符串为xxx
 " :n1,n2s/^I/','/g                          " 把tab替换成','
 " :%s/^\s\+//g                              " 删除行首空格
 " :%s/\s\+$//g                              " 删除行末空格 要转义斜杠等, 用\,而+ |转义用\\
 " :g/^$/d                                   " 删除没有内容的空行
 " :g/^\s*$/d                                " 删除有空格组成的空格
-" :%s///g                                 " 删除行末^M的符号
+" :%s/<c-v>//g                              " 删除行末^M的符号
 " :12,$s/keywords//g                        " 删除从12行到最后一行的关键字
 " :%s/^\n\+/\r/                             " 压缩多行空行为一行 2013-11-26 15:42:58
 " :%s/keywords//n                           " 统计关键字出现的次数
@@ -2175,7 +2193,7 @@ endif
 " gvim -d file1 file2                       " vimdiff (比较不同)
 "                                           "    ]c 跳转下一个差异点 :diffget 把另外一个文件的差异点的内容复制过来  :diffput 把当前差异点的内容复制过去. :diffupdate 更多比较文件
 "                                           "    前面加行号表示多少行开始  :2,30diffget 把2~30行的差异取过来
-"                                           "    ln -s /usr/bin/diff /usr/share/vim/vim82diff
+"                                           "    ln -s /usr/bin/diff /usr/share/vim/vim90diff
 " c{ motion }                               " 删除motion命令跨过的,并且进入插入 c$删到行尾的并进入插入,ct! 删除从光标位到下一个!位置
 " dp                                        " 把光标处的不同放到另一个文件
 " dg                                        " 在光标处从另一个文件取得不同
