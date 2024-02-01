@@ -2,7 +2,7 @@
 "========================================================================
 " * For vim Configuration file
 
-" * VIM 8.2
+" * VIM 9.0
 
 " * @filename   vimrc
 " * @author     Rainy Sia <rainysia@gmail.com>
@@ -10,7 +10,7 @@
 " * @license    https://opensource.org/licenses/MIT license
 " * @version    GIT: 21.12.01
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2021-12-21 19:45:12
+" * @lastChange 2022-09-28 17:18:23
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -21,8 +21,8 @@
 "{{                                         " work in linux, echo &rtp
 if has("unix")
     if system('uname') =~ "Darwin"
-        let $VIMRUNTIME="/usr/share/vim/vim82"
-        set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+        let $VIMRUNTIME="/usr/share/vim/vim90"
+        set runtimepath=/usr/share/vim/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     else
         let $VIMRUNTIME="/usr/share/vim/vim82"
         set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
