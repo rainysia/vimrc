@@ -6,17 +6,12 @@
 
 " * @filename   vimrc
 " * @author     Rainy Sia <rainysia@gmail.com>
-" * @copyright  2008-2023 BTROOT.ORG
+" * @copyright  2008-2024 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-<<<<<<< HEAD
-" * @version    GIT: 23.12.01
+
+" * @version    GIT: 24.02.01
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2023-12-30 23:05:51
-=======
-" * @version    GIT: 23.06.19
-" * @createTime 2008-04-01 02:14:55
-" * @lastChange 2023-06-19 17:38:25
->>>>>>> 9da7d19099c9b4b9e92b9c991da66a5022ce85e3
+" * @lastChange 2024-02-01 13:27:23
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -27,13 +22,8 @@
 "{{                                         " work in linux, echo &rtp
 if has("unix")
     if system('uname') =~ "Darwin"
-<<<<<<< HEAD
-        let $VIMRUNTIME="/usr/share/vim/vim82"
-        set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
-=======
         let $VIMRUNTIME="/usr/share/vim/vim90"
         set runtimepath=/usr/share/vim/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
->>>>>>> 9da7d19099c9b4b9e92b9c991da66a5022ce85e3
     else
         let $VIMRUNTIME="/usr/share/vim/vim90"
         set runtimepath=/usr/share/vim/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
