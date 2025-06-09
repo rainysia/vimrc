@@ -2,15 +2,17 @@
 "========================================================================
 " * For vim Configuration file
 
-" * VIM 8.2
+" * VIM 9.1
 
-" * @filename   vimrc
+" * @filename   .vimrc
 " * @author     Rainy Sia <rainysia@gmail.com>
-" * @copyright  2008-2021 BTROOT.ORG
+" * @copyright  2008-2025 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
-" * @version    GIT: 21.08.11
+
+" * @version    GIT: 25.06.09
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2021-08-17 11:09:18
+" * @lastChange 2025-06-09 11:03:52
+
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -21,18 +23,19 @@
 "{{                                         " work in linux, echo &rtp
 if has("unix")
     if system('uname') =~ "Darwin"
-        let $VIMRUNTIME="/usr/share/vim/vim82"
-        set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+        let $VIMRUNTIME="/usr/share/vim/vim91"
+        set runtimepath=/usr/share/vim/vim91,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+        let g:python3_host_prog = expand("~/.venvs/nvim/bin//python")
     else
-        let $VIMRUNTIME="/usr/share/vim/vim82"
-        set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+        let $VIMRUNTIME="/usr/share/vim/vim91"
+        set runtimepath=/usr/share/vim/vim91,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     endif
 elseif has("win32")
-    let $VIMRUNTIME="~/vim82"
-    set runtimepath=~/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    let $VIMRUNTIME="~/vim91"
+    set runtimepath=~/vim91,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 else
-    let $VIMRUNTIME="/usr/share/vim/vim82"
-    set runtimepath=/usr/share/vim/vim82,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    let $VIMRUNTIME="/usr/share/vim/vim91"
+    set runtimepath=/usr/share/vim/vim91,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 endif
 "}}
 set nocp                                    " close compeletion with vi
@@ -205,7 +208,7 @@ set viminfo='1000,f1,<500
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  4 => Display {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme desert                          " 设置配色方案, 需要用自定义的覆盖/usr/share/vim/vim82/colors/desert.vim
+colorscheme desert                          " 设置配色方案, 需要用自定义的覆盖/usr/share/vim/vim91/colors/desert.vim
 set background=dark                         " 设置背景为黑
 set novisualbell                            " No mouseflash
 set nu                                      " 设置行号
@@ -889,12 +892,12 @@ let g:indentLine_char = '|'
 "{{                                         " vim-fugitive https://github.com/tpope/vim-fugitive
 "                                           " :Gedit, :Gsplit, :Gvsplit, :Gtabedit, :Gdiff, :Gcommit,
 "                                           " :Gblame, :Gmove, :Ggrep, :Glog, :Gread=git checkout --filename
-"nmap <Leader>gb :Gblame<CR>
+nmap <Leader>gb :Git blame<CR>
 function! s:ToggleBlame()
     if &l:filetype ==# 'fugitiveblame'
         close
     else
-        Gblame
+        Git blame
     endif
 endfunction
 
@@ -1186,12 +1189,33 @@ let g:snips_link=g:vimrc_link
 ""}}
 "{{                                         " deoplete.vim 插件,自动完成提示(for vim 8.2+) https://github.com/Shougo/deoplete.nvim
 "                                           " pip3 install --user pynvim, pip3 install --user neovim
+"                                           " vim9 pip3 install python3-pynvim
 "                                           " :python3 import neovim 不报错
 "                                           " :echo has('pythonx')  返回1
 "                                           " :echo exepath('python3') 返回python3的执行位置
 "                                           " :echo neovim_rpc#serveraddr() 显示服务器的IP地址
+"                                           " :pythonx import sys; print (sys.path)  show python3的install位置, 如果不一致会导致上面neovim报错
+"                                           : :pythonx 的install 是macvim 带进来的，不可修改，所以需要修改上面的python3为pythonx的对应版本
+"                                           : mac:
+"                                               ln -sf /opt/homebrew/Cellar/python@3.13/3.13.4/bin/python3.13-config /opt/homebrew/Cellar/python@3.13/3.13.4/bin/python3-config
+"                                               ln -sf /opt/homebrew/Cellar/python@3.13/3.13.4/bin/python3-config /opt/homebrew/bin/python3.13-config
+"                                               ln -sf /opt/homebrew/bin/python3.13-config /opt/homebrew/bin/python3-config
+"
+"                                               ln -sf /opt/homebrew/Cellar/python@3.13/3.13.4/bin/python3.13 /opt/homebrew/Cellar/python@3.13/3.13.4/bin/python3
+"                                               ln -sf /opt/homebrew/Cellar/python@3.13/3.13.4/bin/python3 /opt/homebrew/bin/python3.13
+"                                               ln -sf /opt/homebrew/bin/python3.13-config /opt/homebrew/bin/python3
+"
+"                                               ln -sf /opt/homebrew/Cellar/python@3.13/3.13.4/bin/pip3.13 /opt/homebrew/Cellar/python@3.13/3.13.4/bin/pip3
+"                                               ln -sf /opt/homebrew/Cellar/python@3.13/3.13.4/bin/pip3 /opt/homebrew/bin/pip3.13
+"                                               ln -sf /opt/homebrew/bin/pip3.13 /opt/homebrew/bin/pip3
+"                                               /opt/homebrew/bin/pip3 install pynvim neovim
 set pyxversion=3
-let g:python3_host_prog = "/usr/bin/python3"
+
+if system('uname') =~ "Darwin"
+    let g:python3_host_prog = "/opt/homebrew/bin/python3"
+else
+    let g:python3_host_prog = "/usr/bin/python3"
+endif
 let g:deoplete#enable_at_startup = 1
 "}}
 "{{                                         " phpqa.vim的设定 https://github.com/joonty/vim-phpqa
@@ -1199,7 +1223,11 @@ let g:deoplete#enable_at_startup = 1
 "let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = "--standard=Zend"
 let g:phpqa_codesniffer_args = " --encoding=utf-8"
-let g:phpqa_codesniffer_cmd  = '/usr/bin/phpcs'
+if system('uname') =~ "Darwin"
+    let g:phpqa_codesniffer_cmd  = '/opt/homebrew/bin/phpcs'
+else
+    let g:phpqa_codesniffer_cmd  = '/usr/bin/phpcs'
+endif
 let g:phpqa_codesniffer_autorun = 1         "  default =1 on save
 "                                           " :return NULL Void Boolean Float String Array Object Resource Callback
 let g:phpqa_messdetector_ruleset = ''
@@ -1554,27 +1582,24 @@ autocmd VimEnter * call TabPos_Initialize()
 "{{
 set diffexpr=MyDiff()
 function! MyDiff()
-    let opt = '-a --binary '
+    let opt = '-a '
     if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
     if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-    let arg1 = v:fname_in
-    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-    let arg2 = v:fname_new
-    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-    let arg3 = v:fname_out
-    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-    let eq = ''
-    if $VIMRUNTIME =~ ' '
-        if &sh =~ '\<cmd'
-            let cmd = '""' . $VIMRUNTIME . '\diff"'
-            let eq = '"'
-        else
-            let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-        endif
+
+    let arg1 = shellescape(v:fname_in)
+    let arg2 = shellescape(v:fname_new)
+    let arg3 = shellescape(v:fname_out)
+
+    if has('macunix') && executable('/opt/homebrew/bin/gdiff')
+            let cmd = '/opt/homebrew/bin/gdiff'
+            let opt .= '--binary '
+    elseif executable('diff')
+            let cmd = 'diff'
     else
-        let cmd = $VIMRUNTIME . '\diff'
+        echoerr "No suitable diff tool found"
+        return
     endif
-    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
 endfunction
 map <Leader>dg :diffget<CR>
 map <Leader>dp :diffput<CR>
@@ -2070,9 +2095,10 @@ endif
 " :%s/\s\+$//g                              " 删除行末空格 要转义斜杠等, 用\,而+ |转义用\\
 " :g/^$/d                                   " 删除没有内容的空行
 " :g/^\s*$/d                                " 删除有空格组成的空格
-" :%s///g                                 " 删除行末^M的符号
+" :%s/<c-v>//g                              " 删除行末^M的符号
 " :12,$s/keywords//g                        " 删除从12行到最后一行的关键字
-" :%s/^\n\+/\r/                             " 压缩多行空行为一行 2013-11-26 15:42:58
+" :%s/^\n\+/\r/                             " 压缩多行空行为一行 2013.13-26 15:42:58
+" ggvGJ                                     " esc退出后normal 模式, 合并多行为一行
 " :%s/keywords//n                           " 统计关键字出现的次数
 " :                                         " 把正则用\( \) 扩起来后, 后面替换的时候可以用\1 \2来引用对应的正则
 " : 将 Doe, John 修改为 John Doe   :%s/\(\w\+\), \(\w\+\)/\2 \1/
@@ -2168,7 +2194,7 @@ endif
 " gvim -d file1 file2                       " vimdiff (比较不同)
 "                                           "    ]c 跳转下一个差异点 :diffget 把另外一个文件的差异点的内容复制过来  :diffput 把当前差异点的内容复制过去. :diffupdate 更多比较文件
 "                                           "    前面加行号表示多少行开始  :2,30diffget 把2~30行的差异取过来
-"                                           "    ln -s /usr/bin/diff /usr/share/vim/vim82diff
+"                                           "    ln -s /usr/bin/diff /usr/share/vim/vim91diff
 " c{ motion }                               " 删除motion命令跨过的,并且进入插入 c$删到行尾的并进入插入,ct! 删除从光标位到下一个!位置
 " dp                                        " 把光标处的不同放到另一个文件
 " dg                                        " 在光标处从另一个文件取得不同
@@ -2474,14 +2500,14 @@ endif
 " 5.10.01                                   " 增加.c .h .sh .java 头文件自动添加,其它 2013-10-08 10:25:36
 " 5.10.02                                   " 修改set noexpandtab为expandtab用空格来代替制表符,保证代码和staff的兼容.2013-10-18 15:54:50
 " 5.10.03                                   " 增加CodeSniffer效验    2013-10-31 15:35:01
-" 5.11.02                                   " 增加CodeSniffer效验,return type    2013-11-01 17:47:01
-" 5.11.03                                   " 增加fuzzyfinder in root. 2013-11-05 10:55:00
-" 5.11.04                                   " 增加d ↓注释. 2013-11-13 10:36:48
-" 5.11.05                                   " 增加插件auto complpop  2013-11-21 11:17:40
-" 5.11.06                                   " 增加快捷语法 2013-11-21 11:40:39
-" 5.11.07                                   " 增加ctags 2013-11-26 10:28:48
-" 5.11.08                                   " 增加some tips 2013-11-26 16:06:32
-" 5.11.09                                   " 修改终端下代码提示 2013-11-26 16:51:38
+" 5.11.02                                   " 增加CodeSniffer效验,return type    2013.13-01 17:47:01
+" 5.11.03                                   " 增加fuzzyfinder in root. 2013.13-05 10:55:00
+" 5.11.04                                   " 增加d ↓注释. 2013.13.43 10:36:48
+" 5.11.05                                   " 增加插件auto complpop  2013.13-21 11:17:40
+" 5.11.06                                   " 增加快捷语法 2013.13-21 11:40:39
+" 5.11.07                                   " 增加ctags 2013.13-26 10:28:48
+" 5.11.08                                   " 增加some tips 2013.13-26 16:06:32
+" 5.11.09                                   " 修改终端下代码提示 2013.13-26 16:51:38
 " 5.12.01                                   " fix bug 2013-12-26 16:29:01
 " 6.01.01                                   " add Surround.vim 2014-01-14 14:14:26
 " 6.01.02                                   " add indentLine.vim  2014-01-14 14:51:57
