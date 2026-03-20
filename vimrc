@@ -2,16 +2,16 @@
 "========================================================================
 " * For vim Configuration file
 
-" * VIM 9.0
+" * VIM 9.1
 
 " * @filename   vimrc
 " * @author     Rainy Sia <rainysia@gmail.com>
-" * @copyright  2008-2024 BTROOT.ORG
+" * @copyright  2008-2026 BTROOT.ORG
 " * @license    https://opensource.org/licenses/MIT license
 
 " * @version    GIT: 24.02.01
 " * @createTime 2008-04-01 02:14:55
-" * @lastChange 2024-02-01 13:27:23
+" * @lastChange 2026-03-20 13:27:23
 
 " * @link http://www.btroot.org
 "========================================================================
@@ -22,18 +22,18 @@
 "{{                                         " work in linux, echo &rtp
 if has("unix")
     if system('uname') =~ "Darwin"
-        let $VIMRUNTIME="/usr/share/vim/vim90"
-        set runtimepath=/usr/share/vim/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+        let $VIMRUNTIME="/usr/share/vim/vim91"
+        set runtimepath=/usr/share/vim/vim91,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     else
-        let $VIMRUNTIME="/usr/share/vim/vim90"
-        set runtimepath=/usr/share/vim/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+        let $VIMRUNTIME="/usr/share/vim/vim91"
+        set runtimepath=/usr/share/vim/vim91,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
     endif
 elseif has("win32")
     let $VIMRUNTIME="~/vim90"
     set runtimepath=~/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 else
-    let $VIMRUNTIME="/usr/share/vim/vim90"
-    set runtimepath=/usr/share/vim/vim90,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
+    let $VIMRUNTIME="/usr/share/vim/vim91"
+    set runtimepath=/usr/share/vim/vim91,~/.vim,~/.vim/after,~/.vim/bundle/vim-snipmate/after
 endif
 "}}
 set nocp                                    " close compeletion with vi
@@ -1193,10 +1193,17 @@ let g:snips_link=g:vimrc_link
 "                                           " :echo exepath('python3') 返回python3的执行位置
 "                                           " :echo neovim_rpc#serveraddr() 显示服务器的IP地址
 "                                           " :pythonx import sys; print (sys.path)  show python3的install位置
+"                                           " mac 用虚拟环境的python: 
+"                                           " python3 -m venv ~/.venvs/vim
+"                                           " source ~/.venv/vim/bin/activate
+"                                           " pip install pynvim
+"                                           " vim ~/.vimrc
+"                                           " vimrc 增加let g:python3_host_prog = expand('~/.venvs/vim/bin/python')
 set pyxversion=3
 
 if system('uname') =~ "Darwin"
-    let g:python3_host_prog = "/usr/local/bin/python3"
+    "let g:python3_host_prog = "/usr/local/bin/python3"
+    let g:python3_host_prog = expand('~/.venvs/vim/bin/python')
 else
     let g:python3_host_prog = "/usr/bin/python3"
 endif
